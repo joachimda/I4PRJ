@@ -17,3 +17,5 @@
 *.gz
 *.toc
 *.db
+*.bbl
+*.blg
