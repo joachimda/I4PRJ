@@ -13,6 +13,7 @@
 *.run
 *.syntex.gz
 *.syntez
+*.pdf
 *.gz
 *.toc
 *.db
