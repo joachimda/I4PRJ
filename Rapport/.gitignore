@@ -8,7 +8,6 @@
 *.log
 *.out
 *.tdo
-*.pdf
 *.run.xml
 *.xml
 *.run
