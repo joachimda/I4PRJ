@@ -2,7 +2,7 @@ language: csharp
 solution: ./CalculatorProject/CalculatorProject.sln
 
 install:
-- sudo apt-get install nunit-console
+- sudo apt-get install nunit-console -y
 - nuget restore ./CalculatorProject/CalculatorProject.sln
 
 script:
