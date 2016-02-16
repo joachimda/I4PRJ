@@ -18,7 +18,7 @@ namespace Calculator.Test.Unit
         [TestCase(3, 1, 4)]
         [TestCase(4, 1, 5)]
         [TestCase(5, 1, 6)]
-        [TestCase(6, 1, 6)]
+        [TestCase(6, 1, 7)]
         public void Add_AddTwoNumbers_ReturnCorrect(int a, int b, int result)
         {
             Assert.That(_uut.Add(a,b), Is.EqualTo(result));
