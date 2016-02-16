@@ -1,5 +1,7 @@
 language: csharp
-cache: bundler
+cache:
+- bundler
+- cocoapods
 solution: CalculatorProject/CalculatorProject.sln
 
 script:
