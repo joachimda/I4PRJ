@@ -3,4 +3,4 @@ solution: CalculatorProject/CalculatorProject.sln
 
 script:
 - xbuild /p:Configuration=Release CalculatorProject/CalculatorProject.sln
-- mono ./testrunner/NUnit.Runners.3.0.1/tools/nunit-console.exe ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
+- mono ./CalculatorProject/packages/NUnit.Console.3.0.1/tools/nunit3-console.exe ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
