@@ -23,5 +23,11 @@ namespace Calculator.Test.Unit
         {
             Assert.That(_uut.Add(a,b), Is.EqualTo(result));
         }
+
+        [Test]
+        public void Add_AddTwoNumbers_ReturnSomething()
+        {
+            Assert.That(_uut.Add(4, 4), Is.Positive);
+        }
     }
 }
