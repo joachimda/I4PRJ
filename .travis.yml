@@ -1,0 +1,10 @@
+language: csharp
+solution: ./CalculatorProject/CalculatorProject.sln
+
+install:
+	- sudo apt-get install nunit-console
+	- nuget restore ./CalculatorProject/CalculatorProject.sln
+
+script:
+	- xbuild ./CalculatorProject/CalculatorProject.sln
+	- nunit-console ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
