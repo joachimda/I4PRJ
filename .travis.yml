@@ -2,9 +2,9 @@ language: csharp
 solution: ./CalculatorProject/CalculatorProject.sln
 
 install:
-- sudo apt-get install nunit-console -y
-- nuget restore ./CalculatorProject/CalculatorProject.sln
+ - nuget restore solution-name.sln
+ - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
 
 script:
 - xbuild ./CalculatorProject/CalculatorProject.sln
-- nunit-console ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
+- mono ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
