@@ -1,2 +1,6 @@
 language: csharp
 solution: CalculatorProject/CalculatorProject.sln
+
+script:
+- xbuild /p:Configuration=Release CalculatorProject/CalculatorProject.sln
+- mono ./testrunner/NUnit.Runners.3.0.1/tools/nunit-console.exe ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
