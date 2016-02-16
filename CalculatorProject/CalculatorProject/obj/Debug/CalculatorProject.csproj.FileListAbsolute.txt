@@ -1,0 +1,5 @@
+C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\CalculatorProject\bin\Debug\CalculatorProject.dll
+C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\CalculatorProject\bin\Debug\CalculatorProject.pdb
+C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\CalculatorProject\obj\Debug\CalculatorProject.csprojResolveAssemblyReference.cache
+C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\CalculatorProject\obj\Debug\CalculatorProject.dll
+C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\CalculatorProject\obj\Debug\CalculatorProject.pdb
