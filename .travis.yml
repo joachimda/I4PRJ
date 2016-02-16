@@ -1,10 +1,2 @@
 language: csharp
-solution: ./CalculatorProject/CalculatorProject.sln
-
-install:
-- nuget restore ./CalculatorProject/CalculatorProject.sln
-- nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
-
-script:
-- xbuild ./CalculatorProject/CalculatorProject.sln
-- mono ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
+solution: CalculatorProject/CalculatorProject.sln
