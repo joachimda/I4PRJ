@@ -1,9 +1,0 @@
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\Calculator.Test.Unit.dll
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\Calculator.Test.Unit.pdb
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\CalculatorProject.dll
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\nunit.framework.dll
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\CalculatorProject.pdb
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\bin\Debug\nunit.framework.xml
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\obj\Debug\Calculator.Test.Unit.csprojResolveAssemblyReference.cache
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\obj\Debug\Calculator.Test.Unit.dll
-C:\Users\Norgaard\Documents\Git\I4PRJ\CalculatorProject\Calculator.Test.Unit\obj\Debug\Calculator.Test.Unit.pdb
