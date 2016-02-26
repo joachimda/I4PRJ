@@ -1,4 +1,3 @@
-%!TEX program = lualatex
 \documentclass[a4paper,11pt,oneside]{memoir}
 \input{utils/packages}
 \input{utils/layout}
@@ -12,25 +11,26 @@
 \newcommand{\Projektdokument}{Projektrapport}
 
 %% Litteratur
-\addbibresource{utils/litteratur.bib}
+%\addbibresource{utils/litteratur.bib}
+\bibliography{bibtex/litteratur}
 
 \begin{document}
 \frontmatter
-\input{utils/frontpage}\clearpage
+%\input{utils/frontpage}\clearpage
 
 %% Abstract
-\input{docs/abstract}\clearpage
+%\input{docs/abstract}\clearpage
 
 %% Forord
 \pagestyle{asereport}
-\input{docs/forord}\clearpage
+%\input{docs/forord}\clearpage
 
 %% ToC
-\tableofcontents\clearpage
+%\tableofcontents\clearpage
 
 %% Indledning
 \mainmatter
-\input{docs/indledning}\clearpage
+%\input{docs/indledning}\clearpage
 
 %% Projektformulering
 %\input{docs/projektformulering/main}\clearpage
@@ -48,9 +48,9 @@
 %\input{docs/konklusion/main}\clearpage
 
 %% Appendix
-\appendix
-\markboth{APPENDIKS}{APPENDIKS}
-\appendixpage
+%\appendix
+%\markboth{APPENDIKS}{APPENDIKS}
+%\appendixpage
 %\input{docs/appendix/InterviewAfPlejer}\clearpage
 %\input{docs/appendix/Klassediagram}\clearpage
 %\input{docs/appendix/UndersøgelseAfApotek}\clearpage
