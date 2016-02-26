@@ -16,48 +16,48 @@
 
 \begin{document}
 \frontmatter
-%\input{utils/frontpage}\clearpage
+\input{utils/frontpage}\clearpage
 
 %% Abstract
-%\input{docs/abstract}\clearpage
+\input{docs/frontmatter/abstract}\clearpage
 
 %% Forord
 \pagestyle{asereport}
-%\input{docs/forord}\clearpage
+\input{docs/frontmatter/forord}\clearpage
 
 %% ToC
-%\tableofcontents\clearpage
+\tableofcontents\clearpage
 
-%% Indledning
 \mainmatter
-%\input{docs/indledning}\clearpage
+%% Indledning
+\input{docs/frontmatter/indledning}\clearpage
 
 %% Projektformulering
-%\input{docs/projektformulering/main}\clearpage
+\input{docs/projektformulering/main}\clearpage
 
-%% Systembeskrivelse
-%\input{docs/systembeskrivelse/main}\clearpage
+%% Kravspecifikation
+\input{docs/kravspecifikation/main}\clearpage
 
-%% Projektbeskrivelse
-%\input{docs/projektbeskrivelse/main}\clearpage
+%% Systemarkitektur
+\input{docs/systemarkitektur/main}\clearpage
 
-%% Design og implementering
-%\input{docs/design_og_implementering/main}\clearpage
+%% Processbeskrivelse
+\input{docs/processbeskrivelse/main}\clearpage
 
-%% Konklusioner
-%\input{docs/konklusion/main}\clearpage
+%% Design
+\input{docs/design/main}\clearpage
+
+%% Implementering
+\input{docs/implementering/main}\clearpage
+
+%% Integration
+\input{docs/integration/main}\clearpage
 
 %% Appendix
-%\appendix
-%\markboth{APPENDIKS}{APPENDIKS}
-%\appendixpage
-%\input{docs/appendix/InterviewAfPlejer}\clearpage
-%\input{docs/appendix/Klassediagram}\clearpage
-%\input{docs/appendix/UndersøgelseAfApotek}\clearpage
+\input{docs/appendix/main}\clearpage
 
-
-%% Glossary
 \backmatter
+%% Glossary
 \setglossarystyle{list}
 \printnoidxglossary[title=Ordliste]
 
