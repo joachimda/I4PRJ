@@ -1,9 +1,0 @@
-language: csharp
-cache:
-- bundler
-- cocoapods
-solution: CalculatorProject/CalculatorProject.sln
-
-script:
-- xbuild /p:Configuration=Release CalculatorProject/CalculatorProject.sln
-- mono ./CalculatorProject/packages/NUnit.Console.3.0.1/tools/nunit3-console.exe ./CalculatorProject/Calculator.Test.Unit/bin/Debug/Calculator.Test.Unit.dll
