@@ -3,7 +3,7 @@
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{figs/domainModel}
-\caption{Domænemodel for SmartPool systemet}
+\caption{Domænemodel for systemet}
 \label{fig:domainModel}
 \end{figure}
 
@@ -41,7 +41,7 @@ En Admin er en “official” fra SmartPool\texttrademark, og har rettigheder ti
 Databasen indeholder brugerdata, såsom brugerens email-adresse, registrerede MonitorUnits, samt måledata. Måledata gemmes i en endnu udefineret tidsperiode, således at User har mulighed for at få en grafisk gengivelse\footnote{Evt. Graf, søjlediagram og lign.} af historisk data.
 
 \subsubsection{MonitorUnit}
-En MonitorUnit registreres hos SmartPool\texttrademark gennem Desktop applikationen. Med hver MonitorUnit medfølger et serienummer som bruges ved registrering. En MonitorUnit er enheden der måler pH, frit\footnote{Frit klor angriber bakterier, alger og svampeorganismer. Med tiden transformeres frit klor til bunden klor.} klor og total\footnote{Total klor er summen af frit klor og bunden klor.} klor samt varmeværdier i en Pool. Det er MonitorUnit der står for behandling\footnote{Da der er en sammenhæng~\ref{fig:chlorinePh} mellem målte pH-værdier og effektivitet af frit klor skal den rå data gennemgå en hidtil udefineret matematisk behandling for at kunne vise User relevant information.} af rå data. De rå data bruges til at beregne forholdet mellem bunden\footnote{Bunden klor er ineffektivt, lugter kraftigt og irriterer øjne og slimhinder.} klor og frit klor samt poolens overordnede sundhedskarakteristika. MonitorUnits ansvar er således:
+En MonitorUnit registreres hos SmartPool gennem Desktop applikationen. Med hver MonitorUnit medfølger et serienummer som bruges ved registrering. En MonitorUnit er enheden der måler pH, frit\footnote{Frit klor angriber bakterier, alger og svampeorganismer. Med tiden transformeres frit klor til bunden klor.} klor og total\footnote{Total klor er summen af frit klor og bunden klor.} klor samt varmeværdier i en Pool. Det er MonitorUnit der står for behandling\footnote{Da der er en sammenhæng~\ref{fig:chlorinePh} mellem målte pH-værdier og effektivitet af frit klor skal den rå data gennemgå en hidtil udefineret matematisk behandling for at kunne vise User relevant information.} af rå data. De rå data bruges til at beregne forholdet mellem bunden\footnote{Bunden klor er ineffektivt, lugter kraftigt og irriterer øjne og slimhinder.} klor og frit klor samt poolens overordnede sundhedskarakteristika. MonitorUnits ansvar er således:
 
 \paragraph{Måling af data}
 \begin{itemize}
@@ -60,7 +60,7 @@ En MonitorUnit registreres hos SmartPool\texttrademark gennem Desktop applikatio
 
 \begin{figure}
 \centering
-\includegraphics[width=0.7\linewidth]{figs/chlorinePh.png}
+\includegraphics[width=0.6\linewidth]{figs/chlorinePh.png}
 \caption{Sammenhæng mellem effektivitet af frit klor og pH værdi. Kilde: \url{http://www.pahlen.com/users-guide/ph-and-chlorine}}
 \label{fig:chlorinePh}
 \end{figure}
