@@ -1,0 +1,10 @@
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe.config
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\SPDatabase.pdb
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\EntityFramework.dll
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\EntityFramework.xml
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\obj\Debug\SPDatabase.csprojResolveAssemblyReference.cache
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\obj\Debug\SPDatabase.exe
+C:\Users\Mr. Derp-lappitoppi\Desktop\SPDatabase\SPDatabase\obj\Debug\SPDatabase.pdb
