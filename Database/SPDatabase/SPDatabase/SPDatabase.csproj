@@ -93,6 +93,22 @@
     <Compile Include="Migrations\201603021407567_test3.Designer.cs">
       <DependentUpon>201603021407567_test3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603021500546_test5.cs" />
+    <Compile Include="Migrations\201603021500546_test5.Designer.cs">
+      <DependentUpon>201603021500546_test5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021502070_test6.cs" />
+    <Compile Include="Migrations\201603021502070_test6.Designer.cs">
+      <DependentUpon>201603021502070_test6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021509520_test61.cs" />
+    <Compile Include="Migrations\201603021509520_test61.Designer.cs">
+      <DependentUpon>201603021509520_test61.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021515327_test8.cs" />
+    <Compile Include="Migrations\201603021515327_test8.Designer.cs">
+      <DependentUpon>201603021515327_test8.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorUnit.cs" />
     <Compile Include="Pool.cs" />
@@ -137,6 +153,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603021407567_test3.resx">
       <DependentUpon>201603021407567_test3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021500546_test5.resx">
+      <DependentUpon>201603021500546_test5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021502070_test6.resx">
+      <DependentUpon>201603021502070_test6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021509520_test61.resx">
+      <DependentUpon>201603021509520_test61.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021515327_test8.resx">
+      <DependentUpon>201603021515327_test8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
