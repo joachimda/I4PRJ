@@ -29,3 +29,6 @@ C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatab
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.asd.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.test2.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.test3.resources
+C:\Users\Norgaard\Documents\Git\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe.config
+C:\Users\Norgaard\Documents\Git\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.exe
+C:\Users\Norgaard\Documents\Git\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.pdb
