@@ -1,18 +1,23 @@
-/*namespace SPDatabase
+using System.Runtime.InteropServices.WindowsRuntime;
+
+namespace SPDatabase
 {
+    enum AccessLevel
+    {
+        Spectator = 1, 
+        User,
+        Admin
+    }
+
     public class User
     {
+        RealName _realName = new RealName();
+
         public User(string fN, string mN, string lN)
         {
-            FirstName = fN;
-            MiddleName = mN;
-            LastName = lN;
+            _realName.FirstName = fN;
+            _realName.MiddleName = mN;
+            _realName.SurName = lN;
         }
-
-        public string FirstName { get; private set; }
-        public string MiddleName { get; private set; }
-        public string LastName { get; private set; }
-
     }
 }
-*/
