@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseAccessControl.cs" />
+    <Compile Include="IPool.cs" />
     <Compile Include="Migrations\201603021253076_InitialCreate.cs" />
     <Compile Include="Migrations\201603021253076_InitialCreate.Designer.cs">
       <DependentUpon>201603021253076_InitialCreate.cs</DependentUpon>
