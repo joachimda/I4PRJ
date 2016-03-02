@@ -10,6 +10,7 @@ namespace SPDatabase
             using (var db = new SpContext())
             {
                 db.UserEntities.Add(userEntity);
+                db.SaveChanges();
             }
         }
         

@@ -10,8 +10,8 @@ namespace SPDatabase
             UserEntity userEntity = new UserEntity();
 
             userEntity.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
-            databaseAccessControl.AddUserToDatabase(userEntity);
 
+            databaseAccessControl.AddUserToDatabase(userEntity);
             databaseAccessControl.GetQueryForRealNamesInDatabase();
         }
     }
