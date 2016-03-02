@@ -5,10 +5,10 @@
         static void Main(string[] args)
         {
             DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
-            UserInDatabase userInDatabase = new UserInDatabase();
+            UserEntity userEntity = new UserEntity();
 
-            userInDatabase.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
-            databaseAccessControl.AddUserToDatabase(userInDatabase);
+            userEntity.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
+            databaseAccessControl.AddUserToDatabase(userEntity);
 
             databaseAccessControl.GetQueryForRealNamesInDatabase();
 
@@ -27,7 +27,7 @@
                 Console.WriteLine("Type your email");
                 var email = Console.ReadLine();
                 
-                UserInDatabase userInDatabase = new UserInDatabase
+                UserEntity UserEntity = new UserEntity
                 {
                     Name = new RealName {FirstName = fName, MiddleName = mName, SurName = sName},
                     Email = email
@@ -35,7 +35,7 @@
 
                 Console.WriteLine("User has been created");
 
-                db.Users.Add(userInDatabase);
+                db.Users.Add(UserEntity);
                 db.SaveChanges();
                 
 

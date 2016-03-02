@@ -5,11 +5,11 @@ namespace SPDatabase
 {
     public class DatabaseAccessControl
     {
-        public void AddUserToDatabase(UserInDatabase userInDatabase)
+        public void AddUserToDatabase(UserEntity userEntity)
         {
             using (var db = new SpContext())
             {
-                db.UsersInDatabase.Add(userInDatabase);
+                db.UsersInDatabase.Add(userEntity);
             }
         }
 

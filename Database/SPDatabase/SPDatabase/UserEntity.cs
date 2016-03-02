@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SPDatabase
 {
-    public class UserInDatabase
+    public class UserEntity
     {
         public int UserId { get; set; }
         public RealName Name { get; set; }
