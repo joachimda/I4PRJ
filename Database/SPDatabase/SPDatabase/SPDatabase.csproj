@@ -52,14 +52,92 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseAccessControl.cs" />
+    <Compile Include="Migrations\201603021253076_InitialCreate.cs" />
+    <Compile Include="Migrations\201603021253076_InitialCreate.Designer.cs">
+      <DependentUpon>201603021253076_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021300407_test.cs" />
+    <Compile Include="Migrations\201603021300407_test.Designer.cs">
+      <DependentUpon>201603021300407_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021328173_herpaderp.cs" />
+    <Compile Include="Migrations\201603021328173_herpaderp.Designer.cs">
+      <DependentUpon>201603021328173_herpaderp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021334053_herpaderpd.cs" />
+    <Compile Include="Migrations\201603021334053_herpaderpd.Designer.cs">
+      <DependentUpon>201603021334053_herpaderpd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021336363_herpaderpdddd.cs" />
+    <Compile Include="Migrations\201603021336363_herpaderpdddd.Designer.cs">
+      <DependentUpon>201603021336363_herpaderpdddd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021340419_her.cs" />
+    <Compile Include="Migrations\201603021340419_her.Designer.cs">
+      <DependentUpon>201603021340419_her.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021342109_herddddd.cs" />
+    <Compile Include="Migrations\201603021342109_herddddd.Designer.cs">
+      <DependentUpon>201603021342109_herddddd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021345325_asd.cs" />
+    <Compile Include="Migrations\201603021345325_asd.Designer.cs">
+      <DependentUpon>201603021345325_asd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021403223_test2.cs" />
+    <Compile Include="Migrations\201603021403223_test2.Designer.cs">
+      <DependentUpon>201603021403223_test2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021407567_test3.cs" />
+    <Compile Include="Migrations\201603021407567_test3.Designer.cs">
+      <DependentUpon>201603021407567_test3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MonitorUnit.cs" />
+    <Compile Include="Pool.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealName.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UserContext.cs" />
+    <Compile Include="UserInDatabase.cs" />
+    <Compile Include="SpContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603021253076_InitialCreate.resx">
+      <DependentUpon>201603021253076_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021300407_test.resx">
+      <DependentUpon>201603021300407_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021328173_herpaderp.resx">
+      <DependentUpon>201603021328173_herpaderp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021334053_herpaderpd.resx">
+      <DependentUpon>201603021334053_herpaderpd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021336363_herpaderpdddd.resx">
+      <DependentUpon>201603021336363_herpaderpdddd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021340419_her.resx">
+      <DependentUpon>201603021340419_her.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021342109_herddddd.resx">
+      <DependentUpon>201603021342109_herddddd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021345325_asd.resx">
+      <DependentUpon>201603021345325_asd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021403223_test2.resx">
+      <DependentUpon>201603021403223_test2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021407567_test3.resx">
+      <DependentUpon>201603021407567_test3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
