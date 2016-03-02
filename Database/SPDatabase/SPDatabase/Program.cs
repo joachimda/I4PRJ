@@ -5,10 +5,10 @@
         static void Main(string[] args)
         {
             DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
-            UserInDatabase user1 = new UserInDatabase();
+            UserInDatabase userInDatabase = new UserInDatabase();
 
-            user1.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
-            databaseAccessControl.AddUserToDatabase(user1);
+            userInDatabase.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
+            databaseAccessControl.AddUserToDatabase(userInDatabase);
 
             databaseAccessControl.GetQueryForRealNamesInDatabase();
 
