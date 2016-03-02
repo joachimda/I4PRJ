@@ -8,8 +8,6 @@ namespace SPDatabase
         public RealName Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int NumberOfRegisteredMonitorUnits { get; set; }
-        public virtual List<MonitorUnit> RegisteredMonitorUnits { get; set; }
-        //public virtual List<Pool> RegisteredPools { get; set; }
+        public virtual List<Pool> Pools { get; set; }
     }
 }
