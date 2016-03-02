@@ -5,9 +5,16 @@ namespace SPDatabase
 {
     public class DatabaseAccessControl
     {
+        public SpContext db;
+
+        public DatabaseAccessControl(SpContext dBContext)
+        {
+            db = dBContext;
+        }
+
         public void AddUserToDatabase(UserEntity userEntity)
         {
-            using (var db = new SpContext())
+            using (db)
             {
                 db.UserEntities.Add(userEntity);
                 db.SaveChanges();
@@ -16,7 +23,7 @@ namespace SPDatabase
         
         public void GetQueryForRealNamesInDatabase()
         {
-            using (var db = new SpContext())
+            using (db)
             {
                 var query = from realNames in db.RealNames
                     orderby realNames.FirstName
@@ -29,8 +36,18 @@ namespace SPDatabase
 
             }
         }
-        
         /*
+        public void DisposeDatabase()
+        {
+            using (db)
+            {
+                db.Dispose();
+            }
+        }
+
+
+
+        
         public void AddMonitorUnitToUser(User user, MonitorUnit monitorUnit)
         {
             using (var db = new SpContext())
