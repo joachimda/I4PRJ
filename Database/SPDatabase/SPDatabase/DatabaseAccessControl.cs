@@ -9,26 +9,26 @@ namespace SPDatabase
         {
             using (var db = new SpContext())
             {
-                db.UsersInDatabase.Add(userEntity);
+                db.UserEntities.Add(userEntity);
             }
         }
-
+        
         public void GetQueryForRealNamesInDatabase()
         {
             using (var db = new SpContext())
             {
-                var query = from realNames in db.UsersInDatabase
-                    orderby realNames.Name
+                var query = from realNames in db.RealNames
+                    orderby realNames.FirstName
                     select realNames;
 
                 foreach (var realNameItem in query)
                 {
-                    Console.WriteLine(realNameItem.Name);
+                    Console.WriteLine(realNameItem.FirstName);
                 }
 
             }
         }
-
+        
         /*
         public void AddMonitorUnitToUser(User user, MonitorUnit monitorUnit)
         {
