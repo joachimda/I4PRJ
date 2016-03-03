@@ -5,16 +5,10 @@ namespace SPDatabase
 {
     public class DatabaseAccessControl
     {
-        public SpContext db;
-
-        public DatabaseAccessControl(SpContext dBContext)
-        {
-            db = dBContext;
-        }
 
         public void AddUserToDatabase(UserEntity userEntity)
         {
-            using (db)
+            using (var db = new SpContext())
             {
                 db.UserEntities.Add(userEntity);
                 db.SaveChanges();
@@ -23,7 +17,7 @@ namespace SPDatabase
         
         public void GetQueryForRealNamesInDatabase()
         {
-            using (db)
+            using (var db = new SpContext())
             {
                 var query = from realNames in db.RealNames
                     orderby realNames.FirstName
@@ -36,17 +30,20 @@ namespace SPDatabase
 
             }
         }
-        /*
-        public void DisposeDatabase()
+        
+        public void ClearEntitiesInDatabase()
         {
-            using (db)
+            using (var db = new SpContext())
             {
-                db.Dispose();
+                db.Database.ExecuteSqlCommand("DELETE [MonitorUnits]");
+                db.Database.ExecuteSqlCommand("DELETE [UserEntities]");
+                db.Database.ExecuteSqlCommand("DELETE [UserEntities]");
+                db.Database.ExecuteSqlCommand("DELETE [RealNames]");
             }
         }
 
 
-
+        /*
         
         public void AddMonitorUnitToUser(User user, MonitorUnit monitorUnit)
         {
