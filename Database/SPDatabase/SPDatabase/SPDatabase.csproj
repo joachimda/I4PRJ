@@ -110,6 +110,26 @@
     <Compile Include="Migrations\201603021515327_test8.Designer.cs">
       <DependentUpon>201603021515327_test8.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603021550210_test9.cs" />
+    <Compile Include="Migrations\201603021550210_test9.Designer.cs">
+      <DependentUpon>201603021550210_test9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021600359_test10.cs" />
+    <Compile Include="Migrations\201603021600359_test10.Designer.cs">
+      <DependentUpon>201603021600359_test10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021608059_test11.cs" />
+    <Compile Include="Migrations\201603021608059_test11.Designer.cs">
+      <DependentUpon>201603021608059_test11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021609432_test12.cs" />
+    <Compile Include="Migrations\201603021609432_test12.Designer.cs">
+      <DependentUpon>201603021609432_test12.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603021618122_test13.cs" />
+    <Compile Include="Migrations\201603021618122_test13.Designer.cs">
+      <DependentUpon>201603021618122_test13.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorUnit.cs" />
     <Compile Include="Pool.cs" />
@@ -166,6 +186,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603021515327_test8.resx">
       <DependentUpon>201603021515327_test8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021550210_test9.resx">
+      <DependentUpon>201603021550210_test9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021600359_test10.resx">
+      <DependentUpon>201603021600359_test10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021608059_test11.resx">
+      <DependentUpon>201603021608059_test11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021609432_test12.resx">
+      <DependentUpon>201603021609432_test12.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603021618122_test13.resx">
+      <DependentUpon>201603021618122_test13.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
