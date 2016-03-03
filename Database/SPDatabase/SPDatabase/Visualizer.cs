@@ -4,7 +4,7 @@ namespace SPDatabase
 {
     public class Visualizer
     {
-        public void PromptForNewUser()
+        public RealName PromptForNewUser()
         {
             RealName name = new RealName();
             Console.WriteLine("You are now adding a user to the SmartPool database ");
@@ -37,9 +37,7 @@ namespace SPDatabase
                     name.SurName = splitNames[2];
                     break;
             }
-
-
-
+            return name;
         }
 
         public void DrawPossibleCommands()
@@ -49,6 +47,7 @@ namespace SPDatabase
             Console.WriteLine(String.Format("|****** Task ******|***** Command *****|"));
             Console.WriteLine(String.Format("|Create user       |add                |"));
             Console.WriteLine(String.Format("|Delete all entries|clear              |"));
+            Console.WriteLine(String.Format("|Print name query  |qry                |"));
             Console.WriteLine(String.Format("|Quit              |NOT SPECIFIED      |"));
             Console.WriteLine(String.Format("|******************|*******************|"));
         }

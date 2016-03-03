@@ -11,6 +11,7 @@ namespace SPDatabase
             Visualizer visualizer = new Visualizer();
             visualizer.DrawPossibleCommands();
 
+            #region Menu
             while (true)
             {
                 var input = Console.ReadLine();
@@ -22,13 +23,19 @@ namespace SPDatabase
 
                     case "add":
                         UserEntity user = new UserEntity();
-                        visualizer.PromptForNewUser();
+                        user.Name = visualizer.PromptForNewUser();
+
+                        //Prompt for password email etc goes here..
+
+                        databaseAccessControl.AddUserToDatabase(user);
                         break;
 
                     #endregion
 
                     #region Menu: Get query for RealNames in db
                     case "qrn":
+                        databaseAccessControl.GetQueryForRealNamesInDatabase();
+                        break;
 
                     #endregion
 
@@ -55,6 +62,10 @@ namespace SPDatabase
 
                 }
             }
+
+            #endregion
+
+
             /*
             DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
 
@@ -70,7 +81,7 @@ namespace SPDatabase
 
             databaseAccessControl.GetQueryForRealNamesInDatabase();
             */
-            
+
         }
     }
 }

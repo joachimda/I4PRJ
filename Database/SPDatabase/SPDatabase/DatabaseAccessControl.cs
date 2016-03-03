@@ -36,9 +36,20 @@ namespace SPDatabase
             using (var db = new SpContext())
             {
                 db.Database.ExecuteSqlCommand("DELETE [MonitorUnits]");
+                Console.WriteLine("Clearing MonitorUnits...");
+
+                db.Database.ExecuteSqlCommand("DELETE [Pools]");
+                Console.WriteLine("Clearing pools...");
+
                 db.Database.ExecuteSqlCommand("DELETE [UserEntities]");
-                db.Database.ExecuteSqlCommand("DELETE [UserEntities]");
+                Console.WriteLine("Clearing UserEntities...");
+
                 db.Database.ExecuteSqlCommand("DELETE [RealNames]");
+                Console.WriteLine("Clearing RealNames");
+                Console.WriteLine("************************************************************");
+                Console.WriteLine("******************** All tables cleared! *******************");
+
+                db.SaveChanges();
             }
         }
 
