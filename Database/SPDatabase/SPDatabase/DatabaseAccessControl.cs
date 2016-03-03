@@ -18,13 +18,21 @@ namespace SPDatabase
         {
             using (var db = new SpContext())
             {
-                var query = from realNames in db.RealNames
-                            orderby realNames.FirstName
-                            select realNames;
+                var query1 = from realFirstNames in db.RealNames
+                             orderby realFirstNames.FirstName
+                             select realFirstNames;
 
-                foreach (var realNameItem in query)
+                var query2 = from realMiddleNames in db.RealNames
+                             orderby realMiddleNames.MiddleName
+                             select realMiddleNames;
+
+                var query3 = from realSurNames in db.RealNames
+                             orderby realSurNames.SurName
+                             select realSurNames;
+
+                foreach (var realFirstNameItem in query1)
                 {
-                    Console.WriteLine(realNameItem.FirstName);
+                    Console.WriteLine(realFirstNameItem.FirstName);
                 }
 
             }
@@ -81,7 +89,7 @@ namespace SPDatabase
 
         public void ClearPoolEntity()
         {
-            
+
         }
 
         private bool SecurityCheck()

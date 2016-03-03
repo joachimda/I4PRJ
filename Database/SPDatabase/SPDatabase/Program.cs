@@ -48,8 +48,8 @@ namespace SPDatabase
                     #endregion
 
                     #region Menu: Quit
-                    case "q":
-                        break;
+                    case "exit":
+                        return;
                     #endregion
 
                     #region Menu: Clear MonitorUnits

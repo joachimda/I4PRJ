@@ -49,7 +49,7 @@ namespace SPDatabase
             Console.WriteLine(String.Format("|Create user       |add                |"));
             Console.WriteLine(String.Format("|Delete all entries|clear              |"));
             Console.WriteLine(String.Format("|Print name query  |qry                |"));
-            Console.WriteLine(String.Format("|Quit              |NOT SPECIFIED      |"));
+            Console.WriteLine(String.Format("|Exit program      |exit               |"));
             Console.WriteLine(String.Format("|******************|*******************|"));
         }
     }
