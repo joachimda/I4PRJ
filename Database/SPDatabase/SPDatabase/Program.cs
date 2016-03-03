@@ -33,7 +33,7 @@ namespace SPDatabase
                     #endregion
 
                     #region Menu: Get query for RealNames in db
-                    case "qrn":
+                    case "qry":
                         databaseAccessControl.GetQueryForRealNamesInDatabase();
                         break;
 
