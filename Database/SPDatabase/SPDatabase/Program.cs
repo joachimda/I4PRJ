@@ -12,6 +12,7 @@ namespace SPDatabase
             visualizer.DrawPossibleCommands();
 
             #region Menu
+
             while (true)
             {
                 var input = Console.ReadLine();
@@ -42,46 +43,27 @@ namespace SPDatabase
                     #region Menu: Clear
 
                     case "clear":
-                        Console.WriteLine("This action wil clear the entire SmartPool user database (yes/no).");
-                        var securityCheck = Console.ReadLine();
-
-                        if (securityCheck == "yes")
-                        {
-                            databaseAccessControl.ClearEntitiesInDatabase();
-                        }
-                        else if (securityCheck == "no")
-                        {
-                            Console.WriteLine("Please be more careful. Returning to main menu");
-                        }
+                        databaseAccessControl.ClearEntitiesInDatabase();
                         break;
-
                     #endregion
 
+                    #region Menu: Quit
                     case "q":
                         break;
+                    #endregion
+
+                    #region Menu: Clear MonitorUnits
+
+                    case "clear mu all":
+                        databaseAccessControl.ClearMonitorUnitEntity();
+                        break;
+
+                        #endregion
 
                 }
             }
 
             #endregion
-
-
-            /*
-            DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
-
-            UserEntity userEntity = new UserEntity();
-            UserEntity userEntity2 = new UserEntity();
-
-
-            userEntity.Name = new RealName {FirstName = "Joachim", MiddleName = "Dam", SurName = "Andersen"};
-            userEntity2.Name = new RealName {FirstName = "Bjorn", MiddleName = "Norgaard", SurName = "Sorensen"};
-
-            databaseAccessControl.AddUserToDatabase(userEntity);
-            databaseAccessControl.AddUserToDatabase(userEntity2);
-
-            databaseAccessControl.GetQueryForRealNamesInDatabase();
-            */
-
         }
     }
 }
