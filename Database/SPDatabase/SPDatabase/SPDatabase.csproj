@@ -150,6 +150,18 @@
     <Compile Include="Migrations\201603031259109_testing13.Designer.cs">
       <DependentUpon>201603031259109_testing13.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603031333451_testing14.cs" />
+    <Compile Include="Migrations\201603031333451_testing14.Designer.cs">
+      <DependentUpon>201603031333451_testing14.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603031336593_testing141.cs" />
+    <Compile Include="Migrations\201603031336593_testing141.Designer.cs">
+      <DependentUpon>201603031336593_testing141.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603031338549_testing1411.cs" />
+    <Compile Include="Migrations\201603031338549_testing1411.Designer.cs">
+      <DependentUpon>201603031338549_testing1411.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorUnit.cs" />
     <Compile Include="Pool.cs" />
@@ -237,6 +249,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603031259109_testing13.resx">
       <DependentUpon>201603031259109_testing13.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603031333451_testing14.resx">
+      <DependentUpon>201603031333451_testing14.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603031336593_testing141.resx">
+      <DependentUpon>201603031336593_testing141.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603031338549_testing1411.resx">
+      <DependentUpon>201603031338549_testing1411.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

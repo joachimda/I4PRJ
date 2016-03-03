@@ -33,3 +33,6 @@ C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatab
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing11.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing12.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing13.resources
+C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing14.resources
+C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing141.resources
+C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing1411.resources
