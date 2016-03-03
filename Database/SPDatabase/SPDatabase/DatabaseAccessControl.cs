@@ -53,6 +53,16 @@ namespace SPDatabase
             }
         }
 
+        public void ClearAllMonitorUnitEntities()
+        {
+            using (var db = new SpContext())
+            {
+                db.Database.ExecuteSqlCommand("DELETE [MonitorUnits]");
+                Console.WriteLine("DELETE [MonitorUnits] run against database: db");
+                Console.WriteLine("MonitorUnits was deletes succesfully");
+            }
+        }
+
 
         /*
         
