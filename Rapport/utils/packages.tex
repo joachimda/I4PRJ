@@ -41,7 +41,7 @@
 
 % References & Quotes
 %\usepackage[danish]{varioref}				% Muliggoer bl.a. krydshenvisninger med sidetal (\vref)
-%\usepackage{natbib}							% Udvidelse med naturvidenskabelige citationsmodeller
+%\usepackage{nat}							% Udvidelse med naturvidenskabelige citationsmodeller
 \usepackage[danish=guillemets]{csquotes}
 \usepackage[hidelinks]{hyperref}
 \hypersetup{
@@ -53,8 +53,10 @@
 \usepackage[all]{hypcap}
 
 % Etc
+\usepackage{todonotes} % "to-do"-liste vha. \todo{opgave}
 \usepackage[
-	backend=biber,
+	%backend=biber,
+	backend=bibtex,
 	style=ieee,
 	natbib=true,
 	backref=false,

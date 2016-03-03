@@ -11,11 +11,13 @@
 \newcommand{\Projektdokument}{Projektrapport}
 
 %% Litteratur
-\bibstyle{utils/harvard}
+\nocite{*}
+%\bibliographystyle{harvard}
 \bibliography{utils/litteratur}
 
 \begin{document}
 \frontmatter
+
 \input{utils/frontpage}\clearpage
 
 %% Abstract
@@ -29,6 +31,10 @@
 \tableofcontents\clearpage
 
 \mainmatter
+
+%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
+\listoftodos[Liste over gøremål]
+
 %% Indledning
 \input{docs/frontmatter/indledning}\clearpage
 
