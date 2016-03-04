@@ -3,14 +3,12 @@ namespace SPDatabase.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class test5 : DbMigration
+    public partial class derp : DbMigration
     {
         public override void Up()
         {
-            DropForeignKey("dbo.UserInDatabases", "Name_RealNameId", "dbo.RealNames");
-            DropForeignKey("dbo.MonitorUnits", "UserInDatabase_UserInDatabaseId", "dbo.UserInDatabases");
-            DropIndex("dbo.UserInDatabases", new[] { "Name_RealNameId" });
-            DropIndex("dbo.MonitorUnits", new[] { "UserInDatabase_UserInDatabaseId" });
+            DropForeignKey("dbo.Users", "Name_RealNameId", "dbo.RealNames");
+            DropIndex("dbo.Users", new[] { "Name_RealNameId" });
             CreateTable(
                 "dbo.UserEntities",
                 c => new
@@ -29,53 +27,53 @@ namespace SPDatabase.Migrations
                 c => new
                     {
                         PoolId = c.Int(nullable: false, identity: true),
-                        Depth = c.Int(nullable: false),
-                        Length = c.Int(nullable: false),
-                        Width = c.Int(nullable: false),
+                        AverageTemperature = c.Double(nullable: false),
                         UserEntity_UserEntityId = c.Int(),
                     })
                 .PrimaryKey(t => t.PoolId)
                 .ForeignKey("dbo.UserEntities", t => t.UserEntity_UserEntityId)
                 .Index(t => t.UserEntity_UserEntityId);
             
-            DropTable("dbo.UserInDatabases");
-            DropTable("dbo.MonitorUnits");
-        }
-        
-        public override void Down()
-        {
             CreateTable(
                 "dbo.MonitorUnits",
                 c => new
                     {
                         MonitorUnitId = c.Int(nullable: false, identity: true),
                         SerialNo = c.String(),
-                        UserInDatabase_UserInDatabaseId = c.Int(),
+                        Pool_PoolId = c.Int(),
                     })
-                .PrimaryKey(t => t.MonitorUnitId);
+                .PrimaryKey(t => t.MonitorUnitId)
+                .ForeignKey("dbo.Pools", t => t.Pool_PoolId)
+                .Index(t => t.Pool_PoolId);
             
+            DropTable("dbo.Users");
+        }
+        
+        public override void Down()
+        {
             CreateTable(
-                "dbo.UserInDatabases",
+                "dbo.Users",
                 c => new
                     {
-                        UserInDatabaseId = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false, identity: true),
                         Email = c.String(),
                         Password = c.String(),
                         NumberOfRegisteredMonitorUnits = c.Int(nullable: false),
                         Name_RealNameId = c.Int(),
                     })
-                .PrimaryKey(t => t.UserInDatabaseId);
+                .PrimaryKey(t => t.UserId);
             
             DropForeignKey("dbo.Pools", "UserEntity_UserEntityId", "dbo.UserEntities");
+            DropForeignKey("dbo.MonitorUnits", "Pool_PoolId", "dbo.Pools");
             DropForeignKey("dbo.UserEntities", "Name_RealNameId", "dbo.RealNames");
+            DropIndex("dbo.MonitorUnits", new[] { "Pool_PoolId" });
             DropIndex("dbo.Pools", new[] { "UserEntity_UserEntityId" });
             DropIndex("dbo.UserEntities", new[] { "Name_RealNameId" });
+            DropTable("dbo.MonitorUnits");
             DropTable("dbo.Pools");
             DropTable("dbo.UserEntities");
-            CreateIndex("dbo.MonitorUnits", "UserInDatabase_UserInDatabaseId");
-            CreateIndex("dbo.UserInDatabases", "Name_RealNameId");
-            AddForeignKey("dbo.MonitorUnits", "UserInDatabase_UserInDatabaseId", "dbo.UserInDatabases", "UserInDatabaseId");
-            AddForeignKey("dbo.UserInDatabases", "Name_RealNameId", "dbo.RealNames", "RealNameId");
+            CreateIndex("dbo.Users", "Name_RealNameId");
+            AddForeignKey("dbo.Users", "Name_RealNameId", "dbo.RealNames", "RealNameId");
         }
     }
 }

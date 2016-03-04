@@ -37,3 +37,15 @@ C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatab
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing141.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing1411.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.tests1.resources
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe.config
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.pdb
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.dll
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.dll
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.xml
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.xml
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.csprojResolveAssemblyReference.cache
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.exe
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.pdb
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.derp.resources
+F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.csproj.GenerateResource.Cache
