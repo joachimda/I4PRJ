@@ -55,10 +55,6 @@
     <Compile Include="DatabaseAccessControl.cs" />
     <Compile Include="Formatter.cs" />
     <Compile Include="IPool.cs" />
-    <Compile Include="Migrations\201603041136321_derp.cs" />
-    <Compile Include="Migrations\201603041136321_derp.Designer.cs">
-      <DependentUpon>201603041136321_derp.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MonitorUnit.cs" />
     <Compile Include="Pool.cs" />
@@ -73,11 +69,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603041136321_derp.resx">
-      <DependentUpon>201603041136321_derp.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
