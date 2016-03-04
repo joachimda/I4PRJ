@@ -107,6 +107,7 @@ namespace SPDatabase
             }
             else
             {
+                Console.WriteLine("Invalid response. Returning to main menu");
                 return false;
             }
         }

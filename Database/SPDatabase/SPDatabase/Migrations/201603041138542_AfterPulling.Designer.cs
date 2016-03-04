@@ -7,13 +7,13 @@ namespace SPDatabase.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class test12 : IMigrationMetadata
+    public sealed partial class AfterPulling : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(test12));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AfterPulling));
         
         string IMigrationMetadata.Id
         {
-            get { return "201603021609432_test12"; }
+            get { return "201603041138542_AfterPulling"; }
         }
         
         string IMigrationMetadata.Source

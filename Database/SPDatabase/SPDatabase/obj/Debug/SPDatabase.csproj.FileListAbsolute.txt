@@ -37,3 +37,15 @@ C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatab
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing141.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.testing1411.resources
 C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.tests1.resources
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe.config
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.exe
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\SPDatabase.pdb
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.dll
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.xml
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.csprojResolveAssemblyReference.cache
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.exe
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.pdb
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.Migrations.AfterPulling.resources
+C:\Users\Norgaard\Documents\Github\I4PRJ\Database\SPDatabase\SPDatabase\obj\Debug\SPDatabase.csproj.GenerateResource.Cache
