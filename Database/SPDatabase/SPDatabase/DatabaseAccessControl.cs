@@ -110,5 +110,17 @@ namespace SPDatabase
                 return false;
             }
         }
+
+
+        public void AddPoolToUserInDatabase(/*UserEntity user,*/ Pool pool)
+        {
+
+            using (var db = new SpContext())
+            {
+                throw new NotImplementedException();
+            }
+
+            Console.WriteLine("The pool: {0} was added to user: .", pool.PoolName/*, user.Name.FirstName*/);
+        }
     }
 }
