@@ -1,11 +1,36 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ModelFirstSmartPool
 {
-    public class DatabaseAccessControl
+    public class DatabaseAccessControl : DbContext
     {
+            // Made an override to check for exceptions thx to stackoverflow :)
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException exception)
+            {
+                var errMsg = exception.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => x.ErrorMessage);
+
+                var fullMsg = string.Join("; ", errMsg);
+
+                var exceptionMsg = string.Concat(exception.Message, "The validation errors are: ", fullMsg);
+                throw new DbEntityValidationException(exceptionMsg, exception.EntityValidationErrors);
+            }
+        }
+   
         public void AddUserToDatabase(User user)
         {
             using (var db = new SmartPoolContext())
@@ -83,6 +108,72 @@ namespace ModelFirstSmartPool
                     return;
                 }
             }
+        }
+    }
+
+
+    public class Creator
+    {
+        public User AssembleUser()
+        {
+            User user = new User();
+            user.FullName = NewUserPromptForFullName();
+            user.Password = NewUserPromptForPassword();
+            user.Email = NewUserPromptForEmail();
+            return user;
+        }
+
+        private string NewUserPromptForEmail()
+        {
+            Console.WriteLine("Please write your email address formatted as username@host.domain ");
+
+            //We should use built in email attribute
+            return Console.ReadLine();
+
+        } 
+
+        private string NewUserPromptForPassword()
+        {
+            Console.WriteLine("Please enter your desired password");
+            var password = Console.ReadLine();
+            return password;
+        }
+
+        
+        private FullName NewUserPromptForFullName()
+        {
+            FullName name = new FullName();
+            Formatter formatter = new Formatter();
+            bool validNameEntered = false;
+
+            Console.WriteLine("You are now adding a user to the SmartPool database ");
+            Console.WriteLine("Please enter your full name (Use a maximum of 3 names), then press ENTER ");
+
+            string[] splitNames = { };
+
+            while (!validNameEntered)
+            {
+                string fullName = Console.ReadLine();
+
+                if (fullName != null && fullName.Length > 3)
+                {
+                    splitNames = fullName.Split(' ');
+                    Console.WriteLine("You have input: ");
+                    foreach (var partOfName in splitNames)
+                    {
+                        Console.Write(" {0}", partOfName);
+                    }
+                    validNameEntered = true;
+                }
+
+                else
+                {
+                    Console.WriteLine("Please write a valid name ");
+                }
+            }
+
+            return formatter.FormatRealNameInputFromStringArray(splitNames, name);
+
         }
     }
 }

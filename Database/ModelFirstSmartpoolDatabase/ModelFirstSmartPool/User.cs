@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace ModelFirstSmartPool
 {
     using System;
@@ -23,7 +25,7 @@ namespace ModelFirstSmartPool
     
         public int UserId { get; set; }
         public string Email { get; set; }
-        public byte[] Password { get; set; }
+        public string Password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pool> Pools { get; set; }
