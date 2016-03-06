@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/06/2016 22:47:16
--- Generated from EDMX file: C:\Users\Mr. Derp-lappitoppi\Desktop\ModelFirstSmartPool\ModelFirstSmartPool\SmartPoolModel.edmx
+-- Date Created: 03/06/2016 23:29:00
+-- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\ModelFirstSmartpoolDatabase\ModelFirstSmartPool\SmartPoolModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -99,7 +99,10 @@ GO
 -- Creating table 'FullNames'
 CREATE TABLE [dbo].[FullNames] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [UserUserId] int  NOT NULL
+    [UserUserId] int  NOT NULL,
+    [FirstName] nvarchar(max)  NOT NULL,
+    [MiddleName] nvarchar(max)  NOT NULL,
+    [LastName] nvarchar(max)  NOT NULL
 );
 GO
 

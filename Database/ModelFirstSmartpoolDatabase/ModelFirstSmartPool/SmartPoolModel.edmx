@@ -72,6 +72,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MonitorUnits">
     <Key>
@@ -313,6 +316,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserUserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="SmartPoolModel.UserFullName" FromRole="FullName" ToRole="User" />
+          <Property Name="FirstName" Type="String" Nullable="false" />
+          <Property Name="MiddleName" Type="String" Nullable="false" />
+          <Property Name="LastName" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="MonitorUnit">
           <Key>
@@ -449,6 +455,9 @@
         <MappingFragment StoreEntitySet="FullNames">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserUserId" ColumnName="UserUserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
