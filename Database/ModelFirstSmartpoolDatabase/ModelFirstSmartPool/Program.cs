@@ -10,78 +10,33 @@ namespace ModelFirstSmartPool
     {
         static void Main(string[] args)
         {
-            using (var db = new SmartPoolContext())
+            Visualizer visualizer = new Visualizer();
+            DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
+            visualizer.DrawPossibleCommands();
+            
+            #region Menu
+
+            while (true)
             {
-
-            }
-        }
-    }
-
-    public class DatabaseAccessControl
-    {
-        public void AddUserToDatabase(User user)
-        {
-            using (var db = new SmartPoolContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
-        }
-
-        public void ClearAllEntitiesInDatabase()
-        {
-            using (var db = new SmartPoolContext())
-            {
-                Console.WriteLine("This action wil clear the entire SmartPool user database (yes/no).");
-
-                if (SecurityCheck() == true)
+                var input = Console.ReadLine();
+                switch (input)
                 {
+                    #region Menu: Add user
 
-                    //These commands need to be parameterized
-                    db.Database.ExecuteSqlCommand("DELETE [MonitorUnits]");
-                    Console.WriteLine("Clearing MonitorUnits...");
+                    case "add":
+                        User user = new User();
+                        user.FullName = visualizer.PromptForNewUser();
 
-                    db.Database.ExecuteSqlCommand("DELETE [Pools]");
-                    Console.WriteLine("Clearing pools...");
+                        //Prompt for passwd email, etc goes here.
 
-                    db.Database.ExecuteSqlCommand("DELETE [UserEntities]");
-                    Console.WriteLine("Clearing UserEntities...");
+                        databaseAccessControl.AddUserToDatabase(user);
+                        break;
 
-                    db.Database.ExecuteSqlCommand("DELETE [RealNames]");
-                    Console.WriteLine("Clearing RealNames");
-                    Console.WriteLine("************************************************************");
-                    Console.WriteLine("******************** All tables cleared! *******************");
-
-                    db.SaveChanges();
-                }
-                else
-                {
-                    return;
+                        #endregion
                 }
             }
+
+            #endregion
         }
-
-        public bool SecurityCheck()
-        {
-            var securityCheck = Console.ReadLine(/* yes/no */);
-
-            if (securityCheck == "yes")
-            {
-                return true;
-            }
-            else if (securityCheck == "no")
-            {
-                Console.WriteLine("Please be more careful. Returning to main menu");
-                return false;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-
-
     }
 }

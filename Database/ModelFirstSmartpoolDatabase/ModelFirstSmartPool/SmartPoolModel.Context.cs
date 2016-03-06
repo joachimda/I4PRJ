@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Data.Entity.Validation;
+using System.Linq;
+
 namespace ModelFirstSmartPool
 {
     using System;
@@ -24,7 +27,27 @@ namespace ModelFirstSmartPool
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
+        // Made an override to check for exceptions thx to stackoverflow :)
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException exception)
+            {
+                var errMsg = exception.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => x.ErrorMessage);
+
+                var fullMsg = string.Join("; ", errMsg);
+
+                var exceptionMsg = string.Concat(exception.Message, "The validation errors are: ", fullMsg);
+                throw new DbEntityValidationException(exceptionMsg, exception.EntityValidationErrors);
+            }
+        }
+
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Pool> Pools { get; set; }
         public virtual DbSet<FullName> FullNames { get; set; }

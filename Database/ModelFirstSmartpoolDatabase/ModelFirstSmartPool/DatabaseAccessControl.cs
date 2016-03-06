@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 
 namespace ModelFirstSmartPool
 {
@@ -65,8 +67,22 @@ namespace ModelFirstSmartPool
             }
         }
 
-
-
-
+        public void ClearMonitorUnitEntity()
+        {
+            using (var db = new SmartPoolContext())
+            {
+                Console.WriteLine("This action wil clear the entire MonitorUnit entity in the user database (yes/no).");
+                if (SecurityCheck() == true)
+                {
+                    db.Database.ExecuteSqlCommand("DELETE [MonitorUnits]");
+                    Console.WriteLine("DELETE [MonitorUnits] run against database: db");
+                    Console.WriteLine("MonitorUnits was deletes succesfully");
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
     }
 }
