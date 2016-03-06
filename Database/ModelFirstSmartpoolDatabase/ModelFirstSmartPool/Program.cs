@@ -12,6 +12,7 @@ namespace ModelFirstSmartPool
         {
             Visualizer visualizer = new Visualizer();
             DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
+            Creator creator = new Creator();
             visualizer.DrawPossibleCommands();
             
             #region Menu
@@ -24,15 +25,10 @@ namespace ModelFirstSmartPool
                     #region Menu: Add user
 
                     case "add":
-                        User user = new User();
-                        user.FullName = visualizer.PromptForNewUser();
-
-                        //Prompt for passwd email, etc goes here.
-
-                        databaseAccessControl.AddUserToDatabase(user);
+                        databaseAccessControl.AddUserToDatabase(creator.AssembleUser());
                         break;
 
-                        #endregion
+                    #endregion
                 }
             }
 

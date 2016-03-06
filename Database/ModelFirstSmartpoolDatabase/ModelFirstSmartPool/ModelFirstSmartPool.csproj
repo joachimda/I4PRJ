@@ -57,6 +57,7 @@
     <Compile Include="Chlorine.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Creator.cs" />
     <Compile Include="DatabaseAccessControl.cs" />
     <Compile Include="Formatter.cs" />
     <Compile Include="FullName.cs">
