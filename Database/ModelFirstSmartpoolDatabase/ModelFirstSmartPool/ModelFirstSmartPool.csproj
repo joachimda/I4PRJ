@@ -99,6 +99,7 @@
     <Compile Include="User.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="UserConfigurator.cs" />
     <Compile Include="ValueConstraints.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>

@@ -1,10 +1,11 @@
 using System;
+using System.Security.Authentication.ExtendedProtection;
 
 namespace ModelFirstSmartPool
 {
     public class Creator
     {
-        public User AssembleUser() //Template method
+        public User MandatoryAssemblyOfUser() //Template method
         {
             User user = new User();
             user.FullName = NewUserPromptForFullName();
@@ -13,7 +14,40 @@ namespace ModelFirstSmartPool
             return user;
         }
 
-        private string NewUserPromptForEmail()
+        public Pool MandatoryAssemblyOfPool(User user) //Template method
+        {
+            Pool pool = new Pool();
+            pool.User = user; //This is assigning the pool to the user??
+            Console.WriteLine("You are now creating a pool system, and we need some information to create your pool..");
+
+            pool.Name = NewPoolPromptForPoolName();
+            pool.PoolDimension = NewPoolPromptForPoolDimensions(pool);
+            //pool.UserUserId = user.UserId; Is this the assignment thingy?
+            return pool;
+
+
+        }
+
+        private PoolDimensions NewPoolPromptForPoolDimensions(Pool pool)
+        {
+            PoolDimensions poolDimensions = new PoolDimensions();
+            poolDimensions.Pool = pool;
+            Console.WriteLine("How deep is your pool?");
+            poolDimensions.Depth = Console.Read();
+            Console.WriteLine("How long is your pool?");
+            poolDimensions.Length = Console.Read();
+            Console.WriteLine("How wide is your pool?");
+            poolDimensions.Width = Console.Read();
+            return poolDimensions;
+        }
+
+        private string NewPoolPromptForPoolName()
+        {
+            Console.WriteLine("What would you like to call your pool? eg. Frontyard or mypool ");
+            return Console.ReadLine();
+        }
+
+        private static string NewUserPromptForEmail()
         {
             Console.WriteLine("Please write your email address formatted as username@host.domain ");
 
@@ -23,14 +57,14 @@ namespace ModelFirstSmartPool
 
         } 
 
-        private string NewUserPromptForPassword()
+        private static string NewUserPromptForPassword()
         {
             Console.WriteLine("Please enter your desired password");
             var password = Console.ReadLine();
             return password;
         }
         
-        private FullName NewUserPromptForFullName()
+        private static FullName NewUserPromptForFullName()
         {
             FullName name = new FullName();
             Formatter formatter = new Formatter();
@@ -65,5 +99,8 @@ namespace ModelFirstSmartPool
             return formatter.FormatRealNameInputFromStringArray(splitNames, name);
 
         }
+
+
+
     }
 }

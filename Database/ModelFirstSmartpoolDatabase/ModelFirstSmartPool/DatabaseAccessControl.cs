@@ -4,8 +4,6 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Net.Mail;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ModelFirstSmartPool
 {

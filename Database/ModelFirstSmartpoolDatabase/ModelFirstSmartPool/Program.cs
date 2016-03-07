@@ -13,6 +13,8 @@ namespace ModelFirstSmartPool
             Visualizer visualizer = new Visualizer();
             DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
             Creator creator = new Creator();
+            PrintQueries printer = new PrintQueries();
+
             visualizer.DrawPossibleCommands();
             
             #region Menu
@@ -25,10 +27,14 @@ namespace ModelFirstSmartPool
                     #region Menu: Add user
 
                     case "add":
-                        databaseAccessControl.AddUserToDatabase(creator.AssembleUser());
+                        databaseAccessControl.AddUserToDatabase(creator.MandatoryAssemblyOfUser());
                         break;
 
-                    #endregion
+                    case "qry":
+                        printer.GetAllUsers();
+                        break;
+
+                        #endregion
                 }
             }
 

@@ -10,12 +10,13 @@ namespace ModelFirstSmartPool
             using (var db = new SmartPoolContext())
             {
                 var userQuery = from users in db.Users
-                    orderby users.FullName
+                    orderby users.FullName.FirstName
                     select users;
 
                 foreach (var user in userQuery)
                 {
-                    Console.WriteLine(user.FullName.FirstName + " " + user.FullName.MiddleName + " " + user.FullName.LastName);
+                    //Console.WriteLine(user.FullName.FirstName + " " + user.FullName.MiddleName + " " + user.FullName.LastName);
+                    Console.WriteLine(user.FullName.FirstName);
                     
                 }
             }
