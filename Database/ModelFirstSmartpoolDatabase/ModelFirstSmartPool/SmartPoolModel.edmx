@@ -4,231 +4,231 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SmartPoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ChlorineValues">
-          <Key>
-            <PropertyRef Name="ChlorineValueId" />
-          </Key>
-          <Property Name="ChlorineValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MinimumFreeChlorine" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MaximumFreeChlorine" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MinimumBondedChlorine" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MaximumBondedChlorine" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="FullNames">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserUserId" Type="int" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar(max)" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="MonitorUnits">
-          <Key>
-            <PropertyRef Name="MonitorUnitId" />
-          </Key>
-          <Property Name="MonitorUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PoolPoolId" Type="int" Nullable="false" />
-          <Property Name="SerialNo" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="pHs">
-          <Key>
-            <PropertyRef Name="pHValueId" />
-          </Key>
-          <Property Name="pHValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MinimumPhValue" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MaximumPhValue" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PoolDimensions">
-          <Key>
-            <PropertyRef Name="PoolDimensionsId" />
-          </Key>
-          <Property Name="PoolDimensionsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Length" Type="float" Nullable="false" />
-          <Property Name="Width" Type="float" Nullable="false" />
-          <Property Name="Depth" Type="float" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Pools">
-          <Key>
-            <PropertyRef Name="PoolId" />
-          </Key>
-          <Property Name="PoolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserUserId" Type="int" Nullable="false" />
-          <Property Name="PoolDimension_PoolDimensionsId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Residences">
-          <Key>
-            <PropertyRef Name="AddressId" />
-          </Key>
-          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="State" Type="nvarchar(max)" />
-          <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UserUserId" Type="int" Nullable="false" />
-          <Property Name="ValueConstraint_ValueConstraintsId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Users">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="FullName_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ValueConstraints">
-          <Key>
-            <PropertyRef Name="ValueConstraintsId" />
-          </Key>
-          <Property Name="ValueConstraintsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pH_pHValueId" Type="int" Nullable="false" />
-          <Property Name="ChlorineConstraint_ChlorineValueId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_PoolMonitorUnit">
-          <End Role="Pools" Type="Self.Pools" Multiplicity="1" />
-          <End Role="MonitorUnits" Type="Self.MonitorUnits" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pools">
-              <PropertyRef Name="PoolId" />
-            </Principal>
-            <Dependent Role="MonitorUnits">
-              <PropertyRef Name="PoolPoolId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PoolPoolDimensions">
-          <End Role="PoolDimensions" Type="Self.PoolDimensions" Multiplicity="1" />
-          <End Role="Pools" Type="Self.Pools" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PoolDimensions">
-              <PropertyRef Name="PoolDimensionsId" />
-            </Principal>
-            <Dependent Role="Pools">
-              <PropertyRef Name="PoolDimension_PoolDimensionsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ResidenceValueConstraints">
-          <End Role="ValueConstraints" Type="Self.ValueConstraints" Multiplicity="1" />
-          <End Role="Residences" Type="Self.Residences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ValueConstraints">
-              <PropertyRef Name="ValueConstraintsId" />
-            </Principal>
-            <Dependent Role="Residences">
-              <PropertyRef Name="ValueConstraint_ValueConstraintsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserFullName">
-          <End Role="FullNames" Type="Self.FullNames" Multiplicity="1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FullNames">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="FullName_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserPool">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Pools" Type="Self.Pools" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Pools">
-              <PropertyRef Name="UserUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserResidence">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Residences" Type="Self.Residences" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Residences">
-              <PropertyRef Name="UserUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ValueConstraintsChlorine">
-          <End Role="ChlorineValues" Type="Self.ChlorineValues" Multiplicity="1" />
-          <End Role="ValueConstraints" Type="Self.ValueConstraints" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ChlorineValues">
-              <PropertyRef Name="ChlorineValueId" />
-            </Principal>
-            <Dependent Role="ValueConstraints">
-              <PropertyRef Name="ChlorineConstraint_ChlorineValueId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ValueConstraintspH">
-          <End Role="pHs" Type="Self.pHs" Multiplicity="1" />
-          <End Role="ValueConstraints" Type="Self.ValueConstraints" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="pHs">
-              <PropertyRef Name="pHValueId" />
-            </Principal>
-            <Dependent Role="ValueConstraints">
-              <PropertyRef Name="pH_pHValueId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="SmartPoolModelStoreContainer">
-          <EntitySet Name="ChlorineValues" EntityType="Self.ChlorineValues" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="FullNames" EntityType="Self.FullNames" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MonitorUnits" EntityType="Self.MonitorUnits" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="pHs" EntityType="Self.pHs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PoolDimensions" EntityType="Self.PoolDimensions" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Pools" EntityType="Self.Pools" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Residences" EntityType="Self.Residences" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ValueConstraints" EntityType="Self.ValueConstraints" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_PoolMonitorUnit" Association="Self.FK_PoolMonitorUnit">
-            <End Role="Pools" EntitySet="Pools" />
-            <End Role="MonitorUnits" EntitySet="MonitorUnits" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PoolPoolDimensions" Association="Self.FK_PoolPoolDimensions">
-            <End Role="PoolDimensions" EntitySet="PoolDimensions" />
-            <End Role="Pools" EntitySet="Pools" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ResidenceValueConstraints" Association="Self.FK_ResidenceValueConstraints">
-            <End Role="ValueConstraints" EntitySet="ValueConstraints" />
-            <End Role="Residences" EntitySet="Residences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserFullName" Association="Self.FK_UserFullName">
-            <End Role="FullNames" EntitySet="FullNames" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserPool" Association="Self.FK_UserPool">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Pools" EntitySet="Pools" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserResidence" Association="Self.FK_UserResidence">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Residences" EntitySet="Residences" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ValueConstraintsChlorine" Association="Self.FK_ValueConstraintsChlorine">
-            <End Role="ChlorineValues" EntitySet="ChlorineValues" />
-            <End Role="ValueConstraints" EntitySet="ValueConstraints" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ValueConstraintspH" Association="Self.FK_ValueConstraintspH">
-            <End Role="pHs" EntitySet="pHs" />
-            <End Role="ValueConstraints" EntitySet="ValueConstraints" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="SmartPoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SmartPoolModelStoreContainer">
+    <EntitySet Name="Users" EntityType="SmartPoolModel.Store.Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pools" EntityType="SmartPoolModel.Store.Pools" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FullNames" EntityType="SmartPoolModel.Store.FullNames" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MonitorUnits" EntityType="SmartPoolModel.Store.MonitorUnits" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Residences" EntityType="SmartPoolModel.Store.Residences" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PoolDimensions" EntityType="SmartPoolModel.Store.PoolDimensions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ValueConstraints" EntityType="SmartPoolModel.Store.ValueConstraints" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="pHs" EntityType="SmartPoolModel.Store.pHs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ChlorineValues" EntityType="SmartPoolModel.Store.ChlorineValues" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserPool" Association="SmartPoolModel.Store.UserPool">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Pool" EntitySet="Pools" />
+    </AssociationSet>
+    <AssociationSet Name="PoolMonitorUnit" Association="SmartPoolModel.Store.PoolMonitorUnit">
+      <End Role="Pool" EntitySet="Pools" />
+      <End Role="MonitorUnit" EntitySet="MonitorUnits" />
+    </AssociationSet>
+    <AssociationSet Name="UserResidence" Association="SmartPoolModel.Store.UserResidence">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Residence" EntitySet="Residences" />
+    </AssociationSet>
+    <AssociationSet Name="UserFullName" Association="SmartPoolModel.Store.UserFullName">
+      <End Role="User" EntitySet="Users" />
+      <End Role="FullName" EntitySet="FullNames" />
+    </AssociationSet>
+    <AssociationSet Name="PoolPoolDimensions" Association="SmartPoolModel.Store.PoolPoolDimensions">
+      <End Role="Pool" EntitySet="Pools" />
+      <End Role="PoolDimensions" EntitySet="PoolDimensions" />
+    </AssociationSet>
+    <AssociationSet Name="ValueConstraintspH" Association="SmartPoolModel.Store.ValueConstraintspH">
+      <End Role="ValueConstraints" EntitySet="ValueConstraints" />
+      <End Role="pH" EntitySet="pHs" />
+    </AssociationSet>
+    <AssociationSet Name="ValueConstraintsChlorine" Association="SmartPoolModel.Store.ValueConstraintsChlorine">
+      <End Role="ValueConstraints" EntitySet="ValueConstraints" />
+      <End Role="Chlorine" EntitySet="ChlorineValues" />
+    </AssociationSet>
+    <AssociationSet Name="ResidenceValueConstraints" Association="SmartPoolModel.Store.ResidenceValueConstraints">
+      <End Role="Residence" EntitySet="Residences" />
+      <End Role="ValueConstraints" EntitySet="ValueConstraints" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FullName_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pools">
+    <Key>
+      <PropertyRef Name="PoolId" />
+    </Key>
+    <Property Name="PoolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="PoolDimension_PoolDimensionsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FullNames">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonitorUnits">
+    <Key>
+      <PropertyRef Name="MonitorUnitId" />
+    </Key>
+    <Property Name="MonitorUnitId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PoolPoolId" Type="int" Nullable="false" />
+    <Property Name="SerialNo" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Residences">
+    <Key>
+      <PropertyRef Name="AddressId" />
+    </Key>
+    <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ZipCode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserUserId" Type="int" Nullable="false" />
+    <Property Name="ValueConstraint_ValueConstraintsId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PoolDimensions">
+    <Key>
+      <PropertyRef Name="PoolDimensionsId" />
+    </Key>
+    <Property Name="PoolDimensionsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Length" Type="int" Nullable="false" />
+    <Property Name="Width" Type="int" Nullable="false" />
+    <Property Name="Depth" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ValueConstraints">
+    <Key>
+      <PropertyRef Name="ValueConstraintsId" />
+    </Key>
+    <Property Name="ValueConstraintsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pH_pHValueId" Type="int" Nullable="false" />
+    <Property Name="ChlorineConstraint_ChlorineValueId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pHs">
+    <Key>
+      <PropertyRef Name="pHValueId" />
+    </Key>
+    <Property Name="pHValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MinimumPhValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MaximumPhValue" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChlorineValues">
+    <Key>
+      <PropertyRef Name="ChlorineValueId" />
+    </Key>
+    <Property Name="ChlorineValueId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MinimumFreeChlorine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MaximumFreeChlorine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MinimumBondedChlorine" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MaximumBondedChlorine" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="UserPool">
+    <End Role="User" Type="SmartPoolModel.Store.Users" Multiplicity="1" />
+    <End Role="Pool" Type="SmartPoolModel.Store.Pools" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="UserUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PoolMonitorUnit">
+    <End Role="Pool" Type="SmartPoolModel.Store.Pools" Multiplicity="1" />
+    <End Role="MonitorUnit" Type="SmartPoolModel.Store.MonitorUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pool">
+        <PropertyRef Name="PoolId" />
+      </Principal>
+      <Dependent Role="MonitorUnit">
+        <PropertyRef Name="PoolPoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserResidence">
+    <End Role="User" Type="SmartPoolModel.Store.Users" Multiplicity="1" />
+    <End Role="Residence" Type="SmartPoolModel.Store.Residences" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Residence">
+        <PropertyRef Name="UserUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserFullName">
+    <End Role="User" Type="SmartPoolModel.Store.Users" Multiplicity="*" />
+    <End Role="FullName" Type="SmartPoolModel.Store.FullNames" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="FullName">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="FullName_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PoolPoolDimensions">
+    <End Role="Pool" Type="SmartPoolModel.Store.Pools" Multiplicity="*" />
+    <End Role="PoolDimensions" Type="SmartPoolModel.Store.PoolDimensions" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="PoolDimensions">
+        <PropertyRef Name="PoolDimensionsId" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="PoolDimension_PoolDimensionsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ValueConstraintspH">
+    <End Role="ValueConstraints" Type="SmartPoolModel.Store.ValueConstraints" Multiplicity="*" />
+    <End Role="pH" Type="SmartPoolModel.Store.pHs" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="pH">
+        <PropertyRef Name="pHValueId" />
+      </Principal>
+      <Dependent Role="ValueConstraints">
+        <PropertyRef Name="pH_pHValueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ValueConstraintsChlorine">
+    <End Role="ValueConstraints" Type="SmartPoolModel.Store.ValueConstraints" Multiplicity="*" />
+    <End Role="Chlorine" Type="SmartPoolModel.Store.ChlorineValues" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Chlorine">
+        <PropertyRef Name="ChlorineValueId" />
+      </Principal>
+      <Dependent Role="ValueConstraints">
+        <PropertyRef Name="ChlorineConstraint_ChlorineValueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ResidenceValueConstraints">
+    <End Role="Residence" Type="SmartPoolModel.Store.Residences" Multiplicity="*" />
+    <End Role="ValueConstraints" Type="SmartPoolModel.Store.ValueConstraints" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ValueConstraints">
+        <PropertyRef Name="ValueConstraintsId" />
+      </Principal>
+      <Dependent Role="Residence">
+        <PropertyRef Name="ValueConstraint_ValueConstraintsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SmartPoolModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -376,9 +376,9 @@
             <PropertyRef Name="PoolDimensionsId" />
           </Key>
           <Property Name="PoolDimensionsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Length" Type="Double" Nullable="false" />
-          <Property Name="Width" Type="Double" Nullable="false" />
-          <Property Name="Depth" Type="Double" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Depth" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="SmartPoolModel.PoolPoolDimensions" FromRole="PoolDimensions" ToRole="Pool" />
         </EntityType>
         <Association Name="PoolPoolDimensions">

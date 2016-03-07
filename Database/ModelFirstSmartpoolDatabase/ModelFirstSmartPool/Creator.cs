@@ -5,12 +5,21 @@ namespace ModelFirstSmartPool
 {
     public class Creator
     {
+        DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
+
         public User MandatoryAssemblyOfUser() //Template method
         {
             User user = new User();
             user.FullName = NewUserPromptForFullName();
             user.Password = NewUserPromptForPassword();
             user.Email = NewUserPromptForEmail();
+
+            //For test!
+            user.Pools.Add(MandatoryAssemblyOfPool(user));
+            //
+
+            databaseAccessControl.AddUserToDatabase(user);
+
             return user;
         }
 
@@ -32,12 +41,16 @@ namespace ModelFirstSmartPool
         {
             PoolDimensions poolDimensions = new PoolDimensions();
             poolDimensions.Pool = pool;
+
             Console.WriteLine("How deep is your pool?");
             poolDimensions.Depth = Console.Read();
+
             Console.WriteLine("How long is your pool?");
             poolDimensions.Length = Console.Read();
+
             Console.WriteLine("How wide is your pool?");
             poolDimensions.Width = Console.Read();
+
             return poolDimensions;
         }
 

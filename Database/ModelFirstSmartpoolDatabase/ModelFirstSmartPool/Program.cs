@@ -29,6 +29,9 @@ namespace ModelFirstSmartPool
                     case "add":
                         databaseAccessControl.AddUserToDatabase(creator.MandatoryAssemblyOfUser());
                         break;
+                    #endregion
+
+                    #region Menu: Query for all users in database
 
                     case "qry":
                         printer.GetAllUsers();
