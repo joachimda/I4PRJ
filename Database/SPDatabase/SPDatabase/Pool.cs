@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SPDatabase
 {
@@ -6,6 +7,7 @@ namespace SPDatabase
     {
         #region Properties
 
+        [Key]
         public int PoolId { get; set; }
         public List<MonitorUnit> MonitorUnits { get; set; }
         public double AverageTemperature { get; set; }
