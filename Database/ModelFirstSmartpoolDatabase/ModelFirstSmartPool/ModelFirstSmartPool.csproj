@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8F625723-896C-4158-8AB6-B2139CF8DC58}</ProjectGuid>
+    <ProjectGuid>{5D8A643B-9BDE-4906-A868-0402DC0F8094}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPDatabase</RootNamespace>
-    <AssemblyName>SPDatabase</AssemblyName>
+    <RootNamespace>ModelFirstSmartPool</RootNamespace>
+    <AssemblyName>ModelFirstSmartPool</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,6 +44,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,39 +54,83 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chlorine.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Creator.cs" />
     <Compile Include="DatabaseAccessControl.cs" />
     <Compile Include="Formatter.cs" />
-    <Compile Include="IPool.cs" />
-    <Compile Include="Migrations\201603061452432_testingt1.cs" />
-    <Compile Include="Migrations\201603061452432_testingt1.Designer.cs">
-      <DependentUpon>201603061452432_testingt1.cs</DependentUpon>
+    <Compile Include="FullName.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603061459080_testingt2.cs" />
-    <Compile Include="Migrations\201603061459080_testingt2.Designer.cs">
-      <DependentUpon>201603061459080_testingt2.cs</DependentUpon>
+    <Compile Include="MonitorUnit.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="MonitorUnit.cs" />
-    <Compile Include="Pool.cs" />
+    <Compile Include="pH.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pool.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PoolDimensions.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrintQueries.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RealName.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserEntity.cs" />
-    <Compile Include="SpContext.cs" />
+    <Compile Include="Residence.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmartPoolModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartPoolModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmartPoolModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SmartPoolModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfigurator.cs" />
+    <Compile Include="ValueConstraints.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Visualizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="SmartPoolModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SmartPoolModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="packages.config" />
+    <None Include="SmartPoolModel.edmx.diagram">
+      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603061452432_testingt1.resx">
-      <DependentUpon>201603061452432_testingt1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603061459080_testingt2.resx">
-      <DependentUpon>201603061459080_testingt2.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="SmartPoolModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SmartPoolModel.Context.cs</LastGenOutput>
+      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="SmartPoolModel.edmx.sql" />
+    <Content Include="SmartPoolModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SmartPoolModel.cs</LastGenOutput>
+      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

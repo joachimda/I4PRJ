@@ -58,8 +58,14 @@ namespace SPDatabase
                         databaseAccessControl.ClearMonitorUnitEntity();
                         break;
 
-                        #endregion
+                    #endregion
 
+                    case "createsamplepool":
+                        Pool pool = new Pool {Depth = 2, Length = 6, PoolName = "Backyard", Width = 3};
+                        RealName rnName = new RealName { FirstName = "John", SurName = "Doe" };
+                        UserEntity someUserEntity = new UserEntity {Email = "richguy@gmail.com",Password = "password", Name = rnName};
+                        databaseAccessControl.AddPoolToUserInDatabase(/*someUserEntity,*/ pool);
+                        break;
                 }
             }
 
