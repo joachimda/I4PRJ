@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d4c41833009443d4a7de5a3e9cb776aa" Name="Diagram1" >
+      <Diagram DiagramId="d4c41833009443d4a7de5a3e9cb776aa" Name="Diagram1" ZoomLevel="82" >
         <EntityTypeShape EntityType="SmartPoolModel.User" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="SmartPoolModel.Pool" Width="1.5" PointX="2.75" PointY="0.5" />
         <AssociationConnector Association="SmartPoolModel.UserPool" />

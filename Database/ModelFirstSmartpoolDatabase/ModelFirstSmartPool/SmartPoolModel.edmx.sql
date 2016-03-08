@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/07/2016 01:36:23
+-- Date Created: 03/07/2016 12:30:44
 -- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Database\ModelFirstSmartpoolDatabase\ModelFirstSmartPool\SmartPoolModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [ModelFirst.SmartPool];
+USE [F16I4PRJ4Gr3];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,37 +17,40 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_PoolMonitorUnit]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MonitorUnits] DROP CONSTRAINT [FK_PoolMonitorUnit];
-GO
-IF OBJECT_ID(N'[dbo].[FK_PoolPoolDimensions]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Pools] DROP CONSTRAINT [FK_PoolPoolDimensions];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ResidenceValueConstraints]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Residences] DROP CONSTRAINT [FK_ResidenceValueConstraints];
-GO
-IF OBJECT_ID(N'[dbo].[FK_UserFullName]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserFullName];
-GO
 IF OBJECT_ID(N'[dbo].[FK_UserPool]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Pools] DROP CONSTRAINT [FK_UserPool];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PoolMonitorUnit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MonitorUnits] DROP CONSTRAINT [FK_PoolMonitorUnit];
 GO
 IF OBJECT_ID(N'[dbo].[FK_UserResidence]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Residences] DROP CONSTRAINT [FK_UserResidence];
 GO
-IF OBJECT_ID(N'[dbo].[FK_ValueConstraintsChlorine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ValueConstraints] DROP CONSTRAINT [FK_ValueConstraintsChlorine];
+IF OBJECT_ID(N'[dbo].[FK_UserFullName]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Users] DROP CONSTRAINT [FK_UserFullName];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PoolPoolDimensions]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Pools] DROP CONSTRAINT [FK_PoolPoolDimensions];
 GO
 IF OBJECT_ID(N'[dbo].[FK_ValueConstraintspH]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ValueConstraints] DROP CONSTRAINT [FK_ValueConstraintspH];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ValueConstraintsChlorine]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ValueConstraints] DROP CONSTRAINT [FK_ValueConstraintsChlorine];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ResidenceValueConstraints]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Residences] DROP CONSTRAINT [FK_ResidenceValueConstraints];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[ChlorineValues]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ChlorineValues];
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
+GO
+IF OBJECT_ID(N'[dbo].[Pools]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Pools];
 GO
 IF OBJECT_ID(N'[dbo].[FullNames]', 'U') IS NOT NULL
     DROP TABLE [dbo].[FullNames];
@@ -55,23 +58,20 @@ GO
 IF OBJECT_ID(N'[dbo].[MonitorUnits]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MonitorUnits];
 GO
-IF OBJECT_ID(N'[dbo].[pHs]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[pHs];
+IF OBJECT_ID(N'[dbo].[Residences]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Residences];
 GO
 IF OBJECT_ID(N'[dbo].[PoolDimensions]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PoolDimensions];
 GO
-IF OBJECT_ID(N'[dbo].[Pools]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Pools];
-GO
-IF OBJECT_ID(N'[dbo].[Residences]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Residences];
-GO
-IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Users];
-GO
 IF OBJECT_ID(N'[dbo].[ValueConstraints]', 'U') IS NOT NULL
     DROP TABLE [dbo].[ValueConstraints];
+GO
+IF OBJECT_ID(N'[dbo].[pHs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[pHs];
+GO
+IF OBJECT_ID(N'[dbo].[ChlorineValues]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ChlorineValues];
 GO
 
 -- --------------------------------------------------
