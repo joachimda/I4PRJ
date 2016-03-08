@@ -1,46 +1,47 @@
 using System;
+using System.Globalization;
 using System.Security.Authentication.ExtendedProtection;
 
 namespace ModelFirstSmartPool
 {
     public class Creator
     {
-        DatabaseAccessControl databaseAccessControl = new DatabaseAccessControl();
+        private readonly DatabaseAccessControl _databaseAccessControl = new DatabaseAccessControl();
 
         public User MandatoryAssemblyOfUser() //Template method
         {
-            User user = new User();
-            user.FullName = NewUserPromptForFullName();
-            user.Password = NewUserPromptForPassword();
-            user.Email = NewUserPromptForEmail();
+            User user = new User
+            {
+                FullName = NewUserPromptForFullName(),
+                Password = NewUserPromptForPassword(),
+                Email = NewUserPromptForEmail()
+            };
 
             //For test!
             user.Pools.Add(MandatoryAssemblyOfPool(user));
-            //
-
-            databaseAccessControl.AddUserToDatabase(user);
+            
+            //_databaseAccessControl.AddUserToDatabase(user);
 
             return user;
         }
 
         public Pool MandatoryAssemblyOfPool(User user) //Template method
         {
-            Pool pool = new Pool();
-            pool.User = user; //This is assigning the pool to the user??
+            Pool pool = new Pool {User = user};
+            //This is assigning the pool to the user??
             Console.WriteLine("You are now creating a pool system, and we need some information to create your pool..");
 
             pool.Name = NewPoolPromptForPoolName();
             pool.PoolDimension = NewPoolPromptForPoolDimensions(pool);
-            //pool.UserUserId = user.UserId; Is this the assignment thingy?
+            //pool.UserUserId = user.UserId; //Is this the assignment thingy?
             return pool;
 
 
         }
 
-        private PoolDimensions NewPoolPromptForPoolDimensions(Pool pool)
+        private static PoolDimensions NewPoolPromptForPoolDimensions(Pool pool)
         {
-            PoolDimensions poolDimensions = new PoolDimensions();
-            poolDimensions.Pool = pool;
+            PoolDimensions poolDimensions = new PoolDimensions {Pool = pool};
 
             Console.WriteLine("How deep is your pool?");
             poolDimensions.Depth = Console.Read();
@@ -54,7 +55,7 @@ namespace ModelFirstSmartPool
             return poolDimensions;
         }
 
-        private string NewPoolPromptForPoolName()
+        private static string NewPoolPromptForPoolName()
         {
             Console.WriteLine("What would you like to call your pool? eg. Frontyard or mypool ");
             return Console.ReadLine();
@@ -110,10 +111,6 @@ namespace ModelFirstSmartPool
             }
 
             return formatter.FormatRealNameInputFromStringArray(splitNames, name);
-
         }
-
-
-
     }
 }
