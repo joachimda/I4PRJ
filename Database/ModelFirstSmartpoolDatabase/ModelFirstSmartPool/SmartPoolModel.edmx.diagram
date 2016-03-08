@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="SmartPoolModel.Pool" Width="1.5" PointX="2.75" PointY="0.5" />
         <AssociationConnector Association="SmartPoolModel.UserPool" />
         <EntityTypeShape EntityType="SmartPoolModel.FullName" Width="1.5" PointX="0.5" PointY="3.375" />
-        <EntityTypeShape EntityType="SmartPoolModel.MonitorUnit" Width="1.5" PointX="4.875" PointY="0.5" />
+        <EntityTypeShape EntityType="SmartPoolModel.MonitorUnit" Width="1.5" PointX="5.125" PointY="0.5" />
         <AssociationConnector Association="SmartPoolModel.PoolMonitorUnit" />
         <EntityTypeShape EntityType="SmartPoolModel.Residence" Width="1.5" PointX="2.75" PointY="3.375" />
         <AssociationConnector Association="SmartPoolModel.UserResidence" />
