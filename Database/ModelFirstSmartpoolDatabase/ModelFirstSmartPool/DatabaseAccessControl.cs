@@ -9,7 +9,7 @@ namespace ModelFirstSmartPool
 {
     public class DatabaseAccessControl : DbContext
     {
-            // Made an override to check for exceptions thx to stackoverflow :)
+        // Made an override to check for exceptions thx to stackoverflow :)
         public override int SaveChanges()
         {
             try
@@ -75,18 +75,15 @@ namespace ModelFirstSmartPool
         {
             var securityCheck = Console.ReadLine(/* yes/no */);
 
-            if (securityCheck == "yes")
+            switch (securityCheck)
             {
-                return true;
-            }
-            else if (securityCheck == "no")
-            {
-                Console.WriteLine("Please be more careful. Returning to main menu");
-                return false;
-            }
-            else
-            {
-                return false;
+                case "yes":
+                    return true;
+                case "no":
+                    Console.WriteLine("Please be more careful. Returning to main menu");
+                    return false;
+                default:
+                    return false;
             }
         }
 

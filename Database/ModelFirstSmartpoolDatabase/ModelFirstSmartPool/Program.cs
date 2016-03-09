@@ -37,7 +37,16 @@ namespace ModelFirstSmartPool
                         printer.GetAllUsers();
                         break;
 
-                        #endregion
+                    #endregion
+
+                    #region Menu: Default
+
+                    default:
+                        Console.WriteLine("Do something!");
+                        break;
+
+                    #endregion
+
                 }
             }
 
