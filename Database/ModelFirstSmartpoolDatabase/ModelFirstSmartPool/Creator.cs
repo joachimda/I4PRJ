@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Security.Authentication.ExtendedProtection;
 
 namespace ModelFirstSmartPool
@@ -18,9 +19,9 @@ namespace ModelFirstSmartPool
 
             //For test!
             user.Pools.Add(MandatoryAssemblyOfPool(user));
-            //
 
-            _databaseAccessControl.AddUserToDatabase(user);
+            
+            //_databaseAccessControl.AddUserToDatabase(user);
 
             return user;
         }
@@ -33,7 +34,7 @@ namespace ModelFirstSmartPool
 
             pool.Name = NewPoolPromptForPoolName();
             pool.PoolDimension = NewPoolPromptForPoolDimensions(pool);
-            //pool.UserUserId = user.UserId; Is this the assignment thingy?
+            //pool.UserUserId = user.UserId; //Is this the assignment thingy?
             return pool;
         }
 
@@ -109,7 +110,6 @@ namespace ModelFirstSmartPool
             }
 
             return formatter.FormatRealNameInputFromStringArray(splitNames, name);
-
         }
     }
 }
