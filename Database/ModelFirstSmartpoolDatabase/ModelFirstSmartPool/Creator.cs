@@ -20,7 +20,6 @@ namespace ModelFirstSmartPool
             //For test!
             user.Pools.Add(MandatoryAssemblyOfPool(user));
 
-            
             //_databaseAccessControl.AddUserToDatabase(user);
 
             return user;
