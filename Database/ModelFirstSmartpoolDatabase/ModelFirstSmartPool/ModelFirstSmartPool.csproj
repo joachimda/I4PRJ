@@ -111,6 +111,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SmartPoolModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="SmartPoolModel.edmx.diagram">
       <DependentUpon>SmartPoolModel.edmx</DependentUpon>
