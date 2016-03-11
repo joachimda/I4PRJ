@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ModelFirstSmartPool;
 
 namespace SmartPoolGui.Application
 {
@@ -13,6 +14,6 @@ namespace SmartPoolGui.Application
     /// </summary>
     public partial class App : System.Windows.Application //Not Application only?
     {
-
+        
     }
 }
