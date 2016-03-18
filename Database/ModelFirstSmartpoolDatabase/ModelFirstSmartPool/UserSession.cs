@@ -23,10 +23,9 @@ namespace ModelFirstSmartPool
             }
 
             // this constructor should only be called by an authenticating class
-            public UserSession(int userId, bool authenticated)
+            public UserSession(UserIdentity userId, bool authenticated)
             {
-                var identity = new UserIdentity(userId);
-                _session = Tuple.Create(identity, authenticated);
+                _session = Tuple.Create(userId, authenticated);
             }
 
             public bool Authenticated()

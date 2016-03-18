@@ -28,7 +28,8 @@ namespace ModelFirstSmartPool
                         select users.UserId;
 
                     // checks to see whether the input was matched by the query
-                    return userQuery.Any() ? new UserSession(userQuery.First(), true) : null;
+                    var userId = new UserIdentity(userQuery.First(), password);
+                    return userQuery.Any() ? new UserSession(userId, true) : null;
                 }
             }
 
@@ -36,11 +37,12 @@ namespace ModelFirstSmartPool
             public void Deauthenticate(ref UserSession session)
             {
                 // gets the sessions authenticated id (possibly null)
-                var userId = session?.Identity().AuthenticatedId;
-                if (userId == null) return;
+                var authenticatedId = session?.Identity().AuthenticatedId;
+                if (authenticatedId == null) return;
 
                 // deauthenticates the current user
-                session = new UserSession(userId.GetValueOrDefault(), false);
+                var userId = new UserIdentity(authenticatedId.GetValueOrDefault(), "");
+                session = new UserSession(userId, false);
             }
 
             // nullifies the input session
@@ -58,7 +60,21 @@ namespace ModelFirstSmartPool
             // confirms write access to data related to the user id contained in the session
             public bool ConfirmWriteAccess(UserSession session)
             {
-                return session.Authenticated();
+                if (session == null || session.Authenticated() == false) return false;
+
+                // returns false if user could not be authenticated based on the input   
+                using (var db = new SmartPoolContext())
+                {
+                    // queries the database for users matching input session
+                    var userQuery = from users in db.Users
+                        where
+                            users.UserId == session.Identity().AuthenticatedId &&
+                            users.Password == session.Identity().Password
+                        select users.UserId;
+
+                    // returns true if the input was matched by the query
+                    return userQuery.Any();
+                }
             }
         }
     }

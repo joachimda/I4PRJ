@@ -16,11 +16,13 @@ namespace ModelFirstSmartPool
         internal class UserIdentity
         {
             public int AuthenticatedId { get; private set; }
+            public string Password { get; private set; }
 
             // this constructor should only be called by an authenticating class
-            public UserIdentity(int userId)
+            public UserIdentity(int userId, string password)
             {
                 AuthenticatedId = userId;
+                Password = password;
             }
         }
     }  
