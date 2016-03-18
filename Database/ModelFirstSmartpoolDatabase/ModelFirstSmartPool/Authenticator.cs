@@ -48,6 +48,18 @@ namespace ModelFirstSmartPool
             {
                 session = null;
             }
+
+            // confirms read access to data related to the user id contained in the session
+            public bool ConfirmReadAccess(UserSession session)
+            {
+                return session.Authenticated();
+            }
+
+            // confirms write access to data related to the user id contained in the session
+            public bool ConfirmWriteAccess(UserSession session)
+            {
+                return session.Authenticated();
+            }
         }
     }
 }
