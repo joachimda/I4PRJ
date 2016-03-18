@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{00000000-0000-0000-0000-000000000000}</ProjectGuid>
+    <ProjectGuid>{ac14053d-8d47-404c-84b8-2cc2d6bd7369}</ProjectGuid>
     <ArchitectureToolsVersion>2.0.0.0</ArchitectureToolsVersion>
     <Name>Smartpool.Modeling</Name>
     <RootNamespace>Smartpool.Modeling</RootNamespace>
@@ -22,6 +22,13 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" Condition="'$(VSToolsPath)' != ''" />
   <ItemGroup>
+    <Content Include="SD_Authentication.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="SD_Authentication.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>SD_Authentication.sequencediagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\Smartpool.Modeling.uml">
       <SubType>Content</SubType>

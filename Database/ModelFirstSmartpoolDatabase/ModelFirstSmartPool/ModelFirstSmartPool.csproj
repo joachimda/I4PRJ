@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authenticator.cs" />
     <Compile Include="Chlorine.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
@@ -100,6 +101,8 @@
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserConfigurator.cs" />
+    <Compile Include="UserIdentity.cs" />
+    <Compile Include="UserSession.cs" />
     <Compile Include="ValueConstraints.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
@@ -111,7 +114,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SmartPoolModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="SmartPoolModel.edmx.diagram">
       <DependentUpon>SmartPoolModel.edmx</DependentUpon>
