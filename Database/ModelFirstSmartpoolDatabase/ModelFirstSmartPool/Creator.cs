@@ -19,8 +19,6 @@ namespace ModelFirstSmartPool
 
             //For test!
             user.Pools.Add(MandatoryAssemblyOfPool(user));
-            
-            //_databaseAccessControl.AddUserToDatabase(user);
 
             return user;
         }
@@ -80,6 +78,7 @@ namespace ModelFirstSmartPool
         
         private static FullName NewUserPromptForFullName()
         {
+            
             FullName name = new FullName();
             Formatter formatter = new Formatter();
             bool validNameEntered = false;

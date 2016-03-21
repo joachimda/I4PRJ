@@ -4,7 +4,7 @@ namespace ModelFirstSmartPool
 {
     public class Visualizer
     {
-        public FullName PromptForNewUser()
+      /*  public FullName PromptForNewUser()
         {
             FullName name = new FullName();
             Formatter formatter = new Formatter();
@@ -37,8 +37,9 @@ namespace ModelFirstSmartPool
             }
 
             return formatter.FormatRealNameInputFromStringArray(splitNames, name);
-
+            
         }
+        */
 
         public void DrawPossibleCommands()
         {

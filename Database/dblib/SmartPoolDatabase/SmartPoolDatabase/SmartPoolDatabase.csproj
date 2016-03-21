@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5D8A643B-9BDE-4906-A868-0402DC0F8094}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0A5DAAA2-694C-4F31-812C-D003246F9758}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModelFirstSmartPool</RootNamespace>
-    <AssemblyName>ModelFirstSmartPool</AssemblyName>
+    <RootNamespace>SmartPoolDatabase</RootNamespace>
+    <AssemblyName>SmartPoolDatabase</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -54,81 +51,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chlorine.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Creator.cs" />
     <Compile Include="DatabaseAccessControl.cs" />
-    <Compile Include="Formatter.cs" />
-    <Compile Include="FullName.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    <Compile Include="IUserControl.cs" />
+    <Compile Include="Name.cs">
+      <DependentUpon>SmartPoolModelNew.tt</DependentUpon>
     </Compile>
-    <Compile Include="MonitorUnit.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="pH.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Pool.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PoolDimensions.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PrintQueries.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Residence.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SmartPoolModel.Context.cs">
+    <Compile Include="SmartPoolModelNew.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.Context.tt</DependentUpon>
+      <DependentUpon>SmartPoolModelNew.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="SmartPoolModel.cs">
+    <Compile Include="SmartPoolModelNew.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+      <DependentUpon>SmartPoolModelNew.tt</DependentUpon>
     </Compile>
-    <Compile Include="SmartPoolModel.Designer.cs">
+    <Compile Include="SmartPoolModelNew.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+      <DependentUpon>SmartPoolModelNew.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Parent.cs" />
     <Compile Include="User.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+      <DependentUpon>SmartPoolModelNew.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserConfigurator.cs" />
-    <Compile Include="ValueConstraints.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Visualizer.cs" />
+    <Compile Include="UserControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="SmartPoolModel.edmx">
+    <None Include="App.Config" />
+    <EntityDeploy Include="SmartPoolModelNew.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>SmartPoolModelNew.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
-    <None Include="SmartPoolModel.edmx.diagram">
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    <None Include="SmartPoolModelNew.edmx.diagram">
+      <DependentUpon>SmartPoolModelNew.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SmartPoolModel.Context.tt">
+    <Content Include="SmartPoolModelNew.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.Context.cs</LastGenOutput>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+      <LastGenOutput>SmartPoolModelNew.Context.cs</LastGenOutput>
+      <DependentUpon>SmartPoolModelNew.edmx</DependentUpon>
     </Content>
-    <Content Include="SmartPoolModel.edmx.sql" />
-    <Content Include="SmartPoolModel.tt">
+    <Content Include="SmartPoolModelNew.edmx.sql" />
+    <Content Include="SmartPoolModelNew.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.cs</LastGenOutput>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+      <LastGenOutput>SmartPoolModelNew.cs</LastGenOutput>
+      <DependentUpon>SmartPoolModelNew.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
