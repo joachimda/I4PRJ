@@ -33,8 +33,6 @@ namespace ModelFirstSmartPool
             pool.PoolDimension = NewPoolPromptForPoolDimensions(pool);
             //pool.UserUserId = user.UserId; //Is this the assignment thingy?
             return pool;
-
-
         }
 
         private static PoolDimensions NewPoolPromptForPoolDimensions(Pool pool)

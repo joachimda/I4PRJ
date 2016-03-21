@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authenticator.cs" />
     <Compile Include="Chlorine.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
@@ -101,6 +102,8 @@
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserConfigurator.cs" />
+    <Compile Include="UserIdentity.cs" />
+    <Compile Include="UserSession.cs" />
     <Compile Include="ValueConstraints.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
