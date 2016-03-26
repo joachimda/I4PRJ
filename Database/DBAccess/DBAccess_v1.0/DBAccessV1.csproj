@@ -43,6 +43,7 @@
     <Compile Include="Access\DBAccess.cs" />
     <Compile Include="Access\PoolAccess.cs" />
     <Compile Include="Access\UserAccess.cs" />
+    <Compile Include="MonitorUnit\IMonitorUnit.cs" />
     <Compile Include="Pool\IPoolRead.cs" />
     <Compile Include="Pool\IPoolWrite.cs" />
     <Compile Include="MonitorUnit\MonitorUnit.cs" />

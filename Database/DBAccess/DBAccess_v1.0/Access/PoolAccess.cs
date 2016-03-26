@@ -11,5 +11,12 @@ namespace DBAccessV1
 
             // add pool to db
         }
+
+        public Pool FindPool(string name)
+        {
+            // find pool
+
+            return new Pool("DerpPool");
+        }
     }
 }

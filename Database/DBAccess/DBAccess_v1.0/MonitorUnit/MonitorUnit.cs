@@ -1,6 +1,6 @@
 namespace DBAccessV1
 {
-    public class MonitorUnit
+    public class MonitorUnit : IMonitorUnit
     {
         public string Name { get; set; }
         public double Temperature { get; set; }
