@@ -45,13 +45,19 @@ namespace DBAccessV1
         {
             Name = name;
         }
-    }
 
-    public class MonitorUnit
-    {
-        public string Name { get; set; }
-        public double Temperature { get; set; }
-        public double Ph { get; set; }
-        public double Clorine { get; set; }
+        #region Methods
+
+        public void AddMonitorUnit(MonitorUnit monitorUnit)
+        {
+            MonitorUnits.Add(monitorUnit);
+        }
+
+        public void RemoveMonitorUnit(int monitorUnitId)
+        {
+            // find unit with id, and remove
+        }
+
+        #endregion
     }
 }
