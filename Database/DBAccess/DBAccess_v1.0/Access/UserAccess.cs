@@ -1,10 +1,5 @@
-﻿namespace DBAccessV1
+namespace DBAccessV1
 {
-    public class DBAccess
-    {
-        public UserAccess UserAccess { get; } = new UserAccess();
-    }
-
     public class UserAccess
     {
         #region AddUser methods
