@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="SmartPoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="SmartPoolModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SmartPoolModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="SmartPoolModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="SmartPoolModel.User" />
+          <EntitySet Name="PoolSet" EntityType="SmartPoolModel.Pool" />
+          <AssociationSet Name="UserPool" Association="SmartPoolModel.UserPool">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Pool" EntitySet="PoolSet" />
+          </AssociationSet>
+          <EntitySet Name="MonitorUnitSet" EntityType="SmartPoolModel.MonitorUnit" />
+          <AssociationSet Name="PoolMonitorUnit" Association="SmartPoolModel.PoolMonitorUnit">
+            <End Role="Pool" EntitySet="PoolSet" />
+            <End Role="MonitorUnit" EntitySet="MonitorUnitSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" />
+          <Property Name="Middlename" Type="String" Nullable="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Pool" Relationship="SmartPoolModel.UserPool" FromRole="User" ToRole="Pool" />
+        </EntityType>
+        <EntityType Name="Pool">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="SmartPoolModel.UserPool" FromRole="Pool" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MonitorUnit" Relationship="SmartPoolModel.PoolMonitorUnit" FromRole="Pool" ToRole="MonitorUnit" />
+        </EntityType>
+        <Association Name="UserPool">
+          <End Type="SmartPoolModel.User" Role="User" Multiplicity="1" />
+          <End Type="SmartPoolModel.Pool" Role="Pool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pool">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MonitorUnit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Clorine" Type="Double" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Ph" Type="Double" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" Nullable="false" />
+          <Property Name="Temperature" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Pool" Relationship="SmartPoolModel.PoolMonitorUnit" FromRole="MonitorUnit" ToRole="Pool" />
+          <Property Name="PoolId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PoolMonitorUnit">
+          <End Type="SmartPoolModel.Pool" Role="Pool" Multiplicity="1" />
+          <End Type="SmartPoolModel.MonitorUnit" Role="MonitorUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pool">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonitorUnit">
+              <PropertyRef Name="PoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="SmartPoolModel" />
+        <Alias Key="Target" Value="SmartPoolModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="SmartPoolModelContainer" StorageEntityContainer="SmartPoolModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
