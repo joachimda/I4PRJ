@@ -37,7 +37,7 @@ namespace DBAccessV1
             }
         }
 
-        public List<MonitorUnit> MonitorUnits { get; set; }
+        public List<IMonitorUnit> MonitorUnits { get; set; }
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace DBAccessV1
 
         #region Methods
 
-        public void AddMonitorUnit(MonitorUnit monitorUnit)
+        public void AddMonitorUnit(IMonitorUnit monitorUnit)
         {
             MonitorUnits.Add(monitorUnit);
         }

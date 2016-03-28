@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace DBAccessV1
 {
     public class UserAccess
@@ -22,12 +24,16 @@ namespace DBAccessV1
 
         #endregion
 
-        public User FindUser(string email)
+
+        public List<User> FindUser(string email)
         {
             // find user with that email in db
+            List<User> listOfFoundUsers = new List<User>();
 
-            // return user
-            return new User("John", "Doe", "Derp@gmail.com", "ILikeBoobz");
+            // add found users to list
+
+            // return list
+            return listOfFoundUsers;
         }
     }
 }
