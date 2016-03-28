@@ -23,8 +23,7 @@ namespace DBAccessV1
         }
 
         #endregion
-
-
+        
         public List<User> FindUser(string email)
         {
             // find user with that email in db
