@@ -4,5 +4,11 @@
     {
         public UserAccess UserAccess { get; } = new UserAccess();
         public PoolAccess PoolAccess { get; } = new PoolAccess();
+
+        public void FuckAll()
+        {
+            UserAccess.FuckAll();
+            PoolAccess.FuckAll();
+        }
     }
 }

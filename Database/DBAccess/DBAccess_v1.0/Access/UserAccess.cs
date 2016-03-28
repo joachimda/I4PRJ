@@ -34,5 +34,10 @@ namespace DBAccessV1
             // return list
             return listOfFoundUsers;
         }
+
+        public void FuckAll()
+        {
+            // clear all users
+        }
     }
 }

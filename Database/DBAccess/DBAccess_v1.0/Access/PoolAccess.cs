@@ -18,5 +18,10 @@ namespace DBAccessV1
 
             return new Pool("DerpPool");
         }
+
+        public void FuckAll()
+        {
+            // clear pool soeitjoerij
+        }
     }
 }
