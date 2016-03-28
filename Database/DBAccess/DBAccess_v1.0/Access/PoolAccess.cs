@@ -1,7 +1,4 @@
-using DBAccessV1;
-using DBAccess_v1._0;
-
-namespace DBAccessV1
+namespace DBAccess_v1._0.Access
 {
     public class PoolAccess
     {
@@ -22,7 +19,10 @@ namespace DBAccessV1
 
         public void FuckAll()
         {
-            // clear pool soeitjoerij
+            using (var db = new SmartPoolModelContainer())
+            {
+                db.Database.ExecuteSqlCommand("DELETE [Pool]");
+            }
         }
     }
 }
