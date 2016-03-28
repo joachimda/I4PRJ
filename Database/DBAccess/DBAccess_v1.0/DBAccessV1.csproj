@@ -57,14 +57,9 @@
     <Compile Include="MonitorUnit.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="MonitorUnit\IMonitorUnit.cs" />
     <Compile Include="Pool.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pool\IPoolRead.cs" />
-    <Compile Include="Pool\IPoolWrite.cs" />
-    <Compile Include="MonitorUnit\MonitorUnit.cs" />
-    <Compile Include="Pool\Pool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmartPoolModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -84,7 +79,6 @@
     <Compile Include="User.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="User\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="SmartPoolModel.edmx">
@@ -114,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModelFirstDatabase\ModelFirstDatabase.csproj">
+      <Project>{81a4075e-c63b-402d-a1f3-36ebfe7beea7}</Project>
+      <Name>ModelFirstDatabase</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
 using DBAccessV1;
+using DBAccess_v1._0;
 
 namespace DBAccessV1
 {
@@ -7,7 +8,7 @@ namespace DBAccessV1
         public void AddPool(string name)
         {
             // make temp pool
-            Pool temPool = new Pool(name);
+            //Pool temPool = new Pool(name);
 
             // add pool to db
         }
@@ -16,7 +17,7 @@ namespace DBAccessV1
         {
             // find pool
 
-            return new Pool("DerpPool");
+            return new Pool();
         }
 
         public void FuckAll()

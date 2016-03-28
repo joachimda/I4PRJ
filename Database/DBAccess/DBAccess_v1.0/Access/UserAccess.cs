@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DBAccess_v1._0;
 
 namespace DBAccessV1
 {
@@ -9,7 +10,7 @@ namespace DBAccessV1
         public void AddUser(string firstname, string lastname, string email, string password)
         {
             // make temp user
-            User tempUser = new User(firstname, lastname, email, password);
+            User tempUser = new User();
 
             // add user to db
         }
@@ -17,7 +18,7 @@ namespace DBAccessV1
         public void AddUser(string firstname, string middelname, string lastname, string email, string password)
         {
             // make temp user
-            User tempUser = new User(firstname, middelname, lastname, email, password);
+            User tempUser = new User();
 
             // add user to db
         }
