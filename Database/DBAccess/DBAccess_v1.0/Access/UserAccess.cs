@@ -38,7 +38,7 @@ namespace DBAccessV1
 
         public void FuckAll()
         {
-            using (var db = new SmartPoolModelContainer())
+            using (var db = new SmartPoolContext())
             {
                 db.Database.ExecuteSqlCommand("DELETE [User]");
             }

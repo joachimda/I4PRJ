@@ -77,7 +77,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SmartPoolModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="SmartPoolModelContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SmartPoolContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserSet" EntityType="SmartPoolModel.User" />
           <EntitySet Name="PoolSet" EntityType="SmartPoolModel.Pool" />
           <AssociationSet Name="UserPool" Association="SmartPoolModel.UserPool">
@@ -154,7 +154,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="SmartPoolModelStoreContainer" CdmEntityContainer="SmartPoolModelContainer">
+  <EntityContainerMapping StorageEntityContainer="SmartPoolModelStoreContainer" CdmEntityContainer="SmartPoolContext">
     <EntitySetMapping Name="UserSet">
       <EntityTypeMapping TypeName="IsTypeOf(SmartPoolModel.User)">
         <MappingFragment StoreEntitySet="UserSet">

@@ -7,41 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Data.Entity.Validation;
-using System.Linq;
-
-namespace DBAccess_v1._0
+namespace DbAccess
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SmartPoolModelContainer : DbContext
+    public partial class SmartPoolContext : DbContext
     {
-        public SmartPoolModelContainer()
-            : base("name=SmartPoolModelContainer")
+        public SmartPoolContext()
+            : base("name=SmartPoolContext")
         {
         }
-
-        public override int SaveChanges()
-        {
-            try
-            {
-                return base.SaveChanges();
-            }
-            catch (DbEntityValidationException exception)
-            {
-                var errMsg = exception.EntityValidationErrors
-                    .SelectMany(x => x.ValidationErrors)
-                    .Select(x => x.ErrorMessage);
-
-                var fullMsg = string.Join("; ", errMsg);
-
-                var exceptionMsg = string.Concat(exception.Message, "The validation errors are: ", fullMsg);
-                throw new DbEntityValidationException(exceptionMsg, exception.EntityValidationErrors);
-            }
-        }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

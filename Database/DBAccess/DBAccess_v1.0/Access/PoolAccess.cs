@@ -19,7 +19,7 @@ namespace DBAccess_v1._0.Access
 
         public void FuckAll()
         {
-            using (var db = new SmartPoolModelContainer())
+            using (var db = new SmartPoolContext())
             {
                 db.Database.ExecuteSqlCommand("DELETE [Pool]");
             }

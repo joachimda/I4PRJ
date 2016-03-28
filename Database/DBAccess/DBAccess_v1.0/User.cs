@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DBAccess_v1._0
+namespace DbAccess
 {
     using System;
     using System.Collections.Generic;
