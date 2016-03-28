@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBAccess_v1.0\DBAccessV1.csproj">
+      <Project>{b8516725-1e74-4629-86ba-58ce0b41dd2e}</Project>
+      <Name>DBAccessV1</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelFirstDatabase\ModelFirstDatabase.csproj">
+      <Project>{81a4075e-c63b-402d-a1f3-36ebfe7beea7}</Project>
+      <Name>ModelFirstDatabase</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

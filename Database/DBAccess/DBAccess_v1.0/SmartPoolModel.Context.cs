@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Data.Entity.Validation;
+using System.Linq;
+
 namespace DBAccess_v1._0
 {
     using System;
@@ -19,7 +22,26 @@ namespace DBAccess_v1._0
             : base("name=SmartPoolModelContainer")
         {
         }
-    
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                return base.SaveChanges();
+            }
+            catch (DbEntityValidationException exception)
+            {
+                var errMsg = exception.EntityValidationErrors
+                    .SelectMany(x => x.ValidationErrors)
+                    .Select(x => x.ErrorMessage);
+
+                var fullMsg = string.Join("; ", errMsg);
+
+                var exceptionMsg = string.Concat(exception.Message, "The validation errors are: ", fullMsg);
+                throw new DbEntityValidationException(exceptionMsg, exception.EntityValidationErrors);
+            }
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
