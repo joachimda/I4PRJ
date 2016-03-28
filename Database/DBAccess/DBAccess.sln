@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAccessV1", "DBAccess_v1.0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelFirstDatabase", "ModelFirstDatabase\ModelFirstDatabase.csproj", "{81A4075E-C63B-402D-A1F3-36EBFE7BEEA7}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProdDatabase", "ProdDatabase\ProdDatabase.sqlproj", "{CE5864F6-6ED8-4481-A509-419E1AF4C27D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,12 @@ Global
 		{81A4075E-C63B-402D-A1F3-36EBFE7BEEA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81A4075E-C63B-402D-A1F3-36EBFE7BEEA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81A4075E-C63B-402D-A1F3-36EBFE7BEEA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE5864F6-6ED8-4481-A509-419E1AF4C27D}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

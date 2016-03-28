@@ -4,11 +4,76 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="SmartPoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="SmartPoolModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="SmartPoolModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SmartPoolModelStoreContainer">
+    <EntitySet Name="UserSet" EntityType="SmartPoolModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PoolSet" EntityType="SmartPoolModel.Store.PoolSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MonitorUnitSet" EntityType="SmartPoolModel.Store.MonitorUnitSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserPool" Association="SmartPoolModel.Store.UserPool">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Pool" EntitySet="PoolSet" />
+    </AssociationSet>
+    <AssociationSet Name="PoolMonitorUnit" Association="SmartPoolModel.Store.PoolMonitorUnit">
+      <End Role="Pool" EntitySet="PoolSet" />
+      <End Role="MonitorUnit" EntitySet="MonitorUnitSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Middlename" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PoolSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MonitorUnitSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Clorine" Type="float" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ph" Type="float" Nullable="false" />
+    <Property Name="SerialNumber" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Temperature" Type="float" Nullable="false" />
+    <Property Name="PoolId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserPool">
+    <End Role="User" Type="SmartPoolModel.Store.UserSet" Multiplicity="1" />
+    <End Role="Pool" Type="SmartPoolModel.Store.PoolSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PoolMonitorUnit">
+    <End Role="Pool" Type="SmartPoolModel.Store.PoolSet" Multiplicity="1" />
+    <End Role="MonitorUnit" Type="SmartPoolModel.Store.MonitorUnitSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pool">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MonitorUnit">
+        <PropertyRef Name="PoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="SmartPoolModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -88,13 +153,44 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="SmartPoolModel" />
-        <Alias Key="Target" Value="SmartPoolModel.Store" />
-        <EntityContainerMapping CdmEntityContainer="SmartPoolModelContainer" StorageEntityContainer="SmartPoolModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SmartPoolModelStoreContainer" CdmEntityContainer="SmartPoolModelContainer">
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(SmartPoolModel.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Middlename" ColumnName="Middlename" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoolSet">
+      <EntityTypeMapping TypeName="IsTypeOf(SmartPoolModel.Pool)">
+        <MappingFragment StoreEntitySet="PoolSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonitorUnitSet">
+      <EntityTypeMapping TypeName="IsTypeOf(SmartPoolModel.MonitorUnit)">
+        <MappingFragment StoreEntitySet="MonitorUnitSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Clorine" ColumnName="Clorine" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Ph" ColumnName="Ph" />
+          <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+          <ScalarProperty Name="PoolId" ColumnName="PoolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -108,6 +204,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

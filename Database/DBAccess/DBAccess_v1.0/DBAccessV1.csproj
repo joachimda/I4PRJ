@@ -105,6 +105,7 @@
       <LastGenOutput>SmartPoolModel.Context.cs</LastGenOutput>
       <DependentUpon>SmartPoolModel.edmx</DependentUpon>
     </Content>
+    <Content Include="SmartPoolModel.edmx.sql" />
     <Content Include="SmartPoolModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>SmartPoolModel.cs</LastGenOutput>
