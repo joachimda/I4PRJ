@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2016 15:05:04
+-- Date Created: 03/30/2016 15:35:53
 -- Generated from EDMX file: F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SmartPoolDB\SmartpoolApplication\SmartPoolModel.edmx
 -- --------------------------------------------------
 
@@ -33,7 +33,11 @@ GO
 -- Creating table 'UserSet'
 CREATE TABLE [dbo].[UserSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Firstname] nvarchar(max)  NOT NULL
+    [Firstname] nvarchar(max)  NOT NULL,
+    [Middlename] nvarchar(max)  NOT NULL,
+    [Lastname] nvarchar(max)  NOT NULL,
+    [Email] nvarchar(max)  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -9,18 +9,24 @@ namespace DbAccess
 
         public void AddUser(string firstname, string lastname, string email, string password)
         {
-            // make temp user
-            User tempUser = new User();
+            User tempUser = new User {Email = email, Firstname = firstname, Lastname = lastname, Password = password};
 
-            // add user to db
+            using (var db = new SmartPoolContext())
+            {
+                db.UserSet.Add(tempUser);
+                db.SaveChanges();
+            }
         }
 
         public void AddUser(string firstname, string middelname, string lastname, string email, string password)
         {
-            // make temp user
-            User tempUser = new User();
+            User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname};
 
-            // add user to db
+            using (var db = new SmartPoolContext())
+            {
+                db.UserSet.Add(tempUser);
+                db.SaveChanges();
+            }
         }
 
         #endregion
@@ -36,12 +42,9 @@ namespace DbAccess
             return listOfFoundUsers;
         }
 
-        public void FuckAll()
+        public void DeleteAllData()
         {
-            using (var db = new SmartPoolContext())
-            {
-                db.Database.ExecuteSqlCommand("DELETE [User]");
-            }
+           
         }
     }
 }
