@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2016 16:42:23
+-- Date Created: 03/30/2016 16:48:14
 -- Generated from EDMX file: F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SmartPoolDB\DbAccess\SmartPoolModel.edmx
 -- --------------------------------------------------
 
@@ -17,6 +17,9 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_UserPool]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[PoolSet] DROP CONSTRAINT [FK_UserPool];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -24,6 +27,9 @@ GO
 
 IF OBJECT_ID(N'[dbo].[UserSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserSet];
+GO
+IF OBJECT_ID(N'[dbo].[PoolSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[PoolSet];
 GO
 
 -- --------------------------------------------------
@@ -45,9 +51,9 @@ GO
 CREATE TABLE [dbo].[PoolSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Length] nvarchar(max)  NOT NULL,
-    [Width] nvarchar(max)  NOT NULL,
-    [Depth] nvarchar(max)  NOT NULL,
+    [Length] float  NOT NULL,
+    [Width] float  NOT NULL,
+    [Depth] float  NOT NULL,
     [UserId] int  NOT NULL
 );
 GO

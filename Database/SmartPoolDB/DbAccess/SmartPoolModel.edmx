@@ -30,9 +30,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Length" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Width" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Depth" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Length" Type="float" Nullable="false" />
+    <Property Name="Width" Type="float" Nullable="false" />
+    <Property Name="Depth" Type="float" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
@@ -77,9 +77,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Length" Type="String" Nullable="false" />
-          <Property Name="Width" Type="String" Nullable="false" />
-          <Property Name="Depth" Type="String" Nullable="false" />
+          <Property Name="Length" Type="Double" Nullable="false" />
+          <Property Name="Width" Type="Double" Nullable="false" />
+          <Property Name="Depth" Type="Double" Nullable="false" />
           <NavigationProperty Name="User" Relationship="SmartPoolModel.UserPool" FromRole="Pool" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
