@@ -53,6 +53,9 @@
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
     <Compile Include="MonitorUnitAccess.cs" />
+    <Compile Include="Pool.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PoolAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmartPoolModel.Context.cs">

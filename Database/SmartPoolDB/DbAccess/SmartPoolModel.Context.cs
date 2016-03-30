@@ -26,5 +26,6 @@ namespace DbAccess
         }
     
         public virtual DbSet<User> UserSet { get; set; }
+        public virtual DbSet<Pool> PoolSet { get; set; }
     }
 }

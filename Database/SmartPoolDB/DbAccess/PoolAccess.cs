@@ -2,9 +2,13 @@ namespace DbAccess
 {
     public class PoolAccess
     {
+
         public void DeleteAllPoolData()
         {
-            throw new System.NotImplementedException();
+            using (var db = new SmartPoolContext())
+            {
+                db.Database.ExecuteSqlCommand("DELETE [PoolSet]");
+            }
         }
     }
 }
