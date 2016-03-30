@@ -14,7 +14,6 @@ namespace DbAccess
                 if (FindUser(email).Count == 0)
                 {
                     User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password };
-
                     db.UserSet.Add(tempUser);
                     db.SaveChanges();
                 }
@@ -23,12 +22,16 @@ namespace DbAccess
 
         public void AddUser(string firstname, string middelname, string lastname, string email, string password)
         {
-            User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname };
+            
 
             using (var db = new SmartPoolContext())
             {
-                db.UserSet.Add(tempUser);
-                db.SaveChanges();
+                if (FindUser(email).Count == 0)
+                {
+                    User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname };
+                    db.UserSet.Add(tempUser);
+                    db.SaveChanges();
+                }
             }
         }
 
