@@ -12,18 +12,11 @@ namespace DbAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class MonitorUnit
+    public partial class Serial
     {
         public int Id { get; set; }
-        public double Ph { get; set; }
-        public double Temperature { get; set; }
-        public double Chlorine { get; set; }
-        public double Humidity { get; set; }
-        public string SerialNumber { get; set; }
-        public int PoolId { get; set; }
-        public string Name { get; set; }
-        public int Pin { get; set; }
-    
-        public virtual Pool Pool { get; set; }
+        public string SN { get; set; }
+        public string PIN { get; set; }
+        public string occ { get; set; }
     }
 }

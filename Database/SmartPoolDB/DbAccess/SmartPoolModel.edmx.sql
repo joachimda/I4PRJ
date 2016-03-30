@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2016 18:36:54
+-- Date Created: 03/30/2016 18:41:45
 -- Generated from EDMX file: F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SmartPoolDB\DbAccess\SmartPoolModel.edmx
 -- --------------------------------------------------
 
@@ -67,12 +67,14 @@ GO
 -- Creating table 'MonitorUnitSet'
 CREATE TABLE [dbo].[MonitorUnitSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Ph] nvarchar(max)  NOT NULL,
-    [Temperature] nvarchar(max)  NOT NULL,
-    [Chlorine] nvarchar(max)  NOT NULL,
-    [Humidity] nvarchar(max)  NOT NULL,
+    [Ph] float  NOT NULL,
+    [Temperature] float  NOT NULL,
+    [Chlorine] float  NOT NULL,
+    [Humidity] float  NOT NULL,
     [SerialNumber] nvarchar(max)  NOT NULL,
-    [PoolId] int  NOT NULL
+    [PoolId] int  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Pin] int  NOT NULL
 );
 GO
 

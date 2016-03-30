@@ -45,12 +45,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Ph" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Temperature" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Chlorine" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Humidity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Ph" Type="float" Nullable="false" />
+    <Property Name="Temperature" Type="float" Nullable="false" />
+    <Property Name="Chlorine" Type="float" Nullable="false" />
+    <Property Name="Humidity" Type="float" Nullable="false" />
     <Property Name="SerialNumber" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PoolId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pin" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
     <End Role="User" Type="SmartPoolModel.Store.UserSet" Multiplicity="1" />
@@ -92,6 +94,7 @@
             <End Role="Pool" EntitySet="PoolSet" />
             <End Role="MonitorUnit" EntitySet="MonitorUnitSet" />
           </AssociationSet>
+          <EntitySet Name="SerialSet" EntityType="SmartPoolModel.Serial" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -135,13 +138,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Ph" Type="String" Nullable="false" />
-          <Property Name="Temperature" Type="String" Nullable="false" />
-          <Property Name="Chlorine" Type="String" Nullable="false" />
-          <Property Name="Humidity" Type="String" Nullable="false" />
+          <Property Name="Ph" Type="Double" Nullable="false" />
+          <Property Name="Temperature" Type="Double" Nullable="false" />
+          <Property Name="Chlorine" Type="Double" Nullable="false" />
+          <Property Name="Humidity" Type="Double" Nullable="false" />
           <Property Name="SerialNumber" Type="String" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="SmartPoolModel.PoolMonitorUnit" FromRole="MonitorUnit" ToRole="Pool" />
           <Property Name="PoolId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Pin" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="PoolMonitorUnit">
           <End Type="SmartPoolModel.Pool" Role="Pool" Multiplicity="1" />
@@ -155,6 +160,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Serial">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" Nullable="false" />
+          <Property Name="PIN" Type="String" Nullable="false" />
+          <Property Name="occ" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -195,6 +209,8 @@
           <ScalarProperty Name="Humidity" ColumnName="Humidity" />
           <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
           <ScalarProperty Name="PoolId" ColumnName="PoolId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Pin" ColumnName="Pin" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
