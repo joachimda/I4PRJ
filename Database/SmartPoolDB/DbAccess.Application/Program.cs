@@ -17,7 +17,6 @@ namespace DbAccess.Application
             dbAccess.UserAccess.AddUser("Signe", "Jensen", "signe@jensen.com", "signesPassword");
 
 
-
         }
     }
 }
