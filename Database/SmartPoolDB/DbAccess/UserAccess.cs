@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DbAccess
 {
@@ -32,13 +33,21 @@ namespace DbAccess
 
         public List<User> FindUser(string email)
         {
-            // find user with that email in db
-            List<User> listOfFoundUsers = new List<User>();
+            List<User> searchResults = new List<User>();
 
-            // add found users to list
+            using (var db = new SmartPoolContext())
+            {
+                var searchByEmail = from search in db.UserSet
+                    where search.Email.Equals(email)
+                    select search;
 
-            // return list
-            return listOfFoundUsers;
+                foreach (var user in searchByEmail)
+                {
+                    searchResults.Add(user);
+                }
+            }
+
+            return searchResults;
         }
 
         public void DeleteAllData()
