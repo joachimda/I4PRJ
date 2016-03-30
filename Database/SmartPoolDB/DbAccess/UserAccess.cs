@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 
 namespace DbAccess
@@ -37,6 +39,26 @@ namespace DbAccess
 
         #endregion
 
+        //public void RemoveUser(string email)
+        //{
+        //    using (var db = new SmartPoolContext())
+        //    {
+
+        //        db.PoolSet.RemoveRange(FindUser(email)[0].Pool);
+        //        if (FindUser(email).Count != 0)
+        //        {
+        //            foreach (var pool in FindUser(email)[0].Pool)
+        //            {
+        //                db.PoolSet.Remove(pool);
+        //            }
+        //            db.PoolSet.RemoveRange(FindUser(email)[0].Pool);
+        //            db.UserSet.Remove(FindUser(email)[0]);
+
+        //            db.SaveChanges();
+        //        }
+        //    }
+        //}
+
         public List<User> FindUser(string email)
         {
             List<User> searchResults = new List<User>();
@@ -52,7 +74,7 @@ namespace DbAccess
                     searchResults.Add(user);
                 }
             }
-
+            
             return searchResults;
         }
 
