@@ -12,7 +12,7 @@ namespace DbAccess
         public PoolAccess PoolAccess { get; } = new PoolAccess();
         public MonitorUnitAccess MonitorUnitAccess { get; } = new MonitorUnitAccess();
 
-        public void FuckAll()
+        public void DeleteAllData()
         {
             UserAccess.DeleteAllUserData();
             PoolAccess.DeleteAllPoolData();
