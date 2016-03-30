@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using DBAccess_v1._0;
 
-namespace DBAccessV1
+namespace DbAccess.Access
 {
     public class UserAccess
     {

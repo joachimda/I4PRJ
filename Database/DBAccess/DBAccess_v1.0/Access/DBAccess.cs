@@ -1,6 +1,4 @@
-﻿using DBAccessV1;
-
-namespace DBAccess_v1._0.Access
+﻿namespace DbAccess.Access
 {
     public class DbAccess
     {

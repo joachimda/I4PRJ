@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DBAccess_v1._0.Access
+﻿namespace DbAccess.Access
 {
     public class MonitorUnitAccess
     {
