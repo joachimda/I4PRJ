@@ -16,12 +16,14 @@ namespace DbAccess.Application
             //dbAccess.UserAccess.AddUser("Lars", "Peter", "Jensen", "lars@jensen.com", "petersPassword");
             //dbAccess.UserAccess.AddUser("Signe", "Jensen", "signe@jensen.com", "signesPassword");
 
+            dbAccess.PoolAccess.AddPool(dbAccess.UserAccess.FindUser("peter@jensen.com").ElementAt(0), "Baghave", 3, 4, 2);
+
             //dbAccess.UserAccess.DeleteAllUserData();
 
-            foreach (var user in dbAccess.UserAccess.FindUser("peter@jensen.com"))
-            {
-                Console.WriteLine(user.Firstname);
-            }
+            //foreach (var user in dbAccess.UserAccess.FindUser("peter@jensen.com"))
+            //{
+            //    Console.WriteLine(user.Firstname);
+            //}
         }
     }
 }
