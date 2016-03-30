@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2016 16:48:14
+-- Date Created: 03/30/2016 18:24:50
 -- Generated from EDMX file: F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SmartPoolDB\DbAccess\SmartPoolModel.edmx
 -- --------------------------------------------------
 
@@ -58,6 +58,18 @@ CREATE TABLE [dbo].[PoolSet] (
 );
 GO
 
+-- Creating table 'MonitorUnitSet'
+CREATE TABLE [dbo].[MonitorUnitSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Ph] nvarchar(max)  NOT NULL,
+    [Temperature] nvarchar(max)  NOT NULL,
+    [Chlorine] nvarchar(max)  NOT NULL,
+    [Humidity] nvarchar(max)  NOT NULL,
+    [SerialNumber] nvarchar(max)  NOT NULL,
+    [Pool_Id] int  NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -71,6 +83,12 @@ GO
 -- Creating primary key on [Id] in table 'PoolSet'
 ALTER TABLE [dbo].[PoolSet]
 ADD CONSTRAINT [PK_PoolSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'MonitorUnitSet'
+ALTER TABLE [dbo].[MonitorUnitSet]
+ADD CONSTRAINT [PK_MonitorUnitSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -91,6 +109,21 @@ GO
 CREATE INDEX [IX_FK_UserPool]
 ON [dbo].[PoolSet]
     ([UserId]);
+GO
+
+-- Creating foreign key on [Pool_Id] in table 'MonitorUnitSet'
+ALTER TABLE [dbo].[MonitorUnitSet]
+ADD CONSTRAINT [FK_PoolMonitorUnit]
+    FOREIGN KEY ([Pool_Id])
+    REFERENCES [dbo].[PoolSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PoolMonitorUnit'
+CREATE INDEX [IX_FK_PoolMonitorUnit]
+ON [dbo].[MonitorUnitSet]
+    ([Pool_Id]);
 GO
 
 -- --------------------------------------------------

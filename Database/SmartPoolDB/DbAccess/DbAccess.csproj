@@ -52,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DbAccess.cs" />
+    <Compile Include="MonitorUnit.cs">
+      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MonitorUnitAccess.cs" />
     <Compile Include="Pool.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
