@@ -43,6 +43,10 @@ namespace DbAccess
 
         public void DeleteAllData()
         {
+            using (var db = new SmartPoolContext())
+            {
+                db.Database.ExecuteSqlCommand("DELETE [UserSet]");
+            }
            
         }
     }
