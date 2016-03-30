@@ -1,0 +1,23 @@
+%% database stuff
+
+\section{Første iteration af Databasen}
+
+%% Lavede en produktionsdatabase til test
+
+%% "Helloworld udgave"
+
+%% Convertering til classlibrary
+
+%% problemer med app.config
+
+%% Features i første iteration
+
+\section{Designovervejelser}
+
+Om navnet skulle fordeles ud i en entity for sig selv.
+
+all de sql commands som vi skriver direkte ind i vores program skal parametiseres
+
+%% VIGTIGT  at der ikke kan indsættes flere brugere med samme email!!
+
+%% ved sletning af alle data i db er det også vigtigt at slette i korrekt rækkefølge: mu, pool og så user.
