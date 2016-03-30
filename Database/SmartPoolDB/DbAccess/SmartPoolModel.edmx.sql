@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 03/30/2016 18:24:50
+-- Date Created: 03/30/2016 18:36:54
 -- Generated from EDMX file: F:\Cygwin64\home\Mr. Derp\Git repos\I4PRJ\Database\SmartPoolDB\DbAccess\SmartPoolModel.edmx
 -- --------------------------------------------------
 
@@ -20,6 +20,9 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_UserPool]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[PoolSet] DROP CONSTRAINT [FK_UserPool];
 GO
+IF OBJECT_ID(N'[dbo].[FK_PoolMonitorUnit]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MonitorUnitSet] DROP CONSTRAINT [FK_PoolMonitorUnit];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -30,6 +33,9 @@ IF OBJECT_ID(N'[dbo].[UserSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[PoolSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PoolSet];
+GO
+IF OBJECT_ID(N'[dbo].[MonitorUnitSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MonitorUnitSet];
 GO
 
 -- --------------------------------------------------
@@ -66,7 +72,7 @@ CREATE TABLE [dbo].[MonitorUnitSet] (
     [Chlorine] nvarchar(max)  NOT NULL,
     [Humidity] nvarchar(max)  NOT NULL,
     [SerialNumber] nvarchar(max)  NOT NULL,
-    [Pool_Id] int  NULL
+    [PoolId] int  NOT NULL
 );
 GO
 
@@ -111,10 +117,10 @@ ON [dbo].[PoolSet]
     ([UserId]);
 GO
 
--- Creating foreign key on [Pool_Id] in table 'MonitorUnitSet'
+-- Creating foreign key on [PoolId] in table 'MonitorUnitSet'
 ALTER TABLE [dbo].[MonitorUnitSet]
 ADD CONSTRAINT [FK_PoolMonitorUnit]
-    FOREIGN KEY ([Pool_Id])
+    FOREIGN KEY ([PoolId])
     REFERENCES [dbo].[PoolSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -123,7 +129,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_PoolMonitorUnit'
 CREATE INDEX [IX_FK_PoolMonitorUnit]
 ON [dbo].[MonitorUnitSet]
-    ([Pool_Id]);
+    ([PoolId]);
 GO
 
 -- --------------------------------------------------

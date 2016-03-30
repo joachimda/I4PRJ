@@ -50,7 +50,7 @@
     <Property Name="Chlorine" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Humidity" Type="nvarchar(max)" Nullable="false" />
     <Property Name="SerialNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Pool_Id" Type="int" Nullable="true" />
+    <Property Name="PoolId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
     <End Role="User" Type="SmartPoolModel.Store.UserSet" Multiplicity="1" />
@@ -65,14 +65,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PoolMonitorUnit">
-    <End Role="Pool" Type="SmartPoolModel.Store.PoolSet" Multiplicity="0..1" />
+    <End Role="Pool" Type="SmartPoolModel.Store.PoolSet" Multiplicity="1" />
     <End Role="MonitorUnit" Type="SmartPoolModel.Store.MonitorUnitSet" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Pool">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="MonitorUnit">
-        <PropertyRef Name="Pool_Id" />
+        <PropertyRef Name="PoolId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -141,10 +141,19 @@
           <Property Name="Humidity" Type="String" Nullable="false" />
           <Property Name="SerialNumber" Type="String" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="SmartPoolModel.PoolMonitorUnit" FromRole="MonitorUnit" ToRole="Pool" />
+          <Property Name="PoolId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="PoolMonitorUnit">
-          <End Type="SmartPoolModel.Pool" Role="Pool" Multiplicity="0..1" />
+          <End Type="SmartPoolModel.Pool" Role="Pool" Multiplicity="1" />
           <End Type="SmartPoolModel.MonitorUnit" Role="MonitorUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pool">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonitorUnit">
+              <PropertyRef Name="PoolId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -185,18 +194,10 @@
           <ScalarProperty Name="Chlorine" ColumnName="Chlorine" />
           <ScalarProperty Name="Humidity" ColumnName="Humidity" />
           <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+          <ScalarProperty Name="PoolId" ColumnName="PoolId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="PoolMonitorUnit" TypeName="SmartPoolModel.PoolMonitorUnit" StoreEntitySet="MonitorUnitSet">
-      <EndProperty Name="Pool">
-        <ScalarProperty Name="Id" ColumnName="Pool_Id" />
-      </EndProperty>
-      <EndProperty Name="MonitorUnit">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-      <Condition ColumnName="Pool_Id" IsNull="false" />
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

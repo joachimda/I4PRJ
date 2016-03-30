@@ -20,6 +20,7 @@ namespace DbAccess
         public string Chlorine { get; set; }
         public string Humidity { get; set; }
         public string SerialNumber { get; set; }
+        public int PoolId { get; set; }
     
         public virtual Pool Pool { get; set; }
     }
