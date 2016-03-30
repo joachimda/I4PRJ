@@ -9,18 +9,21 @@ namespace DbAccess
 
         public void AddUser(string firstname, string lastname, string email, string password)
         {
-            User tempUser = new User {Email = email, Firstname = firstname, Lastname = lastname, Password = password};
-
             using (var db = new SmartPoolContext())
             {
-                db.UserSet.Add(tempUser);
-                db.SaveChanges();
+                if (FindUser(email).Count == 0)
+                {
+                    User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password };
+
+                    db.UserSet.Add(tempUser);
+                    db.SaveChanges();
+                }
             }
         }
 
         public void AddUser(string firstname, string middelname, string lastname, string email, string password)
         {
-            User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname};
+            User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname };
 
             using (var db = new SmartPoolContext())
             {
@@ -38,8 +41,8 @@ namespace DbAccess
             using (var db = new SmartPoolContext())
             {
                 var searchByEmail = from search in db.UserSet
-                    where search.Email.Equals(email)
-                    select search;
+                                    where search.Email.Equals(email)
+                                    select search;
 
                 foreach (var user in searchByEmail)
                 {
@@ -56,7 +59,7 @@ namespace DbAccess
             {
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
-           
+
         }
     }
 }
