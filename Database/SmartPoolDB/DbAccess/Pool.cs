@@ -16,9 +16,9 @@ namespace DbAccess
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Length { get; set; }
-        public string Width { get; set; }
-        public string Depth { get; set; }
+        public double Length { get; set; }
+        public double Width { get; set; }
+        public double Depth { get; set; }
         public int UserId { get; set; }
     
         public virtual User User { get; set; }
