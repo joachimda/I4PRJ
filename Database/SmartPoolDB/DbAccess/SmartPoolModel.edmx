@@ -94,7 +94,6 @@
             <End Role="Pool" EntitySet="PoolSet" />
             <End Role="MonitorUnit" EntitySet="MonitorUnitSet" />
           </AssociationSet>
-          <EntitySet Name="SerialSet" EntityType="SmartPoolModel.Serial" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -160,15 +159,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Serial">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SN" Type="String" Nullable="false" />
-          <Property Name="PIN" Type="String" Nullable="false" />
-          <Property Name="occ" Type="String" Nullable="false" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
