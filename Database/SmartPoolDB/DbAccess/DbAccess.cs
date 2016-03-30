@@ -14,9 +14,9 @@ namespace DbAccess
 
         public void FuckAll()
         {
-            UserAccess.DeleteAllData();
-            PoolAccess.DeleteAllData();
-            MonitorUnitAccess.DeleteAllData();
+            UserAccess.DeleteAllUserData();
+            PoolAccess.DeleteAllPoolData();
+            MonitorUnitAccess.DeleteAllMonitorUnitData();
         }
     }
 }

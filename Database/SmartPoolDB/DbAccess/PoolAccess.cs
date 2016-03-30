@@ -2,7 +2,7 @@ namespace DbAccess
 {
     public class PoolAccess
     {
-        public void DeleteAllData()
+        public void DeleteAllPoolData()
         {
             throw new System.NotImplementedException();
         }

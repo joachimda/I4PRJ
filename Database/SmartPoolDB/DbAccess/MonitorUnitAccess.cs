@@ -2,7 +2,7 @@
 {
     public class MonitorUnitAccess
     {
-        public void DeleteAllData()
+        public void DeleteAllMonitorUnitData()
         {
             throw new System.NotImplementedException();
         }

@@ -16,7 +16,7 @@ namespace DbAccess.Application
             //dbAccess.UserAccess.AddUser("Lars", "Peter", "Jensen", "lars@jensen.com", "petersPassword");
             //dbAccess.UserAccess.AddUser("Signe", "Jensen", "signe@jensen.com", "signesPassword");
 
-            //dbAccess.UserAccess.DeleteAllData();
+            //dbAccess.UserAccess.DeleteAllUserData();
 
             foreach (var user in dbAccess.UserAccess.FindUser("peter@jensen.com"))
             {

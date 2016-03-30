@@ -50,7 +50,7 @@ namespace DbAccess
             return searchResults;
         }
 
-        public void DeleteAllData()
+        public void DeleteAllUserData()
         {
             using (var db = new SmartPoolContext())
             {
