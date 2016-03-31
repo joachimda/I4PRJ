@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAccess", "DbAccess\DbAcce
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAccess.Application", "DbAccess.Application\DbAccess.Application.csproj", "{D9FEF11D-A845-465D-9BED-35661961DB39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartPoolDB.UnitTest", "SmartPoolDB.UnitTest\SmartPoolDB.UnitTest.csproj", "{1DB6CA7E-EF4D-4DFC-992D-F0606A4802D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D9FEF11D-A845-465D-9BED-35661961DB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9FEF11D-A845-465D-9BED-35661961DB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9FEF11D-A845-465D-9BED-35661961DB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DB6CA7E-EF4D-4DFC-992D-F0606A4802D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DB6CA7E-EF4D-4DFC-992D-F0606A4802D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DB6CA7E-EF4D-4DFC-992D-F0606A4802D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DB6CA7E-EF4D-4DFC-992D-F0606A4802D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
