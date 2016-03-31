@@ -82,7 +82,6 @@
     <Compile Include="Access classes\UserAccess.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <None Include="Config\App.config" />
     <None Include="Config\packages.config" />
     <EntityDeploy Include="Database model\SmartPoolModel.edmx">
@@ -92,7 +91,6 @@
     <None Include="Database model\SmartPoolModel.edmx.diagram">
       <DependentUpon>SmartPoolModel.edmx</DependentUpon>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database model\SmartPoolModel.Context.tt">
