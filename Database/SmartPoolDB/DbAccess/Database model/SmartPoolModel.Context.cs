@@ -12,9 +12,7 @@
 
 namespace DbAccess.Database_model
 {
-
-using System;
-using System.Data.Entity;
+    using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
 

@@ -11,8 +11,6 @@
 
 namespace DbAccess.Database_model
 {
-
-using System;
     using System.Collections.Generic;
     
 public partial class Pool
