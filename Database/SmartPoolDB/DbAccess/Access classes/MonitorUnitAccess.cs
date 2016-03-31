@@ -1,4 +1,6 @@
-﻿namespace DbAccess
+﻿using DbAccess.Database_model;
+
+namespace DbAccess
 {
     public class MonitorUnitAccess
     {

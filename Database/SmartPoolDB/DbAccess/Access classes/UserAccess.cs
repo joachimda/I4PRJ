@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using DbAccess.Database_model;
 
 namespace DbAccess
 {
