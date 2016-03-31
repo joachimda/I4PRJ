@@ -25,8 +25,6 @@ namespace DbAccess
 
         public void AddUser(string firstname, string middelname, string lastname, string email, string password)
         {
-            
-
             using (var db = new SmartPoolContext())
             {
                 if (FindUser(email).Count == 0)
@@ -75,7 +73,6 @@ namespace DbAccess
                     searchResults.Add(user);
                 }
             }
-            
             return searchResults;
         }
 
@@ -85,7 +82,6 @@ namespace DbAccess
             {
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
-
         }
     }
 }

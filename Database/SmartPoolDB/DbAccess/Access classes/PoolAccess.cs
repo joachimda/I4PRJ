@@ -5,7 +5,6 @@ namespace DbAccess
 {
     public class PoolAccess
     {
-
         public void AddPool(User owner, string name, double length, double width, double depth)
         {
             Pool tempPool = new Pool { Name = name, Length = length, Width = width, Depth = depth, UserId = owner.Id};
