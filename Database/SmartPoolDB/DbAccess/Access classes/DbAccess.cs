@@ -14,7 +14,7 @@ namespace DbAccess
 
         public void DeleteAllData()
         {
-            //MonitorUnitAccess.DeleteAllMonitorUnitData();
+            MonitorUnitAccess.DeleteAllMonitorUnitData();
             PoolAccess.DeleteAllPoolData();
             UserAccess.DeleteAllUserData();
         }
