@@ -19,6 +19,11 @@ Om navnet skulle fordeles ud i en entity for sig selv.
 
 all de sql commands som vi skriver direkte ind i vores program skal parametiseres
 
+Overvejelser vedr. serienummer på MU eller ekstern entitet.
+	- SN hardcodes for forbruger convenience.
+
+Test direkte på databasen. Visuel test ved indsættelse af data i databasen (view data).
+
 %% VIGTIGT  at der ikke kan indsættes flere brugere med samme email!!
 
 %% ved sletning af alle data i db er det også vigtigt at slette i korrekt rækkefølge: mu, pool og så user.
