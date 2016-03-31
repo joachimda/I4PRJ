@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="SmartPoolModel.User" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="SmartPoolModel.Pool" Width="1.5" PointX="2.875" PointY="0.5" />
         <AssociationConnector Association="SmartPoolModel.UserPool" />
-        <EntityTypeShape EntityType="SmartPoolModel.MonitorUnit" Width="1.5" PointX="6" PointY="0.5" />
+        <EntityTypeShape EntityType="SmartPoolModel.MonitorUnit" Width="1.5" PointX="5" PointY="0.5" />
         <AssociationConnector Association="SmartPoolModel.PoolMonitorUnit" />
       </Diagram>
     </edmx:Diagrams>
