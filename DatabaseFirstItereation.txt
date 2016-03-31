@@ -9,6 +9,7 @@
 %% Convertering til classlibrary
 
 %% problemer med app.config
+Slettet Database model.SmartPoolModel.csdl|res://*/Database model.SmartPoolModel.ssdl|res://*/Database model.SmartPoolModel.msl&quot; for at undgå MetadataException: "Unable to load the specified metadata resource"
 
 %% Features i første iteration
 

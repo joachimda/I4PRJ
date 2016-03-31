@@ -82,6 +82,7 @@
     <Compile Include="Access classes\UserAccess.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Config\App.config" />
     <None Include="Config\packages.config" />
     <EntityDeploy Include="Database model\SmartPoolModel.edmx">
