@@ -1,5 +1,8 @@
-﻿namespace SmartPoolDB.UnitTest
+﻿using NUnit.Framework;
+
+namespace SmartPoolDB.UnitTest
 {
+    [TestFixture]
     public class UserAccessTest
     {
     }
