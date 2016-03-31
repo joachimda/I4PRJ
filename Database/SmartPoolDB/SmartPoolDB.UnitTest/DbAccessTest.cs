@@ -5,5 +5,6 @@ namespace SmartPoolDB.UnitTest
     [TestFixture]
     public class DbAccessTest
     {
+
     }
 }

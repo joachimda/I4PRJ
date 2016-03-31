@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DbAccess
+namespace DbAccess.Database_model
 {
     using System;
     using System.Collections.Generic;
