@@ -9,6 +9,7 @@
 %% Convertering til classlibrary
 
 %% problemer med app.config
+Slettet Database model.SmartPoolModel.csdl|res://*/Database model.SmartPoolModel.ssdl|res://*/Database model.SmartPoolModel.msl&quot; for at undgå MetadataException: "Unable to load the specified metadata resource"
 
 %% Features i første iteration
 
@@ -17,6 +18,11 @@
 Om navnet skulle fordeles ud i en entity for sig selv.
 
 all de sql commands som vi skriver direkte ind i vores program skal parametiseres
+
+Overvejelser vedr. serienummer på MU eller ekstern entitet.
+	- SN hardcodes for forbruger convenience.
+
+Test direkte på databasen. Visuel test ved indsættelse af data i databasen (view data).
 
 %% VIGTIGT  at der ikke kan indsættes flere brugere med samme email!!
 
