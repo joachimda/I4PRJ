@@ -5,13 +5,14 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  AK      UserSession interfaced
 //========================================================================
 
 using System;
 
 namespace Smartpool.Application.Model
 {
-    public class UserSession
+    public class UserSession : IUserSession
     {
         private readonly Tuple<UserIdentity, bool> _session;
 
