@@ -5,6 +5,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  AK      Authenticator Interfaced
 //========================================================================
 
 using System;
@@ -14,7 +15,7 @@ using DbAccess.Database_model;
 
 namespace Smartpool.Application.Model
 {
-    public class Authenticator
+    public class Authenticator : IAuthenticator
     {
         // authenticates and provides a user with a corresponding session
         public UserSession Authenticate(string email, string password)
