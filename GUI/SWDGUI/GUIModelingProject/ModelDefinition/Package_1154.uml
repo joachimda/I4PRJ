@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="e011b925-57e7-4197-a4d8-55689f7f34d8"
+  name="WinView" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="1137cf84-ecd4-49ef-8e36-00c3f5b5709b"
+        name="WinStatView"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="ae3cb32b-dc5d-4b72-ac10-0040830c53b7">
+            <interfaceMoniker
+              Id="07b0a3ce-22cd-4b8f-adb5-5241aa27dc71"
+              LastKnownName="IStatView"
+              LastKnownLocation="Package_1157.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0f9c5926-9706-407b-9a97-702d4e206f16"
+        name="WinLoginView"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="e762e7da-ede4-4fe6-9e4f-77f10bfd4f94">
+            <interfaceMoniker
+              Id="7901077a-b41d-4640-a8a8-5433d44a50c1"
+              LastKnownName="ILoginView"
+              LastKnownLocation="Package_1157.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
