@@ -56,9 +56,9 @@ namespace DbAccess
         //    }
         //}
 
-        public User FindUser(string email)
+        public List<User> FindUser(string email)
         {
-            User searchResults = new User();
+            List<User> searchResults = new List<User>();
 
             using (var db = new SmartPoolContext())
             {
@@ -66,14 +66,11 @@ namespace DbAccess
                                     where search.Email.Equals(email)
                                     select search;
 
-                searchResults = searchByEmail.First();
-
-                //foreach (var user in searchByEmail)
-                //{
-                //    searchResults.Add(user);
-                //}
+                foreach (var user in searchByEmail)
+                {
+                    searchResults.Add(user);
+                }
             }
-
             return searchResults;
         }
 
