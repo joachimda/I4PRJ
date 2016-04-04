@@ -12,7 +12,7 @@ namespace DbAccess
         {
             using (var db = new SmartPoolContext())
             {
-                if (FindUserByEmail(email).Count == 0)
+                if (FindUserByEmail(email) != null)
                 {
                     User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password };
                     db.UserSet.Add(tempUser);
@@ -25,7 +25,7 @@ namespace DbAccess
         {
             using (var db = new SmartPoolContext())
             {
-                if (FindUserByEmail(email).Count == 0)
+                if (FindUserByEmail(email) != null)
                 {
                     User tempUser = new User { Email = email, Firstname = firstname, Lastname = lastname, Password = password, Middlename = middelname };
                     db.UserSet.Add(tempUser);
@@ -56,7 +56,7 @@ namespace DbAccess
         //    }
         //}
 
-        public List<User> FindUserByEmail(string email)
+        public User FindUserByEmail(string email)
         {
             List<User> searchResults = new List<User>();
 
@@ -71,7 +71,7 @@ namespace DbAccess
                     searchResults.Add(user);
                 }
             }
-            return searchResults;
+            return searchResults[0];
         }
 
         public void DeleteAllUserData()
