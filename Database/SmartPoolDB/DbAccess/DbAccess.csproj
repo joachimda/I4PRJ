@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Access classes\DbAccess.cs" />
+    <Compile Include="Access classes\IUserAccess.cs" />
     <Compile Include="Database model\MonitorUnit.cs">
       <DependentUpon>SmartPoolModel.tt</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@ using DbAccess.Database_model;
 
 namespace DbAccess
 {
-    public class UserAccess
+    public class UserAccess : IUserAccess
     {
         #region AddUser methods
 
@@ -80,6 +80,11 @@ namespace DbAccess
             {
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
         }
     }
 }
