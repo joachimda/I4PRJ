@@ -81,10 +81,5 @@ namespace DbAccess
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
         }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
     }
 }
