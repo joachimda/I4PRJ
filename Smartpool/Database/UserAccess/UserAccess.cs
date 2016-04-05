@@ -8,6 +8,11 @@ namespace Smartpool
     {
         public bool AddUser(string fullname, string email, string password)
         {
+            if (EmailUsed(email))
+            {
+                return false;
+            }
+
             string[] names = fullname.Split(' ');
 
             User user = new User() { Firstname = names[0], Lastname = names[names.Length], Email = email, Password = password };
@@ -39,7 +44,7 @@ namespace Smartpool
             return listOfFoundUsers[0];
         }
 
-        public bool IsEmailUsed(string email)
+        public bool EmailUsed(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 
