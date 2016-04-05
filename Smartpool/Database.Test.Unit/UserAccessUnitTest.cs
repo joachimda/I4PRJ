@@ -66,6 +66,26 @@ namespace Database.Test.Unit
 
         #endregion
 
+        #region AddUser, testing that it should not the possible to add user with existing email
+
+        [Test]
+        public void AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse()
+        {
+            _uut.AddUser("John Johnson", "mail", "password");
+
+            Assert.That(_uut.AddUser("Derp Derpsen", "mail", "wordpass"), Is.False);
+        }
+
+        [Test]
+        public void AddUser_InsertUserWithAlreadyUsedEmail_SecondUserIsNotInDatabase()
+        {
+            _uut.AddUser("John Johnson", "mail", "password");
+            _uut.AddUser("Derp Derpsen", "mail", "wordpass");
+
+            // not sure how to test this...
+        }
+
+        #endregion
 
     }
 }
