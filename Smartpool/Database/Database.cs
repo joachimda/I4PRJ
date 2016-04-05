@@ -1,4 +1,4 @@
-﻿namespace Database
+﻿namespace Smartpool
 {
     public class Database
     {
