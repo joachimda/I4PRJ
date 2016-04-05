@@ -57,12 +57,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DbAccessFactory.cs" />
+    <Compile Include="Factories\DbAccessFactory.cs" />
     <Compile Include="DatabaseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Factories\DefaultAccessFactory.cs" />
     <Compile Include="UserAccess\IUserAccess.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
