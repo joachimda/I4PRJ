@@ -1,13 +1,16 @@
-﻿namespace Smartpool
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Smartpool
 {
     public class Database
     {
-        public void method()
+        IUserAccess _userAccess;
+
+        public Database(DbAccessFactory dbAccessFactory)
         {
-            using (var db = new DatabaseContext())
-            {
-                
-            }
+            _userAccess = dbAccessFactory.CreateUserAccess();
         }
     }
 }
