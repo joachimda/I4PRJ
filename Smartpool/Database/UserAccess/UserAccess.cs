@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Smartpool
+namespace Smartpool.UserAccess
 {
     public class UserAccess : IUserAccess
     {
