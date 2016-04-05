@@ -7,7 +7,7 @@
             string[] names = fullname.Split(' ');
 
             User user = new User() { Firstname = names[0], Lastname = names[names.Length], Email = email, Password = password };
-
+            
             using (var db = new DatabaseContext())
             {
 
