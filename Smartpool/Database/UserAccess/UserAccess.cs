@@ -36,7 +36,7 @@ namespace Smartpool
                 db.SaveChanges();
             }
 
-            return false;
+            return true;
         }
 
         public User FindUserByEmail(string email)
