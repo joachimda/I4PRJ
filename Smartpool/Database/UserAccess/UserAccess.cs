@@ -9,14 +9,12 @@ namespace Smartpool
         public bool AddUser(string fullname, string email, string password)
         {
             #region Checking 'email' and creating instance of 'User'
-
-            // check if 'email' is already in db
+            
             if (EmailUsed(email))
             {
                 return false;
             }
 
-            // divide 'fullname' string into stringarray, split will occour on space
             string[] names = fullname.Split(' ');
 
             if (names.Length <= 2)
@@ -29,7 +27,6 @@ namespace Smartpool
             }
 
             #endregion
-
 
             using (var db = new DatabaseContext())
             {
