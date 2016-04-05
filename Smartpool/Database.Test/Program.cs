@@ -6,9 +6,9 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            Smartpool.Database database = new Smartpool.Database(new DefaultAccessFactory());
+            Smartpool.SmartpoolDB smartpoolDb = new Smartpool.SmartpoolDB(new DefaultAccessFactory());
 
-            database.UserAccess.AddUser("John Derp Smith", "john@smith.com", "johnpass123");
+            smartpoolDb.UserAccess.AddUser("John Derp Smith", "john@smith.com", "johnpass123");
         }
     }
 }
