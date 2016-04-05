@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" >
-        <EntityTypeShape EntityType="DatabaseModel.User" Width="1.5" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.875" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

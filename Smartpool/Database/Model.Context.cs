@@ -13,10 +13,10 @@ namespace Smartpool
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DatabaseModelContainer : DbContext
+    public partial class DatabaseContext : DbContext
     {
-        public DatabaseModelContainer()
-            : base("name=DatabaseModelContainer")
+        public DatabaseContext()
+            : base("name=DatabaseContext")
         {
         }
     

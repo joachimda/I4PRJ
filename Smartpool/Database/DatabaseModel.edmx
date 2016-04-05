@@ -4,9 +4,9 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="DatabaseModelStoreContainer">
-    <EntitySet Name="UserSet" EntityType="DatabaseModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <Schema Namespace="Smartpool.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SmartpoolStoreContainer">
+    <EntitySet Name="UserSet" EntityType="Smartpool.Store.UserSet" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="UserSet">
     <Key>
@@ -22,9 +22,9 @@
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
-        <EntityContainer Name="DatabaseModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UserSet" EntityType="DatabaseModel.User" />
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Smartpool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DatabaseContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserSet" EntityType="Smartpool.User" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -42,9 +42,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseModelContainer">
+  <EntityContainerMapping StorageEntityContainer="SmartpoolStoreContainer" CdmEntityContainer="DatabaseContext">
     <EntitySetMapping Name="UserSet">
-      <EntityTypeMapping TypeName="IsTypeOf(DatabaseModel.User)">
+      <EntityTypeMapping TypeName="IsTypeOf(Smartpool.User)">
         <MappingFragment StoreEntitySet="UserSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
