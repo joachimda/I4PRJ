@@ -15,22 +15,25 @@ namespace Smartpool
                 return false;
             }
 
+            User user;
+
             string[] names = fullname.Split(' ');
 
             if (names.Length <= 2)
             {
-                User user = new User() { Firstname = names[0], Lastname = names[2], Email = email, Password = password };
+                user = new User() { Firstname = names[0], Lastname = names[2], Email = email, Password = password };
             }
             else
             {
-                User user = new User() { Firstname = names[0], Middelname = names[1], Lastname = names[2], Email = email, Password = password };
+                user = new User() { Firstname = names[0], Middelname = names[1], Lastname = names[2], Email = email, Password = password };
             }
 
             #endregion
 
             using (var db = new DatabaseContext())
             {
-
+                db.UserSet.Add(user);
+                db.SaveChanges();
             }
 
             return false;
