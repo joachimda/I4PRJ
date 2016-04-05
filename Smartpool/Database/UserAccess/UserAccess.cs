@@ -20,7 +20,7 @@ namespace Smartpool
             return false;
         }
 
-        public User FindUser(string email)
+        public User FindUserByEmail(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 
@@ -37,6 +37,30 @@ namespace Smartpool
             }
 
             return listOfFoundUsers[0];
+        }
+
+        public bool IsEmailUsed(string email)
+        {
+            List<User> listOfFoundUsers = new List<User>();
+
+            using (var db = new DatabaseContext())
+            {
+                var searchByEmail = from search in db.UserSet
+                                    where search.Email.Equals(email)
+                                    select search;
+
+                foreach (User user in searchByEmail)
+                {
+                    listOfFoundUsers.Add(user);
+                }
+            }
+
+            if (listOfFoundUsers.Count == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool RemoveUser(string email)
