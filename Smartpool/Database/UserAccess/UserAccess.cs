@@ -1,4 +1,7 @@
-﻿namespace Smartpool
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Smartpool
 {
     public class UserAccess : IUserAccess
     {
@@ -18,7 +21,21 @@
 
         public User FindUser(string email)
         {
-            throw new System.NotImplementedException();
+            List<User> listOfFoundUsers = new List<User>();
+
+            using (var db = new DatabaseContext())
+            {
+                var searchByEmail = from search in db.UserSet
+                    where search.Email.Equals(email)
+                    select search;
+
+                foreach (User user in searchByEmail)
+                {
+                    listOfFoundUsers.Add(user);
+                }
+            }
+
+            return listOfFoundUsers[0];
         }
 
         public bool RemoveUser(string email)
