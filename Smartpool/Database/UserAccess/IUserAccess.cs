@@ -6,6 +6,6 @@
         User FindUserByEmail(string email);
         bool EmailUsed(string email);
         bool RemoveUser(string email);
-        bool DeleteAllUsers();
+        void DeleteAllUsers();
     }
 }
