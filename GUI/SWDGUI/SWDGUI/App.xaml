@@ -5,14 +5,12 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:sw="clr-namespace:WpfStyleableWindow.StyleableWindow"
              StartupUri="WinLoginView.xaml">
-    
     <Application.Resources>
         <SolidColorBrush x:Key="SpBlack" Color="#FF141414" />
         <SolidColorBrush x:Key="SpDarkGrey" Color="#FF1F1F1F" />
         <SolidColorBrush x:Key="SpGrey" Color="#FF575757" />
         <SolidColorBrush x:Key="SpLightGrey" Color="#FFABABAC" />
         <SolidColorBrush x:Key="SpOrange" Color="#FFFDA029" />
-
 
         <!--#region Window-->
         <!--the brushes used in the template (use these to customize the window look along with the window style (see the bottom of this file)-->
@@ -155,7 +153,6 @@
         <!--#endregion-->
 
 
-
         <!-- TextBoxBase -->
         <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBoxBase}">
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -174,7 +171,7 @@
                     <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                 </Trigger>
                 <!-- Highlight -->
-                <Trigger Property="IsSelectionActive" Value="True" >
+                <Trigger Property="IsKeyboardFocusWithin" Value="True" >
                     <Setter Property="Background" Value="{StaticResource SpOrange}" TargetName="Bd"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -186,14 +183,19 @@
         <!-- TextBox with a placeholder containing attached property PlaceholderText-->
         <ControlTemplate x:Key="TextBoxWPlaceholderTemplate" TargetType="{x:Type TextBox}">
             <Grid>
-                <TextBox x:Name="FrontTextBox" Template="{StaticResource TextBoxBaseControlTemplate}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{TemplateBinding Foreground}"/>
+                <Border Background="{StaticResource SpGrey}" x:Name="Bd" BorderBrush="{StaticResource SpDarkGrey}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Height="30" >
+                    <ScrollViewer x:Name="PART_ContentHost"/>
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="2" Opacity="0.3" />
+                    </Border.Effect>
+                </Border>
                 <TextBlock IsHitTestVisible="False" Text="{Binding Path=(local:ThemeProperties.PlaceholderText), RelativeSource={RelativeSource TemplatedParent}}" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" Foreground="#FF808080">
                     <TextBlock.Style>
                         <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Visibility" Value="Collapsed"/>
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding Text, ElementName=FrontTextBox}" Value="">
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}" Value="">
                                     <Setter Property="Visibility" Value="Visible"/>
                                 </DataTrigger>
                             </Style.Triggers>
@@ -201,6 +203,20 @@
                     </TextBlock.Style>
                 </TextBlock>
             </Grid>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
+                    <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </Trigger>
+                <!-- Highlight -->
+                <Trigger Property="IsKeyboardFocusWithin" Value="True" >
+                    <Setter Property="Background" Value="{StaticResource SpOrange}" TargetName="Bd"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource SpOrange}" TargetName="Bd"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
         </ControlTemplate>
 
         <!-- Button -->
