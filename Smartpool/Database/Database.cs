@@ -6,11 +6,11 @@ namespace Smartpool
 {
     public class Database
     {
-        IUserAccess _userAccess;
+        public IUserAccess UserAccess { get; set; }
 
         public Database(DbAccessFactory dbAccessFactory)
         {
-            _userAccess = dbAccessFactory.CreateUserAccess();
+            UserAccess = dbAccessFactory.CreateUserAccess();
         }
     }
 }
