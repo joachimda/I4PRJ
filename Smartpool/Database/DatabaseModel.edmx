@@ -16,7 +16,7 @@
     <Property Name="Firstname" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Middelname" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Lastname" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Emailaddress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
 </Schema></edmx:StorageModels>
@@ -34,7 +34,7 @@
           <Property Name="Firstname" Type="String" Nullable="false" />
           <Property Name="Middelname" Type="String" Nullable="true" />
           <Property Name="Lastname" Type="String" Nullable="false" />
-          <Property Name="Emailaddress" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
         </EntityType>
       </Schema>
@@ -50,7 +50,7 @@
           <ScalarProperty Name="Firstname" ColumnName="Firstname" />
           <ScalarProperty Name="Middelname" ColumnName="Middelname" />
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="Emailaddress" ColumnName="Emailaddress" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>

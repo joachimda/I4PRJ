@@ -17,7 +17,7 @@ namespace Database.Test.Unit
         }
 
         #endregion
-
+        
         #region AddUser, testing that the name is set correct when using 3 names
 
         [Test]
