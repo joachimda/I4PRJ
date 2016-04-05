@@ -5,7 +5,7 @@ namespace Smartpool
 {
     public class SmartpoolDB
     {
-        public IUserAccess UserAccess { get; set; }
+        public IUserAccess UserAccess { get; }
 
         public SmartpoolDB(DbAccessFactory dbAccessFactory)
         {
