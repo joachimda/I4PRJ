@@ -2,9 +2,25 @@
 {
     public class UserAccess : IUserAccess
     {
-        public bool AddUser(string name, string email, string password)
+        public bool AddUser(string fullname, string email, string password)
         {
-            throw new System.NotImplementedException();
+            string[] names = fullname.Split(' ');
+
+            User user = new User()
+            {
+                Firstname = names[0],
+                Lastname = names[1],
+                Email = email,
+                Password = password
+            };
+
+
+            using (var db = new DatabaseContext())
+            {
+
+            }
+
+            return false;
         }
 
         public User FindUser(string email)
