@@ -67,6 +67,11 @@ namespace Smartpool.UserAccess
                 }
             }
 
+            if (listOfFoundUsers.Count > 1)
+            {
+                throw new EmailAlreadyInUseException();
+            }
+
             return listOfFoundUsers[0];
         }
 
