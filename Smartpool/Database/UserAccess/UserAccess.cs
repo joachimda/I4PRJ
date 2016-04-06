@@ -16,7 +16,7 @@ namespace Smartpool.UserAccess
         {
             #region Checking 'email' and creating instance of 'User'
             
-            if (EmailUsed(email))
+            if (IsEmailInUse(email))
             {
                 return false;
             }
@@ -76,7 +76,7 @@ namespace Smartpool.UserAccess
         /// <param name="email">Checks for this email.</param>
         /// <returns>Return true if the email is already used. 
         /// False if no entry was found with that email.</returns>
-        public bool EmailUsed(string email)
+        public bool IsEmailInUse(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 
