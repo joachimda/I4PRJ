@@ -35,7 +35,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Derp Johnson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Derp"));
+            Assert.That(_uut.FindUserByEmail("mail").Middelname, Is.EqualTo("Derp"));
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Derp Johnson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Johnson"));
+            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Johnson"));
         }
 
         #endregion
@@ -63,7 +63,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Johnson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Johnson"));
+            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Johnson"));
         }
 
         #endregion
