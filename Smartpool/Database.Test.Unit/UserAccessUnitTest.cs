@@ -17,7 +17,9 @@ namespace Database.Test.Unit
         }
 
         #endregion
-        
+
+        #region AddUser
+
         #region AddUser, testing that the name is set correct when using 3 names
 
         [Test]
@@ -87,5 +89,22 @@ namespace Database.Test.Unit
 
         #endregion
 
+        #endregion
+
+        #region FindUserByEmail
+
+        #endregion
+
+        #region EmailIsUsed
+
+        #endregion
+
+        #region ValidatePassword
+
+        #endregion
+
+        #region RemoveUser
+
+        #endregion
     }
 }
