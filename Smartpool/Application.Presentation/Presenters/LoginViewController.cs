@@ -19,6 +19,7 @@ namespace Smartpool.Application.Presentation
         private readonly ILoginView _view;
         private string _password;
         private string _email;
+        private IAuthenticator _authenticator; // Never set (needs implementation)
 
         // Life Cycle
         public void ViewDidLoad()
@@ -83,8 +84,7 @@ namespace Smartpool.Application.Presentation
 
         private void Login()
         {
-            var authenticator = new Authenticator();
-            var session = authenticator.Authenticate(_email, _password);
+            var session = _authenticator.Authenticate(_email, _password);
 
             if (session.Authenticated())
             {
