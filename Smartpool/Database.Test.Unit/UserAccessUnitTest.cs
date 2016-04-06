@@ -135,6 +135,30 @@ namespace Database.Test.Unit
 
         #region ValidatePassword
 
+        [Test]
+        public void ValidatePassword_ValidPassword_ReturnsTrue()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.That(_uut.ValidatePassword("email", "pass"), Is.True);
+        }
+
+        [Test]
+        public void ValidatePassword_InvalidPassword_ReturnsFalse()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.That(_uut.ValidatePassword("email", "falsepass"), Is.False);
+        }
+
+        [Test]
+        public void ValidatePassword_UserIsNotInDB_ThrowsUserNotFoundException()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.Throws<UserNotFoundException>(() => _uut.ValidatePassword("otheremail", "pass"));
+        }
+
         #endregion
 
         #region RemoveUser

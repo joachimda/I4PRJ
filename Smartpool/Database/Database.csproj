@@ -63,7 +63,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Factories\DefaultAccessFactory.cs" />
+    <Compile Include="Factories\StdAccessFactory.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="UserAccess\IUserAccess.cs" />
     <Compile Include="Model.Context.cs">

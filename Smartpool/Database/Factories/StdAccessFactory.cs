@@ -2,7 +2,7 @@
 
 namespace Smartpool.Factories
 {
-    public class DefaultAccessFactory : DbAccessFactory
+    public class StdAccessFactory : DbAccessFactory
     {
         public override IUserAccess CreateUserAccess()
         {
