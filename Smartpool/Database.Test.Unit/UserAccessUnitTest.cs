@@ -84,8 +84,8 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Johnson", "mail", "password");
             _uut.AddUser("Derp Derpsen", "mail", "wordpass");
-
-            // not sure how to test this...
+            
+            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.Not.EqualTo("Derp"));
         }
 
         #endregion
@@ -93,6 +93,10 @@ namespace Database.Test.Unit
         #endregion
 
         #region FindUserByEmail
+
+        // dont add user and find email
+
+        // add user and find email
 
         #endregion
 
