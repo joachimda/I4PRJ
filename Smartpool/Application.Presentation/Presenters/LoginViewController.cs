@@ -33,6 +33,16 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
+        public void LoadView()
+        {
+            // 
+        }
+
+        public void UnloadView()
+        {
+            //
+        }
+
         public LoginViewController(ILoginView view, IAuthenticator authenticator = null)
         {
             _view = view;

@@ -41,6 +41,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tab Bar Controller\ITabbedViewController.cs" />
+    <Compile Include="Tab Bar Controller\ITabBarController.cs" />
+    <Compile Include="Tab Bar Controller\TabBarController.cs" />
     <Compile Include="View Interfaces\ILoginView.cs" />
     <Compile Include="Presenters\ILoginViewController.cs" />
     <Compile Include="Presenters\LoginViewController.cs" />
