@@ -6,7 +6,7 @@
         User FindUserByEmail(string email);
         bool IsEmailInUse(string email);
         bool ValidatePassword(string email, string password);
-        bool RemoveUser(string email);
+        void RemoveUser(string email);
         void DeleteAllUsers();
     }
 }

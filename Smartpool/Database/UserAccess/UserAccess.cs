@@ -131,9 +131,8 @@ namespace Smartpool.UserAccess
         /// Method will search for a User with argument email and remove
         /// user from database.
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns>Returns 0 if the user was removed without problem.</returns>
-        public bool RemoveUser(string email)
+        /// <param name="email">Email of user to be deleted from database.</param>
+        public void RemoveUser(string email)
         {
             throw new System.NotImplementedException();
         }
