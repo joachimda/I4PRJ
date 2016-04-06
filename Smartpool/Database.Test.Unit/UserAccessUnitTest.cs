@@ -163,6 +163,21 @@ namespace Database.Test.Unit
 
         #region RemoveUser
 
+        [Test]
+        public void RemoveUser_RemoveExistingUser_UserNotInDatabase()
+        {
+            _uut.AddUser("Joachim Fucktard Andersen", "jokkemail", "tissemisse");
+            _uut.RemoveUser("jokkemail");
+
+            Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("jokkemail"));
+        }
+
+        [Test]
+        public void RemoveUser_UserNotPresentInDB_ThrowsUserNotFoundException()
+        {
+            Assert.Throws<UserNotFoundException>(() => _uut.RemoveUser("jokkemail"));
+        }
+
         #endregion
     }
 }
