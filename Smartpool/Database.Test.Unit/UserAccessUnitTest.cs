@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Smartpool;
 using Smartpool.UserAccess;
 
 namespace Database.Test.Unit
@@ -14,6 +15,7 @@ namespace Database.Test.Unit
         public void Setup()
         {
             _uut = new UserAccess();
+            _uut.DeleteAllUsers();
         }
 
         #endregion
@@ -35,7 +37,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Derp Johnson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Derp"));
+            Assert.That(_uut.FindUserByEmail("mail").Middelname, Is.EqualTo("Derp"));
         }
 
         [Test]
@@ -43,7 +45,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Derp Johnson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Johnson"));
+            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Johnson"));
         }
 
         #endregion
@@ -53,7 +55,7 @@ namespace Database.Test.Unit
         [Test]
         public void AddUser_InsertUserWith2Names_UserHasCorrectFirstname()
         {
-            _uut.AddUser("John Johnson", "mail", "password");
+            _uut.AddUser("John Derpson", "mail", "password");
 
             Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("John"));
         }
@@ -61,9 +63,9 @@ namespace Database.Test.Unit
         [Test]
         public void AddUser_InsertUserWith2Names_UserHasCorrectLastname()
         {
-            _uut.AddUser("John Johnson", "mail", "password");
+            _uut.AddUser("John Derpson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("Johnson"));
+            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Derpson"));
         }
 
         #endregion
@@ -84,7 +86,7 @@ namespace Database.Test.Unit
             _uut.AddUser("John Johnson", "mail", "password");
             _uut.AddUser("Derp Derpsen", "mail", "wordpass");
 
-            // not sure how to test this...
+            Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.Not.EqualTo("Derp"));
         }
 
         #endregion
@@ -93,13 +95,69 @@ namespace Database.Test.Unit
 
         #region FindUserByEmail
 
+        [Test]
+        public void FindUserByEmail_UserIsNotAdded_ThrowsUserNotFoundException()
+        {
+            Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("mail"));
+        }
+
+        [Test]
+        public void FindUserByEmail_UserIsAdded_FindsCorrectUser()
+        {
+            _uut.AddUser("John Derp Herpson", "email", "password");
+
+            Assert.That(_uut.FindUserByEmail("email").Password, Is.EqualTo("password"));
+        }
+
+        [Test]
+        public void FindUserByEmail_TwoUsersWithSameEmailExistInDB_ThrowsMultipleOccourencesOfEmailWasFoundException()
+        {
+            User user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Herpson", Email = "email", Password = "password" };
+            User user2 = new User() { Firstname = "Simon", Middelname = "Siggy", Lastname = "Sergson", Email = "email", Password = "hellopass" };
+
+            using (var db = new DatabaseContext())
+            {
+                db.UserSet.Add(user1);
+                db.UserSet.Add(user2);
+                db.SaveChanges();
+            }
+
+            Assert.Throws<MultipleOccourencesOfEmailWasFoundException>(() => _uut.FindUserByEmail("email"));
+        }
+
         #endregion
 
         #region EmailIsUsed
 
+        // is tested through 'FindUserByEmail'
+
         #endregion
 
         #region ValidatePassword
+
+        [Test]
+        public void ValidatePassword_ValidPassword_ReturnsTrue()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.That(_uut.ValidatePassword("email", "pass"), Is.True);
+        }
+
+        [Test]
+        public void ValidatePassword_InvalidPassword_ReturnsFalse()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.That(_uut.ValidatePassword("email", "falsepass"), Is.False);
+        }
+
+        [Test]
+        public void ValidatePassword_UserIsNotInDB_ThrowsUserNotFoundException()
+        {
+            _uut.AddUser("John Derp", "email", "pass");
+
+            Assert.Throws<UserNotFoundException>(() => _uut.ValidatePassword("otheremail", "pass"));
+        }
 
         #endregion
 

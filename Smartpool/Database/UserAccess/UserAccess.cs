@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq; 
 
 namespace Smartpool.UserAccess
@@ -27,7 +28,7 @@ namespace Smartpool.UserAccess
 
             if (names.Length <= 2)
             {
-                user = new User() { Firstname = names[0], Lastname = names[2], Email = email, Password = password };
+                user = new User() { Firstname = names[0], Lastname = names[1], Email = email, Password = password };
             }
             else
             {
@@ -65,6 +66,15 @@ namespace Smartpool.UserAccess
                 {
                     listOfFoundUsers.Add(user);
                 }
+            }
+
+            if (listOfFoundUsers.Count > 1)
+            {
+                throw new MultipleOccourencesOfEmailWasFoundException();
+            }
+            if (listOfFoundUsers.Count == 0)
+            {
+                throw new UserNotFoundException();
             }
 
             return listOfFoundUsers[0];
