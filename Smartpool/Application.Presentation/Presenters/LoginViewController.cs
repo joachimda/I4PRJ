@@ -4,7 +4,8 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
-// 1.1  LP      Now conforms to the IViewController interface
+// 1.1  LP      Now conforms to the IViewController interface and injects
+//              authenticator during construction
 //========================================================================
 
 using Smartpool.Application.Model;
@@ -17,9 +18,9 @@ namespace Smartpool.Application.Presentation
         // Properties
 
         private readonly ILoginView _view;
+        private readonly IAuthenticator _authenticator;
         private string _password;
         private string _email;
-        private IAuthenticator _authenticator; // Never set (needs implementation)
 
         // Life Cycle
         public void ViewDidLoad()
@@ -32,10 +33,11 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
-        public LoginViewController(ILoginView view)
+        public LoginViewController(ILoginView view, IAuthenticator authenticator = null)
         {
             _view = view;
             _view.Controller = this;
+            _authenticator = authenticator;
         }
 
         // Interface
@@ -70,7 +72,7 @@ namespace Smartpool.Application.Presentation
 
         // LoginViewController
 
-        private void UpdateLoginButton()
+        public void UpdateLoginButton()
         {
             // Enable button if user entered password and email
             if (_email.Length > 0 && _password.Length > 0)
@@ -82,11 +84,11 @@ namespace Smartpool.Application.Presentation
             }
         }
 
-        private void Login()
+        public void Login()
         {
-            var session = _authenticator.Authenticate(_email, _password);
+            var session = _authenticator?.Authenticate(_email, _password);
 
-            if (session.Authenticated())
+            if (session != null && session.Authenticated())
             {
                 // Present another view controller (MISSING IMPLEMENTATION)
             }
