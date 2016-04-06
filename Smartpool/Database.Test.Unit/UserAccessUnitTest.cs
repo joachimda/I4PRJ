@@ -14,6 +14,7 @@ namespace Database.Test.Unit
         public void Setup()
         {
             _uut = new UserAccess();
+            _uut.DeleteAllUsers();
         }
 
         #endregion
@@ -53,7 +54,7 @@ namespace Database.Test.Unit
         [Test]
         public void AddUser_InsertUserWith2Names_UserHasCorrectFirstname()
         {
-            _uut.AddUser("John Johnson", "mail", "password");
+            _uut.AddUser("John Derpson", "mail", "password");
 
             Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.EqualTo("John"));
         }
@@ -61,9 +62,9 @@ namespace Database.Test.Unit
         [Test]
         public void AddUser_InsertUserWith2Names_UserHasCorrectLastname()
         {
-            _uut.AddUser("John Johnson", "mail", "password");
+            _uut.AddUser("John Derpson", "mail", "password");
 
-            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Johnson"));
+            Assert.That(_uut.FindUserByEmail("mail").Lastname, Is.EqualTo("Derpson"));
         }
 
         #endregion
