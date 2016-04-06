@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{68B11AF2-9072-4E63-B82D-D4CEDBE4C911}</ProjectGuid>
+    <ProjectGuid>{49C26AE7-7C61-453F-A21A-2BBA513DD71D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbAccess</RootNamespace>
-    <AssemblyName>DbAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Smartpool</RootNamespace>
+    <AssemblyName>Database</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,11 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -51,67 +51,70 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Access classes\DbAccess.cs" />
-    <Compile Include="Access classes\IUserAccess.cs" />
-    <Compile Include="Database model\MonitorUnit.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    <Compile Include="SmartpoolDB.cs" />
+    <Compile Include="DatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Access classes\MonitorUnitAccess.cs" />
-    <Compile Include="Database model\Pool.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
+    <Compile Include="Factories\DbAccessFactory.cs" />
+    <Compile Include="DatabaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Access classes\PoolAccess.cs" />
+    <Compile Include="Factories\DefaultAccessFactory.cs" />
+    <Compile Include="UserAccess\IUserAccess.cs" />
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Database model\SmartPoolModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.Context.tt</DependentUpon>
+    <Compile Include="User.cs">
+      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database model\SmartPoolModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database model\SmartPoolModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Database model\User.cs">
-      <DependentUpon>SmartPoolModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Access classes\UserAccess.cs" />
+    <Compile Include="UserAccess\UserAccess.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Config\App.config" />
-    <None Include="Config\packages.config" />
-    <EntityDeploy Include="Database model\SmartPoolModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Database model\SmartPoolModel.edmx.diagram">
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+    <None Include="DatabaseModel.edmx.diagram">
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database model\SmartPoolModel.Context.tt">
+    <Content Include="DatabaseModel.edmx.sql" />
+    <Content Include="DatabaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.Context.cs</LastGenOutput>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+      <LastGenOutput>DatabaseModel.cs</LastGenOutput>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Database model\SmartPoolModel.edmx.sql" />
-    <Content Include="Database model\SmartPoolModel.tt">
+    <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SmartPoolModel.cs</LastGenOutput>
-      <DependentUpon>SmartPoolModel.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+      <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

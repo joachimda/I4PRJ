@@ -63,6 +63,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StyleableWindow\ControlDoubleClickBehavior.cs" />
+    <Compile Include="StyleableWindow\ShowSystemMenuBehavior.cs" />
+    <Compile Include="StyleableWindow\SystemMenuManager.cs" />
+    <Compile Include="StyleableWindow\WindowCloseCommand.cs" />
+    <Compile Include="StyleableWindow\WindowDragBehavior.cs" />
+    <Compile Include="StyleableWindow\WindowMaximizeCommand.cs" />
+    <Compile Include="StyleableWindow\WindowMinimizeCommand.cs" />
+    <Compile Include="StyleableWindow\WindowResizeBehavior.cs" />
     <Compile Include="WinLoginView.xaml.cs">
       <DependentUpon>WinLoginView.xaml</DependentUpon>
       <SubType>Code</SubType>
