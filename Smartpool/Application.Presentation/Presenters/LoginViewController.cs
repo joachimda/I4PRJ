@@ -4,7 +4,10 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Now conforms to the IViewController interface
 //========================================================================
+
+using Smartpool.Application.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
@@ -13,15 +16,25 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private ILoginView _view;
+        private readonly ILoginView _view;
         private string _password;
         private string _email;
 
         // Life Cycle
+        public void ViewDidLoad()
+        {
+            // Reset text boxes
+            _view.SetEmailText("");
+            _view.SetPasswordText("");
+
+            // Disable login button
+            _view.SetLoginButtonEnabled(false);
+        }
 
         public LoginViewController(ILoginView view)
         {
-            this._view = view;
+            _view = view;
+            _view.Controller = this;
         }
 
         // Interface
@@ -58,7 +71,6 @@ namespace Smartpool.Application.Presentation
 
         private void UpdateLoginButton()
         {
-
             // Enable button if user entered password and email
             if (_email.Length > 0 && _password.Length > 0)
             {

@@ -16,7 +16,7 @@ namespace Smartpool.Application.Presentation
         ForgotButton = 2
     }
 
-    public interface ILoginViewController
+    public interface ILoginViewController : IViewController
     {
         void ButtonPressed(LoginViewButton button);
         void DidChangeEmailText(string text);
