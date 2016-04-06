@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq; 
 
 namespace Smartpool.UserAccess
@@ -69,7 +70,11 @@ namespace Smartpool.UserAccess
 
             if (listOfFoundUsers.Count > 1)
             {
-                throw new EmailAlreadyInUseException();
+                throw new MultipleOccourencesOfEmailWasFoundException();
+            }
+            if (listOfFoundUsers.Count == 0)
+            {
+                throw new UserNotFoundException();
             }
 
             return listOfFoundUsers[0];

@@ -2,7 +2,11 @@ using System;
 
 namespace Smartpool.UserAccess
 {
-    public class EmailAlreadyInUseException : Exception
+    public class UserNotFoundException : Exception
+    {
+    }
+
+    public class MultipleOccourencesOfEmailWasFoundException : Exception
     {
     }
 }

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using Smartpool;
 using Smartpool.UserAccess;
 
 namespace Database.Test.Unit
@@ -84,7 +85,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Johnson", "mail", "password");
             _uut.AddUser("Derp Derpsen", "mail", "wordpass");
-            
+
             Assert.That(_uut.FindUserByEmail("mail").Firstname, Is.Not.EqualTo("Derp"));
         }
 
@@ -94,13 +95,41 @@ namespace Database.Test.Unit
 
         #region FindUserByEmail
 
-        // dont add user and find email
+        [Test]
+        public void FindUserByEmail_UserIsNotAdded_ThrowsUserNotFoundException()
+        {
+            Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("mail"));
+        }
 
-        // add user and find email
+        [Test]
+        public void FindUserByEmail_UserIsAdded_FindsCorrectUser()
+        {
+            _uut.AddUser("John Derp Herpson", "email", "password");
+
+            Assert.That(_uut.FindUserByEmail("email").Password, Is.EqualTo("password"));
+        }
+
+        [Test]
+        public void FindUserByEmail_TwoUsersWithSameEmailExistInDB_ThrowsMultipleOccourencesOfEmailWasFoundException()
+        {
+            User user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Herpson", Email = "email", Password = "password" };
+            User user2 = new User() { Firstname = "Simon", Middelname = "Siggy", Lastname = "Sergson", Email = "email", Password = "hellopass" };
+
+            using (var db = new DatabaseContext())
+            {
+                db.UserSet.Add(user1);
+                db.UserSet.Add(user2);
+                db.SaveChanges();
+            }
+
+            Assert.Throws<MultipleOccourencesOfEmailWasFoundException>(() => _uut.FindUserByEmail("email"));
+        }
 
         #endregion
 
         #region EmailIsUsed
+
+        // is tested through 'FindUserByEmail'
 
         #endregion
 
