@@ -13,8 +13,6 @@ namespace Database.Test
             SmartPoolDB.UserAccess.AddUser("Bjørn Nørgaaard Sørensen", "bjorn@norgaard-andersen.tech", "helloyou");
             SmartPoolDB.UserAccess.AddUser("Signe Satan", "signe@hotmail.com", "signespassword");
             SmartPoolDB.UserAccess.AddUser("Nanna Derps", "derp@gmail.com", "monstersikkerdk");
-
-            SmartPoolDB.UserAccess.FindUserByEmail("bjorn@norgaard-andersen.tech").Password = "it works!";
         }
     }
 }
