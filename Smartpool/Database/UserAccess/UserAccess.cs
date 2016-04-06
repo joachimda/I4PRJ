@@ -100,6 +100,29 @@ namespace Smartpool.UserAccess
             return true;
         }
 
+        /// <summary>
+        /// Method will checkout if email and password is a match.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns>Returns true if the password matches the email. 
+        /// False otherwise.</returns>
+        public bool ValidatePassword(string email, string password)
+        {
+            if (FindUserByEmail(email).Password == password)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Method will search for a User with argument email and remove
+        /// user from database.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Returns 0 if the user was removed without problem.</returns>
         public bool RemoveUser(string email)
         {
             throw new System.NotImplementedException();
