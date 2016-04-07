@@ -84,6 +84,8 @@
     <ImageAsset Include="Resources\Images.xcassets\First.imageset\First.pdf" />
     <ImageAsset Include="Resources\Images.xcassets\Second.imageset\Contents.json" />
     <ImageAsset Include="Resources\Images.xcassets\Second.imageset\Second.pdf" />
+    <ImageAsset Include="Resources\Images.xcassets\Logo.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Logo.imageset\Logo.pdf" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -96,14 +98,31 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="FirstViewController.cs" />
-    <Compile Include="SecondViewController.cs" />
-    <Compile Include="FirstViewController.designer.cs">
+    <Compile Include="LoginViewBridge.cs" />
+    <Compile Include="LoginViewBridge.designer.cs">
+      <DependentUpon>LoginViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Temporary\FirstViewController.cs" />
+    <Compile Include="Temporary\FirstViewController.designer.cs">
       <DependentUpon>FirstViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="SecondViewController.designer.cs">
+    <Compile Include="Temporary\SecondViewController.cs" />
+    <Compile Include="Temporary\SecondViewController.designer.cs">
       <DependentUpon>SecondViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Presentation\Application.Presentation.csproj">
+      <Project>{9C001789-1D5F-4545-AD60-50B6FB91DD96}</Project>
+      <Name>Application.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Images.xcassets\Contents.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Images.xcassets\Logo.imageset\" />
+    <Folder Include="Temporary\" />
+  </ItemGroup>
 </Project>

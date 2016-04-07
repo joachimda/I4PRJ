@@ -43,11 +43,10 @@ namespace Smartpool.Application.Presentation
             //
         }
 
-        public LoginViewController(ILoginView view, IAuthenticator authenticator = null)
+        public LoginViewController(ILoginView view)
         {
             _view = view;
-            _view.Controller = this;
-            _authenticator = authenticator;
+            _authenticator = null;
         }
 
         // Interface
