@@ -21,13 +21,10 @@ namespace ServerTest
                     {
                         return "Login failed";
                     }
-                    break;
                 case "GetPoolInfo":
                     return "Temperature in pool is 25 degrees";
-                    break;
                 default:
                     return "The server did not recognize your request";
-                    break;
             }
         }
     }
