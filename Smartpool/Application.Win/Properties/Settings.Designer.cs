@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SWDStatView.Properties
+namespace Application.Win.Properties
 {
 
 

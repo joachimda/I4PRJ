@@ -1,27 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace SWDStatView
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
-    {
-    }
-
     public class StatViewer : Button
     {
         public Brush BorderColor
         {
-            get { return (Brush) GetValue(BorderColorProperty); }
+            get { return (Brush)GetValue(BorderColorProperty); }
             set { SetValue(BorderColorProperty, value); }
         }
 
@@ -59,4 +46,3 @@ namespace SWDStatView
                 new FrameworkPropertyMetadata("Target yy"));
     }
 }
-
