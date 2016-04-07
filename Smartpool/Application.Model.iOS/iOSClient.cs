@@ -20,7 +20,7 @@ namespace Smartpool.Application.Model.iOS
 		}
 
 		public string StartClient (string whatToSend) {
-
+			return "Login";
 		}
 	}
 }
