@@ -170,11 +170,9 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void ValidatePassword_UserIsNotInDB_ThrowsUserNotFoundException()
+        public void ValidatePassword_UserIsNotInDB_ReturnsFalse()
         {
-            _uut.AddUser("John Derp", "email", "pass");
-
-            Assert.Throws<UserNotFoundException>(() => _uut.ValidatePassword("otheremail", "pass"));
+               Assert.That(_uut.ValidatePassword("email", "pass"), Is.False);
         }
 
         #endregion
@@ -186,8 +184,8 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("Joachim Fucktard Andersen", "jokkemail", "tissemisse");
             _uut.RemoveUser("jokkemail");
-
-            Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("jokkemail"));
+            
+            Assert.That(_uut.FindUserByEmail("jokkemail"), Is.Null);
         }
 
         [Test]

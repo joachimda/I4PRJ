@@ -1,9 +1,9 @@
-﻿<Window x:Class="SWDGUI.WinLoginView"
+﻿<Window x:Class="Smartpool.Application.Win.WinLoginView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SWDGUI"
+        xmlns:local="clr-namespace:Smartpool.Application.Win"
         mc:Ignorable="d"
         Height="350" Width="525" Background="#FF2e2e2e" MinWidth="300" MinHeight="226" Style="{StaticResource SpWindowStyle}" Icon="Icon.ico"> 
 
@@ -21,14 +21,14 @@
         <Image Name="Icon" Margin="20" Source="Icon.png" Grid.Column="1" Grid.Row="0" MaxWidth="240"/>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Width="Auto" >
             <Separator Opacity="0" Height="18"/>
-            <TextBox x:Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
+            <TextBox x:Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
             <Separator Opacity="0" Height="18"/>
-            <TextBox x:Name="TextBoxPassword" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000"/>
+            <TextBox x:Name="PasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" TextChanged="TextBox_TextChanged"/>
             <Separator Opacity="0" Height="18"/>
             <Button x:Name="LoginButton" Content="Login" Click="LoginButton_Click" Template="{StaticResource ButtonSp}"/>
             <Separator Opacity="0" Height="8"/>
-            <Label x:Name="CreateUser" Content="Sign up" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave"/>
-            <Label x:Name="ForgotUser" Content="Forgot login?" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave"/>
+            <Label x:Name="CreateUser" Content="Sign up" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="CreateUser_MouseUp"/>
+            <Label x:Name="ForgotUser" Content="Forgot login?" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="ForgotUser_MouseUp"/>
             <Separator Opacity="0" Height="8"/>
         </StackPanel>
         

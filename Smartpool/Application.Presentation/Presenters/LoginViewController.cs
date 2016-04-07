@@ -19,9 +19,9 @@ namespace Smartpool.Application.Presentation
 
         private readonly ILoginView _view;
         private readonly IAuthenticator _authenticator;
-        private string _password;
-        private string _email;
-
+        private string _password = "";
+        private string _email = "";
+     
         // Life Cycle
         public void ViewDidLoad()
         {
