@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
 
 namespace Smartpool.UserAccess
 {
@@ -16,7 +16,7 @@ namespace Smartpool.UserAccess
         public bool AddUser(string fullname, string email, string password)
         {
             #region Checking 'email' and creating instance of 'User'
-            
+
             if (IsEmailInUse(email))
             {
                 return false;
@@ -134,7 +134,27 @@ namespace Smartpool.UserAccess
         /// <param name="email">Email of user to be deleted from database.</param>
         public void RemoveUser(string email)
         {
-            throw new System.NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                if (IsEmailInUse(email))
+                {
+                    var removeUserByEmail =
+                    from user in db.UserSet
+                    where user.Email == email
+                    select user;
+
+                    foreach (var user in removeUserByEmail)
+                    {
+                        db.UserSet.Remove(user);
+                    }
+
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
+            }
         }
 
         /// <summary>
