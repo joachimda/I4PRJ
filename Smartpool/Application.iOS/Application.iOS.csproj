@@ -98,17 +98,17 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="FirstViewController.cs" />
-    <Compile Include="SecondViewController.cs" />
-    <Compile Include="FirstViewController.designer.cs">
-      <DependentUpon>FirstViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SecondViewController.designer.cs">
-      <DependentUpon>SecondViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="LoginViewBridge.cs" />
     <Compile Include="LoginViewBridge.designer.cs">
       <DependentUpon>LoginViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Temporary\FirstViewController.cs" />
+    <Compile Include="Temporary\FirstViewController.designer.cs">
+      <DependentUpon>FirstViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Temporary\SecondViewController.cs" />
+    <Compile Include="Temporary\SecondViewController.designer.cs">
+      <DependentUpon>SecondViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
@@ -123,5 +123,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\Logo.imageset\" />
+    <Folder Include="Temporary\" />
   </ItemGroup>
 </Project>

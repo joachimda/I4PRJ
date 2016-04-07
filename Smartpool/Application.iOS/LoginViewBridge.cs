@@ -3,7 +3,7 @@
 // DESCR.   :   Bridge between login view controller and iOS login view
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 1.0  LP      Initial version
+// 1.0  LP      Initial version, missing DisplayAlert implementation
 //========================================================================
 
 using Smartpool.Application.Presentation;
