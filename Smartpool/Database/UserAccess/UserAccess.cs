@@ -138,10 +138,9 @@ namespace Smartpool.UserAccess
             {
                 if (IsEmailInUse(email))
                 {
-                    var removeUserByEmail =
-                    from user in db.UserSet
-                    where user.Email == email
-                    select user;
+                    var removeUserByEmail = from user in db.UserSet
+                                            where user.Email == email
+                                            select user;
 
                     foreach (var user in removeUserByEmail)
                     {
