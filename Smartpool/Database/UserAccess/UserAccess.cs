@@ -16,7 +16,7 @@ namespace Smartpool.UserAccess
         public bool AddUser(string fullname, string email, string password)
         {
             #region Checking 'email' and creating instance of 'User'
-            
+
             if (IsEmailInUse(email))
             {
                 return false;
@@ -136,17 +136,24 @@ namespace Smartpool.UserAccess
         {
             using (var db = new DatabaseContext())
             {
-                var removeUserByEmail =
+                if (IsEmailInUse(email))
+                {
+                    var removeUserByEmail =
                     from user in db.UserSet
                     where user.Email == email
                     select user;
 
-                foreach (var user in removeUserByEmail)
-                {
-                    db.UserSet.Remove(user);
-                }
+                    foreach (var user in removeUserByEmail)
+                    {
+                        db.UserSet.Remove(user);
+                    }
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
             }
         }
 

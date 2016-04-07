@@ -161,7 +161,7 @@ namespace Database.Test.Unit
 
         #endregion
 
-     /*   #region RemoveUser
+        #region RemoveUser
 
         [Test]
         public void RemoveUser_RemoveExistingUser_UserNotInDatabase()
@@ -179,6 +179,5 @@ namespace Database.Test.Unit
         }
 
         #endregion
-    */
     }
 }
