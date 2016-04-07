@@ -19,7 +19,7 @@ namespace Smartpool.Application.Presentation
         // Properties
 
         private readonly List<ITabbedViewController> _viewControllers;
-        private IViewController _topViewController;
+		private ITabbedViewController _topViewController;
         private int _topViewControllerIndex;
 
         public int TopViewControllerIndex
