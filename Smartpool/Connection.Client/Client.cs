@@ -48,23 +48,15 @@ namespace Client
                     return stringReturned;
 
                 }
-                catch (ArgumentNullException ane)
-                {
-                   // Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
-                }
-                catch (SocketException se)
-                {
-                    //Console.WriteLine("SocketException : {0}", se.ToString());
-                }
                 catch (Exception e)
                 {
-                    //Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                    Console.WriteLine("Unexpected exception : {0}", e.ToString());
                 }
 
             }
             catch (Exception e)
             {
-                //Console.WriteLine(e.ToString());
+                Console.WriteLine(e.ToString());
             }
             return "Error";
         }
