@@ -23,6 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.Client", "Connec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Model.iOS", "Application.Model.iOS\Application.Model.iOS.csproj", "{E680ABBD-86AD-4ECD-8525-B6B062FA4F2A}"
 EndProject
+<<<<<<< HEAD
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Win", "Application.Win\Application.Win.csproj", "{1530F5A8-302B-46AE-98AB-2085CD87F2F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Presentation.Temp", "Application.Presentation.Temp\Application.Presentation.Temp.csproj", "{BD5461CA-101E-4563-9D15-55AFA116745A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
