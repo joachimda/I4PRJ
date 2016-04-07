@@ -21,8 +21,10 @@ namespace ServerTest
                     {
                         return "Login failed";
                     }
-                case "GetPoolInfo":
+                case "GetTemp":
                     return "Temperature in pool is 25 degrees";
+                case "GetPoolInfo":
+                    return "22,60";
                 default:
                     return "The server did not recognize your request";
             }
