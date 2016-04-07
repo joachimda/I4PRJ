@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SWDGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Background="#FF2e2e2e" MinWidth="300" MinHeight="226" >
+        Title="MainWindow" Height="350" Width="525" Background="#FF2e2e2e" MinWidth="300" MinHeight="226" Style="{StaticResource SpWindowStyle}"> <!--Icon="App.ico"-->
 
-    
+
     <Grid Margin="0,0,0,1" UseLayoutRounding ="True" SnapsToDevicePixels="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
