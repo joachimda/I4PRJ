@@ -15,7 +15,5 @@ namespace Smartpool.Application.Presentation
 		/// The view's controller, assign this during construction of the view
 		/// </summary>
         IViewController Controller { get; set; }
-		void Load();
-		void Unload();
     }
 }
