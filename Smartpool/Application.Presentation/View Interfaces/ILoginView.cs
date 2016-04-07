@@ -11,9 +11,29 @@ namespace Smartpool.Application.Presentation
 {
     public interface ILoginView : IView
     {
+		/// <summary>
+		/// Sets the text of the email text field
+		/// </summary>
         void SetEmailText(string text);
+
+		/// <summary>
+		/// Sets the text of the password text field
+		/// </summary>
         void SetPasswordText(string text);
+
+		/// <summary>
+		/// Sets the state of the login button
+		/// </summary>
         void SetLoginButtonEnabled(bool enabled);
+
+		/// <summary>
+		/// Displays a message or alert on the view
+		/// </summary>
         void DisplayAlert(string title, string content);
+
+		/// <summary>
+		/// Tells the view that a login request has been accepted, should present the main menu
+		/// </summary>
+		void LoginAccepted();
     }
 }

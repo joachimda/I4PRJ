@@ -33,16 +33,6 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
-        public void LoadView()
-        {
-            // 
-        }
-
-        public void UnloadView()
-        {
-            //
-        }
-
         public LoginViewController(ILoginView view)
         {
             _view = view;
@@ -99,7 +89,7 @@ namespace Smartpool.Application.Presentation
 
             if (session != null && session.Authenticated())
             {
-                // Present another view controller (MISSING IMPLEMENTATION)
+				_view.LoginAccepted ();
             }
             else {
                 // Reset password and display message
