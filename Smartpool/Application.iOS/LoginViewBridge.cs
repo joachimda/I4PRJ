@@ -75,6 +75,14 @@ namespace Application.iOS
 
 		// ILoginView Interface Implementation
 
+		public void LoginAccepted()
+		{
+			// present tab bar controller
+			var storyBoard = UIStoryboard.FromName ("Main", null);
+			var tabBarController = storyBoard.InstantiateViewController ("tabBarController") as UITabBarController;
+			this.PresentViewController (tabBarController, animated: true, completionHandler: null);
+		}
+
 		public void SetEmailText(string text)
 		{
 			emailTextField.Text = text;

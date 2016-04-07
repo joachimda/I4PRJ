@@ -1,19 +1,15 @@
 ﻿//========================================================================
-// FILENAME :   IViewController.cs
-// DESCR.   :   Ínterface for view controllers
+// FILENAME :   IStatView.cs
+// DESCR.   :   Interface for stat views
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 1.0  LP      Initial version
+// 0.1  LP      Initial version, missing implementation
 //========================================================================
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-    public interface IViewController
-    {
-        /// <summary>
-        /// Called when the ViewController's View has finished loading
-        /// </summary>
-        void ViewDidLoad();
-    }
+	public interface IStatView : IView
+	{
+	}
 }
