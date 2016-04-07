@@ -51,6 +51,8 @@
     <Compile Include="Presenters\IViewController.cs" />
     <Compile Include="Presenters\ITabbedViewController.cs" />
     <Compile Include="View Interfaces\ITabbedView.cs" />
+    <Compile Include="Presenters\IStatViewController.cs" />
+    <Compile Include="View Interfaces\IStatView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
