@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq; 
+using System.Linq;
 
 namespace Smartpool.UserAccess
 {
@@ -134,7 +134,20 @@ namespace Smartpool.UserAccess
         /// <param name="email">Email of user to be deleted from database.</param>
         public void RemoveUser(string email)
         {
-            throw new System.NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                var removeUserByEmail =
+                    from user in db.UserSet
+                    where user.Email == email
+                    select user;
+
+                foreach (var user in removeUserByEmail)
+                {
+                    db.UserSet.Remove(user);
+                }
+
+                db.SaveChanges();
+            }
         }
 
         /// <summary>
