@@ -21,14 +21,14 @@
         <Image Name="Icon" Margin="20" Source="Icon.png" Grid.Column="1" Grid.Row="0" MaxWidth="240"/>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Width="Auto" >
             <Separator Opacity="0" Height="18"/>
-            <TextBox x:Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
+            <TextBox x:Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
             <Separator Opacity="0" Height="18"/>
-            <TextBox x:Name="TextBoxPassword" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000"/>
+            <TextBox x:Name="PasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" TextChanged="TextBox_TextChanged"/>
             <Separator Opacity="0" Height="18"/>
             <Button x:Name="LoginButton" Content="Login" Click="LoginButton_Click" Template="{StaticResource ButtonSp}"/>
             <Separator Opacity="0" Height="8"/>
-            <Label x:Name="CreateUser" Content="Sign up" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave"/>
-            <Label x:Name="ForgotUser" Content="Forgot login?" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave"/>
+            <Label x:Name="CreateUser" Content="Sign up" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="CreateUser_MouseUp"/>
+            <Label x:Name="ForgotUser" Content="Forgot login?" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="ForgotUser_MouseUp"/>
             <Separator Opacity="0" Height="8"/>
         </StackPanel>
         
