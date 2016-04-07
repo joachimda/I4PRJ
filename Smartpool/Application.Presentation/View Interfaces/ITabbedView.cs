@@ -1,6 +1,6 @@
 ﻿//========================================================================
-// FILENAME :   IView.cs
-// DESCR.   :   Interface for views
+// FILENAME :   ITabbedView.cs
+// DESCR.   :   Interface for views in a tab bar environment
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -9,11 +9,16 @@
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-    public interface IView
-    {
+	public interface ITabbedView : IView
+	{
 		/// <summary>
-		/// The view's controller, assign this during construction of the view
+		/// Presents the view, i.e. open()
 		/// </summary>
-        IViewController Controller { get; set; }
-    }
+		void Load();
+
+		/// <summary>
+		/// Hides or closes the view, i.e. close()
+		/// </summary>
+		void Unload();
+	}
 }

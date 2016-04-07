@@ -15,15 +15,5 @@ namespace Smartpool.Application.Presentation
         /// Called when the ViewController's View has finished loading
         /// </summary>
         void ViewDidLoad();
-
-        /// <summary>
-        /// Called by the TabBarController to let the ViewController know it's View should be presented
-        /// </summary>
-        void LoadView();
-
-        /// <summary>
-        /// Called by the TabBarController to let the ViewController know it's View should end presentation
-        /// </summary>
-        void UnloadView();
     }
 }

@@ -11,6 +11,9 @@ namespace Smartpool.Application.Presentation
 {
     public interface ITabBarController
     {
+		/// <summary>
+		/// The active view controller index of list of view controllers in the tab bar controller
+		/// </summary>
         int TopViewControllerIndex { get; set; }
     }
 }
