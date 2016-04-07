@@ -12,5 +12,7 @@ namespace Smartpool.Application.Presentation
     public interface IView
     {
         IViewController Controller { get; set; }
+		void Load();
+		void Unload();
     }
 }
