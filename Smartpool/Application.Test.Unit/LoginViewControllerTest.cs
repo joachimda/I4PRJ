@@ -26,47 +26,7 @@ namespace Smartpool.Application.Test.Unit
         {
             _view = Substitute.For<ILoginView>();
             _authenticator = Substitute.For<IAuthenticator>();
-            _uut = new LoginViewController(_view, _authenticator);
+            _uut = new LoginViewController(_view);
         }
-
-        // Life Cycle
-
-        [TestCase()]
-        public void Constructor_Performed_ControllerSetForView()
-        {
-            _view.Received().Controller = _uut;
-        }
-
-        [TestCase()]
-        public void ViewDidLoad_Performed_LoginButtonDisabledOnView()
-        {
-            _uut.ViewDidLoad();
-            _view.Received().SetLoginButtonEnabled(false);
-        }
-
-        // Interface
-
-        [TestCase("","")]
-        [TestCase("john@doe.com", "johndoe123")]
-        public void ButtonPressed_LoginButtonArgument_AuthenticateCalled(string email, string password)
-        {
-            _uut.DidChangeEmailText(email);
-            _uut.DidChangePasswordText(password);
-            _uut.ButtonPressed(LoginViewButton.LoginButton);
-            _authenticator.Received().Authenticate(email, password);
-        }
-
-        [TestCase("", "", false)]
-        [TestCase("john@doe.com", "", false)]
-        [TestCase("", "johndoe123", false)]
-        [TestCase("john@doe.com", "johndoe123", true)]
-        public void DidChangeText_EmailAndPasswordChanged_ViewLoginButtonStateSet(string email, string password, bool loginButtonEnabled)
-        {
-            _uut.DidChangeEmailText(email);
-            _uut.DidChangePasswordText(password);
-            _view.Received().SetLoginButtonEnabled(loginButtonEnabled);
-        }
-
-        // LoginViewController
     }
 }
