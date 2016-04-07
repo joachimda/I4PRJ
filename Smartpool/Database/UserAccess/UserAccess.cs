@@ -136,24 +136,21 @@ namespace Smartpool.UserAccess
         {
             using (var db = new DatabaseContext())
             {
-                if (IsEmailInUse(email))
-                {
-                    var removeUserByEmail =
-                    from user in db.UserSet
-                    where user.Email == email
-                    select user;
-
-                    foreach (var user in removeUserByEmail)
-                    {
-                        db.UserSet.Remove(user);
-                    }
-
-                    db.SaveChanges();
-                }
-                else
+                if (!IsEmailInUse(email))
                 {
                     throw new UserNotFoundException();
                 }
+
+                var removeUserByEmail = from user in db.UserSet
+                                        where user.Email == email
+                                        select user;
+
+                foreach (var user in removeUserByEmail)
+                {
+                    db.UserSet.Remove(user);
+                }
+
+                db.SaveChanges();
             }
         }
 
