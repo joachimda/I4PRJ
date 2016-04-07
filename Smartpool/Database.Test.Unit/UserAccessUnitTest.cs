@@ -70,6 +70,12 @@ namespace Database.Test.Unit
 
         #endregion
 
+        [Test]
+        public void AddUser_AddingUserWith1NameOnly_ReturnsFalse()
+        {
+            Assert.That(_uut.AddUser("OnlyName", "sædoij", "iuhiu"), Is.False);
+        }
+
         #region AddUser, testing that it should not the possible to add user with existing email
 
         [Test]
