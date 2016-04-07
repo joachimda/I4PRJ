@@ -122,7 +122,7 @@ namespace ServerTest
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
-                    var handleResponse = new FakeResponseManager();
+                    var handleResponse = new ResponseManager();
                     // Echo the data back to the client.
                     Send(handler, handleResponse.Respond(content));
 
