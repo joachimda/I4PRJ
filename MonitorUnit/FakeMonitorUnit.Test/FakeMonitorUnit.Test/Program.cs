@@ -12,7 +12,8 @@ namespace FakeMonitorUnit.Test
         static void Main(string[] args)
         {
             IMonitorUnit monitor = new FakeMonitorUnit();
-
+            Console.Title = "Dummy MonitorUnit test";
+            
             while (true)
             {
                 Console.WriteLine("Chlorine level is " + monitor.GetChlorineData() + " units");
@@ -20,7 +21,7 @@ namespace FakeMonitorUnit.Test
                 Console.WriteLine("pH level is " + monitor.GetPhData());
                 Console.WriteLine("Temperature is " + monitor.GetTemperatureData() + " degrees Celcius");
                 Thread.Sleep(1000);
-
+                Console.Clear();
             }
 
         }
