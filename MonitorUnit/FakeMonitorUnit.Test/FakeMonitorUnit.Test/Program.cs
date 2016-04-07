@@ -18,6 +18,7 @@ namespace FakeMonitorUnit.Test
                 Console.WriteLine("Chlorine level is " + monitor.GetChlorineData() + " units");
                 Console.WriteLine("Room humidity is " + monitor.GetHumidityData() + "%");
                 Console.WriteLine("pH level is " + monitor.GetPhData());
+                Console.WriteLine("Temperature is " + monitor.GetTemperatureData() + " degrees Celcius");
                 Thread.Sleep(1000);
 
             }

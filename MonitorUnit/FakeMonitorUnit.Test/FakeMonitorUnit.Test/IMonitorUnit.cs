@@ -11,6 +11,7 @@ namespace FakeMonitorUnit.Test
         double GetPhData();
         double GetChlorineData();
         double GetHumidityData();
+        double GetTemperatureData();
     }
 
     class FakeMonitorUnit : IMonitorUnit
@@ -34,6 +35,13 @@ namespace FakeMonitorUnit.Test
         {
             Random rnd = new Random();
             var val = rnd.Next(0, 100);
+            return val;
+        }
+
+        public double GetTemperatureData()
+        {
+            Random rnd = new Random();
+            var val = rnd.Next(-10, 80);
             return val;
         }
     }
