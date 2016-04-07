@@ -91,6 +91,14 @@ namespace Database.Test.Unit
 
         #endregion
 
+        [Test]
+        public void AddUser_Add2UsersWithSameEmailWithDiffCaPiTaL_ReturnsFalse()
+        {
+            _uut.AddUser("John Steward Sirson", "john@sirson.com", "password1");
+
+            Assert.That(_uut.AddUser("Gurn Hat Derpson", "John@Sirson.com", "password2"), Is.False);
+        }
+
         #endregion
 
         #region FindUserByEmail
@@ -123,6 +131,14 @@ namespace Database.Test.Unit
             }
 
             Assert.Throws<MultipleOccourencesOfEmailWasFoundException>(() => _uut.FindUserByEmail("email"));
+        }
+
+        [Test]
+        public void FindUserByEmail_InsertsUserWithEmailInAllCaps_FindUserSearchingWithLowerCaps()
+        {
+            _uut.AddUser("John Derp Herpson", "EMAIL", "password");
+
+            Assert.That(_uut.FindUserByEmail("email").Lastname, Is.EqualTo("Herpson"));
         }
 
         #endregion
