@@ -104,9 +104,11 @@ namespace Database.Test.Unit
         #region FindUserByEmail
 
         [Test]
-        public void FindUserByEmail_UserIsNotAdded_ThrowsUserNotFoundException()
+        public void FindUserByEmail_UserIsNotAdded_ReturnsNullUser()
         {
-            Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("mail"));
+            //Assert.Throws<UserNotFoundException>(() => _uut.FindUserByEmail("mail"));
+
+            Assert.That(_uut.FindUserByEmail("mail"), Is.Null);
         }
 
         [Test]
