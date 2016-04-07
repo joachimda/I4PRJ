@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/05/2016 23:16:13
--- Generated from EDMX file: C:\Users\Norgaard\Documents\Github\I4PRJ\Smartpool\Database\DatabaseModel.edmx
+-- Date Created: 04/07/2016 12:54:28
+-- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [SmartpoolDB];
+USE [F16I4PRJ4Gr3];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
