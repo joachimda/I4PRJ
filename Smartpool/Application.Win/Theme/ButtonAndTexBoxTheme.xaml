@@ -85,6 +85,9 @@
             </Border.Effect>
         </Border>
         <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Opacity" Value="0.2"/>
+            </Trigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource SpOrange}" />
             </Trigger>
