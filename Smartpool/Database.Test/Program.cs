@@ -8,12 +8,13 @@ namespace Database.Test
         {
             Smartpool.SmartpoolDB SmartPoolDB = new Smartpool.SmartpoolDB(new StdAccessFactory());
 
-            SmartPoolDB.UserAccess.DeleteAllUsers();
-            SmartPoolDB.UserAccess.AddUser("Joachim Dam Andersen", "jokke@norgaard-andersen.tech", "herropree");
-            SmartPoolDB.UserAccess.AddUser("Bjørn Nørgaaard Sørensen", "bjorn@norgaard-andersen.tech", "helloyou");
-            SmartPoolDB.UserAccess.AddUser("Signe Satan", "signe@hotmail.com", "signespassword");
-            SmartPoolDB.UserAccess.AddUser("Nanna Derps", "derp@gmail.com", "monstersikkerdk");
-
+            //SmartPoolDB.UserAccess.DeleteAllUsers();
+            //SmartPoolDB.UserAccess.AddUser("Joachim Dam Andersen", "jokke@norgaard-andersen.tech", "herropree");
+            //SmartPoolDB.UserAccess.AddUser("Bjørn Nørgaaard Sørensen", "bjorn@norgaard-andersen.tech", "helloyou");
+            //SmartPoolDB.UserAccess.AddUser("Signe Satan", "signe@hotmail.com", "signespassword");
+            //SmartPoolDB.UserAccess.AddUser("Nanna Derps", "derp@gmail.com", "monstersikkerdk");
+            SmartPoolDB.UserAccess.AddUser("Emil Lasse", "emil@lasse.com", "pikpikpik");
+            SmartPoolDB.UserAccess.AddUser("lol lol", "hej", "hej");
             //SmartPoolDB.UserAccess.RemoveUser("jokke@norgaard-andersen.tech");
         }
     }

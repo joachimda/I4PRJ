@@ -45,6 +45,9 @@ namespace SWDGUI
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show($"Email: {EmailTextBox.Text}\nPass: {TextBoxPassword.Text}");
+            WinStatView view = new WinStatView();
+            view.Show();
+            this.Close();
         }
     }
 

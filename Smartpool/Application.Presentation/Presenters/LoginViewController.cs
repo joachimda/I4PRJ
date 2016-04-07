@@ -19,9 +19,9 @@ namespace Smartpool.Application.Presentation
 
         private readonly ILoginView _view;
         private readonly IAuthenticator _authenticator;
-        private string _password;
-        private string _email;
-
+        private string _password = "";
+        private string _email = "";
+     
         // Life Cycle
         public void ViewDidLoad()
         {
@@ -31,16 +31,6 @@ namespace Smartpool.Application.Presentation
 
             // Disable login button
             _view.SetLoginButtonEnabled(false);
-        }
-
-        public void LoadView()
-        {
-            // 
-        }
-
-        public void UnloadView()
-        {
-            //
         }
 
         public LoginViewController(ILoginView view)
@@ -99,7 +89,7 @@ namespace Smartpool.Application.Presentation
 
             if (session != null && session.Authenticated())
             {
-                // Present another view controller (MISSING IMPLEMENTATION)
+				_view.LoginAccepted ();
             }
             else {
                 // Reset password and display message

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Smartpool.UserAccess
 {
@@ -26,7 +27,11 @@ namespace Smartpool.UserAccess
 
             string[] names = fullname.Split(' ');
 
-            if (names.Length <= 2)
+            if (names.Length <= 1)
+            {
+                return false;
+            }
+            else if (names.Length <= 2)
             {
                 user = new User() { Firstname = names[0], Lastname = names[1], Email = email, Password = password };
             }
@@ -74,7 +79,8 @@ namespace Smartpool.UserAccess
             }
             if (listOfFoundUsers.Count == 0)
             {
-                throw new UserNotFoundException();
+                //throw new UserNotFoundException();
+                return null;
             }
 
             return listOfFoundUsers[0];
@@ -119,7 +125,13 @@ namespace Smartpool.UserAccess
         /// False otherwise.</returns>
         public bool ValidatePassword(string email, string password)
         {
-            if (FindUserByEmail(email).Password == password)
+            User user = FindUserByEmail(email);
+
+            if (user == null)
+            {
+                return false;
+            }
+            if (user.Password == password)
             {
                 return true;
             }
