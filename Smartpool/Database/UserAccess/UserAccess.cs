@@ -27,7 +27,11 @@ namespace Smartpool.UserAccess
 
             string[] names = fullname.Split(' ');
 
-            if (names.Length <= 2)
+            if (names.Length <= 1)
+            {
+                return false;
+            }
+            else if (names.Length <= 2)
             {
                 user = new User() { Firstname = names[0], Lastname = names[1], Email = email, Password = password };
             }
