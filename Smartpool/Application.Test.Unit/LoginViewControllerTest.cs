@@ -19,12 +19,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private LoginViewController _uut;
         private ILoginView _view;
+        private IClient _client;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<ILoginView>();
-            _uut = new LoginViewController(_view);
+            _client = Substitute.For<IClient>();
+            _uut = new LoginViewController(_view, _client);
             _view.Controller = _uut;
         }
 
@@ -69,15 +71,15 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Accepted_LoginAcceptedCalledOnView()
         {
-            _uut.Client = true;
+            _client.StartClient("").ReturnsForAnyArgs("Login");
             _uut.Login();
             _view.Received().LoginAccepted();
         }
 
         [Test]
-        public void Login_Declined_LoginAcceptedCalledOnView()
+        public void Login_Declined_DisplayAlertCalledOnView()
         {
-            _uut.Client = false;
+            _client.StartClient("").ReturnsForAnyArgs("LoginFailed");
             _uut.Login();
             _view.ReceivedWithAnyArgs().DisplayAlert("","");
         }
