@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Client.cs" />
-    <Compile Include="ClientCommands.cs" />
+    <Compile Include="Redundant\ClientCommands.cs" />
     <Compile Include="LoginHandle.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
@@ -99,6 +99,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Model\Application.Model.csproj">
+      <Project>{af0d91d7-2379-4b72-b739-6cb92dfcb2e4}</Project>
+      <Name>Application.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
