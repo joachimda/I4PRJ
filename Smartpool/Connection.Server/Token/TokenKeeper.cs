@@ -1,16 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ServerTest.Token
 {
-    public class TokenKeeper
+    public class TokenKeeper : ITokenKeeper, ITokenKeeperInternal
     {
         private readonly List<IToken> _tokens = new List<IToken>();
         private readonly ITokenStringGenerator _tokenStringGenerator;
+        private readonly int _tokenLifeTime;
+        private readonly int _tokensCreatedBeforeRemovingUnused = 100;
+        private int _removeUnusedCountdown;
 
-        public TokenKeeper(ITokenStringGenerator tokenStringGenerator)
+        public TokenKeeper(ITokenStringGenerator tokenStringGenerator, int TokenLifeTimeMinutes)
         {
             _tokenStringGenerator = tokenStringGenerator;
+            _tokenLifeTime = TokenLifeTimeMinutes;
+            _removeUnusedCountdown = _tokensCreatedBeforeRemovingUnused;
         }
 
         public bool TokenActive(string username, string tokenString)
@@ -21,18 +27,32 @@ namespace ServerTest.Token
                 {
                     if (token.TokenAlive())
                         return true;
+                    else
+                    {
+                        _tokens.Remove(token);
+                    }
                 }
             }
             return false;
         }
 
-        public void CreateNewToken(string username)
+        public string CreateNewToken(string username)
         {
-            CheckForOldToken(username);
-            _tokens.Add(new Token(username, _tokenStringGenerator));
+            RemoveOldToken(username);
+            var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
+            _tokens.Add(newToken);
+
+            if (_removeUnusedCountdown == 0)
+            {
+                RemoveAllUnusedTokens();
+                _removeUnusedCountdown = _tokensCreatedBeforeRemovingUnused;
+            }
+            _removeUnusedCountdown--;
+
+            return newToken.GetTokenString();
         }
 
-        private void CheckForOldToken(string username)
+        private void RemoveOldToken(string username)
         {
             foreach (var token in _tokens)
             {
@@ -42,6 +62,20 @@ namespace ServerTest.Token
                     return;
                 }
             }
+        }
+
+        private void RemoveAllUnusedTokens()
+        {
+            foreach (var token in _tokens)
+            {
+                if (!token.TokenAlive())
+                    _tokens.Remove(token);
+            }
+        }
+
+        public int GetAmountOfTokens()
+        {
+            return _tokens.Count;
         }
     }
 }
