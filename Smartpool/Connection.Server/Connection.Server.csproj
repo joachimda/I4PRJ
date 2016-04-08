@@ -59,9 +59,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseManager.cs" />
     <Compile Include="Token\IToken.cs" />
-    <Compile Include="Token\ITokenGenerator.cs" />
+    <Compile Include="Token\ITokenKeeper.cs" />
+    <Compile Include="Token\ITokenKeeperInternal.cs" />
+    <Compile Include="Token\ITokenStringGenerator.cs" />
     <Compile Include="Token\Token.cs" />
-    <Compile Include="Token\TokenGenerator.cs" />
+    <Compile Include="Token\TokenStringGenerator.cs" />
     <Compile Include="Token\TokenKeeper.cs" />
   </ItemGroup>
   <ItemGroup>
