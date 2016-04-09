@@ -16,6 +16,7 @@ namespace Connection.Server.Test.Unit
         private ITokenStringGenerator _uut_TSG;
         private IToken _uut_Token;
         private ITokenKeeperInternal _uut_TK;
+        
 
         [SetUp]
         public void Setup()
@@ -40,7 +41,7 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void zTokenAlive_NotActive_ReturnsFalse()
         {
-            Thread.Sleep(70000);
+            Thread.Sleep(60001);
             Assert.That(_uut_Token.TokenAlive, Is.False);
         }
 
