@@ -110,6 +110,10 @@
     <Compile Include="Temporary\SecondViewController.designer.cs">
       <DependentUpon>SecondViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="SignUpViewBridge.cs" />
+    <Compile Include="SignUpViewBridge.designer.cs">
+      <DependentUpon>SignUpViewBridge.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
