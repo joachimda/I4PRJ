@@ -9,4 +9,8 @@ namespace Smartpool.UserAccess
     public class MultipleOccourencesOfEmailWasFoundException : Exception
     {
     }
+
+    public class PoolNotFoundException : Exception
+    { 
+    }
 }

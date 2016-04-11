@@ -61,6 +61,12 @@ namespace Database.Test.Unit
 
             Assert.That(_uut.FindSpecificPool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"), Is.Null);
         }
+
+        [Test]
+        public void RemovePool_PoolNotPresentInDB_ThrowsPoolNotFoundException()
+        {
+            Assert.Throws<PoolNotFoundException>(() => _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"));
+        }
         /*
         [Test]
         public void RemoveUser_UserNotPresentInDB_ThrowsUserNotFoundException()
