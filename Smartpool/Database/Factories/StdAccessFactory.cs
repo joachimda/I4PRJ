@@ -8,5 +8,10 @@ namespace Smartpool.Factories
         {
             return new UserAccess.UserAccess();
         }
+
+        public override IPoolAccess CreatePoolAccess()
+        {
+            return new PoolAccess(); 
+        }
     }
 }

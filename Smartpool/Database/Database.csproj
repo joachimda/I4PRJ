@@ -51,10 +51,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PoolAccess\IPoolAccess.cs" />
     <Compile Include="ISmartpoolDB.cs" />
     <Compile Include="Pool.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="PoolAccess\PoolAccess.cs" />
     <Compile Include="SmartpoolDB.cs" />
     <Compile Include="DatabaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
