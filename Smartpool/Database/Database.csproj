@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISmartpoolDB.cs" />
     <Compile Include="SmartpoolDB.cs" />
     <Compile Include="DatabaseModel.Designer.cs">
       <AutoGen>True</AutoGen>

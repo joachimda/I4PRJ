@@ -2,8 +2,9 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Application.Win;
-using Smartpool.Application.Presentation.Temp;
+using Smartpool.Application.Presentation;
+using Smartpool.Application.Model;
+using Client;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Win
@@ -42,7 +43,9 @@ namespace Smartpool.Application.Win
             ThemeProperties.SetPlaceholderText(EmailTextBox, "E-mail");
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
 
-            Controller = new LoginViewController(this);
+            //
+            var client = new SynchronousSocketClient();
+            Controller = new LoginViewController(this, client);
             Controller.ViewDidLoad();
         }
 
