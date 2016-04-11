@@ -1,6 +1,4 @@
-﻿using Smartpool;
-
-namespace Smartpool
+﻿namespace Smartpool
 {
     public class SmartpoolDB : ISmartpoolDB
     {
