@@ -67,13 +67,6 @@ namespace Database.Test.Unit
         {
             Assert.Throws<PoolNotFoundException>(() => _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"));
         }
-        /*
-        [Test]
-        public void RemoveUser_UserNotPresentInDB_ThrowsUserNotFoundException()
-        {
-            Assert.Throws<UserNotFoundException>(() => _uut.RemoveUser("jokkemail"));
-        }
-        */
 
         #endregion
     }
