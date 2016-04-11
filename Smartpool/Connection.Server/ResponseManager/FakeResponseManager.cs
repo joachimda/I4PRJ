@@ -1,4 +1,7 @@
-﻿namespace ServerTest
+﻿using Newtonsoft.Json;
+using Smartpool.Connection.Model;
+
+namespace Smartpool.Connection.Server.ResponseManager
 {
     public class FakeResponseManager
     {
@@ -6,10 +9,13 @@
         {
             var receivedStrings = content.Split(',');
 
-            switch (receivedStrings[0])
+            var message = JsonConvert.DeserializeObject<ClientMsg>(receivedStrings[0]);
+
+            switch (message.MsgType)
             {
                 case "Login":
-                    if (receivedStrings[1] == "Joachim" && receivedStrings[2] == "1234")
+                    var fullMessage = JsonConvert.DeserializeObject<LoginMsg>(receivedStrings[0]);
+                    if (fullMessage.Username == "Joachim" && fullMessage.Password == "1234")
                         return "Login";
                     else
                     {

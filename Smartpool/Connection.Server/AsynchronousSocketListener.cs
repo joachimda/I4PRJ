@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace ServerTest
+namespace Smartpool.Connection.Server
 {
     // State object for reading client data asynchronously
     public class StateObject
@@ -122,7 +122,7 @@ namespace ServerTest
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
-                    var handleResponse = new ResponseManager();
+                    var handleResponse = new ResponseManager.ResponseManager();
                     // Echo the data back to the client.
                     Send(handler, handleResponse.Respond(content));
 

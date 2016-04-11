@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using NUnit.Framework;
-using ServerTest.Token;
+using Smartpool.Connection.Server.Token;
 
 namespace Connection.Server.Test.Unit
 {
