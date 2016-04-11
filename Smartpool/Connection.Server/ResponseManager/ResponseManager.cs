@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using Smartpool.Connection.Server.Token;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.ResponseManager
 {
@@ -10,6 +12,11 @@ namespace Smartpool.Connection.Server.ResponseManager
         private readonly ITokenKeeper _tokenKeeper;
         private string temporaryPoolInfo = "25,60";
         private SmartpoolDB _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
+
+        JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.All
+        };
 
         public ResponseManager()
         {
@@ -23,16 +30,17 @@ namespace Smartpool.Connection.Server.ResponseManager
             _tokenKeeper = tokenKeeper;
         }
 
-        public string Respond(string content)
+        public string Respond(string receivedString)
         {
-            var receivedStrings = content.Split(',');
-            
-            switch (receivedStrings[0])
+            var recievedMessage = JsonConvert.DeserializeObject<Message>(receivedString, JsonSettings);
+
+            switch (recievedMessage.MsgType)
             {
-                case "Login":
-                    if (_smartpoolDb.UserAccess.ValidatePassword(receivedStrings[1], receivedStrings[2]))
+                case MessageTypes.Login:
+                    var loginMessage = JsonConvert.DeserializeObject<LoginMsg>(receivedString);
+                    if (_smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password))
                     {
-                        var tokenString = _tokenKeeper.CreateNewToken(receivedStrings[1]);
+                        var tokenString = _tokenKeeper.CreateNewToken(loginMessage.Username);
                         return "Login";
                         //return "Login,"+tokenString;
                     }
@@ -41,9 +49,9 @@ namespace Smartpool.Connection.Server.ResponseManager
                     {
                         return "Login failed";
                     }
-                case "GetTemp":
+                case MessageTypes.GetInfo:
                     {
-                        if  (_tokenKeeper.TokenActive(receivedStrings[1], receivedStrings[2]))
+                        if  (_tokenKeeper.TokenActive(receivedString, receivedString))
                             return "Temperature in pool is 25 degrees";
 
                         else
@@ -52,9 +60,9 @@ namespace Smartpool.Connection.Server.ResponseManager
                         }
                     }
                     
-                case "GetPoolInfo":
+                case MessageTypes.GetPoolInfo:
                     {
-                        if (_tokenKeeper.TokenActive(receivedStrings[1], receivedStrings[2]))
+                        if (_tokenKeeper.TokenActive(receivedString, receivedString))
                             return JsonConvert.SerializeObject(temporaryPoolInfo);
                         else
                         {

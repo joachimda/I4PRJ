@@ -3,7 +3,8 @@
     public enum MessageTypes
     {
         Login,
-        GetInfo
+        GetInfo,
+        GetPoolInfo
     }
     public class Message
     {
