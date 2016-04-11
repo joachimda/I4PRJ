@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Smartpool.UserAccess;
 
 namespace Smartpool.Factories
 {
@@ -41,20 +43,34 @@ namespace Smartpool.Factories
             throw new System.NotImplementedException();
         }
 
-        public bool RemovePool(string email, string address, string name)
-        {
-            throw new System.NotImplementedException();
-        }
-
         /// <summary>
-        /// Removes a single pool from database
+        /// Removes a specific pool
         /// </summary>
-        /// <param name="email">Identifies the user</param>
-        /// <param name="name">Identifies specific pool</param>
-        /// <returns>true on succes, false on fail</returns>
-        public bool RemovePool(string email, string name)
+        /// <param name="email"> identifies the user email</param>
+        /// <param name="address"> identifies the pool address</param>
+        /// <param name="name">identifies the name of the pool</param>
+
+        public void RemovePool(string email, string address, string name)
         {
-            throw new System.NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                if (!IsPoolNameInUse(email, address, name))
+                {
+                    throw new PoolNotFoundException();
+                }
+
+                //Query for the pool
+                //var removePool = from user in db.UserSet
+                //                        where user.Email == email
+                //                        select user;
+
+                //foreach (var user in removeUserByEmail)
+                //{
+                //    db.UserSet.Remove(user);
+                //}
+
+                db.SaveChanges();
+            }
         }
 
         /// <summary>

@@ -51,27 +51,21 @@ namespace Database.Test.Unit
 
         #region RemovePool
 
-        // tests
-
-        #endregion
-
-        #region DeleteAllPools
-
         [Test]
         public void RemovePool_RemoveExistingPool_PoolNotInDatabase()
         {
-            _uut.AddPool("jokke@mail.com","Kærgaarden 78", "IndoorPewl", 25);
+            _uut.AddPool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl", 25);
             _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl");
 
-            Assert.That(_uut.FindSpecificPool("jokke@mail.com","Kærgaarden 78", "IndoorPewl"), Is.Null);
+            Assert.That(_uut.FindSpecificPool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"), Is.Null);
         }
-        /*
+
         [Test]
-        public void RemoveUser_UserNotPresentInDB_ThrowsUserNotFoundException()
+        public void RemovePool_PoolNotPresentInDB_ThrowsPoolNotFoundException()
         {
-            Assert.Throws<UserNotFoundException>(() => _uut.RemoveUser("jokkemail"));
+            Assert.Throws<PoolNotFoundException>(() => _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"));
         }
-        */
+
         #endregion
     }
 }
