@@ -21,6 +21,8 @@ namespace Database.Test.Unit
             
             _uut = new PoolAccess();
             _userAccess = Substitute.For<IUserAccess>();
+
+            //_userAccess.FindUserByEmail("lasse@emil.com").Returns(new User());
         }
 
         [TearDown]
@@ -36,7 +38,9 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPool_ReturnsSomething()
         {
-            //_uut.AddPool()
+            _uut.AddPool("lasse@emil.com", "derproad 12", "baghave lille", 30);
+
+            Assert.That(_uut.IsPoolNameInUse("lasse@emil.com", "derproad 12", "baghave lille"), Is.True);
         }
 
         #endregion
