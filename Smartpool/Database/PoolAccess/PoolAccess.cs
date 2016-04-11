@@ -2,8 +2,16 @@ namespace Smartpool.Factories
 {
     public class PoolAccess : IPoolAccess
     {
-        public bool AddUser(string fullname, string email, string password)
+        /// <summary>
+        /// Adds pool to a users poolSet
+        /// </summary>
+        /// <param name="userEmail">Identifying the 'owner' of the pool</param>
+        /// <param name="name">The pools name</param>
+        /// <param name="volume">the pools volume</param>
+        /// <returns></returns>
+        public bool AddPool(string userEmail, string name, double volume)
         {
+            
             throw new System.NotImplementedException();
         }
 
