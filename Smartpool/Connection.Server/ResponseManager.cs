@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ServerTest.Token;
 using Smartpool;
-using Smartpool.Factories;
 
 namespace ServerTest
 {

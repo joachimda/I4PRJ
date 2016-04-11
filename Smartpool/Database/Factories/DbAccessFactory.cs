@@ -1,6 +1,6 @@
-﻿using Smartpool.UserAccess;
+﻿using Smartpool;
 
-namespace Smartpool.Factories
+namespace Smartpool
 {
     public abstract class DbAccessFactory
     {

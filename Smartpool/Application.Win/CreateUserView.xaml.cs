@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Client;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Win;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Data.Entity.Infrastructure.Design;
-using Smartpool.Factories;
-using System.Configuration;
+﻿using Smartpool;
 
 
 namespace Database.Test

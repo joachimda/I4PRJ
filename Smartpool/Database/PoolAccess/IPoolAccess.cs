@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-
-namespace Smartpool.Factories
+﻿namespace Smartpool
 {
     public interface IPoolAccess
     {

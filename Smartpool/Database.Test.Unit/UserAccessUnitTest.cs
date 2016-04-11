@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Smartpool;
-using Smartpool.UserAccess;
 
 namespace Database.Test.Unit
 {

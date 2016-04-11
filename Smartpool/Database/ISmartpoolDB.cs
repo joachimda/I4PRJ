@@ -1,5 +1,4 @@
-﻿using Smartpool.Factories;
-using Smartpool.UserAccess;
+﻿using Smartpool;
 
 namespace Smartpool
 {

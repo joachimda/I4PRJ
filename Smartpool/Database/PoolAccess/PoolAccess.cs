@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using Smartpool.UserAccess;
+using Smartpool;
 
-namespace Smartpool.Factories
+namespace Smartpool
 {
     public class PoolAccess : IPoolAccess
     {

@@ -1,8 +1,6 @@
 ﻿using NSubstitute;
 using NUnit.Framework;
 using Smartpool;
-using Smartpool.Factories;
-using Smartpool.UserAccess;
 
 namespace Database.Test.Unit
 {

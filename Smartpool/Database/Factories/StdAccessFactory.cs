@@ -1,12 +1,12 @@
-﻿using Smartpool.UserAccess;
+﻿using Smartpool;
 
-namespace Smartpool.Factories
+namespace Smartpool
 {
     public class StdAccessFactory : DbAccessFactory
     {
         public override IUserAccess CreateUserAccess()
         {
-            return new UserAccess.UserAccess();
+            return new UserAccess();
         }
 
         public override IPoolAccess CreatePoolAccess()
