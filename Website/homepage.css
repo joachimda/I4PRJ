@@ -1,0 +1,47 @@
+#name{
+	Smartpool
+}
+body{
+	
+	background-color:#2e2e2e;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align:center;
+}
+
+header {
+	height: 128pt;    background-color:#000000;
+}
+
+input{
+	width: 250pt;
+	height: 20pt;
+	margin: 12pt;
+	background-color: #575757;
+	border-radius:5px;
+	border-color: #1F1F1F;
+	color: #ABABAC;
+}
+
+input:focus {
+    background-color: #FDA029;
+    outline: none;
+}
+
+input:hover {
+	border-color: #FDA029;
+}
+
+input[type="submit"] {
+	width: 255pt;
+	height: 25pt;
+	background-color:#ABABAC;
+	color: #000000; 
+}
+
+header h1 {
+	color:#FFFFFF;
+}
+
+article {
+   	color:#FFFFFF;
+}
