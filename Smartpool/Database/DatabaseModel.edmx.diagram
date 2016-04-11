@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" >
         <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.875" PointY="0.5" />
-        <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="6.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="4.75" PointY="0.5" />
         <AssociationConnector Association="Smartpool.UserPool" />
       </Diagram>
     </edmx:Diagrams>
