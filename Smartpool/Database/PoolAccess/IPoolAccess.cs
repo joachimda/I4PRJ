@@ -1,12 +1,12 @@
-﻿namespace Smartpool.Factories
+﻿using System.Globalization;
+
+namespace Smartpool.Factories
 {
     public interface IPoolAccess
     {
-        bool AddUser(string fullname, string email, string password);
-        User FindUserByEmail(string email);
-        bool IsEmailInUse(string email);
-        bool ValidatePassword(string email, string password);
-        void RemoveUser(string email);
-        void DeleteAllUsers();
+        bool AddPool(string userEmail, string name, double volume);
+        bool IsPoolNameInUse(string userEmail, string name);
+        bool RemovePool(string email, string name);
+        void DeleteAllPools();
     }
 }
