@@ -21,8 +21,6 @@ namespace Database.Test.Unit
             
             _uut = new PoolAccess();
             _userAccess = Substitute.For<IUserAccess>();
-
-            //_userAccess.FindUserByEmail("lasse@emil.com").Returns(new User());
         }
 
         [TearDown]
