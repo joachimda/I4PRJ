@@ -27,7 +27,7 @@ namespace Smartpool.Factories
         }
 
         /// <summary>
-        /// 
+        /// Removes a single pool from database
         /// </summary>
         /// <param name="email"></param>
         /// <param name="name"></param>
@@ -38,11 +38,14 @@ namespace Smartpool.Factories
         }
 
         /// <summary>
-        /// 
+        /// Removes all pools i database
         /// </summary>
         public void DeleteAllPools()
         {
-            throw new System.NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                db.Database.ExecuteSqlCommand("DELETE [PoolSet]");
+            }
         }
     }
 }
