@@ -20,10 +20,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 0, 0, 9" Name="NameTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 9" Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 9" Name="PasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" />
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="0, 9" Name="RepeatPasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" />
-        <Button  Grid.Row="4" Grid.Column="1" Margin="0, 9" Name="SignUpButton" Content="Sign up" Template="{StaticResource ButtonSp}" VerticalAlignment="Top" />
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 0, 0, 9" Name="NameTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="NameTextBox_OnTextChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 9" Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="EmailTextBox_OnTextChanged"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 9" Name="PasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000"  TextChanged="PasswordTextBox_OnTextChanged"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0, 9" Name="RepeatPasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" TextChanged="PasswordTextBox_OnTextChanged"/>
+        <Button  Grid.Row="4" Grid.Column="1" Margin="0, 9" Name="SignUpButton" Content="Sign up" Template="{StaticResource ButtonSp}" VerticalAlignment="Top" Click="SignUpButton_OnClick"/>
+        <Ellipse Grid.Row="3" Grid.Column="2" Name="ValidEllipse" HorizontalAlignment="Left" Height="8" Width="8" Fill="#FF00FF00"/>
     </Grid>
 </Window>

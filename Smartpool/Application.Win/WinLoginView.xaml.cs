@@ -132,5 +132,4 @@ namespace Smartpool.Application.Win
             }
         }
     }
-
 }
