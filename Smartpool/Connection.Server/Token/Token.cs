@@ -14,7 +14,7 @@ namespace ServerTest.Token
             _tokenString = tokenStringGenerator.GenerateTokenString();
             _tokenActiveMinutes = tokenActiveMinutes;
             _tokenOwner = username;
-            RefreshToken();
+            _lastUseDateTime = DateTime.Now;
         }
 
         public bool TokenAlive()
