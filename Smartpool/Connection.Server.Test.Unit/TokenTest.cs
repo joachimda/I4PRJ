@@ -16,7 +16,7 @@ namespace Connection.Server.Test.Unit
         private ITokenStringGenerator _uut_TSG;
         private IToken _uut_Token;
         private ITokenKeeperInternal _uut_TK;
-        
+
 
         [SetUp]
         public void Setup()
@@ -25,7 +25,7 @@ namespace Connection.Server.Test.Unit
             _uut_Token = new Token("Joachim", _uut_TSG, 1);
             _uut_TK = new TokenKeeper(_uut_TSG, 1);
         }
-#region TokenStringGenerator tests
+        #region TokenStringGenerator tests
         [Test]
         public void GenerateTokenString_ReturnsEightCharString()
         {
@@ -33,7 +33,7 @@ namespace Connection.Server.Test.Unit
         }
         #endregion
 
-#region Token tests
+        #region Token tests
         [Test]
         public void TokenAlive_StillActive_ReturnsTrue()
         {
@@ -49,7 +49,7 @@ namespace Connection.Server.Test.Unit
         }
         #endregion
 
-#region TokenKeeper tests
+        #region TokenKeeper tests
         [Test]
         public void CreateNewToken_NewTokenCreated_ListLenghtOne()
         {
@@ -96,7 +96,7 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void RemoveOldTokens_OneHundredTokensCreated_OldTokensRemoved()
         {
-            _uut_TK = new TokenKeeper(_uut_TSG,0);
+            _uut_TK = new TokenKeeper(_uut_TSG, 0);
 
             for (int i = 0; i < 20; i++)
             {
@@ -115,5 +115,3 @@ namespace Connection.Server.Test.Unit
         #endregion
     }
 }
-
-
