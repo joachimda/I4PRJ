@@ -36,8 +36,6 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
-            _userAccess.FindUserByEmail("lasse@emil.com").Returns(new User());
-            
             _uut.AddPool("lasse@emil.com", "derproad 12", "baghave lille", 30);
 
             Assert.That(_uut.IsPoolNameInUse("lasse@emil.com", "derproad 12", "baghave lille"), Is.True);
