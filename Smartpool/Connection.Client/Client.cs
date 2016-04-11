@@ -2,11 +2,12 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Smartpool.Application.Model;
 
 namespace Client
 {
 
-    public class SynchronousSocketClient
+    public class SynchronousSocketClient : IClient
     {
 
         public string StartClient(string whatToSend)
@@ -18,7 +19,8 @@ namespace Client
             try
             {
                 // Establish the remote endpoint for the socket.
-                IPAddress ipAddress = IPAddress.Parse("2.109.10.231");
+                IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+                //IPAddress ipAddress = IPAddress.Parse("2.109.10.231");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
 
                 // Create a TCP/IP  socket.

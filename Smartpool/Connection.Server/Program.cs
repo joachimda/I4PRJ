@@ -39,8 +39,8 @@ namespace ServerTest
             //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
 
-            IPAddress ipAddress = IPAddress.Parse("192.168.1.86");
-            IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 11000);
+            IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);
 
             // Create a TCP/IP socket.
             Socket listener = new Socket(AddressFamily.InterNetwork,

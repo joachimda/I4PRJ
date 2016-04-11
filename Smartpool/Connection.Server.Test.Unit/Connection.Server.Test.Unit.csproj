@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD5461CA-101E-4563-9D15-55AFA116745A}</ProjectGuid>
+    <ProjectGuid>{FC702AE7-5F81-4336-9F87-16B9D75BD512}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Application.Presentation.Temp</RootNamespace>
-    <AssemblyName>Application.Presentation.Temp</AssemblyName>
+    <RootNamespace>Connection.Server.Test.Unit</RootNamespace>
+    <AssemblyName>Connection.Server.Test.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,6 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,18 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILoginView.cs" />
-    <Compile Include="ILoginViewController.cs" />
-    <Compile Include="IView.cs" />
-    <Compile Include="IViewController.cs" />
-    <Compile Include="LoginViewController.cs" />
+    <Compile Include="ResponseManagerUnitTest.cs" />
+    <Compile Include="TokenTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Connection.Client\Connection.Client.csproj">
-      <Project>{c48ed75a-c94d-4328-9666-cc1c6c3d7cd2}</Project>
-      <Name>Connection.Client</Name>
+    <ProjectReference Include="..\Connection.Server\Connection.Server.csproj">
+      <Project>{62fdcce8-2f78-4c1c-b4ab-035a3e6b0f79}</Project>
+      <Name>Connection.Server</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

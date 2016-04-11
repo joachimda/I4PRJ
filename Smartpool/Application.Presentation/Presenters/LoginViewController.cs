@@ -17,8 +17,8 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
+        private readonly IClient _client; // temporary, needs a real IClient
         private readonly ILoginView _view;
-        private readonly IAuthenticator _authenticator;
         private string _password = "";
         private string _email = "";
      
@@ -33,10 +33,10 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
-        public LoginViewController(ILoginView view)
+        public LoginViewController(ILoginView view, IClient client = null)
         {
             _view = view;
-            _authenticator = null;
+            _client = client;
         }
 
         // Interface
@@ -53,6 +53,7 @@ namespace Smartpool.Application.Presentation
                 case LoginViewButton.ForgotButton:
                     break;
                 default:
+                    _view.DisplayAlert("Invalid action", "Please don't do that again.");
                     break;
             }
         }
@@ -85,9 +86,10 @@ namespace Smartpool.Application.Presentation
 
         public void Login()
         {
-            var session = _authenticator?.Authenticate(_email, _password);
+            // Create a new login command
+            var clientCommand = new ClientCommands(_client);
 
-            if (session != null && session.Authenticated())
+            if (clientCommand.Login(_email, _password))
             {
 				_view.LoginAccepted ();
             }

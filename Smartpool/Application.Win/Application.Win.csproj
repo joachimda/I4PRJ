@@ -134,9 +134,17 @@
     <Resource Include="Icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application.Presentation.Temp\Application.Presentation.Temp.csproj">
-      <Project>{bd5461ca-101e-4563-9d15-55afa116745a}</Project>
-      <Name>Application.Presentation.Temp</Name>
+    <ProjectReference Include="..\Application.Model\Application.Model.csproj">
+      <Project>{af0d91d7-2379-4b72-b739-6cb92dfcb2e4}</Project>
+      <Name>Application.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Application.Presentation\Application.Presentation.csproj">
+      <Project>{9c001789-1d5f-4545-ad60-50b6fb91dd96}</Project>
+      <Name>Application.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Connection.Client\Connection.Client.csproj">
+      <Project>{c48ed75a-c94d-4328-9666-cc1c6c3d7cd2}</Project>
+      <Name>Connection.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
