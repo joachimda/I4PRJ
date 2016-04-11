@@ -1,4 +1,4 @@
-﻿namespace ServerTest
+﻿namespace Smartpool.Connection.Server
 {
     public interface IResponseManager
     {

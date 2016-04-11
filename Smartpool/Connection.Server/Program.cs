@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace ServerTest
+namespace Smartpool.Connection.Server
 {
     // State object for reading client data asynchronously
     public class StateObject

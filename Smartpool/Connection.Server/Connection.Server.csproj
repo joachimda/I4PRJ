@@ -7,8 +7,8 @@
     <ProjectGuid>{62FDCCE8-2F78-4C1C-B4AB-035A3E6B0F79}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServerTest</RootNamespace>
-    <AssemblyName>ServerTest</AssemblyName>
+    <RootNamespace>Smartpool.Connection.Server</RootNamespace>
+    <AssemblyName>Connection.Server</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

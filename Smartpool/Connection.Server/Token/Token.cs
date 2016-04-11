@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServerTest.Token
+namespace Smartpool.Connection.Server.Token
 {
     public class Token : IToken
     {

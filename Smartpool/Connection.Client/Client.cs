@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using Smartpool.Application.Model;
 
-namespace Client
+namespace Smartpool.Connection.Client
 {
 
     public class SynchronousSocketClient : IClient

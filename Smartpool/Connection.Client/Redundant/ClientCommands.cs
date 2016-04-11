@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.RightsManagement;
-
-namespace Client
+﻿namespace Smartpool.Connection.Client.Redundant
 {
     public class ClientCommands
     {

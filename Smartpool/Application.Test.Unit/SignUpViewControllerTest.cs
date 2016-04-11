@@ -6,8 +6,8 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-using NUnit.Framework;
 using NSubstitute;
+using NUnit.Framework;
 using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
 

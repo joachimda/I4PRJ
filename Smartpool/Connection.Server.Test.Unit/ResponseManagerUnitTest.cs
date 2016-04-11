@@ -1,8 +1,8 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-using ServerTest;
-using ServerTest.Token;
 using NSubstitute;
+using Smartpool.Connection.Server;
+using Smartpool.Connection.Server.Token;
 
 namespace Connection.Server.Test.Unit
 {
