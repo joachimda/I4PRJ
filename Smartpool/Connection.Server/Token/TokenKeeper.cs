@@ -66,10 +66,14 @@ namespace ServerTest.Token
 
         private void RemoveAllUnusedTokens()
         {
-            foreach (var token in _tokens)
+            for (int index = 0; index < _tokens.Count; index++)
             {
+                var token = _tokens[index];
                 if (!token.TokenAlive())
+                {
                     _tokens.Remove(token);
+                    index--;
+                }
             }
         }
 

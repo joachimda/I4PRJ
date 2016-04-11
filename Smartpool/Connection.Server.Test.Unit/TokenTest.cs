@@ -102,11 +102,10 @@ namespace Connection.Server.Test.Unit
                 _uut_TK.CreateNewToken("Emil");
                 
             }
-            Thread.Sleep(1000);
             _uut_TK.CreateNewToken("Joachim");
             var tokensInKepper = _uut_TK.GetAmountOfTokens();
 
-            Assert.That(tokensInKepper, Is.EqualTo(1));
+            Assert.That(tokensInKepper, Is.EqualTo(0));
         }
 
         #endregion
