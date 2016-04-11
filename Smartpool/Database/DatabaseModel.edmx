@@ -7,6 +7,11 @@
     <Schema Namespace="Smartpool.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="SmartpoolStoreContainer">
     <EntitySet Name="UserSet" EntityType="Smartpool.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PoolSet" EntityType="Smartpool.Store.PoolSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UserPool" Association="Smartpool.Store.UserPool">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Pool" EntitySet="PoolSet" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
     <Key>
@@ -19,6 +24,27 @@
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="PoolSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Volume" Type="float" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserPool">
+    <End Role="User" Type="Smartpool.Store.UserSet" Multiplicity="1" />
+    <End Role="Pool" Type="Smartpool.Store.PoolSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Pool">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -80,6 +106,16 @@
           <ScalarProperty Name="Lastname" ColumnName="Lastname" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PoolSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Smartpool.Pool)">
+        <MappingFragment StoreEntitySet="PoolSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Volume" ColumnName="Volume" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
