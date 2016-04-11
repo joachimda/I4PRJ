@@ -1,0 +1,29 @@
+﻿<Window x:Class="Application.Win.CreateUserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Application.Win"
+        mc:Ignorable="d"
+        Style="{StaticResource SpWindowStyle}" Title="Create User" Height="260" MinHeight="260" MinWidth="270"  Width="270" Background="{StaticResource SpBackgroundGray}" Icon="Icon.ico">
+    <Grid UseLayoutRounding ="True" SnapsToDevicePixels="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="0, 0, 0, 9" Name="NameTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0, 9" Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0, 9" Name="PasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0, 9" Name="RepeatPasswordTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" />
+        <Button  Grid.Row="4" Grid.Column="1" Margin="0, 9" Name="SignUpButton" Content="Sign up" Template="{StaticResource ButtonSp}" VerticalAlignment="Top" />
+    </Grid>
+</Window>

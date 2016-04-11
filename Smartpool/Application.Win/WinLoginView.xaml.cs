@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Application.Win;
 using Smartpool.Application.Presentation.Temp;
 
 // ReSharper disable once CheckNamespace
@@ -101,6 +102,10 @@ namespace Smartpool.Application.Win
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
+
+            //Delete this
+            CreateUserView view = new CreateUserView();
+            view.Show();
         }
 
         private void ForgotUser_MouseUp(object sender, MouseButtonEventArgs e)
