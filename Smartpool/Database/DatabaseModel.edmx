@@ -25,6 +25,11 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Smartpool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="DatabaseContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserSet" EntityType="Smartpool.User" />
+          <EntitySet Name="PoolSet" EntityType="Smartpool.Pool" />
+          <AssociationSet Name="UserPool" Association="Smartpool.UserPool">
+            <End Role="User" EntitySet="UserSet" />
+            <End Role="Pool" EntitySet="PoolSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -36,7 +41,30 @@
           <Property Name="Lastname" Type="String" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
+          <NavigationProperty Name="Pool" Relationship="Smartpool.UserPool" FromRole="User" ToRole="Pool" />
         </EntityType>
+        <EntityType Name="Pool">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Volume" Type="Double" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Smartpool.UserPool" FromRole="Pool" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="UserPool">
+          <End Type="Smartpool.User" Role="User" Multiplicity="1" />
+          <End Type="Smartpool.Pool" Role="Pool" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pool">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
