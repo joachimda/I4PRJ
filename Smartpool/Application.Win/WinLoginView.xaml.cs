@@ -6,6 +6,7 @@ using Application.Win;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Model;
 using Smartpool.Connection.Client;
+using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Win
@@ -45,8 +46,8 @@ namespace Smartpool.Application.Win
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
 
             //
-            var client = new SynchronousSocketClient();
-            Controller = new LoginViewController(this, client);
+            var clientMessager = new ClientMessager(new SynchronousSocketClient());
+            Controller = new LoginViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
 

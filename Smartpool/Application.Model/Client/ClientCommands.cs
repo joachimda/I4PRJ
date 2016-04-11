@@ -25,17 +25,17 @@ namespace Smartpool.Application.Model
         public bool Login(string username, string password)
         {
             // Client returns "Login" if the password and username was accepted
-            return ("Login" == _clientMessager.SendMessage("Login", new LoginMsg(username,password)));
+            return ("Login" == _clientMessager.SendMessage(new LoginMsg(username,password)));
         }
 
         public string GetTemp()
         {
-            return _clientMessager.SendMessage("GetTemp", new Message());
+            return _clientMessager.SendMessage(new Message());
         }
 
         public PoolInfo GetPoolInfo(string username, UserSessionToken userSessionToken)
         {
-            var returnedStrings = _clientMessager.SendMessage("GetPoolInfo", new Message()).Split(',');
+            var returnedStrings = _clientMessager.SendMessage(new Message()).Split(',');
             
             double temp = 0;
             double.TryParse(returnedStrings[0], out temp);

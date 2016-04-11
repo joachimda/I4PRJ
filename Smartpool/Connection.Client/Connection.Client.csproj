@@ -61,7 +61,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="SynchronousSocketClient.cs" />
-    <Compile Include="ClientMessager.cs" />
     <Compile Include="Redundant\ClientCommands.cs" />
     <Compile Include="LoginHandle.cs" />
     <Compile Include="RelayCommand.cs" />

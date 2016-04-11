@@ -10,6 +10,7 @@ using NUnit.Framework;
 using NSubstitute;
 using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Test.Unit
