@@ -25,13 +25,15 @@ namespace Connection.Server.Test.Unit
             _uut_Token = new Token("Joachim", _uut_TSG, 1);
             _uut_TK = new TokenKeeper(_uut_TSG, 1);
         }
-
+#region TokenStringGenerator tests
         [Test]
         public void GenerateTokenString_ReturnsEightCharString()
         {
             Assert.That(_uut_TSG.GenerateTokenString().Length, Is.EqualTo(8));
         }
+        #endregion
 
+#region Token tests
         [Test]
         public void TokenAlive_StillActive_ReturnsTrue()
         {
@@ -39,13 +41,15 @@ namespace Connection.Server.Test.Unit
         }
 
         [Test]
-        public void zTokenAlive_NotActive_ReturnsFalse()
+        public void TokenAlive_NotActive_ReturnsFalse()
         {
             _uut_Token = new Token("Joachim", _uut_TSG, 0);
             Thread.Sleep(1);
             Assert.That(_uut_Token.TokenAlive, Is.False);
         }
+        #endregion
 
+#region TokenKeeper tests
         [Test]
         public void CreateNewToken_NewTokenCreated_ListLenghtOne()
         {
@@ -78,6 +82,35 @@ namespace Connection.Server.Test.Unit
             _uut_TK.CreateNewToken("Joachim");
             Assert.That(_uut_TK.TokenActive("Joachim", "Random"), Is.False);
         }
+
+        [Test]
+        public void RemoveOldTokens_OneHundredTokensCreated_OldTokensRemoved()
+        {
+            _uut_Token = new Token("Joachim", _uut_TSG, 0);
+
+            for (int i = 0; i < 20; i++)
+            {
+                _uut_TK.CreateNewToken("Joachim");
+                Thread.Sleep(1);
+                _uut_TK.CreateNewToken("Bjorn");
+                Thread.Sleep(10);
+
+                _uut_TK.CreateNewToken("Lasse");
+
+                Thread.Sleep(10);
+                _uut_TK.CreateNewToken("Alex");
+                
+                _uut_TK.CreateNewToken("Emil");
+                
+            }
+            Thread.Sleep(1000);
+            _uut_TK.CreateNewToken("Joachim");
+            var tokensInKepper = _uut_TK.GetAmountOfTokens();
+
+            Assert.That(tokensInKepper, Is.EqualTo(5));
+        }
+
+        #endregion
     }
 }
 
