@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
-namespace Smartpool.Connection.Server.Token
+namespace ServerTest.Token
 {
     public class TokenKeeper : ITokenKeeper, ITokenKeeperInternal
     {

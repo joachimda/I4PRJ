@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Input;
-
 //
 // Downloaded from: http://mvvmfoundation.codeplex.com/
 //
 
-namespace Smartpool.Connection.Client
+namespace MvvmFoundation.Wpf
 {
     /// <summary>
     /// A command whose sole purpose is to 

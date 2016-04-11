@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Application.Win
+namespace SWDStatView
 {
     public class StatViewer : Button
     {

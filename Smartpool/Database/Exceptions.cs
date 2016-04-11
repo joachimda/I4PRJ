@@ -1,6 +1,6 @@
 using System;
 
-namespace Smartpool
+namespace Smartpool.UserAccess
 {
     public class UserNotFoundException : Exception
     {

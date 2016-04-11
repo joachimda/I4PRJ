@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Smartpool.Connection.Server.Token;
+using ServerTest.Token;
+using Smartpool;
 using Smartpool.Factories;
 
-namespace Smartpool.Connection.Server
+namespace ServerTest
 {
     public class ResponseManager : IResponseManager
     {

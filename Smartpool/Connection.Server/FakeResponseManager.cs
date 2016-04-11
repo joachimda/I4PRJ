@@ -1,4 +1,4 @@
-﻿namespace Smartpool.Connection.Server
+﻿namespace ServerTest
 {
     public class FakeResponseManager
     {

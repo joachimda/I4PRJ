@@ -1,7 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-namespace Application.Win.StyleableWindow
+namespace WpfStyleableWindow.StyleableWindow
 {
     public static class WindowResizeBehavior
     {

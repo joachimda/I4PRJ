@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
+using MvvmFoundation.Wpf;
 
-namespace Smartpool.Connection.Client
+namespace Client
 {
     public class LoginHandle : INotifyPropertyChanged
     {

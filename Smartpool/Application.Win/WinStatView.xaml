@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:win="clr-namespace:Application.Win"
-        x:Class="Application.Win.WinStatView"
+        xmlns:local="clr-namespace:Smartpool.Application.Win"
+        xmlns:SWDStatView="clr-namespace:SWDStatView" x:Class="Smartpool.Application.Win.WinStatView"
         mc:Ignorable="d"
         Background="Black" Height="300" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
     <Grid>
 
-        <win:StatViewer x:Name="StatViewer" Content="StatViewer" Template="{StaticResource StatViewer}" HorizontalAlignment="Stretch"/>
+        <SWDStatView:StatViewer x:Name="StatViewer" Content="StatViewer" Template="{StaticResource StatViewer}" HorizontalAlignment="Stretch"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-﻿namespace Smartpool.Connection.Server.Token
+﻿namespace ServerTest.Token
 {
     public interface ITokenKeeper
     {
