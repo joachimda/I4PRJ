@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Model;
-using Client;
+using Smartpool.Connection.Client;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Win
