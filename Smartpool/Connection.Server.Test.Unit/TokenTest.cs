@@ -86,7 +86,7 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void RemoveOldTokens_OneHundredTokensCreated_OldTokensRemoved()
         {
-            _uut_Token = new Token("Joachim", _uut_TSG, 0);
+            _uut_TK = new TokenKeeper(_uut_TSG,0);
 
             for (int i = 0; i < 20; i++)
             {
