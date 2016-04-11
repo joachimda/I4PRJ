@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using NUnit.Framework;
-using ServerTest.Token;
+using Smartpool.Connection.Server.Token;
 
 namespace Connection.Server.Test.Unit
 {

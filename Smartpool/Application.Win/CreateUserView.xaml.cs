@@ -4,6 +4,7 @@ using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Win;
 using Smartpool.Connection.Client;
+using Smartpool.Connection.Model;
 
 namespace Application.Win
 {
@@ -20,8 +21,8 @@ namespace Application.Win
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
             ThemeProperties.SetPlaceholderText(RepeatPasswordTextBox, "Repeat password");
 
-            var client = new SynchronousSocketClient();
-            Controller = new SignUpViewController(this, client);
+            var clientMessager = new ClientMessager(new SynchronousSocketClient());
+            Controller = new SignUpViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
 

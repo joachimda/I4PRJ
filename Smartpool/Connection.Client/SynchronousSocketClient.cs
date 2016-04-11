@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Smartpool.Application.Model;
+using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Client
 {

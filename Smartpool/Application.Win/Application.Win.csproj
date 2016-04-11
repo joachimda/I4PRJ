@@ -153,6 +153,10 @@
       <Project>{c48ed75a-c94d-4328-9666-cc1c6c3d7cd2}</Project>
       <Name>Connection.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
+      <Name>Connection.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

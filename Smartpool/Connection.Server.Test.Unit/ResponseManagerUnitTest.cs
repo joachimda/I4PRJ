@@ -1,7 +1,11 @@
-﻿using NUnit.Framework;
-using ServerTest;
-using ServerTest.Token;
+﻿using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 using NSubstitute;
+using Smartpool.Connection.Model;
+using Smartpool.Connection.Server;
+using Smartpool.Connection.Server.ResponseManager;
+using Smartpool.Connection.Server.Token;
+using Newtonsoft.Json;
 
 namespace Connection.Server.Test.Unit
 {
@@ -38,6 +42,15 @@ namespace Connection.Server.Test.Unit
         public void Respond_CorrectTokenRetrievingTemp_ReturnsTemperature()
         {
             Assert.That(_uut.Respond("GetTemp,Joachim,TokenStr,<EOF"), Is.EqualTo("Temperature in pool is 25 degrees"));
+        }
+
+        [Test]
+        public void TemporaryTestOfMessageSystem()
+        {
+            var tempUut = new FakeResponseManager();
+            var loginMsg = new LoginMsg("Joachim","1234");
+            var jsonstring = JsonConvert.SerializeObject(loginMsg);
+            Assert.That(tempUut.Respond(jsonstring+",<EOF>"), Is.EqualTo("Login"));
         }
     }
 }
