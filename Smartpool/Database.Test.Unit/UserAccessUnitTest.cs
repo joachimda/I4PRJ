@@ -18,6 +18,12 @@ namespace Database.Test.Unit
             _uut.DeleteAllUsers();
         }
 
+        [TearDown]
+        public void Teardown()
+        {
+            _uut.DeleteAllUsers();
+        }
+
         #endregion
 
         #region AddUser
