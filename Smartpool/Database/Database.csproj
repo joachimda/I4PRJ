@@ -51,26 +51,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Smartpool\ISmartpoolDB.cs" />
     <Compile Include="PoolAccess\IPoolAccess.cs" />
-    <Compile Include="ISmartpoolDB.cs" />
     <Compile Include="Pool.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="PoolAccess\PoolAccess.cs" />
-    <Compile Include="SmartpoolDB.cs" />
     <Compile Include="DatabaseModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Factories\DbAccessFactory.cs" />
     <Compile Include="DatabaseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Factories\StdAccessFactory.cs" />
     <Compile Include="Exceptions.cs" />
+    <Compile Include="Smartpool\SmartpoolDB.cs" />
     <Compile Include="UserAccess\IUserAccess.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
