@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Win;
+using Smartpool.Connection.Client;
 
 namespace Application.Win
 {
