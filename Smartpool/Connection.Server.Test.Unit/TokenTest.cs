@@ -91,13 +91,12 @@ namespace Connection.Server.Test.Unit
             for (int i = 0; i < 20; i++)
             {
                 _uut_TK.CreateNewToken("Joachim");
-                Thread.Sleep(1);
+                
                 _uut_TK.CreateNewToken("Bjorn");
-                Thread.Sleep(10);
+                
 
                 _uut_TK.CreateNewToken("Lasse");
 
-                Thread.Sleep(10);
                 _uut_TK.CreateNewToken("Alex");
                 
                 _uut_TK.CreateNewToken("Emil");
@@ -107,7 +106,7 @@ namespace Connection.Server.Test.Unit
             _uut_TK.CreateNewToken("Joachim");
             var tokensInKepper = _uut_TK.GetAmountOfTokens();
 
-            Assert.That(tokensInKepper, Is.EqualTo(5));
+            Assert.That(tokensInKepper, Is.EqualTo(1));
         }
 
         #endregion
