@@ -7,13 +7,18 @@ namespace Smartpool.Connection.Server.ResponseManager
     {
         public string Respond(string content)
         {
-            var receivedStrings = content.Split(',');
+            var receivedStrings = content.Split('¤');
 
-            var message = JsonConvert.DeserializeObject<ClientMsg>(receivedStrings[0]);
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
+            var message = JsonConvert.DeserializeObject<Message>(receivedStrings[0], settings);
 
             switch (message.MsgType)
             {
-                case "Login":
+                case MessageTypes.Login:
                     var fullMessage = JsonConvert.DeserializeObject<LoginMsg>(receivedStrings[0]);
                     if (fullMessage.Username == "Joachim" && fullMessage.Password == "1234")
                         return "Login";
@@ -21,7 +26,7 @@ namespace Smartpool.Connection.Server.ResponseManager
                     {
                         return "Login failed";
                     }
-                case "GetPoolInfo":
+                case MessageTypes.GetInfo:
                     return "Temperature in pool is 25 degrees";
                 default:
                     return "The server did not recognize your request";
