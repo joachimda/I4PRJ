@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Smartpool.Factories
 {
     public class PoolAccess : IPoolAccess
@@ -5,12 +7,12 @@ namespace Smartpool.Factories
         /// <summary>
         /// Adds pool to a users poolSet
         /// </summary>
-        /// <param name="userEmail">Identifying the 'owner' of the pool</param>
+        /// <param name="email">Identifying the 'owner' of the pool</param>
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
         /// <param name="address">the address of the pool location</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(string userEmail, string address, string name, double volume)
+        public bool AddPool(string email, string address, string name, double volume)
         {
  
             throw new System.NotImplementedException();
@@ -19,11 +21,23 @@ namespace Smartpool.Factories
         /// <summary>
         /// Checks if a specific pool name is in use on a specific address
         /// </summary>
-        /// <param name="userEmail"></param>
+        /// <param name="email"></param>
         /// <param name="name"></param>
         /// <param name="address">the address of the pool location</param>
         /// <returns></returns>
-        public bool IsPoolNameInUse(string userEmail, string address, string name)
+        public bool IsPoolNameInUse(string email, string address, string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Finds all pools 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="address">the address of the pool location</param>
+        /// <param name="name">the name of the pool</param>
+        /// <returns></returns>
+        public Pool FindSpecificPool(string email, string address, string name)
         {
             throw new System.NotImplementedException();
         }
