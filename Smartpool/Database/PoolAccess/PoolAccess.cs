@@ -42,6 +42,11 @@ namespace Smartpool.Factories
             throw new System.NotImplementedException();
         }
 
+        public bool RemovePool(string email, string address, string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
         /// <summary>
         /// Removes a single pool from database
         /// </summary>

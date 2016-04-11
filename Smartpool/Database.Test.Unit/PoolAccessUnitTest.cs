@@ -50,18 +50,18 @@ namespace Database.Test.Unit
         [Test]
         public void RemovePool_RemoveExistingPool_PoolNotInDatabase()
         {
-            _uut.AddPool("Joachim Fucktard Andersen", "jokke@mail.com","jokkePassword", 25);
-            _uut.RemovePool("jokkemail");
+            _uut.AddPool("jokke@mail.com","Kærgaarden 78", "IndoorPewl", 25);
+            _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl");
 
-            Assert.That(_uut.FindPool("jokkemail", "",""), Is.Null);
+            Assert.That(_uut.FindSpecificPool("jokke@mail.com","Kærgaarden 78", "IndoorPewl"), Is.Null);
         }
-
+        /*
         [Test]
         public void RemoveUser_UserNotPresentInDB_ThrowsUserNotFoundException()
         {
             Assert.Throws<UserNotFoundException>(() => _uut.RemoveUser("jokkemail"));
         }
-
+        */
         #endregion
     }
 }
