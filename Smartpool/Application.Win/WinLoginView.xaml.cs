@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Application.Win;
 using Smartpool.Application.Presentation;
 using Smartpool.Application.Model;
 using Client;
@@ -105,6 +106,10 @@ namespace Smartpool.Application.Win
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
+
+            //Delete this
+            CreateUserView view = new CreateUserView();
+            view.Show();
         }
 
         private void ForgotUser_MouseUp(object sender, MouseButtonEventArgs e)
@@ -127,5 +132,4 @@ namespace Smartpool.Application.Win
             }
         }
     }
-
 }
