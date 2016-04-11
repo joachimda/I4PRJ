@@ -14,11 +14,7 @@ namespace Smartpool.Factories
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(string email, string address, string name, double volume)
         {
-
-           UserAccess.UserAccess userAccess = new UserAccess.UserAccess();
-            userAccess.FindUserByEmail(email);
-
-            return false;
+            throw new System.NotImplementedException();
         }
 
         /// <summary>

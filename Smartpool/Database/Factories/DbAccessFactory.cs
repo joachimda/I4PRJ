@@ -6,6 +6,5 @@ namespace Smartpool.Factories
     {
         public abstract IUserAccess CreateUserAccess();
         public abstract IPoolAccess CreatePoolAccess();
-
     }
 }
