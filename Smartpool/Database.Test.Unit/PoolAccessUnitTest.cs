@@ -16,16 +16,39 @@ namespace Database.Test.Unit
         public void Setup()
         {
             _uut = new PoolAccess();
-            _uut.DeleteAllUsers();
+            _uut.DeleteAllPools();
         }
 
         [TearDown]
         public void Teardown()
         {
-            //_uut.DeleteAllUsers();
+            //_uut.DeleteAllPools();
         }
 
         #endregion
 
+        #region AddPool
+
+        // tests
+
+        #endregion
+
+        #region IsPoolNameInUse
+
+        // tests
+
+        #endregion
+
+        #region RemovePool
+
+        // tests
+
+        #endregion
+
+        #region DeleteAllPools
+
+        // tests
+
+        #endregion
     }
 }
