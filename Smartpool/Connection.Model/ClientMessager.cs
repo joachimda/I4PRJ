@@ -19,7 +19,7 @@ namespace Smartpool.Connection.Model
         public string SendMessage(Message message)
         {
             var serializedMessage = JsonConvert.SerializeObject(message, JsonSettings);
-            return _client.StartClient(serializedMessage + "¤<EOF>");
+            return _client.StartClient(serializedMessage + "<EOF>");
         }
     }
 }
