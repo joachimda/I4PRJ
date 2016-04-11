@@ -8,7 +8,7 @@ namespace Smartpool.Factories
         /// <param name="userEmail">Identifying the 'owner' of the pool</param>
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
-        /// <returns>false if failed, true if succeeded</returns>
+        /// <returns>true on succes, false on fail</returns>
         public bool AddPool(string userEmail, string name, double volume)
         {
  
@@ -29,9 +29,9 @@ namespace Smartpool.Factories
         /// <summary>
         /// Removes a single pool from database
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="name"></param>
-        /// <returns></returns>
+        /// <param name="email">Identifies the user</param>
+        /// <param name="name">Identifies specific pool</param>
+        /// <returns>true on succes, false on fail</returns>
         public bool RemovePool(string email, string name)
         {
             throw new System.NotImplementedException();
