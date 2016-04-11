@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using NUnit.Framework;
-﻿using NUnit.Framework;
 using NSubstitute;
 using Smartpool.Connection.Model;
 using Smartpool.Connection.Server;
