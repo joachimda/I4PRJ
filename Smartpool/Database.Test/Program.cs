@@ -14,7 +14,9 @@ namespace Database.Test
             //SmartPoolDB.UserAccess.AddUser("Signe Satan", "signe@hotmail.com", "signespassword");
             //SmartPoolDB.UserAccess.AddUser("Nanna Derps", "derp@gmail.com", "monstersikkerdk");
             SmartPoolDB.UserAccess.AddUser("Emil Lasse", "emil@lasse.com", "pikpikpik");
-            SmartPoolDB.UserAccess.AddUser("lol lol", "hej", "hej");
+            SmartPoolDB.UserAccess.AddUser("lol derp lol", "hejza", "pissword");
+            SmartPoolDB.UserAccess.AddUser("Cartman San", "Lelz@herp.so", "lort");
+
             //SmartPoolDB.UserAccess.RemoveUser("jokke@norgaard-andersen.tech");
         }
     }
