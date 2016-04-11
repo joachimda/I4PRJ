@@ -1,9 +1,13 @@
 ﻿namespace Smartpool.Connection.Model
 {
+    public enum MessageTypes
+    {
+        Login,
+        GetInfo
+    }
     public class Message
     {
-        public int Id { get; }
-        public string MsgType { get; set; }
+        public MessageTypes MsgType { get; set; }
     }
 
     public class ClientMsg : Message
@@ -20,6 +24,7 @@
         {
             Username = username;
             Password = password;
+            MsgType = MessageTypes.Login;
         }
     }
 

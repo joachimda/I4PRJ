@@ -47,10 +47,15 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void TemporaryTestOfMessageSystem()
         {
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.All
+            };
+
             var tempUut = new FakeResponseManager();
             var loginMsg = new LoginMsg("Joachim","1234");
-            var jsonstring = JsonConvert.SerializeObject(loginMsg);
-            Assert.That(tempUut.Respond(jsonstring+",<EOF>"), Is.EqualTo("Login"));
+            var jsonstring = JsonConvert.SerializeObject(loginMsg, settings);
+            Assert.That(tempUut.Respond(jsonstring+"¤<EOF>"), Is.EqualTo("Login"));
         }
     }
 }
