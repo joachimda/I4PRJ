@@ -5,7 +5,7 @@ namespace Smartpool.Factories
     public class PoolAccess : IPoolAccess
     {
         /// <summary>
-        /// Adds pool to a users poolSet
+        /// Adds pool to a users poolSet.
         /// </summary>
         /// <param name="email">Identifying the 'owner' of the pool</param>
         /// <param name="name">The pools name</param>
@@ -15,6 +15,10 @@ namespace Smartpool.Factories
         public bool AddPool(string email, string address, string name, double volume)
         {
 
+           UserAccess.UserAccess userAccess = new UserAccess.UserAccess();
+            userAccess.FindUserByEmail(email);
+
+            return false;
         }
 
         /// <summary>
