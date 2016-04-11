@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ServerTest;
 using ServerTest.Token;
 using NSubstitute;

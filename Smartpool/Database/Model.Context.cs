@@ -9,7 +9,6 @@
 
 namespace Smartpool
 {
-    using System.Linq;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -27,5 +26,6 @@ namespace Smartpool
         }
     
         public virtual DbSet<User> UserSet { get; set; }
+        public virtual DbSet<Pool> PoolSet { get; set; }
     }
 }

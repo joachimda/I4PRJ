@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using ServerTest.Token;
 using Smartpool;
-using Smartpool.Factories;
 
 namespace ServerTest
 {
@@ -10,7 +9,7 @@ namespace ServerTest
         private ITokenStringGenerator _tokenStringGenerator;
         private readonly ITokenKeeper _tokenKeeper;
         private string temporaryPoolInfo = "25,60";
-        private SmartpoolDB _smartpoolDb = new SmartpoolDB(new StdAccessFactory());
+        private SmartpoolDB _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
 
         public ResponseManager()
         {
