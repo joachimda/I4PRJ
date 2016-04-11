@@ -1,6 +1,6 @@
 using System;
 
-namespace Smartpool.UserAccess
+namespace Smartpool
 {
     public class UserNotFoundException : Exception
     {
@@ -8,5 +8,9 @@ namespace Smartpool.UserAccess
 
     public class MultipleOccourencesOfEmailWasFoundException : Exception
     {
+    }
+
+    public class PoolNotFoundException : Exception
+    { 
     }
 }

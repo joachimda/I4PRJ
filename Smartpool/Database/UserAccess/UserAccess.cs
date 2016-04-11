@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 
-namespace Smartpool.UserAccess
+namespace Smartpool
 {
     public class UserAccess : IUserAccess
     {

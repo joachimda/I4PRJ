@@ -1,4 +1,4 @@
-﻿namespace Smartpool.UserAccess
+﻿namespace Smartpool
 {
     public interface IUserAccess
     {
