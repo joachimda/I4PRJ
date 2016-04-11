@@ -10,4 +10,5 @@
     <SolidColorBrush x:Key="SpLightBlue" Color="#FF49BAE1"/>
     <SolidColorBrush x:Key="SpBlue" Color="#FF0354A5"/>
     <SolidColorBrush x:Key="SpWhite" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="SpBackgroundGray" Color="#FF2e2e2e" />
 </ResourceDictionary>

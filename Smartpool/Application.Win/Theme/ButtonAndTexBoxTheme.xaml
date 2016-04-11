@@ -77,7 +77,7 @@
         <Setter Property="Height" Value="35"/>
     </Style>
     <ControlTemplate x:Key="ButtonSp"  TargetType="Button">
-        <Border x:Name="Border" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" 
+        <Border x:Name="Border" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" Height="30" 
                     Background="{StaticResource SpLightGrey}" BorderBrush="{StaticResource SpDarkGrey}">
             <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
             <Border.Effect>
