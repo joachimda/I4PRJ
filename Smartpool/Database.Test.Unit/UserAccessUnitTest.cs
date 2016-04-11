@@ -21,7 +21,7 @@ namespace Database.Test.Unit
         [TearDown]
         public void Teardown()
         {
-            _uut.DeleteAllUsers();
+            //_uut.DeleteAllUsers();
         }
 
         #endregion

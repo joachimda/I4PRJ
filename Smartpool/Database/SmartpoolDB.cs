@@ -3,7 +3,7 @@ using Smartpool.UserAccess;
 
 namespace Smartpool
 {
-    public class SmartpoolDB
+    public class SmartpoolDB : ISmartpoolDB
     {
         public IUserAccess UserAccess { get; }
 
