@@ -36,7 +36,7 @@ namespace Database.Test.Unit
         #region AddPool
 
         [Test]
-        public void AddPool_AddingPool_ReturnsSomething()
+        public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
             _uut.AddPool("lasse@emil.com", "derproad 12", "baghave lille", 30);
 
