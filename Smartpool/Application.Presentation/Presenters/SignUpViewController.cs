@@ -16,7 +16,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClient _client; // temporary, needs a real IClient
+        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
         private readonly ISignUpView _view;
         private string _name = "";
         private string[] _passwords = {"", ""};
@@ -36,10 +36,10 @@ namespace Smartpool.Application.Presentation
             _view.SetButtonEnabled(false);
         }
 
-        public SignUpViewController(ISignUpView view, IClient client = null)
+        public SignUpViewController(ISignUpView view, IClientMessager clientMessager = null)
         {
             _view = view;
-            _client = client;
+            _clientMessager = clientMessager;
         }
 
         // Interface
@@ -104,7 +104,7 @@ namespace Smartpool.Application.Presentation
         public void SignUp()
         {
             // Create a new sign up command
-            var clientCommand = new ClientCommands(_client);
+            var clientCommand = new ClientCommands(_clientMessager);
 
             // Missing implementation
             var successful = false;

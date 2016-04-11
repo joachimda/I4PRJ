@@ -17,7 +17,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClient _client; // temporary, needs a real IClient
+        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
         private readonly ILoginView _view;
         private string _password = "";
         private string _email = "";
@@ -33,10 +33,10 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
-        public LoginViewController(ILoginView view, IClient client = null)
+        public LoginViewController(ILoginView view, IClientMessager clientMessager = null)
         {
             _view = view;
-            _client = client;
+            _clientMessager = clientMessager;
         }
 
         // Interface
@@ -87,7 +87,7 @@ namespace Smartpool.Application.Presentation
         public void Login()
         {
             // Create a new login command
-            var clientCommand = new ClientCommands(_client);
+            var clientCommand = new ClientCommands(_clientMessager);
 
             if (clientCommand.Login(_email, _password))
             {

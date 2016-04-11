@@ -7,7 +7,7 @@ using Smartpool.Application.Model;
 namespace Smartpool.Connection.Client
 {
 
-    public class SynchronousSocketClient : IClient
+    public class SynchronousSocketClient
     {
 
         public string StartClient(string whatToSend)

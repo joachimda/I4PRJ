@@ -7,13 +7,16 @@
 //========================================================================
 
 // ReSharper disable once CheckNamespace
+
+using Smartpool.Connection.Model;
+
 namespace Smartpool.Application.Model
 {
-	public interface IClient
-	{
+	public interface IClientMessager
+    {
 		/// <summary>
 		/// Method for starting a TCP client and sending a string to the server
 		/// </summary>
-		string StartClient (string whatToSend);
+		string SendMessage (string msgType, Message message);
 	}
 }

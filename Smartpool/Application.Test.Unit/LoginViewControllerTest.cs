@@ -10,6 +10,7 @@ using NUnit.Framework;
 using NSubstitute;
 using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Test.Unit
@@ -19,14 +20,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private LoginViewController _uut;
         private ILoginView _view;
-        private IClient _client;
+        private IClientMessager _clientMessager;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<ILoginView>();
-            _client = Substitute.For<IClient>();
-            _uut = new LoginViewController(_view, _client);
+            _clientMessager = Substitute.For<IClientMessager>();
+            _uut = new LoginViewController(_view, _clientMessager);
             _view.Controller = _uut;
         }
 
@@ -71,7 +72,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Accepted_LoginAcceptedCalledOnView()
         {
-            _client.StartClient("").ReturnsForAnyArgs("Login");
+            _clientMessager.SendMessage("", new Message()).ReturnsForAnyArgs("Login");
             _uut.Login();
             _view.Received().LoginAccepted();
         }
@@ -79,7 +80,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Declined_DisplayAlertCalledOnView()
         {
-            _client.StartClient("").ReturnsForAnyArgs("LoginFailed");
+            _clientMessager.SendMessage("", new Message()).ReturnsForAnyArgs("LoginFailed");
             _uut.Login();
             _view.ReceivedWithAnyArgs().DisplayAlert("","");
         }
