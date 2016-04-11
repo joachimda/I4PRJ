@@ -80,12 +80,20 @@ namespace Connection.Server.Test.Unit
         public void StillActive_IncorrectUserAndString_ReturnsFalse()
         {
             _uut_TK.CreateNewToken("Joachim");
-            Assert.That(_uut_TK.TokenActive("Joachim", "Random"), Is.False);
+            Assert.That(_uut_TK.TokenActive("Joachim", "IncorrectToken"), Is.False);
         }
 
         [Test]
+        public void NotActive_CorrectUserAndString_ReturnsFalse()
+        {
+            _uut_TK = new TokenKeeper(_uut_TSG, 0);
+            var tokenString = _uut_TK.CreateNewToken("Joachim");
+            Assert.That(_uut_TK.TokenActive("Joachim", tokenString), Is.False);
+        }
+
         //Tests that each time 101 tokens are created, expired tokens will be removed.
         //Tokens are created with lifetime = 0, so all will be removed
+        [Test]
         public void RemoveOldTokens_OneHundredTokensCreated_OldTokensRemoved()
         {
             _uut_TK = new TokenKeeper(_uut_TSG,0);

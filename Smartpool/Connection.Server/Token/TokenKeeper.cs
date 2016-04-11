@@ -21,8 +21,9 @@ namespace ServerTest.Token
 
         public bool TokenActive(string username, string tokenString)
         {
-            foreach (var token in _tokens)
+            for (int index = 0; index < _tokens.Count; index++)
             {
+                var token = _tokens[index];
                 if (token.GetTokenOwner() == username && token.GetTokenString() == tokenString)
                 {
                     if (token.TokenAlive())
@@ -30,6 +31,7 @@ namespace ServerTest.Token
                     else
                     {
                         _tokens.Remove(token);
+                        index--;
                     }
                 }
             }
