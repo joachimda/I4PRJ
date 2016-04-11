@@ -31,7 +31,6 @@ namespace ServerTest
             switch (receivedStrings[0])
             {
                 case "Login":
-                    if (true)
                     if (_smartpoolDb.UserAccess.ValidatePassword(receivedStrings[1], receivedStrings[2]))
                     {
                         var tokenString = _tokenKeeper.CreateNewToken(receivedStrings[1]);
