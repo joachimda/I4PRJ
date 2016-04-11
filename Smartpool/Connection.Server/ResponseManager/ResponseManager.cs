@@ -30,10 +30,8 @@ namespace Smartpool.Connection.Server.ResponseManager
             _tokenKeeper = tokenKeeper;
         }
 
-        public string Respond(string content)
+        public string Respond(string receivedString)
         {
-            var receivedString = content.TrimEnd(content[content.Length-5]);
-            
             var recievedMessage = JsonConvert.DeserializeObject<Message>(receivedString, JsonSettings);
 
             switch (recievedMessage.MsgType)

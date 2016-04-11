@@ -122,9 +122,11 @@ namespace Smartpool.Connection.Server
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
+                    var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
+
                     var handleResponse = new ResponseManager.ResponseManager();
                     // Echo the data back to the client.
-                    Send(handler, handleResponse.Respond(content));
+                    Send(handler, handleResponse.Respond(receivedString));
 
                     
                 }
