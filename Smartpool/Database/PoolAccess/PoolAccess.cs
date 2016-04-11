@@ -44,6 +44,13 @@ namespace Smartpool.Factories
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Removes a specific pool
+        /// </summary>
+        /// <param name="email"> identifies the user email</param>
+        /// <param name="address"> identifies the pool address</param>
+        /// <param name="name">identifies the name of the pool</param>
+
         public void RemovePool(string email, string address, string name)
         {
             using (var db = new DatabaseContext())
@@ -53,14 +60,15 @@ namespace Smartpool.Factories
                     throw new PoolNotFoundException();
                 }
 
-                var removeUserByEmail = from user in db.UserSet
-                                        where user.Email == email
-                                        select user;
+                //Query for the pool
+                //var removePool = from user in db.UserSet
+                //                        where user.Email == email
+                //                        select user;
 
-                foreach (var user in removeUserByEmail)
-                {
-                    db.UserSet.Remove(user);
-                }
+                //foreach (var user in removeUserByEmail)
+                //{
+                //    db.UserSet.Remove(user);
+                //}
 
                 db.SaveChanges();
             }
