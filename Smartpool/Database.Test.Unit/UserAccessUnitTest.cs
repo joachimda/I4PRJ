@@ -156,7 +156,7 @@ namespace Database.Test.Unit
         // is tested through 'FindUserByEmail'
 
         #endregion
-
+        
         #region ValidatePassword
 
         [Test]
@@ -178,7 +178,7 @@ namespace Database.Test.Unit
         [Test]
         public void ValidatePassword_UserIsNotInDB_ReturnsFalse()
         {
-               Assert.That(_uut.ValidatePassword("email", "pass"), Is.False);
+            Assert.That(_uut.ValidatePassword("email", "pass"), Is.False);
         }
 
         #endregion
@@ -190,7 +190,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("Joachim Fucktard Andersen", "jokkemail", "tissemisse");
             _uut.RemoveUser("jokkemail");
-            
+
             Assert.That(_uut.FindUserByEmail("jokkemail"), Is.Null);
         }
 
