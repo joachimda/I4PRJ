@@ -37,7 +37,16 @@
     <Compile Include="ClientMessager.cs" />
     <Compile Include="IClient.cs" />
     <Compile Include="IClientMessager.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Messages\ClientMessages\AddUserMsg.cs" />
+    <Compile Include="Messages\ClientMessages\ClientMsg.cs" />
+    <Compile Include="Messages\ClientMessages\LoginMsg.cs" />
+    <Compile Include="Messages\MessageTypes.cs" />
+    <Compile Include="Messages\ServerMessages\AddUserResponseMsg.cs" />
+    <Compile Include="Messages\ServerMessages\LoginResponseMsg.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMsg.cs" />
+    <Compile Include="Messages\ServerMessages\ServerMsg.cs" />
+    <Compile Include="Messages\ServerMessages\TokenResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
