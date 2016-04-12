@@ -41,6 +41,8 @@ namespace Smartpool.Connection.Server
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
 
             IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
+            //IPAddress ipAddress = IPAddress.Parse("192.168.1.86");
+
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);
 
             // Create a TCP/IP socket.
