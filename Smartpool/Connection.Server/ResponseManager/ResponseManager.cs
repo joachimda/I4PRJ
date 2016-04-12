@@ -9,18 +9,22 @@ namespace Smartpool.Connection.Server.ResponseManager
     public class ResponseManager : IResponseManager
     {
         private readonly ITokenKeeper _tokenKeeper;
-        private SmartpoolDB _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
-        private readonly TokenMsgResponse _tokenMsgResponse = new TokenMsgResponse();
+        private readonly ISmartpoolDB _smartpoolDb;
+        private readonly ITokenMsgResponse _tokenMsgResponse;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
         public ResponseManager()
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
+            _tokenMsgResponse = new TokenMsgResponse();
+            _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
         }
 
-        public ResponseManager(ITokenKeeper tokenKeeper)
+        public ResponseManager(ITokenKeeper tokenKeeper, ITokenMsgResponse tokenMsgResponse, ISmartpoolDB smartpoolDb)
         {
             _tokenKeeper = tokenKeeper;
+            _tokenMsgResponse = tokenMsgResponse;
+            _smartpoolDb = smartpoolDb;
         }
 
         public Message Respond(string receivedString)
