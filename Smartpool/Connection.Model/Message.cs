@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-
+﻿
 namespace Smartpool.Connection.Model
 {
     public enum MessageTypes
@@ -10,9 +9,7 @@ namespace Smartpool.Connection.Model
     }
     public class Message
     {
-        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public string MessageInfo { get; set; }
-        public string SerializedMessage => JsonConvert.SerializeObject(this, _jsonSettings);
 
         public Message()
         {

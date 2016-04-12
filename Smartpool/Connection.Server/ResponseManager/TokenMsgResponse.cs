@@ -5,14 +5,14 @@ namespace Smartpool.Connection.Server.ResponseManager
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
-        public string HandleTokenMsg(Message message)
+        public Message HandleTokenMsg(Message message)
         {
-            return new Message("not implemented").SerializedMessage;
+            return new Message("not implemented");
         }
     }
 
     public interface ITokenMsgResponse
     {
-        string HandleTokenMsg(Message message);
+        Message HandleTokenMsg(Message message);
     }
 }

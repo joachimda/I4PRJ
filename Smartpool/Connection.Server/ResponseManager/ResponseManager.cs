@@ -23,7 +23,7 @@ namespace Smartpool.Connection.Server.ResponseManager
             _tokenKeeper = tokenKeeper;
         }
 
-        public string Respond(string receivedString)
+        public Message Respond(string receivedString)
         {
             var receivedMessage = JsonConvert.DeserializeObject<Message>(receivedString, _jsonSettings);
 
@@ -31,14 +31,14 @@ namespace Smartpool.Connection.Server.ResponseManager
             {
                 case MessageTypes.Login:
                     var loginMessage = JsonConvert.DeserializeObject<LoginMsg>(receivedString);
-                    return _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password) ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true).SerializedMessage  : new LoginResponseMsg("", false).SerializedMessage;
+                    return _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password) ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true) : new LoginResponseMsg("", false);
 
                 case MessageTypes.Token:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
-                    return _tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString) ? _tokenMsgResponse.HandleTokenMsg(tokenMessage) : new TokenResponseMsg(false).SerializedMessage;
+                    return _tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString) ? _tokenMsgResponse.HandleTokenMsg(tokenMessage) : new TokenResponseMsg(false);
                     
                 default:
-                    return new Message("The server did not recognize your request").SerializedMessage;
+                    return new Message("The server did not recognize your request");
             }
         }
     }

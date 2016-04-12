@@ -20,7 +20,7 @@ namespace Smartpool.Connection.Client
             try
             {
                 // Establish the remote endpoint for the socket.
-                IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+                IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
                 //IPAddress ipAddress = IPAddress.Parse("2.109.10.231");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
 
