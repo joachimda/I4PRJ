@@ -19,7 +19,7 @@ namespace Connection.Server.Test.Unit
         public void SetUp()
         {
             _subTokenKeeper = Substitute.For<ITokenKeeper>();
-            _uut = new ResponseManager(new TokenStringGenerator(), _subTokenKeeper);
+            _uut = new ResponseManager(_subTokenKeeper);
 
             _subTokenKeeper.CreateNewToken("Joachim").Returns("TokenStr");
             _subTokenKeeper.TokenActive("Joachim","TokenStr").Returns(true);
@@ -42,20 +42,6 @@ namespace Connection.Server.Test.Unit
         public void Respond_CorrectTokenRetrievingTemp_ReturnsTemperature()
         {
             Assert.That(_uut.Respond("GetTemp,Joachim,TokenStr,<EOF"), Is.EqualTo("Temperature in pool is 25 degrees"));
-        }
-
-        [Test]
-        public void TemporaryTestOfMessageSystem()
-        {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
-
-            var tempUut = new FakeResponseManager();
-            var loginMsg = new LoginMsg("Joachim","1234");
-            var jsonstring = JsonConvert.SerializeObject(loginMsg, settings);
-            Assert.That(tempUut.Respond(jsonstring+"¤<EOF>"), Is.EqualTo("Login"));
         }
     }
 }

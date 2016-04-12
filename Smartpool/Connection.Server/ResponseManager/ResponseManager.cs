@@ -8,69 +8,37 @@ namespace Smartpool.Connection.Server.ResponseManager
 {
     public class ResponseManager : IResponseManager
     {
-        private ITokenStringGenerator _tokenStringGenerator;
         private readonly ITokenKeeper _tokenKeeper;
-        private string temporaryPoolInfo = "25,60";
         private SmartpoolDB _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
-
-        JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
-
+        private readonly TokenMsgResponse _tokenMsgResponse = new TokenMsgResponse();
+        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        
         public ResponseManager()
         {
-            _tokenStringGenerator = new TokenStringGenerator();
-            _tokenKeeper = new TokenKeeper(_tokenStringGenerator, 10);
+            _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
         }
 
-        public ResponseManager(ITokenStringGenerator tokenStringGenerator, ITokenKeeper tokenKeeper)
+        public ResponseManager(ITokenKeeper tokenKeeper)
         {
-            _tokenStringGenerator = tokenStringGenerator;
             _tokenKeeper = tokenKeeper;
         }
 
         public string Respond(string receivedString)
         {
-            var recievedMessage = JsonConvert.DeserializeObject<Message>(receivedString, JsonSettings);
+            var receivedMessage = JsonConvert.DeserializeObject<Message>(receivedString, _jsonSettings);
 
-            switch (recievedMessage.MsgType)
+            switch (receivedMessage.MsgType)
             {
                 case MessageTypes.Login:
                     var loginMessage = JsonConvert.DeserializeObject<LoginMsg>(receivedString);
-                    if (_smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password))
-                    {
-                        var tokenString = _tokenKeeper.CreateNewToken(loginMessage.Username);
-                        return "Login";
-                        //return "Login,"+tokenString;
-                    }
-                        
-                    else
-                    {
-                        return "Login failed";
-                    }
-                case MessageTypes.GetInfo:
-                    {
-                        if  (_tokenKeeper.TokenActive(receivedString, receivedString))
-                            return "Temperature in pool is 25 degrees";
+                    return _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password) ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true).SerializedMessage  : new LoginResponseMsg("", false).SerializedMessage;
 
-                        else
-                        {
-                            return "Session Expired";
-                        }
-                    }
+                case MessageTypes.Token:
+                    var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
+                    return _tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString) ? _tokenMsgResponse.HandleTokenMsg(tokenMessage) : new TokenResponseMsg(false).SerializedMessage;
                     
-                case MessageTypes.GetPoolInfo:
-                    {
-                        if (_tokenKeeper.TokenActive(receivedString, receivedString))
-                            return JsonConvert.SerializeObject(temporaryPoolInfo);
-                        else
-                        {
-                            return "Session Expired";
-                        }
-                    }
                 default:
-                    return "The server did not recognize your request";
+                    return new Message("The server did not recognize your request").SerializedMessage;
             }
         }
     }
