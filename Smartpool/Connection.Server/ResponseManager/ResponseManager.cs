@@ -35,8 +35,14 @@ namespace Smartpool.Connection.Server.ResponseManager
 
                 case MessageTypes.Token:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
-                    return _tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString) ? _tokenMsgResponse.HandleTokenMsg(tokenMessage) : new TokenResponseMsg(false);
-                    
+                    if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
+                        return _tokenMsgResponse.HandleTokenMsg(tokenMessage);
+                    else return new TokenResponseMsg(false);
+
+                case MessageTypes.AddUser:
+                    var addUserMessage = JsonConvert.DeserializeObject<AddUserMsg>(receivedString);
+                    return new AddUserResponseMsg(_smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
+
                 default:
                     return new Message("The server did not recognize your request");
             }
