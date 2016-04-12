@@ -9,6 +9,7 @@
 
 // ReSharper disable once CheckNamespace
 
+using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 
 namespace Smartpool.Application.Model
@@ -16,6 +17,7 @@ namespace Smartpool.Application.Model
     public class ClientCommands
     {
         private readonly IClientMessager _clientMessager;
+        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public ClientCommands(IClientMessager clientMessager)
         {
@@ -25,7 +27,7 @@ namespace Smartpool.Application.Model
         public bool Login(string username, string password)
         {
             // Client returns "Login" if the password and username was accepted
-            return ("Login" == _clientMessager.SendMessage(new LoginMsg(username,password)));
+            return (JsonConvert.DeserializeObject<LoginResponseMsg>(_clientMessager.SendMessage(new LoginMsg(username, password))).LoginSuccessful );
         }
 
         public string GetTemp()
