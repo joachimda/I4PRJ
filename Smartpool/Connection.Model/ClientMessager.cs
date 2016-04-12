@@ -6,10 +6,7 @@ namespace Smartpool.Connection.Model
     {
         private readonly IClient _client;
 
-        JsonSerializerSettings JsonSettings = new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.All
-        };
+        
 
         public ClientMessager(IClient client)
         {
@@ -18,8 +15,7 @@ namespace Smartpool.Connection.Model
 
         public string SendMessage(Message message)
         {
-            var serializedMessage = JsonConvert.SerializeObject(message, JsonSettings);
-            return _client.StartClient(serializedMessage + "<EOF>");
+            return _client.StartClient(message.SerializedMessage + "<EOF>");
         }
     }
 }
