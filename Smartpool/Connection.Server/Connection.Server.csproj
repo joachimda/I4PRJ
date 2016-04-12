@@ -58,10 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsynchronousSocketListener.cs" />
-    <Compile Include="ResponseManager\FakeResponseManager.cs" />
     <Compile Include="ResponseManager\IResponseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseManager\ResponseManager.cs" />
+    <Compile Include="ResponseManager\TokenMsgResponse.cs" />
     <Compile Include="Token\IToken.cs" />
     <Compile Include="Token\ITokenKeeper.cs" />
     <Compile Include="Token\ITokenKeeperInternal.cs" />

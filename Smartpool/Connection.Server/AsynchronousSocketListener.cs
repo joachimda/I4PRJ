@@ -124,9 +124,9 @@ namespace Smartpool.Connection.Server
 
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
 
-                    var handleResponse = new ResponseManager.ResponseManager();
+                    var responseManager = new ResponseManager.ResponseManager();
                     // Echo the data back to the client.
-                    Send(handler, handleResponse.Respond(receivedString));
+                    Send(handler, responseManager.Respond(receivedString));
 
                     
                 }
