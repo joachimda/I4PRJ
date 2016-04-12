@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
 
 namespace Smartpool.Connection.Server
 {
@@ -39,7 +40,7 @@ namespace Smartpool.Connection.Server
             //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
 
-            IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+            IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);
 
             // Create a TCP/IP socket.
@@ -125,8 +126,9 @@ namespace Smartpool.Connection.Server
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
 
                     var responseManager = new ResponseManager.ResponseManager();
+                    var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
                     // Echo the data back to the client.
-                    Send(handler, responseManager.Respond(receivedString));
+                    Send(handler, JsonConvert.SerializeObject(responseManager.Respond(receivedString), jsonSettings));
 
                     
                 }
