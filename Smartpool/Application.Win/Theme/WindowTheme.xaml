@@ -37,7 +37,7 @@
     </Style>
 
     <!-- Set Icon size here to show Icon in left upper corner -->
-    <Style TargetType="{x:Type Image}" x:Key="WindowIcon">
+    <Style TargetType="{x:Type Image}" x:Key="IconImage">
         <Setter Property="Height" Value="26"/>
         <Setter Property="Width" Value="26"/>
     </Style>
@@ -59,7 +59,7 @@
                     <Label Grid.Column="0"                                           
                                     sw:ControlDoubleClickBehavior.ExecuteCommand="{StaticResource CloseCommand}"                                               
                                     sw:ControlDoubleClickBehavior.ExecuteCommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Padding="0">
-                        <Image DockPanel.Dock="Left" Style="{StaticResource WindowIcon}" Source="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},Path=Icon}"                                         
+                        <Image DockPanel.Dock="Left" Style="{StaticResource IconImage}" Source="/Application.Win;component/Icon.ico"                                         
                                     Width="16"                                           
                                     sw:ShowSystemMenuBehavior.TargetWindow="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"                                           
                                     sw:ShowSystemMenuBehavior.LeftButtonShowAt="{Binding ElementName=WindowContent}"/>

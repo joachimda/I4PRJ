@@ -11,9 +11,9 @@ namespace WpfStyleableWindow.StyleableWindow
         {
             return true;
         }
-
+        
         public event EventHandler CanExecuteChanged;
-
+        
         public void Execute(object parameter)
         {
             var window = parameter as Window;
@@ -23,5 +23,5 @@ namespace WpfStyleableWindow.StyleableWindow
                 window.Close();
             }
         }
-    }
+     }
 }

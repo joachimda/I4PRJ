@@ -37,19 +37,21 @@ namespace Smartpool.Application.Win
     /// </summary>
     public partial class WinLoginView : Window, ILoginView
     {
-        //UI related
+        
         public WinLoginView()
         {
+            //UI related. Sets placeholdertext
             InitializeComponent();
             ThemeProperties.SetPlaceholderText(EmailTextBox, "E-mail");
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
 
-            //
+            //Controller
             var clientMessager = new ClientMessager(new SynchronousSocketClient());
             Controller = new LoginViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
 
+        //UI related
         private void Control_MouseEnter(object sender, MouseEventArgs e)
         {
             var control = sender as Control;
@@ -116,6 +118,10 @@ namespace Smartpool.Application.Win
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.ForgotButton);
+
+            //Delete this. It's here for debugging purposes
+            WinStatView view = new WinStatView();
+            view.Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
