@@ -46,7 +46,6 @@ namespace Smartpool.Connection.Server.ResponseManager
                 case MessageTypes.AddUser:
                     var addUserMessage = JsonConvert.DeserializeObject<AddUserMsg>(receivedString);
                     return new AddUserResponseMsg(_smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
-
                 default:
                     return new Message("The server did not recognize your request");
             }

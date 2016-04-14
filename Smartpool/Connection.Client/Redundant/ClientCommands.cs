@@ -12,8 +12,7 @@ namespace Smartpool.Connection.Client.Redundant
 
         public bool Login(string username, string password, int lastIpDigit)
         {
-
-            return ("Login" == new ClientMessager(new SynchronousSocketClient(lastIpDigit)).SendMessage(new LoginMsg(username,password)));
+            return ("Login" == new ClientMessager(new SynchronousSocketClient(lastIpDigit)).SendMessage(new LoginMsg(username, password)));
 
         }
 
