@@ -8,6 +8,7 @@ namespace Smartpool.Connection.Client
 {
     public class LoginHandle : INotifyPropertyChanged
     {
+        public int LastIpDigit { get; set; }
         private string _username;
 
         public string Username
@@ -44,7 +45,7 @@ namespace Smartpool.Connection.Client
 
         private void LoginCommand_Execute()
         {
-            LoggedIn = _clientCommands.Login(Username, Password);
+            LoggedIn = _clientCommands.Login(Username, Password, LastIpDigit);
         }
 
         private ICommand _getTempCommand;
