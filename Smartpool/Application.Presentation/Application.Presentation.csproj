@@ -39,6 +39,10 @@
       <Project>{AF0D91D7-2379-4B72-B739-6CB92DFCB2E4}</Project>
       <Name>Application.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
+      <Name>Connection.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presenters\ISignUpViewController.cs" />

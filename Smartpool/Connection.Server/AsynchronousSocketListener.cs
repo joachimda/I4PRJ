@@ -3,8 +3,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
 
-namespace ServerTest
+namespace Smartpool.Connection.Server
 {
     // State object for reading client data asynchronously
     public class StateObject
@@ -39,7 +40,9 @@ namespace ServerTest
             //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
 
-            IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+            IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
+            //IPAddress ipAddress = IPAddress.Parse("192.168.1.86");
+
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);
 
             // Create a TCP/IP socket.
@@ -122,9 +125,12 @@ namespace ServerTest
                     Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
-                    var handleResponse = new ResponseManager();
+                    var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
+
+                    var responseManager = new ResponseManager.ResponseManager();
+                    var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
                     // Echo the data back to the client.
-                    Send(handler, handleResponse.Respond(content));
+                    Send(handler, JsonConvert.SerializeObject(responseManager.Respond(receivedString), jsonSettings));
 
                     
                 }

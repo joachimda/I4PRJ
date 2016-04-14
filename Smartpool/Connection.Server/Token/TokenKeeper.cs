@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
-namespace ServerTest.Token
+namespace Smartpool.Connection.Server.Token
 {
     public class TokenKeeper : ITokenKeeper, ITokenKeeperInternal
     {
@@ -21,8 +19,9 @@ namespace ServerTest.Token
 
         public bool TokenActive(string username, string tokenString)
         {
-            foreach (var token in _tokens)
+            for (int index = 0; index < _tokens.Count; index++)
             {
+                var token = _tokens[index];
                 if (token.GetTokenOwner() == username && token.GetTokenString() == tokenString)
                 {
                     if (token.TokenAlive())
@@ -30,6 +29,7 @@ namespace ServerTest.Token
                     else
                     {
                         _tokens.Remove(token);
+                        index--;
                     }
                 }
             }
@@ -66,10 +66,14 @@ namespace ServerTest.Token
 
         private void RemoveAllUnusedTokens()
         {
-            foreach (var token in _tokens)
+            for (int index = 0; index < _tokens.Count; index++)
             {
+                var token = _tokens[index];
                 if (!token.TokenAlive())
+                {
                     _tokens.Remove(token);
+                    index--;
+                }
             }
         }
 

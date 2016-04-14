@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace ServerTest.Token
+namespace Smartpool.Connection.Server.Token
 {
     //Class that generates a random string with $StringLenght characters
     public class TokenStringGenerator : ITokenStringGenerator

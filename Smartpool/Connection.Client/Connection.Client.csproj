@@ -7,8 +7,8 @@
     <ProjectGuid>{C48ED75A-C94D-4328-9666-CC1C6C3D7CD2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Client</RootNamespace>
-    <AssemblyName>Client</AssemblyName>
+    <RootNamespace>Smartpool.Connection.Client</RootNamespace>
+    <AssemblyName>Connection.Client</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,6 +36,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -56,7 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Client.cs" />
+    <Compile Include="SynchronousSocketClient.cs" />
     <Compile Include="Redundant\ClientCommands.cs" />
     <Compile Include="LoginHandle.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -91,6 +95,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,6 +109,10 @@
     <ProjectReference Include="..\Application.Model\Application.Model.csproj">
       <Project>{af0d91d7-2379-4b72-b739-6cb92dfcb2e4}</Project>
       <Name>Application.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43c6c261-d3ec-4ab6-972e-a81c85e9258a}</Project>
+      <Name>Connection.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,6 +10,7 @@ using NUnit.Framework;
 using NSubstitute;
 using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Test.Unit
@@ -19,14 +20,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private SignUpViewController _uut;
         private ISignUpView _view;
-        private IClient _client;
+        private IClientMessager _clientMessager;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<ISignUpView>();
-            _client = Substitute.For<IClient>();
-            _uut = new SignUpViewController(_view, _client);
+            _clientMessager = Substitute.For<IClientMessager>();
+            _uut = new SignUpViewController(_view, _clientMessager);
             _view.Controller = _uut;
         }
 

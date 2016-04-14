@@ -3,8 +3,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Smartpool.Application.Model;
+using Smartpool.Connection.Model;
 
-namespace Client
+namespace Smartpool.Connection.Client
 {
 
     public class SynchronousSocketClient : IClient
@@ -19,7 +20,7 @@ namespace Client
             try
             {
                 // Establish the remote endpoint for the socket.
-                IPAddress ipAddress = IPAddress.Parse("10.240.28.95");
+                IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
                 //IPAddress ipAddress = IPAddress.Parse("2.109.10.231");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
 
