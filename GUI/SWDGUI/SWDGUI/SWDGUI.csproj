@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SpTabControl.xaml.cs" />
     <Compile Include="WinStatView.xaml.cs">
       <DependentUpon>WinStatView.xaml</DependentUpon>
     </Compile>
@@ -67,6 +68,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Theme\StatViewerTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Theme\SpTabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

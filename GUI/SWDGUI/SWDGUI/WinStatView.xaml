@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:SWDGUI"
         xmlns:SWDStatView="clr-namespace:SWDStatView" x:Class="SWDGUI.WinStatView"
         mc:Ignorable="d"
-        Background="Black" Height="300" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+        Background="#FF2e2e2e" Height="300" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico" Foreground="{StaticResource SpWhite}">
     <Grid>
-
         <SWDStatView:StatViewer x:Name="StatViewer" Content="StatViewer" Template="{StaticResource StatViewer}" HorizontalAlignment="Stretch"/>
+        <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Background}" />
 
     </Grid>
 </Window>
