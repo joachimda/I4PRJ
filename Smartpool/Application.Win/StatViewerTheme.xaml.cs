@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace SWDStatView
+// ReSharper disable once CheckNamespace
+namespace Smartpool.Application.Win
 {
     public class StatViewer : Button
     {

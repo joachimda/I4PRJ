@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Smartpool.Application.Win"
         mc:Ignorable="d"
-        Height="350" Width="525" Background="{StaticResource SpBackgroundGray}" MinWidth="300" MinHeight="226" Style="{StaticResource SpWindowStyle}" Icon="Icon.ico"> 
+        Height="350" Width="525" Background="{StaticResource SpBackgroundGray}" MinWidth="300" MinHeight="226" Style="{StaticResource SpWindowStyle}" >
 
     <Grid Margin="0,0,0,1" UseLayoutRounding ="True" SnapsToDevicePixels="True">
         <Grid.RowDefinitions>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Canvas Grid.ColumnSpan="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource SpBlack}"/>
-        <Image Name="Icon" Margin="20" Source="Icon.png" Grid.Column="1" Grid.Row="0" MaxWidth="240"/>
+        <Image Margin="20" Source="Icon.png" Grid.Column="1" Grid.Row="0" MaxWidth="240"/>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Width="Auto" >
             <Separator Opacity="0" Height="18"/>
             <TextBox x:Name="EmailTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
