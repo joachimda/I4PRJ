@@ -28,6 +28,18 @@ namespace Smartpool.Connection.Server
         public AsynchronousSocketListener()
         {
         }
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("Local IP Address Not Found!");
+        }
 
         public static void StartListening()
         {
@@ -40,7 +52,7 @@ namespace Smartpool.Connection.Server
             //IPHostEntry ipHostInfo = Dns.Resolve(Dns.GetHostName());
             //IPAddress ipAddress = ipHostInfo.AddressList[0];
 
-            IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
+            IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress()); 
             //IPAddress ipAddress = IPAddress.Parse("192.168.1.86");
 
             IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 11000);

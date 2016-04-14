@@ -6,42 +6,109 @@ using Smartpool.Connection.Server;
 using Smartpool.Connection.Server.ResponseManager;
 using Smartpool.Connection.Server.Token;
 using Newtonsoft.Json;
+using Smartpool;
 
 namespace Connection.Server.Test.Unit
 {
     [TestFixture]
     public class ResponseManagerUnitTest
     {
-        private IResponseManager _uut;
-        private ITokenKeeper _subTokenKeeper;
+        private ResponseManager _uut;
+        private ITokenKeeper _tokenKeeper;
+        private ITokenMsgResponse _tokenMsgResponse;
+        private ISmartpoolDB _smartpoolDb;
+        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         [SetUp]
         public void SetUp()
         {
-            _subTokenKeeper = Substitute.For<ITokenKeeper>();
-            _uut = new ResponseManager(_subTokenKeeper);
+            _tokenKeeper = Substitute.For<ITokenKeeper>();
+            _tokenMsgResponse = Substitute.For<ITokenMsgResponse>();
+            _smartpoolDb = Substitute.For<ISmartpoolDB>();
+            _uut = new ResponseManager(_tokenKeeper, _tokenMsgResponse, _smartpoolDb);
 
-            _subTokenKeeper.CreateNewToken("Joachim").Returns("TokenStr");
-            _subTokenKeeper.TokenActive("Joachim","TokenStr").Returns(true);
-            _subTokenKeeper.TokenActive("Joachim","Token").Returns(false);
+            _smartpoolDb.UserAccess.ValidatePassword("KnownEmail", "CorrectPassword").Returns(true);
+
+            //_tokenMsgResponse.HandleTokenMsg(new TokenMsg("KnownEmail", "CorrectTokenString")).Returns(new TokenResponseMsg(true));
+
+            _tokenKeeper.CreateNewToken("KnownEmail").Returns("CorrectTokenString");
+            _tokenKeeper.TokenActive("KnownEmail", "CorrectTokenString").Returns(true);
+            _tokenKeeper.TokenActive("KnownEmail", "IncorrectTokenString").Returns(false);
+        }
+
+#region Test of Login case
+        [Test]
+        public void Respond_ReceivedKnownUsernameAndCorrectPassword_ReturnsCorrectLoginResponseMsg()
+        {
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("KnownEmail", "CorrectPassword"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+            
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("CorrectTokenString", true))));
         }
 
         [Test]
-        public void Respond_ReceivedUsernameForSignePasswordForSigne_ReturnsStringLoginCommaTokenStr()
+        public void Respond_ReceivedKnownUsernameButIncorrectPassword_ReturnsCorrectLoginResponseMsg()
         {
-            Assert.That(_uut.Respond("Login,Joachim,password,<EOF>"), Is.EqualTo("Login,TokenStr"));
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("KnownEmail", "WrongPassword"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false))));
         }
 
         [Test]
-        public void Respond_IncorrectTokenRetrievingTemp_ReturnsSessionExpired()
+        public void Respond_ReceivedUnknownUsername_ReturnsCorrectLoginResponseMsg()
         {
-            Assert.That(_uut.Respond("GetTemp,Joachim,Token,<EOF"), Is.EqualTo("Session Expired"));
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("UnknownEmail", "CorrectPassword"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false))));
+        }
+        #endregion
+
+        #region Test of Token case
+        [Test]
+        public void Respond_CorrectToken_ReturnsCorrectMessage()
+        {
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new TokenMsg("KnownEmail", "CorrectTokenString"), _jsonSettings);
+
+            _uut.Respond(messageReceived);
+
+            _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenMsg>());
         }
 
         [Test]
-        public void Respond_CorrectTokenRetrievingTemp_ReturnsTemperature()
+        public void Respond_InCorrectToken_ReturnsCorrectMessage()
         {
-            Assert.That(_uut.Respond("GetTemp,Joachim,TokenStr,<EOF"), Is.EqualTo("Temperature in pool is 25 degrees"));
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new TokenMsg("KnownEmail", "IncorrectTokenString"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+            
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new TokenResponseMsg(false))));
+            
         }
+        #endregion
+
+        #region Test of AddUser case
+
+
+
+        #endregion
+
     }
 }

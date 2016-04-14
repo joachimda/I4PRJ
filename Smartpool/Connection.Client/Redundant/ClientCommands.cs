@@ -1,4 +1,6 @@
-﻿namespace Smartpool.Connection.Client.Redundant
+﻿using Smartpool.Connection.Model;
+
+namespace Smartpool.Connection.Client.Redundant
 {
     public class ClientCommands
     {
@@ -8,10 +10,9 @@
             
         }
 
-        public bool Login(string username, string password)
+        public bool Login(string username, string password, int lastIpDigit)
         {
-
-            return ("Login" == _client.StartClient("Login," + username + "," + password + ",<EOF>"));
+            return ("Login" == new ClientMessager(new SynchronousSocketClient(lastIpDigit)).SendMessage(new LoginMsg(username, password)));
 
         }
 
