@@ -12,11 +12,13 @@
     </Window.DataContext>
     <Grid>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="80,157,0,0" TextWrapping="Wrap" Text="{Binding Username}" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="button" Command="{Binding LoginCommand}" Content="Login" HorizontalAlignment="Left" Margin="311,157,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="80,208,0,0" TextWrapping="Wrap" Text="{Binding Password}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="ipFielf" HorizontalAlignment="Left" Height="23" Margin="110,240,0,0" TextWrapping="Wrap" Text="{Binding LastIpDigit}" VerticalAlignment="Top" Width="90" ></TextBox>
+        <Button x:Name="button" Command="{Binding LoginCommand}" Content="Login" HorizontalAlignment="Left" Margin="311,157,0,0" VerticalAlignment="Top" Width="75"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="19,160,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="19,208,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top"/>
         <Button x:Name="button1" Command="{Binding GetTempCommand}" Content="Get temperature" HorizontalAlignment="Left" Margin="300,206,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="label" Content="Last IP digit" HorizontalAlignment="Left" Margin="17,240,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

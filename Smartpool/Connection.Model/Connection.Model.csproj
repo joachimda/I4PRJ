@@ -44,9 +44,9 @@
     <Compile Include="Messages\ServerMessages\AddUserResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\LoginResponseMsg.cs" />
     <Compile Include="Messages\Message.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\TokenMsg.cs" />
     <Compile Include="Messages\ServerMessages\ServerMsg.cs" />
-    <Compile Include="Messages\ServerMessages\TokenResponseMsg.cs" />
+    <Compile Include="Messages\ServerMessages\TokenResponseMessages\TokenResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

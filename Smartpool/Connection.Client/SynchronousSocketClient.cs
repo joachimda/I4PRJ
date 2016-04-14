@@ -10,6 +10,13 @@ namespace Smartpool.Connection.Client
 
     public class SynchronousSocketClient : IClient
     {
+        private readonly string _serverIp;
+
+        public SynchronousSocketClient() { }
+        public SynchronousSocketClient(int lastIpDigits)
+        {
+            _serverIp = "10.240.30." + lastIpDigits;
+        }
 
         public string StartClient(string whatToSend)
         {
@@ -20,7 +27,7 @@ namespace Smartpool.Connection.Client
             try
             {
                 // Establish the remote endpoint for the socket.
-                IPAddress ipAddress = IPAddress.Parse("10.240.30.205");
+                IPAddress ipAddress = IPAddress.Parse(_serverIp);
                 //IPAddress ipAddress = IPAddress.Parse("2.109.10.231");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 11000);
 

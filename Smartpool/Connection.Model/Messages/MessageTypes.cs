@@ -7,6 +7,8 @@ namespace Smartpool.Connection.Model
         Token,
         TokenResponse,
         AddUser,
-        AddUserResponse
+        AddUserResponse,
+        AddPool,
+        AddPoolResponse
     }
 }
