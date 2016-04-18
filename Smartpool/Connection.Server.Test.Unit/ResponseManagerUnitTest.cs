@@ -41,7 +41,7 @@ namespace Connection.Server.Test.Unit
         public void Respond_ReceivedKnownUsernameAndCorrectPassword_ReturnsCorrectLoginResponseMsg()
         {
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("KnownEmail", "CorrectPassword"));
+            var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("KnownEmail", "CorrectPassword"));
             //Answer from ResponseManager
             var messageSentBack = _uut.Respond(messageReceived);
             //Answer from ResponseManager in serialized form
@@ -54,7 +54,7 @@ namespace Connection.Server.Test.Unit
         public void Respond_ReceivedKnownUsernameButIncorrectPassword_ReturnsCorrectLoginResponseMsg()
         {
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("KnownEmail", "WrongPassword"));
+            var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("KnownEmail", "WrongPassword"));
             //Answer from ResponseManager
             var messageSentBack = _uut.Respond(messageReceived);
             //Answer from ResponseManager in serialized form
@@ -67,7 +67,7 @@ namespace Connection.Server.Test.Unit
         public void Respond_ReceivedUnknownUsername_ReturnsCorrectLoginResponseMsg()
         {
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new LoginMsg("UnknownEmail", "CorrectPassword"));
+            var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("UnknownEmail", "CorrectPassword"));
             //Answer from ResponseManager
             var messageSentBack = _uut.Respond(messageReceived);
             //Answer from ResponseManager in serialized form
@@ -82,18 +82,18 @@ namespace Connection.Server.Test.Unit
         public void Respond_CorrectToken_ReturnsCorrectMessage()
         {
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new TokenMsg("KnownEmail", "CorrectTokenString"), _jsonSettings);
+            var messageReceived = JsonConvert.SerializeObject(new TokenRequestMsg("KnownEmail", "CorrectTokenString"), _jsonSettings);
 
             _uut.Respond(messageReceived);
 
-            _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenMsg>());
+            _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenRequestMsg>());
         }
 
         [Test]
         public void Respond_InCorrectToken_ReturnsCorrectMessage()
         {
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new TokenMsg("KnownEmail", "IncorrectTokenString"));
+            var messageReceived = JsonConvert.SerializeObject(new TokenRequestMsg("KnownEmail", "IncorrectTokenString"));
             //Answer from ResponseManager
             var messageSentBack = _uut.Respond(messageReceived);
             //Answer from ResponseManager in serialized form

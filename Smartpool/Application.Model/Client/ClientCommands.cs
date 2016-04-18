@@ -27,7 +27,7 @@ namespace Smartpool.Application.Model
         public bool Login(string username, string password)
         {
             // Client returns "Login" if the password and username was accepted
-            return (JsonConvert.DeserializeObject<LoginResponseMsg>(_clientMessager.SendMessage(new LoginMsg(username, password))).LoginSuccessful );
+            return (JsonConvert.DeserializeObject<LoginResponseMsg>(_clientMessager.SendMessage(new LoginRequestMsg(username, password))).LoginSuccessful );
         }
 
         public string GetTemp()
