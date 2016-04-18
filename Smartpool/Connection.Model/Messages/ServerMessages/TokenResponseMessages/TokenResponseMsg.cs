@@ -6,12 +6,13 @@ namespace Smartpool.Connection.Model
 
         public TokenResponseMsg()
         {
-            
+            MsgType = MessageTypes.TokenResponse;
         }
 
         public TokenResponseMsg(bool tokenStillActive)
         {
             TokenStillActive = tokenStillActive;
+            MsgType = MessageTypes.TokenResponse;
         }
     }
 
@@ -23,6 +24,7 @@ namespace Smartpool.Connection.Model
         {
             TokenStillActive = tokenStillActive;
             PoolAdded = poolAdded;
+            MsgType = MessageTypes.AddPoolResponse;
         }
     }
 }
