@@ -12,9 +12,9 @@ namespace Smartpool.Connection.Client
         private readonly string _serverIp;
 
         public SynchronousSocketClient() { }
-        public SynchronousSocketClient(int lastIpDigits)
+        public SynchronousSocketClient(string serverIp)
         {
-            _serverIp = "10.240.30." + lastIpDigits;
+            _serverIp = serverIp;
         }
 
         public string StartClient(string whatToSend)
