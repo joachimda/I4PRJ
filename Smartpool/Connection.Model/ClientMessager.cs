@@ -6,15 +6,17 @@ namespace Smartpool.Connection.Model
     {
         private readonly IClient _client;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        private readonly ClientResponseManager _clientResponseManager = new ClientResponseManager();
+        
 
         public ClientMessager(IClient client)
         {
             _client = client;
         }
 
-        public string SendMessage(Message message)
+        public Message SendMessage(Message message)
         {
-            return _client.StartClient(JsonConvert.SerializeObject(message, _jsonSettings) + "<EOF>");
+            return _clientResponseManager.DeserializeString(_client.StartClient(JsonConvert.SerializeObject(message, _jsonSettings) + "<EOF>"));
         }
     }
 }
