@@ -6,6 +6,6 @@
         /// <summary>
 		/// Method for sending a message to the server
 		/// </summary>
-        string SendMessage(Message message);
+        Message SendMessage(Message message);
     }
 }
