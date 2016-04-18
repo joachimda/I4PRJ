@@ -85,7 +85,7 @@ namespace Connection.Server.Test.Unit
             tokenRequestMessage.Username = "KnownEmail";
             tokenRequestMessage.TokenString = "CorrectTokenString";
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage, _jsonSettings));
+            var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage, _jsonSettings);
 
             _uut.Respond(messageReceived);
 

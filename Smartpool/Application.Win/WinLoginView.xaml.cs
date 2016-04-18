@@ -44,10 +44,10 @@ namespace Smartpool.Application.Win
             InitializeComponent();
             ThemeProperties.SetPlaceholderText(EmailTextBox, "E-mail");
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
-            ThemeProperties.SetPlaceholderText(IpTextBox, "Server Ip");
 
+            string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
             //Controller
-            var clientMessager = new ClientMessager(new SynchronousSocketClient());
+            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
             Controller = new LoginViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
