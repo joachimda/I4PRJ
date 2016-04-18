@@ -81,8 +81,11 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void Respond_CorrectToken_ReturnsCorrectMessage()
         {
+            var tokenRequestMessage = new TokenRequestMsg();
+            tokenRequestMessage.Username = "KnownEmail";
+            tokenRequestMessage.TokenString = "CorrectTokenString";
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new TokenRequestMsg("KnownEmail", "CorrectTokenString"), _jsonSettings);
+            var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage, _jsonSettings));
 
             _uut.Respond(messageReceived);
 
@@ -92,8 +95,11 @@ namespace Connection.Server.Test.Unit
         [Test]
         public void Respond_InCorrectToken_ReturnsCorrectMessage()
         {
+            var tokenRequestMessage = new TokenRequestMsg();
+            tokenRequestMessage.Username = "KnownEmail";
+            tokenRequestMessage.TokenString = "IncorrectTokenString";
             //Message received from client
-            var messageReceived = JsonConvert.SerializeObject(new TokenRequestMsg("KnownEmail", "IncorrectTokenString"));
+            var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage);
             //Answer from ResponseManager
             var messageSentBack = _uut.Respond(messageReceived);
             //Answer from ResponseManager in serialized form
