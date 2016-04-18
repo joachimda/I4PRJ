@@ -30,6 +30,7 @@
             <Label x:Name="CreateUser" Content="Sign up" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="CreateUser_MouseUp"/>
             <Label x:Name="ForgotUser" Content="Forgot login?" HorizontalAlignment="Center" Foreground="#FFABABAC" MouseEnter="Control_MouseEnter" MouseLeave="Control_MouseLeave" MouseUp="ForgotUser_MouseUp"/>
             <Separator Opacity="0" Height="8"/>
+            <TextBox x:Name="IpTextBox" Template="{StaticResource TextBoxWPlaceholderTemplate}" />
         </StackPanel>
         
     </Grid>

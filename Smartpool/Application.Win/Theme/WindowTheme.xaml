@@ -19,7 +19,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="Bder" BorderThickness="1" CornerRadius="2"  Background="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}},Path=Background }">
+                    <Border x:Name="Bder" BorderThickness="1" CornerRadius="2"  Background="{StaticResource SpBackgroundGray}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -43,7 +43,7 @@
     </Style>
 
     <ControlTemplate x:Key="WindowTemplate" TargetType="{x:Type Window}">
-        <Grid Background="{TemplateBinding Background}">
+        <Grid Background="{StaticResource SpBackgroundGray}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="26"/>

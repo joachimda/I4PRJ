@@ -44,6 +44,7 @@ namespace Smartpool.Application.Win
             InitializeComponent();
             ThemeProperties.SetPlaceholderText(EmailTextBox, "E-mail");
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
+            ThemeProperties.SetPlaceholderText(IpTextBox, "Server Ip");
 
             //Controller
             var clientMessager = new ClientMessager(new SynchronousSocketClient());

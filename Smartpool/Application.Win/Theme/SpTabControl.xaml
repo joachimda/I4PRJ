@@ -9,9 +9,9 @@
     <!-- SpTabControl Button template-->
     <ControlTemplate x:Key="SpTabControlButton" TargetType="Button">
         <Border x:Name="Border" CornerRadius="5, 5, 0, 0" BorderThickness="{TemplateBinding BorderThickness}" 
-                    Background="{Binding RelativeSource={RelativeSource AncestorType=local:SpTabControl}, Path=Background}" 
-                    BorderBrush="{StaticResource SpDarkGrey}" VerticalAlignment="Top" Height="20">
-            <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                    Background="{StaticResource SpBackgroundGray}" 
+                    BorderBrush="{StaticResource SpAccentGray}" VerticalAlignment="Top" Height="20">
+            <ContentPresenter Margin="8,0" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
@@ -28,15 +28,18 @@
         <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
     <ControlTemplate x:Key="SpTabControl" TargetType="local:SpTabControl">
-        <Grid VerticalAlignment="Stretch" Height="20" Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}">
+        <Grid VerticalAlignment="Stretch" Height="20" Background="{StaticResource SpBackgroundGray}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Separator Grid.Column="0" Grid.ColumnSpan="3" Margin="1,0,0,0" Background="{StaticResource SpDarkGrey}" VerticalAlignment="Bottom"/>
-            <Button x:Name="PART_StatViewButton" Grid.Column="0" Grid.Row="0" Content="Stat View" Template="{StaticResource SpTabControlButton}" 
+            <Separator Grid.Column="0" Grid.ColumnSpan="3" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
+            <Button x:Name="PART_StatViewButton" Grid.Column="0" Grid.Row="0" Content="Stats" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
+            <Button x:Name="PART_HistoryViewButton" Grid.Column="1" Grid.Row="0" Content="History" Template="{StaticResource SpTabControlButton}" 
+                    Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
+
         </Grid>
 
     </ControlTemplate>
