@@ -11,6 +11,14 @@ namespace Smartpool.Application.Win
         public WinStatView()
         {
             InitializeComponent();
+
+            SpTabControl1.OnShowStatButtonClicked += SpTabControl1_OnClickMeClicked;
+            SpTabControl1.OnShowHistoryButtonClicked += SpTabControl1_OnClickMeClicked;
+        }
+
+        private void SpTabControl1_OnClickMeClicked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Show Stats or History");
         }
     }
 }

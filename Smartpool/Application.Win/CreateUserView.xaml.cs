@@ -21,7 +21,8 @@ namespace Application.Win
             ThemeProperties.SetPlaceholderText(PasswordTextBox, "Password");
             ThemeProperties.SetPlaceholderText(RepeatPasswordTextBox, "Repeat password");
 
-            var clientMessager = new ClientMessager(new SynchronousSocketClient());
+            string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
+            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
             Controller = new SignUpViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
