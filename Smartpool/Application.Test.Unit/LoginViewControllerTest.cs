@@ -72,7 +72,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Accepted_LoginAcceptedCalledOnView()
         {
-            _clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("Login");
+            //_clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("Login");
             _uut.Login();
             _view.Received().LoginAccepted();
         }
@@ -80,7 +80,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Declined_DisplayAlertCalledOnView()
         {
-            _clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("LoginFailed");
+            //_clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("LoginFailed");
             _uut.Login();
             _view.ReceivedWithAnyArgs().DisplayAlert("","");
         }

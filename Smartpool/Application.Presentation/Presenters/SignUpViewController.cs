@@ -104,9 +104,6 @@ namespace Smartpool.Application.Presentation
 
         public void SignUp()
         {
-            // Create a new sign up command
-            var clientCommand = new ClientCommands(_clientMessager);
-
             // Missing implementation
             var successful = false;
             if (successful)

@@ -88,11 +88,14 @@ namespace Smartpool.Application.Presentation
         public void Login()
         {
             // Create a new login command
-            var clientCommand = new ClientCommands(_clientMessager);
+            var request = new LoginRequestMsg(_email, _password);
+            var response = _clientMessager.SendMessage(request);
+            var loginResponse = (LoginResponseMsg) response;
 
-            if (clientCommand.Login(_email, _password))
+            if (loginResponse.LoginSuccessful)
             {
 				_view.LoginAccepted ();
+                // Save token
             }
             else {
                 // Reset password and display message
