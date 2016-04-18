@@ -154,9 +154,9 @@
       <Project>{9c001789-1d5f-4545-ad60-50b6fb91dd96}</Project>
       <Name>Application.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Connection.Client\Connection.Client.csproj">
-      <Project>{c48ed75a-c94d-4328-9666-cc1c6c3d7cd2}</Project>
-      <Name>Connection.Client</Name>
+    <ProjectReference Include="..\Connection.Client.NET\Connection.Client.NET.csproj">
+      <Project>{5eabb430-58ae-4139-923a-9efa963a2c5f}</Project>
+      <Name>Connection.Client.NET</Name>
     </ProjectReference>
     <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
       <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
