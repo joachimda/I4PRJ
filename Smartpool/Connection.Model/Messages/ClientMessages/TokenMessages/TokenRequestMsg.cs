@@ -5,8 +5,10 @@ namespace Smartpool.Connection.Model
         public string Username { get; set; }
         public string TokenString { get; set; }
         
-        public TokenRequestMsg()
+        public TokenRequestMsg(string username, string tokenString)
         {
+            Username = username;
+            TokenString = tokenString;
             MsgType = MessageTypes.TokenRequest;
         }
     }

@@ -5,14 +5,43 @@ namespace Smartpool.Connection.Server.ResponseManager
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
-        public Message HandleTokenMsg(Message message)
+        private readonly ISmartpoolDB _smartpoolDb;
+        public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
-            return new Message("not implemented");
+            _smartpoolDb = smartpoolDb;
+        }
+        public Message HandleTokenMsg(Message message, string messageString)
+        {
+            switch (message.MsgType)
+            {
+                case MessageTypes.AddPoolRequest:
+                    var apMsg = JsonConvert.DeserializeObject<AddPoolRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Address, apMsg.Name, apMsg.Volume));
+
+                case MessageTypes.UpdatePoolInfoRequest:
+                    var upiMsg = JsonConvert.DeserializeObject<UpdatePoolInfoRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false); // _smartpoolDb.PoolAccess.UpdatePoolInfo(upiMsg.OldPoolName, upiMsg.NewPoolAddress, upiMsg.NewPoolName, upiMsg.NewPoolVolume)
+
+                case MessageTypes.RemovePoolRequest:
+                    var rpMsg = JsonConvert.DeserializeObject<RemovePoolRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false); //_smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.Address, rpMsg.PoolName)
+
+                case MessageTypes.ChangePasswordRequest:
+                    var cpMsg = JsonConvert.DeserializeObject<ChangePasswordRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false);
+
+                case MessageTypes.LogoutRequest:
+                    var loMsg = JsonConvert.DeserializeObject<LogoutRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false);
+
+                default:
+                    return new GeneralResponseMsg(true, false);
+            }
         }
     }
 
     public interface ITokenMsgResponse
     {
-        Message HandleTokenMsg(Message message);
+        Message HandleTokenMsg(Message message, string messageString);
     }
 }

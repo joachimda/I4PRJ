@@ -41,14 +41,17 @@
     <Compile Include="Messages\ClientMessages\AddUserRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\ClientMsg.cs" />
     <Compile Include="Messages\ClientMessages\LoginRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\ResetPasswordRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\ChangePasswordRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\LogoutRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\RemovePoolRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\TokenRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\UpdatePoolInfoRequestMsg.cs" />
     <Compile Include="Messages\MessageTypes.cs" />
-    <Compile Include="Messages\ServerMessages\AddUserResponseMsg.cs" />
+    <Compile Include="Messages\ServerMessages\GeneralResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\LoginResponseMsg.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\AddPoolRequestMsg.cs" />
-    <Compile Include="Messages\ServerMessages\ServerMsg.cs" />
-    <Compile Include="Messages\ServerMessages\TokenResponseMessages\TokenResponseMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

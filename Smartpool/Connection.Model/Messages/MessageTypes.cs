@@ -2,13 +2,20 @@ namespace Smartpool.Connection.Model
 {
     public enum MessageTypes
     {
+        //Client messages
         LoginRequest,
-        LoginResponse,
-        TokenRequest,
-        TokenResponse,
         AddUserRequest,
-        AddUserResponse,
+        ResetPasswordRequest,
+        //Client messages for users already logged in
+        TokenRequest,
+        ChangePasswordRequest,
+        LogoutRequest,
         AddPoolRequest,
-        AddPoolResponse
+        UpdatePoolInfoRequest,
+        RemovePoolRequest,
+
+        //Server messages
+        LoginResponse,
+        GeneralResponse,
     }
 }

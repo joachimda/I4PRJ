@@ -17,10 +17,8 @@ namespace Smartpool.Connection.Model
             {
                 case MessageTypes.LoginResponse:
                     return JsonConvert.DeserializeObject<LoginResponseMsg>(messageString);
-                case MessageTypes.AddPoolResponse:
-                    return JsonConvert.DeserializeObject<AddPoolResponseMsg>(messageString);
-                case MessageTypes.AddUserResponse:
-                    return JsonConvert.DeserializeObject<AddUserResponseMsg>(messageString);
+                case MessageTypes.GeneralResponse:
+                    return JsonConvert.DeserializeObject<GeneralResponseMsg>(messageString);
                 default:
                     if (receivedMessage.MessageInfo != null)
                         return new Message(receivedMessage.MessageInfo);
