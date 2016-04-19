@@ -78,12 +78,11 @@ namespace Connection.Server.Test.Unit
         #endregion
 
         #region Test of Token case
+        /*
         [Test]
         public void Respond_CorrectToken_ReturnsCorrectMessage()
         {
-            var tokenRequestMessage = new TokenRequestMsg();
-            tokenRequestMessage.Username = "KnownEmail";
-            tokenRequestMessage.TokenString = "CorrectTokenString";
+            var tokenRequestMessage = new TokenRequestMsg("KnownEmail", "CorrectTokenString");
             //Message received from client
             var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage, _jsonSettings);
 
@@ -91,11 +90,12 @@ namespace Connection.Server.Test.Unit
 
             _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenRequestMsg>());
         }
+        */
 
         [Test]
         public void Respond_InCorrectToken_ReturnsCorrectMessage()
         {
-            var tokenRequestMessage = new TokenRequestMsg();
+            var tokenRequestMessage = new TokenRequestMsg("KnownEmail", "IncorrectTokenString");
             tokenRequestMessage.Username = "KnownEmail";
             tokenRequestMessage.TokenString = "IncorrectTokenString";
             //Message received from client
@@ -105,7 +105,7 @@ namespace Connection.Server.Test.Unit
             //Answer from ResponseManager in serialized form
             var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
             
-            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new TokenResponseMsg(false))));
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new GeneralResponseMsg(false, false))));
             
         }
         #endregion

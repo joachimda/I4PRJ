@@ -16,8 +16,8 @@ namespace Smartpool.Connection.Server.ResponseManager
         public ResponseManager()
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
-            _tokenMsgResponse = new TokenMsgResponse();
             _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
+            _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
         }
 
         public ResponseManager(ITokenKeeper tokenKeeper, ITokenMsgResponse tokenMsgResponse, ISmartpoolDB smartpoolDb)
@@ -40,12 +40,16 @@ namespace Smartpool.Connection.Server.ResponseManager
                 case MessageTypes.TokenRequest:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenRequestMsg>(receivedString);
                     if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
-                        return _tokenMsgResponse.HandleTokenMsg(tokenMessage);
-                    else return new TokenResponseMsg(false);
+                        return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString);
+                    else return new GeneralResponseMsg(false, false);
 
                 case MessageTypes.AddUserRequest:
                     var addUserMessage = JsonConvert.DeserializeObject<AddUserRequestMsg>(receivedString);
-                    return new AddUserResponseMsg(_smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
+                    return new GeneralResponseMsg(false, _smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
+
+                case MessageTypes.ResetPasswordRequest:
+                    var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
+                    return new GeneralResponseMsg(false, false); //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
                 default:
                     return new Message("The server did not recognize your request");
             }

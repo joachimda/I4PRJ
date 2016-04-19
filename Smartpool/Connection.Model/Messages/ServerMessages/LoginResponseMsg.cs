@@ -1,6 +1,6 @@
 namespace Smartpool.Connection.Model
 {
-    public class LoginResponseMsg : ServerMsg
+    public class LoginResponseMsg : Message
     {
         public string TokenString { get; set; }
         public bool LoginSuccessful { get; set; }

@@ -6,10 +6,8 @@ namespace Smartpool.Connection.Model
         public string Name { get; set; }
         public double Volume { get; set; }
 
-        public AddPoolRequestMsg(string username, string tokenString, string poolAddress, string poolName, double poolVolume)
+        public AddPoolRequestMsg(string username, string tokenString, string poolAddress, string poolName, double poolVolume) : base(username, tokenString)
         {
-            Username = username;
-            TokenString = tokenString;
             Address = poolAddress;
             Name = poolName;
             Volume = poolVolume;
