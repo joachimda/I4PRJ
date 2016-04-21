@@ -16,7 +16,7 @@ namespace Smartpool.Connection.Model
 
         public Message SendMessage(Message message)
         {
-            return _clientResponseManager.DeserializeString(_client.StartClient(JsonConvert.SerializeObject(message, _jsonSettings) + "<EOF>"));
+            return _clientResponseManager.HandleMessage(_client.StartClient(JsonConvert.SerializeObject(message, _jsonSettings) + "<EOF>"));
         }
     }
 }

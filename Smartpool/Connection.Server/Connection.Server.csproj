@@ -58,17 +58,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsynchronousSocketListener.cs" />
-    <Compile Include="ResponseManager\IResponseManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseManager\Interfaces\IResponseManager.cs" />
+    <Compile Include="ResponseManager\Interfaces\ITokenMsgResponse.cs" />
     <Compile Include="ResponseManager\ResponseManager.cs" />
     <Compile Include="ResponseManager\TokenMsgResponse.cs" />
-    <Compile Include="Token\IToken.cs" />
-    <Compile Include="Token\ITokenKeeper.cs" />
-    <Compile Include="Token\ITokenKeeperInternal.cs" />
-    <Compile Include="Token\ITokenStringGenerator.cs" />
-    <Compile Include="Token\Token.cs" />
-    <Compile Include="Token\TokenStringGenerator.cs" />
-    <Compile Include="Token\TokenKeeper.cs" />
+    <Compile Include="TokenSystem\Interfaces\IToken.cs" />
+    <Compile Include="TokenSystem\Interfaces\ITokenKeeper.cs" />
+    <Compile Include="TokenSystem\Interfaces\ITokenKeeperInternal.cs" />
+    <Compile Include="TokenSystem\Interfaces\ITokenStringGenerator.cs" />
+    <Compile Include="TokenSystem\Token.cs" />
+    <Compile Include="TokenSystem\TokenKeeper.cs" />
+    <Compile Include="TokenSystem\TokenStringGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
