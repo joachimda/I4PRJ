@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB45BB69-7867-4D65-9FF6-ECE8F314E8DF}</ProjectGuid>
+    <ProjectGuid>{FC702AE7-5F81-4336-9F87-16B9D75BD512}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Connection.Model.Test.Unit</RootNamespace>
-    <AssemblyName>Connection.Model.Test.Unit</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Connection.Test</RootNamespace>
+    <AssemblyName>Connection.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,12 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NSubstitute, Version=1.10.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.1.10.0.0\lib\net45\NSubstitute.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.2.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.2.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -49,16 +54,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientMessagerUnitTest.cs" />
+    <Compile Include="ClientResponseManagerUnitTest.cs" />
+    <Compile Include="ConnectionIntegrationTest.cs" />
+    <Compile Include="ResponseManagerUnitTest.cs" />
+    <Compile Include="TokenMsgResponseUnitTest.cs" />
+    <Compile Include="TokenUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Connection.Client.NET\Connection.Client.NET.csproj">
+      <Project>{5EABB430-58AE-4139-923A-9EFA963A2C5F}</Project>
+      <Name>Connection.Client.NET</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
       <Project>{43c6c261-d3ec-4ab6-972e-a81c85e9258a}</Project>
       <Name>Connection.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Connection.Server\Connection.Server.csproj">
+      <Project>{62fdcce8-2f78-4c1c-b4ab-035a3e6b0f79}</Project>
+      <Name>Connection.Server</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Database\Database.csproj">
+      <Project>{49c26ae7-7c61-453f-a21a-2bba513dd71d}</Project>
+      <Name>Database</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using Smartpool.Connection.Server.Token;
 
-namespace Connection.Server.Test.Unit
+namespace Connection.Test
 {
     [TestFixture]
     public class TokenUnitTest

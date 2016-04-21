@@ -1,14 +1,12 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
+﻿using Newtonsoft.Json;
 using NSubstitute;
+using NUnit.Framework;
+using Smartpool;
 using Smartpool.Connection.Model;
-using Smartpool.Connection.Server;
 using Smartpool.Connection.Server.ResponseManager;
 using Smartpool.Connection.Server.Token;
-using Newtonsoft.Json;
-using Smartpool;
 
-namespace Connection.Server.Test.Unit
+namespace Connection.Test
 {
     [TestFixture]
     public class ResponseManagerUnitTest
@@ -90,8 +88,8 @@ namespace Connection.Server.Test.Unit
 
             _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenRequestMsg>());
         }
-        */
-        /*
+        
+        
         [Test]
         public void Respond_InCorrectToken_ReturnsCorrectMessage()
         {

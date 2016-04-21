@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
+﻿using NSubstitute;
 using NUnit.Framework;
 using Smartpool.Connection.Model;
 
-namespace Connection.Model.Test.Unit
+namespace Connection.Test
 {
     [TestFixture]
     public class ClientMessagerUnitTest
@@ -28,9 +23,9 @@ namespace Connection.Model.Test.Unit
         }
 
         [Test]
-        public void test()
+        public void NoTestsImplemented()
         {
-            
+            Assert.That(true, Is.True);
         }
     }
 }
