@@ -41,7 +41,7 @@ namespace Smartpool.Connection.Server
             throw new Exception("Local IP Address Not Found!");
         }
 
-        public static void StartListening()
+        public void StartListening()
         {
             // Data buffer for incoming data.
             byte[] bytes = new Byte[1024];
@@ -183,13 +183,6 @@ namespace Smartpool.Connection.Server
             {
                 Console.WriteLine(e.ToString());
             }
-        }
-
-
-        public static int Main(String[] args)
-        {
-            StartListening();
-            return 0;
         }
     }
 }

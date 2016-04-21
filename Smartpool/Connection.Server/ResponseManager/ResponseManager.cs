@@ -35,10 +35,12 @@ namespace Smartpool.Connection.Server.ResponseManager
             {
                 case MessageTypes.LoginRequest:
                     var loginMessage = JsonConvert.DeserializeObject<LoginRequestMsg>(receivedString);
-                    return _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password) ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true) : new LoginResponseMsg("", false);
+                    if (_smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password))
+                        return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true);
+                    else return new LoginResponseMsg("", false);
 
-                case MessageTypes.TokenRequest:
-                    var tokenMessage = JsonConvert.DeserializeObject<TokenRequestMsg>(receivedString);
+                case MessageTypes.TokenMsg:
+                    var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
                     if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
                         return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString);
                     else return new GeneralResponseMsg(false, false);
@@ -50,6 +52,7 @@ namespace Smartpool.Connection.Server.ResponseManager
                 case MessageTypes.ResetPasswordRequest:
                     var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
                     return new GeneralResponseMsg(false, false); //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+
                 default:
                     return new Message("The server did not recognize your request");
             }

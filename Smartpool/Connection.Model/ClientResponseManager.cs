@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace Smartpool.Connection.Model
 {
-    class ClientResponseManager
+    public class ClientResponseManager : IClientResponseManager
     {
-        public Message DeserializeString(string messageString)
+        public Message HandleMessage(string messageString)
         {
             var receivedMessage = JsonConvert.DeserializeObject<Message>(messageString);
 
