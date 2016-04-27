@@ -11,66 +11,40 @@
 \newcommand{\Projektdokument}{Projektrapport}
 
 %% Litteratur
-\nocite{*}
+%\nocite{*}
 %\bibliographystyle{harvard}
 \bibliography{utils/litteratur}
+%\addbibresource{utils/litteratur.bib}
 
 \begin{document}
-\frontmatter
+		
+	\frontmatter
+	\pagestyle{asereport}
+	\input{utils/frontpage}					\clearpage %% Forside
+	\input{docs/frontmatter/abstract}		\clearpage %% Abstract
+	\input{docs/frontmatter/forord}			\clearpage %% Forord
+	\tableofcontents						\clearpage %% ToC
+	
+	\mainmatter
+	\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
+	\input{docs/frontmatter/indledning}		\clearpage %% Indledning
+	\input{docs/projektformulering/main}	\clearpage %% Projektformulering
+	\input{docs/kravspecifikation/main}		\clearpage %% Kravspecifikation
+	\input{docs/systemarkitektur/main}		\clearpage %% Systemarkitektur
+	\input{docs/processbeskrivelse/main}	\clearpage %% Processbeskrivelse
+	\input{docs/design/main}				\clearpage %% Design
+	\input{docs/implementering/main}		\clearpage %% Implementering
+	\input{docs/integration/main}			\clearpage %% Integration
+	\input{docs/accepttest/main}			\clearpage %% Accepttest
+	\input{docs/appendix/main}				\clearpage %% Appendix
+	
+	\backmatter
+	%% Glossary
+	\setglossarystyle{list}
+	\printnoidxglossary[title=Ordliste]
+	
+	% Bibliography
+	\clearpage
+	\printbibliography[title={Litteratur}]
 
-\input{utils/frontpage}\clearpage
-
-%% Abstract
-\input{docs/frontmatter/abstract}\clearpage
-
-%% Forord
-\pagestyle{asereport}
-\input{docs/frontmatter/forord}\clearpage
-
-%% ToC
-\tableofcontents\clearpage
-
-\mainmatter
-
-%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
-\listoftodos[Liste over gøremål]
-
-%% Indledning
-\input{docs/frontmatter/indledning}\clearpage
-
-%% Projektformulering
-\input{docs/projektformulering/main}\clearpage
-
-%% Kravspecifikation
-\input{docs/kravspecifikation/main}\clearpage
-
-%% Systemarkitektur
-\input{docs/systemarkitektur/main}\clearpage
-
-%% Processbeskrivelse
-\input{docs/processbeskrivelse/main}\clearpage
-
-%% Design
-\input{docs/design/main}\clearpage
-
-%% Implementering
-\input{docs/implementering/main}\clearpage
-
-%% Integration
-\input{docs/integration/main}\clearpage
-
-%% Accepttest
-\input{docs/accepttest/main}\clearpage
-
-%% Appendix
-\input{docs/appendix/main}\clearpage
-
-\backmatter
-%% Glossary
-\setglossarystyle{list}
-\printnoidxglossary[title=Ordliste]
-
-% Bibliography
-\clearpage
-\printbibliography[title={Litteratur}]
 \end{document}
