@@ -10,14 +10,9 @@
 \newcommand{\Gruppe}{Gruppe 3}
 \newcommand{\Projektdokument}{Projektrapport}
 
-%% Litteratur
-%\nocite{*}
-%\bibliographystyle{harvard}
-\bibliography{utils/litteratur}
-%\addbibresource{utils/litteratur.bib}
+\bibliography{utils/litteratur} %% Litteratur
 
-\begin{document}
-		
+\begin{document}		
 	\frontmatter
 	\pagestyle{asereport}
 	\input{utils/frontpage}					\clearpage %% Forside
@@ -39,12 +34,9 @@
 	\input{docs/appendix/main}				\clearpage %% Appendix
 	
 	\backmatter
-	%% Glossary
 	\setglossarystyle{list}
-	\printnoidxglossary[title=Ordliste]
+	\printnoidxglossary[title=Ordliste]		%% Glossary
 	
-	% Bibliography
 	\clearpage
-	\printbibliography[title={Litteratur}]
-
+	\printbibliography[title={Litteratur}] 	%% Bibliography
 \end{document}
