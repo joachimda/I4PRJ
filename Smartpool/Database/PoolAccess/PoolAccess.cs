@@ -1,3 +1,4 @@
+using System.Linq;
 using Smartpool;
 
 namespace Smartpool
@@ -50,7 +51,7 @@ namespace Smartpool
         /// <summary>
         /// Removes a specific pool
         /// </summary>
-        /// <param name="email"> identifies the user email</param>
+        /// <param name="user">Identifies the administrating user</param>
         /// <param name="address"> identifies the pool address</param>
         /// <param name="name">identifies the name of the pool</param>
         public void RemovePool(User user, string address, string name)
@@ -62,24 +63,20 @@ namespace Smartpool
                     throw new PoolNotFoundException();
                 }
 
-                //Query for the pool
-                //var removePool = from user in db.UserSet
-                //                        where user.Email == email
-                //                        select user;
-
-                //foreach (var user in removeUserByEmail)
-                //{
-                //    db.UserSet.Remove(user);
-                //}
-
-                db.SaveChanges();
+                foreach (var pool in user.Pool)
+                {
+                    if (pool.Address != address || pool.Name != name) continue;
+                    db.PoolSet.Remove(pool);
+                    db.SaveChanges();
+                }
             }
         }
 
         /// <summary>
-        /// Removes all pools i database
-        /// </summary>
-        public void DeleteAllPools()
+                /// Removes all pools i database
+                /// </summary>
+            public
+            void DeleteAllPools()
         {
             using (var db = new DatabaseContext())
             {
