@@ -1,6 +1,5 @@
 ﻿using Smartpool;
 
-
 namespace Database.Test
 {
     class Program
