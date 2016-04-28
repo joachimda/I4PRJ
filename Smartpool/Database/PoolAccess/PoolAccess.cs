@@ -45,7 +45,7 @@ namespace Smartpool
             Pool tmpPool = null;
             foreach (var pool in user.Pool)
             {
-                if (pool.Name == name)
+                if (pool.Address == address && pool.Name == name)
                 {
                     tmpPool = pool;
                 }
@@ -58,7 +58,7 @@ namespace Smartpool
         /// </summary>
         /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public bool RemovePool(User user, string name)
+        public void RemovePool(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
@@ -69,11 +69,9 @@ namespace Smartpool
 
                 foreach (var pool in user.Pool)
                 {
-                    if (pool.Name == name)
-                    {
-                        db.PoolSet.Remove(pool);
-                        db.SaveChanges();
-                    }
+                    if (pool.Address != address || pool.Name != name) continue;
+                    db.PoolSet.Remove(pool);
+                    db.SaveChanges();
                 }
             }
         }
