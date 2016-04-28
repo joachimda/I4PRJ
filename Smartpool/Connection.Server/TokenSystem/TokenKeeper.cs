@@ -38,7 +38,7 @@ namespace Smartpool.Connection.Server
 
         public string CreateNewToken(string username)
         {
-            RemoveOldToken(username);
+            RemoveToken(username);
             var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
             _tokens.Add(newToken);
 
@@ -52,7 +52,7 @@ namespace Smartpool.Connection.Server
             return newToken.GetTokenString();
         }
 
-        private void RemoveOldToken(string username)
+        public void RemoveToken(string username)
         {
             foreach (var token in _tokens)
             {

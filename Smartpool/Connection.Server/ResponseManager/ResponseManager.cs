@@ -41,7 +41,7 @@ namespace Smartpool.Connection.Server
                 case MessageTypes.TokenMsg:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
                     if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
-                        return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString);
+                        return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString, _tokenKeeper);
                     else return new GeneralResponseMsg(false, false);
 
                 case MessageTypes.AddUserRequest:

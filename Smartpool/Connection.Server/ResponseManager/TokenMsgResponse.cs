@@ -10,7 +10,7 @@ namespace Smartpool.Connection.Server
         {
             _smartpoolDb = smartpoolDb;
         }
-        public Message HandleTokenMsg(Message message, string messageString)
+        public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
         {
             switch (message.MsgType)
             {
@@ -25,7 +25,19 @@ namespace Smartpool.Connection.Server
 
                 case MessageTypes.RemovePoolRequest:
                     var rpMsg = JsonConvert.DeserializeObject<RemovePoolMsg>(messageString);
-                    return new GeneralResponseMsg(true, false); //_smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.Address, rpMsg.PoolName)
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.Address, rpMsg.PoolName)); 
+
+                case MessageTypes.AddPoolPictureRequest:
+                    return new GeneralResponseMsg(true, false);
+
+               case MessageTypes.GetPoolDataRequest:
+                   return new Message(); //new GetPoolDataResponseMsg()
+
+                case MessageTypes.GetAllPoolNamesRequest:
+                    return new Message(); //new GetAllPoolNamesResponseMsg()
+
+                case MessageTypes.GetPoolHistoryRequest:
+                    return new Message(); //new GetPoolHistoryResponseMsg()
 
                 //User messages
                 case MessageTypes.ChangePasswordRequest:
@@ -34,8 +46,11 @@ namespace Smartpool.Connection.Server
 
                 case MessageTypes.LogoutRequest:
                     var loMsg = JsonConvert.DeserializeObject<LogoutMsg>(messageString);
+                    tokenKeeper.RemoveToken(loMsg.Username);
+                    return new GeneralResponseMsg(true, true);
+                
+                case MessageTypes.AllowAccessToPoolDataRequest:
                     return new GeneralResponseMsg(true, false);
-
                 //Monitor unit messages
 
                 //Default
