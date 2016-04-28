@@ -48,7 +48,9 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
+            _uut.AddPool(_user1, "poolname", 4);
 
+            Assert.That(_uut.IsPoolNameInUse(_user1, "poolname"), Is.True);
         }
 
         [Test]
