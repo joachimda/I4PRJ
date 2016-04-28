@@ -21,19 +21,24 @@ namespace Smartpool
         /// <summary>
         /// Checks if a specific pool name is in use on a specific address
         /// </summary
-        /// <param name="name"></param>
+        /// <param name="name">Name of the pool</param>
         /// <param name="user">The user to run check against</param>
         /// <param name="address">the address of the pool location</param>
-        /// <returns></returns>
+        /// <returns>True if name is in use, false if name is availible</returns>
         public bool IsPoolNameInUse(User user, string address, string name)
         {
-            throw new System.NotImplementedException();
+            foreach (var pool in user.Pool)
+            {
+                return pool.Address == address && pool.Name == name;
+            }
+
+            return false;
         }
 
         /// <summary>
         /// Finds all pools 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="user">Which user to search for pools in</param>
         /// <param name="address">the address of the pool location</param>
         /// <param name="name">the name of the pool</param>
         /// <returns></returns>
