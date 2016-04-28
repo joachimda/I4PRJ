@@ -13,6 +13,8 @@ namespace Database.Test.Unit
         private IPoolAccess _uut;
         private IUserAccess _userAccess;
 
+        private User _user1, _user2;
+
         [SetUp]
         public void Setup()
         {
@@ -21,13 +23,13 @@ namespace Database.Test.Unit
             _uut = new PoolAccess();
             _userAccess = new UserAccess();
 
-            User user = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
-            User user2 = new User() { Firstname = "Sir", Middelname = "Herp", Lastname = "Jensen", Email = "post@jensen.dk", Password = "mydogsname" };
+            _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
+            _user2 = new User() { Firstname = "Sir", Middelname = "Herp", Lastname = "Jensen", Email = "post@jensen.dk", Password = "mydogsname" };
 
             using (var db = new DatabaseContext())
             {
-                db.UserSet.Add(user);
-                db.UserSet.Add(user2);
+                db.UserSet.Add(_user1);
+                db.UserSet.Add(_user2);
                 db.SaveChanges();
             }
         }
@@ -46,7 +48,7 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
-
+            _uut.AddPool();
         }
 
         [Test]

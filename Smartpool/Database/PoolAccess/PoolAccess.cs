@@ -58,7 +58,7 @@ namespace Smartpool
         /// </summary>
         /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public void RemovePool(User user, string name)
+        public bool RemovePool(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
