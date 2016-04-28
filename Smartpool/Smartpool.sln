@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{49C26AE7-7C61-453F-A21A-2BBA513DD71D}"
 EndProject
@@ -23,11 +23,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Win", "Applicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.Model", "Connection.Model\Connection.Model.csproj", "{43C6C261-D3EC-4AB6-972E-A81C85E9258A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationFolder", "ApplicationFolder", "{65DE8C6C-6E42-4C8F-AA9F-9EDE0AB33260}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{65DE8C6C-6E42-4C8F-AA9F-9EDE0AB33260}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConnectionFolder", "ConnectionFolder", "{6664EE3F-B7A0-45FD-A484-B7439CA221CD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Connection", "Connection", "{6664EE3F-B7A0-45FD-A484-B7439CA221CD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseFolder", "DatabaseFolder", "{81C127D9-0BBC-44A8-A5A3-FDC7778A4656}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{81C127D9-0BBC-44A8-A5A3-FDC7778A4656}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection.Client.NET", "Connection.Client.NET\Connection.Client.NET.csproj", "{5EABB430-58AE-4139-923A-9EFA963A2C5F}"
 EndProject
