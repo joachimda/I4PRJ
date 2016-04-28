@@ -24,7 +24,7 @@ namespace Database.Test.Unit
             _userAccess = new UserAccess();
 
             _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
-            _user2 = new User() { Firstname = "Sir", Middelname = "Herp", Lastname = "Jensen", Email = "post@jensen.dk", Password = "mydogsname" };
+            _user2 = new User() { Firstname = "Sire", Middelname = "Herp", Lastname = "Jensenei", Email = "post@jensenei.dk", Password = "mydogsname" };
 
             using (var db = new DatabaseContext())
             {
