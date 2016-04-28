@@ -15,7 +15,7 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public void AddPool(User user, string address, string name, double volume)
         {
-            Pool newPool = new Pool {Address = address, Name = name, User = user, Volume = volume, UserId = user.Id};
+            Pool newPool = new Pool { Address = address, Name = name, User = user, Volume = volume, UserId = user.Id };
             user.Pool.Add(newPool);
         }
 
@@ -37,7 +37,7 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// Finds all pools 
+        /// Finds a specific pool 
         /// </summary>
         /// <param name="user">Which user to search for pools in</param>
         /// <param name="address">the address of the pool location</param>
@@ -45,7 +45,15 @@ namespace Smartpool
         /// <returns></returns>
         public Pool FindSpecificPool(User user, string address, string name)
         {
-            throw new System.NotImplementedException();
+            Pool tmpPool = null;
+            foreach (var pool in user.Pool)
+            {
+                if (pool.Address == address && pool.Name == name)
+                {
+                    tmpPool = pool;
+                }
+            }
+            return tmpPool;
         }
 
         /// <summary>
@@ -73,10 +81,10 @@ namespace Smartpool
         }
 
         /// <summary>
-                /// Removes all pools i database
-                /// </summary>
-            public
-            void DeleteAllPools()
+        /// Removes all pools i database
+        /// </summary>
+        public
+        void DeleteAllPools()
         {
             using (var db = new DatabaseContext())
             {
