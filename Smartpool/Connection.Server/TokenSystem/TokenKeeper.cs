@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Smartpool.Connection.Server.Token
+namespace Smartpool.Connection.Server
 {
     public class TokenKeeper : ITokenKeeper, ITokenKeeperInternal
     {

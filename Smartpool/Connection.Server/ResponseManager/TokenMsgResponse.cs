@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 
-namespace Smartpool.Connection.Server.ResponseManager
+namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {

@@ -1,6 +1,6 @@
 ﻿using Smartpool.Connection.Model;
 
-namespace Smartpool.Connection.Server.ResponseManager
+namespace Smartpool.Connection.Server
 {
     public interface IResponseManager
     {
