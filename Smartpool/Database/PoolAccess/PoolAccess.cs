@@ -6,15 +6,16 @@ namespace Smartpool
     {
         /// <summary>
         /// Adds pool to a users poolSet.
-        /// </summary>
-        /// <param name="email">Identifying the 'owner' of the pool</param>
+        /// </summary
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
+        /// <param name="user">The user to recieve the pool</param>
         /// <param name="address">the address of the pool location</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(string email, string address, string name, double volume)
+        public bool AddPool(User user, string address, string name, double volume)
         {
-            throw new System.NotImplementedException();
+            Pool newPool = new Pool {Address = address, Name = name, User = user, Volume = volume, UserId = user.Id};
+            user.Pool.Add(newPool);
         }
 
         /// <summary>
