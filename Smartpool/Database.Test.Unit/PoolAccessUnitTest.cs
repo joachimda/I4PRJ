@@ -11,15 +11,20 @@ namespace Database.Test.Unit
         #region Setup
 
         private IPoolAccess _uut;
-        private IUserAccess _userAccess;
 
         [SetUp]
         public void Setup()
         {
             _uut.DeleteAllPools();
-            
             _uut = new PoolAccess();
-            _userAccess = Substitute.For<IUserAccess>();
+
+            User user = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
+
+            using (var db = new DatabaseContext())
+            {
+                db.UserSet.Add(user);
+                db.SaveChanges();
+            }
         }
 
         [TearDown]
@@ -54,25 +59,36 @@ namespace Database.Test.Unit
 
         #region IsPoolNameInUse
 
-        // tests
+        // public void IsPoolNameInUse_EmptyDatabase_ReturnsFalse()
+        // public void IsPoolNameInUse_EmptyDatabase_ThrowsUserNotFoundException()
+        // public void IsPoolNameInUse_EmptyDatabase_ThrowsPoolNotFoundException()
+        // public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
+        // public void IsPoolNameInUse_PoolOnSameUserAndAddress_ReturnsFalse()
+        // public void IsPoolNameInUse_PoolOnSameUserAndAddressAndName_ReturnsTrue()
+
+        #endregion
+
+        #region FindSpecificPool
+
+        // public void FindSpecificPool_EmptyDatabase_ThrowsUserNotFoundException()
+        // public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
+        // public void FindSpecificPool_UserExistsInDatabase_ThrowsPoolNotFoundException()
+        // public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
 
         #endregion
 
         #region RemovePool
 
         [Test]
-        public void RemovePool_RemoveExistingPool_PoolNotInDatabase()
+        public void RemovePool_RemoveExistingPool_IsPoolNameInUseReturnsFalse()
         {
-            _uut.AddPool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl", 25);
-            _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl");
 
-            Assert.That(_uut.FindSpecificPool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"), Is.Null);
         }
 
         [Test]
-        public void RemovePool_PoolNotPresentInDB_ThrowsPoolNotFoundException()
+        public void RemovePool_PoolNotInDatabase_ThrowsPoolNotFoundException()
         {
-            Assert.Throws<PoolNotFoundException>(() => _uut.RemovePool("jokke@mail.com", "Kærgaarden 78", "IndoorPewl"));
+
         }
 
         #endregion
