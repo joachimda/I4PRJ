@@ -2,7 +2,6 @@
 {
     public interface IUserAccess
     {
-        ISmartpoolDB SmartpoolDb { get; set; }
         bool AddUser(string fullname, string email, string password);
         User FindUserByEmail(string email);
         bool IsEmailInUse(string email);
