@@ -30,9 +30,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Volume" Type="float" Nullable="false" />
+    <Property Name="Volume" Type="float" Nullable="true" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
     <End Role="User" Type="Smartpool.Store.UserSet" Multiplicity="1" />
