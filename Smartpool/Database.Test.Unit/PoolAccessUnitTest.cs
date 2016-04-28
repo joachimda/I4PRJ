@@ -59,31 +59,103 @@ namespace Database.Test.Unit
 
         }
 
-        // public void AddPool_AddingPoolWithZeroVolume_ThrowsArgumentException()
-        // public void AddPool_AddingPoolWith-5Volume_ThrowsArgumentException()
-        // public void AddPool_AddingIdenticalPool_ThrowsArgumentException()
-        // public void AddPool_AddingSecondPoolWithValidName_IsPoolNameInUseReturnsTrue()
-        // public void AddPool_AddingPoolOnNewAddressWithExistingName_IsPoolNameInUseReturnsTrue()
+        [Test]
+        public void AddPool_AddingPoolWithZeroVolume_ThrowsArgumentException()
+        {
+
+        }
+
+        [Test]
+        public void AddPool_AddingPoolWithNeg5Volume_ThrowsArgumentException()
+        {
+
+        }
+
+        [Test]
+        public void AddPool_AddingIdenticalPool_ThrowsArgumentException()
+        {
+
+        }
+
+        [Test]
+        public void AddPool_AddingSecondPoolWithValidName_IsPoolNameInUseReturnsTrue()
+        {
+
+        }
+
+        [Test]
+        public void AddPool_AddingPoolOnNewAddressWithExistingName_IsPoolNameInUseReturnsTrue()
+        {
+
+        }
 
         #endregion
 
         #region IsPoolNameInUse
 
-        // public void IsPoolNameInUse_EmptyDatabase_ReturnsFalse()
-        // public void IsPoolNameInUse_EmptyDatabase_ThrowsUserNotFoundException()
-        // public void IsPoolNameInUse_EmptyDatabase_ThrowsPoolNotFoundException()
-        // public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
-        // public void IsPoolNameInUse_PoolOnSameUserAndAddress_ReturnsFalse()
-        // public void IsPoolNameInUse_PoolOnSameUserAndAddressAndName_ReturnsTrue()
+        [Test]
+        public void IsPoolNameInUse_EmptyDatabase_ReturnsFalse()
+        {
+
+        }
+
+        [Test]
+        public void IsPoolNameInUse_EmptyDatabase_ThrowsUserNotFoundException()
+        {
+
+        }
+
+        [Test]
+        public void IsPoolNameInUse_EmptyDatabase_ThrowsPoolNotFoundException()
+        {
+
+        }
+
+        [Test]
+        public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
+        {
+            
+        }
+
+        [Test]
+        public void IsPoolNameInUse_PoolOnSameUserAndAddress_ReturnsFalse()
+        {
+            
+        }
+
+        [Test]
+        public void IsPoolNameInUse_PoolOnSameUserAndAddressAndName_ReturnsTrue()
+        {
+
+        }
 
         #endregion
 
         #region FindSpecificPool
 
-        // public void FindSpecificPool_EmptyDatabase_ThrowsUserNotFoundException()
-        // public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
-        // public void FindSpecificPool_UserExistsInDatabase_ThrowsPoolNotFoundException()
-        // public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
+        [Test]
+        public void FindSpecificPool_EmptyDatabase_ThrowsUserNotFoundException()
+        {
+            
+        }
+
+        [Test]
+        public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
+        {
+            
+        }
+
+        [Test]
+        public void FindSpecificPool_UserExistsInDatabase_ThrowsPoolNotFoundException()
+        {
+            
+        }
+
+        [Test]
+        public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
+        {
+            
+        }
 
         #endregion
 
