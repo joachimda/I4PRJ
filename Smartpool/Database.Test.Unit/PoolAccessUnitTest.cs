@@ -48,7 +48,7 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
-            _uut.AddPool();
+
         }
 
         [Test]
