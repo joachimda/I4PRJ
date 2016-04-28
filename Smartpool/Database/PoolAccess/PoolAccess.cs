@@ -28,7 +28,8 @@ namespace Smartpool
         {
             foreach (var pool in user.Pool)
             {
-                return pool.Address == address && pool.Name == name;
+                if (pool.Name == name)
+                    return true;
             }
 
             return false;
@@ -62,7 +63,7 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                if (!IsPoolNameInUse(user, address, name))
+                if (!IsPoolNameInUse(user, name))
                 {
                     throw new PoolNotFoundException();
                 }
