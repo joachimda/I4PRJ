@@ -10,7 +10,7 @@ namespace Smartpool.Connection.Server
     {
         public static int Main(String[] args)
         {
-            var socketListener = new AsynchronousSocketListener();
+            var socketListener = new AsynchronousSocketListener(new ResponseManager(new SmartpoolDB(new UserAccess(), new PoolAccess())));
             socketListener.StartListening();
             return 0;
         }

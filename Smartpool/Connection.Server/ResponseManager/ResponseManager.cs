@@ -1,10 +1,9 @@
 ﻿using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Smartpool.Connection.Server.Token;
 using Smartpool;
 using Smartpool.Connection.Model;
 
-namespace Smartpool.Connection.Server.ResponseManager
+namespace Smartpool.Connection.Server
 {
     public class ResponseManager : IResponseManager
     {
@@ -13,10 +12,10 @@ namespace Smartpool.Connection.Server.ResponseManager
         private readonly ITokenMsgResponse _tokenMsgResponse;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         
-        public ResponseManager()
+        public ResponseManager(ISmartpoolDB smartpoolDb)
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
-            _smartpoolDb = new SmartpoolDB(new UserAccess(), new PoolAccess());
+            _smartpoolDb = smartpoolDb;
             _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
         }
 
@@ -42,7 +41,7 @@ namespace Smartpool.Connection.Server.ResponseManager
                 case MessageTypes.TokenMsg:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
                     if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
-                        return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString);
+                        return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString, _tokenKeeper);
                     else return new GeneralResponseMsg(false, false);
 
                 case MessageTypes.AddUserRequest:
