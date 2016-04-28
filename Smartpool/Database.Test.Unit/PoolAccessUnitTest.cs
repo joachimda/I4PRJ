@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using System;
+using NSubstitute;
 using NUnit.Framework;
 using Smartpool;
 
@@ -34,10 +35,20 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
         {
-            _uut.AddPool("lasse@emil.com", "derproad 12", "baghave lille", 30);
 
-            Assert.That(_uut.IsPoolNameInUse("lasse@emil.com", "derproad 12", "baghave lille"), Is.True);
         }
+
+        [Test]
+        public void AddPool_AddingPoolWithNonNullUser_ThrowsUserNotFoundException()
+        {
+
+        }
+
+        // public void AddPool_AddingPoolWithZeroVolume_ThrowsArgumentException()
+        // public void AddPool_AddingPoolWith-5Volume_ThrowsArgumentException()
+        // public void AddPool_AddingIdenticalPool_ThrowsArgumentException()
+        // public void AddPool_AddingSecondPoolWithValidName_IsPoolNameInUseReturnsTrue()
+        // public void AddPool_AddingPoolOnNewAddressWithExistingName_IsPoolNameInUseReturnsTrue()
 
         #endregion
 
