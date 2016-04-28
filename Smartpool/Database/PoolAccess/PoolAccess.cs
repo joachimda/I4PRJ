@@ -47,7 +47,6 @@ namespace Smartpool
         /// <param name="email"> identifies the user email</param>
         /// <param name="address"> identifies the pool address</param>
         /// <param name="name">identifies the name of the pool</param>
-
         public void RemovePool(string email, string address, string name)
         {
             using (var db = new DatabaseContext())
