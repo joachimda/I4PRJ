@@ -48,7 +48,7 @@ namespace Smartpool
             Pool tmpPool = null;
             foreach (var pool in user.Pool)
             {
-                if (pool.Address == address && pool.Name == name)
+                if (pool.Name == name)
                 {
                     tmpPool = pool;
                 }
@@ -73,9 +73,11 @@ namespace Smartpool
 
                 foreach (var pool in user.Pool)
                 {
-                    if (pool.Address != address || pool.Name != name) continue;
-                    db.PoolSet.Remove(pool);
-                    db.SaveChanges();
+                    if (pool.Name == name)
+                    {
+                        db.PoolSet.Remove(pool);
+                        db.SaveChanges();
+                    }
                 }
             }
         }
