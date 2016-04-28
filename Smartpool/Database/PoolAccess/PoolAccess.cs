@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Smartpool;
 
 namespace Smartpool
@@ -8,14 +10,25 @@ namespace Smartpool
         /// <summary>
         /// Adds pool to a users poolSet.
         /// </summary
+        /// <param name="user">The user to recieve the pool</param>
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
-        /// <param name="user">The user to recieve the pool</param>
         /// <returns>true on succes, false on fail</returns>
-        public void AddPool(User user, string name, double volume)
+        public bool AddPool(User user, string name, double volume)
         {
+            if (IsPoolNameInUse(user, name))
+            {
+                return false;
+            }
+
             Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
-            user.Pool.Add(newPool);
+
+            using (var db = new DatabaseContext())
+            {
+                user.Pool.Add(newPool);
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -26,10 +39,15 @@ namespace Smartpool
         /// <returns>True if name is in use, false if name is availible</returns>
         public bool IsPoolNameInUse(User user, string name)
         {
-            foreach (var pool in user.Pool)
+            using (var db = new DatabaseContext())
             {
-                if (pool.Name == name)
-                    return true;
+                foreach (var pool in user.Pool)
+                {
+                    if (pool.Name == name)
+                    {
+                        return true;
+                    }
+                }
             }
 
             return false;
@@ -43,15 +61,21 @@ namespace Smartpool
         /// <returns></returns>
         public Pool FindSpecificPool(User user, string name)
         {
-            Pool tmpPool = null;
-            foreach (var pool in user.Pool)
+            List<Pool> listOfFoundPools = new List<Pool>();
+
+            using (var db = new DatabaseContext())
             {
-                if (pool.Name == name)
+                var searchPools = from search in db.PoolSet
+                                  where search.Name.Equals(name)
+                                  select search;
+
+                foreach (Pool pool in searchPools)
                 {
-                    tmpPool = pool;
+                    listOfFoundPools.Add(pool);
                 }
             }
-            return tmpPool;
+
+            return listOfFoundPools[0];
         }
 
         /// <summary>
@@ -59,31 +83,34 @@ namespace Smartpool
         /// </summary>
         /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public void RemovePool(User user, string name)
+        public bool RemovePool(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
                 if (!IsPoolNameInUse(user, name))
                 {
-                    throw new PoolNotFoundException();
+                    return false;
                 }
 
-                foreach (var pool in user.Pool)
+                var searchPool = from pool in db.PoolSet
+                                        where pool.Name == name
+                                        select pool;
+
+                foreach (Pool pool in searchPool)
                 {
-                    if (pool.Name == name)
-                    {
-                        db.PoolSet.Remove(pool);
-                        db.SaveChanges();
-                    }
+                    db.PoolSet.Remove(pool);
                 }
+
+                db.SaveChanges();
             }
+
+            return true;
         }
 
         /// <summary>
         /// Removes all pools i database
         /// </summary>
-        public
-        void DeleteAllPools()
+        public void DeleteAllPools()
         {
             using (var db = new DatabaseContext())
             {
