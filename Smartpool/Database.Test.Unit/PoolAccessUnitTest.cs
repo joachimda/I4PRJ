@@ -11,18 +11,23 @@ namespace Database.Test.Unit
         #region Setup
 
         private IPoolAccess _uut;
+        private IUserAccess _userAccess;
 
         [SetUp]
         public void Setup()
         {
             _uut.DeleteAllPools();
+
             _uut = new PoolAccess();
+            _userAccess = new UserAccess();
 
             User user = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
+            User user2 = new User() { Firstname = "Sir", Middelname = "Herp", Lastname = "Jensen", Email = "post@jensen.dk", Password = "mydogsname" };
 
             using (var db = new DatabaseContext())
             {
                 db.UserSet.Add(user);
+                db.UserSet.Add(user2);
                 db.SaveChanges();
             }
         }
@@ -31,6 +36,7 @@ namespace Database.Test.Unit
         public void Teardown()
         {
             _uut.DeleteAllPools();
+            _userAccess.DeleteAllUsers();
         }
 
         #endregion
