@@ -1,4 +1,4 @@
-﻿namespace Smartpool.Connection.Server.Token
+﻿namespace Smartpool.Connection.Server
 {
     public interface ITokenStringGenerator
     {

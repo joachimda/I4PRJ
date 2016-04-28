@@ -30,9 +30,8 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Volume" Type="float" Nullable="false" />
+    <Property Name="Volume" Type="float" Nullable="true" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
     <End Role="User" Type="Smartpool.Store.UserSet" Multiplicity="1" />
@@ -76,10 +75,9 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Volume" Type="Double" Nullable="false" />
+          <Property Name="Volume" Type="Double" Nullable="true" />
           <NavigationProperty Name="User" Relationship="Smartpool.UserPool" FromRole="Pool" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="UserPool">
           <End Type="Smartpool.User" Role="User" Multiplicity="1" />
@@ -118,7 +116,6 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Volume" ColumnName="Volume" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

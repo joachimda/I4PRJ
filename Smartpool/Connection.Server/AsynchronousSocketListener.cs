@@ -4,6 +4,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using Smartpool.Connection.Server;
 
 namespace Smartpool.Connection.Server
 {
@@ -22,11 +23,13 @@ namespace Smartpool.Connection.Server
 
     public class AsynchronousSocketListener
     {
+        private static IResponseManager _responseManager;
         // Thread signal.
         public static ManualResetEvent allDone = new ManualResetEvent(false);
 
-        public AsynchronousSocketListener()
+        public AsynchronousSocketListener(IResponseManager responseManager)
         {
+            _responseManager = responseManager;
         }
         public static string GetLocalIPAddress()
         {
@@ -139,10 +142,10 @@ namespace Smartpool.Connection.Server
 
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
 
-                    var responseManager = new ResponseManager.ResponseManager();
+                    
                     var jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
                     // Echo the data back to the client.
-                    Send(handler, JsonConvert.SerializeObject(responseManager.Respond(receivedString), jsonSettings));
+                    Send(handler, JsonConvert.SerializeObject(_responseManager.Respond(receivedString), jsonSettings));
 
                     
                 }

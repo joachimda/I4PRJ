@@ -16,9 +16,8 @@ namespace Smartpool
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Volume { get; set; }
+        public Nullable<double> Volume { get; set; }
         public int UserId { get; set; }
-        public string Address { get; set; }
     
         public virtual User User { get; set; }
     }

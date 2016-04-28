@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Smartpool;
 
 namespace Smartpool
@@ -6,69 +9,102 @@ namespace Smartpool
     {
         /// <summary>
         /// Adds pool to a users poolSet.
-        /// </summary>
-        /// <param name="email">Identifying the 'owner' of the pool</param>
+        /// </summary
+        /// <param name="user">The user to recieve the pool</param>
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
-        /// <param name="address">the address of the pool location</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(string email, string address, string name, double volume)
+        public bool AddPool(User user, string name, double volume)
         {
-            throw new System.NotImplementedException();
+            if (IsPoolNameInUse(user, name))
+            {
+                return false;
+            }
+
+            Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
+
+            using (var db = new DatabaseContext())
+            {
+                user.Pool.Add(newPool);
+            }
+
+            return true;
         }
 
         /// <summary>
         /// Checks if a specific pool name is in use on a specific address
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="name"></param>
-        /// <param name="address">the address of the pool location</param>
-        /// <returns></returns>
-        public bool IsPoolNameInUse(string email, string address, string name)
+        /// </summary
+        /// <param name="name">Name of the pool</param>
+        /// <param name="user">The user to run check against</param>
+        /// <returns>True if name is in use, false if name is availible</returns>
+        public bool IsPoolNameInUse(User user, string name)
         {
-            throw new System.NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                foreach (var pool in user.Pool)
+                {
+                    if (pool.Name == name)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
-        /// Finds all pools 
+        /// Finds a specific pool 
         /// </summary>
-        /// <param name="email"></param>
-        /// <param name="address">the address of the pool location</param>
+        /// <param name="user">Which user to search for pools in</param>
         /// <param name="name">the name of the pool</param>
         /// <returns></returns>
-        public Pool FindSpecificPool(string email, string address, string name)
+        public Pool FindSpecificPool(User user, string name)
         {
-            throw new System.NotImplementedException();
+            List<Pool> listOfFoundPools = new List<Pool>();
+
+            using (var db = new DatabaseContext())
+            {
+                var searchPools = from search in db.PoolSet
+                                  where search.Name.Equals(name)
+                                  select search;
+
+                foreach (Pool pool in searchPools)
+                {
+                    listOfFoundPools.Add(pool);
+                }
+            }
+
+            return listOfFoundPools[0];
         }
 
         /// <summary>
         /// Removes a specific pool
         /// </summary>
-        /// <param name="email"> identifies the user email</param>
-        /// <param name="address"> identifies the pool address</param>
+        /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-
-        public void RemovePool(string email, string address, string name)
+        public bool RemovePool(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
-                if (!IsPoolNameInUse(email, address, name))
+                if (!IsPoolNameInUse(user, name))
                 {
-                    throw new PoolNotFoundException();
+                    return false;
                 }
 
-                //Query for the pool
-                //var removePool = from user in db.UserSet
-                //                        where user.Email == email
-                //                        select user;
+                var searchPool = from pool in db.PoolSet
+                                        where pool.Name == name
+                                        select pool;
 
-                //foreach (var user in removeUserByEmail)
-                //{
-                //    db.UserSet.Remove(user);
-                //}
+                foreach (Pool pool in searchPool)
+                {
+                    db.PoolSet.Remove(pool);
+                }
 
                 db.SaveChanges();
             }
+
+            return true;
         }
 
         /// <summary>

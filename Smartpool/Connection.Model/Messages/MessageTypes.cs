@@ -10,24 +10,22 @@ namespace Smartpool.Connection.Model
             //User messages
             ChangePasswordRequest,
             LogoutRequest,
+            AllowAccessToPoolDataRequest, //Takes poolname and username/email for receiver
+            
             //Pool messages
             AddPoolRequest,
-            GetPoolRequest,
             UpdatePoolRequest,
             RemovePoolRequest,
             AddPoolPictureRequest,
+
+            GetPoolDataRequest, //Get all data about pool + latest sensor values
+            GetAllPoolNamesRequest, //Quick get for program startup
+            GetPoolHistoryRequest,
             //Monitor Unit messages
             AddMonitorUnitRequest,
-            GetMonitorUnitRequest,
             UpdateMonitorUnitRequest,
             RemoveMonitorUnitRequest,
-
-        //Not implemented
-        GetAllPoolNames, //Quick get for program startup
-        GetAllDataRequest, //For program startup
-        AllowAccessToPoolDataRequest, //Takes poolname/address and username/email for receiver
-        ChangeSensorTargetValueRequest, //Takes poolname and array of sensor name/number
-        GetSensorValueRequest, //Takes poolname and array of sensor name/number
+            ChangeSensorTargetValueRequest, //Takes poolname and array of sensor name/number
 
         //Non createable client message
         TokenMsg,
@@ -37,10 +35,8 @@ namespace Smartpool.Connection.Model
         GeneralResponse,
 
         //Not implemented
-        GetPoolResponse,
-        GetMonitorUnitResponse,
-        GetAllPoolNamesResponse,
-        GetAllDataResponse,
-        GetSensorValueResponse,
+        GetPoolDataResponse, //get poolinfo + latest sensor values
+        GetAllPoolNamesResponse, //get name + alert bool
+        GetPoolHistoryResponse,
     }
 }
