@@ -6,25 +6,26 @@ namespace Smartpool
     {
         /// <summary>
         /// Adds pool to a users poolSet.
-        /// </summary>
-        /// <param name="email">Identifying the 'owner' of the pool</param>
+        /// </summary
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
+        /// <param name="user">The user to recieve the pool</param>
         /// <param name="address">the address of the pool location</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(string email, string address, string name, double volume)
+        public void AddPool(User user, string address, string name, double volume)
         {
-            throw new System.NotImplementedException();
+            Pool newPool = new Pool {Address = address, Name = name, User = user, Volume = volume, UserId = user.Id};
+            user.Pool.Add(newPool);
         }
 
         /// <summary>
         /// Checks if a specific pool name is in use on a specific address
-        /// </summary>
-        /// <param name="email"></param>
+        /// </summary
         /// <param name="name"></param>
+        /// <param name="user">The user to run check against</param>
         /// <param name="address">the address of the pool location</param>
         /// <returns></returns>
-        public bool IsPoolNameInUse(string email, string address, string name)
+        public bool IsPoolNameInUse(User user, string address, string name)
         {
             throw new System.NotImplementedException();
         }
@@ -36,7 +37,7 @@ namespace Smartpool
         /// <param name="address">the address of the pool location</param>
         /// <param name="name">the name of the pool</param>
         /// <returns></returns>
-        public Pool FindSpecificPool(string email, string address, string name)
+        public Pool FindSpecificPool(User user, string address, string name)
         {
             throw new System.NotImplementedException();
         }
@@ -47,11 +48,11 @@ namespace Smartpool
         /// <param name="email"> identifies the user email</param>
         /// <param name="address"> identifies the pool address</param>
         /// <param name="name">identifies the name of the pool</param>
-        public void RemovePool(string email, string address, string name)
+        public void RemovePool(User user, string address, string name)
         {
             using (var db = new DatabaseContext())
             {
-                if (!IsPoolNameInUse(email, address, name))
+                if (!IsPoolNameInUse(user, address, name))
                 {
                     throw new PoolNotFoundException();
                 }
