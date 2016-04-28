@@ -5,6 +5,13 @@ namespace Smartpool
 {
     public class UserAccess : IUserAccess
     {
+        public ISmartpoolDB SmartpoolDb { get; set; }
+
+        public UserAccess(ISmartpoolDB smartpoolDb)
+        {
+            SmartpoolDb = smartpoolDb;
+        }
+
         /// <summary>
         /// Adds a 'User'-entry to database.
         /// </summary>

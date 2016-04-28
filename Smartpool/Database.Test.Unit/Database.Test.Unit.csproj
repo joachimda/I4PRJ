@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PoolAccessUnitTest.cs" />
+    <Compile Include="SPFactoryUnitTest.cs" />
     <Compile Include="UserAccessUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

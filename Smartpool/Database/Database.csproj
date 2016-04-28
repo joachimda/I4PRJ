@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\ISmartpoolFactory.cs" />
     <Compile Include="Smartpool\ISmartpoolDB.cs" />
     <Compile Include="PoolAccess\IPoolAccess.cs" />
     <Compile Include="Pool.cs">
