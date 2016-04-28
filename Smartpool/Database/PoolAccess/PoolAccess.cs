@@ -12,7 +12,7 @@ namespace Smartpool
         /// <param name="user">The user to recieve the pool</param>
         /// <param name="address">the address of the pool location</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(User user, string address, string name, double volume)
+        public void AddPool(User user, string address, string name, double volume)
         {
             Pool newPool = new Pool {Address = address, Name = name, User = user, Volume = volume, UserId = user.Id};
             user.Pool.Add(newPool);
