@@ -1,3 +1,4 @@
+using System.Linq;
 using Smartpool;
 
 namespace Smartpool
@@ -14,38 +15,51 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public void AddPool(User user, string address, string name, double volume)
         {
-            Pool newPool = new Pool {Address = address, Name = name, User = user, Volume = volume, UserId = user.Id};
+            Pool newPool = new Pool { Address = address, Name = name, User = user, Volume = volume, UserId = user.Id };
             user.Pool.Add(newPool);
         }
 
         /// <summary>
         /// Checks if a specific pool name is in use on a specific address
         /// </summary
-        /// <param name="name"></param>
+        /// <param name="name">Name of the pool</param>
         /// <param name="user">The user to run check against</param>
         /// <param name="address">the address of the pool location</param>
-        /// <returns></returns>
+        /// <returns>True if name is in use, false if name is availible</returns>
         public bool IsPoolNameInUse(User user, string address, string name)
         {
-            throw new System.NotImplementedException();
+            foreach (var pool in user.Pool)
+            {
+                return pool.Address == address && pool.Name == name;
+            }
+
+            return false;
         }
 
         /// <summary>
-        /// Finds all pools 
+        /// Finds a specific pool 
         /// </summary>
-        /// <param name="email"></param>
+        /// <param name="user">Which user to search for pools in</param>
         /// <param name="address">the address of the pool location</param>
         /// <param name="name">the name of the pool</param>
         /// <returns></returns>
         public Pool FindSpecificPool(User user, string address, string name)
         {
-            throw new System.NotImplementedException();
+            Pool tmpPool = null;
+            foreach (var pool in user.Pool)
+            {
+                if (pool.Address == address && pool.Name == name)
+                {
+                    tmpPool = pool;
+                }
+            }
+            return tmpPool;
         }
 
         /// <summary>
         /// Removes a specific pool
         /// </summary>
-        /// <param name="email"> identifies the user email</param>
+        /// <param name="user">Identifies the administrating user</param>
         /// <param name="address"> identifies the pool address</param>
         /// <param name="name">identifies the name of the pool</param>
         public void RemovePool(User user, string address, string name)
@@ -57,24 +71,20 @@ namespace Smartpool
                     throw new PoolNotFoundException();
                 }
 
-                //Query for the pool
-                //var removePool = from user in db.UserSet
-                //                        where user.Email == email
-                //                        select user;
-
-                //foreach (var user in removeUserByEmail)
-                //{
-                //    db.UserSet.Remove(user);
-                //}
-
-                db.SaveChanges();
+                foreach (var pool in user.Pool)
+                {
+                    if (pool.Address != address || pool.Name != name) continue;
+                    db.PoolSet.Remove(pool);
+                    db.SaveChanges();
+                }
             }
         }
 
         /// <summary>
         /// Removes all pools i database
         /// </summary>
-        public void DeleteAllPools()
+        public
+        void DeleteAllPools()
         {
             using (var db = new DatabaseContext())
             {
