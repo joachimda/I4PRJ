@@ -91,13 +91,13 @@ namespace Smartpool
         /// <param name="name">identifies the name of the pool</param>
         public bool RemovePool(User user, string name)
         {
+            if (!IsPoolNameInUse(user, name))
+            {
+                return false;
+            }
+
             using (var db = new DatabaseContext())
             {
-                if (!IsPoolNameInUse(user, name))
-                {
-                    return false;
-                }
-
                 var searchPool = from pool in user.Pool
                                  where pool.Name == name
                                  select pool;
