@@ -50,9 +50,12 @@ namespace Smartpool
                                     where pool.Name == name
                                     select pool;
 
-                if (searchPoolSet.Any())
+                foreach (Pool pool in searchPoolSet)
                 {
-                    return false;
+                    if (pool.UserId == user.Id)
+                    {
+                        return false;
+                    }
                 }
             }
 
