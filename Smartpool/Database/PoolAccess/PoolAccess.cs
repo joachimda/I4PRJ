@@ -20,6 +20,10 @@ namespace Smartpool
             {
                 return false;
             }
+            if (volume <= 0)
+            {
+                return false;
+            }
 
             Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
 
@@ -43,7 +47,7 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var pool in db.PoolSet)
+                foreach (var pool in user.Pool)
                 {
                     if (pool.Name == name)
                     {

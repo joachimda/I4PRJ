@@ -54,37 +54,46 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithNonNullUser_ThrowsUserNotFoundException()
         {
-
+            Assert.DoesNotThrow(() => _uut.AddPool(_user1, "poolname", 89));
         }
 
         [Test]
-        public void AddPool_AddingPoolWithZeroVolume_ThrowsArgumentException()
+        public void AddPool_AddingPoolWithZeroVolume_ReturnsFalse()
         {
-
+            Assert.That(_uut.AddPool(_user1, "name", 0), Is.False);
         }
 
         [Test]
-        public void AddPool_AddingPoolWithNeg5Volume_ThrowsArgumentException()
+        public void AddPool_AddingPoolWithNeg5Volume_ReturnsFalse()
         {
-
+            Assert.That(_uut.AddPool(_user1, "name", -5), Is.False);
         }
 
         [Test]
-        public void AddPool_AddingIdenticalPool_ThrowsArgumentException()
+        public void AddPool_AddingIdenticalPool_ReturnsFalse()
         {
-
+            _uut.AddPool(_user1, "name", 4);
+            Assert.That(_uut.AddPool(_user1, "name", 4), Is.False);
         }
 
         [Test]
         public void AddPool_AddingSecondPoolWithValidName_IsPoolNameInUseReturnsTrue()
         {
+            _uut.AddPool(_user1, "name", 8);
 
+            bool shouldBeTrue = _uut.AddPool(_user1, "othername", 3);
+
+            Assert.That(shouldBeTrue, Is.True);
         }
 
         [Test]
-        public void AddPool_AddingPoolOnNewAddressWithExistingName_IsPoolNameInUseReturnsTrue()
+        public void AddPool_AddingPoolToOtherUserWithSameName_ReturnTrue()
         {
+            _uut.AddPool(_user2, "name", 8);
 
+            bool beTrue = _uut.AddPool(_user1, "name", 8);
+
+            Assert.That(beTrue, Is.True);
         }
 
         #endregion
@@ -94,37 +103,24 @@ namespace Database.Test.Unit
         [Test]
         public void IsPoolNameInUse_EmptyDatabase_ReturnsFalse()
         {
-
+            Assert.That(_uut.IsPoolNameInUse(_user1, "somename"), Is.False);
         }
 
         [Test]
-        public void IsPoolNameInUse_EmptyDatabase_ThrowsUserNotFoundException()
+        public void IsPoolNameInUse_PoolExists_ReturnsTrue()
         {
-
-        }
-
-        [Test]
-        public void IsPoolNameInUse_EmptyDatabase_ThrowsPoolNotFoundException()
-        {
-
+            _uut.AddPool(_user2, "unknown", 8);
+            Assert.That(_uut.IsPoolNameInUse(_user2, "unknown"), Is.True);
         }
 
         [Test]
         public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
         {
-            
-        }
+            _uut.AddPool(_user1, "name", 8);
 
-        [Test]
-        public void IsPoolNameInUse_PoolOnSameUserAndAddress_ReturnsFalse()
-        {
-            
-        }
+            bool mustBeFalse = _uut.IsPoolNameInUse(_user1, "othername");
 
-        [Test]
-        public void IsPoolNameInUse_PoolOnSameUserAndAddressAndName_ReturnsTrue()
-        {
-
+            Assert.That(mustBeFalse, Is.False);
         }
 
         #endregion
@@ -153,7 +149,7 @@ namespace Database.Test.Unit
         public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
         {
             _uut.AddPool(_user1, "poolio", 50);
-
+            
             Pool pool = _uut.FindSpecificPool(_user1, "poolio");
             Assert.That(pool.Name, Is.EqualTo("poolio"));
 
