@@ -1,4 +1,13 @@
-﻿using System.Windows;
+﻿//========================================================================
+// DESCR.   :   Codebehind that calls the presenter.
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  EN      Initial version with event for Stats
+// 1.01 EN      Added event for History
+// 1.02 EN      
+//========================================================================
+
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
