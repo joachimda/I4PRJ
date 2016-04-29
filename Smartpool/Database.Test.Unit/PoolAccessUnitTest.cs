@@ -52,7 +52,7 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void AddPool_AddingPoolWithNonNullUser_ThrowsUserNotFoundException()
+        public void AddPool_AddingPoolWithValidUser_ThrowsUserNotFoundException()
         {
             Assert.DoesNotThrow(() => _uut.AddPool(_user1, "poolname", 89));
         }
