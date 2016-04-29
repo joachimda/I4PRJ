@@ -98,7 +98,7 @@ namespace Smartpool
                     return false;
                 }
 
-                var searchPool = from pool in db.PoolSet
+                var searchPool = from pool in user.Pool
                                  where pool.Name == name
                                  select pool;
 
