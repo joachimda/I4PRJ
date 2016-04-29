@@ -16,7 +16,7 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(User user, string name, double volume)
         {
-            if (IsPoolNameInUse(user, name))
+            if (IsPoolNameAvailable(user, name) == false)
             {
                 return false;
             }
@@ -30,7 +30,6 @@ namespace Smartpool
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
-                //user.Pool.Add(newPool);
                 db.SaveChanges();
             }
 
@@ -42,21 +41,22 @@ namespace Smartpool
         /// </summary
         /// <param name="name">Name of the pool</param>
         /// <param name="user">The user to run check against</param>
-        /// <returns>True if name is in use, false if name is availible</returns>
-        public bool IsPoolNameInUse(User user, string name)
+        /// <returns>True if name is available, false if name is in use</returns>
+        public bool IsPoolNameAvailable(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var pool in user.Pool)
+                var searchPoolSet = from pool in db.PoolSet
+                                    where pool.Name == name
+                                    select pool;
+
+                if (searchPoolSet.Any())
                 {
-                    if (pool.Name == name)
-                    {
-                        return true;
-                    }
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -89,22 +89,25 @@ namespace Smartpool
         /// </summary>
         /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public bool RemovePool(User user, string name)
+        public bool RemovePool(User userToFind, string name)
         {
-            if (!IsPoolNameInUse(user, name))
+            if (IsPoolNameAvailable(userToFind, name))
             {
                 return false;
             }
 
             using (var db = new DatabaseContext())
             {
-                var searchPool = from pool in user.Pool
-                                 where pool.Name == name
-                                 select pool;
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.Name == name
+                                    select pool;
 
-                foreach (Pool pool in searchPool)
+                foreach (Pool pool in searchForPool)
                 {
-                    db.PoolSet.Remove(pool);
+                    if (pool.UserId == userToFind.Id)
+                    {
+                        db.PoolSet.Remove(pool);
+                    }
                 }
 
                 db.SaveChanges();

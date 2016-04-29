@@ -44,11 +44,11 @@ namespace Database.Test.Unit
         #region AddPool
 
         [Test]
-        public void AddPool_AddingPoolWithExistingUser_IsPoolNameInUseReturnsTrue()
+        public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
         {
             _uut.AddPool(_user1, "poolname", 4);
 
-            Assert.That(_uut.IsPoolNameInUse(_user1, "poolname"), Is.True);
+            Assert.That(_uut.IsPoolNameAvailable(_user1, "poolname"), Is.False);
         }
 
         [Test]
@@ -77,7 +77,7 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void AddPool_AddingSecondPoolWithValidName_IsPoolNameInUseReturnsTrue()
+        public void AddPool_AddingSecondPoolWithValidName_IsPoolNameAvailableReturnsTrue()
         {
             _uut.AddPool(_user1, "name", 8);
 
@@ -98,29 +98,29 @@ namespace Database.Test.Unit
 
         #endregion
 
-        #region IsPoolNameInUse
+        #region IsPoolNameAvailable
 
         [Test]
-        public void IsPoolNameInUse_EmptyDatabase_ReturnsFalse()
+        public void IsPoolNameAvailable_EmptyDatabase_IsPoolNameAvailableReturnsTrue()
         {
-            Assert.That(_uut.IsPoolNameInUse(_user1, "somename"), Is.False);
+            Assert.That(_uut.IsPoolNameAvailable(_user1, "somename"), Is.True);
         }
 
         [Test]
-        public void IsPoolNameInUse_PoolExists_ReturnsTrue()
+        public void IsPoolNameAvailable_PoolExists_IsPoolNameAvailableReturnsFalse()
         {
             _uut.AddPool(_user2, "unknown", 8);
-            Assert.That(_uut.IsPoolNameInUse(_user2, "unknown"), Is.True);
+            Assert.That(_uut.IsPoolNameAvailable(_user2, "unknown"), Is.False);
         }
 
         [Test]
-        public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
+        public void IsPoolNameAvailable_AddedOtherOriginalPool_IsPoolNameAvailableReturnsTrue()
         {
             _uut.AddPool(_user1, "name", 8);
 
-            bool mustBeFalse = _uut.IsPoolNameInUse(_user1, "othername");
+            bool mustBeTrue = _uut.IsPoolNameAvailable(_user1, "othername");
 
-            Assert.That(mustBeFalse, Is.False);
+            Assert.That(mustBeTrue, Is.True);
         }
 
         #endregion
@@ -130,26 +130,26 @@ namespace Database.Test.Unit
         [Test]
         public void FindSpecificPool_EmptyDatabase_ThrowsUserNotFoundException()
         {
-            
+
         }
 
         [Test]
         public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
         {
-            
+
         }
 
         [Test]
         public void FindSpecificPool_UserExistsInDatabase_ThrowsPoolNotFoundException()
         {
-            
+
         }
 
         [Test]
         public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
         {
             _uut.AddPool(_user1, "poolio", 50);
-            
+
             Pool pool = _uut.FindSpecificPool(_user1, "poolio");
             Assert.That(pool.Name, Is.EqualTo("poolio"));
 
@@ -160,11 +160,14 @@ namespace Database.Test.Unit
         #region RemovePool
 
         [Test]
-        public void RemovePool_RemoveExistingPool_IsPoolNameInUseReturnsFalse()
+        public void RemovePool_RemoveExistingPool_IsPoolNameAvailableReturnsTrue()
         {
-            _uut.AddPool(_user1, "someKindOfPool", 100);
-            _uut.RemovePool(_user1, "someKindOfPool");
-            Assert.That(_uut.IsPoolNameInUse(_user1, "someKindOfPool"), Is.False);
+            string poolname = "helloworld";
+
+            _uut.AddPool(_user1, poolname, 9);
+            _uut.RemovePool(_user1, poolname);
+
+            Assert.That(_uut.IsPoolNameAvailable(_user1, poolname), Is.True);
         }
 
         [Test]
