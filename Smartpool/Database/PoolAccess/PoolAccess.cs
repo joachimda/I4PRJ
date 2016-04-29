@@ -47,7 +47,7 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var pool in db.PoolSet)
+                foreach (var pool in user.Pool)
                 {
                     if (pool.Name == name)
                     {
