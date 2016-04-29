@@ -162,13 +162,15 @@ namespace Database.Test.Unit
         [Test]
         public void RemovePool_RemoveExistingPool_IsPoolNameInUseReturnsFalse()
         {
-
+            _uut.AddPool(_user1, "someKindOfPool", 100);
+            _uut.RemovePool(_user1, "someKindOfPool");
+            Assert.That(_uut.IsPoolNameInUse(_user1, "someKindOfPool"), Is.False);
         }
 
         [Test]
         public void RemovePool_PoolNotInDatabase_ThrowsPoolNotFoundException()
         {
-
+            Assert.That(_uut.RemovePool(_user1, "ThisPoolIsNotHere"), Is.False);
         }
 
         #endregion
