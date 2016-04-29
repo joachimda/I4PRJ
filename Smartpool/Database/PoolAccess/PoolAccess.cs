@@ -72,6 +72,11 @@ namespace Smartpool
         {
             List<Pool> listOfFoundPools = new List<Pool>();
 
+            if (IsPoolNameAvailable(user, name) == true)
+            {
+                throw new PoolNotFoundException();
+            }
+
             using (var db = new DatabaseContext())
             {
                 var searchPools = from search in db.PoolSet

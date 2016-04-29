@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using NSubstitute;
 using NUnit.Framework;
 using Smartpool;
@@ -126,33 +127,37 @@ namespace Database.Test.Unit
         #endregion
 
         #region FindSpecificPool
-
-        [Test]
-        public void FindSpecificPool_EmptyDatabase_ThrowsUserNotFoundException()
-        {
-
-        }
-
+        
         [Test]
         public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
         {
+            User derp = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk" };
 
+            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(derp, "thispooldoesnotexist"));
         }
 
         [Test]
-        public void FindSpecificPool_UserExistsInDatabase_ThrowsPoolNotFoundException()
+        public void FindSpecificPool_UserExistsInDatabaseButWithoutPool_ThrowsPoolNotFoundException()
         {
-
+            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(_user1, "thispooldoesnotexist"));
         }
 
         [Test]
-        public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
+        public void FindSpecificPool_PoolIsInDatabase_ReturnsPoolWithCorrectName()
         {
             _uut.AddPool(_user1, "poolio", 50);
 
             Pool pool = _uut.FindSpecificPool(_user1, "poolio");
             Assert.That(pool.Name, Is.EqualTo("poolio"));
+        }
 
+        [Test]
+        public void FindSpecificPool_PoolIsInDatabase_ReturnsPoolWithCorrectUserId()
+        {
+            _uut.AddPool(_user1, "poolio", 50);
+
+            Pool pool = _uut.FindSpecificPool(_user1, "poolio");
+            Assert.That(pool.UserId, Is.EqualTo(_user1.Id));
         }
 
         #endregion
