@@ -152,7 +152,11 @@ namespace Database.Test.Unit
         [Test]
         public void FindSpecificPool_PoolIsInDatabase_ReturnsCorrectPool()
         {
-            
+            _uut.AddPool(_user1, "poolio", 50);
+
+            Pool pool = _uut.FindSpecificPool(_user1, "poolio");
+            Assert.That(pool.Name, Is.EqualTo("poolio"));
+
         }
 
         #endregion
@@ -168,7 +172,7 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void RemovePool_PoolNotInDatabase_ThrowsPoolNotFoundException()
+        public void RemovePool_PoolNotInDatabase_RemovePoolReturnsFalse()
         {
             Assert.That(_uut.RemovePool(_user1, "ThisPoolIsNotHere"), Is.False);
         }
