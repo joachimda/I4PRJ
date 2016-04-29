@@ -86,6 +86,16 @@ namespace Database.Test.Unit
             Assert.That(shouldBeTrue, Is.True);
         }
 
+        [Test]
+        public void AddPool_AddingPoolToOtherUserWithSameName_ReturnTrue()
+        {
+            _uut.AddPool(_user2, "name", 8);
+
+            bool beTrue = _uut.AddPool(_user1, "name", 8);
+
+            Assert.That(beTrue, Is.True);
+        }
+
         #endregion
 
         #region IsPoolNameInUse
@@ -104,27 +114,13 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void IsPoolNameInUse_EmptyDatabase_ThrowsPoolNotFoundException()
-        {
-
-        }
-
-        [Test]
         public void IsPoolNameInUse_AddedOtherOriginalPool_ReturnsFalse()
         {
+            _uut.AddPool(_user1, "name", 8);
 
-        }
+            bool mustBeFalse = _uut.IsPoolNameInUse(_user1, "othername");
 
-        [Test]
-        public void IsPoolNameInUse_PoolOnSameUserAndAddress_ReturnsFalse()
-        {
-
-        }
-
-        [Test]
-        public void IsPoolNameInUse_PoolOnSameUserAndAddressAndName_ReturnsTrue()
-        {
-
+            Assert.That(mustBeFalse, Is.False);
         }
 
         #endregion
