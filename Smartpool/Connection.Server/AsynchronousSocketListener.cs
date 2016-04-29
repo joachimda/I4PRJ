@@ -4,7 +4,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
-using Smartpool.Connection.Server;
 
 namespace Smartpool.Connection.Server
 {

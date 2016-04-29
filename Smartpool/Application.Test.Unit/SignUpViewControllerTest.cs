@@ -8,7 +8,6 @@
 
 using NUnit.Framework;
 using NSubstitute;
-using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 

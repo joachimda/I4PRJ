@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http.Headers;
-using NSubstitute;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Smartpool;
 
 namespace Database.Test.Unit
