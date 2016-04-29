@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Separator Grid.Column="0" Grid.ColumnSpan="3" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
+            <Separator Grid.Column="0" Grid.ColumnSpan="5" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
             <Button x:Name="PART_StatViewButton" Grid.Column="0" Grid.Row="0" Content="Stats" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
             <Button x:Name="PART_HistoryViewButton" Grid.Column="1" Grid.Row="0" Content="History" Template="{StaticResource SpTabControlButton}" 
