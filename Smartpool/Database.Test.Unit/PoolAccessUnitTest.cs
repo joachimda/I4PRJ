@@ -18,8 +18,6 @@ namespace Database.Test.Unit
         [SetUp]
         public void Setup()
         {
-            _uut.DeleteAllPools();
-
             _uut = new PoolAccess();
             _userAccess = new UserAccess();
 

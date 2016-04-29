@@ -25,7 +25,9 @@ namespace Smartpool
 
             using (var db = new DatabaseContext())
             {
-                user.Pool.Add(newPool);
+                db.PoolSet.Add(newPool);
+                //user.Pool.Add(newPool);
+                db.SaveChanges();
             }
 
             return true;
@@ -41,7 +43,7 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var pool in user.Pool)
+                foreach (var pool in db.PoolSet)
                 {
                     if (pool.Name == name)
                     {
@@ -93,8 +95,8 @@ namespace Smartpool
                 }
 
                 var searchPool = from pool in db.PoolSet
-                                        where pool.Name == name
-                                        select pool;
+                                 where pool.Name == name
+                                 select pool;
 
                 foreach (Pool pool in searchPool)
                 {
