@@ -20,8 +20,7 @@
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter TargetName="Bd" Property="Opacity" Value="0.2"/>
             </Trigger>
             <!-- Highlight -->
             <Trigger Property="IsKeyboardFocusWithin" Value="True" >
@@ -42,6 +41,7 @@
                     <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="2" Opacity="0.3" />
                 </Border.Effect>
             </Border>
+            
             <TextBlock IsHitTestVisible="False" Text="{Binding Path=(local:ThemeProperties.PlaceholderText), RelativeSource={RelativeSource TemplatedParent}}" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" Foreground="#FF808080">
                 <TextBlock.Style>
@@ -59,8 +59,7 @@
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" TargetName="Bd"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                <Setter TargetName="Bd" Property="Opacity" Value="0.2"/>
             </Trigger>
             <!-- Highlight -->
             <Trigger Property="IsKeyboardFocusWithin" Value="True" >

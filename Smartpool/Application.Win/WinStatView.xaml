@@ -7,10 +7,20 @@
         xmlns:local="clr-namespace:Smartpool.Application.Win"
         x:Class="Smartpool.Application.Win.WinStatView"
         mc:Ignorable="d"
-        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" Height="300" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
     <Grid>
-        <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Background="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Background}"/>
-        <local:StatViewer x:Name="StatViewer" Content="StatViewer" Template="{StaticResource StatViewer}" HorizontalAlignment="Stretch"/>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" />
+        <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />
+        <local:StatViewer Grid.Row="2" x:Name="PhStatViewer" Content="pH" Template="{StaticResource StatViewer}"/>
+        <local:StatViewer Grid.Row="3" x:Name="ChlorineStatViewer" Content="Chlorine" Template="{StaticResource StatViewer}"/>
+        <local:StatViewer Grid.Row="4" x:Name="HumidityStatViewer" Content="Humidity" Template="{StaticResource StatViewer}"/>
+
     </Grid>
 </Window>
