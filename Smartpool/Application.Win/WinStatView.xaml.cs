@@ -5,6 +5,7 @@
 // 1.0  EN      Initial version with event for Stats
 // 1.01 EN      Added event for History
 // 1.02 EN      Added event for AddPool and EditPool
+// 1.03 EN      Added more statviewers
 //========================================================================
 
 using System.Windows;
@@ -44,7 +45,10 @@ namespace Smartpool.Application.Win
 
         private void SpTabControl1_ShowAddPoolView(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Show AddPool");
+            //MessageBox.Show("Show AddPool");
+            Window view = new WinAddPoolView();
+            view.Show();
+            this.Close();
         }
 
         private void SpTabControl1_ShowEditPoolView(object sender, RoutedEventArgs e)
