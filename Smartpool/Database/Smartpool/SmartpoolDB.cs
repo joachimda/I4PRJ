@@ -10,5 +10,11 @@
             UserAccess = userAccess;
             PoolAccess = poolAccess;
         }
+
+        public void ClearEntireDatabase()
+        {
+            PoolAccess.DeleteAllPools();
+            UserAccess.DeleteAllUsers();
+        }
     }
 }

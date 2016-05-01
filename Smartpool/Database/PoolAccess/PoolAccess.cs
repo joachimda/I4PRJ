@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Smartpool;
 
 namespace Smartpool
 {
@@ -16,7 +14,11 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(User user, string name, double volume)
         {
-            if (IsPoolNameInUse(user, name))
+            if (IsPoolNameAvailable(user, name) == false)
+            {
+                return false;
+            }
+            if (volume <= 0)
             {
                 return false;
             }
@@ -25,7 +27,8 @@ namespace Smartpool
 
             using (var db = new DatabaseContext())
             {
-                user.Pool.Add(newPool);
+                db.PoolSet.Add(newPool);
+                db.SaveChanges();
             }
 
             return true;
@@ -36,21 +39,25 @@ namespace Smartpool
         /// </summary
         /// <param name="name">Name of the pool</param>
         /// <param name="user">The user to run check against</param>
-        /// <returns>True if name is in use, false if name is availible</returns>
-        public bool IsPoolNameInUse(User user, string name)
+        /// <returns>True if name is available, false if name is in use</returns>
+        public bool IsPoolNameAvailable(User user, string name)
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var pool in user.Pool)
+                var searchPoolSet = from pool in db.PoolSet
+                                    where pool.Name == name
+                                    select pool;
+
+                foreach (Pool pool in searchPoolSet)
                 {
-                    if (pool.Name == name)
+                    if (pool.UserId == user.Id)
                     {
-                        return true;
+                        return false;
                     }
                 }
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -62,6 +69,11 @@ namespace Smartpool
         public Pool FindSpecificPool(User user, string name)
         {
             List<Pool> listOfFoundPools = new List<Pool>();
+
+            if (IsPoolNameAvailable(user, name) == true)
+            {
+                throw new PoolNotFoundException();
+            }
 
             using (var db = new DatabaseContext())
             {
@@ -83,22 +95,25 @@ namespace Smartpool
         /// </summary>
         /// <param name="user">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public bool RemovePool(User user, string name)
+        public bool RemovePool(User userToFind, string name)
         {
+            if (IsPoolNameAvailable(userToFind, name))
+            {
+                return false;
+            }
+
             using (var db = new DatabaseContext())
             {
-                if (!IsPoolNameInUse(user, name))
-                {
-                    return false;
-                }
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.Name == name
+                                    select pool;
 
-                var searchPool = from pool in db.PoolSet
-                                        where pool.Name == name
-                                        select pool;
-
-                foreach (Pool pool in searchPool)
+                foreach (Pool pool in searchForPool)
                 {
-                    db.PoolSet.Remove(pool);
+                    if (pool.UserId == userToFind.Id)
+                    {
+                        db.PoolSet.Remove(pool);
+                    }
                 }
 
                 db.SaveChanges();

@@ -1,10 +1,9 @@
-﻿using Smartpool;
-
-namespace Smartpool
+﻿namespace Smartpool
 {
     public interface ISmartpoolDB
     {
         IUserAccess UserAccess { get; }
         IPoolAccess PoolAccess { get; }
+        void ClearEntireDatabase();
     }
 }
