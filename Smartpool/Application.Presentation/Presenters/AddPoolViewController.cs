@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using Smartpool.Application.Model;
 using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
@@ -36,6 +37,7 @@ namespace Smartpool.Application.Presentation
 
         public AddPoolViewController(IAddPoolView view, IClientMessager clientMessager = null)
         {
+            // Stored injected dependencies
             _view = view;
             _clientMessager = clientMessager;
         }
@@ -44,12 +46,27 @@ namespace Smartpool.Application.Presentation
 
         public void AddPoolButtonPressed()
         {
-            // Awaiting no
-            _view.DisplayAlert("You found a shiny Magikarp!", "Splash, splash...");
+            var userName = Session.SharedSession.UserName;
+            var tokenString = Session.SharedSession.TokenString;
+
+            // NOTE: Pool address parameter is redundant
+            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _poolName, ActualVolume);
+            var response = _clientMessager.SendMessage(addPoolMessage);
+            var addPoolResponse = (GeneralResponseMsg) response;
+
+            // Act on response
+            if (addPoolResponse.RequestExecutedSuccesfully)
+            {
+                _view.PoolAdded();
+            } else if (addPoolResponse.TokenStillActive == false)
+            {
+                _view.DisplayAlert("Invalid action","Your login is no longer active, please login again.");
+            }
         }
 
        public void DidChangeText(AddPoolTextField textField, string text)
         {
+            // Switch based on text field type and set the proper variable
             switch (textField)
             {
                 case AddPoolTextField.PoolName:
@@ -76,6 +93,7 @@ namespace Smartpool.Application.Presentation
                     break;
             }
 
+            // Update the pool button state since input could have changed the expected state
             UpdateAddPoolButton();
         }
 
@@ -85,10 +103,12 @@ namespace Smartpool.Application.Presentation
         {
             if (userSpecifiedVolume)
             {
+                // Calculating based on volume input so dimensions are redundant
                 _dimensions[0] = "";
                 _dimensions[1] = "";
                 _dimensions[2] = "";
 
+                // Try parsing the input string, otherwise set to 0
                 try
                 {
                     ActualVolume = double.Parse(_volume);
@@ -100,8 +120,10 @@ namespace Smartpool.Application.Presentation
             }
             else
             {
+                // Calculating based on dimensions input so volume is redundant
                 _volume = "";
 
+                // Try parsing the input string, otherwise set to 0
                 try
                 {
                     ActualVolume = double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
@@ -120,6 +142,7 @@ namespace Smartpool.Application.Presentation
 
         private bool ShouldEnableAddPoolButton()
         {
+            // Returns true if a pool name and serial number is specified
             if (_poolName.Length == 0) return false;
             if (_serialNumber.Length == 0) return false;
             return true;
