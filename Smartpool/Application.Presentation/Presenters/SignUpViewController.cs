@@ -103,9 +103,12 @@ namespace Smartpool.Application.Presentation
 
         public void SignUp()
         {
-            // Missing implementation
-            var successful = false;
-            if (successful)
+            // send message to client
+            var signUpRequest = new AddUserRequestMsg(_name, _email, _passwords[0]);
+            var response = _clientMessager.SendMessage(signUpRequest);
+            var generalResponse = (GeneralResponseMsg) response;
+
+            if (generalResponse.RequestExecutedSuccesfully)
             {
                 _view.SignUpAccepted();
             }
