@@ -32,12 +32,18 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Separator Grid.Column="0" Grid.ColumnSpan="3" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
+            <Separator Grid.Column="0" Grid.ColumnSpan="5" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
             <Button x:Name="PART_StatViewButton" Grid.Column="0" Grid.Row="0" Content="Stats" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
             <Button x:Name="PART_HistoryViewButton" Grid.Column="1" Grid.Row="0" Content="History" Template="{StaticResource SpTabControlButton}" 
+                    Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
+            <Button x:Name="PART_AddPoolViewButton" Grid.Column="2" Grid.Row="0" Content="Add Pool" Template="{StaticResource SpTabControlButton}" 
+                    Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
+            <Button x:Name="PART_EditPoolViewButton" Grid.Column="3" Grid.Row="0" Content="Edit Pool" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
 
         </Grid>
