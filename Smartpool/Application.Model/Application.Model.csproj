@@ -41,6 +41,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Session.cs" />
     <Compile Include="UserSessionToken.cs" />
     <Compile Include="Redundant\IAuthenticator.cs" />
     <Compile Include="Redundant\IUserSession.cs" />

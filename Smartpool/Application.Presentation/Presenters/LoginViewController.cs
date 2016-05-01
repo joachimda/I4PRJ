@@ -8,6 +8,7 @@
 //              client during construction
 //========================================================================
 
+using Smartpool.Application.Model;
 using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
@@ -93,8 +94,13 @@ namespace Smartpool.Application.Presentation
 
             if (loginResponse.LoginSuccessful)
             {
-				_view.LoginAccepted ();
                 // Save token
+                var session = Session.SharedSession;
+                session.TokenString = loginResponse.TokenString;
+                session.UserName = _email;
+
+                // Notify view
+                _view.LoginAccepted (); 
             }
             else {
                 // Reset password and display message
