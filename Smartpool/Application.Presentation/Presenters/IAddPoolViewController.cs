@@ -1,6 +1,6 @@
 ﻿//========================================================================
-// FILENAME :   ILoginViewController.cs
-// DESCR.   :   Interface for login view presenters
+// FILENAME :   IAddPoolViewController.cs
+// DESCR.   :   Interface for the add pool presenters
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
