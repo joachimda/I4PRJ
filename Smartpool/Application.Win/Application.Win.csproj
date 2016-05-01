@@ -79,6 +79,9 @@
     <Compile Include="StyleableWindow\WindowMaximizeCommand.cs" />
     <Compile Include="StyleableWindow\WindowMinimizeCommand.cs" />
     <Compile Include="StyleableWindow\WindowResizeBehavior.cs" />
+    <Compile Include="WinAddPoolView.xaml.cs">
+      <DependentUpon>WinAddPoolView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLoginView.xaml.cs" />
     <Compile Include="WinStatView.xaml.cs" />
     <Compile Include="App.xaml.cs">
@@ -97,6 +100,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Theme\RadioButtonTheme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Theme\SpTabControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +115,10 @@
     <Page Include="Theme\WindowTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WinAddPoolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinLoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
