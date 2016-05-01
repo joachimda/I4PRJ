@@ -1,6 +1,6 @@
 ﻿//========================================================================
 // FILENAME :   AddPoolViewController.cs
-// DESCR.   :   Default implementation of the login view presenter
+// DESCR.   :   Default implementation of the add pool view presenter
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -107,6 +107,7 @@ namespace Smartpool.Application.Presentation
                 _dimensions[0] = "";
                 _dimensions[1] = "";
                 _dimensions[2] = "";
+                _view.ClearDimensionText();
 
                 // Try parsing the input string, otherwise set to 0
                 try
@@ -122,6 +123,7 @@ namespace Smartpool.Application.Presentation
             {
                 // Calculating based on dimensions input so volume is redundant
                 _volume = "";
+                _view.ClearVolumeText();
 
                 // Try parsing the input string, otherwise set to 0
                 try

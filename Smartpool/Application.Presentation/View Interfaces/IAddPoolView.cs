@@ -17,6 +17,16 @@ namespace Smartpool.Application.Presentation
         void SetSerialNumberText(string text);
 
         /// <summary>
+        /// Clears the text of the volume text field
+        /// </summary>
+        void ClearVolumeText();
+
+        /// <summary>
+        /// Clears the text of all the dimension text fields
+        /// </summary>
+        void ClearDimensionText();
+
+        /// <summary>
         /// Sets the state of the add pool button
         /// </summary>
         void SetAddPoolButtonEnabled(bool enabled);
