@@ -1,11 +1,9 @@
 ﻿//========================================================================
-// FILENAME :   LoginViewController.cs
+// FILENAME :   AddPoolViewController.cs
 // DESCR.   :   Default implementation of the login view presenter
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
-// 1.1  LP      Now conforms to the IViewController interface and injects
-//              authenticator during construction
 //========================================================================
 
 using System;
@@ -19,19 +17,21 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
+        private readonly IClientMessager _clientMessager;
         private readonly IAddPoolView _view;
         private string _poolName = "";
         private string _serialNumber = "";
         private string _volume = "";
         private string[] _dimensions = {"", "", ""};
-        private double _actualVolume = 0;
+
+        public double ActualVolume { get; private set; }
 
         // Life Cycle
         public void ViewDidLoad()
         {
             // Disable add pool button
             _view.SetAddPoolButtonEnabled(false);
+            ActualVolume = 0;
         }
 
         public AddPoolViewController(IAddPoolView view, IClientMessager clientMessager = null)
@@ -91,11 +91,11 @@ namespace Smartpool.Application.Presentation
 
                 try
                 {
-                    _actualVolume = double.Parse(_volume);
+                    ActualVolume = double.Parse(_volume);
                 }
                 catch (Exception)
                 {
-                    _actualVolume = 0;
+                    ActualVolume = 0;
                 }
             }
             else
@@ -104,11 +104,11 @@ namespace Smartpool.Application.Presentation
 
                 try
                 {
-                    _actualVolume = double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
+                    ActualVolume = double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
                 }
                 catch (Exception)
                 {
-                    _actualVolume = 0;
+                    ActualVolume = 0;
                 }
             }
         }
@@ -122,8 +122,7 @@ namespace Smartpool.Application.Presentation
         {
             if (_poolName.Length == 0) return false;
             if (_serialNumber.Length == 0) return false;
-            if (_volume.Length != 0) return true;
-            return _dimensions[0].Length != 0 || _dimensions[1].Length != 0 || _dimensions[2].Length != 0;
+            return true;
         }
     }
 }

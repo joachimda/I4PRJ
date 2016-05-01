@@ -5,7 +5,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
 // 1.1  LP      Now conforms to the IViewController interface and injects
-//              authenticator during construction
+//              client during construction
 //========================================================================
 
 using Smartpool.Connection.Model;
@@ -17,7 +17,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
+        private readonly IClientMessager _clientMessager;
         private readonly ILoginView _view;
         private string _password = "";
         private string _email = "";
