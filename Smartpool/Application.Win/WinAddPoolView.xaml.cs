@@ -87,6 +87,18 @@ namespace Smartpool.Application.Win
             MessageBox.Show("Pool was added to your user.", "Smartpool - Succes");
         }
 
+        public void ClearVolumeText()
+        {
+            VolumeTextBox.Text = "";
+        }
+        
+        public void ClearDimensionText()
+        {
+            LengthTextBox.Text = "";
+            WidthTextBox.Text = "";
+            DepthTextBox.Text = "";
+        }
+
         //Events that call the controller
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
