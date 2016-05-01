@@ -10,6 +10,7 @@
                     <ResourceDictionary Source="Theme/ButtonAndTexBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/StatViewerTheme.xaml" />
                 <ResourceDictionary Source="Theme/SpTabControl.xaml" />
+                <ResourceDictionary Source="Theme/RadioButtonTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
