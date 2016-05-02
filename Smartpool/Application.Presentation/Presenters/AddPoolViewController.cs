@@ -50,7 +50,7 @@ namespace Smartpool.Application.Presentation
             var tokenString = Session.SharedSession.TokenString;
 
             // NOTE: Pool address parameter is redundant
-            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _poolName, ActualVolume);
+            var addPoolMessage = new AddPoolMsg(userName, tokenString, _poolName, ActualVolume);
             var response = _clientMessager.SendMessage(addPoolMessage);
             var addPoolResponse = (GeneralResponseMsg) response;
 
