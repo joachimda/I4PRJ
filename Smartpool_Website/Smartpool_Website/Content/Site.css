@@ -1,0 +1,88 @@
+﻿#name{
+	Smartpool
+}
+body{
+	
+	background-color:#2e2e2e;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align:center;
+    color: black;
+}
+
+header {
+	height: 128pt;    background-color:#000000;
+}
+
+.btn-login{
+	width: 250pt;
+	height: 20pt;
+	margin: 12pt;
+	background-color: #575757;
+	border-radius:5px;
+	border-color: #1F1F1F;
+	color: #ABABAC;
+}
+
+.btn-login:focus {
+    background-color: #FDA029;
+    outline: none;
+}
+
+.btn:hover {
+	border-color: #FDA029;
+}
+
+.btn-login[type="submit"] {
+	width: 255pt;
+	height: 25pt;
+	background-color:#ABABAC;
+	color: #000000; 
+}
+
+header h1 {
+	color:#FFFFFF;
+}
+
+article {
+   	color:#FFFFFF;
+}
+
+
+a:link {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FDA029;
+}
+
+.SP_button{
+	color: red;
+	border: 3px solid red;
+    border-radius: 10px;
+	width: 100%;
+	cursor: pointer;
+	}
+	
+.SP_button.parameter{
+	font-size: 8pt;
+	text-align: left;
+	border-bottom: 2px solid red;
+}
+
+.SP_button.Value{
+	text-align: center;
+	font-size: 36pt;
+	
+}
+
+.SP_button.Target {
+	font-size: 8pt;
+}
+

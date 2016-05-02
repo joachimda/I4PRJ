@@ -1,4 +1,11 @@
-﻿using System.Windows;
+﻿//========================================================================
+// DESCR.   :   Codebehind that calls the presenter.
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  EN      Initial version with event for Stats
+// 1.1 EN       Implemented presenter
+//========================================================================
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -110,7 +117,7 @@ namespace Smartpool.Application.Win
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
 
-            //Delete this
+            //Delete this. It's here for debugging purposes
             CreateUserView view = new CreateUserView();
             view.Show();
         }

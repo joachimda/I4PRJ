@@ -5,7 +5,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
 // 1.1  LP      Now conforms to the IViewController interface and injects
-//              authenticator during construction
+//              client during construction
 //========================================================================
 
 using Smartpool.Application.Model;
@@ -18,7 +18,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
+        private readonly IClientMessager _clientMessager;
         private readonly ILoginView _view;
         private string _password = "";
         private string _email = "";
@@ -94,8 +94,13 @@ namespace Smartpool.Application.Presentation
 
             if (loginResponse.LoginSuccessful)
             {
-				_view.LoginAccepted ();
                 // Save token
+                var session = Session.SharedSession;
+                session.TokenString = loginResponse.TokenString;
+                session.UserName = _email;
+
+                // Notify view
+                _view.LoginAccepted (); 
             }
             else {
                 // Reset password and display message

@@ -8,7 +8,6 @@
 
 using NUnit.Framework;
 using NSubstitute;
-using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 
@@ -84,11 +83,9 @@ namespace Smartpool.Application.Test.Unit
 
         // ButtonPressed
 
-        [TestCase(LoginViewButton.LoginButton)]
-        [TestCase(LoginViewButton.SignUpButton)]
-        [TestCase(LoginViewButton.ForgotButton)]
-        public void ButtonPressed_ValidArgument_NoExceptions(LoginViewButton button)
+        public void ButtonPressed_Called_NoExceptions()
         {
+            _clientMessager.SendMessage(new AddUserRequestMsg("", "", "")).ReturnsForAnyArgs(new GeneralResponseMsg(false, true));
             _uut.ButtonPressed();
         }
     }

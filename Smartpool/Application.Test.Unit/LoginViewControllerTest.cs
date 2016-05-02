@@ -8,7 +8,6 @@
 
 using NUnit.Framework;
 using NSubstitute;
-using Smartpool.Application.Model;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 
@@ -72,7 +71,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Accepted_LoginAcceptedCalledOnView()
         {
-            //_clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("Login");
+            _clientMessager.SendMessage(new LoginRequestMsg("","")).ReturnsForAnyArgs(new LoginResponseMsg("",true));
             _uut.Login();
             _view.Received().LoginAccepted();
         }
@@ -80,7 +79,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Declined_DisplayAlertCalledOnView()
         {
-            //_clientMessager.SendMessage(new Message()).ReturnsForAnyArgs("LoginFailed");
+            _clientMessager.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
             _uut.Login();
             _view.ReceivedWithAnyArgs().DisplayAlert("","");
         }
@@ -92,6 +91,7 @@ namespace Smartpool.Application.Test.Unit
         [TestCase(LoginViewButton.ForgotButton)]
         public void ButtonPressed_ValidArgument_NoExceptions(LoginViewButton button)
         {
+            _clientMessager.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
             _uut.ButtonPressed(button);
         }
 
