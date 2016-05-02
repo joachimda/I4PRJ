@@ -31,13 +31,13 @@ namespace Smartpool.Connection.Server
                     return new GeneralResponseMsg(true, false);
 
                case MessageTypes.GetPoolDataRequest:
-                   return new Message(); //new GetPoolDataResponseMsg()
+                   return new Message("Not implemented"); //new GetPoolDataResponseMsg()
 
                 case MessageTypes.GetAllPoolNamesRequest:
-                    return new Message(); //new GetAllPoolNamesResponseMsg()
+                    return new Message("Not implemented"); //new GetAllPoolNamesResponseMsg()
 
                 case MessageTypes.GetPoolHistoryRequest:
-                    return new Message(); //new GetPoolHistoryResponseMsg()
+                    return new Message("Not implemented"); //new GetPoolHistoryResponseMsg()
 
                 //User messages
                 case MessageTypes.ChangePasswordRequest:
