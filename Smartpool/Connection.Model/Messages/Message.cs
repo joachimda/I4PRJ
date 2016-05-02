@@ -1,5 +1,4 @@
-﻿
-namespace Smartpool.Connection.Model
+﻿namespace Smartpool.Connection.Model
 {
     public class Message
     {
