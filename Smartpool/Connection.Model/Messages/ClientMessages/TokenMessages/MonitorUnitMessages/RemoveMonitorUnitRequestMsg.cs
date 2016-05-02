@@ -4,7 +4,7 @@ namespace Smartpool.Connection.Model
     {
         public RemoveMonitorUnitRequestMsg(string username, string tokenString) : base(username, tokenString)
         {
-            MsgType = MessageTypes.RemoveMonitorUnitRequest;
+            SubMsgType = TokenSubMessageTypes.RemoveMonitorUnitRequest;
         }
     }
 }

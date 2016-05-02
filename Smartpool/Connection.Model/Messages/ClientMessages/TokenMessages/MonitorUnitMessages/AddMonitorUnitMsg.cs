@@ -1,10 +1,10 @@
 namespace Smartpool.Connection.Model
 {
-    public class AddMonitorUnitMsg : TokenMsg
+    public class AddMonitorUnitRequestMsg : TokenMsg
     {
-        public AddMonitorUnitMsg(string username, string tokenString) : base(username, tokenString)
+        public AddMonitorUnitRequestMsg(string username, string tokenString) : base(username, tokenString)
         {
-            
+            SubMsgType = TokenSubMessageTypes.AddMonitorUnitRequest;
         }
     }
 }

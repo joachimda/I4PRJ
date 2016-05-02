@@ -1,10 +1,10 @@
 namespace Smartpool.Connection.Model
 {
-    public class LogoutMsg : TokenMsg
+    public class LogoutRequestMsg : TokenMsg
     {
-        public LogoutMsg(string username, string tokenString) : base(username, tokenString)
+        public LogoutRequestMsg(string username, string tokenString) : base(username, tokenString)
         {
-            MsgType = MessageTypes.LogoutRequest;
+            SubMsgType = TokenSubMessageTypes.LogoutRequest;
         }
     }
 }
