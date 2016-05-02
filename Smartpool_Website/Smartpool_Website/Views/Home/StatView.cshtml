@@ -1,4 +1,8 @@
-﻿
+﻿@using System.Drawing
+
+
+
+
 @{
     ViewBag.Title = "StatView";
 }
@@ -10,14 +14,34 @@
     <img src="../../Icon.png" style="height: 100pt" align="bottom">
 </header>
 
-<article>
-    <h2>Stat View</h2>
-</article>
+@functions{
+    string ColorForParameter(string parameter)
+    {
+        switch (@parameter)
+        {
+            case "Temperature":
+                return "#FF584D";
+            case "Humidity":
+                return "#0354A5";
+            case "Chlorine":
+                return "#49BAE1";
+            case "pH":
+                return "#FDA029";
+            default:
+                return "#987654";
+        }
+    }
 
-<div class="SP_button">
-    <table onclick="location.href = 'www.google.dk'">
+}
+@{ var parameter = "";}
+<div class="container">
+<br/>
+@{parameter = "Temperature";
+ var tableColor = ColorForParameter(parameter);}
+<div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px" >
+    <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
         <tr>
-            <td class="parameter"> Temperature</td>
+            <td class="Parameter" style="border-bottom: 2px solid @tableColor"> @parameter</td>
         </tr>
 
         <tr>
@@ -29,5 +53,65 @@
         </tr>
     </table>
 </div>
+<br/>
 
+@{parameter = "pH";}
+@{tableColor = ColorForParameter(parameter);}
+<div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
+    <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
+        <tr>
+            <td class="Parameter" style="border-bottom: 2px solid @tableColor"> @parameter</td>
+        </tr>
+
+        <tr>
+            <td class="Value">23&#x2103</td>
+        </tr>
+
+        <tr>
+            <td class="Target">Target: 30&#x2103 </td>
+        </tr>
+    </table>
+</div>
+<br />
+
+@{parameter = "Chlorine";}
+@{tableColor = ColorForParameter(parameter);}
+<div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
+    <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
+        <tr>
+            <td class="Parameter" style="border-bottom: 2px solid @tableColor"> @parameter</td>
+        </tr>
+
+        <tr>
+            <td class="Value">23&#x2103</td>
+        </tr>
+
+        <tr>
+            <td class="Target">Target: 30&#x2103 </td>
+        </tr>
+    </table>
+</div>
+<br />
+
+
+
+@{parameter = "Humidity";}
+@{tableColor = ColorForParameter(parameter);}
+<div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
+    <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
+        <tr>
+            <td class="Parameter" style="border-bottom: 2px solid @tableColor"> @parameter</td>
+        </tr>
+
+        <tr>
+            <td class="Value">23&#x2103</td>
+        </tr>
+
+        <tr>
+            <td class="Target">Target: 30&#x2103 </td>
+        </tr>
+    </table>
+</div>
+<br/>
+</div>
 
