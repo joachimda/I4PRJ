@@ -3,10 +3,8 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  EN      Initial version with event for Stats
-// 1.01 EN      Added event for History
-// 1.02 EN      
+// 1.1 EN       Implemented presenter
 //========================================================================
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -119,7 +117,7 @@ namespace Smartpool.Application.Win
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
 
-            //Delete this
+            //Delete this. It's here for debugging purposes
             CreateUserView view = new CreateUserView();
             view.Show();
         }
