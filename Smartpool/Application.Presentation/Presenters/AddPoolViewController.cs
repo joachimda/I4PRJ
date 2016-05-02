@@ -23,7 +23,7 @@ namespace Smartpool.Application.Presentation
         private string _poolName = "";
         private string _serialNumber = "";
         private string _volume = "";
-        private string[] _dimensions = {"", "", ""};
+        private readonly string[] _dimensions = {"", "", ""};
 
         public double ActualVolume { get; private set; }
 
