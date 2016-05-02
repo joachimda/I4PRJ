@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//========================================================================
+// FILENAME :   Pool.cs
+// DESCR.   :   Pool model
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version
+//========================================================================
 
-namespace Application.Model
+using System;
+
+// ReSharper disable once CheckNamespace
+namespace Smartpool.Application.Model
 {
     public class Pool
     {
@@ -20,11 +25,23 @@ namespace Application.Model
             if (volume != null)
             {
                 _volume = volume;
+                _dimensions[0] = "";
+                _dimensions[1] = "";
+                _dimensions[2] = "";
             }
             else if (_dimensions != null)
             {
                 _dimensions = dimensions;
+                _volume = "";
             }
+        }
+
+        public bool IsValid()
+        {
+            // Returns true if a pool name and serial number is specified
+            if (Name.Length == 0) return false;
+            if (SerialNumber.Length == 0) return false;
+            return true;
         }
 
         private double ParsedVolume()

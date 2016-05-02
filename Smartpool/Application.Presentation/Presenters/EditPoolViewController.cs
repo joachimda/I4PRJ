@@ -7,6 +7,7 @@
 //========================================================================
 
 using System;
+using System.Collections.Generic;
 using Smartpool.Application.Model;
 using Smartpool.Connection.Model;
 
@@ -19,18 +20,14 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly IEditPoolView _view;
-        private string _poolName = "";
-        private string _volume = "";
-        private readonly string[] _dimensions = { "", "", "" };
-
-        public double ActualVolume { get; private set; }
+        private Pool _pool = new Pool();
+        private string[] _dimensions = { "", "", "" };
 
         // Life Cycle
         public void ViewDidLoad()
         {
             // Disable add pool button
             _view.SetSaveButtonEnabled(true);
-            ActualVolume = 0;
         }
 
         public EditPoolViewController(IEditPoolView view, IClientMessager clientMessager = null)
@@ -47,9 +44,10 @@ namespace Smartpool.Application.Presentation
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 
-            // NOTE: Pool address parameter is redundant
-            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _poolName, ActualVolume);
-            var response = _clientMessager.SendMessage(addPoolMessage);
+            // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
+            var updatePoolMessage = new UpdatePoolInfoMsg(userName, tokenString, "oldPoolName", "redundant", _pool.Name, _pool.Volume);
+
+            var response = _clientMessager.SendMessage(updatePoolMessage);
             var addPoolResponse = (GeneralResponseMsg)response;
 
             // Act on response
@@ -69,23 +67,25 @@ namespace Smartpool.Application.Presentation
             switch (textField)
             {
                 case EditPoolTextField.PoolName:
-                    _poolName = text;
+                    _pool.Name = text;
                     break;
                 case EditPoolTextField.Volume:
-                    _volume = text;
-                    CalculateVolume(true);
+                    _pool.UpdateVolume(text, null);
+                    _dimensions[0] = "";
+                    _dimensions[1] = "";
+                    _dimensions[2] = "";
                     break;
                 case EditPoolTextField.Width:
                     _dimensions[0] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Length:
                     _dimensions[1] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Depth:
                     _dimensions[2] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
             }
 
@@ -95,53 +95,9 @@ namespace Smartpool.Application.Presentation
 
         // LoginViewController
 
-        private void CalculateVolume(bool userSpecifiedVolume)
-        {
-            if (userSpecifiedVolume)
-            {
-                // Calculating based on volume input so dimensions are redundant
-                _dimensions[0] = "";
-                _dimensions[1] = "";
-                _dimensions[2] = "";
-                _view.ClearDimensionText();
-
-                // Try parsing the input string, otherwise set to 0
-                try
-                {
-                    ActualVolume = double.Parse(_volume);
-                }
-                catch (Exception)
-                {
-                    ActualVolume = 0;
-                }
-            }
-            else
-            {
-                // Calculating based on dimensions input so volume is redundant
-                _volume = "";
-                _view.ClearVolumeText();
-
-                // Try parsing the input string, otherwise set to 0
-                try
-                {
-                    ActualVolume = double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
-                }
-                catch (Exception)
-                {
-                    ActualVolume = 0;
-                }
-            }
-        }
-
         private void UpdateSaveButton()
         {
-            _view.SetSaveButtonEnabled(ShouldEnableSaveButton());
-        }
-
-        private bool ShouldEnableSaveButton()
-        {
-            // Returns true if a pool name is specified
-            return _poolName.Length != 0;
+            _view.SetSaveButtonEnabled(_pool.IsValid());
         }
     }
 }

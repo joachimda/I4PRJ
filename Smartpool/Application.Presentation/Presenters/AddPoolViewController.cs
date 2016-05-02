@@ -20,19 +20,14 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly IAddPoolView _view;
-        private string _poolName = "";
-        private string _serialNumber = "";
-        private string _volume = "";
-        private readonly string[] _dimensions = {"", "", ""};
-
-        public double ActualVolume { get; private set; }
+        private Pool _pool = new Pool();
+        private string[] _dimensions = {"", "", ""};
 
         // Life Cycle
         public void ViewDidLoad()
         {
             // Disable add pool button
             _view.SetAddPoolButtonEnabled(false);
-            ActualVolume = 0;
         }
 
         public AddPoolViewController(IAddPoolView view, IClientMessager clientMessager = null)
@@ -49,8 +44,8 @@ namespace Smartpool.Application.Presentation
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 
-            // NOTE: Pool address parameter is redundant
-            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _poolName, ActualVolume);
+            // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
+            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _pool.Name, _pool.Volume);
             var response = _clientMessager.SendMessage(addPoolMessage);
             var addPoolResponse = (GeneralResponseMsg) response;
 
@@ -70,26 +65,28 @@ namespace Smartpool.Application.Presentation
             switch (textField)
             {
                 case AddPoolTextField.PoolName:
-                    _poolName = text;
+                    _pool.Name = text;
                     break;
                 case AddPoolTextField.SerialNumber:
-                    _serialNumber = text;
+                    _pool.SerialNumber = text;
                     break;
                 case AddPoolTextField.Volume:
-                    _volume = text;
-                    CalculateVolume(true);
+                    _pool.UpdateVolume(text, null);
+                    _dimensions[0] = "";
+                    _dimensions[1] = "";
+                    _dimensions[2] = "";
                     break;
                 case AddPoolTextField.Width:
                     _dimensions[0] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case AddPoolTextField.Length:
                     _dimensions[1] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case AddPoolTextField.Depth:
                     _dimensions[2] = text;
-                    CalculateVolume(false);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
             }
 
@@ -99,55 +96,9 @@ namespace Smartpool.Application.Presentation
 
         // LoginViewController
 
-        private void CalculateVolume(bool userSpecifiedVolume)
-        {
-            if (userSpecifiedVolume)
-            {
-                // Calculating based on volume input so dimensions are redundant
-                _dimensions[0] = "";
-                _dimensions[1] = "";
-                _dimensions[2] = "";
-                _view.ClearDimensionText();
-
-                // Try parsing the input string, otherwise set to 0
-                try
-                {
-                    ActualVolume = double.Parse(_volume);
-                }
-                catch (Exception)
-                {
-                    ActualVolume = 0;
-                }
-            }
-            else
-            {
-                // Calculating based on dimensions input so volume is redundant
-                _volume = "";
-                _view.ClearVolumeText();
-
-                // Try parsing the input string, otherwise set to 0
-                try
-                {
-                    ActualVolume = double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
-                }
-                catch (Exception)
-                {
-                    ActualVolume = 0;
-                }
-            }
-        }
-
         private void UpdateAddPoolButton()
         {
-            _view.SetAddPoolButtonEnabled(ShouldEnableAddPoolButton());
-        }
-
-        private bool ShouldEnableAddPoolButton()
-        {
-            // Returns true if a pool name and serial number is specified
-            if (_poolName.Length == 0) return false;
-            if (_serialNumber.Length == 0) return false;
-            return true;
+            _view.SetAddPoolButtonEnabled(_pool.IsValid());
         }
     }
 }
