@@ -1,4 +1,4 @@
-#name{
+﻿#name{
 	Smartpool
 }
 body{
@@ -6,13 +6,14 @@ body{
 	background-color:#2e2e2e;
 	font-family: Arial, Helvetica, sans-serif;
 	text-align:center;
+    color: black;
 }
 
 header {
 	height: 128pt;    background-color:#000000;
 }
 
-input{
+.btn-login{
 	width: 250pt;
 	height: 20pt;
 	margin: 12pt;
@@ -22,16 +23,16 @@ input{
 	color: #ABABAC;
 }
 
-input:focus {
+.btn-login:focus {
     background-color: #FDA029;
     outline: none;
 }
 
-input:hover {
+.btn:hover {
 	border-color: #FDA029;
 }
 
-input[type="submit"] {
+.btn-login[type="submit"] {
 	width: 255pt;
 	height: 25pt;
 	background-color:#ABABAC;
@@ -60,3 +61,28 @@ a:visited {
 a:hover {
     color: #FDA029;
 }
+
+.SP_button{
+	color: red;
+	border: 3px solid red;
+    border-radius: 10px;
+	width: 100%;
+	cursor: pointer;
+	}
+	
+.SP_button.parameter{
+	font-size: 8pt;
+	text-align: left;
+	border-bottom: 2px solid red;
+}
+
+.SP_button.Value{
+	text-align: center;
+	font-size: 36pt;
+	
+}
+
+.SP_button.Target {
+	font-size: 8pt;
+}
+
