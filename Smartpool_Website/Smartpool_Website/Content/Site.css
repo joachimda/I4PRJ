@@ -65,24 +65,59 @@ a:hover {
 .SP_button{
 	color: red;
 	border: 3px solid red;
-    border-radius: 10px;
+    border-radius: 5px;
 	width: 100%;
 	cursor: pointer;
-	}
+}
 	
-.SP_button.parameter{
-	font-size: 8pt;
+.SP_button table td.Parameter{
+    color: white;
+	font-size: 12pt;
 	text-align: left;
 	border-bottom: 2px solid red;
 }
 
-.SP_button.Value{
+.SP_button table td.Value{
 	text-align: center;
 	font-size: 36pt;
 	
 }
 
-.SP_button.Target {
+.SP_button table td.Target {
 	font-size: 8pt;
+}
+
+@media screen and (max-width: 700px) {
+    header {
+        display: none;
+    }
+    .container {
+        height: 100%;
+        max-height: 100%
+    }
+
+.SP_button table {
+    padding-bottom: -20%;
+    border-collapse: collapse;
+}
+	
+
+	
+.SP_button table td.Parameter{
+    font-size: 10pt;
+    border-bottom-width:50px;
+    
+}
+
+.SP_button table td.Value{
+	text-align: center;
+	font-size: 24pt;
+    height: auto;
+    padding: 0;
+    margin: 0;
+}
+    .SP_button table td.Target {
+	font-size: 10pt;
+}
 }
 
