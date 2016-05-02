@@ -17,7 +17,7 @@ namespace Smartpool.Connection.Server
                 //Pool messages
                 case MessageTypes.AddPoolRequest:
                     var apMsg = JsonConvert.DeserializeObject<AddPoolMsg>(messageString);
-                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Address, apMsg.Name, apMsg.Volume));
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name, apMsg.Volume));
 
                 case MessageTypes.UpdatePoolRequest:
                     var upiMsg = JsonConvert.DeserializeObject<UpdatePoolInfoMsg>(messageString);
@@ -25,7 +25,7 @@ namespace Smartpool.Connection.Server
 
                 case MessageTypes.RemovePoolRequest:
                     var rpMsg = JsonConvert.DeserializeObject<RemovePoolMsg>(messageString);
-                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.Address, rpMsg.PoolName)); 
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.PoolName)); 
 
                 case MessageTypes.AddPoolPictureRequest:
                     return new GeneralResponseMsg(true, false);
