@@ -6,26 +6,6 @@ namespace Smartpool.Connection.Model
         LoginRequest,
         AddUserRequest,
         ResetPasswordRequest,
-        //Client messages for users already logged in
-            //User messages
-            ChangePasswordRequest,
-            LogoutRequest,
-            AllowAccessToPoolDataRequest, //Takes poolname and username/email for receiver
-            
-            //Pool messages
-            AddPoolRequest,
-            UpdatePoolRequest,
-            RemovePoolRequest,
-            AddPoolPictureRequest,
-
-            GetPoolDataRequest, //Get all data about pool + latest sensor values
-            GetAllPoolNamesRequest, //Quick get for program startup
-            GetPoolHistoryRequest,
-            //Monitor Unit messages
-            AddMonitorUnitRequest,
-            UpdateMonitorUnitRequest,
-            RemoveMonitorUnitRequest,
-            ChangeSensorTargetValueRequest, //Takes poolname and array of sensor name/number
 
         //Non createable client message
         TokenMsg,
@@ -38,5 +18,29 @@ namespace Smartpool.Connection.Model
         GetPoolDataResponse, //get poolinfo + latest sensor values
         GetAllPoolNamesResponse, //get name + alert bool
         GetPoolHistoryResponse,
+    }
+
+    public enum TokenSubMessageTypes
+    {
+        //Client messages for users already logged in
+        //User messages
+        ChangePasswordRequest,
+        LogoutRequest,
+        AllowAccessToPoolDataRequest, //Takes poolname and username/email for receiver
+
+        //Pool messages
+        AddPoolRequest,
+        UpdatePoolRequest,
+        RemovePoolRequest,
+        AddPoolPictureRequest,
+
+        GetPoolDataRequest, //Get all data about pool + latest sensor values
+        GetAllPoolNamesRequest, //Quick get for program startup
+        GetPoolHistoryRequest,
+        //Monitor Unit messages
+        AddMonitorUnitRequest,
+        UpdateMonitorUnitRequest,
+        RemoveMonitorUnitRequest,
+        ChangeSensorTargetValueRequest, //Takes poolname and array of sensor name/number
     }
 }

@@ -4,7 +4,7 @@ namespace Smartpool.Connection.Model
     {
         public AddPoolPictureRequestMsg(string username, string tokenString) : base(username, tokenString)
         {
-            MsgType = MessageTypes.AddPoolPictureRequest;
+            SubMsgType = TokenSubMessageTypes.AddPoolPictureRequest;
         }
     }
 }

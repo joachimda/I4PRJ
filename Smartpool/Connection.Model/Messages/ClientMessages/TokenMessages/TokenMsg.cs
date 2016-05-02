@@ -4,8 +4,9 @@ namespace Smartpool.Connection.Model
     {
         public string Username { get; set; }
         public string TokenString { get; set; }
+        public TokenSubMessageTypes SubMsgType { get; set; }
         
-        protected TokenMsg(string username, string tokenString)
+        public TokenMsg(string username, string tokenString)
         {
             Username = username;
             TokenString = tokenString;
