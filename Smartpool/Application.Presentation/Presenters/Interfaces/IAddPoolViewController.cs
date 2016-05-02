@@ -10,7 +10,7 @@
 namespace Smartpool.Application.Presentation
 {
     /// <summary>
-	/// Enumeration of possible buttons on the Login View
+	/// Enumeration of possible input text fields on the Add Pool View
 	/// </summary>
     public enum AddPoolTextField
     {

@@ -20,8 +20,8 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly IAddPoolView _view;
-        private Pool _pool = new Pool();
         private string[] _dimensions = {"", "", ""};
+        public Pool PoolToBeAdded = new Pool();
 
         // Life Cycle
         public void ViewDidLoad()
@@ -45,7 +45,7 @@ namespace Smartpool.Application.Presentation
             var tokenString = Session.SharedSession.TokenString;
 
             // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
-            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", _pool.Name, _pool.Volume);
+            var addPoolMessage = new AddPoolMsg(userName, tokenString, "", PoolToBeAdded.Name, PoolToBeAdded.Volume);
             var response = _clientMessager.SendMessage(addPoolMessage);
             var addPoolResponse = (GeneralResponseMsg) response;
 
@@ -65,28 +65,28 @@ namespace Smartpool.Application.Presentation
             switch (textField)
             {
                 case AddPoolTextField.PoolName:
-                    _pool.Name = text;
+                    PoolToBeAdded.Name = text;
                     break;
                 case AddPoolTextField.SerialNumber:
-                    _pool.SerialNumber = text;
+                    PoolToBeAdded.SerialNumber = text;
                     break;
                 case AddPoolTextField.Volume:
-                    _pool.UpdateVolume(text, null);
+                    PoolToBeAdded.UpdateVolume(text, null);
                     _dimensions[0] = "";
                     _dimensions[1] = "";
                     _dimensions[2] = "";
                     break;
                 case AddPoolTextField.Width:
                     _dimensions[0] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
                 case AddPoolTextField.Length:
                     _dimensions[1] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
                 case AddPoolTextField.Depth:
                     _dimensions[2] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
             }
 
@@ -98,7 +98,7 @@ namespace Smartpool.Application.Presentation
 
         private void UpdateAddPoolButton()
         {
-            _view.SetAddPoolButtonEnabled(_pool.IsValid());
+            _view.SetAddPoolButtonEnabled(PoolToBeAdded.IsValid());
         }
     }
 }
