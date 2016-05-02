@@ -1,6 +1,4 @@
-﻿#name{
-	Smartpool
-}
+﻿
 body{
 	
 	background-color:#2e2e2e;
@@ -10,7 +8,10 @@ body{
 }
 
 header {
-	height: 128pt;    background-color:#000000;
+    background-color: black;
+}
+.Logo {
+    background-color: black;height: 100px;display: block;
 }
 
 .btn-login{
