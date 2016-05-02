@@ -8,16 +8,23 @@ namespace Smartpool_Website.Controllers
 {
     public class HomeController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
         }
 
+       /* public class ASPLoginView : ILoginView
+        {
+            
+        }*/
+
         public ActionResult Login()
         {
+            //var LoginView = new ASPLoginView();
             ViewBag.Message = "Login Page";
 
-            return View();
+            return View(/*ASPLoginView*/);
         }
 
         public ActionResult Contact()
