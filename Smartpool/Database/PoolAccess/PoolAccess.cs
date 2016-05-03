@@ -4,17 +4,24 @@ using System.Linq;
 namespace Smartpool
 {
     public class PoolAccess : IPoolAccess
-    {
+    { 
+        public IUserAccess UserAccess { get; set; }
+
+        public PoolAccess(IUserAccess userAccess)
+        {
+            UserAccess = userAccess;
+        }
         /// <summary>
         /// Adds pool to a users poolSet.
         /// </summary
-        /// <param name="user">The user to recieve the pool</param>
+        /// <param name="email">The email of the user to recieve the pool</param>
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(User user, string name, double volume)
+        public bool AddPool(string email, string name, double volume)
         {
-            if (IsPoolNameAvailable(user, name) == false)
+
+            if (IsPoolNameAvailable(email, name) == false)
             {
                 return false;
             }
@@ -23,8 +30,8 @@ namespace Smartpool
                 return false;
             }
 
-            Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
-
+            Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
+            Pool derp = new Pool() {};
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
@@ -38,9 +45,9 @@ namespace Smartpool
         /// Checks if a specific pool name is in use on a specific address
         /// </summary
         /// <param name="name">Name of the pool</param>
-        /// <param name="user">The user to run check against</param>
+        /// <param name="email">The email of the user to run check against</param>
         /// <returns>True if name is available, false if name is in use</returns>
-        public bool IsPoolNameAvailable(User user, string name)
+        public bool IsPoolNameAvailable(string email, string name)
         {
             using (var db = new DatabaseContext())
             {
@@ -50,7 +57,7 @@ namespace Smartpool
 
                 foreach (Pool pool in searchPoolSet)
                 {
-                    if (pool.UserId == user.Id)
+                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
                     {
                         return false;
                     }
@@ -63,14 +70,14 @@ namespace Smartpool
         /// <summary>
         /// Finds a specific pool 
         /// </summary>
-        /// <param name="user">Which user to search for pools in</param>
+        /// <param name="email"> Email of the user to search upon for pools in</param>
         /// <param name="name">the name of the pool</param>
         /// <returns></returns>
-        public Pool FindSpecificPool(User user, string name)
+        public Pool FindSpecificPool(string email, string name)
         {
             List<Pool> listOfFoundPools = new List<Pool>();
 
-            if (IsPoolNameAvailable(user, name) == true)
+            if (IsPoolNameAvailable(email, name) == true)
             {
                 throw new PoolNotFoundException();
             }
@@ -93,11 +100,11 @@ namespace Smartpool
         /// <summary>
         /// Removes a specific pool
         /// </summary>
-        /// <param name="user">Identifies the administrating user</param>
+        /// <param name="email">Identifies the administrating user</param>
         /// <param name="name">identifies the name of the pool</param>
-        public bool RemovePool(User userToFind, string name)
+        public bool RemovePool(string email, string name)
         {
-            if (IsPoolNameAvailable(userToFind, name))
+            if (IsPoolNameAvailable(email, name))
             {
                 return false;
             }
@@ -110,7 +117,7 @@ namespace Smartpool
 
                 foreach (Pool pool in searchForPool)
                 {
-                    if (pool.UserId == userToFind.Id)
+                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
                     {
                         db.PoolSet.Remove(pool);
                     }
