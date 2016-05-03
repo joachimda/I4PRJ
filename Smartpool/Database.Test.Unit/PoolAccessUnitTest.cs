@@ -219,6 +219,9 @@ namespace Database.Test.Unit
         // public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
         // public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
 
+        // public void EditPool_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
+        // public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool()
+
         // public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue()
         // public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool()
 
@@ -242,11 +245,14 @@ namespace Database.Test.Unit
         // public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse()
         // public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
 
-        // public void EditPool_ChangeUserOfExistingPoolToInvalid_ReturnsFalse()
-        // public void EditPool_ChangeUserOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+        // public void EditPool_ChangeUserToInvalid_ReturnsFalse()
+        // public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool()
 
-        // public void EditPool_ChangeUserOfExistingPool_ReturnsTrue()
-        // public void EditPool_ChangeUserOfExistingPool_FindSpecificPoolReturnsNewPool()
+        // public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse()
+        // public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeUser_ReturnsTrue()
+        // public void EditPool_ChangeUser_FindSpecificPoolReturnsNewPool()
 
         #endregion
     }
