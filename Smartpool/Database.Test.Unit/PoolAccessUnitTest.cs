@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net.Sockets;
-using NSubstitute;
-using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
 using Smartpool;
 

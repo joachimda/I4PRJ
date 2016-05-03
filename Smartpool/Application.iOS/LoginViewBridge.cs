@@ -7,7 +7,6 @@
 //========================================================================
 
 using Smartpool.Application.Presentation;
-using Smartpool.Application.Model;
 using System;
 using UIKit;
 

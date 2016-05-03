@@ -6,8 +6,6 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-using System;
-using System.Collections.Generic;
 using Smartpool.Application.Model;
 using Smartpool.Connection.Model;
 
