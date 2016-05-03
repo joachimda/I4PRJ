@@ -3,6 +3,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Smartpool;
 using Smartpool.Connection.Model;
+using Smartpool.Connection.Server;
 
 namespace Connection.Test
 {
