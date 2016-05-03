@@ -15,7 +15,7 @@ namespace Database.Test.Unit
         public void Setup()
         {
             _uut = new UserAccess();
-            _poolAccess = new PoolAccess();
+            _poolAccess = new PoolAccess(_uut);
         }
 
         [TearDown]

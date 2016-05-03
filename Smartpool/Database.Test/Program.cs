@@ -6,7 +6,7 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            SmartpoolDB SmartPoolDB = new SmartpoolDB(new UserAccess(), new PoolAccess());
+            SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
             SmartPoolDB.ClearEntireDatabase();
 
             SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");

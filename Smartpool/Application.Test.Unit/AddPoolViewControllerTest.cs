@@ -47,7 +47,7 @@ namespace Smartpool.Application.Test.Unit
         public void ActualVolume_VolumeTextChanged_ActualVolumeCorrectValue(string text, double volume)
         {
             _uut.DidChangeText(AddPoolTextField.Volume, text);
-            Assert.That(_uut.ActualVolume, Is.EqualTo(volume).Within(0.1));
+            Assert.That(_uut.PoolToBeAdded.Volume, Is.EqualTo(volume).Within(0.1));
         }
 
         [TestCase("10", "10", "10", 1000)]
@@ -59,7 +59,7 @@ namespace Smartpool.Application.Test.Unit
             _uut.DidChangeText(AddPoolTextField.Width, width);
             _uut.DidChangeText(AddPoolTextField.Length, length);
             _uut.DidChangeText(AddPoolTextField.Depth, depth);
-            Assert.That(_uut.ActualVolume, Is.EqualTo(volume).Within(0.1));
+            Assert.That(_uut.PoolToBeAdded.Volume, Is.EqualTo(volume).Within(0.1));
         }
 
         [TestCase("109,23", 109.23)]
@@ -69,7 +69,7 @@ namespace Smartpool.Application.Test.Unit
             _uut.DidChangeText(AddPoolTextField.Length, "10");
             _uut.DidChangeText(AddPoolTextField.Depth, "10");
             _uut.DidChangeText(AddPoolTextField.Volume, volumeText);
-            Assert.That(_uut.ActualVolume, Is.EqualTo(volume).Within(0.1));
+            Assert.That(_uut.PoolToBeAdded.Volume, Is.EqualTo(volume).Within(0.1));
         }
 
         // Required text field filled tests
