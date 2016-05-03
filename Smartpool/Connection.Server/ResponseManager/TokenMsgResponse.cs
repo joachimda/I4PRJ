@@ -19,7 +19,7 @@ namespace Smartpool.Connection.Server
                 //Pool messages
                 case TokenSubMessageTypes.AddPoolRequest:
                     var apMsg = JsonConvert.DeserializeObject<AddPoolRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false); //_smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name, apMsg.Volume)
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name, apMsg.Volume)); 
 
                 case TokenSubMessageTypes.UpdatePoolRequest:
                     var upiMsg = JsonConvert.DeserializeObject<UpdatePoolRequestMsg>(messageString);
@@ -27,13 +27,13 @@ namespace Smartpool.Connection.Server
 
                 case TokenSubMessageTypes.RemovePoolRequest:
                     var rpMsg = JsonConvert.DeserializeObject<RemovePoolRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false); //_smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.PoolName) 
+                    return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.PoolName)); 
 
                 case TokenSubMessageTypes.AddPoolPictureRequest:
                     return new GeneralResponseMsg(true, false);
 
                case TokenSubMessageTypes.GetPoolDataRequest:
-                   return new Message("Not implemented"); //new GetPoolDataResponseMsg()
+                   return new Message("Not implemented"); //new GetPoolDataResponseMsg() 
 
                 case TokenSubMessageTypes.GetAllPoolNamesRequest:
                     return new Message("Not implemented"); //new GetAllPoolNamesResponseMsg()
