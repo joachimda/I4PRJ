@@ -20,7 +20,6 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(string email, string name, double volume)
         {
-
             if (IsPoolNameAvailable(email, name) == false)
             {
                 return false;
