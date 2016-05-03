@@ -191,18 +191,20 @@ namespace Database.Test.Unit
         [Test]
         public void RemovePool_RemoveExistingPool_IsPoolNameAvailableReturnsTrue()
         {
+            const string mail = "somemail@derp.com";
             string poolname = "helloworld";
 
-            _uut.AddPool(_user1, poolname, 9);
-            _uut.RemovePool(_user1, poolname);
+            _uut.AddPool(mail, poolname, 9);
+            _uut.RemovePool(mail, poolname);
 
-            Assert.That(_uut.IsPoolNameAvailable(_user1, poolname), Is.True);
+            Assert.That(_uut.IsPoolNameAvailable(mail, poolname), Is.True);
         }
 
         [Test]
         public void RemovePool_PoolNotInDatabase_RemovePoolReturnsFalse()
         {
-            Assert.That(_uut.RemovePool(_user1, "ThisPoolIsNotHere"), Is.False);
+            const string mail = "somemail@derp.com";
+            Assert.That(_uut.RemovePool(mail, "ThisPoolIsNotHere"), Is.False);
         }
 
         #endregion
