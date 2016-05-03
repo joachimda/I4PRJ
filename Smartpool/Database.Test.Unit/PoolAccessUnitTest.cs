@@ -175,10 +175,13 @@ namespace Database.Test.Unit
         [Test]
         public void FindSpecificPool_PoolIsInDatabase_ReturnsPoolWithCorrectUserId()
         {
-            _uut.AddPool(_user1, "poolio", 50);
+            const string mail = "somemail@derp.com";
+            User derp = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = mail };
+            _uut.AddPool(mail, "poolio", 50);
+            _userAccess.FindUserByEmail(mail).Returns(derp);
 
-            Pool pool = _uut.FindSpecificPool(_user1, "poolio");
-            Assert.That(pool.UserId, Is.EqualTo(_user1.Id));
+            Pool pool = _uut.FindSpecificPool(mail, "poolio");
+            Assert.That(pool.UserId, Is.EqualTo(derp.Id));
         }
 
         #endregion
