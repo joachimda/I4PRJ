@@ -49,14 +49,15 @@ namespace Database.Test.Unit
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
         {
             const string mail = "somemail@derp.com";
-            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            User derp = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = mail };
+            _userAccess.FindUserByEmail(mail).Returns(derp);
             _uut.AddPool(mail, "poolname", 4);
 
             Assert.That(_uut.IsPoolNameAvailable(mail, "poolname"), Is.False);
         }
 
         [Test]
-        public void AddPool_AddingPoolWithValidUser_ThrowsUserNotFoundException()
+        public void AddPool_AddingPoolWithValidUser_ReturnsNull()
         {
             const string mail = "somemail@derp.com";
             _userAccess.FindUserByEmail(mail).ReturnsNull();
