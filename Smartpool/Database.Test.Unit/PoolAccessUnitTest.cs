@@ -210,5 +210,44 @@ namespace Database.Test.Unit
         }
 
         #endregion
+
+        #region Change Name
+
+        // public void EditPool_ChangeNameOfNotExistingPool_ReturnsFalse()
+        // public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
+        // public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue()
+        // public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool()
+
+        #endregion
+
+        #region Change Volume
+
+        // public void EditPool_ChangeVolumeOfNotExistingPool_ReturnsFalse()
+        // public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse()
+        // public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeVolumeOfExistingPool_ReturnsTrue()
+        // public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool()
+
+        #endregion
+
+        #region Change User
+
+        // public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse()
+        // public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeUserOfExistingPoolToInvalid_ReturnsFalse()
+        // public void EditPool_ChangeUserOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+
+        // public void EditPool_ChangeUserOfExistingPool_ReturnsTrue()
+        // public void EditPool_ChangeUserOfExistingPool_FindSpecificPoolReturnsNewPool()
+
+        #endregion
     }
 }
