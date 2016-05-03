@@ -14,7 +14,7 @@
         public void ClearEntireDatabase()
         {
             PoolAccess.DeleteAllPools();
-            PoolAccess.UserAccess.DeleteAllUsers();
+            UserAccess.DeleteAllUsers();
         }
     }
 }
