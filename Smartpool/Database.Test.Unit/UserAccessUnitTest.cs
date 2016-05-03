@@ -208,5 +208,50 @@ namespace Database.Test.Unit
         }
 
         #endregion
+
+        #region EditUser
+
+        #region Change of Name
+
+        // public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse()
+        // public void EditUser_ChangeNameOfNotExistingUser_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse()
+        // public void EditUser_ChangeNameOfExistingUserToInvalidName_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeNameOfExistingUser_ReturnsTrue()
+        // public void EditUser_ChangeNameOfExistingUser_FindUserByEmailReturnsNewUser()
+
+        #endregion
+
+        #region Change of Email
+
+        // public void EditUser_ChangeEmailOfNotExistingUser_ReturnsFalse()
+        // public void EditUser_ChangeEmailOfNotExistingUser_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeOfExistingUserToInvalid_ReturnsFalse()
+        // public void EditUser_ChangeEmailOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeOfExistingUser_ReturnsTrue()
+        // public void EditUser_ChangeEmailOfExistingUser_FindUserByEmailReturnsNewUser()        
+
+        #endregion
+
+        #region Change of Password
+
+        // public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse()
+        // public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeOfExistingUserToInvalid_ReturnsFalse()
+        // public void EditUser_ChangePasswordOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser()
+
+        // public void EditUser_ChangeOfExistingUser_ReturnsTrue()
+        // public void EditUser_ChangePasswordOfExistingUser_FindUserByEmailReturnsNewUser()   
+
+        #endregion
+  
+
+        #endregion
+
     }
 }
