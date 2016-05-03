@@ -9,13 +9,13 @@ namespace Database.Test
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
             SmartPoolDB.ClearEntireDatabase();
 
-            SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
-            SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
-            SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
+            //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
+            //SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
+            //SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
 
-            SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
-            SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
-            SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
+            //SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
+            //SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
+            //SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
         }
     }
     /*****************************Don't touch diz!*******************************/

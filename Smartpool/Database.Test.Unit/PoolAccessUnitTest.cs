@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net.Sockets;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using NUnit.Framework;
@@ -87,11 +90,41 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolToOtherUserWithSameName_ReturnTrue()
         {
-            const string mail1 = "somemail@derp.com";
-            const string mail2 = "post@jensenei.dk";
-            _uut.AddPool(mail2, "name", 8);
-            bool beTrue = _uut.AddPool(mail1, "name", 8);
+            _uut.AddPool(_testUser2.Email, "name", 8);
+            bool beTrue = _uut.AddPool(_testUser1.Email, "name", 8);
             Assert.That(beTrue, Is.True);
+        }
+
+        [Test]
+        public void AddPool_AddingPoolToExistingUser_DoesNotThrowException()
+        {
+            Assert.DoesNotThrow(() => _uut.AddPool(_testUser1.Email, "poolname", 4));
+        }
+
+        [Test]
+        public void AddPool_AddingPoolToExistingUser_UserOnlyAppearOnceInDb()
+        {
+            // clear pools in db
+            _uut.DeleteAllPools();
+            _userAccess.RemoveUser(_testUser2.Email);
+
+            // list to store found users in
+            List<User> listOfFoundUsers = new List<User>();
+
+            _uut.AddPool(_testUser1.Email, "poolname", 8);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForUsers = from user in db.UserSet
+                                     select user;
+
+                foreach (User user in searchForUsers)
+                {
+                    listOfFoundUsers.Add(user);
+                }
+            }
+            
+            Assert.That(listOfFoundUsers.Count, Is.EqualTo(1));
         }
 
         #endregion
@@ -123,7 +156,7 @@ namespace Database.Test.Unit
         #endregion
 
         #region FindSpecificPool
-        
+
         [Test]
         public void FindSpecificPool_EmptyDatabase_ThrowsPoolNotFoundException()
         {
