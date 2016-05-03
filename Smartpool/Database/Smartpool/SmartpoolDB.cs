@@ -5,7 +5,6 @@
         public IPoolAccess PoolAccess { get; }
         public IUserAccess UserAccess { get; }
 
-
         public SmartpoolDB(IPoolAccess poolAccess)
         {
             PoolAccess = poolAccess;
