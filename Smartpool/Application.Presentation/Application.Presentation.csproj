@@ -46,12 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Presenters\AddPoolViewController.cs" />
+    <Compile Include="Presenters\EditPoolViewController.cs" />
     <Compile Include="Presenters\Interfaces\IAddPoolViewController.cs" />
+    <Compile Include="Presenters\Interfaces\IEditPoolViewController.cs" />
     <Compile Include="Presenters\Interfaces\ISignUpViewController.cs" />
     <Compile Include="Presenters\SignUpViewController.cs" />
     <Compile Include="Tab Bar Controller\ITabBarController.cs" />
     <Compile Include="Tab Bar Controller\TabBarController.cs" />
     <Compile Include="View Interfaces\IAddPoolView.cs" />
+    <Compile Include="View Interfaces\IEditPoolView.cs" />
     <Compile Include="View Interfaces\ILoginView.cs" />
     <Compile Include="Presenters\Interfaces\ILoginViewController.cs" />
     <Compile Include="Presenters\LoginViewController.cs" />
