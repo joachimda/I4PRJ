@@ -13,11 +13,9 @@ namespace Smartpool.Connection.Model
         //Server messages
         LoginResponse,
         GeneralResponse,
-
-        //Not implemented
         GetPoolDataResponse, //get poolinfo + latest sensor values
-        GetAllPoolNamesResponse, //get name + alert bool
-        GetPoolHistoryResponse,
+        //GetAllPoolNamesResponse, //get name + alert bool -> added to getpooldata as parameter
+        //GetPoolHistoryResponse, // -> added to getpooldata as parameter
     }
 
     public enum TokenSubMessageTypes
@@ -35,8 +33,8 @@ namespace Smartpool.Connection.Model
         AddPoolPictureRequest,
 
         GetPoolDataRequest, //Get all data about pool + latest sensor values
-        GetAllPoolNamesRequest, //Quick get for program startup
-        GetPoolHistoryRequest,
+        //GetAllPoolNamesRequest, //Quick get for program startup -> added to getpooldata as parameter
+        //GetPoolHistoryRequest, // -> added to getpooldata as parameter
         //Monitor Unit messages
         AddMonitorUnitRequest,
         UpdateMonitorUnitRequest,

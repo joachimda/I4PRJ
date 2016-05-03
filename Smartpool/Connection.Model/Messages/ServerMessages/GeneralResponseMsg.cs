@@ -1,6 +1,6 @@
 namespace Smartpool.Connection.Model
 {
-    public class GeneralResponseMsg : Message
+    public class GeneralResponseMsg : ServerMsg
     {
         public bool TokenStillActive { get; set; }
         public bool RequestExecutedSuccesfully { get; set; }
