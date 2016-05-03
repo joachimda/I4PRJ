@@ -5,6 +5,7 @@ namespace Smartpool
 {
     public class PoolAccess : IPoolAccess
     {
+        private IUserAccess _userAccess = null;
         /// <summary>
         /// Adds pool to a users poolSet.
         /// </summary
@@ -12,9 +13,10 @@ namespace Smartpool
         /// <param name="name">The pools name</param>
         /// <param name="volume">the pools volume</param>
         /// <returns>true on succes, false on fail</returns>
-        public bool AddPool(User user, string name, double volume)
+        public bool AddPool(string email, string name, double volume)
         {
-            if (IsPoolNameAvailable(user, name) == false)
+
+            if (IsPoolNameAvailable(_userAccess.FindUserByEmail(email), name) == false)
             {
                 return false;
             }
@@ -23,7 +25,7 @@ namespace Smartpool
                 return false;
             }
 
-            Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
+            Pool newPool = new Pool { Name = name, User = _userAccess.FindUserByEmail(email), Volume = volume, UserId = _userAccess.FindUserByEmail(email).Id };
 
             using (var db = new DatabaseContext())
             {
