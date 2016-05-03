@@ -6,14 +6,14 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            SmartpoolDB SmartPoolDB = new SmartpoolDB(new UserAccess(), new PoolAccess());
+            SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
             SmartPoolDB.ClearEntireDatabase();
 
-            SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email", "pass");
-            User user = SmartPoolDB.UserAccess.FindUserByEmail("email");
-            SmartPoolDB.PoolAccess.AddPool(user, "testpoolname", 89);
+            //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email", "pass");
+            //User user = SmartPoolDB.UserAccess.FindUserByEmail("email");
+            //SmartPoolDB.PoolAccess.AddPool(user, "testpoolname", 89);
 
-            SmartPoolDB.PoolAccess.RemovePool(user, "testpoolname");
+            //SmartPoolDB.PoolAccess.RemovePool(user, "testpoolname");
 
             //User _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
 

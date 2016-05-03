@@ -30,8 +30,8 @@ namespace Smartpool
                 return false;
             }
 
-            Pool newPool = new Pool { Name = name, User = UserAccess.FindUserByEmail(email), Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
-
+            Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
+            Pool derp = new Pool() {};
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
