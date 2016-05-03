@@ -264,16 +264,16 @@ namespace Database.Test.Unit
         public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangeOfExistingUserToInvalid_ReturnsFalse() { }
+        public void EditUser_ChangeToInvalid_ReturnsFalse() { }
 
         [Test]
-        public void EditUser_ChangePasswordOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser() { }
+        public void EditUser_ChangeToInvalid_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangeOfExistingUser_ReturnsTrue() { }
+        public void EditUser_ChangePassword_ReturnsTrue() { }
 
         [Test]
-        public void EditUser_ChangePasswordOfExistingUser_FindUserByEmailReturnsNewUser() { }
+        public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
 
         #endregion
 
