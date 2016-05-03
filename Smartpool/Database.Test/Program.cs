@@ -9,26 +9,13 @@ namespace Database.Test
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
             SmartPoolDB.ClearEntireDatabase();
 
-            //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email", "pass");
-            //User user = SmartPoolDB.UserAccess.FindUserByEmail("email");
-            //SmartPoolDB.PoolAccess.AddPool(user, "testpoolname", 89);
+            SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
+            SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
+            SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
 
-            //SmartPoolDB.PoolAccess.RemovePool(user, "testpoolname");
-
-            //User _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
-
-            //SmartPoolDB.PoolAccess.RemovePool(_user1, "someKindOfPool");
-
-            //SmartPoolDB.UserAccess.AddUser("Sir John Traktor", "some@mail.dk", "password123");
-            //SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("some@mail.dk"), "poolname", 5);
-
-            //SmartPoolDB.UserAccess.DeleteAllUsers();
-            //SmartPoolDB.UserAccess.AddUser("Joachim Dam Andersen", "jokke@norgaard-andersen.tech", "herropree");
-            //SmartPoolDB.UserAccess.AddUser("Bjørn Nørgaaard Sørensen", "bjorn@norgaard-andersen.tech", "helloyou");
-            //SmartPoolDB.UserAccess.AddUser("Signe Satan", "signe@hotmail.com", "signespassword");
-            //SmartPoolDB.UserAccess.AddUser("Nanna Derps", "derp@gmail.com", "monstersikkerdk");
-            //SmartPoolDB.UserAccess.AddUser("Emil Lasse", "emil@lasse.com", "pikpikpik");
-            //SmartPoolDB.UserAccess.RemoveUser("jokke@norgaard-andersen.tech");
+            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("email@hensen.dk"), "Sir Derp's Pool", 20);
+            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("sen@her.com"), "Miss's Pool", 11);
+            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("duck@import.dk"), "Duke's Pool", 5);
         }
     }
     /*****************************Don't touch diz!*******************************/

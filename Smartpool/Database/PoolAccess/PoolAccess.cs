@@ -4,7 +4,7 @@ using System.Linq;
 namespace Smartpool
 {
     public class PoolAccess : IPoolAccess
-    { 
+    {
         public IUserAccess UserAccess { get; set; }
 
         public PoolAccess(IUserAccess userAccess)
@@ -31,7 +31,7 @@ namespace Smartpool
             }
 
             Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
-            Pool derp = new Pool() {};
+            
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
