@@ -22,24 +22,20 @@ namespace Smartpool.Connection.Server
                     return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name, apMsg.Volume)); 
 
                 case TokenSubMessageTypes.UpdatePoolRequest:
-                    var upiMsg = JsonConvert.DeserializeObject<UpdatePoolRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false); // _smartpoolDb.PoolAccess.UpdatePoolInfo(upiMsg.OldPoolName, upiMsg.NewPoolAddress, upiMsg.NewPoolName, upiMsg.NewPoolVolume)
+                    var upMsg = JsonConvert.DeserializeObject<UpdatePoolRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false) { MessageInfo = "Not implemented" }; // _smartpoolDb.PoolAccess.UpdatePoolInfo(upiMsg.OldPoolName, upiMsg.NewPoolAddress, upiMsg.NewPoolName, upiMsg.NewPoolVolume)
 
                 case TokenSubMessageTypes.RemovePoolRequest:
                     var rpMsg = JsonConvert.DeserializeObject<RemovePoolRequestMsg>(messageString);
                     return new GeneralResponseMsg(true, _smartpoolDb.PoolAccess.RemovePool(rpMsg.Username, rpMsg.PoolName)); 
 
                 case TokenSubMessageTypes.AddPoolPictureRequest:
-                    return new GeneralResponseMsg(true, false);
+                    var appMsg = JsonConvert.DeserializeObject<AddPoolPictureRequestMsg>(messageString);
+                    return new GeneralResponseMsg(true, false) { MessageInfo = "Not implemented" };
 
-               case TokenSubMessageTypes.GetPoolDataRequest:
-                   return new Message("Not implemented"); //new GetPoolDataResponseMsg() 
-
-                case TokenSubMessageTypes.GetAllPoolNamesRequest:
-                    return new Message("Not implemented"); //new GetAllPoolNamesResponseMsg()
-
-                case TokenSubMessageTypes.GetPoolHistoryRequest:
-                    return new Message("Not implemented"); //new GetPoolHistoryResponseMsg()
+                case TokenSubMessageTypes.GetPoolDataRequest:
+                    var gpdMsg = JsonConvert.DeserializeObject<GetPoolDataRequestMsg>(messageString);
+                    return new GetPoolDataResponseMsg() { MessageInfo = "Not implemented"};  
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
