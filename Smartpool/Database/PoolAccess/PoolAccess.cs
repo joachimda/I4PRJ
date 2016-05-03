@@ -23,7 +23,7 @@ namespace Smartpool
                 return false;
             }
 
-            Pool newPool = new Pool { Name = name, User = user, Volume = volume, UserId = user.Id };
+            Pool newPool = new Pool { Name = name, Volume = volume, UserId = user.Id };
 
             using (var db = new DatabaseContext())
             {
