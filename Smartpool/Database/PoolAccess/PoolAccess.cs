@@ -5,8 +5,12 @@ namespace Smartpool
 {
     public class PoolAccess : IPoolAccess
     { 
-        private readonly IUserAccess _userAccess = null;
+        public IUserAccess UserAccess { get; set; }
 
+        public PoolAccess(IUserAccess userAccess)
+        {
+            UserAccess = userAccess;
+        }
         /// <summary>
         /// Adds pool to a users poolSet.
         /// </summary
@@ -26,7 +30,7 @@ namespace Smartpool
                 return false;
             }
 
-            Pool newPool = new Pool { Name = name, User = _userAccess.FindUserByEmail(email), Volume = volume, UserId = _userAccess.FindUserByEmail(email).Id };
+            Pool newPool = new Pool { Name = name, User = UserAccess.FindUserByEmail(email), Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
 
             using (var db = new DatabaseContext())
             {
@@ -53,7 +57,7 @@ namespace Smartpool
 
                 foreach (Pool pool in searchPoolSet)
                 {
-                    if (pool.UserId == _userAccess.FindUserByEmail(email).Id)
+                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
                     {
                         return false;
                     }
@@ -113,7 +117,7 @@ namespace Smartpool
 
                 foreach (Pool pool in searchForPool)
                 {
-                    if (pool.UserId == _userAccess.FindUserByEmail(email).Id)
+                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
                     {
                         db.PoolSet.Remove(pool);
                     }

@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.Globalization;
+using NSubstitute;
+using NSubstitute.ReturnsExtensions;
+using NUnit.Framework;
 using Smartpool;
 
 namespace Database.Test.Unit
@@ -11,15 +14,16 @@ namespace Database.Test.Unit
         private IPoolAccess _uut;
         private IUserAccess _userAccess;
 
+
         private User _user1, _user2;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new PoolAccess();
-            _userAccess = new UserAccess();
+            _userAccess = Substitute.For<IUserAccess>();
+            _uut = new PoolAccess(_userAccess);
 
-            _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk", Password = "password123" };
+            _user1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "somemail@derp.com", Password = "password123" };
             _user2 = new User() { Firstname = "Sire", Middelname = "Herp", Lastname = "Jensenei", Email = "post@jensenei.dk", Password = "mydogsname" };
 
             using (var db = new DatabaseContext())
@@ -44,53 +48,63 @@ namespace Database.Test.Unit
         [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
         {
-            _uut.AddPool(_user1, "poolname", 4);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            _uut.AddPool(mail, "poolname", 4);
 
-            Assert.That(_uut.IsPoolNameAvailable(_user1, "poolname"), Is.False);
+            Assert.That(_uut.IsPoolNameAvailable(mail, "poolname"), Is.False);
         }
 
         [Test]
         public void AddPool_AddingPoolWithValidUser_ThrowsUserNotFoundException()
         {
-            Assert.DoesNotThrow(() => _uut.AddPool(_user1, "poolname", 89));
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            Assert.DoesNotThrow(() => _uut.AddPool(mail, "poolname", 89));
         }
 
         [Test]
         public void AddPool_AddingPoolWithZeroVolume_ReturnsFalse()
         {
-            Assert.That(_uut.AddPool(_user1, "name", 0), Is.False);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            Assert.That(_uut.AddPool(mail, "name", 0), Is.False);
         }
 
         [Test]
         public void AddPool_AddingPoolWithNeg5Volume_ReturnsFalse()
         {
-            Assert.That(_uut.AddPool(_user1, "name", -5), Is.False);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            Assert.That(_uut.AddPool(mail, "name", -5), Is.False);
         }
 
         [Test]
         public void AddPool_AddingIdenticalPool_ReturnsFalse()
         {
-            _uut.AddPool(_user1, "name", 4);
-            Assert.That(_uut.AddPool(_user1, "name", 4), Is.False);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            _uut.AddPool(mail, "name", 4);
+            Assert.That(_uut.AddPool(mail, "name", 4), Is.False);
         }
 
         [Test]
         public void AddPool_AddingSecondPoolWithValidName_IsPoolNameAvailableReturnsTrue()
         {
-            _uut.AddPool(_user1, "name", 8);
-
-            bool shouldBeTrue = _uut.AddPool(_user1, "othername", 3);
-
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            _uut.AddPool(mail, "name", 8);
+            bool shouldBeTrue = _uut.AddPool(mail, "othername", 3);
             Assert.That(shouldBeTrue, Is.True);
         }
 
         [Test]
         public void AddPool_AddingPoolToOtherUserWithSameName_ReturnTrue()
         {
-            _uut.AddPool(_user2, "name", 8);
-
-            bool beTrue = _uut.AddPool(_user1, "name", 8);
-
+            const string mail1 = "somemail@derp.com";
+            const string mail2 = "post@jensenei.dk";
+            _uut.AddPool(mail2, "name", 8);
+            bool beTrue = _uut.AddPool(mail1, "name", 8);
             Assert.That(beTrue, Is.True);
         }
 
@@ -99,24 +113,29 @@ namespace Database.Test.Unit
         #region IsPoolNameAvailable
 
         [Test]
-        public void IsPoolNameAvailable_EmptyDatabase_IsPoolNameAvailableReturnsTrue()
+        public void IsPoolNameAvailable_UserNotExisting_IsPoolNameAvailableReturnsTrue()
         {
-            Assert.That(_uut.IsPoolNameAvailable(_user1, "somename"), Is.True);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            Assert.That(_uut.IsPoolNameAvailable(mail, "somename"), Is.True);
         }
 
         [Test]
         public void IsPoolNameAvailable_PoolExists_IsPoolNameAvailableReturnsFalse()
         {
-            _uut.AddPool(_user2, "unknown", 8);
-            Assert.That(_uut.IsPoolNameAvailable(_user2, "unknown"), Is.False);
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            _uut.AddPool(mail, "unknown", 8);
+            Assert.That(_uut.IsPoolNameAvailable(mail, "unknown"), Is.False);
         }
 
         [Test]
         public void IsPoolNameAvailable_AddedOtherOriginalPool_IsPoolNameAvailableReturnsTrue()
         {
-            _uut.AddPool(_user1, "name", 8);
-
-            bool mustBeTrue = _uut.IsPoolNameAvailable(_user1, "othername");
+            const string mail = "somemail@derp.com";
+            _userAccess.FindUserByEmail(mail).ReturnsNull();
+            _uut.AddPool(mail, "name", 8);
+            bool mustBeTrue = _uut.IsPoolNameAvailable(mail, "othername");
 
             Assert.That(mustBeTrue, Is.True);
         }
@@ -130,21 +149,26 @@ namespace Database.Test.Unit
         {
             User derp = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "post@andersen.dk" };
 
-            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(derp, "thispooldoesnotexist"));
+            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(derp.Email, "thispooldoesnotexist"));
         }
 
         [Test]
         public void FindSpecificPool_UserExistsInDatabaseButWithoutPool_ThrowsPoolNotFoundException()
         {
-            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(_user1, "thispooldoesnotexist"));
+            const string mail = "somemail@derp.com";
+
+            User derp = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = mail };
+            _userAccess.FindUserByEmail(mail).Returns(derp);
+            Assert.Throws<PoolNotFoundException>(() => _uut.FindSpecificPool(derp.Email, "thispooldoesnotexist"));
         }
 
         [Test]
         public void FindSpecificPool_PoolIsInDatabase_ReturnsPoolWithCorrectName()
         {
-            _uut.AddPool(_user1, "poolio", 50);
+            const string mail = "somemail@derp.com";
+            _uut.AddPool(mail, "poolio", 50);
 
-            Pool pool = _uut.FindSpecificPool(_user1, "poolio");
+            Pool pool = _uut.FindSpecificPool(mail, "poolio");
             Assert.That(pool.Name, Is.EqualTo("poolio"));
         }
 
