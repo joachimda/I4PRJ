@@ -5,7 +5,6 @@
         public IPoolAccess PoolAccess { get; }
         public IUserAccess UserAccess { get; }
 
-
         public SmartpoolDB(IPoolAccess poolAccess)
         {
             PoolAccess = poolAccess;
@@ -15,7 +14,7 @@
         public void ClearEntireDatabase()
         {
             PoolAccess.DeleteAllPools();
-            PoolAccess.UserAccess.DeleteAllUsers();
+            UserAccess.DeleteAllUsers();
         }
     }
 }
