@@ -2,10 +2,10 @@
 {
     public interface IPoolAccess
     {
-        bool AddPool(User user, string name, double volume);
-        bool IsPoolNameAvailable(User user, string name);
-        Pool FindSpecificPool(User user, string name);
-        bool RemovePool(User user, string name);
+        bool AddPool(string email, string name, double volume);
+        bool IsPoolNameAvailable(string email, string name);
+        Pool FindSpecificPool(string email, string name);
+        bool RemovePool(string email, string name);
         void DeleteAllPools();
     }
 }
