@@ -119,7 +119,7 @@ namespace Database.Test.Unit
                     listOfFoundUsers.Add(user);
                 }
             }
-            
+
             Assert.That(listOfFoundUsers.Count, Is.EqualTo(1));
         }
 
@@ -213,46 +213,81 @@ namespace Database.Test.Unit
 
         #region Change Name
 
-        // public void EditPool_ChangeNameOfNotExistingPool_ReturnsFalse()
-        // public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeNameOfNotExistingPool_ReturnsFalse() { }
 
-        // public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
-        // public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
-        // public void EditPool_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
-        // public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse() { }
 
-        // public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue()
-        // public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool()
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToTakenName_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool() { }
 
         #endregion
 
         #region Change Volume
 
-        // public void EditPool_ChangeVolumeOfNotExistingPool_ReturnsFalse()
-        // public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeVolumeOfNotExistingPool_ReturnsFalse() { }
 
-        // public void EditPool_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse()
-        // public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
-        // public void EditPool_ChangeVolumeOfExistingPool_ReturnsTrue()
-        // public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool()
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+
+        public void EditPool_ChangeVolumeOfExistingPool_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool() { }
 
         #endregion
 
         #region Change User
 
-        // public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse()
-        // public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse() { }
 
-        // public void EditPool_ChangeUserToInvalid_ReturnsFalse()
-        // public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
-        // public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse()
-        // public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool()
+        [Test]
+        public void EditPool_ChangeUserToInvalid_ReturnsFalse() { }
 
-        // public void EditPool_ChangeUser_ReturnsTrue()
-        // public void EditPool_ChangeUser_FindSpecificPoolReturnsNewPool()
+        [Test]
+        public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+
+        public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeUser_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeUser_FindSpecificPoolReturnsNewPool() { }
 
         #endregion
     }
