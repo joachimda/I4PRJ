@@ -27,33 +27,13 @@ namespace Smartpool.Application.Win
             ChlorineStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x49, 0xBA, 0xE1));
             HumidityStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x03, 0x54, 0xA5));
 
-            SpTabControl1.OnShowStatButtonClicked += SpTabControl1_ShowStatView;
-            SpTabControl1.OnShowHistoryButtonClicked += SpTabControl1_ShowHistoryView;
-            SpTabControl1.OnShowAddPoolButtonClicked += SpTabControl1_ShowAddPoolView;
-            SpTabControl1.OnShowEditPoolButtonClicked += SpTabControl1_ShowEditPoolView;
+            //Sets up the tabBars event handlers
+            //SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+            SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
+            SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
+            SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
         }
 
-        private void SpTabControl1_ShowStatView(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Show Stats");
-        }
 
-        private void SpTabControl1_ShowHistoryView(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Show History");
-        }
-
-        private void SpTabControl1_ShowAddPoolView(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show("Show AddPool");
-            Window view = new WinAddPoolView();
-            view.Show();
-            this.Close();
-        }
-
-        private void SpTabControl1_ShowEditPoolView(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Show EditPool");
-        }
     }
 }
