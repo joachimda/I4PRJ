@@ -13,9 +13,9 @@ namespace Database.Test
             SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
             SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
 
-            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("email@hensen.dk"), "Sir Derp's Pool", 20);
-            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("sen@her.com"), "Miss's Pool", 11);
-            SmartPoolDB.PoolAccess.AddPool(SmartPoolDB.UserAccess.FindUserByEmail("duck@import.dk"), "Duke's Pool", 5);
+            SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
+            SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
+            SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
         }
     }
     /*****************************Don't touch diz!*******************************/
