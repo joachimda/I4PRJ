@@ -23,13 +23,14 @@ namespace Smartpool
 
             User user;
 
-            string[] names = fullname.Split(' ');
-
-            if (names.Length <= 1)
+            if (!ValidateName(fullname))
             {
                 return false;
             }
-            else if (names.Length <= 2)
+
+            string[] names = fullname.Split(' ');
+
+            if (names.Length <= 2)
             {
                 user = new User() { Firstname = names[0], Lastname = names[1], Email = email, Password = password };
             }
@@ -45,6 +46,21 @@ namespace Smartpool
                 db.UserSet.Add(user);
                 db.SaveChanges();
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Validates name to be used for user.
+        /// </summary>
+        /// <param name="fullname">Name to be validated.</param>
+        /// <returns>True if name if ok, false otherwise.</returns>
+        public bool ValidateName(string fullname)
+        {
+            string[] names = fullname.Split(' ');
+
+            if (names.Length <= 1)
+                return false;
 
             return true;
         }
@@ -195,6 +211,10 @@ namespace Smartpool
             if (IsEmailInUse(emailOfUser) == false)
             {
                 return false;
+            }
+            if (!ValidateName())
+            {
+
             }
 
             return true;
