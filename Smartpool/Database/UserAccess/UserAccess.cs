@@ -23,13 +23,14 @@ namespace Smartpool
 
             User user;
 
-            string[] names = fullname.Split(' ');
-
-            if (names.Length <= 1)
+            if (!ValidateName(fullname))
             {
                 return false;
             }
-            else if (names.Length <= 2)
+
+            string[] names = fullname.Split(' ');
+
+            if (names.Length <= 2)
             {
                 user = new User() { Firstname = names[0], Lastname = names[1], Email = email, Password = password };
             }
@@ -45,6 +46,21 @@ namespace Smartpool
                 db.UserSet.Add(user);
                 db.SaveChanges();
             }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Validates name to be used for user.
+        /// </summary>
+        /// <param name="fullname">Name to be validated.</param>
+        /// <returns>True if name if ok, false otherwise.</returns>
+        public bool ValidateName(string fullname)
+        {
+            string[] names = fullname.Split(' ');
+
+            if (names.Length <= 1)
+                return false;
 
             return true;
         }
@@ -173,6 +189,35 @@ namespace Smartpool
             {
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
+        }
+
+        /// <summary>
+        /// Changes member of a user in db.
+        /// </summary>
+        /// <param name="emailOfUser">Email of the user, that you want to change the property for.</param>
+        /// <param name="propertyToChange">The property you want to change.</param>
+        /// <param name="newValue">The new value for the property.</param>
+        public bool EditUser(string emailOfUser, string propertyToChange, string newValue)
+        {
+            #region Checking if second arg have been missspelled
+
+            if (propertyToChange != "name" && propertyToChange != "email" && propertyToChange != "password")
+            {
+                throw new YouSpelledSomethingWrongException();
+            }
+
+            #endregion
+
+            if (IsEmailInUse(emailOfUser) == false)
+            {
+                return false;
+            }
+            if (!ValidateName(newValue))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

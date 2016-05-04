@@ -30,6 +30,12 @@ namespace Smartpool.Application.Win
             ThemeProperties.SetPlaceholderText(DepthTextBox, "Depth");
             ThemeProperties.SetPlaceholderText(SeialTextBox, "Moniter unit serial number");
 
+            //Sets up the tabBars event handlers
+            SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+            SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
+            //SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
+            SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
+
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
             //Controller
             var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
@@ -135,7 +141,5 @@ namespace Smartpool.Application.Win
                 controller?.DidChangeText(AddPoolTextField.SerialNumber, textField.Text);
             }
         }
-
-
     }
 }

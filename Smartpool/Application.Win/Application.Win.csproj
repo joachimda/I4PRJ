@@ -79,6 +79,7 @@
     <Compile Include="StyleableWindow\WindowMaximizeCommand.cs" />
     <Compile Include="StyleableWindow\WindowMinimizeCommand.cs" />
     <Compile Include="StyleableWindow\WindowResizeBehavior.cs" />
+    <Compile Include="TabBarController.cs" />
     <Compile Include="WinAddPoolView.xaml.cs">
       <DependentUpon>WinAddPoolView.xaml</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
       <Name>Connection.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
