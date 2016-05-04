@@ -212,9 +212,9 @@ namespace Smartpool
             {
                 return false;
             }
-            if (!ValidateName())
+            if (!ValidateName(newValue))
             {
-
+                return false;
             }
 
             return true;

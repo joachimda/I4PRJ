@@ -209,6 +209,23 @@ namespace Database.Test.Unit
 
         #endregion
 
+        #region ValidateName
+
+        [Test]
+        public void ValidateName_ValidName_ReturnsTrue()
+        {
+
+        }
+
+        [Test]
+        public void ValidateName_InvalidName_ReturnsFalse()
+        {
+            
+        }
+
+        #endregion
+
+
         #region EditUser
 
         #region Change of Name
