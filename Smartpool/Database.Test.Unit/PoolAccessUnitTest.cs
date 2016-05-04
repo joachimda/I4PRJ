@@ -216,23 +216,23 @@ namespace Database.Test.Unit
         [Test]
         public void EditPool_ChangeNameOfNotExistingPool_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
         public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
         public void EditPool_ChangeNameOfExistingPoolToTakenName_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue() { }
+        public void EditPool_ChangeNameOfExistingPool_ReturnsTrue() { }
 
         [Test]
         public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool() { }
@@ -244,21 +244,21 @@ namespace Database.Test.Unit
         [Test]
         public void EditPool_ChangeVolumeOfNotExistingPool_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
         public void EditPool_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
 
         public void EditPool_ChangeVolumeOfExistingPool_ReturnsTrue() { }
 
-        [Test]
-        public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool() { }
+        //[Test]
+        //public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool() { }
 
         #endregion
 
@@ -267,21 +267,20 @@ namespace Database.Test.Unit
         [Test]
         public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
         public void EditPool_ChangeUserToInvalid_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-
         public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse() { }
 
-        [Test]
-        public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool() { }
+        //[Test]
+        //public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
         public void EditPool_ChangeUser_ReturnsTrue() { }
