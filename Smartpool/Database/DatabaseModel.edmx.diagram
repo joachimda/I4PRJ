@@ -4,10 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" >
-        <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.875" PointY="0.5" />
-        <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="4.75" PointY="0.5" />
+      <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="2.625" PointY="0.5" />
         <AssociationConnector Association="Smartpool.UserPool" />
+        <EntityTypeShape EntityType="Smartpool.Data" Width="1.5" PointX="4.875" PointY="0.5" />
+        <AssociationConnector Association="Smartpool.PoolData" />
+        <EntityTypeShape EntityType="Smartpool.pH" Width="1.5" PointX="3.75" PointY="3.625" />
+        <EntityTypeShape EntityType="Smartpool.Chlorine" Width="1.5" PointX="1.75" PointY="3.625" />
+        <EntityTypeShape EntityType="Smartpool.Temperature" Width="1.5" PointX="5.875" PointY="3.625" />
+        <EntityTypeShape EntityType="Smartpool.Humidity" Width="1.5" PointX="8" PointY="3.625" />
+        <AssociationConnector Association="Smartpool.DataChlorine" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="Smartpool.DatapH" ></AssociationConnector>
+        <AssociationConnector Association="Smartpool.DataTemperature" />
+        <AssociationConnector Association="Smartpool.DataHumidity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

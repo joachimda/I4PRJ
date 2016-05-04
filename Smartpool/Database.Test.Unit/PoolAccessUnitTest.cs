@@ -119,7 +119,7 @@ namespace Database.Test.Unit
                     listOfFoundUsers.Add(user);
                 }
             }
-            
+
             Assert.That(listOfFoundUsers.Count, Is.EqualTo(1));
         }
 
@@ -208,6 +208,86 @@ namespace Database.Test.Unit
             const string mail = "somemail@derp.com";
             Assert.That(_uut.RemovePool(mail, "ThisPoolIsNotHere"), Is.False);
         }
+
+        #endregion
+
+        #region Change Name
+
+        [Test]
+        public void EditPool_ChangeNameOfNotExistingPool_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToTakenName_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolTo_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool() { }
+
+        #endregion
+
+        #region Change Volume
+
+        [Test]
+        public void EditPool_ChangeVolumeOfNotExistingPool_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+
+        public void EditPool_ChangeVolumeOfExistingPool_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool() { }
+
+        #endregion
+
+        #region Change User
+
+        [Test]
+        public void EditPool_ChangeUserOfNotExistingPool_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeUserToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+
+        public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse() { }
+
+        [Test]
+        public void EditPool_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool() { }
+
+        [Test]
+        public void EditPool_ChangeUser_ReturnsTrue() { }
+
+        [Test]
+        public void EditPool_ChangeUser_FindSpecificPoolReturnsNewPool() { }
 
         #endregion
     }

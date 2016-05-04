@@ -57,6 +57,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chlorine.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Humidity.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pH.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Smartpool\ISmartpoolDB.cs" />
     <Compile Include="PoolAccess\IPoolAccess.cs" />
     <Compile Include="Pool.cs">
@@ -75,6 +87,9 @@
     </Compile>
     <Compile Include="Exceptions.cs" />
     <Compile Include="Smartpool\SmartpoolDB.cs" />
+    <Compile Include="Temperature.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserAccess\IUserAccess.cs" />
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
