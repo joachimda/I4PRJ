@@ -214,10 +214,18 @@ namespace Database.Test.Unit
         #region Change of Name
 
         [Test]
-        public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse() { }
-        
+        public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse()
+        {
+            Assert.That(_uut.EditUser("nonexisting", "email", "newsomething"), Is.False);
+        }
+
         [Test]
-        public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse() { }
+        public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse()
+        {
+            _uut.AddUser("Hans Jørgensen", "mail", "pass");
+
+            Assert.That(_uut.EditUser("mail", "name", "Invalid"), Is.False);
+        }
 
         //[Test]
         //public void EditUser_ChangeNameOfExistingUserToInvalidName_FindUserByEmailReturnsOriginalUser() { }
@@ -262,7 +270,7 @@ namespace Database.Test.Unit
         {
             _uut.AddUser("John Hansen", "hansen@gmail.com", "hansenpass");
 
-            Assert.That(_uut.EditUser());
+           // Assert.That(_uut.EditUser());
         }
 
         //[Test]
