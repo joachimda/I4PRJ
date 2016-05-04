@@ -208,5 +208,75 @@ namespace Database.Test.Unit
         }
 
         #endregion
+
+        #region EditUser
+
+        #region Change of Name
+
+        [Test]
+        public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfExistingUserToInvalidName_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfExistingUser_ReturnsTrue() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfExistingUser_FindUserByEmailReturnsNewUser() { }
+
+        #endregion
+
+        #region Change of Email
+
+        [Test]
+        public void EditUser_ChangeEmailOfNotExistingUser_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangeEmailOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangeOfExistingUserToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangeEmailOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangeOfExistingUser_ReturnsTrue() { }
+
+        [Test]
+        public void EditUser_ChangeEmailOfExistingUser_FindUserByEmailReturnsNewUser() { }
+
+        #endregion
+
+        #region Change of Password
+
+        [Test]
+        public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangeToInvalid_ReturnsFalse() { }
+
+        [Test]
+        public void EditUser_ChangeToInvalid_FindUserByEmailReturnsOriginalUser() { }
+
+        [Test]
+        public void EditUser_ChangePassword_ReturnsTrue() { }
+
+        [Test]
+        public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
+
+        #endregion
+
+        #endregion
     }
 }
