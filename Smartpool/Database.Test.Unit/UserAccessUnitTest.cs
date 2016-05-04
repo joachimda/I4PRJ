@@ -215,21 +215,21 @@ namespace Database.Test.Unit
 
         [Test]
         public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse() { }
-
-        [Test]
-        public void EditUser_ChangeNameOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
-
+        
         [Test]
         public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse() { }
 
-        [Test]
-        public void EditUser_ChangeNameOfExistingUserToInvalidName_FindUserByEmailReturnsOriginalUser() { }
+        //[Test]
+        //public void EditUser_ChangeNameOfExistingUserToInvalidName_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangeNameOfExistingUser_ReturnsTrue() { }
+        public void EditUser_ChangeNameOfUser_ReturnsTrue() { }
 
         [Test]
         public void EditUser_ChangeNameOfExistingUser_FindUserByEmailReturnsNewUser() { }
+
+        [Test]
+        public void EditUser_ChangeNameOfExistingUser_FindUserByEmailCannotFindOldUser() { }
 
         #endregion
 
@@ -238,17 +238,17 @@ namespace Database.Test.Unit
         [Test]
         public void EditUser_ChangeEmailOfNotExistingUser_ReturnsFalse() { }
 
-        [Test]
-        public void EditUser_ChangeEmailOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
+        //[Test]
+        //public void EditUser_ChangeEmailOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangeOfExistingUserToInvalid_ReturnsFalse() { }
+        public void EditUser_ChangeEmailOfExistingUserToInvalid_ReturnsFalse() { }
 
-        [Test]
-        public void EditUser_ChangeEmailOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser() { }
+        //[Test]
+        //public void EditUser_ChangeEmailOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser() { }
 
-        [Test]
-        public void EditUser_ChangeOfExistingUser_ReturnsTrue() { }
+        //[Test]
+        //public void EditUser_ChangeEmailOfExistingUser_ReturnsTrue() { }
 
         [Test]
         public void EditUser_ChangeEmailOfExistingUser_FindUserByEmailReturnsNewUser() { }
@@ -260,20 +260,20 @@ namespace Database.Test.Unit
         [Test]
         public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse() { }
 
-        [Test]
-        public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
+        //[Test]
+        //public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
         public void EditUser_ChangeToInvalid_ReturnsFalse() { }
 
-        [Test]
-        public void EditUser_ChangeToInvalid_FindUserByEmailReturnsOriginalUser() { }
+        //[Test]
+        //public void EditUser_ChangeToInvalid_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
         public void EditUser_ChangePassword_ReturnsTrue() { }
 
-        [Test]
-        public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
+        //[Test]
+        //public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
 
         #endregion
 
