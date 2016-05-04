@@ -258,7 +258,12 @@ namespace Database.Test.Unit
         #region Change of Password
 
         [Test]
-        public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse() { }
+        public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse()
+        {
+            _uut.AddUser("John Hansen", "hansen@gmail.com", "hansenpass");
+
+            Assert.That(_uut.EditUser());
+        }
 
         //[Test]
         //public void EditUser_ChangePasswordOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
@@ -276,6 +281,14 @@ namespace Database.Test.Unit
         //public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
 
         #endregion
+
+        [Test]
+        public void EditUser_MissspellMemberToChange_ThrowYouSpelledSomethingWrongException()
+        {
+            _uut.AddUser("John Hansen", "hansen@gmail.com", "kodesaldfkjh");
+
+            Assert.Throws<YouSpelledSomethingWrongException>(() => _uut.EditUser("hansen@gmail.com", "assword", "kodeord123"));
+        }
 
         #endregion
     }
