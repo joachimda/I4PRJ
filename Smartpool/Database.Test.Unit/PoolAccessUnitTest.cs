@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Smartpool;
 
@@ -274,23 +275,45 @@ namespace Database.Test.Unit
         #region Change Volume
 
         [Test]
-        public void EditPoolVolume_ChangeVolumeOfNotExistingPool_ReturnsFalse() { }
-
-        //[Test]
-        //public void EditPoolVolume_ChangeVolumeOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
+        public void EditPoolVolume_ChangeVolumeOfNotExistingPool_ReturnsFalse()
+        {
+            Assert.That(_uut.EditPoolVolume(_testUser1.Email, "unknown", 4), Is.False);
+        }
+        
+        [Test]
+        public void EditPoolVolume_ChangeVolumeOfExistingPoolTo0_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "unknown", 5);
+            Assert.That(_uut.EditPoolVolume(_testUser1.Email, "unknown", 0), Is.False);
+        }
 
         [Test]
-        public void EditPoolVolume_ChangeVolumeOfExistingPoolToInvalid_ReturnsFalse() { }
+        public void EditPoolVolume_ChangeVolumeOfExistingPoolToNeg1_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "unknown", 5);
+            Assert.That(_uut.EditPoolVolume(_testUser1.Email, "unknown", -1), Is.False);
+        }
 
         //[Test]
         //public void EditPoolVolume_ChangeVolumeOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
 
-        public void EditPoolVolume_ChangeVolumeOfExistingPool_ReturnsTrue() { }
+        public void EditPoolVolume_ChangeVolumeOfExistingPool_ReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "unknown", 5);
 
-        //[Test]
-        //public void EditPoolVolume_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool() { }
+            Assert.That(_uut.EditPoolVolume(_testUser1.Email, "unknown", 9), Is.True);
+        }
+
+        [Test]
+        public void EditPoolVolume_ChangeVolumeOfExistingPool_FindSpecificPoolReturnsNewPool()
+        {
+            _uut.AddPool(_testUser1.Email, "unknown", 5);
+            _uut.EditPoolVolume(_testUser1.Email, "unknown", 9);
+
+            Assert.That(_uut.FindSpecificPool(_testUser1.Email, "unknown").Volume, Is.EqualTo(9));
+        }
 
         #endregion
 

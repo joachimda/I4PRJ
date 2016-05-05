@@ -156,9 +156,7 @@ namespace Smartpool
         {
             if (newName == "") return false;
             if (!IsPoolNameAvailable(ownerEmail, newName)) return false;
-
-            List<Pool> foundPools = new List<Pool>();
-
+            
             using (var db = new DatabaseContext())
             {
                 var searchForPool = from pool in db.PoolSet
@@ -185,7 +183,23 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
         {
-            return false;
+            if (newVolume <= 0) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == ownerEmail && pool.Name == name
+                                    select pool;
+
+                if (searchForPool.Any() == false) return false;
+                if (searchForPool.Count() > 1) throw new ArgumentException();
+
+                searchForPool.First().Volume = newVolume;
+
+                db.SaveChanges();
+            }
+
+            return true;
         }
 
         /// <summary>
