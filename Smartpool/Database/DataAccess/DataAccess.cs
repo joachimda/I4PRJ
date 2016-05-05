@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Smartpool.DataAccess
 {
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
-        public bool CreateTemperatureEntry(string serialNumber, int temperature)
+        public bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperature)
         {
             throw new System.NotImplementedException();
         }
-
-        public List<Temperature> GetRecentTemperatures(string serialNumber, int howManyToReturns)
+        
+        Dictionary<DateTime, Temperature> IReadDataAccess.GetRecentTemperatures(string poolOwnerEmail, string poolName, int howManyToReturns)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
