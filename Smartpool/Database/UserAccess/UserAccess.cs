@@ -191,33 +191,5 @@ namespace Smartpool
             }
         }
 
-        /// <summary>
-        /// Changes member of a user in db.
-        /// </summary>
-        /// <param name="emailOfUser">Email of the user, that you want to change the property for.</param>
-        /// <param name="propertyToChange">The property you want to change.</param>
-        /// <param name="newValue">The new value for the property.</param>
-        public bool EditUser(string emailOfUser, string propertyToChange, string newValue)
-        {
-            #region Checking if second arg have been missspelled
-
-            if (propertyToChange != "name" && propertyToChange != "email" && propertyToChange != "password")
-            {
-                throw new YouSpelledSomethingWrongException();
-            }
-
-            #endregion
-
-            if (IsEmailInUse(emailOfUser) == false)
-            {
-                return false;
-            }
-            if (!ValidateName(newValue))
-            {
-                return false;
-            }
-
-            return true;
-        }
     }
 }
