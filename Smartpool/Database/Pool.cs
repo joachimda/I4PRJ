@@ -24,6 +24,7 @@ namespace Smartpool
         public string Name { get; set; }
         public Nullable<double> Volume { get; set; }
         public int UserId { get; set; }
+        public string Serialnumber { get; set; }
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
