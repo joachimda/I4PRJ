@@ -165,7 +165,6 @@ namespace Smartpool
                                     select pool;
 
                 if (searchForPool.Any() == false) return false;
-                if (searchForPool.Count() > 1) throw new ArgumentException();
 
                 searchForPool.First().Name = newName;
 
@@ -193,7 +192,6 @@ namespace Smartpool
                                     select pool;
 
                 if (searchForPool.Any() == false) return false;
-                if (searchForPool.Count() > 1) throw new ArgumentException();
 
                 searchForPool.First().Volume = newVolume;
 
@@ -221,10 +219,7 @@ namespace Smartpool
                 var searchForPool = from pool in db.PoolSet
                                     where pool.User.Email == currectOwnerEmail && pool.Name == name
                                     select pool;
-
-                if (searchForPool.Any() == false) return false;
-                if (searchForPool.Count() > 1) throw new ArgumentException();
-
+                
                 searchForPool.First().UserId = UserAccess.FindUserByEmail(newUserEmail).Id;
 
                 db.SaveChanges();
