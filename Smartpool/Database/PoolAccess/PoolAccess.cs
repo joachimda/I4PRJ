@@ -215,7 +215,7 @@ namespace Smartpool
             if (IsPoolNameAvailable(currectOwnerEmail, name) == true) return false;
             if (UserAccess.IsEmailInUse(newUserEmail) == false) return false;
             if (IsPoolNameAvailable(newUserEmail, name) == false) return false;
-            
+
             using (var db = new DatabaseContext())
             {
                 var searchForPool = from pool in db.PoolSet
@@ -233,9 +233,24 @@ namespace Smartpool
             return true;
         }
 
-        public List<Pool> ListOfPools(string ownerEmail)
+        public List<Pool> FindAllPoolsOfUser(string ownerEmail)
         {
+            if (UserAccess.IsEmailInUse(ownerEmail) == false) throw new UserNotFoundException();
+
             List<Pool> poolList = new List<Pool>();
+            int userId = UserAccess.FindUserByEmail(ownerEmail).Id;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPools = from pool in db.PoolSet
+                                     where pool.UserId == userId
+                                     select pool;
+
+                foreach (Pool pool in searchForPools)
+                {
+                    poolList.Add(pool);
+                }
+            }
 
             return poolList;
         }

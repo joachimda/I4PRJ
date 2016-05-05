@@ -279,7 +279,7 @@ namespace Database.Test.Unit
         {
             Assert.That(_uut.EditPoolVolume(_testUser1.Email, "unknown", 4), Is.False);
         }
-        
+
         [Test]
         public void EditPoolVolume_ChangeVolumeOfExistingPoolTo0_ReturnsFalse()
         {
@@ -379,14 +379,58 @@ namespace Database.Test.Unit
 
         #endregion
 
-        #region ListOfPools
+        #region FindAllPoolsOfUser
 
-        //public void ListOfPools_NullUser_ThrowsUserNotFoundException() { }
-        //public void ListOfPools_UserWith0Pools_ReturnEmptyList() { }
-        //public void ListOfPools_UserWith1Pool_ReturnsListWithCorrectPool() { }
-        //public void ListOfPools_UserWith10Pools_ReturnsListWithCorrectPools() { }
+        [Test]
+        public void FindAllPoolsOfUser_NullUser_ThrowsUserNotFoundException()
+        {
+            Assert.Throws<UserNotFoundException>(() => _uut.FindAllPoolsOfUser("fakemail"));
+        }
+
+        [Test]
+        public void FindAllPoolsOfUser_UserWith0Pools_ReturnEmptyList()
+        {
+            Assert.That(_uut.FindAllPoolsOfUser(_testUser1.Email).Count, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void FindAllPoolsOfUser_UserWith1Pool_ReturnsListWithCorrectPool()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+
+            Assert.That(_uut.FindAllPoolsOfUser(_testUser1.Email).First().Name, Is.EqualTo("name"));
+        }
+
+        [Test]
+        public void FindAllPoolsOfUser_UserWith1Pool_ReturnsListWithCount1()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+
+            Assert.That(_uut.FindAllPoolsOfUser(_testUser1.Email).Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void FindAllPoolsOfUser_UserWith10Pool_ReturnsListWithCount10()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _uut.AddPool(_testUser1.Email, "name" + i, 8);
+            }
+
+            Assert.That(_uut.FindAllPoolsOfUser(_testUser1.Email).Count, Is.EqualTo(10));
+        }
+
+        [Test]
+        public void FindAllPoolsOfUser_UserWith10Pools_ReturnsListWithCorrectPools()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _uut.AddPool(_testUser1.Email, "name" + i, 8);
+            }
+
+            Assert.That(_uut.FindAllPoolsOfUser(_testUser1.Email)[5].Name, Is.EqualTo("name5"));
+        }
 
         #endregion
-
     }
 }
