@@ -211,7 +211,12 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)
         {
-            return false;
+            if (IsPoolNameAvailable(currectOwnerEmail, name) == true) return false;
+            if (UserAccess.IsEmailInUse(newUserEmail) == false) return false;
+
+
+
+            return true;
         }
     }
 }

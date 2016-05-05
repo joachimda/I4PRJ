@@ -320,28 +320,62 @@ namespace Database.Test.Unit
         #region Change User
 
         [Test]
-        public void EditPoolUser_ChangeUserOfNotExistingPool_ReturnsFalse() { }
+        public void EditPoolUser_ChangeUserOfNotExistingPool_ReturnsFalse()
+        {
+            Assert.That(_uut.EditPoolUser(_testUser1.Email, "nonexisting", _testUser2.Email), Is.False);
+        }
 
         //[Test]
         //public void EditPoolUser_ChangeUserOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolUser_ChangeUserToInvalid_ReturnsFalse() { }
+        public void EditPoolUser_ChangeUserToInvalid_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+
+            Assert.That(_uut.EditPoolUser(_testUser1.Email, "name", "invaliduseremail"), Is.False);
+        }
 
         //[Test]
         //public void EditPoolUser_ChangeUserToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolUser_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse() { }
+        public void EditPoolUser_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+            _uut.AddPool(_testUser2.Email, "derp", 8);
+
+            Assert.That(_uut.EditPoolUser(_testUser1.Email, "name", _testUser2.Email), Is.False);
+        }
 
         //[Test]
         //public void EditPoolUser_ChangeUserToSomeoneWhereNameIsTaken_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolUser_ChangeUser_ReturnsTrue() { }
+        public void EditPoolUser_ChangeUser_ReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+
+            Assert.That(_uut.EditPoolUser(_testUser1.Email, "name", _testUser2.Email), Is.True);
+        }
 
         [Test]
-        public void EditPoolUser_ChangeUser_FindSpecificPoolReturnsNewPool() { }
+        public void EditPoolUser_ChangeUser_IsPoolNameAvailableReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+            _uut.EditPoolUser(_testUser1.Email, "name", _testUser2.Email);
+
+            Assert.That(_uut.IsPoolNameAvailable(_testUser1.Email, "name"), Is.True);
+        }
+
+        [Test]
+        public void EditPoolUser_ChangeUser_IsPoolNameAvailableReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 8);
+            _uut.EditPoolUser(_testUser1.Email, "name", _testUser2.Email);
+
+            Assert.That(_uut.IsPoolNameAvailable(_testUser2.Email, "name"), Is.False);
+        }
 
         #endregion
     }
