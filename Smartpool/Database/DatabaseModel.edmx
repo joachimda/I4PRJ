@@ -57,7 +57,6 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Volume" Type="float" Nullable="true" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="Serialnumber" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="DataSet">
     <Key>
@@ -234,7 +233,6 @@
           <NavigationProperty Name="User" Relationship="Smartpool.UserPool" FromRole="Pool" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.PoolData" FromRole="Pool" ToRole="Data" />
-          <Property Name="Serialnumber" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="UserPool">
           <End Type="Smartpool.User" Role="User" Multiplicity="1" />
@@ -341,7 +339,6 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Volume" ColumnName="Volume" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="Serialnumber" ColumnName="Serialnumber" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
