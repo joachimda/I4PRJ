@@ -5,6 +5,8 @@ namespace Smartpool.DataAccess
 {
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
+        public IPoolAccess PoolAccess { get; set; }
+
         public bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue)
         {
             throw new NotImplementedException();
@@ -23,6 +25,7 @@ namespace Smartpool.DataAccess
         public Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns)
         {
             throw new NotImplementedException();
+
         }
     }
 }

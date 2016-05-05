@@ -5,6 +5,7 @@ namespace Smartpool.DataAccess
 {
     public interface IWriteDataAccess
     {
+        IPoolAccess PoolAccess { get; set; }
         bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue);
         bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue);
     }
