@@ -1,7 +1,14 @@
-﻿namespace Smartpool.DataAccess
+﻿using System.Collections.Generic;
+
+namespace Smartpool.DataAccess
 {
-    public class IDataAccess
+    public interface IWriteDataAccess
     {
         bool CreateTemperatureEntry(string serialNumber, int temperature);
+    }
+
+    public interface IReadDataAccess
+    {
+        List<Temperature> GetRecentTemperatures(string serialNumber, int howManyToReturns);
     }
 }
