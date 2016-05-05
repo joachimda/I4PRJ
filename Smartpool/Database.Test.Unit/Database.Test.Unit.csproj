@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WriteDataAccessUnitTest.cs" />
     <Compile Include="PoolAccessUnitTest.cs" />
     <Compile Include="UserAccessUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
