@@ -7,8 +7,20 @@ namespace Smartpool.DataAccess
 {
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
+        public IPoolAccess PoolAccess { get; set; }
+
         public bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue)
         {
+            if (!PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail))
+            {
+                return false;
+            }
+            Chlorine chlorine = new Chlorine {Value = chlorineValue};
+
+            using (var db = new DatabaseContext())
+            {
+                db.ChlorineSet.Add(chlorine);
+            }
             throw new NotImplementedException();
         }
 
