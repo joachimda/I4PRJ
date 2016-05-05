@@ -22,7 +22,7 @@ namespace Database.Test
             SmartPoolDB.PoolAccess.EditPoolName("email@hensen.dk", "Sir Derp's Pool", "namechange");
 
             SmartPoolDB.UserAccess.EditUserEmail("sen@her.com", "noobiboob@mail.com");
-            SmartPoolDB.UserAccess.EditUserName("email@hensen.dk", "Sir Derp");
+            SmartPoolDB.UserAccess.EditUserName("email@hensen.dk", "Sir Derpdddd");
             //SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
             //SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
         }
