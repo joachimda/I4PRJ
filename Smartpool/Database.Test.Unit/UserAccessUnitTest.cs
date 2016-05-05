@@ -307,14 +307,6 @@ namespace Database.Test.Unit
 
         #endregion
 
-        [Test]
-        public void EditUser_MissspellMemberToChange_ThrowYouSpelledSomethingWrongException()
-        {
-            _uut.AddUser("John Hansen", "hansen@gmail.com", "kodesaldfkjh");
-
-            Assert.Throws<YouSpelledSomethingWrongException>(() => _uut.EditUser("hansen@gmail.com", "assword", "kodeord123"));
-        }
-
         #endregion
     }
 }

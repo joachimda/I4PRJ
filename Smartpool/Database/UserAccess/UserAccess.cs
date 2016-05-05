@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
+using Microsoft.SqlServer.Server;
 
 namespace Smartpool
 {
@@ -204,7 +206,7 @@ namespace Smartpool
             {
                 return false;
             }
-            
+
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
@@ -224,7 +226,7 @@ namespace Smartpool
             {
                 return false;
             }
-;
+
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
@@ -235,6 +237,40 @@ namespace Smartpool
                 }
             }
             return true;
+        }
+
+        public bool EditUserName(string email, string newName)
+        {
+            if (!IsEmailInUse(email))
+            {
+                return false;
+            }
+
+            string[] names = newName.Split(' ');
+
+            using (var db = new DatabaseContext())
+            {
+                var original = db.UserSet.Find(FindUserByEmail(email).Id);
+                if (original != null)
+                {
+                    if (names.Length == 2)
+                    {
+                        original.Firstname = names[0];
+                        original.Lastname = names[1];
+                        db.SaveChanges();
+                    }
+
+                    if (names.Length == 3)
+                    {
+                        original.Firstname = names[0];
+                        original.Middelname = names[1];
+                        original.Lastname = names[2];
+                        db.SaveChanges();
+                    }
+                    return true;
+                }
+                return true;
+            }
         }
     }
 }
