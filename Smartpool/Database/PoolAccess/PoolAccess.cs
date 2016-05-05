@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Constraints;
 
 namespace Smartpool
 {
@@ -152,6 +154,9 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolName(string ownerEmail, string currentName, string newName)
         {
+            if (newName == "") return false;
+            if (!IsPoolNameAvailable(ownerEmail, newName)) return false;
+
             List<Pool> foundPools = new List<Pool>();
 
             using (var db = new DatabaseContext())
@@ -160,13 +165,15 @@ namespace Smartpool
                                     where pool.User.Email == ownerEmail && pool.Name == currentName
                                     select pool;
 
-                if (searchForPool.Any() == false)
-                {
-                    return false;
-                }
+                if (searchForPool.Any() == false) return false;
+                if(searchForPool.Count() > 1) throw new ArgumentException();
+
+                searchForPool.First().Name = newName;
+
+                db.SaveChanges();
             }
 
-            return false;
+            return true;
         }
 
         /// <summary>

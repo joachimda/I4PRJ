@@ -240,16 +240,34 @@ namespace Database.Test.Unit
         //public void EditPoolName_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolName_ChangeNameOfExistingPoolToTakenName_ReturnsFalse() { }
+        public void EditPoolName_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "takenname", 5);
+            _uut.AddPool(_testUser1.Email, "nametochange", 5);
+
+            Assert.That(_uut.EditPoolName(_testUser1.Email, "nametochange", "takenname"), Is.False);
+        }
 
         //[Test]
         //public void EditPoolName_ChangeNameOfExistingPoolToTakenName_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolName_ChangeNameOfExistingPool_ReturnsTrue() { }
+        public void EditPoolName_ChangeNameOfExistingPool_ReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "takenname", 5);
+            _uut.AddPool(_testUser1.Email, "nametochange", 5);
+
+            Assert.That(_uut.EditPoolName(_testUser1.Email, "nametochange", "newname"), Is.True);
+        }
 
         [Test]
-        public void EditPoolName_ChangeNameOfExistingPoolTo_FindSpecificPoolReturnsNewPool() { }
+        public void EditPoolName_ChangeNameOfExistingPoolTo_IsPoolNameAvailableReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "nametochange", 5);
+            _uut.EditPoolName(_testUser1.Email, "nametochange", "newname");
+
+            Assert.That(_uut.IsPoolNameAvailable(_testUser1.Email, "nametochange"), Is.True);
+        }
 
         #endregion
 
