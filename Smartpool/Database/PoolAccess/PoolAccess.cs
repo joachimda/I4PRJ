@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using NUnit.Framework.Constraints;
 
@@ -157,8 +158,6 @@ namespace Smartpool
             if (newName == "") return false;
             if (!IsPoolNameAvailable(ownerEmail, newName)) return false;
 
-            List<Pool> foundPools = new List<Pool>();
-
             using (var db = new DatabaseContext())
             {
                 var searchForPool = from pool in db.PoolSet
@@ -166,7 +165,7 @@ namespace Smartpool
                                     select pool;
 
                 if (searchForPool.Any() == false) return false;
-                if(searchForPool.Count() > 1) throw new ArgumentException();
+                if (searchForPool.Count() > 1) throw new ArgumentException();
 
                 searchForPool.First().Name = newName;
 
@@ -185,7 +184,23 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
         {
-            return false;
+            if (newVolume <= 0) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == ownerEmail && pool.Name == name
+                                    select pool;
+
+                if (searchForPool.Any() == false) return false;
+                if (searchForPool.Count() > 1) throw new ArgumentException();
+
+                searchForPool.First().Volume = newVolume;
+
+                db.SaveChanges();
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -197,7 +212,25 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)
         {
-            return false;
+            if (IsPoolNameAvailable(currectOwnerEmail, name) == true) return false;
+            if (UserAccess.IsEmailInUse(newUserEmail) == false) return false;
+            if (IsPoolNameAvailable(newUserEmail, name) == false) return false;
+            
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == currectOwnerEmail && pool.Name == name
+                                    select pool;
+
+                if (searchForPool.Any() == false) return false;
+                if (searchForPool.Count() > 1) throw new ArgumentException();
+
+                searchForPool.First().UserId = UserAccess.FindUserByEmail(newUserEmail).Id;
+
+                db.SaveChanges();
+            }
+
+            return true;
         }
     }
 }
