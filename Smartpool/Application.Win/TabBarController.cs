@@ -21,6 +21,8 @@ namespace Smartpool.Application.Win
             
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();
 
             activeWindow.Close();
@@ -33,6 +35,8 @@ namespace Smartpool.Application.Win
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();*/
             MessageBox.Show("Show Historyl\nFix this in TabBarController.cs");
             activeWindow.Close();
@@ -45,6 +49,8 @@ namespace Smartpool.Application.Win
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();
             activeWindow.Close();
         }
@@ -56,6 +62,8 @@ namespace Smartpool.Application.Win
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();*/
             MessageBox.Show("Show Edit Pool\nFix this in TabBarController.cs");
             activeWindow.Close();
