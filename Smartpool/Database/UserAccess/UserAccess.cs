@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Smartpool
@@ -190,6 +192,49 @@ namespace Smartpool
                 db.Database.ExecuteSqlCommand("DELETE [UserSet]");
             }
         }
+        /// <summary>
+        /// Edits a single user's password
+        /// </summary>
+        /// <param name="email">The email of the </param>
+        /// <param name="newPassword"></param>
+        /// <returns></returns>
+        public bool EditUserPassword(string email, string newPassword)
+        {
+            if (!IsEmailInUse(email))
+            {
+                return false;
+            }
 
+            
+            using (var db = new DatabaseContext())
+            {
+                var original = db.UserSet.Find(FindUserByEmail(email).Id);
+
+                if (original != null)
+                {
+                    original.Password = newPassword;
+                    db.SaveChanges();
+                }
+            }
+
+            return true;
+        }
+
+        public bool EditUserEmail(string email, string newEmail)
+        {
+            if (IsEmailInUse(newEmail))
+            {
+                return false;
+            }
+
+            User userToBeChanged = FindUserByEmail(email);
+
+            using (var db = new DatabaseContext())
+            {
+                userToBeChanged.Email = newEmail;
+                db.SaveChanges();
+            }
+            return true;
+        }
     }
 }
