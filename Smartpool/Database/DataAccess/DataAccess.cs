@@ -9,6 +9,16 @@ namespace Smartpool.DataAccess
 
         public bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue)
         {
+            if (!PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail))
+            {
+                return false;
+            }
+            Chlorine chlorine = new Chlorine {Value = chlorineValue};
+
+            using (var db = new DatabaseContext())
+            {
+                db.ChlorineSet.Add(chlorine);
+            }
             throw new NotImplementedException();
         }
 
@@ -25,7 +35,6 @@ namespace Smartpool.DataAccess
         public Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns)
         {
             throw new NotImplementedException();
-
         }
     }
 }
