@@ -138,5 +138,20 @@ namespace Smartpool
                 db.Database.ExecuteSqlCommand("DELETE [PoolSet]");
             }
         }
+
+        public bool EditPoolName(string ownerEmail, string currentName, string newName)
+        {
+            return false;
+        }
+
+        public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
+        {
+            return false;
+        }
+
+        public bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)
+        {
+            return false;
+        }
     }
 }
