@@ -3,9 +3,9 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  EN      Initial version with functions
+// 1.01 EN      Resizes windows before showing
 //========================================================================
 
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Windows;
 
