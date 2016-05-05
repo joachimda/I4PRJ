@@ -204,12 +204,10 @@ namespace Smartpool
             {
                 return false;
             }
-
             
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
-
                 if (original != null)
                 {
                     original.Password = newPassword;
