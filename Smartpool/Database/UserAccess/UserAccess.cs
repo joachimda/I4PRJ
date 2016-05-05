@@ -202,7 +202,7 @@ namespace Smartpool
         /// <returns></returns>
         public bool EditUserPassword(string email, string newPassword)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newPassword.Length == 0)
             {
                 return false;
             }
@@ -222,7 +222,7 @@ namespace Smartpool
 
         public bool EditUserEmail(string email, string newEmail)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newEmail.Length == 0)
             {
                 return false;
             }

@@ -274,22 +274,40 @@ namespace Database.Test.Unit
         #region Change of Email
 
         [Test]
-        public void EditUser_ChangeEmailOfNotExistingUser_ReturnsFalse() { }
+        public void EditUser_ChangeEmailOfNotExistingUser_ReturnsFalse()
+        {
+            Assert.That(_uut.EditUserEmail("jokkemail@mail.dk", "jokkemail@mail.com"), Is.False);
+
+        }
 
         //[Test]
         //public void EditUser_ChangeEmailOfNotExistingUser_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangeEmailOfExistingUserToInvalid_ReturnsFalse() { }
+        public void EditUser_ChangeEmailOfExistingUserToInvalid_ReturnsFalse()
+        {
+            _uut.AddUser("Joachim Andersen", "jokkemail@mail.dk", "pass");
+            Assert.That(_uut.EditUserEmail("jokkemail@mail.dk", ""), Is.False);
+        }
 
         //[Test]
         //public void EditUser_ChangeEmailOfExistingUserToInvalid_FindUserByEmailReturnsOriginalUser() { }
 
-        //[Test]
-        //public void EditUser_ChangeEmailOfExistingUser_ReturnsTrue() { }
+        [Test]
+        public void EditUser_ChangeEmailOfExistingUser_ReturnsTrue()
+        {
+            _uut.AddUser("Joachim Andersen", "jokkemail@mail.dk", "pass");
+            Assert.That(_uut.EditUserEmail("jokkemail@mail.dk", "jokkemail@mail.com"), Is.True);
+        }
 
         [Test]
-        public void EditUser_ChangeEmailOfExistingUser_FindUserByEmailReturnsNewUser() { }
+        public void EditUser_ChangeEmailOfExistingUser_FindUserByEmailReturnsNewUserMail()
+        {
+            _uut.AddUser("Joachim Andersen", "jokkemail@mail.dk", "pass");
+            _uut.EditUserEmail("jokkemail@mail.dk", "jokkemail@mail.com");
+            Assert.That(_uut.IsEmailInUse("jokkemail@mail.com"), Is.True);
+            Assert.That(_uut.FindUserByEmail("jokkemail@mail.com").Email, Is.EqualTo("jokkemail@mail.com"));
+        }
 
         #endregion
 
@@ -309,14 +327,19 @@ namespace Database.Test.Unit
         [Test]
         public void EditUser_ChangeToInvalid_ReturnsFalse()
         {
-            
+            _uut.AddUser("John Hansen", "hansen@gmail.com", "hansenpass");
+            Assert.That(_uut.EditUserPassword("hansen@gmail.com", ""), Is.False);
         }
 
         //[Test]
         //public void EditUser_ChangeToInvalid_FindUserByEmailReturnsOriginalUser() { }
 
         [Test]
-        public void EditUser_ChangePassword_ReturnsTrue() { }
+        public void EditUser_ChangePassword_ReturnsTrue()
+        {
+            _uut.AddUser("John Hansen", "hansen@gmail.com", "hansenpass");
+            Assert.That(_uut.EditUserPassword("hansen@gmail.com", "newpassword"), Is.True);
+        }
 
         //[Test]
         //public void EditUser_ChangePassword_FindUserByEmailReturnsNewUser() { }
