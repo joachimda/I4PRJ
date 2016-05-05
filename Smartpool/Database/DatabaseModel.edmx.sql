@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/04/2016 16:04:46
--- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
+-- Date Created: 05/05/2016 12:40:53
+-- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -24,16 +24,16 @@ IF OBJECT_ID(N'[dbo].[FK_PoolData]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[DataSet] DROP CONSTRAINT [FK_PoolData];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DataChlorine]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DataSet] DROP CONSTRAINT [FK_DataChlorine];
+    ALTER TABLE [dbo].[ChlorineSet] DROP CONSTRAINT [FK_DataChlorine];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DatapH]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DataSet] DROP CONSTRAINT [FK_DatapH];
+    ALTER TABLE [dbo].[pHSet] DROP CONSTRAINT [FK_DatapH];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DataTemperature]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DataSet] DROP CONSTRAINT [FK_DataTemperature];
+    ALTER TABLE [dbo].[TemperatureSet] DROP CONSTRAINT [FK_DataTemperature];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DataHumidity]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[DataSet] DROP CONSTRAINT [FK_DataHumidity];
+    ALTER TABLE [dbo].[HumiditySet] DROP CONSTRAINT [FK_DataHumidity];
 GO
 
 -- --------------------------------------------------

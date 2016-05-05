@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
+using NUnit.Framework.Constraints;
 
 namespace Smartpool
 {
@@ -20,6 +23,10 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(string email, string name, double volume)
         {
+            if (name == "")
+            {
+                return false;
+            }
             if (IsPoolNameAvailable(email, name) == false)
             {
                 return false;
@@ -30,7 +37,7 @@ namespace Smartpool
             }
 
             Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
-            
+
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
@@ -137,6 +144,110 @@ namespace Smartpool
             {
                 db.Database.ExecuteSqlCommand("DELETE [PoolSet]");
             }
+        }
+
+        /// <summary>
+        /// Edits name of a pool.
+        /// </summary>
+        /// <param name="ownerEmail">Email of owner.</param>
+        /// <param name="currentName">Current name of the pool.</param>
+        /// <param name="newName">The new name, which should be set for pool.</param>
+        /// <returns>True on success, false on fail</returns>
+        public bool EditPoolName(string ownerEmail, string currentName, string newName)
+        {
+            if (newName == "") return false;
+            if (!IsPoolNameAvailable(ownerEmail, newName)) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == ownerEmail && pool.Name == currentName
+                                    select pool;
+
+                if (searchForPool.Any() == false) return false;
+
+                searchForPool.First().Name = newName;
+
+                db.SaveChanges();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Edits volume of pool.
+        /// </summary>
+        /// <param name="ownerEmail">Email of owner.</param>
+        /// <param name="name">Name of pool to change value for.</param>
+        /// <param name="newVolume">New value to be set.</param>
+        /// <returns>True on success, false on fail</returns>
+        public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
+        {
+            if (newVolume <= 0) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == ownerEmail && pool.Name == name
+                                    select pool;
+
+                if (searchForPool.Any() == false) return false;
+
+                searchForPool.First().Volume = newVolume;
+
+                db.SaveChanges();
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Changes owner of pool.
+        /// </summary>
+        /// <param name="currectOwnerEmail">Email of current owner.</param>
+        /// <param name="name">Name of pool to change value for.</param>
+        /// <param name="newUserEmail">New value to be set.</param>
+        /// <returns>True on success, false on fail</returns>
+        public bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)
+        {
+            if (IsPoolNameAvailable(currectOwnerEmail, name) == true) return false;
+            if (UserAccess.IsEmailInUse(newUserEmail) == false) return false;
+            if (IsPoolNameAvailable(newUserEmail, name) == false) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == currectOwnerEmail && pool.Name == name
+                                    select pool;
+                
+                searchForPool.First().UserId = UserAccess.FindUserByEmail(newUserEmail).Id;
+
+                db.SaveChanges();
+            }
+
+            return true;
+        }
+
+        public List<Pool> FindAllPoolsOfUser(string ownerEmail)
+        {
+            if (UserAccess.IsEmailInUse(ownerEmail) == false) throw new UserNotFoundException();
+
+            List<Pool> poolList = new List<Pool>();
+            int userId = UserAccess.FindUserByEmail(ownerEmail).Id;
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPools = from pool in db.PoolSet
+                                     where pool.UserId == userId
+                                     select pool;
+
+                foreach (Pool pool in searchForPools)
+                {
+                    poolList.Add(pool);
+                }
+            }
+
+            return poolList;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Smartpool
+﻿using System;
+
+namespace Smartpool
 {
     public interface IUserAccess
     {
@@ -8,6 +10,7 @@
         bool ValidatePassword(string email, string password);
         void RemoveUser(string email);
         void DeleteAllUsers();
-        bool EditUser(string emailOfUser, string propertyToChange, string newValue);
+        bool EditUserPassword(string email, string newPassword);
+        bool EditUserEmail(string email, string newEmail);
     }
 }

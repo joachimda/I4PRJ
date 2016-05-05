@@ -1,4 +1,6 @@
-﻿namespace Smartpool
+﻿using System.Collections.Generic;
+
+namespace Smartpool
 {
     public interface IPoolAccess
     {
@@ -8,5 +10,9 @@
         Pool FindSpecificPool(string email, string name);
         bool RemovePool(string email, string name);
         void DeleteAllPools();
+        bool EditPoolName(string ownerEmail, string currentName, string newName);
+        bool EditPoolVolume(string ownerEmail, string name, int newVolume);
+        bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail);
+        List<Pool> FindAllPoolsOfUser(string ownerEmail);
     }
 }
