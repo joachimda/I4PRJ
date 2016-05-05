@@ -24,7 +24,7 @@ namespace Smartpool
         }
     
         public int Id { get; set; }
-        public string Timestamp { get; set; }
+        public System.TimeSpan Timestamp { get; set; }
     
         public virtual Pool Pool { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

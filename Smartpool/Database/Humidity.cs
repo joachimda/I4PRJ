@@ -16,7 +16,7 @@ namespace Smartpool
     {
         public int Id { get; set; }
         public int DataId { get; set; }
-        public string Value { get; set; }
+        public int Value { get; set; }
     
         public virtual Data Data { get; set; }
     }
