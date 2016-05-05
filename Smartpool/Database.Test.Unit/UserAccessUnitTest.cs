@@ -233,15 +233,13 @@ namespace Database.Test.Unit
         [Test]
         public void EditUser_ChangeNameOfNotExistingUser_ReturnsFalse()
         {
-            Assert.That(_uut.EditUser("nonexisting", "email", "newsomething"), Is.False);
+
         }
 
         [Test]
         public void EditUser_ChangeNameOfExistingUserToInvalidName_ReturnsFalse()
         {
-            _uut.AddUser("Hans Jørgensen", "mail", "pass");
 
-            Assert.That(_uut.EditUser("mail", "name", "Invalid"), Is.False);
         }
 
         //[Test]
