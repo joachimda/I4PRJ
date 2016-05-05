@@ -202,7 +202,7 @@ namespace Smartpool
         /// <returns></returns>
         public bool EditUserPassword(string email, string newPassword)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newPassword.Length == 0)
             {
                 return false;
             }
@@ -222,7 +222,7 @@ namespace Smartpool
 
         public bool EditUserEmail(string email, string newEmail)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newEmail.Length == 0)
             {
                 return false;
             }
@@ -247,17 +247,22 @@ namespace Smartpool
             }
 
             string[] names = newName.Split(' ');
+            if (names.Length < 2)
+            {
+                return false;
+            }
 
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
+
                 if (original != null)
                 {
                     if (names.Length == 2)
                     {
                         original.Firstname = names[0];
+                        original.Middelname = null;
                         original.Lastname = names[1];
-                        db.SaveChanges();
                     }
 
                     if (names.Length == 3)
@@ -265,12 +270,11 @@ namespace Smartpool
                         original.Firstname = names[0];
                         original.Middelname = names[1];
                         original.Lastname = names[2];
-                        db.SaveChanges();
                     }
-                    return true;
+                    db.SaveChanges();
                 }
-                return true;
             }
+            return true;
         }
     }
 }
