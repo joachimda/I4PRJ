@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using NUnit.Framework.Constraints;
 
@@ -156,7 +157,7 @@ namespace Smartpool
         {
             if (newName == "") return false;
             if (!IsPoolNameAvailable(ownerEmail, newName)) return false;
-            
+
             using (var db = new DatabaseContext())
             {
                 var searchForPool = from pool in db.PoolSet
@@ -164,7 +165,7 @@ namespace Smartpool
                                     select pool;
 
                 if (searchForPool.Any() == false) return false;
-                if(searchForPool.Count() > 1) throw new ArgumentException();
+                if (searchForPool.Count() > 1) throw new ArgumentException();
 
                 searchForPool.First().Name = newName;
 
@@ -213,8 +214,21 @@ namespace Smartpool
         {
             if (IsPoolNameAvailable(currectOwnerEmail, name) == true) return false;
             if (UserAccess.IsEmailInUse(newUserEmail) == false) return false;
+            if (IsPoolNameAvailable(newUserEmail, name) == false) return false;
+            
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == currectOwnerEmail && pool.Name == name
+                                    select pool;
 
+                if (searchForPool.Any() == false) return false;
+                if (searchForPool.Count() > 1) throw new ArgumentException();
 
+                searchForPool.First().UserId = UserAccess.FindUserByEmail(newUserEmail).Id;
+
+                db.SaveChanges();
+            }
 
             return true;
         }

@@ -343,7 +343,7 @@ namespace Database.Test.Unit
         public void EditPoolUser_ChangeUserToSomeoneWhereNameIsTaken_ReturnsFalse()
         {
             _uut.AddPool(_testUser1.Email, "name", 8);
-            _uut.AddPool(_testUser2.Email, "derp", 8);
+            _uut.AddPool(_testUser2.Email, "name", 8);
 
             Assert.That(_uut.EditPoolUser(_testUser1.Email, "name", _testUser2.Email), Is.False);
         }
