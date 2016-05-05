@@ -378,5 +378,15 @@ namespace Database.Test.Unit
         }
 
         #endregion
+
+        #region ListOfPools
+
+        //public void ListOfPools_NullUser_ThrowsUserNotFoundException() { }
+        //public void ListOfPools_UserWith0Pools_ReturnEmptyList() { }
+        //public void ListOfPools_UserWith1Pool_ReturnsListWithCorrectPool() { }
+        //public void ListOfPools_UserWith10Pools_ReturnsListWithCorrectPools() { }
+
+        #endregion
+
     }
 }

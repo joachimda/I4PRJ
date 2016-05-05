@@ -232,5 +232,12 @@ namespace Smartpool
 
             return true;
         }
+
+        public List<Pool> ListOfPools(string ownerEmail)
+        {
+            List<Pool> poolList = new List<Pool>();
+
+            return poolList;
+        }
     }
 }
