@@ -20,6 +20,10 @@ namespace Smartpool
         /// <returns>true on succes, false on fail</returns>
         public bool AddPool(string email, string name, double volume)
         {
+            if (name == "")
+            {
+                return false;
+            }
             if (IsPoolNameAvailable(email, name) == false)
             {
                 return false;
@@ -30,7 +34,7 @@ namespace Smartpool
             }
 
             Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
-            
+
             using (var db = new DatabaseContext())
             {
                 db.PoolSet.Add(newPool);
@@ -148,6 +152,20 @@ namespace Smartpool
         /// <returns>True on success, false on fail</returns>
         public bool EditPoolName(string ownerEmail, string currentName, string newName)
         {
+            List<Pool> foundPools = new List<Pool>();
+
+            using (var db = new DatabaseContext())
+            {
+                var searchForPool = from pool in db.PoolSet
+                                    where pool.User.Email == ownerEmail && pool.Name == currentName
+                                    select pool;
+
+                if (searchForPool.Any() == false)
+                {
+                    return false;
+                }
+            }
+
             return false;
         }
 

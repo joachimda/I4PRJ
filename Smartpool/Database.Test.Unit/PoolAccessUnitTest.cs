@@ -43,6 +43,12 @@ namespace Database.Test.Unit
         #region AddPool
 
         [Test]
+        public void AddPool_AddingPoolWithInvalidName_ReturnsFalse()
+        {
+            Assert.That(_uut.AddPool(_testUser1.Email, "", 4), Is.False);
+        }
+
+        [Test]
         public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
         {
             _uut.AddPool(_testUser1.Email, "poolname", 4);
@@ -214,13 +220,21 @@ namespace Database.Test.Unit
         #region Change Name
 
         [Test]
-        public void EditPoolName_ChangeNameOfNotExistingPool_ReturnsFalse() { }
+        public void EditPoolName_ChangeNameOfNotExistingPool_ReturnsFalse()
+        {
+            Assert.That(_uut.EditPoolName(_testUser1.Email, "nonexisting", "newname"), Is.False);
+        }
 
         //[Test]
         //public void EditPoolName_ChangeNameOfNotExistingPool_FindSpecificPoolReturnsOriginalPool() { }
 
         [Test]
-        public void EditPoolName_ChangeNameOfExistingPoolToInvalid_ReturnsFalse() { }
+        public void EditPoolName_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
+        {
+            _uut.AddPool(_testUser1.Email, "oldname", 5);
+
+            Assert.That(_uut.EditPoolName(_testUser1.Email, "oldname", ""), Is.False);
+        }
 
         //[Test]
         //public void EditPoolName_ChangeNameOfExistingPoolToInvalid_FindSpecificPoolReturnsOriginalPool() { }
