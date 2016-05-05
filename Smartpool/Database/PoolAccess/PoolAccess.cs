@@ -139,16 +139,37 @@ namespace Smartpool
             }
         }
 
+        /// <summary>
+        /// Edits name of a pool.
+        /// </summary>
+        /// <param name="ownerEmail">Email of owner.</param>
+        /// <param name="currentName">Current name of the pool.</param>
+        /// <param name="newName">The new name, which should be set for pool.</param>
+        /// <returns>True on success, false on fail</returns>
         public bool EditPoolName(string ownerEmail, string currentName, string newName)
         {
             return false;
         }
 
+        /// <summary>
+        /// Edits volume of pool.
+        /// </summary>
+        /// <param name="ownerEmail">Email of owner.</param>
+        /// <param name="name">Name of pool to change value for.</param>
+        /// <param name="newVolume">New value to be set.</param>
+        /// <returns>True on success, false on fail</returns>
         public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
         {
             return false;
         }
 
+        /// <summary>
+        /// Changes owner of pool.
+        /// </summary>
+        /// <param name="currectOwnerEmail">Email of current owner.</param>
+        /// <param name="name">Name of pool to change value for.</param>
+        /// <param name="newUserEmail">New value to be set.</param>
+        /// <returns>True on success, false on fail</returns>
         public bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)
         {
             return false;
