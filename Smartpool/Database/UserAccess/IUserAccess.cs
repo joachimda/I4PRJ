@@ -12,5 +12,6 @@ namespace Smartpool
         void DeleteAllUsers();
         bool EditUserPassword(string email, string newPassword);
         bool EditUserEmail(string email, string newEmail);
+        bool EditUserName(string email, string newName);
     }
 }

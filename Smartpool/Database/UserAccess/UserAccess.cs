@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
+using Microsoft.SqlServer.Server;
 
 namespace Smartpool
 {
@@ -200,11 +202,11 @@ namespace Smartpool
         /// <returns></returns>
         public bool EditUserPassword(string email, string newPassword)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newPassword.Length == 0)
             {
                 return false;
             }
-            
+
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
@@ -220,17 +222,55 @@ namespace Smartpool
 
         public bool EditUserEmail(string email, string newEmail)
         {
-            if (!IsEmailInUse(email))
+            if (!IsEmailInUse(email) || newEmail.Length == 0)
             {
                 return false;
             }
-;
+
             using (var db = new DatabaseContext())
             {
                 var original = db.UserSet.Find(FindUserByEmail(email).Id);
                 if (original != null)
                 {
                     original.Email = newEmail;
+                    db.SaveChanges();
+                }
+            }
+            return true;
+        }
+
+        public bool EditUserName(string email, string newName)
+        {
+            if (!IsEmailInUse(email))
+            {
+                return false;
+            }
+
+            string[] names = newName.Split(' ');
+            if (names.Length < 2)
+            {
+                return false;
+            }
+
+            using (var db = new DatabaseContext())
+            {
+                var original = db.UserSet.Find(FindUserByEmail(email).Id);
+
+                if (original != null)
+                {
+                    if (names.Length == 2)
+                    {
+                        original.Firstname = names[0];
+                        original.Middelname = null;
+                        original.Lastname = names[1];
+                    }
+
+                    if (names.Length == 3)
+                    {
+                        original.Firstname = names[0];
+                        original.Middelname = names[1];
+                        original.Lastname = names[2];
+                    }
                     db.SaveChanges();
                 }
             }
