@@ -222,17 +222,19 @@ namespace Smartpool
 
         public bool EditUserEmail(string email, string newEmail)
         {
-            if (IsEmailInUse(newEmail))
+            if (!IsEmailInUse(email))
             {
                 return false;
             }
-
-            User userToBeChanged = FindUserByEmail(email);
-
+;
             using (var db = new DatabaseContext())
             {
-                userToBeChanged.Email = newEmail;
-                db.SaveChanges();
+                var original = db.UserSet.Find(FindUserByEmail(email).Id);
+                if (original != null)
+                {
+                    original.Email = newEmail;
+                    db.SaveChanges();
+                }
             }
             return true;
         }

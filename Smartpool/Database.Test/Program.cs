@@ -1,4 +1,5 @@
-﻿using Smartpool;
+﻿using System.Net.Mail;
+using Smartpool;
 
 namespace Database.Test
 {
@@ -19,6 +20,8 @@ namespace Database.Test
 
             SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
             SmartPoolDB.PoolAccess.EditPoolName("email@hensen.dk", "Sir Derp's Pool", "namechange");
+
+            SmartPoolDB.UserAccess.EditUserEmail("sen@her.com", "noobiboob@mail.com");
             //SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
             //SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
         }
