@@ -29,5 +29,6 @@
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="DepthTextBox" Width="44" HorizontalAlignment="Left" Margin="124,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SeialTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddButton" Content="Add pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Template="{StaticResource ButtonSp}" Click="AddButton_Click" />
+        
     </Grid>
 </Window>
