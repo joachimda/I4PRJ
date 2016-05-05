@@ -63,6 +63,8 @@
     <Compile Include="Data.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\DataAccess.cs" />
+    <Compile Include="DataAccess\IDataAccess.cs" />
     <Compile Include="Humidity.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

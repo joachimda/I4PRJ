@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/05/2016 12:40:53
--- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Smartpool\Database\DatabaseModel.edmx
+-- Date Created: 05/05/2016 14:57:38
+-- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -89,7 +89,7 @@ GO
 -- Creating table 'DataSet'
 CREATE TABLE [dbo].[DataSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Timestamp] nvarchar(max)  NOT NULL,
+    [Timestamp] time  NOT NULL,
     [Pool_Id] int  NOT NULL
 );
 GO
@@ -98,7 +98,7 @@ GO
 CREATE TABLE [dbo].[pHSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DataId] int  NOT NULL,
-    [Value] nvarchar(max)  NOT NULL,
+    [Value] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -107,7 +107,7 @@ GO
 CREATE TABLE [dbo].[ChlorineSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DataId] int  NOT NULL,
-    [Value] nvarchar(max)  NOT NULL,
+    [Value] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -116,7 +116,7 @@ GO
 CREATE TABLE [dbo].[TemperatureSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DataId] int  NOT NULL,
-    [Value] nvarchar(max)  NOT NULL,
+    [Value] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -125,7 +125,7 @@ GO
 CREATE TABLE [dbo].[HumiditySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [DataId] int  NOT NULL,
-    [Value] nvarchar(max)  NOT NULL,
+    [Value] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO

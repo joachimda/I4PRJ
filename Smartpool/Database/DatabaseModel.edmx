@@ -63,7 +63,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Timestamp" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Timestamp" Type="time" Nullable="false" />
     <Property Name="Pool_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="pHSet">
@@ -72,7 +72,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
     <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ChlorineSet">
@@ -81,7 +81,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
     <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TemperatureSet">
@@ -90,7 +90,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
     <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HumiditySet">
@@ -99,7 +99,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Value" Type="int" Nullable="false" />
     <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
@@ -252,7 +252,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Pool" Relationship="Smartpool.PoolData" FromRole="Data" ToRole="Pool" />
-          <Property Name="Timestamp" Type="String" Nullable="false" />
+          <Property Name="Timestamp" Type="Time" Nullable="false" />
           <NavigationProperty Name="Chlorine" Relationship="Smartpool.DataChlorine" FromRole="Data" ToRole="Chlorine" />
           <NavigationProperty Name="pH" Relationship="Smartpool.DatapH" FromRole="Data" ToRole="pH" />
           <NavigationProperty Name="Temperature" Relationship="Smartpool.DataTemperature" FromRole="Data" ToRole="Temperature" />
@@ -268,7 +268,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DatapH" FromRole="pH" ToRole="Data" />
         </EntityType>
         <EntityType Name="Chlorine">
@@ -277,7 +277,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataChlorine" FromRole="Chlorine" ToRole="Data" />
         </EntityType>
         <EntityType Name="Temperature">
@@ -286,7 +286,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataTemperature" FromRole="Temperature" ToRole="Data" />
         </EntityType>
         <EntityType Name="Humidity">
@@ -295,7 +295,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
-          <Property Name="Value" Type="String" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataHumidity" FromRole="Humidity" ToRole="Data" />
         </EntityType>
         <Association Name="DataChlorine">

@@ -317,7 +317,7 @@ namespace Database.Test.Unit
         public void EditUser_ChangePasswordOfNotExistingUser_ReturnsFalse()
         {
             _uut.AddUser("John Hansen", "hansen@gmail.com", "hansenpass");
-            
+
             Assert.That(_uut.EditUserPassword("hansenWrong@gmail.com", "newpass"), Is.False);
         }
 
