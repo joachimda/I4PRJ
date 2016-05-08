@@ -12,7 +12,7 @@ namespace Database.Test.Unit
         private IWriteDataAccess _uut;
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
-        
+
         [SetUp]
         public void Setup()
         {
@@ -35,5 +35,24 @@ namespace Database.Test.Unit
 
         #endregion
 
+        #region AddData
+
+        // public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
+        // public void AddData_AddingDataToNonExistingPool_ReturnsFalse()
+        // public void AddData_AddingDataToNonExistingUser_ReturnsFalse()
+        // public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
+        // public void AddData_AddingData_ReturnsFalse()
+
+        #endregion
+
+        #region RemoveData
+
+        // public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse()
+        // public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse()
+        // public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse()
+        // public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse()
+        // public void RemoveData_RemovingData_ReturnsFalse()
+
+        #endregion
     }
 }
