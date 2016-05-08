@@ -39,28 +39,52 @@ namespace Database.Test.Unit
 
         #region AddData
 
-        // public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
-        // public void AddData_AddingDataToNonExistingPool_ReturnsFalse()
-        // public void AddData_AddingDataToNonExistingUser_ReturnsFalse()
-        // public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
-        // public void AddData_AddingData_ReturnsFalse()
+        [Test]
+        public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
+        {
+            Assert.That(_uut.AddData(email, poolname), Is.False);
+        }
+
+        [Test]
+        public void AddData_AddingDataToNonExistingPool_ReturnsFalse() { }
+
+        [Test]
+        public void AddData_AddingDataToNonExistingUser_ReturnsFalse() { }
+
+        [Test]
+        public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse() { }
+
+        [Test]
+        public void AddData_AddingData_ReturnsFalse() { }
 
         #endregion
 
         #region RemoveData
 
-        // public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse()
-        // public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse()
-        // public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse()
-        // public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse()
-        // public void RemoveData_RemovingData_ReturnsFalse()
+        [Test]
+        public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse() { }
+
+        [Test]
+        public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse() { }
+
+        [Test]
+        public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse() { }
+
+        [Test]
+        public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse() { }
+
+        [Test]
+        public void RemoveData_RemovingData_ReturnsFalse() { }
 
         #endregion
 
         #region DeleteAllData
 
-        // public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase()
-        // public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase()
+        [Test]
+        public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase() { }
+
+        [Test]
+        public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase() { }
 
         #endregion
 
