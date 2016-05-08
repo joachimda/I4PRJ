@@ -5,7 +5,7 @@ using Smartpool.DataAccess;
 namespace Database.Test.Unit
 {
     [TestFixture]
-    public class WriteDataAccessUnitTest
+    public class DataAccessUnitTest
     {
         #region Setup
 
