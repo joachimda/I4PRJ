@@ -13,7 +13,7 @@ namespace Database.Test.Unit
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
-        string email = "hansen@gmail.com", poolname = "baghave";
+        string email = "hansen@gmail.com", nameOfPool = "baghave";
 
         [SetUp]
         public void Setup()
@@ -23,8 +23,8 @@ namespace Database.Test.Unit
             _poolAccess = new PoolAccess(_userAccess);
 
             _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
-            _poolAccess.AddPool(email, poolname, 8);
-            _uut.AddData(email, poolname);
+            _poolAccess.AddPool(email, nameOfPool, 8);
+            _uut.AddData(email, nameOfPool);
         }
 
         [TearDown]
@@ -42,17 +42,26 @@ namespace Database.Test.Unit
         [Test]
         public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
         {
-            Assert.That(_uut.AddData(email, poolname), Is.False);
+            Assert.That(_uut.AddData("mail", "somepool"), Is.False);
         }
 
         [Test]
-        public void AddData_AddingDataToNonExistingPool_ReturnsFalse() { }
+        public void AddData_AddingDataToNonExistingPool_ReturnsFalse()
+        {
+            Assert.That(_uut.AddData(email, "somepool"), Is.False);
+        }
 
         [Test]
-        public void AddData_AddingDataToNonExistingUser_ReturnsFalse() { }
+        public void AddData_AddingDataToNonExistingUser_ReturnsFalse()
+        {
+            Assert.That(_uut.AddData("user", nameOfPool), Is.False);
+        }
 
         [Test]
-        public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse() { }
+        public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
+        {
+            //_uut.AddData(email)
+        }
 
         [Test]
         public void AddData_AddingData_ReturnsFalse() { }
