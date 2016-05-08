@@ -30,6 +30,7 @@ namespace Database.Test.Unit
         {
             _poolAccess.DeleteAllPools();
             _userAccess.DeleteAllUsers();
+            _uut.DeleteAllData();
         }
 
         #endregion
