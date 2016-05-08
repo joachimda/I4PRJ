@@ -226,7 +226,6 @@ namespace Database.Test.Unit
 
         #endregion
 
-
         #region EditUser
 
         #region Change of Name
