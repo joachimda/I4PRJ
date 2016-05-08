@@ -13,6 +13,8 @@ namespace Database.Test.Unit
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
+        string email = "hansen@gmail.com", poolname = "baghave";
+
         [SetUp]
         public void Setup()
         {
@@ -20,9 +22,9 @@ namespace Database.Test.Unit
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
 
-            _userAccess.AddUser("Sir Derp Hansen", "hansen@gmail.com", "hanpassword");
-            _poolAccess.AddPool("hansen@gmail.com", "baghave", 8);
-            _uut.AddData("hansen@gmail.com", "baghave");
+            _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
+            _poolAccess.AddPool(email, poolname, 8);
+            _uut.AddData(email, poolname);
         }
 
         [TearDown]
@@ -54,5 +56,13 @@ namespace Database.Test.Unit
         // public void RemoveData_RemovingData_ReturnsFalse()
 
         #endregion
+
+        #region DeleteAllData
+
+        // public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase()
+        // public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase()
+
+        #endregion
+
     }
 }
