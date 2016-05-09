@@ -15,7 +15,23 @@ namespace Smartpool.DataAccess
         {
             PoolAccess = poolAccess;
         }
-        
+
+        public bool CreateDataEntry(string poolOwnerEmail, string poolName, double chlorine, double temperature, double pH,
+    double humidity)
+        {
+            if (PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail) == false) return false;
+            if (PoolAccess.IsPoolNameAvailable(poolOwnerEmail, poolName) == true) return false;
+
+            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(poolOwnerEmail, poolName).Id };
+
+            using (var db = new DatabaseContext())
+            {
+                db.DataSet.Add(data);
+                db.SaveChanges();
+            }
+
+            return true;
+        }
 
         public bool RemoveData(string ownerEmail, string poolName)
         {
@@ -27,23 +43,6 @@ namespace Smartpool.DataAccess
             using (var db = new DatabaseContext())
             {
                 db.Database.ExecuteSqlCommand("DELETE [DataSet]");
-            }
-
-            return true;
-        }
-
-        public bool CreateDataEntry(string poolOwnerEmail, string poolName, double chlorineValue, double temperature, double pH,
-            double humidity)
-        {
-            if (PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail) == false) return false;
-            if (PoolAccess.IsPoolNameAvailable(poolOwnerEmail, poolName) == true) return false;
-
-            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(poolOwnerEmail, poolName).Id };
-
-            using (var db = new DatabaseContext())
-            {
-                db.DataSet.Add(data);
-                db.SaveChanges();
             }
 
             return true;
