@@ -18,11 +18,11 @@ namespace Smartpool.Application.Model
     {
         private Session _session = Session.SharedSession;
 
-        public void ReloadPools(IClientMessager clientMessager)
+        public void ReloadPools(IClientMessenger clientMessenger)
         {
             // Send request to server
             var poolRequest = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, true);
-            var response = clientMessager.SendMessage(poolRequest);
+            var response = clientMessenger.SendMessage(poolRequest);
             var poolResponse = response as GetPoolDataResponseMsg;
 
             // Store pools in session
@@ -32,11 +32,11 @@ namespace Smartpool.Application.Model
             }
         }
 
-        public List<Tuple<SensorType, double>> GetSensorDataFromCurrentPool(IClientMessager clientMessager)
+        public List<Tuple<SensorType, double>> GetSensorDataFromCurrentPool(IClientMessenger clientMessenger)
         {
             // Send request to server
             var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString);
-            var response = (GetPoolDataResponseMsg) clientMessager.SendMessage(request);
+            var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
             var sensorData = new List<Tuple<SensorType, double>>();
 
             // MISSING, server support

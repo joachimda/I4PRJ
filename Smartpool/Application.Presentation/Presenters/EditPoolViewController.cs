@@ -18,7 +18,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager;
+        private readonly IClientMessenger _clientMessenger;
         private readonly IEditPoolView _view;
         private string[] _dimensions = { "", "", "" };
         private Session _session = Session.SharedSession;
@@ -29,7 +29,7 @@ namespace Smartpool.Application.Presentation
         public void ViewDidLoad()
         {
             // Load pools from server
-            _loader.ReloadPools(_clientMessager);
+            _loader.ReloadPools(_clientMessenger);
             _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
@@ -48,11 +48,11 @@ namespace Smartpool.Application.Presentation
             }
         }
 
-        public EditPoolViewController(IEditPoolView view, IClientMessager clientMessager = null)
+        public EditPoolViewController(IEditPoolView view, IClientMessenger clientMessenger = null)
         {
             // Stored injected dependencies
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
@@ -64,7 +64,7 @@ namespace Smartpool.Application.Presentation
             // NOTE: MISSING SERIALNUMBER?
             var session = Session.SharedSession;
             var updatePoolMessage = new UpdatePoolRequestMsg(session.UserName, session.TokenString, session.SelectedPool.Item1, _pool.Name, _pool.Volume);
-            var response = (GeneralResponseMsg) _clientMessager.SendMessage(updatePoolMessage);
+            var response = (GeneralResponseMsg) _clientMessenger.SendMessage(updatePoolMessage);
 
             // Act on the response from the server
             if (response.RequestExecutedSuccesfully)
@@ -83,7 +83,7 @@ namespace Smartpool.Application.Presentation
             var session = Session.SharedSession;
             var request = new RemovePoolRequestMsg(session.UserName, session.TokenString,
                 session.SelectedPool.Item1);
-            var response = (GeneralResponseMsg) _clientMessager.SendMessage(request);
+            var response = (GeneralResponseMsg) _clientMessenger.SendMessage(request);
 
             // Display a message in the view based on the response
             if (response.RequestExecutedSuccesfully)

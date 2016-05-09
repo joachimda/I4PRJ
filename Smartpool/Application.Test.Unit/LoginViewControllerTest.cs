@@ -19,14 +19,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private LoginViewController _uut;
         private ILoginView _view;
-        private IClientMessager _clientMessager;
+        private IClientMessenger _clientMessenger;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<ILoginView>();
-            _clientMessager = Substitute.For<IClientMessager>();
-            _uut = new LoginViewController(_view, _clientMessager);
+            _clientMessenger = Substitute.For<IClientMessenger>();
+            _uut = new LoginViewController(_view, _clientMessenger);
             _view.Controller = _uut;
         }
 
@@ -71,7 +71,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Accepted_LoginAcceptedCalledOnView()
         {
-            _clientMessager.SendMessage(new LoginRequestMsg("","")).ReturnsForAnyArgs(new LoginResponseMsg("",true));
+            _clientMessenger.SendMessage(new LoginRequestMsg("","")).ReturnsForAnyArgs(new LoginResponseMsg("",true));
             _uut.Login();
             _view.Received().LoginAccepted();
         }
@@ -79,7 +79,7 @@ namespace Smartpool.Application.Test.Unit
         [Test]
         public void Login_Declined_DisplayAlertCalledOnView()
         {
-            _clientMessager.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
+            _clientMessenger.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
             _uut.Login();
             _view.ReceivedWithAnyArgs().DisplayAlert("","");
         }
@@ -91,7 +91,7 @@ namespace Smartpool.Application.Test.Unit
         [TestCase(LoginViewButton.ForgotButton)]
         public void ButtonPressed_ValidArgument_NoExceptions(LoginViewButton button)
         {
-            _clientMessager.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
+            _clientMessenger.SendMessage(new LoginRequestMsg("", "")).ReturnsForAnyArgs(new LoginResponseMsg("", false));
             _uut.ButtonPressed(button);
         }
 

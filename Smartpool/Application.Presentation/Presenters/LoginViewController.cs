@@ -19,7 +19,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager;
+        private readonly IClientMessenger _clientMessenger;
         private readonly ILoginView _view;
         public UserValidator User = new UserValidator();
 
@@ -34,10 +34,10 @@ namespace Smartpool.Application.Presentation
             _view.SetLoginButtonEnabled(false);
         }
 
-        public LoginViewController(ILoginView view, IClientMessager clientMessager = null)
+        public LoginViewController(ILoginView view, IClientMessenger clientMessenger = null)
         {
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
@@ -84,7 +84,7 @@ namespace Smartpool.Application.Presentation
         {
             // Create a new login command
             var request = new LoginRequestMsg(User.Email, User.Passwords[0]);
-            var response = _clientMessager.SendMessage(request);
+            var response = _clientMessenger.SendMessage(request);
             var loginResponse = (LoginResponseMsg) response;
 
             if (loginResponse.LoginSuccessful)
@@ -96,7 +96,7 @@ namespace Smartpool.Application.Presentation
 
                 // Preload the users pools
                 var loader = new PoolLoader();
-                loader.ReloadPools(_clientMessager);
+                loader.ReloadPools(_clientMessenger);
 
                 // Notify view
                 _view.LoginAccepted (); 

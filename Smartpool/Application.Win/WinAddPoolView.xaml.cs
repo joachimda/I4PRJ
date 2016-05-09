@@ -38,7 +38,7 @@ namespace Smartpool.Application.Win
 
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
             //Controller
-            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
+            var clientMessager = new ClientMessenger(new SynchronousSocketClient(Ip));
             Controller = new AddPoolViewController(this, clientMessager);
             Controller.ViewDidLoad();
 

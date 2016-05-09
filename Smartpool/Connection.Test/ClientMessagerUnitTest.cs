@@ -7,7 +7,7 @@ namespace Connection.Test
     [TestFixture]
     public class ClientMessagerUnitTest
     {
-        private ClientMessager _uut;
+        private ClientMessenger _uut;
         private IClientResponseManager _clientResponseManager;
         private IClient _client;
 
@@ -17,7 +17,7 @@ namespace Connection.Test
             _client = Substitute.For<IClient>();
             //_client.StartClient().Returns(new LoginResponseMsg("TokenString", true));
             _clientResponseManager = Substitute.For<IClientResponseManager>();
-            _uut = new ClientMessager(_client);
+            _uut = new ClientMessenger(_client);
 
 
         }
