@@ -35,9 +35,10 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Separator Grid.Column="0" Grid.ColumnSpan="5" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
+            <Separator Grid.Column="0" Grid.ColumnSpan="6" Margin="1,0,0,0" Background="{StaticResource SpAccentGray}" VerticalAlignment="Bottom"/>
             <Button x:Name="PART_StatViewButton" Grid.Column="0" Grid.Row="0" Content="Stats" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
             <Button x:Name="PART_HistoryViewButton" Grid.Column="1" Grid.Row="0" Content="History" Template="{StaticResource SpTabControlButton}" 
@@ -46,18 +47,9 @@
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
             <Button x:Name="PART_EditPoolViewButton" Grid.Column="3" Grid.Row="0" Content="Edit Pool" Template="{StaticResource SpTabControlButton}" 
                     Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
+            <Button x:Name="PART_EditUserViewButton" Grid.Column="4" Grid.Row="0" Content="Edit User" Template="{StaticResource SpTabControlButton}" 
+                    Width="Auto" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}"/>
 
-            <ComboBox Grid.Column="4" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
-                      Height="20" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}">
-                <ComboBoxItem Content="Sommerhus pool" />
-                <ComboBoxItem Content="Den sjove pool" />
-                <ComboBoxItem Content="Coffee"></ComboBoxItem>
-                <ComboBoxItem Content="Tea"></ComboBoxItem>
-                <ComboBoxItem Content="Orange Juice"></ComboBoxItem>
-                <ComboBoxItem Content="Milk"></ComboBoxItem>
-                <ComboBoxItem Content="Iced Tea"></ComboBoxItem>
-                <ComboBoxItem Content="Mango Shake"></ComboBoxItem>
-            </ComboBox>
         </Grid>
 
     </ControlTemplate>
@@ -113,7 +105,6 @@
                         <ToggleButton 
                             Name="ToggleButton" 
                             Template="{StaticResource ComboBoxToggleButton}" 
-                            Grid.Column="2" 
                             Focusable="false"
                             IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                             ClickMode="Press">
@@ -121,7 +112,7 @@
                         <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                            Margin="3,3,23,3"
+                            Margin="3,2,23,3"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left" />
                         <TextBox x:Name="PART_EditableTextBox"
@@ -149,10 +140,10 @@
                               MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                 <Border 
                                 x:Name="DropDownBorder"
-                                Background="#FF3F3F3F"
+                                Background="{StaticResource SpBackgroundGray}"
 
                                 BorderThickness="1"
-                                BorderBrush="#888888"/>
+                                BorderBrush="{StaticResource SpAccentGray}"/>
                                 <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
@@ -194,17 +185,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
+                    <!-- Add grid and ellipse here -->
                     <Border Name="Border"
-                              Padding="2"
+                              Padding="2" BorderThickness="1"
                               SnapsToDevicePixels="true">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource SpOrange}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="#888888"/>
+                            <Setter Property="Opacity" Value="0.2"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

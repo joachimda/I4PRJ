@@ -116,10 +116,7 @@ namespace Smartpool.Application.Win
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
-
-            //Delete this. It's here for debugging purposes
-            CreateUserView view = new CreateUserView();
-            view.Show();
+            
         }
 
         private void ForgotUser_MouseUp(object sender, MouseButtonEventArgs e)

@@ -32,6 +32,7 @@ namespace Smartpool.Application.Win
             SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
+            SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
         }
 
 

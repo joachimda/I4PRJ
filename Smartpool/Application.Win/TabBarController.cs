@@ -69,6 +69,20 @@ namespace Smartpool.Application.Win
             activeWindow.Close();
         }
 
+        internal static void ShowEditUserButtonPressed(object sender, RoutedEventArgs e)
+        {
+            Window activeWindow = GetActiveWindow();
+            /*Window view = new WinAddPoolView();
+
+            view.Left = activeWindow.Left;
+            view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
+            view.Show();*/
+            MessageBox.Show("Show Edit User\nFix this in TabBarController.cs");
+            activeWindow.Close();
+        }
+
         private static Window GetActiveWindow()
         {
             return System.Windows.Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
