@@ -63,7 +63,7 @@ namespace Smartpool.DataAccess
         }
 
 
-        public List<Tuple<DateTime, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
+        public List<Tuple<string, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDate)
         {
             using (var db = new DatabaseContext())
             {
@@ -75,15 +75,15 @@ namespace Smartpool.DataAccess
                                         select userSpecificData;
                 #endregion
 
-                var queryStart = DateTime.Now.Day - howManyDaysToReturn;
+                var queryStart = DateTime.Now.Day - queryStartDate;
 
                 List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
 
                 foreach (var data in chlorineDataQuery)
                 {
-                    if (data.Timestamp.Days >= queryStart)
+                    if (data.Timestamp >= queryStartDate)
                     {
-                        ChlorineTuples.Add(new Tuple<DateTime, Chlorine>(data.Timestamp, data.Chlorine));
+
                     }
                 }
 
@@ -91,11 +91,10 @@ namespace Smartpool.DataAccess
             throw new NotImplementedException();
         }
 
-        public List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
+        public List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDate)
         {
             throw new NotImplementedException();
         }
-
 
     }
 
