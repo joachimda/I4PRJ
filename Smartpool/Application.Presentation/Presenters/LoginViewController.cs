@@ -6,6 +6,7 @@
 // 1.0  LP      Initial version
 // 1.1  LP      Now conforms to the IViewController interface and injects
 //              client during construction
+// 1.2  LP      Updated to use pool validator
 //========================================================================
 
 using Smartpool.Application.Model;
