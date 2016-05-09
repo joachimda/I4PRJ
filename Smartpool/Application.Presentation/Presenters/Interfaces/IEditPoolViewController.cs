@@ -29,8 +29,18 @@ namespace Smartpool.Application.Presentation
         void SaveButtonPressed();
 
         /// <summary>
-        /// Called by the Add Pool View when a text field has changed
+        /// Called by the Edit Pool View when the delete button is pressed
+        /// </summary>
+        void DeleteButtonPressed();
+
+        /// <summary>
+        /// Called by the Edit Pool View when a text field has changed
         /// </summary>
         void DidChangeText(EditPoolTextField textField, string text);
+
+        /// <summary>
+        /// Called by the Edit Pool View when the user has selected a pool
+        /// </summary>
+        void DidSelectPool(string name);
     }
 }
