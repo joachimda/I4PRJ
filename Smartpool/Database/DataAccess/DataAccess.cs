@@ -7,7 +7,7 @@ namespace Smartpool.DataAccess
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
         public IPoolAccess PoolAccess { get; set; }
-        
+
         /// <summary>
         /// Constructor - dataaccess setup
         /// </summary>
@@ -29,12 +29,32 @@ namespace Smartpool.DataAccess
         /// <returns></returns>
         public bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)
         {
-            // checks if 
+            // make value checks here!
+
             if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
+
+            using (var db = new DatabaseContext())
+            {
+                var poolsearch = from pools in db.PoolSet
+                                 where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).Id && pools.Name == poolName
+                                 select pools;
+
+                var newChlorine = new Chlorine() { DataId = poolsearch.First().Id, Value = chlorine };
+                var newTemperature = new Temperature() { DataId = poolsearch.First().Id, Value = temp };
+                var newPH = new pH() { DataId = poolsearch.First().Id, Value = pH };
+                var newHumidity = new Humidity() { DataId = poolsearch.First().Id, Value = humidity };
+
+                db.ChlorineSet.Add(newChlorine);
+                db.TemperatureSet.Add(newTemperature);
+                db.pHSet.Add(newPH);
+                db.HumiditySet.Add(newHumidity);
+
+                db.SaveChanges();
+            }
 
             return true;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -45,7 +65,7 @@ namespace Smartpool.DataAccess
         {
             throw new NotImplementedException();
         }
-        
+
         /// <summary>
         /// Directly execute an SQL statemen on the database, deleting all DataSets
         /// </summary>

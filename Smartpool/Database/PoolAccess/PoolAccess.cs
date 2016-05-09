@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,9 +61,16 @@ namespace Smartpool
 
                 foreach (Pool pool in searchPoolSet)
                 {
-                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
+                    try
                     {
-                        return false;
+                        if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
+                        {
+                            return false;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
                     }
                 }
             }
