@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
 namespace Smartpool.DataAccess
 {
@@ -65,14 +67,48 @@ namespace Smartpool.DataAccess
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns)
+
+        public List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        {
+            using (var db = new DatabaseContext())
+            {
+
+                #region Query for all user specific data
+
+                var chlorineDataQuery = from userSpecificData in db.DataSet
+                                        where userSpecificData.Pool.User.Email == poolOwnerEmail &&  userSpecificData.Pool.Name == poolName
+                                        select userSpecificData;
+                #endregion
+
+
+                var daysToGoBack =  - queryStartDay;
+
+                List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
+
+                foreach (var data in chlorineDataQuery)
+                {
+                    if (data.Timestamp >= queryStartDay)
+                    {
+
+                    }
+                }
+
+            }
+            throw new NotImplementedException();
+        }
+
+        public List<Tuple<int, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDay)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns)
+    }
+
+    public class TupleList<T1, T2> : List<Tuple<T1, T2>>
+    {
+        public void Add(T1 item, T2 item2)
         {
-            throw new NotImplementedException();
+            Add(new Tuple<T1, T2>(item, item2));
         }
     }
 }
