@@ -13,11 +13,11 @@ namespace Smartpool.Application.Model
 {
     public class Pool
     {
-        public string Name { get; set; }
-        public string SerialNumber { get; set; }
+        public string Name { get; set; } = "";
+        public string SerialNumber { get; set; } = "";
         public double Volume => ParsedVolume();
 
-        private string _volume;
+        private string _volume = "";
         private string[] _dimensions = {"", "", ""};
 
         public void UpdateVolume(string volume, string[] dimensions)
