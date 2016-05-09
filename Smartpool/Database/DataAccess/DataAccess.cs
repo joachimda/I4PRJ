@@ -19,7 +19,7 @@ namespace Smartpool.DataAccess
             if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
             if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
 
-            Data data = new Data() {PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id};
+            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id };
 
             using (var db = new DatabaseContext())
             {
