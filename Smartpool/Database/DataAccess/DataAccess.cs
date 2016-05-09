@@ -7,22 +7,46 @@ namespace Smartpool.DataAccess
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
         public IPoolAccess PoolAccess { get; set; }
-
+        
+        /// <summary>
+        /// Constructor - dataaccess setup
+        /// </summary>
+        /// <param name="poolAccess">Initializes an IPoolAcces member</param>
         public DataAccess(IPoolAccess poolAccess)
         {
             PoolAccess = poolAccess;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ownerEmail"></param>
+        /// <param name="poolName"></param>
+        /// <param name="chlorine"></param>
+        /// <param name="temp"></param>
+        /// <param name="pH"></param>
+        /// <param name="humidity"></param>
+        /// <returns></returns>
         public bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)
         {
             throw new NotImplementedException();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ownerEmail"></param>
+        /// <param name="poolName"></param>
+        /// <returns></returns>
         public bool RemoveData(string ownerEmail, string poolName)
         {
             throw new NotImplementedException();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool DeleteAllData()
         {
             using (var db = new DatabaseContext())
@@ -33,6 +57,13 @@ namespace Smartpool.DataAccess
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poolOwnerEmail"></param>
+        /// <param name="poolName"></param>
+        /// <param name="queryStartHour"></param>
+        /// <returns></returns>
         public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
@@ -69,6 +100,13 @@ namespace Smartpool.DataAccess
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="poolOwnerEmail"></param>
+        /// <param name="poolName"></param>
+        /// <param name="queryStartHour"></param>
+        /// <returns></returns>
         public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
