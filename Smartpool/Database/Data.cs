@@ -24,7 +24,7 @@ namespace Smartpool
         }
     
         public int Id { get; set; }
-        public string Timestamp { get; set; }
+        public int Timestamp { get; set; }
         public int PoolId { get; set; }
     
         public virtual Pool Pool { get; set; }
