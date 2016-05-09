@@ -13,12 +13,23 @@ namespace Smartpool.DataAccess
 
         public bool AddData(string ownerEmail, string poolName)
         {
-            throw new NotImplementedException();
+            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
+            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
+
+            Data data = new Data();
+
+            using (var db = new DatabaseContext())
+            {
+                db.DataSet.Add(data);
+                db.SaveChanges();
+            }
+
+            return true;
         }
 
         public bool RemoveData(string ownerEmail, string poolName)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool DeleteAllData()

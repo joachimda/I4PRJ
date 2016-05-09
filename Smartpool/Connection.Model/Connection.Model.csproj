@@ -52,7 +52,7 @@
     <Compile Include="Messages\ClientMessages\TokenMessages\UserMessages\LogoutRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\RemovePoolRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\TokenMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\UpdatePoolInfoRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\UpdatePoolRequestMsg.cs" />
     <Compile Include="Messages\MessageTypes.cs" />
     <Compile Include="Messages\ServerMessages\GeneralResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\GetPoolDataResponseMsg.cs" />

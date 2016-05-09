@@ -60,11 +60,16 @@ namespace Database.Test.Unit
         [Test]
         public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
         {
-            //_uut.AddData(email)
+            _uut.AddData(email, nameOfPool);
+
+            Assert.That(_uut.AddData(email, nameOfPool), Is.False);
         }
 
         [Test]
-        public void AddData_AddingData_ReturnsFalse() { }
+        public void AddData_AddingData_ReturnsTrue()
+        {
+            Assert.That(_uut.AddData(email, nameOfPool), Is.True);
+        }
 
         #endregion
 

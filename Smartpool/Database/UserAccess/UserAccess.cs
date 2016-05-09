@@ -75,7 +75,7 @@ namespace Smartpool
         /// <param name="email"></param>
         /// <returns>Returns reference to type of User class. 
         /// If the user could not be found, the return will be null.</returns>
-        public User FindUserByEmail(string email)
+        public User     FindUserByEmail(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 
@@ -97,8 +97,8 @@ namespace Smartpool
             }
             if (listOfFoundUsers.Count == 0)
             {
-                //throw new UserNotFoundException();
-                return null;
+                throw new UserNotFoundException();
+                //return null;
             }
 
             return listOfFoundUsers[0];
