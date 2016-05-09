@@ -84,7 +84,7 @@ namespace Smartpool.Application.Presentation
 
         public void SignUp()
         {
-            // send message to client
+            // Send message to client
             var signUpRequest = new AddUserRequestMsg(User.Name, User.Email, User.Passwords[0]);
             var response = _clientMessager.SendMessage(signUpRequest);
             var generalResponse = (GeneralResponseMsg) response;

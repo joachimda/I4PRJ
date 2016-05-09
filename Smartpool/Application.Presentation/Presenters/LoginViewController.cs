@@ -60,12 +60,14 @@ namespace Smartpool.Application.Presentation
 
         public void DidChangeEmailText(string text)
         {
+            // Update the user validator and login button state
             User.Email = text;
             UpdateLoginButton();
         }
 
         public void DidChangePasswordText(string text)
         {
+            // Update the user validator and login button state
             User.Passwords[0] = text;
             UpdateLoginButton();
         }

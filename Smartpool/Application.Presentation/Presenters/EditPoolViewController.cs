@@ -60,11 +60,13 @@ namespace Smartpool.Application.Presentation
 
         public void DeleteButtonPressed()
         {
+            // Request deletion from server
             var session = Session.SharedSession;
             var request = new RemovePoolRequestMsg(session.UserName, session.TokenString, "redundant",
                 session.SelectedPool.Item1);
             var response = (GeneralResponseMsg) _clientMessager.SendMessage(request);
 
+            // Display a message in the view based on the response
             if (response.RequestExecutedSuccesfully)
             {
                 _view.DisplayAlert("Charizard", "The pool was removed succesfully");
@@ -109,6 +111,7 @@ namespace Smartpool.Application.Presentation
 
         public void DidSelectPool(string name)
         {
+            // Parse the name in the pool loader 
             var loader = new PoolLoader();
             Session.SharedSession.SelectedPoolIndex = loader.IndexForPoolName(name);
         }

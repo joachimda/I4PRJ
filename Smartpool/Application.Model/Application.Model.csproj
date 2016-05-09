@@ -41,6 +41,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PoolLoader.cs" />
     <Compile Include="PoolValidator.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Redundant\UserSessionToken.cs" />
