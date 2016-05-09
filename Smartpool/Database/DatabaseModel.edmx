@@ -63,7 +63,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ChlorineSet">
@@ -71,7 +71,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TemperatureSet">
@@ -79,7 +79,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HumiditySet">
@@ -87,7 +87,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Value" Type="int" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DataSet">
