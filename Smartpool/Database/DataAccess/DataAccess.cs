@@ -44,9 +44,9 @@ namespace Smartpool.DataAccess
         }
         
         /// <summary>
-        /// 
+        /// Directly execute an SQL statemen on the database, deleting all DataSets
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Allways returning true</returns>
         public bool DeleteAllData()
         {
             using (var db = new DatabaseContext())
