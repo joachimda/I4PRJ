@@ -5,6 +5,9 @@ namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
+        /***TEMPORARY***/
+        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,30);
+        /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
@@ -50,12 +53,13 @@ namespace Smartpool.Connection.Server
 
                 case TokenSubMessageTypes.GetPoolDataRequest:
                     var gpdMsg = JsonConvert.DeserializeObject<GetPoolDataRequestMsg>(messageString);
-                    return new GetPoolDataResponseMsg() { MessageInfo = "Not implemented"};  
+                    
+                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors()) { MessageInfo = "Not implemented"};  
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
                     var cpMsg = JsonConvert.DeserializeObject<ChangePasswordRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false);
+                    return new GeneralResponseMsg(true, _smartpoolDb.UserAccess.EditUserPassword(cpMsg.Username, cpMsg.NewPassword));
 
                 case TokenSubMessageTypes.LogoutRequest:
                     var loMsg = JsonConvert.DeserializeObject<LogoutRequestMsg>(messageString);
