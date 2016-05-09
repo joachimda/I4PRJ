@@ -68,45 +68,44 @@ namespace Smartpool.DataAccess
         }
 
 
-        public List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<int, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
         {
             using (var db = new DatabaseContext())
             {
+                if (queryStartDay < 0)
+                {
+                    throw new ArgumentException("Invalid start day, stupid!");
+                }
 
-                #region Query for all user specific data
+                #region Query for all user-pool specific chlorine data
 
-                var chlorineDataQuery = from userSpecificData in db.DataSet
-                                        where userSpecificData.Pool.User.Email == poolOwnerEmail &&  userSpecificData.Pool.Name == poolName
-                                        select userSpecificData;
+                var chlorineDataQuery = from chlorine in db.ChlorineSet
+                                        where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
+                                        select chlorine;
                 #endregion
 
 
-                List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
+                List<Tuple<int, double>> chlorineTuples = null;
 
-                foreach (var data in chlorineDataQuery)
+                foreach (var dataEntity in chlorineDataQuery)
                 {
-                    if (data.Timestamp >= queryStartDay)
+                    if (dataEntity.Data.Timestamp > queryStartDay)
                     {
-
+                        chlorineTuples.Add(new Tuple<int, double>(dataEntity.Data.Timestamp, dataEntity.Value));
                     }
                 }
 
+                return chlorineTuples;
+
             }
-            throw new NotImplementedException();
+
         }
 
-        public List<Tuple<int, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<int, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDay)
         {
             throw new NotImplementedException();
         }
 
     }
 
-    public class TupleList<T1, T2> : List<Tuple<T1, T2>>
-    {
-        public void Add(T1 item, T2 item2)
-        {
-            Add(new Tuple<T1, T2>(item, item2));
-        }
-    }
 }
