@@ -16,7 +16,7 @@ namespace Smartpool.DataAccess
             PoolAccess = poolAccess;
         }
 
-        public bool CreateDataEntry(string poolOwnerEmail, string poolName, double chlorine, double temperature, double pH,
+        public bool AddData(string poolOwnerEmail, string poolName, double chlorine, double temperature, double pH,
     double humidity)
         {
             if (PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail) == false) return false;
