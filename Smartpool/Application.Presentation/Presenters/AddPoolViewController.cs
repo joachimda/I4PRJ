@@ -52,6 +52,7 @@ namespace Smartpool.Application.Presentation
             // Act on response
             if (addPoolResponse.RequestExecutedSuccesfully)
             {
+                Session.SharedSession.ReloadPools(_clientMessager);
                 _view.PoolAdded();
             } else if (addPoolResponse.TokenStillActive == false)
             {

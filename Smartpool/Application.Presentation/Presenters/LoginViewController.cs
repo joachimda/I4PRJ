@@ -20,9 +20,6 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly ILoginView _view;
-        private string _password = "";
-        private string _email = "";
-     
         public UserValidator User = new UserValidator();
 
         // Life Cycle
@@ -83,7 +80,7 @@ namespace Smartpool.Application.Presentation
         public void Login()
         {
             // Create a new login command
-            var request = new LoginRequestMsg(_email, _password);
+            var request = new LoginRequestMsg(User.Email, User.Passwords[0]);
             var response = _clientMessager.SendMessage(request);
             var loginResponse = (LoginResponseMsg) response;
 
@@ -92,7 +89,7 @@ namespace Smartpool.Application.Presentation
                 // Save token
                 var session = Session.SharedSession;
                 session.TokenString = loginResponse.TokenString;
-                session.UserName = _email;
+                session.UserName = User.Email;
 
                 // Preload the users pools
                 session.ReloadPools(_clientMessager);
