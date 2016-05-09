@@ -18,7 +18,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager;
+        private readonly IClientMessenger _clientMessenger;
         private readonly IStatView _view;
         private Session _session = Session.SharedSession;
         private PoolLoader _loader = new PoolLoader();
@@ -27,7 +27,7 @@ namespace Smartpool.Application.Presentation
         public void ViewDidLoad()
         {
             // Load pools from server
-            _loader.ReloadPools(_clientMessager);
+            _loader.ReloadPools(_clientMessenger);
             _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
@@ -41,11 +41,11 @@ namespace Smartpool.Application.Presentation
             }
         }
 
-        public StatViewController(IStatView view, IClientMessager clientMessager = null)
+        public StatViewController(IStatView view, IClientMessenger clientMessenger = null)
         {
             // Stored injected dependencies
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
@@ -61,7 +61,7 @@ namespace Smartpool.Application.Presentation
         private void LoadSensorData()
         {
             // Loads current sensor data into the view
-            _view.DisplaySensorData(_loader.GetSensorDataFromCurrentPool(_clientMessager));
+            _view.DisplaySensorData(_loader.GetSensorDataFromCurrentPool(_clientMessenger));
         }
     }
 }
