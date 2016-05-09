@@ -1,5 +1,4 @@
-﻿using System;
-//========================================================================
+﻿//========================================================================
 // FILENAME :   IAlertDisplaying.cs
 // DESCR.   :   Interface for displayers of alerts
 //------------------------------------------------------------------------ 
@@ -8,9 +7,6 @@
 //========================================================================
 
 // ReSharper disable once CheckNamespace
-
-using System.Collections.Generic;
-
 namespace Smartpool.Application.Presentation
 {
     public interface IAlertDisplaying

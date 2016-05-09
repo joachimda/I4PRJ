@@ -3,7 +3,8 @@
 // DESCR.   :   Default implementation of the stat view presenter
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 1.0  LP      Initial version
+// 0.1  LP      Initial version, missing some implementation
+// 1.1  LP      Missing implementation added
 //========================================================================
 
 using System;

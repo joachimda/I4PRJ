@@ -1,5 +1,4 @@
-﻿using System;
-//========================================================================
+﻿//========================================================================
 // FILENAME :   IPoolDisplaying.cs
 // DESCR.   :   Interface for displayers of pool information (with tab bar)
 //------------------------------------------------------------------------ 
@@ -7,10 +6,10 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-// ReSharper disable once CheckNamespace
-
+using System;
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
     public interface IPoolDisplaying

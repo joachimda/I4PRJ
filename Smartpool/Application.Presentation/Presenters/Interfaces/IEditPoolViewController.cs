@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Moved pool controlling into separate interface
 //========================================================================
 
 // ReSharper disable once CheckNamespace

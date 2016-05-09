@@ -1,6 +1,7 @@
 ﻿//========================================================================
 // FILENAME :   PoolLoader.cs
-// DESCR.   :   Model for loading and parsing pool names
+// DESCR.   :   Model for loading pools into the session and parsing pool
+//              names from strings to actual pools
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version

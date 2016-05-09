@@ -4,13 +4,10 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Moved alert and pool displaying into seperate interface
 //========================================================================
 
 // ReSharper disable once CheckNamespace
-
-using System;
-using System.Collections.Generic;
-
 namespace Smartpool.Application.Presentation
 {
     public interface IEditPoolView : IView, IPoolDisplaying, IAlertDisplaying

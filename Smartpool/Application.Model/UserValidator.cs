@@ -1,6 +1,9 @@
 ﻿//========================================================================
 // FILENAME :   UserValidator.cs
-// DESCR.   :   User validation model
+// DESCR.   :   Model for validating user info, useful for when users must
+//              be edited or created. Store the user info temporarily here
+//              and call a suitable "Valid" method to check if input is
+//              valid for a given context.
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
