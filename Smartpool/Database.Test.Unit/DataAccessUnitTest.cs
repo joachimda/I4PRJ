@@ -13,11 +13,14 @@ namespace Database.Test.Unit
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
-        string email = "hansen@gmail.com", nameOfPool = "baghave";
+        string email, nameOfPool;
 
         [SetUp]
         public void Setup()
         {
+            nameOfPool = "baghave";
+            email = "hansen @gmail.com";
+
             _uut = new DataAccess();
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
