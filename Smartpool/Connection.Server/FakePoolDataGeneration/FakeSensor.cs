@@ -1,8 +1,9 @@
 using System;
+using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
-    internal class FakeSensor
+    internal class FakeSensor : ISensor
     {
         private readonly Random _random = new Random();
         public FakeSensorEnum SensorType { get; set; }
