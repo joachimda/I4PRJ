@@ -15,22 +15,7 @@ namespace Smartpool.DataAccess
         {
             PoolAccess = poolAccess;
         }
-
-        public bool AddData(string ownerEmail, string poolName)
-        {
-            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
-            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
-
-            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id };
-
-            using (var db = new DatabaseContext())
-            {
-                db.DataSet.Add(data);
-                db.SaveChanges();
-            }
-
-            return true;
-        }
+        
 
         public bool RemoveData(string ownerEmail, string poolName)
         {
@@ -47,26 +32,22 @@ namespace Smartpool.DataAccess
             return true;
         }
 
-        public bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue)
+        public bool CreateDataEntry(string poolOwnerEmail, string poolName, double chlorineValue, double temperature, double pH,
+            double humidity)
         {
-            if (!PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail))
-            {
-                return false;
-            }
-            Chlorine chlorine = new Chlorine { Value = chlorineValue };
+            if (PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail) == false) return false;
+            if (PoolAccess.IsPoolNameAvailable(poolOwnerEmail, poolName) == true) return false;
+
+            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(poolOwnerEmail, poolName).Id };
 
             using (var db = new DatabaseContext())
             {
-                db.ChlorineSet.Add(chlorine);
+                db.DataSet.Add(data);
+                db.SaveChanges();
             }
-            throw new NotImplementedException();
-        }
 
-        public bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue)
-        {
-            throw new NotImplementedException();
+            return true;
         }
-
 
         public List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
         {
