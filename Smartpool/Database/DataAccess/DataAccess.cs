@@ -12,7 +12,7 @@ namespace Smartpool.DataAccess
         {
             PoolAccess = poolAccess;
         }
-
+        
         public bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)
         {
             throw new NotImplementedException();
@@ -33,47 +33,47 @@ namespace Smartpool.DataAccess
             return true;
         }
 
-        public List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartHour)
         {
             using (var db = new DatabaseContext())
             {
+                #region Check for invalid starting hour
 
-                #region Query for all user specific data
-
-                var chlorineDataQuery = from userSpecificData in db.DataSet
-                                        where userSpecificData.Pool.User.Email == poolOwnerEmail && userSpecificData.Pool.Name == poolName
-                                        select userSpecificData;
-                #endregion
-
-
-                var daysToGoBack = -queryStartDay;
-
-                List<Tuple<DateTime, Chlorine>> ChlorineTuples = null;
-
-                foreach (var data in chlorineDataQuery)
+                if (queryStartHour < 0)
                 {
-                    if (data.Timestamp >= queryStartDay)
-                    {
-
-                    }
+                    throw new ArgumentException("Invalid start hour, stupid!");
                 }
 
+                #endregion
+
+                #region Query for all user-pool specific chlorine data
+
+                var chlorineDataQuery = from chlorine in db.ChlorineSet
+                                        where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
+                                        select chlorine;
+                #endregion
+
+                #region Add date-relevant chlorine date to Tuple list
+                List<Tuple<long, double>> chlorineTuples = null;
+
+                foreach (var dataEntity in chlorineDataQuery)
+                {
+                    if (dataEntity.Data.Timestamp > queryStartHour)
+                    {
+                        chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                    }
+                }
+                #endregion
+
+                return chlorineTuples;
             }
-            throw new NotImplementedException();
         }
 
-        public List<Tuple<int, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             throw new NotImplementedException();
         }
 
     }
 
-    public class TupleList<T1, T2> : List<Tuple<T1, T2>>
-    {
-        public void Add(T1 item, T2 item2)
-        {
-            Add(new Tuple<T1, T2>(item, item2));
-        }
-    }
 }
