@@ -37,7 +37,7 @@
       <End Role="Data" EntitySet="DataSet" />
       <End Role="Temperature" EntitySet="TemperatureSet" />
     </AssociationSet>
-  </EntityContainer>
+    </EntityContainer>
   <EntityType Name="UserSet">
     <Key>
       <PropertyRef Name="Id" />
@@ -95,7 +95,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Timestamp" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Timestamp" Type="int" Nullable="false" />
     <Property Name="PoolId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
@@ -170,7 +170,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-</Schema></edmx:StorageModels>
+  </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Smartpool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -283,7 +283,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="String" Nullable="false" />
+          <Property Name="Timestamp" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="Smartpool.PoolData" FromRole="Data" ToRole="Pool" />
           <Property Name="PoolId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chlorine" Relationship="Smartpool.DataChlorine" FromRole="Data" ToRole="Chlorine" />
@@ -424,7 +424,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-  </EntityContainerMapping>
+    </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

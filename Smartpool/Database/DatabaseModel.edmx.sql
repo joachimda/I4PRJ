@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/09/2016 12:26:17
--- Generated from EDMX file: C:\cygwin64\home\Mr. Derp-lappitoppi\git-repos\I4PRJ\Smartpool\Database\DatabaseModel.edmx
+-- Date Created: 05/09/2016 12:37:52
+-- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -103,7 +103,7 @@ GO
 -- Creating table 'DataSet'
 CREATE TABLE [dbo].[DataSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Timestamp] nvarchar(max)  NOT NULL,
+    [Timestamp] int  NOT NULL,
     [PoolId] int  NOT NULL
 );
 GO
