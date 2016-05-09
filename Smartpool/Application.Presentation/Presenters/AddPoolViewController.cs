@@ -39,6 +39,8 @@ namespace Smartpool.Application.Presentation
 
         public void AddPoolButtonPressed()
         {
+            if (!PoolToBeAdded.IsValid()) return;
+
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 

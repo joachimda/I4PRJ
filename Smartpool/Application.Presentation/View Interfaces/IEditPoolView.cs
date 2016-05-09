@@ -7,6 +7,10 @@
 //========================================================================
 
 // ReSharper disable once CheckNamespace
+
+using System;
+using System.Collections.Generic;
+
 namespace Smartpool.Application.Presentation
 {
     public interface IEditPoolView : IView
@@ -25,6 +29,11 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of the save button (save updated info)
         /// </summary>
         void SetSaveButtonEnabled(bool enabled);
+
+        /// <summary>
+        /// Sets the list of available pools (tuples with name and notification status)
+        /// </summary>
+        void SetAvailablePools(List<Tuple<string, bool>> pools);
 
         /// <summary>
         /// Displays a message or alert on the view
