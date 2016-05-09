@@ -37,7 +37,7 @@
       <End Role="Data" EntitySet="DataSet" />
       <End Role="Temperature" EntitySet="TemperatureSet" />
     </AssociationSet>
-    </EntityContainer>
+  </EntityContainer>
   <EntityType Name="UserSet">
     <Key>
       <PropertyRef Name="Id" />
@@ -170,7 +170,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  </Schema></edmx:StorageModels>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Smartpool" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -424,7 +424,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    </EntityContainerMapping>
+  </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
