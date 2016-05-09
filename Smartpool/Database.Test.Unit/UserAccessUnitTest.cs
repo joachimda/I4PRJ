@@ -185,9 +185,9 @@ namespace Database.Test.Unit
         [Test]
         public void ValidatePassword_UserIsNotInDB_ReturnsFalse()
         {
-            Assert.Throws<UserNotFoundException>(() => _uut.ValidatePassword("email0", "pass"));
+            //Assert.Throws<UserNotFoundException>(() => _uut.ValidatePassword("email0", "pass"));
 
-            //Assert.That(_uut.ValidatePassword("email0", "pass"), Is.False);
+            Assert.That(_uut.ValidatePassword("email0", "pass"), Is.False);
         }
 
         #endregion
