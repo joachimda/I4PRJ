@@ -6,6 +6,7 @@
 // 1.0  LP      Initial version
 //========================================================================
 
+using System;
 using Smartpool.Application.Model;
 using Smartpool.Connection.Model;
 
@@ -18,8 +19,8 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly IEditPoolView _view;
-        private Pool _pool = new Pool();
         private string[] _dimensions = { "", "", "" };
+        public Pool PoolToBeAdded = new Pool();
 
         // Life Cycle
         public void ViewDidLoad()
@@ -39,11 +40,13 @@ namespace Smartpool.Application.Presentation
 
         public void SaveButtonPressed()
         {
+            if (!PoolToBeAdded.IsValid()) return;
+
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 
             // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
-            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", "redundant", _pool.Name, _pool.Volume);
+            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", "redundant", PoolToBeAdded.Name, PoolToBeAdded.Volume);
 
             var response = _clientMessager.SendMessage(updatePoolMessage);
             var addPoolResponse = (GeneralResponseMsg)response;
@@ -59,31 +62,36 @@ namespace Smartpool.Application.Presentation
             }
         }
 
+        public void DeleteButtonPressed()
+        {
+            throw new NotImplementedException();
+        }
+
         public void DidChangeText(EditPoolTextField textField, string text)
         {
             // Switch based on text field type and set the proper variable
             switch (textField)
             {
                 case EditPoolTextField.PoolName:
-                    _pool.Name = text;
+                    PoolToBeAdded.Name = text;
                     break;
                 case EditPoolTextField.Volume:
-                    _pool.UpdateVolume(text, null);
+                    PoolToBeAdded.UpdateVolume(text, null);
                     _dimensions[0] = "";
                     _dimensions[1] = "";
                     _dimensions[2] = "";
                     break;
                 case EditPoolTextField.Width:
                     _dimensions[0] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Length:
                     _dimensions[1] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Depth:
                     _dimensions[2] = text;
-                    _pool.UpdateVolume(null, _dimensions);
+                    PoolToBeAdded.UpdateVolume(null, _dimensions);
                     break;
             }
 
@@ -91,11 +99,16 @@ namespace Smartpool.Application.Presentation
             UpdateSaveButton();
         }
 
+        public void DidSelectPool(string name)
+        {
+            throw new NotImplementedException();
+        }
+
         // LoginViewController
 
         private void UpdateSaveButton()
         {
-            _view.SetSaveButtonEnabled(_pool.IsValid());
+            _view.SetSaveButtonEnabled(PoolToBeAdded.IsValid());
         }
     }
 }
