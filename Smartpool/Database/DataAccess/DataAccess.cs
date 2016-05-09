@@ -49,12 +49,17 @@ namespace Smartpool.DataAccess
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns)
+        //public Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public Tuple<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManytoReturns)
         {
             throw new NotImplementedException();
         }
 
-        public Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns)
+        public Tuple<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns)
         {
             throw new NotImplementedException();
         }
