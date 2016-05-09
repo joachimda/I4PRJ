@@ -50,12 +50,13 @@ namespace Smartpool.DataAccess
         }
 
 
-        public Tuple<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManytoReturn)
+        public Tuple<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
         {
+
             throw new NotImplementedException();
         }
 
-        public Tuple<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturn)
+        public Tuple<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
         {
             throw new NotImplementedException();
         }
