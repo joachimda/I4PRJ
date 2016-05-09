@@ -79,7 +79,7 @@ namespace Smartpool.Application.Presentation
         public void UpdateSignUpButton()
         {
             // Enable button if user entered password, name and email
-            _view.SetButtonEnabled(User.IsValid);
+            _view.SetButtonEnabled(User.IsValidForSignup);
         }
 
         public void SignUp()

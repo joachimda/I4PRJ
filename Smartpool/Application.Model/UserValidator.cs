@@ -21,6 +21,7 @@ namespace Smartpool.Application.Model
         public string Email { get; set; } = "";
 
         public bool PasswordIsValid => Passwords[0].Length >= MinimumCharacters && Passwords[0] == Passwords[1];
-        public bool IsValid => PasswordIsValid && Name.Length > 0 && Email.Length > 0;
+        public bool IsValidForSignup => PasswordIsValid && Name.Length > 0 && Email.Length > 0;
+        public bool IsValidForLogin => Email.Length > 0 && Passwords[0].Length >= MinimumCharacters;
     }
 }

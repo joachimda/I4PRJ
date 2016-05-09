@@ -23,6 +23,8 @@ namespace Smartpool.Application.Presentation
         private string _password = "";
         private string _email = "";
      
+        public UserValidator User = new UserValidator();
+
         // Life Cycle
         public void ViewDidLoad()
         {
@@ -61,13 +63,13 @@ namespace Smartpool.Application.Presentation
 
         public void DidChangeEmailText(string text)
         {
-            _email = text;
+            User.Email = text;
             UpdateLoginButton();
         }
 
         public void DidChangePasswordText(string text)
         {
-            _password = text;
+            User.Passwords[0] = text;
             UpdateLoginButton();
         }
 
@@ -75,14 +77,7 @@ namespace Smartpool.Application.Presentation
 
         public void UpdateLoginButton()
         {
-            // Enable button if user entered password and email
-            if (_email.Length > 0 && _password.Length > 0)
-            {
-                _view.SetLoginButtonEnabled(true);
-            }
-            else {
-                _view.SetLoginButtonEnabled(false);
-            }
+            _view.SetLoginButtonEnabled(User.IsValidForLogin);
         }
 
         public void Login()
