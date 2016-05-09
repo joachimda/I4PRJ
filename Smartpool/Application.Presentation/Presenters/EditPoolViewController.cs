@@ -46,7 +46,7 @@ namespace Smartpool.Application.Presentation
             var tokenString = Session.SharedSession.TokenString;
 
             // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
-            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", "redundant", PoolToBeAdded.Name, PoolToBeAdded.Volume);
+            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", PoolToBeAdded.Name, PoolToBeAdded.Volume);
 
             var response = _clientMessager.SendMessage(updatePoolMessage);
             var addPoolResponse = (GeneralResponseMsg)response;
