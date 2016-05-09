@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server
@@ -32,10 +34,14 @@ namespace Smartpool.Connection.Server
             {
                 case MessageTypes.LoginRequest:
                     var loginMessage = JsonConvert.DeserializeObject<LoginRequestMsg>(receivedString);
-                    if (_smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password))
-                        return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), true);
-                    else return new LoginResponseMsg("", false);
 
+
+                    var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password));
+                    if (task.Wait(TimeSpan.FromSeconds(3)))
+                        return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result) {MessageInfo = "Username or password was incorrect"};
+                    else
+                        return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
+                    
                 case MessageTypes.TokenMsg:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
                     if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))

@@ -41,7 +41,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pool.cs" />
+    <Compile Include="PoolLoader.cs" />
+    <Compile Include="PoolValidator.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Redundant\UserSessionToken.cs" />
     <Compile Include="Redundant\IAuthenticator.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redundant\UserIdentity.cs" />
     <Compile Include="Redundant\UserSession.cs" />
+    <Compile Include="UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

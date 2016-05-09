@@ -1,10 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
+        /***TEMPORARY***/
+        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,30);
+        private readonly Random _random = new Random();
+        /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
@@ -50,12 +57,18 @@ namespace Smartpool.Connection.Server
 
                 case TokenSubMessageTypes.GetPoolDataRequest:
                     var gpdMsg = JsonConvert.DeserializeObject<GetPoolDataRequestMsg>(messageString);
-                    return new GetPoolDataResponseMsg() { MessageInfo = "Not implemented"};  
+                    if (gpdMsg.GetAllNamesOnly)
+                    {
+                        var pools = _smartpoolDb.PoolAccess.FindAllPoolsOfUser(gpdMsg.Username);
+                        var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
+                        return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
+                    }
+                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors());  
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
                     var cpMsg = JsonConvert.DeserializeObject<ChangePasswordRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false);
+                    return new GeneralResponseMsg(true, _smartpoolDb.UserAccess.EditUserPassword(cpMsg.Username, cpMsg.NewPassword));
 
                 case TokenSubMessageTypes.LogoutRequest:
                     var loMsg = JsonConvert.DeserializeObject<LogoutRequestMsg>(messageString);
@@ -63,7 +76,7 @@ namespace Smartpool.Connection.Server
                     return new GeneralResponseMsg(true, true);
                 
                 case TokenSubMessageTypes.AllowAccessToPoolDataRequest:
-                    return new GeneralResponseMsg(true, false);
+                    return new GeneralResponseMsg(true, false) {MessageInfo = "Not implemented"};
                 //Monitor unit messages
 
                 //Default

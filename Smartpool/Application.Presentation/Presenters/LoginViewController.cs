@@ -20,9 +20,8 @@ namespace Smartpool.Application.Presentation
 
         private readonly IClientMessager _clientMessager;
         private readonly ILoginView _view;
-        private string _password = "";
-        private string _email = "";
-     
+        public UserValidator User = new UserValidator();
+
         // Life Cycle
         public void ViewDidLoad()
         {
@@ -61,13 +60,15 @@ namespace Smartpool.Application.Presentation
 
         public void DidChangeEmailText(string text)
         {
-            _email = text;
+            // Update the user validator and login button state
+            User.Email = text;
             UpdateLoginButton();
         }
 
         public void DidChangePasswordText(string text)
         {
-            _password = text;
+            // Update the user validator and login button state
+            User.Passwords[0] = text;
             UpdateLoginButton();
         }
 
@@ -75,20 +76,13 @@ namespace Smartpool.Application.Presentation
 
         public void UpdateLoginButton()
         {
-            // Enable button if user entered password and email
-            if (_email.Length > 0 && _password.Length > 0)
-            {
-                _view.SetLoginButtonEnabled(true);
-            }
-            else {
-                _view.SetLoginButtonEnabled(false);
-            }
+            _view.SetLoginButtonEnabled(User.IsValidForLogin);
         }
 
         public void Login()
         {
             // Create a new login command
-            var request = new LoginRequestMsg(_email, _password);
+            var request = new LoginRequestMsg(User.Email, User.Passwords[0]);
             var response = _clientMessager.SendMessage(request);
             var loginResponse = (LoginResponseMsg) response;
 
@@ -97,7 +91,11 @@ namespace Smartpool.Application.Presentation
                 // Save token
                 var session = Session.SharedSession;
                 session.TokenString = loginResponse.TokenString;
-                session.UserName = _email;
+                session.UserName = User.Email;
+
+                // Preload the users pools
+                var loader = new PoolLoader();
+                loader.ReloadPools(_clientMessager);
 
                 // Notify view
                 _view.LoginAccepted (); 
@@ -105,8 +103,9 @@ namespace Smartpool.Application.Presentation
             else {
                 // Reset password and display message
                 _view.SetPasswordText("");
-                _view.DisplayAlert("Invalid username or password", "Please try again.");
+                _view.DisplayAlert("Login Error", loginResponse.MessageInfo);
             }
         }
     }
 }
+

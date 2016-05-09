@@ -136,7 +136,7 @@ namespace Smartpool.Connection.Server
                 {
                     // All the data has been read from the 
                     // client. Display it on the console.
-                    Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
+                    Console.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \n Data : {1}",
                         content.Length, content);
 
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
@@ -175,7 +175,7 @@ namespace Smartpool.Connection.Server
 
                 // Complete sending the data to the remote device.
                 int bytesSent = handler.EndSend(ar);
-                Console.WriteLine("Sent {0} bytes to client.", bytesSent);
+                Console.WriteLine(DateTime.Now + " - Sent {0} bytes to client.", bytesSent);
 
                 handler.Shutdown(SocketShutdown.Both);
                 handler.Close();

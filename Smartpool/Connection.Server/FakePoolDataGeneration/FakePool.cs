@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Timers;
+using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
     public class FakePool
     {
         private readonly int _amountOfSensors;
-        private readonly List<FakeSensor> _fakeSensors;
+        private readonly List<ISensor> _fakeSensors;
 
         public FakePool(int amountOfSensors, int secondsBetweenSensorReadings)
         {
             _amountOfSensors = amountOfSensors;
-            _fakeSensors = new List<FakeSensor>();
+            _fakeSensors = new List<ISensor>();
             GenerateSensors();
             var timer = new Timer { Interval = 1000 * secondsBetweenSensorReadings };
             timer.Elapsed += SaveSensorValue;
@@ -34,6 +35,11 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
                 sensor.GetNextSensorValue();
                 sensor.SaveValueToDatabase();
             }
+        }
+
+        public List<ISensor> GetFakeSensors()
+        {
+            return _fakeSensors;
         }
     }
 }
