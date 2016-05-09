@@ -73,7 +73,5 @@ namespace Smartpool.DataAccess
         {
             throw new NotImplementedException();
         }
-
     }
-
 }
