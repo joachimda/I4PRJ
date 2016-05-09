@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Smartpool
@@ -139,7 +140,16 @@ namespace Smartpool
         /// False otherwise.</returns>
         public bool ValidatePassword(string email, string password)
         {
-            User user = FindUserByEmail(email);
+            User user;
+            try
+            {
+                user = FindUserByEmail(email);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
 
             if (user == null)
             {
