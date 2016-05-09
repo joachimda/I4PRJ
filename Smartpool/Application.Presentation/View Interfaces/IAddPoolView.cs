@@ -4,12 +4,13 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Moved alert displaying into seperate interface
 //========================================================================
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-    public interface IAddPoolView : IView
+    public interface IAddPoolView : IView, IAlertDisplaying
     {
         /// <summary>
         /// Sets the text of the serial number text field
@@ -30,11 +31,6 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of the add pool button
         /// </summary>
         void SetAddPoolButtonEnabled(bool enabled);
-
-        /// <summary>
-        /// Displays a message or alert on the view
-        /// </summary>
-        void DisplayAlert(string title, string content);
 
         /// <summary>
         /// Tells the view that a the pool has been added successfully
