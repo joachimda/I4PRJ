@@ -42,21 +42,17 @@ namespace Smartpool.Application.Presentation
         {
             if (!Pool.IsValid()) return;
 
-            var userName = Session.SharedSession.UserName;
-            var tokenString = Session.SharedSession.TokenString;
-
-            // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
-            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", Pool.Name, Pool.Volume);
-
-            var response = _clientMessager.SendMessage(updatePoolMessage);
-            var addPoolResponse = (GeneralResponseMsg)response;
+            // NOTE: MISSING SERIALNUMBER?
+            var session = Session.SharedSession;
+            var updatePoolMessage = new UpdatePoolRequestMsg(session.UserName, session.TokenString, session.SelectedPool.Item1, Pool.Name, Pool.Volume);
+            var response = (GeneralResponseMsg) _clientMessager.SendMessage(updatePoolMessage);
 
             // Act on response
-            if (addPoolResponse.RequestExecutedSuccesfully)
+            if (response.RequestExecutedSuccesfully)
             {
                 _view.PoolUpdated();
             }
-            else if (addPoolResponse.TokenStillActive == false)
+            else if (response.TokenStillActive == false)
             {
                 _view.DisplayAlert("Invalid action", "Your login is no longer active, please login again.");
             }
@@ -64,7 +60,19 @@ namespace Smartpool.Application.Presentation
 
         public void DeleteButtonPressed()
         {
-            throw new NotImplementedException();
+            var session = Session.SharedSession;
+            var request = new RemovePoolRequestMsg(session.UserName, session.TokenString, "redundant",
+                session.SelectedPool.Item1);
+            var response = (GeneralResponseMsg) _clientMessager.SendMessage(request);
+
+            if (response.RequestExecutedSuccesfully)
+            {
+                _view.DisplayAlert("Charizard", "The pool was removed succesfully");
+            }
+            else
+            {
+                _view.DisplayAlert("Error", "The pool could not be removed");
+            }
         }
 
         public void DidChangeText(EditPoolTextField textField, string text)
@@ -101,7 +109,8 @@ namespace Smartpool.Application.Presentation
 
         public void DidSelectPool(string name)
         {
-            throw new NotImplementedException();
+            var loader = new PoolLoader();
+            Session.SharedSession.SelectedPoolIndex = loader.IndexForPoolName(name);
         }
 
         // LoginViewController

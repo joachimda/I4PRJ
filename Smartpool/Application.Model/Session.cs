@@ -32,17 +32,5 @@ namespace Smartpool.Application.Model
 
             SelectedPoolIndex = 0;
         }
-
-        public void ReloadPools(IClientMessager clientMessaget)
-        {
-            var poolRequest = new GetPoolDataRequestMsg(UserName, TokenString, true);
-            var response = clientMessaget.SendMessage(poolRequest);
-            var poolResponse = response as GetPoolDataResponseMsg;
-
-            if (poolResponse != null)
-            {
-                Pools = poolResponse.AllPoolNamesListTuple;
-            }
-        }
     }
 }

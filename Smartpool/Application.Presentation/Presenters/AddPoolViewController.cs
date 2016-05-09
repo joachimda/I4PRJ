@@ -44,7 +44,7 @@ namespace Smartpool.Application.Presentation
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 
-            // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
+            // NOTE: MISSING SERIALNUMBER?
             var addPoolMessage = new AddPoolRequestMsg(userName, tokenString, Pool.Name, Pool.Volume);
             var response = _clientMessager.SendMessage(addPoolMessage);
             var addPoolResponse = (GeneralResponseMsg) response;
@@ -52,7 +52,8 @@ namespace Smartpool.Application.Presentation
             // Act on response
             if (addPoolResponse.RequestExecutedSuccesfully)
             {
-                Session.SharedSession.ReloadPools(_clientMessager);
+                var loader = new PoolLoader();
+                loader.ReloadPools(_clientMessager);
                 _view.PoolAdded();
             } else if (addPoolResponse.TokenStillActive == false)
             {
