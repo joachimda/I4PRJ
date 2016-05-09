@@ -27,7 +27,7 @@ namespace Smartpool.DataAccess
 
         public bool RemoveData(string ownerEmail, string poolName)
         {
-
+            return false;
         }
 
         public bool DeleteAllData()
