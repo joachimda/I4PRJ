@@ -181,7 +181,7 @@ namespace Smartpool
         /// <param name="name">Name of pool to change value for.</param>
         /// <param name="newVolume">New value to be set.</param>
         /// <returns>True on success, false on fail</returns>
-        public bool EditPoolVolume(string ownerEmail, string name, int newVolume)
+        public bool EditPoolVolume(string ownerEmail, string name, double newVolume)
         {
             if (newVolume <= 0) return false;
 
