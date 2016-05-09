@@ -1,6 +1,7 @@
 ﻿//========================================================================
 // FILENAME :   Session.cs
-// DESCR.   :   Session singleton
+// DESCR.   :   Singleton for storing user session info like name, token
+//              and the pool data the user is viewing.
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -29,7 +30,6 @@ namespace Smartpool.Application.Model
         private Session()
         {
             // Private constructer - Use SharedSession to create a static instance
-
             SelectedPoolIndex = 0;
         }
     }

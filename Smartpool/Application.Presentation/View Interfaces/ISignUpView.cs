@@ -4,12 +4,13 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Moved alert displaying into seperate interface
 //========================================================================
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-    public interface ISignUpView : IView
+    public interface ISignUpView : IView, IAlertDisplaying
     {
         /// <summary>
         /// Sets the text of the name text field
@@ -35,11 +36,6 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of the login button
         /// </summary>
         void SetButtonEnabled(bool enabled);
-
-        /// <summary>
-        /// Displays a message or alert on the view
-        /// </summary>
-        void DisplayAlert(string title, string content);
 
         /// <summary>
         /// Tells the view that a login request has been accepted, should present the main menu
