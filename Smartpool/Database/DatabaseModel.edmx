@@ -198,7 +198,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="String" Nullable="false" />
+          <Property Name="Timestamp" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="Smartpool.PoolData" FromRole="Data" ToRole="Pool" />
           <Property Name="PoolId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chlorine" Relationship="Smartpool.DataChlorine" FromRole="Data" ToRole="Chlorine" />
