@@ -8,19 +8,9 @@
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
-{
-	/// <summary>
-	/// Enumeration of possible buttons on the Stat View
-	/// </summary>
-	public enum StatViewButton : int
+{	
+	public interface IStatViewController : IViewController, IPoolControlling
 	{
-	}
-	
-	public interface IStatViewController : ITabbedViewController
-	{
-		/// <summary>
-		/// Called by the Stat View when a button is pressed
-		/// </summary>
-		void ButtonPressed(StatViewButton button);
+
 	}
 }

@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Smartpool.Application.Presentation
 {
-    public interface IEditPoolView : IView, IPoolDisplaying
+    public interface IEditPoolView : IView, IPoolDisplaying, IAlertDisplaying
     {
         /// <summary>
         /// Sets the text of the name text field
@@ -39,11 +39,6 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of the delete button (delete pool)
         /// </summary>
         void SetDeleteButtonEnabled(bool enabled);
-
-        /// <summary>
-        /// Displays a message or alert on the view
-        /// </summary>
-        void DisplayAlert(string title, string content);
 
         /// <summary>
         /// Tells the view that a the changes have been saved successfully
