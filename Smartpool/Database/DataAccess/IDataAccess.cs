@@ -5,6 +5,7 @@ namespace Smartpool.DataAccess
 {
     public interface IWriteDataAccess
     {
+        IPoolAccess PoolAccess { get; set; }
         bool AddData(string ownerEmail, string poolName);
         bool RemoveData(string ownerEmail, string poolName);
         bool DeleteAllData();
@@ -14,6 +15,7 @@ namespace Smartpool.DataAccess
 
     public interface IReadDataAccess
     {
+        IPoolAccess PoolAccess { get; set; }
         Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns);
         Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns);
     }
