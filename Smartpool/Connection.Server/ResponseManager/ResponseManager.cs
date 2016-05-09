@@ -11,7 +11,7 @@ namespace Smartpool.Connection.Server
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly ITokenMsgResponse _tokenMsgResponse;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        
+
         public ResponseManager(ISmartpoolDB smartpoolDb)
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
@@ -53,7 +53,7 @@ namespace Smartpool.Connection.Server
                     case MessageTypes.ResetPasswordRequest:
                         var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
                         return new GeneralResponseMsg(false, false);
-                            //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+                    //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
 
                     default:
                         return new GeneralResponseMsg(false, false)
@@ -90,15 +90,35 @@ namespace Smartpool.Connection.Server
                         MessageInfo = "Login timed out. Please try again later"
                     };
             }
-            catch (UserNotFoundException)
+            catch (Exception e)
             {
-                return new LoginResponseMsg("", false) {MessageInfo = "User not found. Please try again"};
+                if (e is UserNotFoundException)
+                {
+                    return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
+                }
+
+                Console.Write(e.ToString());
+                return new LoginResponseMsg("", false)
+                {
+                    MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
+                };
             }
-            catch (Exception loginErrorException)
-            {
-                Console.Write(loginErrorException.ToString());
-                return new LoginResponseMsg("", false) { MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk" };
-            }
+            #region Old exceptions catching
+
+            //catch (UserNotFoundException e)
+            //{
+            //    return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
+            //}
+            //catch (Exception loginErrorException)
+            //{
+            //    Console.Write(loginErrorException.ToString());
+            //    return new LoginResponseMsg("", false)
+            //    {
+            //        MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
+            //    };
+            //}
+
+            #endregion
         }
     }
 }
