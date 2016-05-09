@@ -1,6 +1,6 @@
 ﻿//========================================================================
-// FILENAME :   Pool.cs
-// DESCR.   :   Pool model
+// FILENAME :   PoolValidator.cs
+// DESCR.   :   Pool validation model
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -11,7 +11,7 @@ using System;
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Model
 {
-    public class Pool
+    public class PoolValidator
     {
         public string Name { get; set; } = "";
         public string SerialNumber { get; set; } = "";

@@ -17,10 +17,15 @@ namespace Smartpool.Application.Model
 
         public string UserName { get; set; }
         public string TokenString { get; set; }
+        public int ActivePoolIndex { private get; set; }
+        public string ActivePool => Pools.Length > ActivePoolIndex ? Pools[ActivePoolIndex] : "";
+        public string[] Pools { get; set; }
 
         private Session()
         {
             // Private constructer - Use SharedSession to create a static instance
+
+            ActivePoolIndex = 0;
         }
     }
 }
