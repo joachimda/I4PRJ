@@ -58,12 +58,12 @@ namespace Smartpool.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// Queries chlorine values within a given hour range
         /// </summary>
-        /// <param name="poolOwnerEmail"></param>
-        /// <param name="poolName"></param>
-        /// <param name="queryStartHour"></param>
-        /// <returns></returns>
+        /// <param name="poolOwnerEmail">The email of the pool owner</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="queryStartHour">Specifies how many hours to look back in time</param>
+        /// <returns>A list of tuples, where each tuple contains a chlorine value and the hour where it was measured</returns>
         public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
@@ -101,12 +101,12 @@ namespace Smartpool.DataAccess
         }
 
         /// <summary>
-        /// 
+        /// Queries temperatures within a given hour range
         /// </summary>
-        /// <param name="poolOwnerEmail"></param>
-        /// <param name="poolName"></param>
-        /// <param name="queryStartHour"></param>
-        /// <returns></returns>
+        /// <param name="poolOwnerEmail">The email of the pool owner</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="queryStartHour">Specifies how many hours to look back in time</param>
+        /// <returns>A list of tuples, where each tuple contains a temperature value and the hour where it was measured</returns>
         public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
