@@ -11,8 +11,8 @@ namespace Smartpool.DataAccess
 
         public bool AddData(string ownerEmail, string poolName)
         {
-            // check email
-            // check name
+            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
+            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
 
             Data data = new Data();
 
@@ -27,7 +27,7 @@ namespace Smartpool.DataAccess
 
         public bool RemoveData(string ownerEmail, string poolName)
         {
-            throw new NotImplementedException();
+
         }
 
         public bool DeleteAllData()
