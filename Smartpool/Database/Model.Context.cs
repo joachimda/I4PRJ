@@ -27,10 +27,10 @@ namespace Smartpool
     
         public virtual DbSet<User> UserSet { get; set; }
         public virtual DbSet<Pool> PoolSet { get; set; }
-        public virtual DbSet<Data> DataSet { get; set; }
         public virtual DbSet<pH> pHSet { get; set; }
         public virtual DbSet<Chlorine> ChlorineSet { get; set; }
         public virtual DbSet<Temperature> TemperatureSet { get; set; }
         public virtual DbSet<Humidity> HumiditySet { get; set; }
+        public virtual DbSet<Data> DataSet { get; set; }
     }
 }
