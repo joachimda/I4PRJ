@@ -63,7 +63,7 @@ namespace Smartpool.Connection.Server
                         var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
-                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors()) { MessageInfo = "Not implemented"};  
+                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors());  
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
@@ -76,7 +76,7 @@ namespace Smartpool.Connection.Server
                     return new GeneralResponseMsg(true, true);
                 
                 case TokenSubMessageTypes.AllowAccessToPoolDataRequest:
-                    return new GeneralResponseMsg(true, false);
+                    return new GeneralResponseMsg(true, false) {MessageInfo = "Not implemented"};
                 //Monitor unit messages
 
                 //Default
