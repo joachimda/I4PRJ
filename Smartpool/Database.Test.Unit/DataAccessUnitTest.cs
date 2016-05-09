@@ -64,10 +64,12 @@ namespace Database.Test.Unit
         {
             Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
         }
+        
+        // public void CreateDataEntry_AddingData
 
         #endregion
 
-        //#region RemoveData
+        #region RemoveData
 
         //[Test]
         //public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse() { }
@@ -84,9 +86,9 @@ namespace Database.Test.Unit
         //[Test]
         //public void RemoveData_RemovingData_ReturnsFalse() { }
 
-        //#endregion
+        #endregion
 
-        //#region DeleteAllData
+        #region DeleteAllData
 
         //[Test]
         //public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase() { }
@@ -94,7 +96,7 @@ namespace Database.Test.Unit
         //[Test]
         //public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase() { }
 
-        //#endregion
+        #endregion
 
     }
 }

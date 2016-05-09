@@ -35,15 +35,25 @@ namespace Smartpool.DataAccess
 
             using (var db = new DatabaseContext())
             {
+                // find pool to add mesurements for
                 var poolsearch = from pools in db.PoolSet
                                  where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).Id && pools.Name == poolName
                                  select pools;
 
+                // check for errors in poolsearch
+                if (poolsearch.Count() > 1) return false;
+                if (poolsearch.Any() == false) return false;
+
+                // create 'Data' entity to store measurements in
+                var newData = new Data() {PoolId = poolsearch.First().Id/*, Timestamp = int.Parse(DateTime.Now)*/ };
+
+                // create measurements
                 var newChlorine = new Chlorine() { DataId = poolsearch.First().Id, Value = chlorine };
                 var newTemperature = new Temperature() { DataId = poolsearch.First().Id, Value = temp };
                 var newPH = new pH() { DataId = poolsearch.First().Id, Value = pH };
                 var newHumidity = new Humidity() { DataId = poolsearch.First().Id, Value = humidity };
 
+                // add mesurements to db
                 db.ChlorineSet.Add(newChlorine);
                 db.TemperatureSet.Add(newTemperature);
                 db.pHSet.Add(newPH);
