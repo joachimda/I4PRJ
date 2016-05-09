@@ -68,14 +68,18 @@ namespace Smartpool.DataAccess
         }
 
 
-        public List<Tuple<int, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
             {
-                if (queryStartDay < 0)
+                #region Check for invalid starting hour
+
+                if (queryStartHour < 0)
                 {
-                    throw new ArgumentException("Invalid start day, stupid!");
+                    throw new ArgumentException("Invalid start hour, stupid!");
                 }
+
+                #endregion
 
                 #region Query for all user-pool specific chlorine data
 
@@ -84,16 +88,17 @@ namespace Smartpool.DataAccess
                                         select chlorine;
                 #endregion
 
-
-                List<Tuple<int, double>> chlorineTuples = null;
+                #region Add date-relevant chlorine date to Tuple list
+                List<Tuple<long, double>> chlorineTuples = null;
 
                 foreach (var dataEntity in chlorineDataQuery)
                 {
-                    if (dataEntity.Data.Timestamp > queryStartDay)
+                    if (dataEntity.Data.Timestamp > queryStartHour)
                     {
-                        chlorineTuples.Add(new Tuple<int, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                        chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
                     }
                 }
+                #endregion
 
                 return chlorineTuples;
 
@@ -101,7 +106,7 @@ namespace Smartpool.DataAccess
 
         }
 
-        public List<Tuple<int, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDay)
+        public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             throw new NotImplementedException();
         }
