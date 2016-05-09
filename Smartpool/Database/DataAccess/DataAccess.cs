@@ -33,7 +33,7 @@ namespace Smartpool.DataAccess
             return true;
         }
 
-        public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartHour)
+        public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
         {
             using (var db = new DatabaseContext())
             {
