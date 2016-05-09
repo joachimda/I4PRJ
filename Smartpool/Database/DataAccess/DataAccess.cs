@@ -11,7 +11,18 @@ namespace Smartpool.DataAccess
 
         public bool AddData(string ownerEmail, string poolName)
         {
-            throw new NotImplementedException();
+            // check email
+            // check name
+
+            Data data = new Data();
+
+            using (var db = new DatabaseContext())
+            {
+                db.DataSet.Add(data);
+                db.SaveChanges();
+            }
+
+            return true;
         }
 
         public bool RemoveData(string ownerEmail, string poolName)
