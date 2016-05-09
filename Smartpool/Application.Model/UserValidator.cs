@@ -14,10 +14,13 @@ namespace Smartpool.Application.Model
 {
     public class UserValidator
     {
+        public const int MinimumCharacters = 8;
+
         public string Name { get; set; } = "";
         public string[] Passwords { get; set; } = { "", "" };
         public string Email { get; set; } = "";
-        public bool PasswordIsValid { get; set; } = false;
-        public bool IsValid { get; set; } = false;
+
+        public bool PasswordIsValid => Passwords[0].Length >= MinimumCharacters && Passwords[0] == Passwords[1];
+        public bool IsValid => PasswordIsValid && Name.Length > 0 && Email.Length > 0;
     }
 }
