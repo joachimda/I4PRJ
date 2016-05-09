@@ -7,6 +7,9 @@
 //========================================================================
 
 // ReSharper disable once CheckNamespace
+
+using System;
+
 namespace Smartpool.Application.Model
 {
     public class Session
@@ -26,6 +29,6 @@ namespace Smartpool.Application.Model
             // Private constructer - Use SharedSession to create a static instance
 
             SelectedPoolIndex = 0;
-        }
+        } 
     }
 }

@@ -99,10 +99,10 @@ namespace Smartpool.Application.Presentation
                 session.TokenString = loginResponse.TokenString;
                 session.UserName = _email;
 
-                // Preload pools
+                // Preload pools // MISSING the preload
                 var poolRequest = new GetPoolDataRequestMsg(session.UserName, session.TokenString, true);
                 response = _clientMessager.SendMessage(poolRequest);
-                var poolResponse = (GetPoolDataResponseMsg) response;
+                var poolResponse = response as GetPoolDataResponseMsg;
 
                 // Notify view
                 _view.LoginAccepted (); 
