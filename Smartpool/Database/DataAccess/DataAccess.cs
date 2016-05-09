@@ -101,9 +101,7 @@ namespace Smartpool.DataAccess
                 #endregion
 
                 return chlorineTuples;
-
             }
-
         }
 
         public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
