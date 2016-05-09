@@ -105,7 +105,5 @@ namespace Smartpool.DataAccess
                 return temperatureTuples;
             }
         }
-
     }
-
 }
