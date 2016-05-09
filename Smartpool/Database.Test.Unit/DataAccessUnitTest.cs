@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Text;
+using NUnit.Framework;
 using Smartpool;
 using Smartpool.DataAccess;
 
@@ -13,20 +14,20 @@ namespace Database.Test.Unit
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
-        string email, nameOfPool;
+        string ownerEmail, poolName;
 
         [SetUp]
         public void Setup()
         {
-            nameOfPool = "baghave";
-            email = "hansen @gmail.com";
+            poolName = "baghave";
+            ownerEmail = "hansen @gmail.com";
 
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
             _uut = new DataAccess(_poolAccess);
 
-            _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
-            _poolAccess.AddPool(email, nameOfPool, 8);
+            _userAccess.AddUser("Sir Derp Hansen", ownerEmail, "hanpassword");
+            _poolAccess.AddPool(ownerEmail, poolName, 8);
         }
 
         [TearDown]
@@ -44,59 +45,57 @@ namespace Database.Test.Unit
         [Test]
         public void CreateDataEntry_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
         {
+            Assert.That(_uut.CreateDataEntry("invalid", "invalid", 987, 89, 8, 33), Is.False);
         }
 
         [Test]
         public void CreateDataEntry_AddingDataToNonExistingPool_ReturnsFalse()
         {
+            Assert.That(_uut.CreateDataEntry(ownerEmail, "invalid", 987, 89, 8, 33), Is.False);
         }
 
         [Test]
         public void CreateDataEntry_AddingDataToNonExistingUser_ReturnsFalse()
         {
-        }
-
-        [Test]
-        public void CreateDataEntry_AddingDataToPoolWithExistingData_ReturnsFalse()
-        {
-
+            Assert.That(_uut.CreateDataEntry("invalid", poolName, 987, 89, 8, 33), Is.False);
         }
 
         [Test]
         public void CreateDataEntry_AddingData_ReturnsTrue()
         {
+            Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
         }
 
         #endregion
 
-        #region RemoveData
+        //#region RemoveData
 
-        [Test]
-        public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse() { }
+        //[Test]
+        //public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse() { }
 
-        [Test]
-        public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse() { }
+        //[Test]
+        //public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse() { }
 
-        [Test]
-        public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse() { }
+        //[Test]
+        //public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse() { }
 
-        [Test]
-        public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse() { }
+        //[Test]
+        //public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse() { }
 
-        [Test]
-        public void RemoveData_RemovingData_ReturnsFalse() { }
+        //[Test]
+        //public void RemoveData_RemovingData_ReturnsFalse() { }
 
-        #endregion
+        //#endregion
 
-        #region DeleteAllData
+        //#region DeleteAllData
 
-        [Test]
-        public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase() { }
+        //[Test]
+        //public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase() { }
 
-        [Test]
-        public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase() { }
+        //[Test]
+        //public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase() { }
 
-        #endregion
+        //#endregion
 
     }
 }
