@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server
@@ -7,6 +10,7 @@ namespace Smartpool.Connection.Server
     {
         /***TEMPORARY***/
         private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,30);
+        private readonly Random _random = new Random();
         /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
@@ -53,7 +57,12 @@ namespace Smartpool.Connection.Server
 
                 case TokenSubMessageTypes.GetPoolDataRequest:
                     var gpdMsg = JsonConvert.DeserializeObject<GetPoolDataRequestMsg>(messageString);
-                    
+                    if (gpdMsg.GetAllNamesOnly)
+                    {
+                        var pools = _smartpoolDb.PoolAccess.FindAllPoolsOfUser(gpdMsg.Username);
+                        var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
+                        return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
+                    }
                     return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors()) { MessageInfo = "Not implemented"};  
 
                 //User messages
