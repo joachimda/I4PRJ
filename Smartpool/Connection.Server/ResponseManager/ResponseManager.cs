@@ -92,7 +92,7 @@ namespace Smartpool.Connection.Server
             }
             catch (Exception e)
             {
-                if (e is UserNotFoundException)
+                if (e.InnerException is UserNotFoundException)
                 {
                     return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
                 }
@@ -103,22 +103,6 @@ namespace Smartpool.Connection.Server
                     MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
                 };
             }
-            #region Old exceptions catching
-
-            //catch (UserNotFoundException e)
-            //{
-            //    return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
-            //}
-            //catch (Exception loginErrorException)
-            //{
-            //    Console.Write(loginErrorException.ToString());
-            //    return new LoginResponseMsg("", false)
-            //    {
-            //        MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
-            //    };
-            //}
-
-            #endregion
         }
     }
 }
