@@ -16,9 +16,14 @@ namespace Smartpool.Application.Presentation
     public interface IEditPoolView : IView
     {
         /// <summary>
-        /// Clears the text of the volume text field
+        /// Sets the text of the name text field
         /// </summary>
-        void ClearVolumeText();
+        void SetNameText(string text);
+
+        /// <summary>
+        /// Sets the text of the volume text field
+        /// </summary>
+        void SetVolumeText(string text);
 
         /// <summary>
         /// Clears the text of all the dimension text fields
@@ -29,6 +34,11 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of the save button (save updated info)
         /// </summary>
         void SetSaveButtonEnabled(bool enabled);
+
+        /// <summary>
+        /// Sets the state of the delete button (delete pool)
+        /// </summary>
+        void SetDeleteButtonEnabled(bool enabled);
 
         /// <summary>
         /// Sets the list of available pools (tuples with name and notification status)

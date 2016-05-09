@@ -36,5 +36,10 @@ namespace Smartpool.Application.Model
             }
             return 0;
         }
+
+        public bool PoolsAreAvailable()
+        {
+            return _session.Pools.Count > 0;
+        }
     }
 }
