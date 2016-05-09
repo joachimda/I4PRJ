@@ -13,14 +13,17 @@ namespace Database.Test.Unit
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
-        string email = "hansen@gmail.com", nameOfPool = "baghave";
+        string email, nameOfPool;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new DataAccess();
+            nameOfPool = "baghave";
+            email = "hansen @gmail.com";
+
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
+            _uut = new DataAccess(_poolAccess);
 
             _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
             _poolAccess.AddPool(email, nameOfPool, 8);
@@ -30,9 +33,9 @@ namespace Database.Test.Unit
         [TearDown]
         public void Teardown()
         {
+            _uut.DeleteAllData();
             _poolAccess.DeleteAllPools();
             _userAccess.DeleteAllUsers();
-            _uut.DeleteAllData();
         }
 
         #endregion
