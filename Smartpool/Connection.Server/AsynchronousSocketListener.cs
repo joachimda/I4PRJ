@@ -158,6 +158,7 @@ namespace Smartpool.Connection.Server
 
         private static void Send(Socket handler, String data)
         {
+            Console.WriteLine(data);
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
