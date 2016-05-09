@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.SqlServer.Server;
 
 namespace Smartpool
 {
@@ -75,7 +71,7 @@ namespace Smartpool
         /// <param name="email"></param>
         /// <returns>Returns reference to type of User class. 
         /// If the user could not be found, the return will be null.</returns>
-        public User     FindUserByEmail(string email)
+        public User FindUserByEmail(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 

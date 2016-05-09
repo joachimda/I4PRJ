@@ -27,7 +27,6 @@ namespace Database.Test.Unit
 
             _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
             _poolAccess.AddPool(email, nameOfPool, 8);
-            _uut.AddData(email, nameOfPool);
         }
 
         [TearDown]
@@ -45,33 +44,27 @@ namespace Database.Test.Unit
         [Test]
         public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
         {
-            Assert.That(_uut.AddData("mail", "somepool"), Is.False);
         }
 
         [Test]
         public void AddData_AddingDataToNonExistingPool_ReturnsFalse()
         {
-            Assert.That(_uut.AddData(email, "somepool"), Is.False);
         }
 
         [Test]
         public void AddData_AddingDataToNonExistingUser_ReturnsFalse()
         {
-            Assert.That(_uut.AddData("user", nameOfPool), Is.False);
         }
 
         [Test]
         public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
         {
-            _uut.AddData(email, nameOfPool);
 
-            Assert.That(_uut.AddData(email, nameOfPool), Is.False);
         }
 
         [Test]
         public void AddData_AddingData_ReturnsTrue()
         {
-            Assert.That(_uut.AddData(email, nameOfPool), Is.True);
         }
 
         #endregion

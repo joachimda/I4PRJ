@@ -7,10 +7,9 @@ namespace Smartpool.DataAccess
     {
         IPoolAccess PoolAccess { get; set; }
         bool AddData(string ownerEmail, string poolName);
+        bool CreateEntry(double chlorine, double temp, double pH, double humidity);
         bool RemoveData(string ownerEmail, string poolName);
         bool DeleteAllData();
-        bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue);
-        bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue);
     }
 
     public interface IReadDataAccess

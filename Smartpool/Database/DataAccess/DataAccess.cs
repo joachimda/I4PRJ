@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
 
 namespace Smartpool.DataAccess
 {
@@ -16,27 +13,6 @@ namespace Smartpool.DataAccess
             PoolAccess = poolAccess;
         }
 
-        public bool AddData(string ownerEmail, string poolName)
-        {
-            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
-            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
-
-            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id };
-
-            using (var db = new DatabaseContext())
-            {
-                db.DataSet.Add(data);
-                db.SaveChanges();
-            }
-
-            return true;
-        }
-
-        public bool RemoveData(string ownerEmail, string poolName)
-        {
-            return false;
-        }
-
         public bool DeleteAllData()
         {
             using (var db = new DatabaseContext())
@@ -47,28 +23,7 @@ namespace Smartpool.DataAccess
             return true;
         }
 
-        public bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue)
-        {
-            if (!PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail))
-            {
-                return false;
-            }
-            Chlorine chlorine = new Chlorine { Value = chlorineValue };
-
-            using (var db = new DatabaseContext())
-            {
-                db.ChlorineSet.Add(chlorine);
-            }
-            throw new NotImplementedException();
-        }
-
-        public bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
+        public List<Tuple<long, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartHour)
         {
             using (var db = new DatabaseContext())
             {
