@@ -38,9 +38,9 @@ namespace Smartpool.Connection.Server
 
                     var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username, loginMessage.Password));
                     if (task.Wait(TimeSpan.FromSeconds(3)))
-                        return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result);
+                        return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result) {MessageInfo = "Username or password was incorrect"};
                     else
-                        return new LoginResponseMsg("Login timedout. Please try again later", false);
+                        return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
                     
                 case MessageTypes.TokenMsg:
                     var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
