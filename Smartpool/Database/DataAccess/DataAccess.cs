@@ -29,7 +29,10 @@ namespace Smartpool.DataAccess
         /// <returns></returns>
         public bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)
         {
-            throw new NotImplementedException();
+            // checks if 
+            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
+
+            return true;
         }
         
         /// <summary>

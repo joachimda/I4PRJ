@@ -1,5 +1,4 @@
-﻿using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Smartpool;
 using Smartpool.DataAccess;
 
@@ -20,7 +19,7 @@ namespace Database.Test.Unit
         public void Setup()
         {
             poolName = "baghave";
-            ownerEmail = "hansen @gmail.com";
+            ownerEmail = "hansen@gmail.com";
 
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);

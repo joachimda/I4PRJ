@@ -88,16 +88,8 @@ namespace Smartpool
                 }
             }
 
-            if (listOfFoundUsers.Count > 1)
-            {
-                throw new MultipleOccourencesOfEmailWasFoundException();
-            }
-            if (listOfFoundUsers.Count == 0)
-            {
-                throw new UserNotFoundException();
-                //return null;
-            }
-
+            if (listOfFoundUsers.Count > 1) throw new MultipleOccourencesOfEmailWasFoundException();
+            if (listOfFoundUsers.Count == 0) throw new UserNotFoundException();
             return listOfFoundUsers[0];
         }
 

@@ -1,5 +1,4 @@
-﻿using System.Net.Mail;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Smartpool;
 
 namespace Database.Test.Unit
