@@ -23,7 +23,22 @@ namespace Smartpool.Connection.Server
 
                 case TokenSubMessageTypes.UpdatePoolRequest:
                     var upMsg = JsonConvert.DeserializeObject<UpdatePoolRequestMsg>(messageString);
-                    return new GeneralResponseMsg(true, false) { MessageInfo = "Not implemented" }; // _smartpoolDb.PoolAccess.UpdatePoolInfo(upiMsg.OldPoolName, upiMsg.NewPoolAddress, upiMsg.NewPoolName, upiMsg.NewPoolVolume)
+                    var newNameSuccess = true;
+                    var newVolumeSuccess = true;
+                    if (upMsg.NewPoolName != "")
+                    {
+                        newNameSuccess = _smartpoolDb.PoolAccess.EditPoolName(upMsg.Username, upMsg.OldPoolName, upMsg.NewPoolName);
+                    }
+                    if (upMsg.NewPoolVolume != 0)
+                    {
+                        newVolumeSuccess = _smartpoolDb.PoolAccess.EditPoolVolume(upMsg.Username, upMsg.OldPoolName, upMsg.NewPoolVolume);
+                    }
+                    if (newVolumeSuccess && newNameSuccess)
+                    return new GeneralResponseMsg(true, true);
+                    else
+                    {
+                        return new GeneralResponseMsg(true, false) {MessageInfo = "An error happened. Data was not saved"};
+                    }
 
                 case TokenSubMessageTypes.RemovePoolRequest:
                     var rpMsg = JsonConvert.DeserializeObject<RemovePoolRequestMsg>(messageString);
