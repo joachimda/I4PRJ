@@ -12,7 +12,17 @@ namespace Smartpool.DataAccess
         {
             PoolAccess = poolAccess;
         }
-        
+
+        public bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveData(string ownerEmail, string poolName)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DeleteAllData()
         {
             using (var db = new DatabaseContext())

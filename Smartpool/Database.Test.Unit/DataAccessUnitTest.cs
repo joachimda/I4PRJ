@@ -39,31 +39,31 @@ namespace Database.Test.Unit
 
         #endregion
 
-        #region AddData
+        #region CreateDataEntry
 
         [Test]
-        public void AddData_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
+        public void CreateDataEntry_AddingDataToNonExistingPoolAndUser_ReturnsFalse()
         {
         }
 
         [Test]
-        public void AddData_AddingDataToNonExistingPool_ReturnsFalse()
+        public void CreateDataEntry_AddingDataToNonExistingPool_ReturnsFalse()
         {
         }
 
         [Test]
-        public void AddData_AddingDataToNonExistingUser_ReturnsFalse()
+        public void CreateDataEntry_AddingDataToNonExistingUser_ReturnsFalse()
         {
         }
 
         [Test]
-        public void AddData_AddingDataToPoolWithExistingData_ReturnsFalse()
+        public void CreateDataEntry_AddingDataToPoolWithExistingData_ReturnsFalse()
         {
 
         }
 
         [Test]
-        public void AddData_AddingData_ReturnsTrue()
+        public void CreateDataEntry_AddingData_ReturnsTrue()
         {
         }
 
