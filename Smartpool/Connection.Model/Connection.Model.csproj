@@ -39,6 +39,7 @@
     <Compile Include="Interfaces\IClient.cs" />
     <Compile Include="Interfaces\IClientMessager.cs" />
     <Compile Include="Interfaces\IClientResponseManager.cs" />
+    <Compile Include="Interfaces\ISensor.cs" />
     <Compile Include="Messages\ClientMessages\AddUserRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\ClientMsg.cs" />
     <Compile Include="Messages\ClientMessages\LoginRequestMsg.cs" />
