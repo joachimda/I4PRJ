@@ -14,7 +14,7 @@ namespace Smartpool.DataAccess
 
     public interface IReadDataAccess
     {
-        List<Tuple<DateTime, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDate);
-        List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDate);
+        List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDate);
+        List<Tuple<int, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDate);
     }
 }

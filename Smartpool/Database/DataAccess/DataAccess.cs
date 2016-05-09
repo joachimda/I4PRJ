@@ -63,7 +63,7 @@ namespace Smartpool.DataAccess
         }
 
 
-        public List<Tuple<string, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDate)
+        public List<Tuple<int, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int queryStartDate)
         {
             using (var db = new DatabaseContext())
             {
@@ -91,7 +91,7 @@ namespace Smartpool.DataAccess
             throw new NotImplementedException();
         }
 
-        public List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDate)
+        public List<Tuple<int, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int queryStartDate)
         {
             throw new NotImplementedException();
         }
