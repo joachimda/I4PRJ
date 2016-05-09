@@ -81,8 +81,6 @@ namespace Smartpool.DataAccess
                 #endregion
 
 
-                var daysToGoBack =  - queryStartDay;
-
                 List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
 
                 foreach (var data in chlorineDataQuery)
