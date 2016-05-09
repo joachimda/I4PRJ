@@ -95,7 +95,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Timestamp" Type="int" Nullable="false" />
+    <Property Name="Timestamp" Type="bigint" Nullable="false" />
     <Property Name="PoolId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
@@ -283,7 +283,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="Int32" Nullable="false" />
+          <Property Name="Timestamp" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="Smartpool.PoolData" FromRole="Data" ToRole="Pool" />
           <Property Name="PoolId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chlorine" Relationship="Smartpool.DataChlorine" FromRole="Data" ToRole="Chlorine" />

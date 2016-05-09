@@ -12,30 +12,7 @@ namespace Smartpool.DataAccess
         {
             PoolAccess = poolAccess;
         }
-
-        public bool AddData(string ownerEmail, string poolName, double chlorine, double temp, double ph, double humidity)
-        {
-            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
-            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
-
-            //Chlorine chlorine = new Chlorine() {DataId = };
-
-            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id};
-
-            using (var db = new DatabaseContext())
-            {
-                db.DataSet.Add(data);
-                db.SaveChanges();
-            }
-
-            return true;
-        }
-
-        public bool RemoveData(string ownerEmail, string poolName)
-        {
-            return false;
-        }
-
+        
         public bool DeleteAllData()
         {
             using (var db = new DatabaseContext())

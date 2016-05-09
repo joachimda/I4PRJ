@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/09/2016 13:08:53
+-- Date Created: 05/09/2016 13:33:25
 -- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -121,7 +121,7 @@ GO
 -- Creating table 'DataSet'
 CREATE TABLE [dbo].[DataSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Timestamp] int  NOT NULL,
+    [Timestamp] bigint  NOT NULL,
     [PoolId] int  NOT NULL
 );
 GO
