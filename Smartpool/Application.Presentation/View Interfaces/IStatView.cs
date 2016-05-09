@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using Smartpool.Application.Model;
 
 namespace Smartpool.Application.Presentation
 {
@@ -19,6 +20,6 @@ namespace Smartpool.Application.Presentation
         /// <summary>
         /// Should display the list of sensor types and their associated values
         /// </summary>
-        void DisplaySensorData(List<Tuple<string, double>> sensorTypeAndValueTuples);
+        void DisplaySensorData(List<Tuple<SensorType, double>> sensorData);
     }
 }

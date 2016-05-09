@@ -32,7 +32,7 @@ namespace Smartpool.Application.Presentation
             // Load active pool info into text fields
             if (!_loader.PoolsAreAvailable())
             {
-                _view.DisplayAlert("No pools", "You have not added any pools yet. Please go to 'Add Pool' to add a pool.");
+                _view.DisplayAlert("No pools available", "You have not added any pools yet. Please go to 'Add Pool' to add a pool.");
             }
             else
             {
@@ -59,7 +59,8 @@ namespace Smartpool.Application.Presentation
 
         private void LoadSensorData()
         {
-            
+            // Loads current sensor data into the view
+            _view.DisplaySensorData(_loader.GetSensorDataFromCurrentPool(_clientMessager));
         }
     }
 }
