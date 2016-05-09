@@ -247,7 +247,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DatapH" FromRole="pH" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -256,7 +256,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataChlorine" FromRole="Chlorine" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -265,7 +265,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataTemperature" FromRole="Temperature" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
         </EntityType>
@@ -274,7 +274,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.DataHumidity" FromRole="Humidity" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
         </EntityType>
