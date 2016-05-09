@@ -9,6 +9,11 @@ namespace Smartpool.DataAccess
     {
         public IPoolAccess PoolAccess { get; set; }
 
+        public DataAccess(IPoolAccess poolAccess)
+        {
+            PoolAccess = poolAccess;
+        }
+
         public bool AddData(string ownerEmail, string poolName)
         {
             if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;

@@ -21,9 +21,9 @@ namespace Database.Test.Unit
             nameOfPool = "baghave";
             email = "hansen @gmail.com";
 
-            _uut = new DataAccess();
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
+            _uut = new DataAccess(_poolAccess);
 
             _userAccess.AddUser("Sir Derp Hansen", email, "hanpassword");
             _poolAccess.AddPool(email, nameOfPool, 8);
@@ -33,9 +33,9 @@ namespace Database.Test.Unit
         [TearDown]
         public void Teardown()
         {
+            _uut.DeleteAllData();
             _poolAccess.DeleteAllPools();
             _userAccess.DeleteAllUsers();
-            _uut.DeleteAllData();
         }
 
         #endregion
