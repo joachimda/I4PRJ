@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
@@ -62,9 +63,14 @@ namespace Smartpool.Connection.Server
                         };
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Console.Write(exception.ToString());
+                Console.Write(e.ToString());
+                if (e.InnerException is SqlException)
+                {
+                    return new GeneralResponseMsg(false, false) {MessageInfo = "An error happened. Please contact helpdesk: CodeDbError40"};
+                }
+                
                 return new GeneralResponseMsg(false, false)
                 {
                     MessageInfo =
@@ -79,7 +85,7 @@ namespace Smartpool.Connection.Server
             {
                 var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username,
                     loginMessage.Password));
-                if (task.Wait(TimeSpan.FromSeconds(3)))
+                if (task.Wait(TimeSpan.FromSeconds(5)))
                     return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result)
                     {
                         MessageInfo = "Username or password was incorrect"
