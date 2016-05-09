@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using NUnit.Framework;
 
 namespace Smartpool.DataAccess
 {
@@ -16,13 +13,14 @@ namespace Smartpool.DataAccess
             PoolAccess = poolAccess;
         }
 
-        public bool AddData(string poolOwnerEmail, string poolName, double chlorine, double temperature, double pH,
-    double humidity)
+        public bool AddData(string ownerEmail, string poolName, double chlorine, double temp, double ph, double humidity)
         {
-            if (PoolAccess.UserAccess.IsEmailInUse(poolOwnerEmail) == false) return false;
-            if (PoolAccess.IsPoolNameAvailable(poolOwnerEmail, poolName) == true) return false;
+            if (PoolAccess.UserAccess.IsEmailInUse(ownerEmail) == false) return false;
+            if (PoolAccess.IsPoolNameAvailable(ownerEmail, poolName) == true) return false;
 
-            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(poolOwnerEmail, poolName).Id };
+            //Chlorine chlorine = new Chlorine() {DataId = };
+
+            Data data = new Data() { PoolId = PoolAccess.FindSpecificPool(ownerEmail, poolName).Id};
 
             using (var db = new DatabaseContext())
             {
@@ -56,14 +54,14 @@ namespace Smartpool.DataAccess
                 #region Query for all user specific data
 
                 var chlorineDataQuery = from userSpecificData in db.DataSet
-                                        where userSpecificData.Pool.User.Email == poolOwnerEmail &&  userSpecificData.Pool.Name == poolName
+                                        where userSpecificData.Pool.User.Email == poolOwnerEmail && userSpecificData.Pool.Name == poolName
                                         select userSpecificData;
                 #endregion
 
 
-                var daysToGoBack =  - queryStartDay;
+                var daysToGoBack = -queryStartDay;
 
-                List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
+                List<Tuple<DateTime, Chlorine>> ChlorineTuples = null;
 
                 foreach (var data in chlorineDataQuery)
                 {
