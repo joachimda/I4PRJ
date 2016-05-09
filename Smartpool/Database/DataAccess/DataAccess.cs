@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
 namespace Smartpool.DataAccess
 {
@@ -56,20 +57,22 @@ namespace Smartpool.DataAccess
             using (var db = new DatabaseContext())
             {
 
-                #region Query for all user specific chlorine data
+                #region Query for all user specific data
 
-                var chlorineDataQuery = from chlorineData in db.DataSet
-                                        where chlorineData.Pool.User.Email == poolOwnerEmail
-                                        select chlorineData;
+                var chlorineDataQuery = from userSpecificData in db.DataSet
+                                        where userSpecificData.Pool.User.Email == poolOwnerEmail &&  userSpecificData.Pool.Name == poolName
+                                        select userSpecificData;
                 #endregion
 
-                Tuple<TimestampInformation, Temperature> chlorineTuple = null;
                 var queryStart = DateTime.Now.Day - howManyDaysToReturn;
+
+                List <Tuple<DateTime, Chlorine> > ChlorineTuples = null;
+
                 foreach (var data in chlorineDataQuery)
                 {
                     if (data.Timestamp.Days >= queryStart)
                     {
-                        chlorineTuple.Item1 = data.Timestamp;
+                        ChlorineTuples.Add(new Tuple<DateTime, Chlorine>(data.Timestamp, data.Chlorine));
                     }
                 }
 
@@ -80,6 +83,16 @@ namespace Smartpool.DataAccess
         public List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
         {
             throw new NotImplementedException();
+        }
+
+
+    }
+
+    public class TupleList<T1, T2> : List<Tuple<T1, T2>>
+    {
+        public void Add(T1 item, T2 item2)
+        {
+            Add(new Tuple<T1, T2>(item, item2));
         }
     }
 }
