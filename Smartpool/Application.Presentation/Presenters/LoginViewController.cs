@@ -94,10 +94,8 @@ namespace Smartpool.Application.Presentation
                 session.TokenString = loginResponse.TokenString;
                 session.UserName = _email;
 
-                // Preload pools // MISSING the preload
-                var poolRequest = new GetPoolDataRequestMsg(session.UserName, session.TokenString, true);
-                response = _clientMessager.SendMessage(poolRequest);
-                var poolResponse = response as GetPoolDataResponseMsg;
+                // Preload the users pools
+                session.ReloadPools(_clientMessager);
 
                 // Notify view
                 _view.LoginAccepted (); 
@@ -110,3 +108,4 @@ namespace Smartpool.Application.Presentation
         }
     }
 }
+
