@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Smartpool.DataAccess
@@ -50,13 +51,33 @@ namespace Smartpool.DataAccess
         }
 
 
-        public Tuple<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
+        public List<Tuple<DateTime, Chlorine>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
         {
+            using (var db = new DatabaseContext())
+            {
 
+                #region Query for all user specific chlorine data
+
+                var chlorineDataQuery = from chlorineData in db.DataSet
+                                        where chlorineData.Pool.User.Email == poolOwnerEmail
+                                        select chlorineData;
+                #endregion
+
+                Tuple<TimestampInformation, Temperature> chlorineTuple = null;
+                var queryStart = DateTime.Now.Day - howManyDaysToReturn;
+                foreach (var data in chlorineDataQuery)
+                {
+                    if (data.Timestamp.Days >= queryStart)
+                    {
+                        chlorineTuple.Item1 = data.Timestamp;
+                    }
+                }
+
+            }
             throw new NotImplementedException();
         }
 
-        public Tuple<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
+        public List<Tuple<DateTime, Temperature>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyDaysToReturn)
         {
             throw new NotImplementedException();
         }
