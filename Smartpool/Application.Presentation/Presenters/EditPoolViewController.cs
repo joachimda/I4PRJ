@@ -62,7 +62,7 @@ namespace Smartpool.Application.Presentation
         {
             // Request deletion from server
             var session = Session.SharedSession;
-            var request = new RemovePoolRequestMsg(session.UserName, session.TokenString, "redundant",
+            var request = new RemovePoolRequestMsg(session.UserName, session.TokenString,
                 session.SelectedPool.Item1);
             var response = (GeneralResponseMsg) _clientMessager.SendMessage(request);
 
