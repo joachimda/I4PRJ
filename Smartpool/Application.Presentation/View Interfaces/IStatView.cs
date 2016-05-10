@@ -19,6 +19,6 @@ namespace Smartpool.Application.Presentation
         /// <summary>
         /// Should display the list of sensor types and their associated values
         /// </summary>
-        void DisplaySensorData(List<Tuple<SensorType, double>> sensorData);
+        void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData);
     }
 }

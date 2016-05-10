@@ -32,18 +32,18 @@ namespace Smartpool.Application.Model
             }
         }
 
-        public List<Tuple<SensorType, double>> GetSensorDataFromCurrentPool(IClientMessenger clientMessenger)
+        public List<Tuple<SensorTypes, double>> GetSensorDataFromCurrentPool(IClientMessenger clientMessenger)
         {
             // Send request to server
             var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString);
             var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
-            var sensorData = new List<Tuple<SensorType, double>>();
+            var sensorData = new List<Tuple<SensorTypes, double>>();
 
             // MISSING, server support
-            sensorData.Add(new Tuple<SensorType, double>(SensorType.Temperature, 34.0));
-            sensorData.Add(new Tuple<SensorType, double>(SensorType.Ph, 7.0));
-            sensorData.Add(new Tuple<SensorType, double>(SensorType.Chlorine, 2.2));
-            sensorData.Add(new Tuple<SensorType, double>(SensorType.Humidity, 50.0));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, 34.0));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, 7.0));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, 2.2));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, 50.0));
 
             return sensorData;
         }

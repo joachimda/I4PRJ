@@ -2,7 +2,7 @@
 {
     public interface ISensor
     {
-        FakeSensorEnum SensorType { get; }
+        SensorTypes SensorType { get; }
         double SensorValue { get; }
         void GetNextSensorValue();
         void SaveValueToDatabase();
