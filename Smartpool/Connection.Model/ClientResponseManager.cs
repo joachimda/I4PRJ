@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 
+
 namespace Smartpool.Connection.Model
 {
     public class ClientResponseManager : IClientResponseManager
