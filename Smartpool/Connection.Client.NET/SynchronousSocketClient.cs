@@ -22,7 +22,7 @@ namespace Smartpool.Connection.Client
         public string StartClient(string whatToSend)
         {
             // Data buffer for incoming data.
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[10240];
 
             // Connect to a remote device.
             try
