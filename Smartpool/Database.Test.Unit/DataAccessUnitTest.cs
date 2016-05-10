@@ -23,7 +23,7 @@ namespace Database.Test.Unit
 
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
-            _uut = new DataAccess(_poolAccess);
+            _uut = new DataAccess();
 
             _userAccess.AddUser("Sir Derp Hansen", ownerEmail, "hanpassword");
             _poolAccess.AddPool(ownerEmail, poolName, 8);
