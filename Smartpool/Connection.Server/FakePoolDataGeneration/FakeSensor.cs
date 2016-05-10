@@ -1,18 +1,29 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
     internal class FakeSensor : ISensor
     {
-        private readonly Random _random = new Random();
         public SensorTypes SensorType { get; set; }
-        public double SensorValue { get; set; }
+        public List<double> SensorValueList => _sensorValueQueue.ToList();
 
-        public FakeSensor()
+        private readonly Random _random = new Random();
+        private readonly Queue<double> _sensorValueQueue = new Queue<double>();
+        private double _lastSensorValueEntry;
+        private readonly int _maxHistory;
+
+        public FakeSensor(int sensorType = -1, int maxHistory = 30)
         {
-            SensorType = (SensorTypes)_random.Next(0, Enum.GetNames(typeof(SensorTypes)).Length);
-            SensorValue = GetRandomSensorValue();
+            _maxHistory = maxHistory;
+            if (sensorType == -1)
+                SensorType = (SensorTypes)_random.Next(0, Enum.GetNames(typeof(SensorTypes)).Length);
+            else
+                SensorType = (SensorTypes) sensorType;
+            
+            AddNewSensorValue(GetRandomSensorValue());
         }
         private double GetRandomSensorValue()
         {
@@ -34,35 +45,29 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
                     throw new ArgumentOutOfRangeException();
             }
         }
-
+       
         public void GetNextSensorValue()
         {
-            switch (SensorType)
-            {
-                case SensorTypes.Temperature:
-                    SensorValue += _random.Next(-2, 3);
-                    break;
+            if (SensorType == SensorTypes.Temperature || SensorType == SensorTypes.Humidity)
+                AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3));
 
-                case SensorTypes.Chlorine:
-                    SensorValue += _random.Next(-2, 3) * 0.1;
-                    break;
+            if (SensorType == SensorTypes.Chlorine || SensorType == SensorTypes.Ph)
+                AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
+        }
 
-                case SensorTypes.Ph:
-                    SensorValue += _random.Next(-2, 3) * 0.1;
-                    break;
+        private void AddNewSensorValue(double nextValue)
+        {
+            if (!(_sensorValueQueue.Count < _maxHistory))
+                _sensorValueQueue.Dequeue();
 
-                case SensorTypes.Humidity:
-                    SensorValue += _random.Next(-2, 3);
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            nextValue = Math.Round(nextValue, 1);
+            _sensorValueQueue.Enqueue(nextValue);
+            _lastSensorValueEntry = nextValue;
         }
 
         public void SaveValueToDatabase()
         {
-            Console.WriteLine(DateTime.Now + " - Sensor of type: " + SensorType + " recorded a value of: " + SensorValue);
+            //Console.WriteLine(DateTime.Now + " - Sensor of type: " + SensorType + " recorded a value of: " + _lastSensorValueEntry);
         }
     }
 }

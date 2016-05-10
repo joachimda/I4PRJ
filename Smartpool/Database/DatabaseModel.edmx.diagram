@@ -16,8 +16,8 @@
         <AssociationConnector Association="Smartpool.PoolData" />
         <AssociationConnector Association="Smartpool.DataChlorine" />
         <AssociationConnector Association="Smartpool.DataHumidity" />
-        <AssociationConnector Association="Smartpool.DatapH" />
         <AssociationConnector Association="Smartpool.DataTemperature" />
+        <AssociationConnector Association="Smartpool.DatapH" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
