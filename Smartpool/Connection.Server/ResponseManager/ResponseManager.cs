@@ -60,7 +60,7 @@ namespace Smartpool.Connection.Server
                     default:
                         return new GeneralResponseMsg(false, false)
                         {
-                            MessageInfo = "An error happened.\nThe server did not recognize your request"
+                            MessageInfo = "The server did not recognize your request"
                         };
                 }
             }
@@ -69,33 +69,23 @@ namespace Smartpool.Connection.Server
                 Console.Write(e.ToString());
                 if (e.InnerException is SqlException)
                 {
-                    return new GeneralResponseMsg(false, false) {MessageInfo = "An error happened. Please contact helpdesk: CodeDbError40"};
+                    return new GeneralResponseMsg(false, false) {MessageInfo = "Please contact helpdesk: CodeDbError40"};
                 }
-                
-                return new GeneralResponseMsg(false, false)
-                {
-                    MessageInfo =
-                        "An unknown error happened.\nPlease check internet connection and braincells for tissue damage"
-                };
+                return new GeneralResponseMsg(false, false) {MessageInfo = "Please check internet connection and braincells for tissue damage"};
             }
         }
 
-        private LoginResponseMsg HandleLoginRequest(LoginRequestMsg loginMessage)
+        private LoginResponseMsg HandleLoginRequest(LoginRequestMsg loginMsg)
         {
             try
             {
-                var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username,
-                    loginMessage.Password));
-                if (task.Wait(TimeSpan.FromSeconds(15)))
-                    return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result)
-                    {
-                        MessageInfo = "Username or password was incorrect"
-                    };
+                var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMsg.Username, loginMsg.Password));
+                if (task.Wait(TimeSpan.FromSeconds(15))) //if task is completed within time limit
+                {
+                    return task.Result ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMsg.Username), true) : new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect"};
+                }
                 else
-                    return new LoginResponseMsg("", false)
-                    {
-                        MessageInfo = "Login timed out. Please try again later"
-                    };
+                    return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
             }
             catch (Exception e)
             {
@@ -107,7 +97,7 @@ namespace Smartpool.Connection.Server
                 Console.Write(e.ToString());
                 return new LoginResponseMsg("", false)
                 {
-                    MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
+                    MessageInfo = "Failed to login.\nPlease try again or contact helpdesk"
                 };
             }
         }
