@@ -37,7 +37,7 @@ namespace Smartpool.DataAccess
             {
                 // find pool to add mesurements for
                 var poolsearch = from pools in db.PoolSet
-                                 where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).Id && pools.Name == poolName
+                                 where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).UserId && pools.Name == poolName
                                  select pools;
 
                 // check for errors in poolsearch
@@ -45,7 +45,7 @@ namespace Smartpool.DataAccess
                 if (poolsearch.Any() == false) return false;
 
                 // create 'Data' entity to store measurements in
-                var newData = new Data() {PoolId = poolsearch.First().Id/*, Timestamp = int.Parse(DateTime.Now)*/ };
+                var newData = new Data() {PoolId = poolsearch.First().Id, Timestamp = DateTime.Now.ToString("u") };
 
                 // create measurements
                 var newChlorine = new Chlorine() { DataId = poolsearch.First().Id, Value = chlorine };
