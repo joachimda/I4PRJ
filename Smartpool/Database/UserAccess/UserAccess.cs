@@ -74,7 +74,7 @@ namespace Smartpool
         /// If the user could not be found, the return will be null.</returns>
         public User FindUserByEmail(string email)
         {
-            List<User> listOfFoundUsers = new List<User>();
+            User foundUser;
 
             using (var db = new DatabaseContext())
             {
@@ -82,15 +82,13 @@ namespace Smartpool
                                     where search.Email.Equals(email)
                                     select search;
 
-                foreach (User user in searchByEmail)
-                {
-                    listOfFoundUsers.Add(user);
-                }
+                if (searchByEmail.Count() > 1) throw new MultipleOccourencesOfEmailWasFoundException();
+                if (searchByEmail.Count() == 0) throw new UserNotFoundException();
+
+                foundUser = searchByEmail.First();
             }
 
-            if (listOfFoundUsers.Count > 1) throw new MultipleOccourencesOfEmailWasFoundException();
-            if (listOfFoundUsers.Count == 0) throw new UserNotFoundException();
-            return listOfFoundUsers[0];
+            return foundUser;
         }
 
         /// <summary>
