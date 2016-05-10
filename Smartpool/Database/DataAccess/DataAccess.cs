@@ -37,7 +37,7 @@ namespace Smartpool.DataAccess
             {
                 // find pool to add mesurements for
                 var poolsearch = from pools in db.PoolSet
-                                 where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).Id && pools.Name == poolName
+                                 where pools.UserId == PoolAccess.FindSpecificPool(ownerEmail, poolName).UserId && pools.Name == poolName
                                  select pools;
 
                 // check for errors in poolsearch
