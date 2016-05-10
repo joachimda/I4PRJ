@@ -13,11 +13,11 @@ namespace Database.Test
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
 
             IWriteDataAccess dataAccess = new DataAccess();
-            //dataAccess.PoolAccess = SmartPoolDB.PoolAccess;
+            dataAccess.PoolAccess = SmartPoolDB.PoolAccess;
             //dataAccess.DeleteAllData();
 
             //SmartPoolDB.ClearEntireDatabase();
-            
+
             //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
             //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 

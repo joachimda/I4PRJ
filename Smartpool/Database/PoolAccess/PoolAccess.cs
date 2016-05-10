@@ -73,7 +73,7 @@ namespace Smartpool
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine(e);
+                        Console.WriteLine("Herro pree, u got errors: " + e);
                     }
                 }
             }
