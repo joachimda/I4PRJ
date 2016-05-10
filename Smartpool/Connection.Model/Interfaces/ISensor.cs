@@ -5,7 +5,7 @@ namespace Smartpool.Connection.Model
     public interface ISensor
     {
         SensorTypes SensorType { get; }
-        List<double> SensorValuesList();
+        List<double> SensorValueList { get; }
         void GetNextSensorValue();
         void SaveValueToDatabase();
     }

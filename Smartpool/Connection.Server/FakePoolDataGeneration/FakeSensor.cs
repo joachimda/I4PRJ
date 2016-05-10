@@ -9,21 +9,24 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
     {
         private readonly Random _random = new Random();
         public SensorTypes SensorType { get; set; }
-        private Queue<double> SensorValueHistory { get; set; }
+
+        public List<double> SensorValueList => SensorValueQueue.ToList();
+
+        private Queue<double> SensorValueQueue { get; set; }
         private double _lastSensorValueEntry;
         private readonly int _maxHistory;
 
         public FakeSensor(int sensorType = -1, int maxHistory = 30)
         {
             _maxHistory = maxHistory;
-            SensorValueHistory = new Queue<double>();
+            SensorValueQueue = new Queue<double>();
             if (sensorType == -1)
                 SensorType = (SensorTypes)_random.Next(0, Enum.GetNames(typeof(SensorTypes)).Length);
             else
             {
                 SensorType = (SensorTypes) sensorType;
             }
-            SensorValueHistory.Enqueue(GetRandomSensorValue());
+            SensorValueQueue.Enqueue(GetRandomSensorValue());
         }
         private double GetRandomSensorValue()
         {
@@ -45,12 +48,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
                     throw new ArgumentOutOfRangeException();
             }
         }
-
-        public List<double> SensorValuesList()
-        {
-            return SensorValueHistory.ToList();
-        }
-
+       
         public void GetNextSensorValue()
         {
             switch (SensorType)
@@ -78,10 +76,10 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 
         private void AddNewSensorValue(double nextValue)
         {
-            if (!(SensorValueHistory.Count < _maxHistory))
-                SensorValueHistory.Dequeue();
+            if (!(SensorValueQueue.Count < _maxHistory))
+                SensorValueQueue.Dequeue();
 
-            SensorValueHistory.Enqueue(nextValue);
+            SensorValueQueue.Enqueue(nextValue);
             _lastSensorValueEntry = nextValue;
         }
 
