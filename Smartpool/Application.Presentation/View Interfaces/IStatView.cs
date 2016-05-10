@@ -9,7 +9,7 @@
 
 using System;
 using System.Collections.Generic;
-using Smartpool.Application.Model;
+using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
