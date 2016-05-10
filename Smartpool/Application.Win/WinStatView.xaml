@@ -20,21 +20,11 @@
 
         <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
                       Height="20" >
-            <ComboBoxItem Content="Sommerhus pool" />
-            <ComboBoxItem Content="Den sjove pool" />
-            <ComboBoxItem Content="Coffee" />
-            <ComboBoxItem Content="Tea" />
-            <ComboBoxItem Content="Orange Juice" />
-            <ComboBoxItem Content="Milk" Foreground="{StaticResource SpRed}"/>
-            <ComboBoxItem Content="Iced Tea" />
-            <ComboBoxItem Content="Mango Shake" />
         </ComboBox>
 
         <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />
         <local:StatViewer Grid.Row="2" x:Name="PhStatViewer" Content="pH" Template="{StaticResource StatViewer}"/>
         <local:StatViewer Grid.Row="3" x:Name="ChlorineStatViewer" Content="Chlorine" Template="{StaticResource StatViewer}"/>
         <local:StatViewer Grid.Row="4" x:Name="HumidityStatViewer" Content="Humidity" Template="{StaticResource StatViewer}"/>
-
-        
     </Grid>
 </Window>
