@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using System.Threading;
 using Smartpool;
+using Smartpool.DataAccess;
 
 namespace Database.Test
 {
@@ -11,8 +12,13 @@ namespace Database.Test
         {
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
             SmartPoolDB.ClearEntireDatabase();
-            
 
+            IWriteDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+
+            SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
+            SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
+
+            dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
         }
     }
     /*****************************Don't touch diz!*******************************/
