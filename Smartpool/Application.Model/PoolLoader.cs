@@ -41,6 +41,14 @@ namespace Smartpool.Application.Model
             return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
         }
 
+        public List<Tuple<SensorTypes, double>> GetHistoricDataFromPool(IClientMessenger clientMessenger, int numberOfDays)
+        {
+            // Send request to server
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, numberOfDays);
+            var response = (GetPoolDataResponseMsg)clientMessenger.SendMessage(request);
+            return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
+        }
+
         public int IndexForPoolName(string name)
         {
             // Searches for the name among the pools and returns the index
