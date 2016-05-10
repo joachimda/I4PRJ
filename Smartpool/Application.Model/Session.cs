@@ -31,6 +31,7 @@ namespace Smartpool.Application.Model
         {
             // Private constructer - Use SharedSession to create a static instance
             SelectedPoolIndex = 0;
+            Pools = new List<Tuple<string, bool>>();
         }
     }
 }
