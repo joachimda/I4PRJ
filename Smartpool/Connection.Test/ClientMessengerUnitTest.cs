@@ -5,7 +5,7 @@ using Smartpool.Connection.Model;
 namespace Connection.Test
 {
     [TestFixture]
-    public class ClientMessagerUnitTest
+    public class ClientMessengerUnitTest
     {
         private ClientMessenger _uut;
         private IClientResponseManager _clientResponseManager;

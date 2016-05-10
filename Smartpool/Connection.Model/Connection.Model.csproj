@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="ClientMessenger.cs" />
     <Compile Include="ClientResponseManager.cs" />
+    <Compile Include="FakeSensorEnum.cs" />
     <Compile Include="Interfaces\IClient.cs" />
     <Compile Include="Interfaces\IClientMessenger.cs" />
     <Compile Include="Interfaces\IClientResponseManager.cs" />

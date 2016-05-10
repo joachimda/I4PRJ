@@ -1,6 +1,6 @@
-﻿namespace Smartpool.Connection.Server.FakePoolDataGeneration
+﻿namespace Smartpool.Connection.Model
 {
-    internal enum FakeSensorEnum
+    public enum FakeSensorEnum
     {
         Temperature = 0, // Leisure waters	28ºC to 30ºC http://pwtag.org/technicalnotes/pool-temperatures/
         Chlorine = 1, // 0.5-1.5 ppm (mg/l) http://www.pahlen.com/users-guide/ph-and-chlorine
