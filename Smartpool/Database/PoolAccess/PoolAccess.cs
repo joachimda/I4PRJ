@@ -59,6 +59,9 @@ namespace Smartpool
                                     where pool.Name == name
                                     select pool;
 
+                // check for errors in searchPoolSet
+                if (searchPoolSet.Any() == false) return true;
+
                 foreach (Pool pool in searchPoolSet)
                 {
                     try
