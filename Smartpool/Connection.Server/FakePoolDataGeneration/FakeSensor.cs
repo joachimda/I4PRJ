@@ -9,9 +9,14 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         public SensorTypes SensorType { get; set; }
         public double SensorValue { get; set; }
 
-        public FakeSensor()
+        public FakeSensor(int sensorType = -1)
         {
-            SensorType = (SensorTypes)_random.Next(0, Enum.GetNames(typeof(SensorTypes)).Length);
+            if (sensorType == -1)
+                SensorType = (SensorTypes)_random.Next(0, Enum.GetNames(typeof(SensorTypes)).Length);
+            else
+            {
+                SensorType = (SensorTypes) sensorType;
+            }
             SensorValue = GetRandomSensorValue();
         }
         private double GetRandomSensorValue()
@@ -62,6 +67,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 
         public void SaveValueToDatabase()
         {
+            //Not implemented
             Console.WriteLine(DateTime.Now + " - Sensor of type: " + SensorType + " recorded a value of: " + SensorValue);
         }
     }
