@@ -28,7 +28,6 @@ namespace Smartpool.Application.Presentation
         {
             // Load pools from server
             _loader.ReloadPools(_clientMessenger);
-            _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
             if (!_loader.PoolsAreAvailable())
@@ -37,6 +36,7 @@ namespace Smartpool.Application.Presentation
             }
             else
             {
+                _view.SetAvailablePools(_session.Pools);
                 LoadSensorData();
             }
         }
