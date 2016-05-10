@@ -1,4 +1,6 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
+using System.Threading;
 using Smartpool;
 
 namespace Database.Test
@@ -12,6 +14,13 @@ namespace Database.Test
 
             //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
             //SmartPoolDB.UserAccess.EditUserPassword("email@hensen.dk", "såfedt");
+
+            while (true)
+            {
+                Console.WriteLine(DateTime.Now.ToString(""));
+
+                Thread.Sleep(1000);
+            }
 
             ////SmartPoolDB.UserAccess.EditUserEmail("email@hensen.dk", "contact@hensen.dk");
             //SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");

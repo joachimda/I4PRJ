@@ -45,13 +45,20 @@ namespace Smartpool.DataAccess
                 if (poolsearch.Any() == false) return false;
 
                 // create 'Data' entity to store measurements in
-                var newData = new Data() {PoolId = poolsearch.First().Id, Timestamp = DateTime.Now.ToString("u") };
+                string time = DateTime.UtcNow.ToString();
+                var newData = new Data() { PoolId = poolsearch.First().Id, Timestamp = time };
+                db.SaveChanges();   // the newdata must be saved to db, so that mesurement can find it by PK
+
+                // get latest dataset from db
+                var datasearch = from data in db.DataSet
+                                 where data.Timestamp == time
+                                 select data;
 
                 // create measurements
-                var newChlorine = new Chlorine() { DataId = poolsearch.First().Id, Value = chlorine };
-                var newTemperature = new Temperature() { DataId = poolsearch.First().Id, Value = temp };
-                var newPH = new pH() { DataId = poolsearch.First().Id, Value = pH };
-                var newHumidity = new Humidity() { DataId = poolsearch.First().Id, Value = humidity };
+                var newChlorine = new Chlorine() { DataId = datasearch.First().Id, Value = chlorine };
+                var newTemperature = new Temperature() { DataId = datasearch.First().Id, Value = temp };
+                var newPH = new pH() { DataId = datasearch.First().Id, Value = pH };
+                var newHumidity = new Humidity() { DataId = datasearch.First().Id, Value = humidity };
 
                 // add mesurements to db
                 db.ChlorineSet.Add(newChlorine);
@@ -122,10 +129,10 @@ namespace Smartpool.DataAccess
 
                 foreach (var dataEntity in chlorineDataQuery)
                 {
-                    if (dataEntity.Data.Timestamp > queryStartHour)
-                    {
-                        chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
-                    }
+                    //if (dataEntity.Data.Timestamp > queryStartHour)
+                    //{
+                    //    chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                    //}
                 }
                 #endregion
 
@@ -166,10 +173,10 @@ namespace Smartpool.DataAccess
 
                 foreach (var dataEntity in temperatureDataQuery)
                 {
-                    if (dataEntity.Data.Timestamp > queryStartHour)
-                    {
-                        temperatureTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
-                    }
+                    //if (dataEntity.Data.Timestamp > queryStartHour)
+                    //{
+                    //    temperatureTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                    //}
                 }
                 #endregion
 
