@@ -36,7 +36,7 @@ namespace Smartpool.Application.Model
         public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
         {
             // Send request to server
-            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString);
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1);
             var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
             return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
         }
@@ -44,7 +44,7 @@ namespace Smartpool.Application.Model
         public List<Tuple<SensorTypes, double>> GetHistoricDataFromPool(IClientMessenger clientMessenger, int numberOfDays)
         {
             // Send request to server
-            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, numberOfDays);
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1, numberOfDays);
             var response = (GetPoolDataResponseMsg)clientMessenger.SendMessage(request);
             return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
         }
