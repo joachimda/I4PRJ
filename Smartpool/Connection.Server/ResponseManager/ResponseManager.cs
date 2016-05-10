@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
@@ -11,7 +12,7 @@ namespace Smartpool.Connection.Server
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly ITokenMsgResponse _tokenMsgResponse;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        
+
         public ResponseManager(ISmartpoolDB smartpoolDb)
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
@@ -53,7 +54,7 @@ namespace Smartpool.Connection.Server
                     case MessageTypes.ResetPasswordRequest:
                         var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
                         return new GeneralResponseMsg(false, false);
-                            //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+                    //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
 
                     default:
                         return new GeneralResponseMsg(false, false)
@@ -62,9 +63,14 @@ namespace Smartpool.Connection.Server
                         };
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Console.Write(exception.ToString());
+                Console.Write(e.ToString());
+                if (e.InnerException is SqlException)
+                {
+                    return new GeneralResponseMsg(false, false) {MessageInfo = "An error happened. Please contact helpdesk: CodeDbError40"};
+                }
+                
                 return new GeneralResponseMsg(false, false)
                 {
                     MessageInfo =
@@ -79,7 +85,7 @@ namespace Smartpool.Connection.Server
             {
                 var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username,
                     loginMessage.Password));
-                if (task.Wait(TimeSpan.FromSeconds(3)))
+                if (task.Wait(TimeSpan.FromSeconds(5)))
                     return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result)
                     {
                         MessageInfo = "Username or password was incorrect"
@@ -90,14 +96,18 @@ namespace Smartpool.Connection.Server
                         MessageInfo = "Login timed out. Please try again later"
                     };
             }
-            catch (UserNotFoundException)
+            catch (Exception e)
             {
-                return new LoginResponseMsg("", false) {MessageInfo = "User not found. Please try again"};
-            }
-            catch (Exception loginErrorException)
-            {
-                Console.Write(loginErrorException.ToString());
-                return new LoginResponseMsg("", false) { MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk" };
+                if (e.InnerException is UserNotFoundException)
+                {
+                    return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
+                }
+
+                Console.Write(e.ToString());
+                return new LoginResponseMsg("", false)
+                {
+                    MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk"
+                };
             }
         }
     }

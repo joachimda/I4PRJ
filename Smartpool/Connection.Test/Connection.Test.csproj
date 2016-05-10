@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClientMessagerUnitTest.cs" />
+    <Compile Include="ClientMessengerUnitTest.cs" />
     <Compile Include="ClientResponseManagerUnitTest.cs" />
     <Compile Include="ConnectionIntegrationTest.cs" />
     <Compile Include="ResponseManagerUnitTest.cs" />

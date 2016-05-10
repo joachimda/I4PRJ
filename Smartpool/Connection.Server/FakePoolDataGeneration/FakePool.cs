@@ -21,11 +21,17 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 
         private void GenerateSensors()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                _fakeSensors.Add(new FakeSensor(i));
+            }
+            /*random sensors
             for (int i = 0; i < _amountOfSensors; i++)
             {
                 _fakeSensors.Add(new FakeSensor());
                 System.Threading.Thread.Sleep(20);
             }
+            */
         }
 
         private void SaveSensorValue(object sender, ElapsedEventArgs e)

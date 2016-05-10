@@ -61,7 +61,7 @@ namespace Smartpool.Application.Presentation
         private void LoadSensorData()
         {
             // Loads current sensor data into the view
-            _view.DisplaySensorData(_loader.GetSensorDataFromCurrentPool(_clientMessenger));
+            _view.DisplaySensorData(_loader.GetCurrentDataFromPool(_clientMessenger));
         }
     }
 }
