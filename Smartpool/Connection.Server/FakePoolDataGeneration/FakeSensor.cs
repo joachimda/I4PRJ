@@ -26,7 +26,8 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             {
                 SensorType = (SensorTypes) sensorType;
             }
-            SensorValueQueue.Enqueue(GetRandomSensorValue());
+            _lastSensorValueEntry = GetRandomSensorValue();
+            SensorValueQueue.Enqueue(_lastSensorValueEntry);
         }
         private double GetRandomSensorValue()
         {
@@ -54,19 +55,19 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             switch (SensorType)
             {
                 case SensorTypes.Temperature:
-                    AddNewSensorValue(_random.Next(-2, 3));
+                    AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3));
                     break;
 
                 case SensorTypes.Chlorine:
-                    AddNewSensorValue(_random.Next(-2, 3) * 0.1);
+                    AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
                     break;
 
                 case SensorTypes.Ph:
-                    AddNewSensorValue(_random.Next(-2, 3) * 0.1);
+                    AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
                     break;
 
                 case SensorTypes.Humidity:
-                    AddNewSensorValue(_random.Next(-2, 3));
+                    AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3));
                     break;
 
                 default:
