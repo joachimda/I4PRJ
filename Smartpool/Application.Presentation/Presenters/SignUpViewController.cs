@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Updated to use user validator
 //========================================================================
 
 using System;
@@ -17,7 +18,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager; // temporary, needs a real IClient
+        private readonly IClientMessenger _clientMessenger; // temporary, needs a real IClient
         private readonly ISignUpView _view;
         public UserValidator User = new UserValidator();
 
@@ -34,10 +35,10 @@ namespace Smartpool.Application.Presentation
             _view.SetButtonEnabled(false);
         }
 
-        public SignUpViewController(ISignUpView view, IClientMessager clientMessager = null)
+        public SignUpViewController(ISignUpView view, IClientMessenger clientMessenger = null)
         {
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
@@ -86,7 +87,7 @@ namespace Smartpool.Application.Presentation
         {
             // Send message to client
             var signUpRequest = new AddUserRequestMsg(User.Name, User.Email, User.Passwords[0]);
-            var response = _clientMessager.SendMessage(signUpRequest);
+            var response = _clientMessenger.SendMessage(signUpRequest);
             var generalResponse = (GeneralResponseMsg) response;
 
             if (generalResponse.RequestExecutedSuccesfully)

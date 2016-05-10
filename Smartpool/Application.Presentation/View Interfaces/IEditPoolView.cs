@@ -4,21 +4,23 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Moved alert and pool displaying into seperate interface
 //========================================================================
 
 // ReSharper disable once CheckNamespace
-
-using System;
-using System.Collections.Generic;
-
 namespace Smartpool.Application.Presentation
 {
-    public interface IEditPoolView : IView
+    public interface IEditPoolView : IView, IPoolDisplaying, IAlertDisplaying
     {
         /// <summary>
-        /// Clears the text of the volume text field
+        /// Sets the text of the name text field
         /// </summary>
-        void ClearVolumeText();
+        void SetNameText(string text);
+
+        /// <summary>
+        /// Sets the text of the volume text field
+        /// </summary>
+        void SetVolumeText(string text);
 
         /// <summary>
         /// Clears the text of all the dimension text fields
@@ -31,14 +33,9 @@ namespace Smartpool.Application.Presentation
         void SetSaveButtonEnabled(bool enabled);
 
         /// <summary>
-        /// Sets the list of available pools (tuples with name and notification status)
+        /// Sets the state of the delete button (delete pool)
         /// </summary>
-        void SetAvailablePools(List<Tuple<string, bool>> pools);
-
-        /// <summary>
-        /// Displays a message or alert on the view
-        /// </summary>
-        void DisplayAlert(string title, string content);
+        void SetDeleteButtonEnabled(bool enabled);
 
         /// <summary>
         /// Tells the view that a the changes have been saved successfully

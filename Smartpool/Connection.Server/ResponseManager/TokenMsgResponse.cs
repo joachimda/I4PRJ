@@ -63,7 +63,10 @@ namespace Smartpool.Connection.Server
                         var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
-                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors());  
+                    var sensorvalues = _fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
+
+                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList());
+                    //return response.SensorList.Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:

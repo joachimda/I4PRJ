@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Updated to use pool validator
 //========================================================================
 
 using Smartpool.Application.Model;
@@ -16,7 +17,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager;
+        private readonly IClientMessenger _clientMessenger;
         private readonly IAddPoolView _view;
         private string[] _dimensions = {"", "", ""};
         public PoolValidator Pool = new PoolValidator();
@@ -28,11 +29,11 @@ namespace Smartpool.Application.Presentation
             _view.SetAddPoolButtonEnabled(false);
         }
 
-        public AddPoolViewController(IAddPoolView view, IClientMessager clientMessager = null)
+        public AddPoolViewController(IAddPoolView view, IClientMessenger clientMessenger = null)
         {
             // Stored injected dependencies
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
@@ -44,16 +45,16 @@ namespace Smartpool.Application.Presentation
             var userName = Session.SharedSession.UserName;
             var tokenString = Session.SharedSession.TokenString;
 
-            // NOTE: MISSING SERIALNUMBER?
-            var addPoolMessage = new AddPoolRequestMsg(userName, tokenString, Pool.Name, Pool.Volume);
-            var response = _clientMessager.SendMessage(addPoolMessage);
+            // Send add pool request to server
+            var addPoolMessage = new AddPoolRequestMsg(userName, tokenString, Pool.Name, Pool.Volume, Pool.SerialNumber);
+            var response = _clientMessenger.SendMessage(addPoolMessage);
             var addPoolResponse = (GeneralResponseMsg) response;
 
             // Act on response
             if (addPoolResponse.RequestExecutedSuccesfully)
             {
                 var loader = new PoolLoader();
-                loader.ReloadPools(_clientMessager);
+                loader.ReloadPools(_clientMessenger);
                 _view.PoolAdded();
             } else if (addPoolResponse.TokenStillActive == false)
             {

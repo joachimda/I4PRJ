@@ -22,7 +22,7 @@ namespace Application.Win
             ThemeProperties.SetPlaceholderText(RepeatPasswordTextBox, "Repeat password");
 
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
-            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
+            var clientMessager = new ClientMessenger(new SynchronousSocketClient(Ip));
             Controller = new SignUpViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
