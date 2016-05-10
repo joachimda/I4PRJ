@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
-using NUnit.Framework.Constraints;
 
 namespace Smartpool
 {
@@ -63,9 +61,16 @@ namespace Smartpool
 
                 foreach (Pool pool in searchPoolSet)
                 {
-                    if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
+                    try
                     {
-                        return false;
+                        if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
+                        {
+                            return false;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
                     }
                 }
             }

@@ -5,16 +5,16 @@ namespace Smartpool.DataAccess
 {
     public interface IWriteDataAccess
     {
-        bool AddData(string ownerEmail, string poolName);
+        IPoolAccess PoolAccess { get; set; }
+        bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity);
         bool RemoveData(string ownerEmail, string poolName);
         bool DeleteAllData();
-        bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue);
-        bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue);
     }
 
     public interface IReadDataAccess
     {
-        Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns);
-        Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns);
+        IPoolAccess PoolAccess { get; set; }
+        List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour);
+        List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour);
     }
 }

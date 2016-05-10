@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using Microsoft.SqlServer.Server;
 
 namespace Smartpool
 {
@@ -75,7 +72,7 @@ namespace Smartpool
         /// <param name="email"></param>
         /// <returns>Returns reference to type of User class. 
         /// If the user could not be found, the return will be null.</returns>
-        public User     FindUserByEmail(string email)
+        public User FindUserByEmail(string email)
         {
             List<User> listOfFoundUsers = new List<User>();
 
@@ -91,16 +88,8 @@ namespace Smartpool
                 }
             }
 
-            if (listOfFoundUsers.Count > 1)
-            {
-                throw new MultipleOccourencesOfEmailWasFoundException();
-            }
-            if (listOfFoundUsers.Count == 0)
-            {
-                throw new UserNotFoundException();
-                //return null;
-            }
-
+            if (listOfFoundUsers.Count > 1) throw new MultipleOccourencesOfEmailWasFoundException();
+            if (listOfFoundUsers.Count == 0) throw new UserNotFoundException();
             return listOfFoundUsers[0];
         }
 
@@ -143,7 +132,16 @@ namespace Smartpool
         /// False otherwise.</returns>
         public bool ValidatePassword(string email, string password)
         {
-            User user = FindUserByEmail(email);
+            User user;
+            try
+            {
+                user = FindUserByEmail(email);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
 
             if (user == null)
             {

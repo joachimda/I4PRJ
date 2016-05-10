@@ -8,17 +8,16 @@
         <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="2.625" PointY="0.5" />
         <AssociationConnector Association="Smartpool.UserPool" />
-        <EntityTypeShape EntityType="Smartpool.Data" Width="1.5" PointX="6.5" PointY="0.5" />
-        <AssociationConnector Association="Smartpool.PoolData" />
         <EntityTypeShape EntityType="Smartpool.pH" Width="1.5" PointX="5.375" PointY="3.625" />
         <EntityTypeShape EntityType="Smartpool.Chlorine" Width="1.5" PointX="3.375" PointY="3.625" />
         <EntityTypeShape EntityType="Smartpool.Temperature" Width="1.5" PointX="7.5" PointY="3.625" />
         <EntityTypeShape EntityType="Smartpool.Humidity" Width="1.5" PointX="9.625" PointY="3.625" />
-        <AssociationConnector Association="Smartpool.DataChlorine" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="Smartpool.DatapH" ></AssociationConnector>
-        <AssociationConnector Association="Smartpool.DataTemperature" />
+        <EntityTypeShape EntityType="Smartpool.Data" Width="1.5" PointX="6.125" PointY="0.5" />
+        <AssociationConnector Association="Smartpool.PoolData" />
+        <AssociationConnector Association="Smartpool.DataChlorine" />
         <AssociationConnector Association="Smartpool.DataHumidity" />
+        <AssociationConnector Association="Smartpool.DatapH" />
+        <AssociationConnector Association="Smartpool.DataTemperature" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

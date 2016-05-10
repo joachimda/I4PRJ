@@ -18,22 +18,23 @@ namespace Smartpool
         public Data()
         {
             this.Chlorine = new HashSet<Chlorine>();
+            this.Humidity = new HashSet<Humidity>();
             this.pH = new HashSet<pH>();
             this.Temperature = new HashSet<Temperature>();
-            this.Humidity = new HashSet<Humidity>();
         }
     
         public int Id { get; set; }
-        public System.TimeSpan Timestamp { get; set; }
+        public long Timestamp { get; set; }
+        public int PoolId { get; set; }
     
         public virtual Pool Pool { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chlorine> Chlorine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Humidity> Humidity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pH> pH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Temperature> Temperature { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Humidity> Humidity { get; set; }
     }
 }
