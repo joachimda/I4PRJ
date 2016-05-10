@@ -1,10 +1,9 @@
 ﻿//========================================================================
-// FILENAME :   IStatView.cs
-// DESCR.   :   Interface for stat views
+// FILENAME :   IHistoryView.cs
+// DESCR.   :   Interface for history views
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 0.1  LP      Initial version, missing implementation
-// 1.0  LP      Added methods for displaying data
+// 1.0  LP      Initial version
 //========================================================================
 
 using System;
@@ -14,11 +13,11 @@ using Smartpool.Connection.Model;
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-	public interface IStatView : IView, IPoolDisplaying, IAlertDisplaying
-	{
+    public interface IHistoryView : IView, IPoolDisplaying, IAlertDisplaying
+    {
         /// <summary>
-        /// Should display the list of sensor types and their associated values
+        /// Should display the list of sensor types and a list of their associated values
         /// </summary>
-        void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData);
+        void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData);
     }
 }

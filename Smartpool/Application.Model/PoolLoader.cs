@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
@@ -32,20 +33,20 @@ namespace Smartpool.Application.Model
             }
         }
 
-        public List<Tuple<SensorTypes, double>> GetSensorDataFromCurrentPool(IClientMessenger clientMessenger)
+        public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
         {
             // Send request to server
-            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString);
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1);
             var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
-            var sensorData = new List<Tuple<SensorTypes, double>>();
+            return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
+        }
 
-            // MISSING, server support
-            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, 34.0));
-            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, 7.0));
-            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, 2.2));
-            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, 50.0));
-
-            return sensorData;
+        public List<Tuple<SensorTypes, double>> GetHistoricDataFromPool(IClientMessenger clientMessenger, int numberOfDays)
+        {
+            // Send request to server
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1, numberOfDays);
+            var response = (GetPoolDataResponseMsg)clientMessenger.SendMessage(request);
+            return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.SensorType, sensor.SensorValue)).ToList();
         }
 
         public int IndexForPoolName(string name)
