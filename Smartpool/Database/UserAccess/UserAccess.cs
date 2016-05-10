@@ -139,18 +139,12 @@ namespace Smartpool
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("Herro pree, u can haz exception: " + e);
                 return false;
             }
 
-            if (user == null)
-            {
-                return false;
-            }
-            if (user.Password == password)
-            {
-                return true;
-            }
+            if (user == null) return false;
+            if (user.Password == password) return true;
 
             return false;
         }
