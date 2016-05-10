@@ -85,7 +85,7 @@ namespace Smartpool.Connection.Server
             {
                 var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username,
                     loginMessage.Password));
-                if (task.Wait(TimeSpan.FromSeconds(5)))
+                if (task.Wait(TimeSpan.FromSeconds(15)))
                     return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result)
                     {
                         MessageInfo = "Username or password was incorrect"
