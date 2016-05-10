@@ -9,7 +9,7 @@ namespace Smartpool.Connection.Server
     public class TokenMsgResponse : ITokenMsgResponse
     {
         /***TEMPORARY***/
-        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,30);
+        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,10);
         private readonly Random _random = new Random();
         /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
@@ -63,11 +63,9 @@ namespace Smartpool.Connection.Server
                         var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
-                    var sensorvalues = _fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
-
-                    return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList());
-                    //return response.SensorList.Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
-
+                    else //return data for one pool only
+                        return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList());
+                    
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
                     var cpMsg = JsonConvert.DeserializeObject<ChangePasswordRequestMsg>(messageString);
