@@ -34,10 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ClientMessager.cs" />
+    <Compile Include="ClientMessenger.cs" />
     <Compile Include="ClientResponseManager.cs" />
     <Compile Include="Interfaces\IClient.cs" />
-    <Compile Include="Interfaces\IClientMessager.cs" />
+    <Compile Include="Interfaces\IClientMessenger.cs" />
     <Compile Include="Interfaces\IClientResponseManager.cs" />
     <Compile Include="Interfaces\ISensor.cs" />
     <Compile Include="Messages\ClientMessages\AddUserRequestMsg.cs" />
@@ -62,6 +62,7 @@
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\AddPoolRequestMsg.cs" />
     <Compile Include="Messages\ServerMessages\ServerMsg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SensorTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

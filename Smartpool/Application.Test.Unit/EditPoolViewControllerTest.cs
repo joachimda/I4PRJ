@@ -19,14 +19,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private AddPoolViewController _uut;
         private IAddPoolView _view;
-        private IClientMessager _clientMessager;
+        private IClientMessenger _clientMessenger;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<IAddPoolView>();
-            _clientMessager = Substitute.For<IClientMessager>();
-            _uut = new AddPoolViewController(_view, _clientMessager);
+            _clientMessenger = Substitute.For<IClientMessenger>();
+            _uut = new AddPoolViewController(_view, _clientMessenger);
             _view.Controller = _uut;
         }
 

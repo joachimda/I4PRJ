@@ -1,12 +1,14 @@
 ﻿//========================================================================
 // FILENAME :   PoolLoader.cs
-// DESCR.   :   Model for loading and parsing pool names
+// DESCR.   :   Model for loading pools into the session and parsing pool
+//              names from strings to actual pools
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
 //========================================================================
 
 using System;
+using System.Collections.Generic;
 using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
@@ -16,25 +18,50 @@ namespace Smartpool.Application.Model
     {
         private Session _session = Session.SharedSession;
 
-        public void ReloadPools(IClientMessager clientMessaget)
+        public void ReloadPools(IClientMessenger clientMessenger)
         {
+            // Send request to server
             var poolRequest = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, true);
-            var response = clientMessaget.SendMessage(poolRequest);
+            var response = clientMessenger.SendMessage(poolRequest);
             var poolResponse = response as GetPoolDataResponseMsg;
 
+            // Store pools in session
             if (poolResponse != null)
             {
                 _session.Pools = poolResponse.AllPoolNamesListTuple;
             }
         }
 
+        public List<Tuple<SensorTypes, double>> GetSensorDataFromCurrentPool(IClientMessenger clientMessenger)
+        {
+            // Send request to server
+            var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString);
+            var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
+            var sensorData = new List<Tuple<SensorTypes, double>>();
+
+            // MISSING, server support
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, 34.0));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, 7.0));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, 2.2));
+            sensorData.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, 50.0));
+
+            return sensorData;
+        }
+
         public int IndexForPoolName(string name)
         {
-            for (int i = 0; i < _session.Pools.Count; i++)
+            // Searches for the name among the pools and returns the index
+            for (var i = 0; i < _session.Pools.Count; i++)
             {
                 if (_session.Pools[i].Item1 == name) return i;
             }
             return 0;
+        }
+
+        public bool PoolsAreAvailable()
+        {
+            // Returns true if pools are loaded
+            return _session.Pools.Count > 0;
         }
     }
 }

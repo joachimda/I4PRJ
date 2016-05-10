@@ -10,7 +10,7 @@ namespace Connection.Test
     [TestFixture]
     public class ConnectionIntegrationTest
     {
-        private IClientMessager _clientMessager;
+        private IClientMessenger _clientMessenger;
         private IClient _client;
         private IpFinder _ipFinder;
         
@@ -19,14 +19,14 @@ namespace Connection.Test
         {
             _ipFinder = new IpFinder();
             _client = new SynchronousSocketClient(_ipFinder.GetLocalIPAddress());
-            _clientMessager = new ClientMessager(_client);
+            _clientMessenger = new ClientMessenger(_client);
         }
 
         // *** Server must be running on same pc with VPN active ***
         [Test]
         public void SendMessage_CorrectLoginMessage_ReturnsLoginSuccessfulIsTrue() 
         {
-            var response = (LoginResponseMsg)_clientMessager.SendMessage(new LoginRequestMsg("test", "test"));
+            var response = (LoginResponseMsg)_clientMessenger.SendMessage(new LoginRequestMsg("test", "test"));
             
             Assert.That(response.LoginSuccessful, Is.True);
         }

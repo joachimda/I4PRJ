@@ -19,14 +19,14 @@ namespace Smartpool.Application.Test.Unit
     {
         private SignUpViewController _uut;
         private ISignUpView _view;
-        private IClientMessager _clientMessager;
+        private IClientMessenger _clientMessenger;
 
         [SetUp]
         public void SetUp()
         {
             _view = Substitute.For<ISignUpView>();
-            _clientMessager = Substitute.For<IClientMessager>();
-            _uut = new SignUpViewController(_view, _clientMessager);
+            _clientMessenger = Substitute.For<IClientMessenger>();
+            _uut = new SignUpViewController(_view, _clientMessenger);
             _view.Controller = _uut;
         }
 
@@ -85,7 +85,7 @@ namespace Smartpool.Application.Test.Unit
 
         public void ButtonPressed_Called_NoExceptions()
         {
-            _clientMessager.SendMessage(new AddUserRequestMsg("", "", "")).ReturnsForAnyArgs(new GeneralResponseMsg(false, true));
+            _clientMessenger.SendMessage(new AddUserRequestMsg("", "", "")).ReturnsForAnyArgs(new GeneralResponseMsg(false, true));
             _uut.ButtonPressed();
         }
     }

@@ -1,24 +1,22 @@
 ﻿//========================================================================
-// FILENAME :   IStatView.cs
-// DESCR.   :   Interface for stat views
+// FILENAME :   IPoolDisplaying.cs
+// DESCR.   :   Interface for displayers of pool information (with tab bar)
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 0.1  LP      Initial version, missing implementation
-// 1.0  LP      Added methods for displaying data
+// 1.0  LP      Initial version
 //========================================================================
 
 using System;
 using System.Collections.Generic;
-using Smartpool.Application.Model;
 
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-	public interface IStatView : IView, IPoolDisplaying, IAlertDisplaying
-	{
+    public interface IPoolDisplaying
+    {
         /// <summary>
-        /// Should display the list of sensor types and their associated values
+        /// Sets the list of available pools (tuples with name and notification status)
         /// </summary>
-        void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData);
+        void SetAvailablePools(List<Tuple<string, bool>> pools);
     }
 }
