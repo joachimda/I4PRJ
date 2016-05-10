@@ -23,14 +23,10 @@ namespace Smartpool.Application.Model
         {
             // Send request to server
             var poolRequest = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, true);
-            var response = clientMessenger.SendMessage(poolRequest);
-            var poolResponse = response as GetPoolDataResponseMsg;
+            var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(poolRequest);
 
             // Store pools in session
-            if (poolResponse != null)
-            {
-                _session.Pools = poolResponse.AllPoolNamesListTuple;
-            }
+            _session.Pools = response.AllPoolNamesListTuple;
         }
 
         public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
