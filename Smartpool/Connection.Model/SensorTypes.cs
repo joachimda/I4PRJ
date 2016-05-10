@@ -8,7 +8,7 @@
 //========================================================================
 
 // ReSharper disable once CheckNamespace
-namespace Smartpool.Application.Model
+namespace Smartpool.Connection.Model
 {
     public enum SensorTypes
     {
