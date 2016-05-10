@@ -18,16 +18,16 @@
         </Grid.RowDefinitions>
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" />
 
-        <ComboBox Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
-                      Height="20" Foreground="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Foreground}">
+        <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
+                      Height="20" >
             <ComboBoxItem Content="Sommerhus pool" />
             <ComboBoxItem Content="Den sjove pool" />
-            <ComboBoxItem Content="Coffee"></ComboBoxItem>
-            <ComboBoxItem Content="Tea"></ComboBoxItem>
-            <ComboBoxItem Content="Orange Juice"></ComboBoxItem>
-            <ComboBoxItem Content="Milk"></ComboBoxItem>
-            <ComboBoxItem Content="Iced Tea"></ComboBoxItem>
-            <ComboBoxItem Content="Mango Shake"></ComboBoxItem>
+            <ComboBoxItem Content="Coffee" />
+            <ComboBoxItem Content="Tea" />
+            <ComboBoxItem Content="Orange Juice" />
+            <ComboBoxItem Content="Milk" Foreground="{StaticResource SpRed}"/>
+            <ComboBoxItem Content="Iced Tea" />
+            <ComboBoxItem Content="Mango Shake" />
         </ComboBox>
 
         <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />

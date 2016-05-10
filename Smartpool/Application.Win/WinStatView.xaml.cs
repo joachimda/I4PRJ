@@ -23,6 +23,7 @@ namespace Smartpool.Application.Win
         {
             InitializeComponent();
 
+            TemperatureStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0xFF, 0x58, 0x4D));
             PhStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0xFD, 0xA0, 0x29));
             ChlorineStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x49, 0xBA, 0xE1));
             HumidityStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x03, 0x54, 0xA5));
@@ -33,8 +34,8 @@ namespace Smartpool.Application.Win
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
             SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
-        }
 
+        }
 
     }
 }
