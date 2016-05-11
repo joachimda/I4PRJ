@@ -18,6 +18,7 @@ namespace Database.Test
             SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
             dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
+            Thread.Sleep(2000);
             dataAccess.CreateDataEntry("email", "baghave", 56, 3, 32, 12);
         }
     }
