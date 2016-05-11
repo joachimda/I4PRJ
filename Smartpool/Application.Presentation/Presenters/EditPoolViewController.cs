@@ -56,9 +56,10 @@ namespace Smartpool.Application.Presentation
             // Act on the response from the server
             if (response.RequestExecutedSuccesfully)
             {
-                _loader.ResetPools(_clientMessenger);
+                _loader.ReloadPools(_clientMessenger);
                 _view.PoolUpdated();
                 LoadPoolInfoIntoView();
+
             }
             else if (response.TokenStillActive == false)
             {
@@ -77,7 +78,9 @@ namespace Smartpool.Application.Presentation
             // Display a message in the view based on the response
             if (response.RequestExecutedSuccesfully)
             {
-                _view.DisplayAlert("Charizard", "The pool was removed succesfully");
+                _loader.ResetPools(_clientMessenger);
+                _view.DisplayAlert("Success!", "The pool was removed succesfully");
+                LoadPoolInfoIntoView();
             }
             else
             {
