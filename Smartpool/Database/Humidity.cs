@@ -15,8 +15,7 @@ namespace Smartpool
     public partial class Humidity
     {
         public int Id { get; set; }
-        public int DataId { get; set; }
-        public int Value { get; set; }
+        public double Value { get; set; }
     
         public virtual Data Data { get; set; }
     }

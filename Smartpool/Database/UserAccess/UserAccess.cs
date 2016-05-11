@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
-using Microsoft.SqlServer.Server;
 
 namespace Smartpool
 {
@@ -75,9 +72,9 @@ namespace Smartpool
         /// <param name="email"></param>
         /// <returns>Returns reference to type of User class. 
         /// If the user could not be found, the return will be null.</returns>
-        public User     FindUserByEmail(string email)
+        public User FindUserByEmail(string email)
         {
-            List<User> listOfFoundUsers = new List<User>();
+            User foundUser;
 
             using (var db = new DatabaseContext())
             {
@@ -85,23 +82,13 @@ namespace Smartpool
                                     where search.Email.Equals(email)
                                     select search;
 
-                foreach (User user in searchByEmail)
-                {
-                    listOfFoundUsers.Add(user);
-                }
+                if (searchByEmail.Count() > 1) throw new MultipleOccourencesOfEmailWasFoundException();
+                if (searchByEmail.Count() == 0) throw new UserNotFoundException();
+
+                foundUser = searchByEmail.First();
             }
 
-            if (listOfFoundUsers.Count > 1)
-            {
-                throw new MultipleOccourencesOfEmailWasFoundException();
-            }
-            if (listOfFoundUsers.Count == 0)
-            {
-                throw new UserNotFoundException();
-                //return null;
-            }
-
-            return listOfFoundUsers[0];
+            return foundUser;
         }
 
         /// <summary>
@@ -143,16 +130,19 @@ namespace Smartpool
         /// False otherwise.</returns>
         public bool ValidatePassword(string email, string password)
         {
-            User user = FindUserByEmail(email);
-
-            if (user == null)
+            User user;
+            try
             {
+                user = FindUserByEmail(email);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Herro pree, u can haz exception: " + e);
                 return false;
             }
-            if (user.Password == password)
-            {
-                return true;
-            }
+
+            if (user == null) return false;
+            if (user.Password == password) return true;
 
             return false;
         }

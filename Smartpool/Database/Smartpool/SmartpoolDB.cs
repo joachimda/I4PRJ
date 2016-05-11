@@ -1,14 +1,18 @@
-﻿namespace Smartpool
+﻿using Smartpool;
+
+namespace Smartpool
 {
     public class SmartpoolDB : ISmartpoolDB
     {
         public IPoolAccess PoolAccess { get; }
         public IUserAccess UserAccess { get; }
+        public IReadDataAccess DataAccess { get; set; }
 
-        public SmartpoolDB(IPoolAccess poolAccess)
+        public SmartpoolDB(IReadDataAccess dataAccess)
         {
-            PoolAccess = poolAccess;
-            UserAccess = PoolAccess.UserAccess;
+            DataAccess = dataAccess;
+            PoolAccess = dataAccess.PoolAccess;
+            UserAccess = dataAccess.PoolAccess.UserAccess;
         }
 
         public void ClearEntireDatabase()
