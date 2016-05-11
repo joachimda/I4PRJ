@@ -52,6 +52,7 @@
     <Compile Include="LoginViewControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUpViewControllerTest.cs" />
+    <Compile Include="UserValidatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
