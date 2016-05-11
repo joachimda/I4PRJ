@@ -175,8 +175,8 @@ namespace Smartpool
                 #region Query for all user-pool specific temperature data
 
                 var temperatureDataQuery = from temperature in db.TemperatureSet
-                                        where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
-                                        select temperature;
+                                           where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
+                                           select temperature;
 
                 #endregion
 
@@ -197,9 +197,7 @@ namespace Smartpool
 
                 #endregion
 
-                throw new NotImplementedException();
-
-
+                return temperatureTuples;
             }
         }
 
