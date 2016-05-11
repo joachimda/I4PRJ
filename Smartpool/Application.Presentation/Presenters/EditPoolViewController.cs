@@ -30,7 +30,6 @@ namespace Smartpool.Application.Presentation
         {
             // Load pools from server
             _loader.ReloadPools(_clientMessenger);
-            _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
             LoadPoolInfoIntoView();
@@ -138,6 +137,8 @@ namespace Smartpool.Application.Presentation
         private void LoadPoolInfoIntoView()
         {
             // Load active pool info into text fields
+            _view.SetAvailablePools(_session.Pools);
+
             if (_loader.PoolsAreAvailable())
             {
                 _pool.Name = _session.SelectedPool.Item1;
