@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Added set selected pool index method
 //========================================================================
 
 using System;
@@ -18,5 +19,10 @@ namespace Smartpool.Application.Presentation
         /// Sets the list of available pools (tuples with name and notification status)
         /// </summary>
         void SetAvailablePools(List<Tuple<string, bool>> pools);
+
+        /// <summary>
+        /// Sets the currently selected pool index
+        /// </summary>
+        void SetSelectedPoolIndex(int index);
     }
 }
