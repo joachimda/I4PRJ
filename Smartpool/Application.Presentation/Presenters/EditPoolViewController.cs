@@ -35,8 +35,11 @@ namespace Smartpool.Application.Presentation
             // Load active pool info into text fields
             if (_loader.PoolsAreAvailable())
             {
+                _pool.Name = _session.SelectedPool.Item1;
+                _pool.SerialNumber = "109"; // NOTE
                 _view.SetNameText(_session.SelectedPool.Item1);
                 _view.SetVolumeText("109"); // NOTE
+                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 _view.SetSaveButtonEnabled(true);
                 _view.SetDeleteButtonEnabled(true);
             }
