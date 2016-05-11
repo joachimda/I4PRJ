@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Client;
@@ -35,8 +36,11 @@ namespace Smartpool.Application.Win
             HumidityStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x03, 0x54, 0xA5));
 
             //Sets up the tabBars event handlers
-            //SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
-            SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
+            SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+            //SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
+
+            SpTabControl1.OnShowHistoryButtonClicked += Set_PoolComboBox_Selection;
+
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
             SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
@@ -86,6 +90,26 @@ namespace Smartpool.Application.Win
         public void DisplayAlert(string title, string content)
         {
             MessageBox.Show(content, title);
+        }
+
+        //private bool _selectionSetByControlller = false;
+
+        public void PoolComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //if (!_selectionSetByControlller)  
+            var selected = PoolComboBox.SelectedIndex;
+            if (selected != -1)
+            {
+                MessageBox.Show(selected.ToString());
+            }
+            //else _selectionSetByControlller = false;
+        }
+
+        public void Set_PoolComboBox_Selection(object sender, EventArgs e)
+        {
+            PoolComboBox.SelectedIndex = 1;
+            //_selectionSetByControlller = true;
+            MessageBox.Show("Set PoolComboBox");
         }
     }
 }
