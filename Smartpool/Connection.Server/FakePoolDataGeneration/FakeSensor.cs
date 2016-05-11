@@ -52,7 +52,13 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
                 AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3));
 
             if (SensorType == SensorTypes.Chlorine || SensorType == SensorTypes.Ph)
-                AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
+            {
+                var tempValue = _lastSensorValueEntry + _random.Next(-2, 3)*0.1;
+                if (tempValue < 0)
+                    tempValue = 0;
+                AddNewSensorValue(tempValue);
+            }
+                
         }
 
         private void AddNewSensorValue(double nextValue)
