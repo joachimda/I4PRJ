@@ -74,10 +74,10 @@ namespace Smartpool
                 if (datasearch.Any() == false) return false;
 
                 // create measurements
-                var newChlorine =       new Chlorine()      { Data = datasearch.First(), Value = chlorine };
-                var newTemperature =    new Temperature()   { Data = datasearch.First(), Value = temp };
-                var newPH =             new pH()            { Data = datasearch.First(), Value = pH};
-                var newHumidity =       new Humidity()      { Data = datasearch.First(), Value = humidity };
+                var newChlorine =       new Chlorine()      { DataId = datasearch.First().Id, Value = chlorine };
+                var newTemperature =    new Temperature()   { DataId = datasearch.First().Id, Value = temp };
+                var newPH =             new pH()            { DataId = datasearch.First().Id, Value = pH};
+                var newHumidity =       new Humidity()      { DataId = datasearch.First().Id, Value = humidity };
 
                 // add mesurements to db
                 db.ChlorineSet.Add(newChlorine);
