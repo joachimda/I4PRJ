@@ -10,12 +10,33 @@ body{
 header {
     height: 200pt;
     background-color: black;
-    padding-bottom: 2000px;
 }
 .Logo {
     height: 200px;
-    padding-bottom: 200pt;
+    
 }
+
+.input-form input{
+
+    width: 250pt;
+	height: 20pt;
+	margin: 12pt;
+	background-color: #575757;
+	border-radius:5px;
+	border-color: #1F1F1F;
+	color: #ABABAC;
+
+}
+
+.input-form input:focus {
+    background-color: #FDA029;
+    outline: none;
+}
+
+.input-form input:hover {
+	border-color: #FDA029;
+}
+
 
 .btn-login{
 	width: 250pt;
@@ -32,11 +53,11 @@ header {
     outline: none;
 }
 
-.btn:hover {
+.btn-login:hover {
 	border-color: #FDA029;
 }
 
-.btn-login[type="submit"] {
+.btn-login {
 	width: 255pt;
 	height: 25pt;
 	background-color:#ABABAC;

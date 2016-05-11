@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     <link rel="Icon" href="../../Icon.ico"/>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -25,6 +26,7 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("StatView", "StatView", "Home")</li>
+                        <li>@Html.ActionLink("Add Pool", "AddPoolView", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                     </ul>
@@ -32,7 +34,7 @@
                 </div>
             </div>
         </div>
-    <header class="Logo" height="250px" padding="200px" ><img src="../../Icon.png" style="height: 200px; padding-top: 60px; padding-bottom: 45px;" /></header>
+    <header class="Logo" height="200px" padding="150px" ><img src="../../Icon.png" style="height: 200px; padding-top: 60px; padding-bottom: 10px;" /></header>
 
 <div class="container body-content">
     @RenderBody()

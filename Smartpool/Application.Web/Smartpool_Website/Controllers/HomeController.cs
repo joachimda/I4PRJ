@@ -68,5 +68,10 @@ namespace Smartpool.Application.Web
             return View();
         }
 
+        public ActionResult AddPoolView()
+        {
+            return View();
+        }
+
     }
 }
