@@ -106,7 +106,7 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// Queries chlorine values within a given hour range: dd/MM/yyyy HH:mm
+        /// Queries chlorine values within a given time range: dd/MM/yyyy HH:mm:ss
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
@@ -117,9 +117,12 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                List<Tuple<string, double>> chlorineTuples = new List<Tuple<string, double>>();
+                #region Convert start and end times to DateTime types
+
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                #endregion
 
                 #region Query for all user-pool specific chlorine data
 
@@ -129,6 +132,8 @@ namespace Smartpool
                 #endregion
 
                 #region Check for timestamp matches and add to tuples
+
+                List<Tuple<string, double>> chlorineTuples = new List<Tuple<string, double>>();
 
                 foreach (var chlorine in chlorineDataQuery)
                 {
@@ -140,16 +145,6 @@ namespace Smartpool
                         chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
                     }
                 }
-                //foreach (var chlorine in chlorineDataQuery)
-                //{
-                //    foreach (var days in calculatedDates)
-                //    {
-                //        if (chlorine.Data.Timestamp == days)
-                //        {
-                //            chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
-                //        }
-                //    }
-                //}
 
                 #endregion
 
