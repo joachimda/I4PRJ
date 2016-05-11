@@ -278,6 +278,8 @@ namespace Smartpool
                 }
 
                 #endregion
+
+                return humidityTuples;
             }
         }
     }
