@@ -9,17 +9,16 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            //SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
-            //IWriteDataAccess dataAccess = new DataAccess();
-            //dataAccess.PoolAccess = SmartPoolDB.PoolAccess;
+            SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
+            IWriteDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+            dataAccess.DeleteAllData();
+            SmartPoolDB.ClearEntireDatabase();
 
-            ////dataAccess.DeleteAllData();
-            ////SmartPoolDB.ClearEntireDatabase();
+            SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
+            SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
-            //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
-            //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
-
-            //dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
+            dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
+            dataAccess.CreateDataEntry("email", "baghave", 56, 3, 32, 12);
         }
     }
     /*****************************Don't touch diz!*******************************/
