@@ -1,0 +1,47 @@
+﻿<Window x:Class="Smartpool.Application.Win.WinEditPoolView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Smartpool.Application.Win"
+        mc:Ignorable="d"
+        Height="300" Width="300" MinWidth="280" Background="{StaticResource SpBackgroundGray}" Foreground="{StaticResource SpWhite}" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+    <Grid UseLayoutRounding ="True" SnapsToDevicePixels="True" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*" MaxWidth="500"/>
+            <ColumnDefinition Width="172"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Grid.ColumnSpan="3"/>
+
+        <ComboBox x:Name="PoolComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
+                      Height="20" >
+            <ComboBoxItem Content="Sommerhus pool" />
+            <ComboBoxItem Content="Den sjove pool" />
+            <ComboBoxItem Content="Coffee" />
+            <ComboBoxItem Content="Tea" />
+            <ComboBoxItem Content="Orange Juice" />
+            <ComboBoxItem Content="Milk" Foreground="{StaticResource SpRed}"/>
+            <ComboBoxItem Content="Iced Tea" />
+            <ComboBoxItem Content="Mango Shake" />
+        </ComboBox>
+        
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  x:Name="NameTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <RadioButton Grid.Row="2" Grid.Column="0" x:Name="VolumeRadioButton" IsChecked="True" Margin="4,21,0,7" VerticalAlignment="Center" Checked="VolumeRadioButton_Checked" Template="{StaticResource SpRadioButton}" />
+        <TextBox Grid.Row="2" Grid.Column="0" x:Name="VolumeTextBox" HorizontalAlignment="Stretch" Margin="22,12,0,0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <RadioButton Grid.Row="2" Grid.Column="1" x:Name="PropertiesRadioButton" Margin="3,21,0,7" VerticalAlignment="Center" Checked="PropertiesRadioButton_Checked" Template="{StaticResource SpRadioButton}" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="LengthTextBox" Width="44" HorizontalAlignment="Left" Margin="21,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="WidthTextBox" Width="44" HorizontalAlignment="Left" Margin="72,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="DepthTextBox" Width="44" HorizontalAlignment="Left" Margin="124,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SerialTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EditButton" Content="Edit pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Template="{StaticResource ButtonSp}" Click="EditButton_OnClickButton_Click" />
+
+    </Grid>
+</Window>
