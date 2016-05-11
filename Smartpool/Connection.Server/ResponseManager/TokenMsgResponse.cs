@@ -64,7 +64,7 @@ namespace Smartpool.Connection.Server
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList());
+                        return new GetPoolDataResponseMsg(_fakePool.GetSensorValuesList());
                     
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
