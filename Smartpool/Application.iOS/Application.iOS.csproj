@@ -135,9 +135,9 @@
       <Project>{9C001789-1D5F-4545-AD60-50B6FB91DD96}</Project>
       <Name>Application.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Application.Model\Application.Model.csproj">
-      <Project>{AF0D91D7-2379-4B72-B739-6CB92DFCB2E4}</Project>
-      <Name>Application.Model</Name>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
+      <Name>Connection.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

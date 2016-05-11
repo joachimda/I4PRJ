@@ -7,6 +7,7 @@
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
 using UIKit;
 
@@ -69,12 +70,12 @@ namespace Application.iOS
 		public void SetButtonEnabled(bool enabled)
 		{
 			signUpButton.Enabled = enabled;
+			signUpButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 			
 		public void DisplayAlert(string title, string content)
 		{
 			// Implementation missing
-			Console.WriteLine(content);
 		}
 			
 		public void SignUpAccepted()

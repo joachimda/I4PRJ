@@ -7,6 +7,7 @@
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
 using UIKit;
 
@@ -96,6 +97,7 @@ namespace Application.iOS
 		public void SetLoginButtonEnabled(bool enabled)
 		{
 			loginButton.Enabled = enabled;
+			loginButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 
 		public void DisplayAlert(string title, string content)
