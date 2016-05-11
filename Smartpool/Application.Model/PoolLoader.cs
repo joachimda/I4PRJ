@@ -30,6 +30,12 @@ namespace Smartpool.Application.Model
             _session.Pools = response.AllPoolNamesListTuple;
         }
 
+        public void ResetPools(IClientMessenger clientMessenger)
+        {
+            ReloadPools(clientMessenger);
+            _session.SelectedPoolIndex = 0;
+        }
+
         public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
         {
             // Send request to server
