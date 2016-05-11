@@ -261,6 +261,23 @@ namespace Smartpool
                                            select humidity;
 
                 #endregion
+
+                #region Check for timestamp matches and add to tuples
+
+                List<Tuple<string, double>> humidityTuples = new List<Tuple<string, double>>();
+
+                foreach (var humidity in humidityDataQuery)
+                {
+                    if (DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    {
+                        humidityTuples.Add(new Tuple<string, double>(humidity.Data.Timestamp, humidity.Value));
+                    }
+                }
+
+                #endregion
             }
         }
     }
