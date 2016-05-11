@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Smartpool.Connection.Model;
+using Newtonsoft.Json;
 
 namespace Smartpool.Connection.Client
 {
@@ -10,6 +11,7 @@ namespace Smartpool.Connection.Client
     public class SynchronousSocketClient : IClient
     {
         private readonly string _serverIp;
+        private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public SynchronousSocketClient() { }
         public SynchronousSocketClient(string serverIp)
@@ -20,7 +22,7 @@ namespace Smartpool.Connection.Client
         public string StartClient(string whatToSend)
         {
             // Data buffer for incoming data.
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[10240];
 
             // Connect to a remote device.
             try
@@ -59,13 +61,13 @@ namespace Smartpool.Connection.Client
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Unexpected exception : {0}", e.ToString());
+                    return JsonConvert.SerializeObject(new LoginResponseMsg("", false) { MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby" }, _jsonSettings);
                 }
 
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                return JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby"}, _jsonSettings);
             }
             return "Error";
         }

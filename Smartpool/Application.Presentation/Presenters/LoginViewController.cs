@@ -94,10 +94,6 @@ namespace Smartpool.Application.Presentation
                 session.TokenString = loginResponse.TokenString;
                 session.UserName = User.Email;
 
-                // Preload the users pools
-                var loader = new PoolLoader();
-                loader.ReloadPools(_clientMessenger);
-
                 // Notify view
                 _view.LoginAccepted (); 
             }

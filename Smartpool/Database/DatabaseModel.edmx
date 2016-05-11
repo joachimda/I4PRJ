@@ -29,13 +29,13 @@
       <End Role="Data" EntitySet="DataSet" />
       <End Role="Humidity" EntitySet="HumiditySet" />
     </AssociationSet>
-    <AssociationSet Name="DatapH" Association="Smartpool.Store.DatapH">
-      <End Role="Data" EntitySet="DataSet" />
-      <End Role="pH" EntitySet="pHSet" />
-    </AssociationSet>
     <AssociationSet Name="DataTemperature" Association="Smartpool.Store.DataTemperature">
       <End Role="Data" EntitySet="DataSet" />
       <End Role="Temperature" EntitySet="TemperatureSet" />
+    </AssociationSet>
+    <AssociationSet Name="DatapH" Association="Smartpool.Store.DatapH">
+      <End Role="Data" EntitySet="DataSet" />
+      <End Role="pH" EntitySet="pHSet" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UserSet">
@@ -65,6 +65,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
+    <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ChlorineSet">
     <Key>
@@ -73,6 +74,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
+    <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TemperatureSet">
     <Key>
@@ -81,6 +83,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
+    <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="HumiditySet">
     <Key>
@@ -89,13 +92,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="DataId" Type="int" Nullable="false" />
+    <Property Name="Data_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DataSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Timestamp" Type="bigint" Nullable="false" />
+    <Property Name="Timestamp" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PoolId" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="UserPool">
@@ -130,7 +134,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Chlorine">
-        <PropertyRef Name="DataId" />
+        <PropertyRef Name="Data_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -142,19 +146,7 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Humidity">
-        <PropertyRef Name="DataId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="DatapH">
-    <End Role="Data" Type="Smartpool.Store.DataSet" Multiplicity="1" />
-    <End Role="pH" Type="Smartpool.Store.pHSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Data">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="pH">
-        <PropertyRef Name="DataId" />
+        <PropertyRef Name="Data_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -166,7 +158,19 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Temperature">
-        <PropertyRef Name="DataId" />
+        <PropertyRef Name="Data_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DatapH">
+    <End Role="Data" Type="Smartpool.Store.DataSet" Multiplicity="1" />
+    <End Role="pH" Type="Smartpool.Store.pHSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Data">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="pH">
+        <PropertyRef Name="Data_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -198,13 +202,13 @@
             <End Role="Data" EntitySet="DataSet" />
             <End Role="Humidity" EntitySet="HumiditySet" />
           </AssociationSet>
-          <AssociationSet Name="DatapH" Association="Smartpool.DatapH">
-            <End Role="Data" EntitySet="DataSet" />
-            <End Role="pH" EntitySet="pHSet" />
-          </AssociationSet>
           <AssociationSet Name="DataTemperature" Association="Smartpool.DataTemperature">
             <End Role="Data" EntitySet="DataSet" />
             <End Role="Temperature" EntitySet="TemperatureSet" />
+          </AssociationSet>
+          <AssociationSet Name="DatapH" Association="Smartpool.DatapH">
+            <End Role="Data" EntitySet="DataSet" />
+            <End Role="pH" EntitySet="pHSet" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
@@ -248,8 +252,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Data" Relationship="Smartpool.DatapH" FromRole="pH" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Smartpool.DatapH" FromRole="pH" ToRole="Data" />
         </EntityType>
         <EntityType Name="Chlorine">
           <Key>
@@ -257,8 +261,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Data" Relationship="Smartpool.DataChlorine" FromRole="Chlorine" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Smartpool.DataChlorine" FromRole="Chlorine" ToRole="Data" />
         </EntityType>
         <EntityType Name="Temperature">
           <Key>
@@ -266,8 +270,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Data" Relationship="Smartpool.DataTemperature" FromRole="Temperature" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Smartpool.DataTemperature" FromRole="Temperature" ToRole="Data" />
         </EntityType>
         <EntityType Name="Humidity">
           <Key>
@@ -275,21 +279,21 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Value" Type="Double" Nullable="false" />
-          <NavigationProperty Name="Data" Relationship="Smartpool.DataHumidity" FromRole="Humidity" ToRole="Data" />
           <Property Name="DataId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Data" Relationship="Smartpool.DataHumidity" FromRole="Humidity" ToRole="Data" />
         </EntityType>
         <EntityType Name="Data">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Timestamp" Type="Int64" Nullable="false" />
+          <Property Name="Timestamp" Type="String" Nullable="false" />
           <NavigationProperty Name="Pool" Relationship="Smartpool.PoolData" FromRole="Data" ToRole="Pool" />
           <Property Name="PoolId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chlorine" Relationship="Smartpool.DataChlorine" FromRole="Data" ToRole="Chlorine" />
           <NavigationProperty Name="Humidity" Relationship="Smartpool.DataHumidity" FromRole="Data" ToRole="Humidity" />
-          <NavigationProperty Name="pH" Relationship="Smartpool.DatapH" FromRole="Data" ToRole="pH" />
           <NavigationProperty Name="Temperature" Relationship="Smartpool.DataTemperature" FromRole="Data" ToRole="Temperature" />
+          <NavigationProperty Name="pH" Relationship="Smartpool.DatapH" FromRole="Data" ToRole="pH" />
         </EntityType>
         <Association Name="PoolData">
           <End Type="Smartpool.Pool" Role="Pool" Multiplicity="1" />
@@ -305,51 +309,19 @@
         </Association>
         <Association Name="DataChlorine">
           <End Type="Smartpool.Data" Role="Data" Multiplicity="1" />
-          <End Type="Smartpool.Chlorine" Role="Chlorine" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Chlorine">
-              <PropertyRef Name="DataId" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Type="Smartpool.Chlorine" Role="Chlorine" Multiplicity="0..1" />
         </Association>
         <Association Name="DataHumidity">
           <End Type="Smartpool.Data" Role="Data" Multiplicity="1" />
-          <End Type="Smartpool.Humidity" Role="Humidity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Humidity">
-              <PropertyRef Name="DataId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DatapH">
-          <End Type="Smartpool.Data" Role="Data" Multiplicity="1" />
-          <End Type="Smartpool.pH" Role="pH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="pH">
-              <PropertyRef Name="DataId" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Type="Smartpool.Humidity" Role="Humidity" Multiplicity="0..1" />
         </Association>
         <Association Name="DataTemperature">
           <End Type="Smartpool.Data" Role="Data" Multiplicity="1" />
-          <End Type="Smartpool.Temperature" Role="Temperature" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Data">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Temperature">
-              <PropertyRef Name="DataId" />
-            </Dependent>
-          </ReferentialConstraint>
+          <End Type="Smartpool.Temperature" Role="Temperature" Multiplicity="0..1" />
+        </Association>
+        <Association Name="DatapH">
+          <End Type="Smartpool.Data" Role="Data" Multiplicity="1" />
+          <End Type="Smartpool.pH" Role="pH" Multiplicity="0..1" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -424,6 +396,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="DataChlorine" TypeName="Smartpool.DataChlorine" StoreEntitySet="ChlorineSet">
+      <EndProperty Name="Data">
+        <ScalarProperty Name="Id" ColumnName="Data_Id" />
+      </EndProperty>
+      <EndProperty Name="Chlorine">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DataHumidity" TypeName="Smartpool.DataHumidity" StoreEntitySet="HumiditySet">
+      <EndProperty Name="Data">
+        <ScalarProperty Name="Id" ColumnName="Data_Id" />
+      </EndProperty>
+      <EndProperty Name="Humidity">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DataTemperature" TypeName="Smartpool.DataTemperature" StoreEntitySet="TemperatureSet">
+      <EndProperty Name="Data">
+        <ScalarProperty Name="Id" ColumnName="Data_Id" />
+      </EndProperty>
+      <EndProperty Name="Temperature">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DatapH" TypeName="Smartpool.DatapH" StoreEntitySet="pHSet">
+      <EndProperty Name="Data">
+        <ScalarProperty Name="Id" ColumnName="Data_Id" />
+      </EndProperty>
+      <EndProperty Name="pH">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

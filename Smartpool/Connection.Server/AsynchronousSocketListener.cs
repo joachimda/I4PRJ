@@ -136,7 +136,7 @@ namespace Smartpool.Connection.Server
                 {
                     // All the data has been read from the 
                     // client. Display it on the console.
-                    Console.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \n Data : {1}",
+                    Console.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \n Data received : {1}",
                         content.Length, content);
 
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
@@ -158,7 +158,7 @@ namespace Smartpool.Connection.Server
 
         private static void Send(Socket handler, String data)
         {
-            Console.WriteLine(data);
+            Console.WriteLine("Sent data back to client: " + data);
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 

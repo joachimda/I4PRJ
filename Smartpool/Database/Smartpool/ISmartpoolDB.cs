@@ -1,4 +1,6 @@
-﻿namespace Smartpool
+﻿using Smartpool.DataAccess;
+
+namespace Smartpool
 {
     public interface ISmartpoolDB
     {

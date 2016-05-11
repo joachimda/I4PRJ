@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
@@ -11,12 +12,13 @@ namespace Smartpool.Connection.Server
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly ITokenMsgResponse _tokenMsgResponse;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        
+
         public ResponseManager(ISmartpoolDB smartpoolDb)
         {
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
             _smartpoolDb = smartpoolDb;
             _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
+            _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
         }
 
         public ResponseManager(ITokenKeeper tokenKeeper, ITokenMsgResponse tokenMsgResponse, ISmartpoolDB smartpoolDb)
@@ -53,51 +55,50 @@ namespace Smartpool.Connection.Server
                     case MessageTypes.ResetPasswordRequest:
                         var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
                         return new GeneralResponseMsg(false, false);
-                            //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+                    //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
 
                     default:
                         return new GeneralResponseMsg(false, false)
                         {
-                            MessageInfo = "An error happened.\nThe server did not recognize your request"
+                            MessageInfo = "The server did not recognize your request"
                         };
                 }
             }
-            catch (Exception exception)
+            catch (Exception e)
             {
-                Console.Write(exception.ToString());
-                return new GeneralResponseMsg(false, false)
+                Console.Write(e.ToString());
+                if (e.InnerException is SqlException)
                 {
-                    MessageInfo =
-                        "An unknown error happened.\nPlease check internet connection and braincells for tissue damage"
-                };
+                    return new GeneralResponseMsg(false, false) {MessageInfo = "Please contact helpdesk: CodeDbError40"};
+                }
+                return new GeneralResponseMsg(false, false) {MessageInfo = "Please check internet connection and braincells for tissue damage"};
             }
         }
 
-        private LoginResponseMsg HandleLoginRequest(LoginRequestMsg loginMessage)
+        private LoginResponseMsg HandleLoginRequest(LoginRequestMsg loginMsg)
         {
             try
             {
-                var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMessage.Username,
-                    loginMessage.Password));
-                if (task.Wait(TimeSpan.FromSeconds(3)))
-                    return new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMessage.Username), task.Result)
-                    {
-                        MessageInfo = "Username or password was incorrect"
-                    };
+                var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMsg.Username, loginMsg.Password));
+                if (task.Wait(TimeSpan.FromSeconds(15))) //if task is completed within time limit
+                {
+                    return task.Result ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMsg.Username), true) : new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect"};
+                }
                 else
-                    return new LoginResponseMsg("", false)
-                    {
-                        MessageInfo = "Login timed out. Please try again later"
-                    };
+                    return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
             }
-            catch (UserNotFoundException)
+            catch (Exception e)
             {
-                return new LoginResponseMsg("", false) {MessageInfo = "User not found. Please try again"};
-            }
-            catch (Exception loginErrorException)
-            {
-                Console.Write(loginErrorException.ToString());
-                return new LoginResponseMsg("", false) { MessageInfo = "An error happened during login.\nPlease try again or contact helpdesk" };
+                if (e.InnerException is UserNotFoundException)
+                {
+                    return new LoginResponseMsg("", false) { MessageInfo = "User not found. Please try again" };
+                }
+
+                Console.Write(e.ToString());
+                return new LoginResponseMsg("", false)
+                {
+                    MessageInfo = "Failed to login.\nPlease try again or contact helpdesk"
+                };
             }
         }
     }
