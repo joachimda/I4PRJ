@@ -6,16 +6,13 @@ namespace Smartpool.Connection.Model
         LoginRequest,
         AddUserRequest,
         ResetPasswordRequest,
-
-        //Non createable client message
-        TokenMsg,
+        TokenMsg, //subcategory for all messages when a user is logged in
 
         //Server messages
         LoginResponse,
         GeneralResponse,
-        GetPoolDataResponse, //get poolinfo + latest sensor values
-        //GetAllPoolNamesResponse, //get name + alert bool -> added to getpooldata as parameter
-        //GetPoolHistoryResponse, // -> added to getpooldata as parameter
+        GetPoolDataResponse, //Get all pool names or all data from one pool
+        GetPoolInfoResponse, //Get information about a pool
     }
 
     public enum TokenSubMessageTypes
@@ -27,18 +24,14 @@ namespace Smartpool.Connection.Model
         AllowAccessToPoolDataRequest, //Takes poolname and username/email for receiver
 
         //Pool messages
-        AddPoolRequest,
-        UpdatePoolRequest,
-        RemovePoolRequest,
         AddPoolPictureRequest,
-
-        GetPoolDataRequest, //Get all data about pool + latest sensor values
-        //GetAllPoolNamesRequest, //Quick get for program startup -> added to getpooldata as parameter
-        //GetPoolHistoryRequest, // -> added to getpooldata as parameter
+        AddPoolRequest,
+        GetPoolDataRequest, //Get all pool names or all data from one pool
+        GetPoolInfoRequest, //Get information about a pool
+        RemovePoolRequest,
+        UpdatePoolRequest,
+        
         //Monitor Unit messages
-        AddMonitorUnitRequest,
-        UpdateMonitorUnitRequest,
-        RemoveMonitorUnitRequest,
         ChangeSensorTargetValueRequest, //Takes poolname and array of sensor name/number
     }
 }

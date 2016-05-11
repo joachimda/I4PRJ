@@ -45,10 +45,8 @@
     <Compile Include="Messages\ClientMessages\LoginRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\ResetPasswordRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\AddPoolPictureRequestMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\AddMonitorUnitMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\RemoveMonitorUnitRequestMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\UpdateMonitorUnitRequest.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\GetPoolDataRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\GetPoolInfoRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\UserMessages\ChangePasswordRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\UserMessages\LogoutRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\RemovePoolRequestMsg.cs" />
