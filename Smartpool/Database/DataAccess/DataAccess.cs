@@ -243,7 +243,12 @@ namespace Smartpool
 
         public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
         {
-            
+            #region Convert start and end times to DateTime types
+
+            DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+            #endregion
         }
     }
 }
