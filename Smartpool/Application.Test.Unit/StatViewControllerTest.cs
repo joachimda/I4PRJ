@@ -1,6 +1,6 @@
 ﻿//========================================================================
 // FILENAME :   StatViewControllerTest.cs
-// DESCR.   :   Unit test of StatViewControllerTest
+// DESCR.   :   Unit test of StatViewController
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
