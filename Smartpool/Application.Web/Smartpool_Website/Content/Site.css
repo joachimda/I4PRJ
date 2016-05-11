@@ -8,10 +8,13 @@ body{
 }
 
 header {
+    height: 200pt;
     background-color: black;
+    padding-bottom: 2000px;
 }
 .Logo {
-    background-color: black;height: 100px;display: block;
+    height: 200px;
+    padding-bottom: 200pt;
 }
 
 .btn-login{
