@@ -37,10 +37,7 @@ namespace Smartpool.Application.Win
 
             //Sets up the tabBars event handlers
             SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
-            //SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
-
-            SpTabControl1.OnShowHistoryButtonClicked += Set_PoolComboBox_Selection;
-
+            SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
             SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
@@ -91,25 +88,22 @@ namespace Smartpool.Application.Win
         {
             MessageBox.Show(content, title);
         }
-
-        //private bool _selectionSetByControlller = false;
-
+        
         public void PoolComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (!_selectionSetByControlller)  
+            var controller = Controller as IStatViewController;
+            
             var selected = PoolComboBox.SelectedIndex;
+
             if (selected != -1)
             {
-                MessageBox.Show(selected.ToString());
+                controller?.DidSelectPool(selected);
             }
-            //else _selectionSetByControlller = false;
         }
 
-        public void Set_PoolComboBox_Selection(object sender, EventArgs e)
+        public void SetSelectedPoolIndex(int index)
         {
-            PoolComboBox.SelectedIndex = 1;
-            //_selectionSetByControlller = true;
-            MessageBox.Show("Set PoolComboBox");
+            PoolComboBox.SelectedIndex = index;
         }
     }
 }
