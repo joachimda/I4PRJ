@@ -169,10 +169,14 @@ namespace Smartpool
 
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                
+
                 #endregion
 
-                #region Query for all user-pool specific chlorine data
+                #region Query for all user-pool specific temperature data
+
+                var chlorineDataQuery = from temperature in db.TemperatureSet
+                                        where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
+                                        select temperature;
 
                 #endregion
 
