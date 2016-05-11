@@ -174,13 +174,26 @@ namespace Smartpool
 
                 #region Query for all user-pool specific temperature data
 
-                var chlorineDataQuery = from temperature in db.TemperatureSet
+                var temperatureDataQuery = from temperature in db.TemperatureSet
                                         where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
                                         select temperature;
 
                 #endregion
 
                 #region Check for timestamp matches and add to tuples
+
+                List<Tuple<string, double>> temperatureTuples = new List<Tuple<string, double>>();
+
+                foreach (var temperature in temperatureDataQuery)
+                {
+                    if (DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    {
+                        temperatureTuples.Add(new Tuple<string, double>(temperature.Data.Timestamp, temperature.Value));
+                    }
+                }
 
                 #endregion
 
