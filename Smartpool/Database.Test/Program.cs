@@ -20,6 +20,11 @@ namespace Database.Test
             dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
             Thread.Sleep(2000);
             dataAccess.CreateDataEntry("email", "baghave", 56, 3, 32, 12);
+
+
+            dataAccess.
+
+
         }
     }
     /*****************************Don't touch diz!*******************************/
