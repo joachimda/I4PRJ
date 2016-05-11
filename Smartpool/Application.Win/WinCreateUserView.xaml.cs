@@ -6,14 +6,14 @@ using Smartpool.Application.Win;
 using Smartpool.Connection.Client;
 using Smartpool.Connection.Model;
 
-namespace Application.Win
+namespace Smartpool.Application.Win
 {
     /// <summary>
     /// Interaction logic for CreateUserView.xaml
     /// </summary>
-    public partial class CreateUserView : Window, ISignUpView
+    public partial class WinCreateUserView : Window, ISignUpView
     {
-        public CreateUserView()
+        public WinCreateUserView()
         {
             InitializeComponent();
             ThemeProperties.SetPlaceholderText(NameTextBox, "Name");
@@ -96,7 +96,6 @@ namespace Application.Win
                 controller?.DidChangePasswordText(textField?.Text, 0);
             }
             else controller?.DidChangePasswordText(textField?.Text, 1);
-
         }
     }
 }
