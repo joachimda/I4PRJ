@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using Smartpool.Connection.Model;
 
@@ -44,9 +46,9 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             }
         }
 
-        public List<ISensor> GetFakeSensors()
+        public List<Tuple<SensorTypes, List<double>>> GetSensorValuesList()
         {
-            return _fakeSensors;
+            return _fakeSensors.Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
         }
     }
 }

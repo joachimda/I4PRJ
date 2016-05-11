@@ -54,8 +54,6 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 
             if (SensorType == SensorTypes.Chlorine || SensorType == SensorTypes.Ph)
                 AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
-            
-                
         }
 
         private void AddNewSensorValue(double sensorValue)
