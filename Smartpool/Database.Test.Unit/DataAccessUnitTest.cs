@@ -163,7 +163,7 @@ namespace Database.Test.Unit
         {
             _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
             
-            Assert.That(_uut.);
+            //Assert.That(_uut.);
         }
 
         #endregion
