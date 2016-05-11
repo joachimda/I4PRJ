@@ -215,8 +215,8 @@ namespace Smartpool
                 #region Query for all user-pool specific pH data
 
                 var phDataQuery = from ph in db.pHSet
-                                           where ph.Data.Pool.Name == poolName && ph.Data.Pool.User.Email == poolOwnerEmail
-                                           select ph;
+                                  where ph.Data.Pool.Name == poolName && ph.Data.Pool.User.Email == poolOwnerEmail
+                                  select ph;
 
                 #endregion
 
@@ -243,12 +243,25 @@ namespace Smartpool
 
         public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
         {
-            #region Convert start and end times to DateTime types
+            using (var db = new DatabaseContext())
+            {
+                #region Convert start and end times to DateTime types
 
-            DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-            DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture);
 
-            #endregion
+                #endregion
+
+                #region Query for all user-pool specific humidity data
+
+                var humidityDataQuery = from humidity in db.HumiditySet
+                                           where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
+                                           select humidity;
+
+                #endregion
+            }
         }
     }
 }
