@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using NUnit.Framework;
 using Smartpool;
 
@@ -9,11 +10,12 @@ namespace Database.Test.Unit
     {
         #region Setup
 
-        private IWriteDataAccess _uut;
+        private IDataAccess _uut;
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
         string ownerEmail, poolName;
+        private int poolId;
 
         [SetUp]
         public void Setup()
@@ -27,6 +29,7 @@ namespace Database.Test.Unit
 
             _userAccess.AddUser("Sir Derp Hansen", ownerEmail, "hanpassword");
             _poolAccess.AddPool(ownerEmail, poolName, 8);
+            poolId = _poolAccess.FindSpecificPool(ownerEmail, poolName).Id;
         }
 
         [TearDown]
@@ -74,9 +77,9 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void CreateDataEntry_Adding10DataEntries_ReturnsTrue()
+        public void CreateDataEntry_Adding4DataEntries_ReturnsTrue()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
                 Thread.Sleep(1000);
@@ -84,7 +87,84 @@ namespace Database.Test.Unit
             Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
         }
 
-        // public void CreateDataEntry_AddingData_DataPresentInDatabase(){}
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SearchReveilsCount1ForDataSet()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchdata = from data in db.DataSet
+                                 where data.PoolId == poolId
+                                 select data;
+
+                Assert.That(searchdata.Count(), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SearchReveilsCount1ForChlorineSet()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchdata = from data in db.ChlorineSet
+                                 select data;
+
+                Assert.That(searchdata.Count(), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SearchReveilsCount1ForPhSet()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchdata = from data in db.pHSet
+                                 select data;
+
+                Assert.That(searchdata.Count(), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SearchReveilsCount1ForTemperatureSet()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchdata = from data in db.TemperatureSet
+                                 select data;
+
+                Assert.That(searchdata.Count(), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SearchReveilsCount1ForHumiditySet()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            using (var db = new DatabaseContext())
+            {
+                var searchdata = from data in db.HumiditySet
+                                 select data;
+
+                Assert.That(searchdata.Count(), Is.EqualTo(1));
+            }
+        }
+
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+            
+            //Assert.That(_uut.);
+        }
 
         #endregion
 

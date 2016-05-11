@@ -6,9 +6,9 @@ namespace Smartpool
     {
         public IPoolAccess PoolAccess { get; }
         public IUserAccess UserAccess { get; }
-        public IReadDataAccess DataAccess { get; set; }
+        public IDataAccess DataAccess { get; }
 
-        public SmartpoolDB(IReadDataAccess dataAccess)
+        public SmartpoolDB(IDataAccess dataAccess)
         {
             DataAccess = dataAccess;
             PoolAccess = dataAccess.PoolAccess;

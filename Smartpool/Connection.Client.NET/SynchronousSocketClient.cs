@@ -59,17 +59,16 @@ namespace Smartpool.Connection.Client
                     return stringReturned;
 
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return JsonConvert.SerializeObject(new LoginResponseMsg("", false) { MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby" }, _jsonSettings);
                 }
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby"}, _jsonSettings);
             }
-            return "Error";
         }
 
         

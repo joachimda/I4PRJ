@@ -55,7 +55,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Volume" Type="float" Nullable="true" />
+    <Property Name="Volume" Type="float" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="pHSet">
@@ -225,7 +225,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Volume" Type="Double" Nullable="true" />
+          <Property Name="Volume" Type="Double" Nullable="false" />
           <NavigationProperty Name="User" Relationship="Smartpool.UserPool" FromRole="Pool" ToRole="User" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Data" Relationship="Smartpool.PoolData" FromRole="Pool" ToRole="Data" />
