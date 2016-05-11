@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPoolViewControllerTest.cs" />
-    <Compile Include="EditPoolViewControllerTest.cs" />
+    <Compile Include="StatViewControllerTest.cs" />
     <Compile Include="LoginViewControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUpViewControllerTest.cs" />
