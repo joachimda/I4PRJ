@@ -25,10 +25,10 @@ namespace Database.Test
             }
 
 
-            List<Tuple<string, double>> chlorineTuples = dataAccess.GetChlorineValues("email", "baghave", "11/05/2016 11:47:51", "11/05/2016 12:20:45");
+            List<Tuple<string, double>> chlorineTuples = dataAccess.GetChlorineValues("email", "baghave", "11/05/2016 11:47:51", "11/05/2016 12:55:45");
             foreach (var chlorineTuple in chlorineTuples)
             {
-                Console.WriteLine(chlorineTuple.Item1 + chlorineTuple.Item2);
+                Console.WriteLine(chlorineTuple.Item1 + " " + chlorineTuple.Item2);
             }
 
 

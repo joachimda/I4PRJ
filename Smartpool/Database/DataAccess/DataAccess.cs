@@ -44,7 +44,7 @@ namespace Smartpool
                 if (poolsearch.Any() == false) return false;
 
                 // create 'Data' entity to store measurements in
-                string time = DateTime.UtcNow.ToString("G");
+                string time = DateTime.UtcNow.ToString();
                 var newData = new Data() { PoolId = poolsearch.First().Id, Timestamp = time };
                 db.DataSet.Add(newData);
                 db.SaveChanges();   // the newdata must be saved to db, so that mesurement can find it by PK
@@ -117,27 +117,9 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                List<Tuple<string, double>> chlorineTuples = null;
+                List<Tuple<string, double>> chlorineTuples = new List<Tuple<string, double>>();
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-
-                var daysDateTimeEnumerable = EachDay(startTime, endTime);
-
-                var calculatedDates = new List<string>
-    (
-       EachDay
-        (
-            DateTime.Parse(start),
-            DateTime.Parse(end)
-        ).Select(d => d.ToString("G"))
-    );
-
-                List<string> daysList = new List<string>();
-
-                foreach (var dateTime in daysDateTimeEnumerable)
-                {
-                    daysList.Add(dateTime.ToString(CultureInfo.InvariantCulture));
-                }
 
                 #region Query for all user-pool specific chlorine data
 
@@ -150,14 +132,24 @@ namespace Smartpool
 
                 foreach (var chlorine in chlorineDataQuery)
                 {
-                    foreach (var days in daysList)
+                    if (DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        if (chlorine.Data.Timestamp == days)
-                        {
-                            chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
-                        }
+                        chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
                     }
                 }
+                //foreach (var chlorine in chlorineDataQuery)
+                //{
+                //    foreach (var days in calculatedDates)
+                //    {
+                //        if (chlorine.Data.Timestamp == days)
+                //        {
+                //            chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
+                //        }
+                //    }
+                //}
 
                 #endregion
 
