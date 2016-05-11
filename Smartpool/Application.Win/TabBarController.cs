@@ -3,9 +3,9 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  EN      Initial version with functions
+// 1.01 EN      Resizes windows before showing
 //========================================================================
 
-using System.ComponentModel.Design;
 using System.Linq;
 using System.Windows;
 
@@ -21,6 +21,8 @@ namespace Smartpool.Application.Win
             
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();
 
             activeWindow.Close();
@@ -33,6 +35,8 @@ namespace Smartpool.Application.Win
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();*/
             MessageBox.Show("Show Historyl\nFix this in TabBarController.cs");
             activeWindow.Close();
@@ -45,6 +49,8 @@ namespace Smartpool.Application.Win
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();
             activeWindow.Close();
         }
@@ -52,12 +58,27 @@ namespace Smartpool.Application.Win
         internal static void ShowEditPoolButtonPressed(object sender, RoutedEventArgs e)
         {
             Window activeWindow = GetActiveWindow();
+            Window view = new WinEditPoolView();
+
+            view.Left = activeWindow.Left;
+            view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
+            view.Show();
+            activeWindow.Close();
+        }
+
+        internal static void ShowEditUserButtonPressed(object sender, RoutedEventArgs e)
+        {
+            Window activeWindow = GetActiveWindow();
             /*Window view = new WinAddPoolView();
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
+            view.Width = activeWindow.Width;
+            view.Height = activeWindow.Height;
             view.Show();*/
-            MessageBox.Show("Show Edit Pool\nFix this in TabBarController.cs");
+            MessageBox.Show("Show Edit User\nFix this in TabBarController.cs");
             activeWindow.Close();
         }
 

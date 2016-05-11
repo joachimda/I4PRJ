@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Updated to use pool validator and loader
 //========================================================================
 
 using System;
@@ -17,46 +18,60 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessager _clientMessager;
+        private readonly IClientMessenger _clientMessenger;
         private readonly IEditPoolView _view;
         private string[] _dimensions = { "", "", "" };
-        public Pool PoolToBeAdded = new Pool();
+        private Session _session = Session.SharedSession;
+        private PoolValidator _pool = new PoolValidator();
+        private PoolLoader _loader = new PoolLoader();
 
         // Life Cycle
         public void ViewDidLoad()
         {
-            // Disable add pool button
-            _view.SetSaveButtonEnabled(true);
+            // Load pools from server
+            _loader.ReloadPools(_clientMessenger);
+            _view.SetAvailablePools(_session.Pools);
+
+            // Load active pool info into text fields
+            if (_loader.PoolsAreAvailable())
+            {
+                _view.SetNameText(_session.SelectedPool.Item1);
+                _view.SetVolumeText("109"); // NOTE
+                _view.SetSaveButtonEnabled(true);
+                _view.SetDeleteButtonEnabled(true);
+            }
+            else
+            {
+                _view.DisplayAlert("No pools","You have no pools to edit");
+                _view.SetSaveButtonEnabled(false);
+                _view.SetDeleteButtonEnabled(false);
+            }
         }
 
-        public EditPoolViewController(IEditPoolView view, IClientMessager clientMessager = null)
+        public EditPoolViewController(IEditPoolView view, IClientMessenger clientMessenger = null)
         {
             // Stored injected dependencies
             _view = view;
-            _clientMessager = clientMessager;
+            _clientMessenger = clientMessenger;
         }
 
         // Interface
 
         public void SaveButtonPressed()
         {
-            if (!PoolToBeAdded.IsValid()) return;
+            if (!_pool.IsValid()) return;
 
-            var userName = Session.SharedSession.UserName;
-            var tokenString = Session.SharedSession.TokenString;
+            // NOTE: MISSING SERIALNUMBER?
+            var session = Session.SharedSession;
+            var updatePoolMessage = new UpdatePoolRequestMsg(session.UserName, session.TokenString, session.SelectedPool.Item1, _pool.Name, _pool.Volume);
+            var response = (GeneralResponseMsg) _clientMessenger.SendMessage(updatePoolMessage);
 
-            // NOTE: Pool address parameter is redundant // MISSING SERIALNUMBER?
-            var updatePoolMessage = new UpdatePoolRequestMsg(userName, tokenString, "oldPoolName", "redundant", PoolToBeAdded.Name, PoolToBeAdded.Volume);
-
-            var response = _clientMessager.SendMessage(updatePoolMessage);
-            var addPoolResponse = (GeneralResponseMsg)response;
-
-            // Act on response
-            if (addPoolResponse.RequestExecutedSuccesfully)
+            // Act on the response from the server
+            if (response.RequestExecutedSuccesfully)
             {
                 _view.PoolUpdated();
             }
-            else if (addPoolResponse.TokenStillActive == false)
+            else if (response.TokenStillActive == false)
             {
                 _view.DisplayAlert("Invalid action", "Your login is no longer active, please login again.");
             }
@@ -64,7 +79,21 @@ namespace Smartpool.Application.Presentation
 
         public void DeleteButtonPressed()
         {
-            throw new NotImplementedException();
+            // Request deletion from server
+            var session = Session.SharedSession;
+            var request = new RemovePoolRequestMsg(session.UserName, session.TokenString,
+                session.SelectedPool.Item1);
+            var response = (GeneralResponseMsg) _clientMessenger.SendMessage(request);
+
+            // Display a message in the view based on the response
+            if (response.RequestExecutedSuccesfully)
+            {
+                _view.DisplayAlert("Charizard", "The pool was removed succesfully");
+            }
+            else
+            {
+                _view.DisplayAlert("Error", "The pool could not be removed");
+            }
         }
 
         public void DidChangeText(EditPoolTextField textField, string text)
@@ -73,25 +102,25 @@ namespace Smartpool.Application.Presentation
             switch (textField)
             {
                 case EditPoolTextField.PoolName:
-                    PoolToBeAdded.Name = text;
+                    _pool.Name = text;
                     break;
                 case EditPoolTextField.Volume:
-                    PoolToBeAdded.UpdateVolume(text, null);
+                    _pool.UpdateVolume(text, null);
                     _dimensions[0] = "";
                     _dimensions[1] = "";
                     _dimensions[2] = "";
                     break;
                 case EditPoolTextField.Width:
                     _dimensions[0] = text;
-                    PoolToBeAdded.UpdateVolume(null, _dimensions);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Length:
                     _dimensions[1] = text;
-                    PoolToBeAdded.UpdateVolume(null, _dimensions);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
                 case EditPoolTextField.Depth:
                     _dimensions[2] = text;
-                    PoolToBeAdded.UpdateVolume(null, _dimensions);
+                    _pool.UpdateVolume(null, _dimensions);
                     break;
             }
 
@@ -101,14 +130,16 @@ namespace Smartpool.Application.Presentation
 
         public void DidSelectPool(string name)
         {
-            throw new NotImplementedException();
+            // Parse the name in the pool loader 
+            _session.SelectedPoolIndex = _loader.IndexForPoolName(name);
+            if (_loader.PoolsAreAvailable()) _view.SetDeleteButtonEnabled(true);
         }
 
-        // LoginViewController
+        // EditPoolViewController
 
         private void UpdateSaveButton()
         {
-            _view.SetSaveButtonEnabled(PoolToBeAdded.IsValid());
+            _view.SetSaveButtonEnabled(_pool.IsValid());
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Smartpool.Connection.Model
 {
 
-    public interface IClientMessager
+    public interface IClientMessenger
     {
         /// <summary>
 		/// Method for sending a message to the server

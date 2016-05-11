@@ -54,7 +54,7 @@ namespace Smartpool.Application.Win
 
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
             //Controller
-            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
+            var clientMessager = new ClientMessenger(new SynchronousSocketClient(Ip));
             Controller = new LoginViewController(this, clientMessager);
             Controller.ViewDidLoad();
         }
@@ -116,10 +116,7 @@ namespace Smartpool.Application.Win
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
-
-            //Delete this. It's here for debugging purposes
-            CreateUserView view = new CreateUserView();
-            view.Show();
+            
         }
 
         private void ForgotUser_MouseUp(object sender, MouseButtonEventArgs e)

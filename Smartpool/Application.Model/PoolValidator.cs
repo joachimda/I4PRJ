@@ -1,6 +1,8 @@
 ﻿//========================================================================
-// FILENAME :   Pool.cs
-// DESCR.   :   Pool model
+// FILENAME :   PoolValidator.cs
+// DESCR.   :   Model for validating pool info, useful for when pools must
+//              be edited or created. Store the pool info temporarily here
+//              and call the IsValid method to check if input is valid.
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -11,7 +13,7 @@ using System;
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Model
 {
-    public class Pool
+    public class PoolValidator
     {
         public string Name { get; set; } = "";
         public string SerialNumber { get; set; } = "";
@@ -22,6 +24,7 @@ namespace Smartpool.Application.Model
 
         public void UpdateVolume(string volume, string[] dimensions)
         {
+            // Updates the volume based on either the actual volume or h/w/d dimensions.
             if (volume != null)
             {
                 _volume = volume;

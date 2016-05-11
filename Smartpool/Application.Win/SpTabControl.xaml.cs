@@ -22,6 +22,7 @@ namespace Smartpool.Application.Win
         private Button _showHistoryViewbutton;
         private Button _showAddPoolViewbutton;
         private Button _showEditPoolViewbutton;
+        private Button _showEditUserViewbutton;
 
         // events exposed to container
         public static readonly RoutedEvent OnShowStatButtonClickedEvent =
@@ -32,6 +33,8 @@ namespace Smartpool.Application.Win
             EventManager.RegisterRoutedEvent("OnShowAddPoolButtonClicked", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(SpTabControl));
         public static readonly RoutedEvent OnShowEditPoolButtonClickedEvent =
             EventManager.RegisterRoutedEvent("OnShowEditPoolButtonClicked", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(SpTabControl));
+        public static readonly RoutedEvent OnShowEditUserButtonClickedEvent =
+            EventManager.RegisterRoutedEvent("OnShowEditUserButtonClicked", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(SpTabControl));
 
         static SpTabControl()
         {
@@ -47,11 +50,13 @@ namespace Smartpool.Application.Win
             _showHistoryViewbutton = GetTemplateChild("PART_HistoryViewButton") as Button;
             _showAddPoolViewbutton = GetTemplateChild("PART_AddPoolViewButton") as Button;
             _showEditPoolViewbutton = GetTemplateChild("PART_EditPoolViewButton") as Button;
+            _showEditUserViewbutton = GetTemplateChild("PART_EditUserViewButton") as Button;
 
             if (_showStatViewbutton != null) _showStatViewbutton.Click += ShowStatButtonClicked;
             if (_showHistoryViewbutton != null) _showHistoryViewbutton.Click += ShowHistoryButtonClicked;
             if (_showAddPoolViewbutton != null) _showAddPoolViewbutton.Click += ShowAddPoolButtonClicked;
             if (_showEditPoolViewbutton != null) _showEditPoolViewbutton.Click += ShowEditPoolButtonClicked;
+            if (_showEditUserViewbutton != null) _showEditUserViewbutton.Click += ShowEditUserButtonClicked;
 
         }
 
@@ -91,7 +96,7 @@ namespace Smartpool.Application.Win
             RaiseEvent(new RoutedEventArgs(OnShowAddPoolButtonClickedEvent));
         }
 
-        // expose and raise 'OnShowHistoryButtonClicked' event
+        // expose and raise 'OnShowEditPoolButtonClicked' event
         public event RoutedEventHandler OnShowEditPoolButtonClicked
         {
             add { AddHandler(OnShowEditPoolButtonClickedEvent, value); }
@@ -101,6 +106,18 @@ namespace Smartpool.Application.Win
         private void ShowEditPoolButtonClicked(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs(OnShowEditPoolButtonClickedEvent));
+        }
+
+        // expose and raise 'OnShowEditUserButtonClicked' event
+        public event RoutedEventHandler OnShowEditUserButtonClicked
+        {
+            add { AddHandler(OnShowEditUserButtonClickedEvent, value); }
+            remove { RemoveHandler(OnShowEditUserButtonClickedEvent, value); }
+        }
+
+        private void ShowEditUserButtonClicked(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs(OnShowEditUserButtonClickedEvent));
         }
     }
 }

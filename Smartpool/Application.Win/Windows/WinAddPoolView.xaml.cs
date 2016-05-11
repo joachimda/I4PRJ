@@ -12,7 +12,7 @@ using Smartpool.Connection.Client;
 using Smartpool.Connection.Model;
 
 // ReSharper disable once CheckNamespace
-namespace Smartpool.Application.Win
+namespace Smartpool.Application.Win.Windows
 {
     /// <summary>
     /// Interaction logic for WinAddPoolView.xaml
@@ -35,11 +35,10 @@ namespace Smartpool.Application.Win
             SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
             //SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
-            SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
 
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
             //Controller
-            var clientMessager = new ClientMessenger(new SynchronousSocketClient(Ip));
+            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
             Controller = new AddPoolViewController(this, clientMessager);
             Controller.ViewDidLoad();
 
