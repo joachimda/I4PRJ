@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/11/2016 10:35:01
+-- Date Created: 05/11/2016 11:00:15
 -- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -90,7 +90,6 @@ GO
 CREATE TABLE [dbo].[pHSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] float  NOT NULL,
-    [DataId] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -99,7 +98,6 @@ GO
 CREATE TABLE [dbo].[ChlorineSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] float  NOT NULL,
-    [DataId] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -108,7 +106,6 @@ GO
 CREATE TABLE [dbo].[TemperatureSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] float  NOT NULL,
-    [DataId] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -117,7 +114,6 @@ GO
 CREATE TABLE [dbo].[HumiditySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Value] float  NOT NULL,
-    [DataId] int  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -225,18 +221,18 @@ ON [dbo].[ChlorineSet]
     ([Data_Id]);
 GO
 
--- Creating foreign key on [Data_Id] in table 'HumiditySet'
-ALTER TABLE [dbo].[HumiditySet]
-ADD CONSTRAINT [FK_DataHumidity]
+-- Creating foreign key on [Data_Id] in table 'pHSet'
+ALTER TABLE [dbo].[pHSet]
+ADD CONSTRAINT [FK_DatapH]
     FOREIGN KEY ([Data_Id])
     REFERENCES [dbo].[DataSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_DataHumidity'
-CREATE INDEX [IX_FK_DataHumidity]
-ON [dbo].[HumiditySet]
+-- Creating non-clustered index for FOREIGN KEY 'FK_DatapH'
+CREATE INDEX [IX_FK_DatapH]
+ON [dbo].[pHSet]
     ([Data_Id]);
 GO
 
@@ -255,18 +251,18 @@ ON [dbo].[TemperatureSet]
     ([Data_Id]);
 GO
 
--- Creating foreign key on [Data_Id] in table 'pHSet'
-ALTER TABLE [dbo].[pHSet]
-ADD CONSTRAINT [FK_DatapH]
+-- Creating foreign key on [Data_Id] in table 'HumiditySet'
+ALTER TABLE [dbo].[HumiditySet]
+ADD CONSTRAINT [FK_DataHumidity]
     FOREIGN KEY ([Data_Id])
     REFERENCES [dbo].[DataSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_DatapH'
-CREATE INDEX [IX_FK_DatapH]
-ON [dbo].[pHSet]
+-- Creating non-clustered index for FOREIGN KEY 'FK_DataHumidity'
+CREATE INDEX [IX_FK_DataHumidity]
+ON [dbo].[HumiditySet]
     ([Data_Id]);
 GO
 
