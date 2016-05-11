@@ -166,7 +166,6 @@ namespace Smartpool.Connection.Server
             {
                 file.WriteLine(data);
             }
-            Console.WriteLine("Sent data back to client. Check debugFile for more info");
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
@@ -184,7 +183,7 @@ namespace Smartpool.Connection.Server
 
                 // Complete sending the data to the remote device.
                 int bytesSent = handler.EndSend(ar);
-                Console.WriteLine(DateTime.Now + " - Sent {0} bytes to client.", bytesSent);
+                Console.WriteLine(DateTime.Now + " - Sent {0} bytes to client. Check debugFile for more info", bytesSent);
 
                 handler.Shutdown(SocketShutdown.Both);
                 handler.Close();
