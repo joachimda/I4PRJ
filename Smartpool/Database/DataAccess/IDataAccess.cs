@@ -13,6 +13,7 @@ namespace Smartpool
     
         List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end);
         List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end); 
+        List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end);
+        List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end);
     }
 }
