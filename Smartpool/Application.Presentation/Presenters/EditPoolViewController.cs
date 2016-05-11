@@ -145,9 +145,12 @@ namespace Smartpool.Application.Presentation
             if (_loader.PoolsAreAvailable())
             {
                 _pool.Name = _session.SelectedPool.Item1;
+                _pool.UpdateVolume("30", null);
                 _pool.SerialNumber = "1X2X5-13ADQ-23AS1-23X1DD-D123Q"; // NOTE
+
                 _view.SetNameText(_session.SelectedPool.Item1);
-                _view.SetVolumeText("30"); // NOTE
+                _view.SetSerialNumberText(_pool.SerialNumber);
+                _view.SetVolumeText(string.Format($"{_pool.Volume}")); // NOTE
                 _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 _view.SetSaveButtonEnabled(true);
                 _view.SetDeleteButtonEnabled(true);
