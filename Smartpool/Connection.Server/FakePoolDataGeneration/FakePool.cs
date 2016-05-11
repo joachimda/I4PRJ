@@ -24,6 +24,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             for (int i = 0; i < 4; i++)
             {
                 _fakeSensors.Add(new FakeSensor(i));
+                System.Threading.Thread.Sleep(20);
             }
             /*random sensors
             for (int i = 0; i < _amountOfSensors; i++)

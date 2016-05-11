@@ -44,7 +44,7 @@ namespace Smartpool.Application.Test.Unit
             _clientMessenger.SendMessage(new Message())
                 .ReturnsForAnyArgs(new GetPoolDataResponseMsg(new List<Tuple<SensorTypes, List<double>>>()));
 
-            _uut.DidSelectPool("Min Sjove Pool");
+            _uut.DidSelectPool(0);
 
             Assert.That(session.SelectedPool.Item1, Is.EqualTo("Min Sjove Pool"));
         }

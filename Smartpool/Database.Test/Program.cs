@@ -10,7 +10,7 @@ namespace Database.Test
         static void Main(string[] args)
         {
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
-            IWriteDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+            IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
             dataAccess.DeleteAllData();
             SmartPoolDB.ClearEntireDatabase();
 

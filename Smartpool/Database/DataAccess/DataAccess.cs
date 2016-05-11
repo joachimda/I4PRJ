@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Smartpool
 {
-    public class DataAccess : IWriteDataAccess, IReadDataAccess
+    public class DataAccess : IDataAccess
     {
         public IPoolAccess PoolAccess { get; set; }
 

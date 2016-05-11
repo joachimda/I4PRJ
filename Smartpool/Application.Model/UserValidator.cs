@@ -9,10 +9,7 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-using System;
-
 // ReSharper disable once CheckNamespace
-
 namespace Smartpool.Application.Model
 {
     public class UserValidator

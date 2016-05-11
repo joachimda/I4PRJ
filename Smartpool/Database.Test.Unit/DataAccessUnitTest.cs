@@ -9,7 +9,7 @@ namespace Database.Test.Unit
     {
         #region Setup
 
-        private IWriteDataAccess _uut;
+        private IDataAccess _uut;
         private IUserAccess _userAccess;
         private IPoolAccess _poolAccess;
 
@@ -74,9 +74,9 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void CreateDataEntry_Adding10DataEntries_ReturnsTrue()
+        public void CreateDataEntry_Adding4DataEntries_ReturnsTrue()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
                 Thread.Sleep(1000);
@@ -84,7 +84,13 @@ namespace Database.Test.Unit
             Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
         }
 
-        // public void CreateDataEntry_AddingData_DataPresentInDatabase(){}
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_DataPresentInDatabase()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+
+            //_uut.GetChlorineValues(ownerEmail, poolName, )
+        }
 
         #endregion
 

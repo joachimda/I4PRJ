@@ -7,12 +7,10 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-// ReSharper disable once CheckNamespace
-
 using System;
 using System.Collections.Generic;
-using Smartpool.Connection.Model;
 
+// ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Model
 {
     public class Session
@@ -23,7 +21,7 @@ namespace Smartpool.Application.Model
 
         public string UserName { get; set; }
         public string TokenString { get; set; }
-        public int SelectedPoolIndex { private get; set; }
+        public int SelectedPoolIndex { get; set; }
         public Tuple<string, bool> SelectedPool => Pools.Count > SelectedPoolIndex ? Pools[SelectedPoolIndex] : null;
         public List<Tuple<string, bool>> Pools { get; set; }
 

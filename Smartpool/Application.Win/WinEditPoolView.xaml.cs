@@ -81,5 +81,10 @@ namespace Smartpool.Application.Win
         {
             throw new System.NotImplementedException();
         }
+
+        private void DeleteButton_OnClickButton_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
