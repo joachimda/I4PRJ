@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" ZoomLevel="112" >
+      <Diagram DiagramId="ab6eaaa49f12471ea5141ecf6f3f0415" Name="Diagram1" ZoomLevel="84" >
         <EntityTypeShape EntityType="Smartpool.User" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="Smartpool.Pool" Width="1.5" PointX="2.875" PointY="0.5" />
         <AssociationConnector Association="Smartpool.UserPool" />
@@ -15,9 +15,9 @@
         <EntityTypeShape EntityType="Smartpool.Data" Width="1.5" PointX="6.125" PointY="0.5" />
         <AssociationConnector Association="Smartpool.PoolData" />
         <AssociationConnector Association="Smartpool.DataChlorine" />
+        <AssociationConnector Association="Smartpool.DataHumidity" />
         <AssociationConnector Association="Smartpool.DatapH" />
         <AssociationConnector Association="Smartpool.DataTemperature" />
-        <AssociationConnector Association="Smartpool.DataHumidity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
