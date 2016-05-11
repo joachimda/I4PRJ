@@ -222,7 +222,7 @@ namespace Smartpool
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> temperatureTuples = new List<Tuple<string, double>>();
+                List<Tuple<string, double>> phTuples = new List<Tuple<string, double>>();
 
                 foreach (var ph in phDataQuery)
                 {
@@ -231,11 +231,13 @@ namespace Smartpool
                         DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        temperatureTuples.Add(new Tuple<string, double>(ph.Data.Timestamp, ph.Value));
+                        phTuples.Add(new Tuple<string, double>(ph.Data.Timestamp, ph.Value));
                     }
                 }
 
                 #endregion
+
+                return phTuples;
             }
         }
 
