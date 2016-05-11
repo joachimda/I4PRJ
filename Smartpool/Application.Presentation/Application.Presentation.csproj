@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Presenters\AddPoolViewController.cs" />
     <Compile Include="Presenters\EditPoolViewController.cs" />
+    <Compile Include="Presenters\HistoryViewController.cs" />
     <Compile Include="Presenters\Interfaces\IAddPoolViewController.cs" />
     <Compile Include="Presenters\Interfaces\IEditPoolViewController.cs" />
     <Compile Include="Presenters\Interfaces\IHistoryViewController.cs" />
