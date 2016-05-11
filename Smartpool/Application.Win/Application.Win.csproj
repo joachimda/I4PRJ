@@ -83,6 +83,9 @@
     <Compile Include="WinAddPoolView.xaml.cs">
       <DependentUpon>WinAddPoolView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinEditPoolView.xaml.cs">
+      <DependentUpon>WinEditPoolView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLoginView.xaml.cs" />
     <Compile Include="WinStatView.xaml.cs" />
     <Compile Include="App.xaml.cs">
@@ -118,6 +121,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="WinAddPoolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinEditPoolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
