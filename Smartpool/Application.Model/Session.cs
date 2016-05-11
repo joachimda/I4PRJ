@@ -7,12 +7,10 @@
 // 1.0  LP      Initial version
 //========================================================================
 
-// ReSharper disable once CheckNamespace
-
 using System;
 using System.Collections.Generic;
-using Smartpool.Connection.Model;
 
+// ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Model
 {
     public class Session
