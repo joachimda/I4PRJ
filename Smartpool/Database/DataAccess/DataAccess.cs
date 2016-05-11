@@ -243,7 +243,7 @@ namespace Smartpool
 
         public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
