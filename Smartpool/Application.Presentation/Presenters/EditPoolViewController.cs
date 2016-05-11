@@ -128,11 +128,14 @@ namespace Smartpool.Application.Presentation
             UpdateSaveButton();
         }
 
-        public void DidSelectPool(string name)
+        public void DidSelectPool(int index)
         {
             // Parse the name in the pool loader 
-            _session.SelectedPoolIndex = _loader.IndexForPoolName(name);
-            if (_loader.PoolsAreAvailable()) _view.SetDeleteButtonEnabled(true);
+            _session.SelectedPoolIndex = index;
+            if (!_loader.PoolsAreAvailable()) return;
+
+            _view.SetNameText(_session.SelectedPool.Item1);
+            _view.SetDeleteButtonEnabled(true);
         }
 
         // EditPoolViewController
