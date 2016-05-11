@@ -112,7 +112,7 @@ namespace Smartpool
         /// <param name="poolName">The specific pool name</param>
         /// <param name="start">Specifies the starting time of the query</param>
         /// <param name="end">Specifies the ending time of the query</param>
-        /// <returns>A list of tuples, where each tuple contains a chlorine value and the hour where it was measured</returns>
+        /// <returns>A list of tuples, where each tuple contains a chlorine value and the time where it was measured</returns>
         public List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end)
         {
             using (var db = new DatabaseContext())
@@ -154,13 +154,13 @@ namespace Smartpool
 
 
         /// <summary>
-        /// Queries chlorine values within a given time range: dd/MM/yyyy HH:mm:ss
+        /// Queries temperature values within a given time range: dd/MM/yyyy HH:mm:ss
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="start">Specifies the starting time of the query</param>
         /// <param name="end">Specifies the ending time of the query</param>
-        /// <returns>A list of tuples, where each tuple contains a chlorine value and the hour where it was measured</returns>
+        /// <returns>A list of tuples, where each tuple contains a temperature value and the time where it was measured</returns>
         public List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end)
         {
             using (var db = new DatabaseContext())
@@ -169,28 +169,134 @@ namespace Smartpool
 
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
                 DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                
+
                 #endregion
 
-                #region Query for all user-pool specific chlorine data
+                #region Query for all user-pool specific temperature data
+
+                var temperatureDataQuery = from temperature in db.TemperatureSet
+                                           where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
+                                           select temperature;
 
                 #endregion
 
                 #region Check for timestamp matches and add to tuples
 
+                List<Tuple<string, double>> temperatureTuples = new List<Tuple<string, double>>();
+
+                foreach (var temperature in temperatureDataQuery)
+                {
+                    if (DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    {
+                        temperatureTuples.Add(new Tuple<string, double>(temperature.Data.Timestamp, temperature.Value));
+                    }
+                }
+
                 #endregion
 
-                throw new NotImplementedException();
-
-
+                return temperatureTuples;
             }
         }
 
-
-        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        /// <summary>
+        /// Queries pH values within a given time range: dd/MM/yyyy HH:mm:ss
+        /// </summary>
+        /// <param name="poolOwnerEmail">The email of the pool owne</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param>
+        /// <returns>A list of tuples, where each tuple contains a pH value and the time where it was measured</returns>
+        public List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end)
         {
-            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
-                yield return day;
+            using (var db = new DatabaseContext())
+            {
+                #region Convert start and end times to DateTime types
+
+                DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                #endregion
+
+                #region Query for all user-pool specific pH data
+
+                var phDataQuery = from ph in db.pHSet
+                                  where ph.Data.Pool.Name == poolName && ph.Data.Pool.User.Email == poolOwnerEmail
+                                  select ph;
+
+                #endregion
+
+                #region Check for timestamp matches and add to tuples
+
+                List<Tuple<string, double>> phTuples = new List<Tuple<string, double>>();
+
+                foreach (var ph in phDataQuery)
+                {
+                    if (DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    {
+                        phTuples.Add(new Tuple<string, double>(ph.Data.Timestamp, ph.Value));
+                    }
+                }
+
+                #endregion
+
+                return phTuples;
+            }
+        }
+
+        /// <summary>
+        /// Queries humidity values within a given time range: dd/MM/yyyy HH:mm:ss
+        /// </summary>
+        /// <param name="poolOwnerEmail">The email of the pool owne</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param>
+        /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
+        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
+        {
+            using (var db = new DatabaseContext())
+            {
+                #region Convert start and end times to DateTime types
+
+                DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture);
+
+                #endregion
+
+                #region Query for all user-pool specific humidity data
+
+                var humidityDataQuery = from humidity in db.HumiditySet
+                                           where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
+                                           select humidity;
+
+                #endregion
+
+                #region Check for timestamp matches and add to tuples
+
+                List<Tuple<string, double>> humidityTuples = new List<Tuple<string, double>>();
+
+                foreach (var humidity in humidityDataQuery)
+                {
+                    if (DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
+                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    {
+                        humidityTuples.Add(new Tuple<string, double>(humidity.Data.Timestamp, humidity.Value));
+                    }
+                }
+
+                #endregion
+
+                return humidityTuples;
+            }
         }
     }
 }
