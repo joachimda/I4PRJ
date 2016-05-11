@@ -69,7 +69,7 @@ namespace Smartpool.Connection.Server
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
                     var poolToReturn = _smartpoolDb.PoolAccess.FindSpecificPool(gpiMsg.Username, gpiMsg.PoolName);
-                    return new GetPoolInfoResponseMsg(1337, "GTP8H-H8D8D-DDTKD-MT8W6-PTD6M");
+                    return new GetPoolInfoResponseMsg(poolToReturn.Volume, "GTP8H-H8D8D-DDTKD-MT8W6-PTD6M");
 
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
