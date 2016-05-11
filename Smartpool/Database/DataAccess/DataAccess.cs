@@ -77,21 +77,10 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ownerEmail"></param>
-        /// <param name="poolName"></param>
-        /// <returns></returns>
-        public bool RemoveData(string ownerEmail, string poolName)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Directly execute an SQL statemen on the database, deleting all DataSets
         /// </summary>
         /// <returns>Allways returning true</returns>
-        public bool DeleteAllData()
+        public void DeleteAllData()
         {
             using (var db = new DatabaseContext())
             {
@@ -101,8 +90,6 @@ namespace Smartpool
                 db.Database.ExecuteSqlCommand("DELETE [HumiditySet]");
                 db.Database.ExecuteSqlCommand("DELETE [DataSet]");
             }
-
-            return true;
         }
 
         /// <summary>
