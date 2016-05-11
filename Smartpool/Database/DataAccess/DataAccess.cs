@@ -14,18 +14,6 @@ namespace Smartpool
             PoolAccess = poolAccess;
         }
 
-        //#region Derp
-
-        //public List<Tuple<string, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName,
-        //    string queryStartHour)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-       
-
-        //#endregion
-
         /// <summary>
         /// 
         /// </summary>
