@@ -15,6 +15,8 @@ namespace Application.iOS
 {
 	public partial class SignUpViewBridge : UIViewController, ISignUpView
 	{
+		private ISignUpViewController _specializedController => Controller as ISignUpViewController;
+
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
@@ -93,35 +95,30 @@ namespace Application.iOS
 		partial void emailTextFieldValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
+			if (textField.Text != null) _specializedController.DidChangeEmailText(textField.Text);
 		}
 			
 		partial void nameTextFieldValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeNameText(textField.Text);
+			if (textField.Text != null) _specializedController.DidChangeNameText(textField.Text);
 		}
 			
 		partial void passwordTextFieldOneValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text, 0);
 		}
 			
 		partial void passwordTextFieldTwoValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text, 0);
 		}
 			
 		partial void signUpButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ISignUpViewController;
-			controller?.ButtonPressed();
+			_specializedController.ButtonPressed();
 		}
 	}
 }

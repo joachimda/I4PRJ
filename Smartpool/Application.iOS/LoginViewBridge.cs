@@ -15,6 +15,8 @@ namespace Application.iOS
 {
 	public partial class LoginViewBridge : UIViewController, ILoginView
 	{
+		private ILoginViewController _specializedController => Controller as ILoginViewController;
+
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
@@ -40,34 +42,29 @@ namespace Application.iOS
 
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.LoginButton);
+			_specializedController.ButtonPressed(LoginViewButton.LoginButton);
 		}
 
 		partial void signupButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.SignUpButton);
+			_specializedController.ButtonPressed(LoginViewButton.SignUpButton);
 		}
 
 		partial void forgotButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.ForgotButton);
+			_specializedController.ButtonPressed(LoginViewButton.ForgotButton);
 		}
 
 		partial void emailValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
+			if (textField.Text != null) _specializedController.DidChangeEmailText(textField.Text);
 		}
 
 		partial void passwordValueChanged (Foundation.NSObject sender)
 		{
 			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text);
+			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text);
 		}
 
 		// IView Interface Implementation
