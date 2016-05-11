@@ -103,8 +103,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="passwordTextFieldOneValueChanged:" destination="PbW-WE-txZ" eventType="valueChanged" id="Qrg-TJ-CQD"/>
-                                    <action selector="passwordValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="Cec-Na-Cl3"/>
+                                    <action selector="passwordOneEditingChanged:" destination="PbW-WE-txZ" eventType="editingChanged" id="uFG-Q2-9AA"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ITP-Ea-0qj">
@@ -113,8 +112,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="passwordTextFieldTwoValueChanged:" destination="PbW-WE-txZ" eventType="valueChanged" id="kzx-yq-Mgd"/>
-                                    <action selector="passwordValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="VKw-V9-ba9"/>
+                                    <action selector="passwordTwoEditingChanged:" destination="PbW-WE-txZ" eventType="editingChanged" id="CWo-5R-95d"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0za-Yd-h71">
@@ -137,8 +135,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailTextFieldValueChanged:" destination="PbW-WE-txZ" eventType="valueChanged" id="Bm8-Q4-Rql"/>
-                                    <action selector="emailValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="0wE-uf-nZ3"/>
+                                    <action selector="emailEditingChanged:" destination="PbW-WE-txZ" eventType="editingChanged" id="kWM-Kd-48l"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QBt-u0-Zeh">
@@ -147,8 +144,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="jRG-1p-Q3s"/>
-                                    <action selector="nameTextFieldValueChanged:" destination="PbW-WE-txZ" eventType="valueChanged" id="TBi-Ll-ccJ"/>
+                                    <action selector="nameEditingChanged:" destination="PbW-WE-txZ" eventType="editingChanged" id="KDU-OA-eLT"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8U-pE-W1v">
@@ -228,7 +224,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="passwordValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="bda-jR-3LD"/>
+                                    <action selector="passwordEditingChanged:" destination="MOS-mj-LMJ" eventType="editingChanged" id="ZT8-RS-tl7"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-h3-NH3">
@@ -282,7 +278,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="emailValueChanged:" destination="MOS-mj-LMJ" eventType="valueChanged" id="Ya1-cb-mkh"/>
+                                    <action selector="emailEditingChanged:" destination="MOS-mj-LMJ" eventType="editingChanged" id="Eos-4c-SVX"/>
                                 </connections>
                             </textField>
                         </subviews>

@@ -30,11 +30,20 @@ namespace Application.iOS
 		[Action ("cancelButtonTouchUpInside:")]
 		partial void cancelButtonTouchUpInside (Foundation.NSObject sender);
 
+		[Action ("emailEditingChanged:")]
+		partial void emailEditingChanged (UIKit.UITextField sender);
+
 		[Action ("emailTextFieldValueChanged:")]
 		partial void emailTextFieldValueChanged (Foundation.NSObject sender);
 
+		[Action ("nameEditingChanged:")]
+		partial void nameEditingChanged (UIKit.UITextField sender);
+
 		[Action ("nameTextFieldValueChanged:")]
 		partial void nameTextFieldValueChanged (Foundation.NSObject sender);
+
+		[Action ("passwordOneEditingChanged:")]
+		partial void passwordOneEditingChanged (UIKit.UITextField sender);
 
 		[Action ("passwordTextFieldOneValueChanged:")]
 		partial void passwordTextFieldOneValueChanged (Foundation.NSObject sender);
@@ -42,19 +51,22 @@ namespace Application.iOS
 		[Action ("passwordTextFieldTwoValueChanged:")]
 		partial void passwordTextFieldTwoValueChanged (Foundation.NSObject sender);
 
+		[Action ("passwordTwoEditingChanged:")]
+		partial void passwordTwoEditingChanged (UIKit.UITextField sender);
+
 		[Action ("signUpButtonTouchUpInside:")]
 		partial void signUpButtonTouchUpInside (Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (nameTextField != null) {
-				nameTextField.Dispose ();
-				nameTextField = null;
-			}
-
 			if (emailTextField != null) {
 				emailTextField.Dispose ();
 				emailTextField = null;
+			}
+
+			if (nameTextField != null) {
+				nameTextField.Dispose ();
+				nameTextField = null;
 			}
 
 			if (passwordTextFieldOne != null) {

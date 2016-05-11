@@ -7,6 +7,7 @@
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
 using UIKit;
 
@@ -14,6 +15,8 @@ namespace Application.iOS
 {
 	public partial class LoginViewBridge : UIViewController, ILoginView
 	{
+		private ILoginViewController _specializedController => Controller as ILoginViewController;
+
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
@@ -39,34 +42,27 @@ namespace Application.iOS
 
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.LoginButton);
+			_specializedController.ButtonPressed(LoginViewButton.LoginButton);
 		}
 
 		partial void signupButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.SignUpButton);
+			_specializedController.ButtonPressed(LoginViewButton.SignUpButton);
 		}
 
 		partial void forgotButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.ForgotButton);
+			_specializedController.ButtonPressed(LoginViewButton.ForgotButton);
+		}
+			
+		partial void emailEditingChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 
-		partial void emailValueChanged (Foundation.NSObject sender)
+		partial void passwordEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
-		}
-
-		partial void passwordValueChanged (Foundation.NSObject sender)
-		{
-			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text);
+			_specializedController.DidChangePasswordText(sender.Text);
 		}
 
 		// IView Interface Implementation
@@ -96,6 +92,7 @@ namespace Application.iOS
 		public void SetLoginButtonEnabled(bool enabled)
 		{
 			loginButton.Enabled = enabled;
+			loginButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 
 		public void DisplayAlert(string title, string content)

@@ -7,6 +7,7 @@
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
 using UIKit;
 
@@ -14,6 +15,8 @@ namespace Application.iOS
 {
 	public partial class SignUpViewBridge : UIViewController, ISignUpView
 	{
+		private ISignUpViewController _specializedController => Controller as ISignUpViewController;
+
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
@@ -69,12 +72,12 @@ namespace Application.iOS
 		public void SetButtonEnabled(bool enabled)
 		{
 			signUpButton.Enabled = enabled;
+			signUpButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 			
 		public void DisplayAlert(string title, string content)
 		{
 			// Implementation missing
-			Console.WriteLine(content);
 		}
 			
 		public void SignUpAccepted()
@@ -89,38 +92,29 @@ namespace Application.iOS
 			// return to previous view
 		}
 
-		partial void emailTextFieldValueChanged (Foundation.NSObject sender)
+		partial void emailEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 			
-		partial void nameTextFieldValueChanged (Foundation.NSObject sender)
+		partial void nameEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeNameText(textField.Text);
+			_specializedController.DidChangeNameText(sender.Text);
 		}
 			
-		partial void passwordTextFieldOneValueChanged (Foundation.NSObject sender)
+		partial void passwordOneEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 0);
 		}
 			
-		partial void passwordTextFieldTwoValueChanged (Foundation.NSObject sender)
+		partial void passwordTwoEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 1);
 		}
 			
 		partial void signUpButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ISignUpViewController;
-			controller?.ButtonPressed();
+			_specializedController.ButtonPressed();
 		}
 	}
 }

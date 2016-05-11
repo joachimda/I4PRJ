@@ -74,10 +74,11 @@
     <!-- Button -->
     <Style TargetType="Button">
         <Setter Property="Height" Value="35"/>
+        <Setter Property="Background" Value="{StaticResource SpLightGrey}" />
     </Style>
     <ControlTemplate x:Key="ButtonSp"  TargetType="Button">
         <Border x:Name="Border" CornerRadius="5" BorderThickness="{TemplateBinding BorderThickness}" Height="30" 
-                    Background="{StaticResource SpLightGrey}" BorderBrush="{StaticResource SpDarkGrey}">
+                    Background="{TemplateBinding Background}" BorderBrush="{StaticResource SpDarkGrey}">
             <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
             <Border.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="2" Opacity="0.3" />
