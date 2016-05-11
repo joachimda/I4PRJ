@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Smartpool.DataAccess
+namespace Smartpool
 {
     public interface IWriteDataAccess
     {

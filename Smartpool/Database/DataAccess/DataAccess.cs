@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Smartpool.DataAccess
+namespace Smartpool
 {
     public class DataAccess : IWriteDataAccess, IReadDataAccess
     {
         public IPoolAccess PoolAccess { get; set; }
+
+        public DataAccess(IPoolAccess poolAccess)
+        {
+            PoolAccess = poolAccess;
+        }
 
         #region Derp
 

@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Smartpool;
-using Smartpool.DataAccess;
 
 namespace Database.Test.Unit
 {
@@ -23,7 +22,7 @@ namespace Database.Test.Unit
 
             _userAccess = new UserAccess();
             _poolAccess = new PoolAccess(_userAccess);
-            _uut = new DataAccess();
+            _uut = new DataAccess(_poolAccess);
 
             _userAccess.AddUser("Sir Derp Hansen", ownerEmail, "hanpassword");
             _poolAccess.AddPool(ownerEmail, poolName, 8);

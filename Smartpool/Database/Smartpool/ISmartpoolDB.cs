@@ -1,4 +1,4 @@
-﻿using Smartpool.DataAccess;
+﻿using Smartpool;
 
 namespace Smartpool
 {
