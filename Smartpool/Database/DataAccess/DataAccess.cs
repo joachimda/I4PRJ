@@ -156,7 +156,19 @@ namespace Smartpool
         {
             using (var db = new DatabaseContext())
             {
-                
+                #region Convert start and end times to DateTime types
+
+                #endregion
+
+                #region Query for all user-pool specific chlorine data
+
+                #endregion
+
+                #region Check for timestamp matches and add to tuples
+
+                #endregion
+
+
             }
         }
 
