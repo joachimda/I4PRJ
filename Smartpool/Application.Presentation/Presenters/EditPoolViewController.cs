@@ -145,7 +145,7 @@ namespace Smartpool.Application.Presentation
 
         private void UpdateSaveButton()
         {
-            _view.SetSaveButtonEnabled(_pool.IsValid());
+            _view.SetSaveButtonEnabled(_pool.Name.Length > 0);
         }
     }
 }
