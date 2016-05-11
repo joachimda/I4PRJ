@@ -157,43 +157,6 @@ namespace Smartpool
             throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Queries temperatures within a given hour range: dd/mm/yyyy hh:mm
-        /// </summary>
-        /// <param name="poolOwnerEmail">The email of the pool owner</param>
-        /// <param name="poolName">The specific pool name</param>
-        /// <param name="start">Specifies the starting time of the query</param>
-        /// <param name="end">Specifies the ending time of the query</param>
-        /// <returns>A list of tuples, where each tuple contains a temperature value and the hour where it was measured</returns>
-        //public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, string start, string end)
-        //{
-        //    using (var db = new DatabaseContext())
-        //    {
-
-
-        //        #region Query for all user-pool specific temperature data
-
-        //        var temperatureDataQuery = from temperature in db.TemperatureSet
-        //                                   where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
-        //                                   select temperature;
-        //        #endregion
-
-        //        #region Add date-relevant temperature data to Tuple list
-
-        //        List<Tuple<long, double>> temperatureTuples = null;
-
-        //        foreach (var dataEntity in temperatureDataQuery)
-        //        {
-        //            if (dataEntity.Data.Timestamp > queryStartHour)
-        //            {
-        //                temperatureTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
-        //            }
-        //        }
-        //        #endregion
-
-        //        return temperatureTuples;
-        //    }
-        //}
 
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
         {
