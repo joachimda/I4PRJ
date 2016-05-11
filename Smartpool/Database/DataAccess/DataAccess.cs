@@ -249,6 +249,14 @@ namespace Smartpool
             }
         }
 
+        /// <summary>
+        /// Queries humidity values within a given time range: dd/MM/yyyy HH:mm:ss
+        /// </summary>
+        /// <param name="poolOwnerEmail">The email of the pool owne</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param>
+        /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
         public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
         {
             using (var db = new DatabaseContext())
