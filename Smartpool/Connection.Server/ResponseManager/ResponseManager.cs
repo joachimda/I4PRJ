@@ -18,7 +18,15 @@ namespace Smartpool.Connection.Server
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
             _smartpoolDb = smartpoolDb;
             _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
-            _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
+            try
+            {
+                _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Could not connect to database. Make sure VPN is active");
+            }
+            
         }
 
         public ResponseManager(ITokenKeeper tokenKeeper, ITokenMsgResponse tokenMsgResponse, ISmartpoolDB smartpoolDb)

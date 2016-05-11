@@ -30,22 +30,9 @@ namespace Smartpool.Application.Presentation
         {
             // Load pools from server
             _loader.ReloadPools(_clientMessenger);
-            _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
-            if (_loader.PoolsAreAvailable())
-            {
-                _view.SetNameText(_session.SelectedPool.Item1);
-                _view.SetVolumeText("109"); // NOTE
-                _view.SetSaveButtonEnabled(true);
-                _view.SetDeleteButtonEnabled(true);
-            }
-            else
-            {
-                _view.DisplayAlert("No pools","You have no pools to edit");
-                _view.SetSaveButtonEnabled(false);
-                _view.SetDeleteButtonEnabled(false);
-            }
+            LoadPoolInfoIntoView();
         }
 
         public EditPoolViewController(IEditPoolView view, IClientMessenger clientMessenger = null)
@@ -69,7 +56,10 @@ namespace Smartpool.Application.Presentation
             // Act on the response from the server
             if (response.RequestExecutedSuccesfully)
             {
+                _loader.ReloadPools(_clientMessenger);
                 _view.PoolUpdated();
+                LoadPoolInfoIntoView();
+
             }
             else if (response.TokenStillActive == false)
             {
@@ -88,7 +78,9 @@ namespace Smartpool.Application.Presentation
             // Display a message in the view based on the response
             if (response.RequestExecutedSuccesfully)
             {
-                _view.DisplayAlert("Charizard", "The pool was removed succesfully");
+                _loader.ResetPools(_clientMessenger);
+                _view.DisplayAlert("Success!", "The pool was removed succesfully");
+                LoadPoolInfoIntoView();
             }
             else
             {
@@ -142,7 +134,37 @@ namespace Smartpool.Application.Presentation
 
         private void UpdateSaveButton()
         {
-            _view.SetSaveButtonEnabled(_pool.IsValid());
+            _view.SetSaveButtonEnabled(_pool.Name.Length > 0);
+        }
+
+        private void LoadPoolInfoIntoView()
+        {
+            // Load active pool info into text fields
+            _view.SetAvailablePools(_session.Pools);
+
+            var volumeAndSerialNumber = _loader.GetVolumeAndSerialNumberForSelectedPool(_clientMessenger);
+
+            if (_loader.PoolsAreAvailable())
+            {
+                // Update pool loader
+                _pool.Name = _session.SelectedPool.Item1;
+                _pool.UpdateVolume(string.Format($"{volumeAndSerialNumber.Item1}"), null);
+                _pool.SerialNumber = volumeAndSerialNumber.Item2;
+
+                // Update view
+                _view.SetNameText(_session.SelectedPool.Item1);
+                _view.SetSerialNumberText(_pool.SerialNumber);
+                _view.SetVolumeText(string.Format($"{_pool.Volume}"));
+                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
+                _view.SetSaveButtonEnabled(true);
+                _view.SetDeleteButtonEnabled(true);
+            }
+            else
+            {
+                _view.DisplayAlert("No pools", "You have no pools to edit");
+                _view.SetSaveButtonEnabled(false);
+                _view.SetDeleteButtonEnabled(false);
+            }
         }
     }
 }

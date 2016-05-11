@@ -64,8 +64,13 @@ namespace Smartpool.Connection.Server
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        return new GetPoolDataResponseMsg(_fakePool.GetFakeSensors().Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList());
-                    
+                        return new GetPoolDataResponseMsg(_fakePool.GetSensorValuesList());
+
+                case TokenSubMessageTypes.GetPoolInfoRequest:
+                    var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
+                    var poolToReturn = _smartpoolDb.PoolAccess.FindSpecificPool(gpiMsg.Username, gpiMsg.PoolName);
+                    return new GetPoolInfoResponseMsg(poolToReturn.Volume, "GTP8H-H8D8D-DDTKD-MT8W6-PTD6M");
+
                 //User messages
                 case TokenSubMessageTypes.ChangePasswordRequest:
                     var cpMsg = JsonConvert.DeserializeObject<ChangePasswordRequestMsg>(messageString);
@@ -79,7 +84,8 @@ namespace Smartpool.Connection.Server
                 case TokenSubMessageTypes.AllowAccessToPoolDataRequest:
                     return new GeneralResponseMsg(true, false) {MessageInfo = "Not implemented"};
                 //Monitor unit messages
-
+                case TokenSubMessageTypes.ChangeSensorTargetValueRequest:
+                    return new GeneralResponseMsg(true, false) { MessageInfo = "Not implemented" };
                 //Default
                 default:
                     return new GeneralResponseMsg(true, false);
