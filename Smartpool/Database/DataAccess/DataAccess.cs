@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace Smartpool
@@ -13,21 +14,21 @@ namespace Smartpool
             PoolAccess = poolAccess;
         }
 
-        #region Derp
+        //#region Derp
 
-        public List<Tuple<string, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName,
-            string queryStartHour)
-        {
-            throw new NotImplementedException();
-        }
+        //public List<Tuple<string, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName,
+        //    string queryStartHour)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public List<Tuple<string, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName,
-            string queryStartHour)
-        {
-            throw new NotImplementedException();
-        }
+        //public List<Tuple<string, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName,
+        //    string queryStartHour)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        #endregion
+        //#endregion
 
         /// <summary>
         /// 
@@ -87,7 +88,7 @@ namespace Smartpool
 
                 db.SaveChanges();
             }
-
+            
             return true;
         }
 
@@ -121,90 +122,100 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// Queries chlorine values within a given hour range
+        /// Queries chlorine values within a given hour range: dd/MM/yyyy HH:mm
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
-        /// <param name="queryStartHour">Specifies how many hours to look back in time</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param
         /// <returns>A list of tuples, where each tuple contains a chlorine value and the hour where it was measured</returns>
-        //public List<Tuple<long, double>> GetRecentChlorineValues(string poolOwnerEmail, string poolName, long queryStartHour)
-        //{
-        //    using (var db = new DatabaseContext())
-        //    {
-        //        #region Check for invalid starting hour
+        public List<Tuple<long, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end)
+        {
+            using (var db = new DatabaseContext())
+            {
 
-        //        if (queryStartHour < 0)
-        //        {
-        //            throw new ArgumentException("Invalid starting hour from ChlorineQuery, stupid!");
-        //        }
+                DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss",System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-        //        #endregion
+                var daysDateTimeEnumerable = EachDay(startTime, endTime);
 
-        //        #region Query for all user-pool specific chlorine data
+                List<string> daysList = new List<string>();
 
-        //        var chlorineDataQuery = from chlorine in db.ChlorineSet
-        //                                where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
-        //                                select chlorine;
-        //        #endregion
+                foreach (var dateTime in daysDateTimeEnumerable)
+                {
+                    daysList.Add(dateTime.ToString(CultureInfo.InvariantCulture));
+                }
 
-        //        #region Add date-relevant chlorine data to Tuple list
-        //        List<Tuple<long, double>> chlorineTuples = null;
+                #region Query for all user-pool specific chlorine data
 
-        //        foreach (var dataEntity in chlorineDataQuery)
-        //        {
-        //            //if (dataEntity.Data.Timestamp > queryStartHour)
-        //            //{
-        //            //    chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
-        //            //}
-        //        }
-        //        #endregion
+                var chlorineDataQuery = from chlorine in db.ChlorineSet
+                                        where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
+                                        select chlorine;
+                #endregion
 
-        //        return chlorineTuples;
-        //    }
-        //}
+                foreach (var chlorine in chlorineDataQuery)
+                {
+                    if (chlorine.Data.Timestamp == days.)
+                }
 
-        ///// <summary>
-        ///// Queries temperatures within a given hour range
-        ///// </summary>
-        ///// <param name="poolOwnerEmail">The email of the pool owner</param>
-        ///// <param name="poolName">The specific pool name</param>
-        ///// <param name="queryStartHour">Specifies how many hours to look back in time</param>
-        ///// <returns>A list of tuples, where each tuple contains a temperature value and the hour where it was measured</returns>
-        //public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, long queryStartHour)
-        //{
-        //    using (var db = new DatabaseContext())
-        //    {
-        //        #region Check for invalid starting hour
+                #region Add date-relevant chlorine data to Tuple list
+                List<Tuple<long, double>> chlorineTuples = null;
 
-        //        if (queryStartHour < 0)
-        //        {
-        //            throw new ArgumentException("Invalid starting hour from TemperatureQuery, stupid!");
-        //        }
+                foreach (var dataEntity in chlorineDataQuery)
+                {
+                    if (dataEntity.Data.Timestamp > queryStartHour)
+                    {
+                        chlorineTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                    }
+                }
+                #endregion
 
-        //        #endregion
+                return chlorineTuples;
+            }
+        }
 
-        //        #region Query for all user-pool specific temperature data
+        /// <summary>
+        /// Queries temperatures within a given hour range: dd/mm/yyyy hh:mm
+        /// </summary>
+        /// <param name="poolOwnerEmail">The email of the pool owner</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param>
+        /// <returns>A list of tuples, where each tuple contains a temperature value and the hour where it was measured</returns>
+        public List<Tuple<long, double>> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, string start, string end)
+        {
+            using (var db = new DatabaseContext())
+            {
+                
 
-        //        var temperatureDataQuery = from temperature in db.TemperatureSet
-        //                                   where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
-        //                                   select temperature;
-        //        #endregion
+                #region Query for all user-pool specific temperature data
 
-        //        #region Add date-relevant temperature data to Tuple list
+                var temperatureDataQuery = from temperature in db.TemperatureSet
+                                           where temperature.Data.Pool.Name == poolName && temperature.Data.Pool.User.Email == poolOwnerEmail
+                                           select temperature;
+                #endregion
+                
+                #region Add date-relevant temperature data to Tuple list
 
-        //        List<Tuple<long, double>> temperatureTuples = null;
+                List<Tuple<long, double>> temperatureTuples = null;
 
-        //        foreach (var dataEntity in temperatureDataQuery)
-        //        {
-        //            //if (dataEntity.Data.Timestamp > queryStartHour)
-        //            //{
-        //            //    temperatureTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
-        //            //}
-        //        }
-        //        #endregion
+                foreach (var dataEntity in temperatureDataQuery)
+                {
+                    if (dataEntity.Data.Timestamp > queryStartHour)
+                    {
+                        temperatureTuples.Add(new Tuple<long, double>(dataEntity.Data.Timestamp, dataEntity.Value));
+                    }
+                }
+                #endregion
 
-        //        return temperatureTuples;
-        //    }
-        //}
+                return temperatureTuples;
+            }
+        }
+
+        public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru)
+        {
+            for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+                yield return day;
+        }
     }
 }
