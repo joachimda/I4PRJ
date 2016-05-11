@@ -14,7 +14,7 @@ namespace Smartpool.Application.Web
 
     public class HomeController : Controller
     {
-        static string Ip = "Ip-address" ;
+        //static string Ip = "Ip-address" ;
 
         public ActionResult Index()
         {
@@ -22,30 +22,29 @@ namespace Smartpool.Application.Web
         }
 
 
-       public class ASPLoginView : ILoginView
-        {
+       //public class ASPLoginView : ILoginView
+       // {
         
-            public IViewController Controller { get; set; }
+       //     public IViewController Controller { get; set; }
             
-            ASPLoginView()
-            {
-                   var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
-                    Controller = new LoginViewController(this,clientMessager);
-            }
+       //     ASPLoginView()
+       //     {
+       //            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
+       //             Controller = new LoginViewController(this,clientMessager);
+       //     }
 
 
-            public void LoginAccepted()
-            {
+        //    public void LoginAccepted()
+        //    {
                 
-            }
-        }
+        //    }
+        //}
 
         public ActionResult Login()
         {
-            var LoginView = new ASPLoginView();
             ViewBag.Message = "Login Page";
 
-            return View(ASPLoginView);
+            return View();
         }
 
         public ActionResult Contact()
