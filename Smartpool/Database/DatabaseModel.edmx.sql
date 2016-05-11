@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/11/2016 11:00:15
+-- Date Created: 05/11/2016 11:25:47
 -- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -26,14 +26,14 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_DataChlorine]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[ChlorineSet] DROP CONSTRAINT [FK_DataChlorine];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DataHumidity]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[HumiditySet] DROP CONSTRAINT [FK_DataHumidity];
+IF OBJECT_ID(N'[dbo].[FK_DatapH]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[pHSet] DROP CONSTRAINT [FK_DatapH];
 GO
 IF OBJECT_ID(N'[dbo].[FK_DataTemperature]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TemperatureSet] DROP CONSTRAINT [FK_DataTemperature];
 GO
-IF OBJECT_ID(N'[dbo].[FK_DatapH]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[pHSet] DROP CONSTRAINT [FK_DatapH];
+IF OBJECT_ID(N'[dbo].[FK_DataHumidity]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[HumiditySet] DROP CONSTRAINT [FK_DataHumidity];
 GO
 
 -- --------------------------------------------------

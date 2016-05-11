@@ -20,8 +20,8 @@ namespace Smartpool
     
         public virtual Pool Pool { get; set; }
         public virtual Chlorine Chlorine { get; set; }
-        public virtual Humidity Humidity { get; set; }
-        public virtual Temperature Temperature { get; set; }
         public virtual pH pH { get; set; }
+        public virtual Temperature Temperature { get; set; }
+        public virtual Humidity Humidity { get; set; }
     }
 }
