@@ -64,6 +64,7 @@
     <Compile Include="AsynchronousSocketListener.cs" />
     <Compile Include="FakePoolDataGeneration\FakePool.cs" />
     <Compile Include="FakePoolDataGeneration\FakeSensor.cs" />
+    <Compile Include="FakePoolDataGeneration\SensorValueAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResponseManager\Interfaces\IResponseManager.cs" />
     <Compile Include="ResponseManager\Interfaces\ITokenMsgResponse.cs" />

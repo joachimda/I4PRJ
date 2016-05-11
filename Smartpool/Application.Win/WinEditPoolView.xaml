@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Grid.ColumnSpan="3"/>
@@ -42,6 +43,8 @@
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="DepthTextBox" Width="44" HorizontalAlignment="Left" Margin="124,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SerialTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EditButton" Content="Edit pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Template="{StaticResource ButtonSp}" Click="EditButton_OnClickButton_Click" />
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DeleteButton" Content="Delete pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Background="{StaticResource
+            SpRed}" Template="{StaticResource ButtonSp}" Click="DeleteButton_OnClickButton_OnClickButton_Click" />
 
     </Grid>
 </Window>

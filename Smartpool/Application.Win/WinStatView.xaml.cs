@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Client;
@@ -35,7 +36,7 @@ namespace Smartpool.Application.Win
             HumidityStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x03, 0x54, 0xA5));
 
             //Sets up the tabBars event handlers
-            //SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+            SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
             SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
@@ -86,6 +87,23 @@ namespace Smartpool.Application.Win
         public void DisplayAlert(string title, string content)
         {
             MessageBox.Show(content, title);
+        }
+        
+        public void PoolComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var controller = Controller as IStatViewController;
+            
+            var selected = PoolComboBox.SelectedIndex;
+
+            if (selected != -1)
+            {
+                controller?.DidSelectPool(selected);
+            }
+        }
+
+        public void SetSelectedPoolIndex(int index)
+        {
+            PoolComboBox.SelectedIndex = index;
         }
     }
 }

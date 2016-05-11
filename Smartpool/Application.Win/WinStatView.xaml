@@ -19,7 +19,7 @@
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" />
 
         <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
-                      Height="20" >
+                      Height="20" SelectedValuePath="Content" SelectionChanged="PoolComboBox_SelectionChanged">
         </ComboBox>
 
         <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />

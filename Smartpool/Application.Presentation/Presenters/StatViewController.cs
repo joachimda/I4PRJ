@@ -4,7 +4,9 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 0.1  LP      Initial version, missing some implementation
-// 1.1  LP      Missing implementation added
+// 1.0  LP      Missing implementation added
+// 1.1  LP      Changed DidSelectPool to int and added SetSelected... in
+//              ViewDidLoad
 //========================================================================
 
 using System;
@@ -37,6 +39,7 @@ namespace Smartpool.Application.Presentation
             else
             {
                 _view.SetAvailablePools(_session.Pools);
+                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 LoadSensorData();
             }
         }
@@ -49,10 +52,10 @@ namespace Smartpool.Application.Presentation
         }
 
         // Interface
-        public void DidSelectPool(string name)
+        public void DidSelectPool(int index)
         {
             // Parse the name in the pool loader 
-            _session.SelectedPoolIndex = _loader.IndexForPoolName(name);
+            _session.SelectedPoolIndex = index;
             LoadSensorData();
         }
 
