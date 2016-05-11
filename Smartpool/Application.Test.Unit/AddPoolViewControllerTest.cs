@@ -43,7 +43,7 @@ namespace Smartpool.Application.Test.Unit
 
         [TestCase("100,5", 100.5)]
         [TestCase("0", 0)]
-        [TestCase("-100,23", -100.23)]
+        [TestCase("-100,23", 0)]
         public void ActualVolume_VolumeTextChanged_ActualVolumeCorrectValue(string text, double volume)
         {
             _uut.DidChangeText(AddPoolTextField.Volume, text);
