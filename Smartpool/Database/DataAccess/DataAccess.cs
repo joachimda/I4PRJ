@@ -152,6 +152,15 @@ namespace Smartpool
             }
         }
 
+
+        /// <summary>
+        /// Queries chlorine values within a given time range: dd/MM/yyyy HH:mm:ss
+        /// </summary>
+        /// <param name="poolOwnerEmail">The email of the pool owner</param>
+        /// <param name="poolName">The specific pool name</param>
+        /// <param name="start">Specifies the starting time of the query</param>
+        /// <param name="end">Specifies the ending time of the query</param>
+        /// <returns>A list of tuples, where each tuple contains a chlorine value and the hour where it was measured</returns>
         public List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end)
         {
             using (var db = new DatabaseContext())
