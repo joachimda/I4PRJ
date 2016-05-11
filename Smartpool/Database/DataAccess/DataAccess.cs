@@ -167,6 +167,9 @@ namespace Smartpool
             {
                 #region Convert start and end times to DateTime types
 
+                DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                
                 #endregion
 
                 #region Query for all user-pool specific chlorine data
