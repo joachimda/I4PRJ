@@ -44,6 +44,13 @@ namespace Smartpool.Application.Model
             return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.Item1, sensor.Item2.LastOrDefault())).ToList();
         }
 
+        public Tuple<double, string> GetVolumeAndSerialNumberForSelectedPool(IClientMessenger clientMessenger)
+        {
+            var request = new GetPoolInfoRequestMsg(_session.UserName, _session.TokenString, _session.SelectedPool.Item1);
+            var response = (GetPoolInfoResponseMsg) clientMessenger.SendMessage(request);
+            return new Tuple<double, string>(response.Volume, response.SerialNumber);
+        }
+
         public List<Tuple<SensorTypes, List<double>>> GetHistoricDataFromPool(IClientMessenger clientMessenger, int numberOfDays)
         {
             // Send request to server

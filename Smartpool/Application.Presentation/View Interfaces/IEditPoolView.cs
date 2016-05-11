@@ -23,6 +23,11 @@ namespace Smartpool.Application.Presentation
         void SetVolumeText(string text);
 
         /// <summary>
+        /// Sets the text of the serial number label
+        /// </summary>
+        void SetSerialNumberText(string text);
+
+        /// <summary>
         /// Clears the text of all the dimension text fields
         /// </summary>
         void ClearDimensionText();

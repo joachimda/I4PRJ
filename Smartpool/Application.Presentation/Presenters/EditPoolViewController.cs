@@ -142,12 +142,19 @@ namespace Smartpool.Application.Presentation
             // Load active pool info into text fields
             _view.SetAvailablePools(_session.Pools);
 
+            var volumeAndSerialNumber = _loader.GetVolumeAndSerialNumberForSelectedPool(_clientMessenger);
+
             if (_loader.PoolsAreAvailable())
             {
+                // Update pool loader
                 _pool.Name = _session.SelectedPool.Item1;
-                _pool.SerialNumber = "1X2X5-13ADQ-23AS1-23X1DD-D123Q"; // NOTE
+                _pool.UpdateVolume(string.Format($"{volumeAndSerialNumber.Item1}"), null);
+                _pool.SerialNumber = volumeAndSerialNumber.Item2;
+
+                // Update view
                 _view.SetNameText(_session.SelectedPool.Item1);
-                _view.SetVolumeText("30"); // NOTE
+                _view.SetSerialNumberText(_pool.SerialNumber);
+                _view.SetVolumeText(string.Format($"{_pool.Volume}"));
                 _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 _view.SetSaveButtonEnabled(true);
                 _view.SetDeleteButtonEnabled(true);
