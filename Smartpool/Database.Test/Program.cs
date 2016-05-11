@@ -1,4 +1,6 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Net.Mail;
+using System.Threading;
 using Smartpool;
 
 namespace Database.Test
@@ -7,24 +9,17 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
-            SmartPoolDB.ClearEntireDatabase();
+            //SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
+            //IWriteDataAccess dataAccess = new DataAccess();
+            //dataAccess.PoolAccess = SmartPoolDB.PoolAccess;
 
-            //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
-            //SmartPoolDB.UserAccess.EditUserPassword("email@hensen.dk", "såfedt");
+            ////dataAccess.DeleteAllData();
+            ////SmartPoolDB.ClearEntireDatabase();
 
-            ////SmartPoolDB.UserAccess.EditUserEmail("email@hensen.dk", "contact@hensen.dk");
-            //SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
-            //SmartPoolDB.UserAccess.EditUserPassword("sen@her.com", "loart2");
-            ////SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
+            //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
+            //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
-            //SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
-            //SmartPoolDB.PoolAccess.EditPoolName("email@hensen.dk", "Sir Derp's Pool", "namechange");
-
-            //SmartPoolDB.UserAccess.EditUserEmail("sen@her.com", "noobiboob@mail.com");
-            //SmartPoolDB.UserAccess.EditUserName("email@hensen.dk", "Sir Derpdddd");
-            //SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
-            //SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
+            //dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
         }
     }
     /*****************************Don't touch diz!*******************************/

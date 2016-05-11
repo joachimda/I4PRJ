@@ -1,4 +1,6 @@
-﻿namespace Smartpool
+﻿using Smartpool;
+
+namespace Smartpool
 {
     public interface ISmartpoolDB
     {

@@ -13,8 +13,4 @@ namespace Smartpool
     public class PoolNotFoundException : Exception
     {
     }
-
-    public class YouSpelledSomethingWrongException : Exception
-    {
-    }
 }

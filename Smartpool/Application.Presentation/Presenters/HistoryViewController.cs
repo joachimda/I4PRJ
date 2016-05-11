@@ -1,12 +1,9 @@
 ﻿//========================================================================
-// FILENAME :   StatViewController.cs
-// DESCR.   :   Default implementation of the stat view presenter
+// FILENAME :   HistoryViewController.cs
+// DESCR.   :   Default implementation of the history view presenter
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 0.1  LP      Initial version, missing some implementation
-// 1.0  LP      Missing implementation added
-// 1.1  LP      Changed DidSelectPool to int and added SetSelected... in
-//              ViewDidLoad
+// 1.0  LP      Initial version
 //========================================================================
 
 using System;
@@ -16,12 +13,12 @@ using Smartpool.Connection.Model;
 // ReSharper disable once CheckNamespace
 namespace Smartpool.Application.Presentation
 {
-    public class StatViewController : IStatViewController
+    public class HistoryViewController : IHistoryViewController
     {
         // Properties
 
         private readonly IClientMessenger _clientMessenger;
-        private readonly IStatView _view;
+        private readonly IHistoryView _view;
         private Session _session = Session.SharedSession;
         private PoolLoader _loader = new PoolLoader();
 
@@ -39,12 +36,11 @@ namespace Smartpool.Application.Presentation
             else
             {
                 _view.SetAvailablePools(_session.Pools);
-                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 LoadSensorData();
             }
         }
 
-        public StatViewController(IStatView view, IClientMessenger clientMessenger = null)
+        public HistoryViewController(IHistoryView view, IClientMessenger clientMessenger = null)
         {
             // Stored injected dependencies
             _view = view;
@@ -52,10 +48,10 @@ namespace Smartpool.Application.Presentation
         }
 
         // Interface
-        public void DidSelectPool(int index)
+        public void DidSelectPool(string name)
         {
             // Parse the name in the pool loader 
-            _session.SelectedPoolIndex = index;
+            _session.SelectedPoolIndex = _loader.IndexForPoolName(name);
             LoadSensorData();
         }
 
@@ -63,8 +59,8 @@ namespace Smartpool.Application.Presentation
 
         private void LoadSensorData()
         {
-            // Loads current sensor data into the view
-            _view.DisplaySensorData(_loader.GetCurrentDataFromPool(_clientMessenger));
+            // Loads historic sensor data into the view
+            _view.DisplayHistoricData(_loader.GetHistoricDataFromPool(_clientMessenger, 7));
         }
     }
 }

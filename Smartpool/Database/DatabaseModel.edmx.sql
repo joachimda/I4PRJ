@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/05/2016 14:57:38
+-- Date Created: 05/11/2016 11:25:47
 -- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -46,9 +46,6 @@ GO
 IF OBJECT_ID(N'[dbo].[PoolSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[PoolSet];
 GO
-IF OBJECT_ID(N'[dbo].[DataSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[DataSet];
-GO
 IF OBJECT_ID(N'[dbo].[pHSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[pHSet];
 GO
@@ -60,6 +57,9 @@ IF OBJECT_ID(N'[dbo].[TemperatureSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[HumiditySet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[HumiditySet];
+GO
+IF OBJECT_ID(N'[dbo].[DataSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[DataSet];
 GO
 
 -- --------------------------------------------------
@@ -86,19 +86,10 @@ CREATE TABLE [dbo].[PoolSet] (
 );
 GO
 
--- Creating table 'DataSet'
-CREATE TABLE [dbo].[DataSet] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [Timestamp] time  NOT NULL,
-    [Pool_Id] int  NOT NULL
-);
-GO
-
 -- Creating table 'pHSet'
 CREATE TABLE [dbo].[pHSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DataId] int  NOT NULL,
-    [Value] int  NOT NULL,
+    [Value] float  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -106,8 +97,7 @@ GO
 -- Creating table 'ChlorineSet'
 CREATE TABLE [dbo].[ChlorineSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DataId] int  NOT NULL,
-    [Value] int  NOT NULL,
+    [Value] float  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -115,8 +105,7 @@ GO
 -- Creating table 'TemperatureSet'
 CREATE TABLE [dbo].[TemperatureSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DataId] int  NOT NULL,
-    [Value] int  NOT NULL,
+    [Value] float  NOT NULL,
     [Data_Id] int  NOT NULL
 );
 GO
@@ -124,9 +113,16 @@ GO
 -- Creating table 'HumiditySet'
 CREATE TABLE [dbo].[HumiditySet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [DataId] int  NOT NULL,
-    [Value] int  NOT NULL,
+    [Value] float  NOT NULL,
     [Data_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'DataSet'
+CREATE TABLE [dbo].[DataSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Timestamp] nvarchar(max)  NOT NULL,
+    [PoolId] int  NOT NULL
 );
 GO
 
@@ -143,12 +139,6 @@ GO
 -- Creating primary key on [Id] in table 'PoolSet'
 ALTER TABLE [dbo].[PoolSet]
 ADD CONSTRAINT [PK_PoolSet]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'DataSet'
-ALTER TABLE [dbo].[DataSet]
-ADD CONSTRAINT [PK_DataSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -176,6 +166,12 @@ ADD CONSTRAINT [PK_HumiditySet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'DataSet'
+ALTER TABLE [dbo].[DataSet]
+ADD CONSTRAINT [PK_DataSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -195,10 +191,10 @@ ON [dbo].[PoolSet]
     ([UserId]);
 GO
 
--- Creating foreign key on [Pool_Id] in table 'DataSet'
+-- Creating foreign key on [PoolId] in table 'DataSet'
 ALTER TABLE [dbo].[DataSet]
 ADD CONSTRAINT [FK_PoolData]
-    FOREIGN KEY ([Pool_Id])
+    FOREIGN KEY ([PoolId])
     REFERENCES [dbo].[PoolSet]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -207,7 +203,7 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_PoolData'
 CREATE INDEX [IX_FK_PoolData]
 ON [dbo].[DataSet]
-    ([Pool_Id]);
+    ([PoolId]);
 GO
 
 -- Creating foreign key on [Data_Id] in table 'ChlorineSet'

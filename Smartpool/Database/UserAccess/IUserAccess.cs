@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Smartpool
+﻿namespace Smartpool
 {
     public interface IUserAccess
     {
