@@ -154,7 +154,10 @@ namespace Smartpool
 
         public List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end)
         {
-            throw new NotImplementedException();
+            using (var db = new DatabaseContext())
+            {
+                
+            }
         }
 
 
