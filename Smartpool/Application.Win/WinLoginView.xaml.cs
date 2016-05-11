@@ -117,16 +117,14 @@ namespace Smartpool.Application.Win
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.SignUpButton);
             
+            var view = new WinCreateUserView();
+            view.Show();
         }
 
         private void ForgotUser_MouseUp(object sender, MouseButtonEventArgs e)
         {
             var controller = Controller as ILoginViewController;
             controller?.ButtonPressed(LoginViewButton.ForgotButton);
-
-            //Delete this. It's here for debugging purposes
-            WinStatView view = new WinStatView();
-            view.Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
