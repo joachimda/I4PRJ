@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using NUnit.Framework.Internal;
 
 namespace Smartpool.Connection.Server
 {
@@ -158,7 +162,11 @@ namespace Smartpool.Connection.Server
 
         private static void Send(Socket handler, String data)
         {
-            Console.WriteLine("Sent data back to client: " + data);
+            using (System.IO.StreamWriter file = new StreamWriter(@"debugFile.txt", true))
+            {
+                file.WriteLine(data);
+            }
+            Console.WriteLine("Sent data back to client. Check debugFile for more info");
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
