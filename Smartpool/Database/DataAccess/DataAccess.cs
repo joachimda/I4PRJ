@@ -106,7 +106,7 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// Queries chlorine values within a given hour range: dd/MM/yyyy HH:mm
+        /// Queries chlorine values within a given hour range: dd/MM/yyyy HH:mm:ss
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>

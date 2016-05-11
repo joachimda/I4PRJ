@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using Smartpool;
@@ -159,11 +162,17 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void CreateDataEntry_AddingDataEntry_()
+        public void CreateDataEntry_AddingDataEntry_SetHasCorrectValue()
         {
-            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+            double value = 987;
+
+            string start = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+            _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
+            string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+
+            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item2;
             
-            //Assert.That(_uut.);
+            Assert.That(setvalue, Is.EqualTo(value));
         }
 
         #endregion
