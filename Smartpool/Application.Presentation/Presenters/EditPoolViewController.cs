@@ -33,22 +33,7 @@ namespace Smartpool.Application.Presentation
             _view.SetAvailablePools(_session.Pools);
 
             // Load active pool info into text fields
-            if (_loader.PoolsAreAvailable())
-            {
-                _pool.Name = _session.SelectedPool.Item1;
-                _pool.SerialNumber = "109"; // NOTE
-                _view.SetNameText(_session.SelectedPool.Item1);
-                _view.SetVolumeText("109"); // NOTE
-                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
-                _view.SetSaveButtonEnabled(true);
-                _view.SetDeleteButtonEnabled(true);
-            }
-            else
-            {
-                _view.DisplayAlert("No pools","You have no pools to edit");
-                _view.SetSaveButtonEnabled(false);
-                _view.SetDeleteButtonEnabled(false);
-            }
+            LoadPoolInfoIntoView();
         }
 
         public EditPoolViewController(IEditPoolView view, IClientMessenger clientMessenger = null)
@@ -72,7 +57,9 @@ namespace Smartpool.Application.Presentation
             // Act on the response from the server
             if (response.RequestExecutedSuccesfully)
             {
+                _loader.ResetPools(_clientMessenger);
                 _view.PoolUpdated();
+                LoadPoolInfoIntoView();
             }
             else if (response.TokenStillActive == false)
             {
@@ -146,6 +133,27 @@ namespace Smartpool.Application.Presentation
         private void UpdateSaveButton()
         {
             _view.SetSaveButtonEnabled(_pool.Name.Length > 0);
+        }
+
+        private void LoadPoolInfoIntoView()
+        {
+            // Load active pool info into text fields
+            if (_loader.PoolsAreAvailable())
+            {
+                _pool.Name = _session.SelectedPool.Item1;
+                _pool.SerialNumber = "1X2X5-13ADQ-23AS1-23X1DD-D123Q"; // NOTE
+                _view.SetNameText(_session.SelectedPool.Item1);
+                _view.SetVolumeText("30"); // NOTE
+                _view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
+                _view.SetSaveButtonEnabled(true);
+                _view.SetDeleteButtonEnabled(true);
+            }
+            else
+            {
+                _view.DisplayAlert("No pools", "You have no pools to edit");
+                _view.SetSaveButtonEnabled(false);
+                _view.SetDeleteButtonEnabled(false);
+            }
         }
     }
 }
