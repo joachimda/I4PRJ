@@ -29,7 +29,7 @@ namespace Smartpool
             {
                 return false;
             }
-            if (volume <= 0)
+            if (volume < 0)
             {
                 return false;
             }
