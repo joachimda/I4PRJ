@@ -5,14 +5,14 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
     internal class SensorValueAuthenticator
     {
-        private const double MinTemp = -273.15;
-        private const double MaxTemp = 100;
-        private const double MinPh = 1;
-        private const double MaxPh = 14;
+        private const double MinTemp = 20;
+        private const double MaxTemp = 40;
+        private const double MinPh = 6;
+        private const double MaxPh = 9;
         private const double MinChlor = 0;
-        private const double MaxChlor = 10;
-        private const double MinHum = 0;
-        private const double MaxHum = 100;
+        private const double MaxChlor = 6;
+        private const double MinHum = 30;
+        private const double MaxHum = 70;
 
         public double Auth(SensorTypes sensorType, double sensorValue)
         {
