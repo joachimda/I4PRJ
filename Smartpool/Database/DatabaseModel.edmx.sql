@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/11/2016 12:22:30
+-- Date Created: 05/11/2016 14:20:04
 -- Generated from EDMX file: C:\Users\Norgaard\Documents\Git\I4PRJ\Smartpool\Database\DatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -81,7 +81,7 @@ GO
 CREATE TABLE [dbo].[PoolSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Volume] float  NULL,
+    [Volume] float  NOT NULL,
     [UserId] int  NOT NULL
 );
 GO
