@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 using Smartpool;
 
 namespace Database.Test.Unit
@@ -63,7 +64,26 @@ namespace Database.Test.Unit
         {
             Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
         }
-        
+
+        [Test]
+        public void CreateDataEntry_Adding2DataEntries_ReturnsTrue()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+            Thread.Sleep(1000);
+            Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
+        }
+
+        [Test]
+        public void CreateDataEntry_Adding10DataEntries_ReturnsTrue()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
+                Thread.Sleep(1000);
+            }
+            Assert.That(_uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33), Is.True);
+        }
+
         // public void CreateDataEntry_AddingData_DataPresentInDatabase(){}
 
         #endregion
