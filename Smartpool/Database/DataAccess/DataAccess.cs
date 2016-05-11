@@ -44,7 +44,7 @@ namespace Smartpool
                 if (poolsearch.Any() == false) return false;
 
                 // create 'Data' entity to store measurements in
-                string time = DateTime.UtcNow.ToString();
+                string time = DateTime.UtcNow.ToString("G");
                 var newData = new Data() { PoolId = poolsearch.First().Id, Timestamp = time };
                 db.DataSet.Add(newData);
                 db.SaveChanges();   // the newdata must be saved to db, so that mesurement can find it by PK
@@ -119,9 +119,18 @@ namespace Smartpool
             {
                 List<Tuple<string, double>> chlorineTuples = null;
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime endTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
                 var daysDateTimeEnumerable = EachDay(startTime, endTime);
+
+                var calculatedDates = new List<string>
+    (
+       EachDay
+        (
+            DateTime.Parse(start),
+            DateTime.Parse(end)
+        ).Select(d => d.ToString("G"))
+    );
 
                 List<string> daysList = new List<string>();
 

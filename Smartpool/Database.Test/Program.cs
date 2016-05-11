@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading;
 using Smartpool;
@@ -17,12 +18,18 @@ namespace Database.Test
             SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
             SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
-            dataAccess.CreateDataEntry("email", "baghave", 5, 9, 3, 10);
-            Thread.Sleep(2000);
-            dataAccess.CreateDataEntry("email", "baghave", 56, 3, 32, 12);
+            for (int i = 0; i < 10; i++)
+            {
+                dataAccess.CreateDataEntry("email", "baghave", 5+i, 9+1, 3+i, 10+i);
+                Thread.Sleep(1500);
+            }
 
 
-            dataAccess.
+            List<Tuple<string, double>> chlorineTuples = dataAccess.GetChlorineValues("email", "baghave", "11/05/2016 11:47:51", "11/05/2016 12:20:45");
+            foreach (var chlorineTuple in chlorineTuples)
+            {
+                Console.WriteLine(chlorineTuple.Item1 + chlorineTuple.Item2);
+            }
 
 
         }
