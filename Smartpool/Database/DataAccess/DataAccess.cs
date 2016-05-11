@@ -201,5 +201,14 @@ namespace Smartpool
             }
         }
 
+        public List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
