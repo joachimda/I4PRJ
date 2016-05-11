@@ -1,6 +1,6 @@
 ﻿//========================================================================
-// FILENAME :   UserValidatorTest.cs
-// DESCR.   :   Unit test of UserValidator
+// FILENAME :   PoolValidatorTest.cs
+// DESCR.   :   Unit test of PoolValidator
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -18,7 +18,7 @@ using Smartpool.Connection.Model;
 namespace Smartpool.Application.Test.Unit
 {
     [TestFixture]
-    public class UserValidatorTest
+    public class PoolValidatorTest
     {
         private UserValidator _uut;
 
