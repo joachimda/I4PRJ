@@ -54,17 +54,15 @@ namespace Application.iOS
 		{
 			_specializedController.ButtonPressed(LoginViewButton.ForgotButton);
 		}
-
-		partial void emailValueChanged (Foundation.NSObject sender)
+			
+		partial void emailEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangeEmailText(textField.Text);
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 
-		partial void passwordValueChanged (Foundation.NSObject sender)
+		partial void passwordEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text);
+			_specializedController.DidChangePasswordText(sender.Text);
 		}
 
 		// IView Interface Implementation

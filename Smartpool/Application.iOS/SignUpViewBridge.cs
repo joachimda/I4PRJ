@@ -92,28 +92,24 @@ namespace Application.iOS
 			// return to previous view
 		}
 
-		partial void emailTextFieldValueChanged (Foundation.NSObject sender)
+		partial void emailEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangeEmailText(textField.Text);
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 			
-		partial void nameTextFieldValueChanged (Foundation.NSObject sender)
+		partial void nameEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangeNameText(textField.Text);
+			_specializedController.DidChangeNameText(sender.Text);
 		}
 			
-		partial void passwordTextFieldOneValueChanged (Foundation.NSObject sender)
+		partial void passwordOneEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 0);
 		}
 			
-		partial void passwordTextFieldTwoValueChanged (Foundation.NSObject sender)
+		partial void passwordTwoEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			if (textField.Text != null) _specializedController.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 1);
 		}
 			
 		partial void signUpButtonTouchUpInside (Foundation.NSObject sender)
