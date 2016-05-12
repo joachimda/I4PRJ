@@ -34,7 +34,6 @@ namespace Smartpool.Application.Win
             ThemeProperties.SetPlaceholderText(LengthTextBox, "Width");
             ThemeProperties.SetPlaceholderText(WidthTextBox, "Length");
             ThemeProperties.SetPlaceholderText(DepthTextBox, "Depth");
-            ThemeProperties.SetPlaceholderText(SerialTextBox, "Moniter unit serial number");
 
             //Sets up the tabBars event handlers
             SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
@@ -185,7 +184,7 @@ namespace Smartpool.Application.Win
 
         public void SetSerialNumberText(string text)
         {
-            SerialTextBox.Text = text;
+            SerialTextBlock.Text = "Moniter unit serial number: " + text;
         }
     }
 }
