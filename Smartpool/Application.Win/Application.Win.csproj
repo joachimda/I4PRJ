@@ -89,6 +89,9 @@
     <Compile Include="WinEditUserView.xaml.cs">
       <DependentUpon>WinEditUserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinHistoryView.xaml.cs">
+      <DependentUpon>WinHistoryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLoginView.xaml.cs" />
     <Compile Include="WinStatView.xaml.cs" />
     <Compile Include="App.xaml.cs">
@@ -132,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinEditUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinHistoryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="Smartpool.Application.Win.WinHistoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Smartpool.Application.Win"
+        mc:Ignorable="d"
+        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="420" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" />
+
+            <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
+                      Height="20" SelectionChanged="PoolComboBox_SelectionChanged">
+            </ComboBox>
+
+            <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />
+
+        </Grid>
+    </Window>

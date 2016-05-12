@@ -95,6 +95,11 @@ namespace Smartpool.Application.Win
             VolumeTextBox.Text = volume;
         }
 
+        public void SetSerialNumberText(string text)
+        {
+            SerialTextBlock.Text = "Moniter unit serial number: " + text;
+        }
+
         public void ClearDimensionText()
         {
             LengthTextBox.Text = "";
@@ -182,9 +187,5 @@ namespace Smartpool.Application.Win
             _specializedController.DeleteButtonPressed();
         }
 
-        public void SetSerialNumberText(string text)
-        {
-            SerialTextBlock.Text = "Moniter unit serial number: " + text;
-        }
     }
 }
