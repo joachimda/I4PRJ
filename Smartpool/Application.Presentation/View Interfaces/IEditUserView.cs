@@ -14,7 +14,7 @@ namespace Smartpool.Application.Presentation
         /// <summary>
         /// Clears the text of all text fields
         /// </summary>
-        void ClearAllText(string text);
+        void ClearAllText();
 
         /// <summary>
         /// Sets the state of the save button (save password)
@@ -25,5 +25,10 @@ namespace Smartpool.Application.Presentation
         /// Sets the state of password indicator of the new password
         /// </summary>
         void SetNewPasswordValid(bool valid);
+
+        /// <summary>
+        /// Tells the view that the new password has been saved successfully
+        /// </summary>
+        void UpdateSuccessful();
     }
 }
