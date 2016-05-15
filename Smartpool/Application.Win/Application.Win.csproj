@@ -66,8 +66,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CreateUserView.xaml.cs">
-      <DependentUpon>CreateUserView.xaml</DependentUpon>
+    <Compile Include="WinCreateUserView.xaml.cs">
+      <DependentUpon>WinCreateUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpTabControl.xaml.cs" />
     <Compile Include="StatViewerTheme.xaml.cs" />
@@ -86,13 +86,16 @@
     <Compile Include="WinEditPoolView.xaml.cs">
       <DependentUpon>WinEditPoolView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinEditUserView.xaml.cs">
+      <DependentUpon>WinEditUserView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinLoginView.xaml.cs" />
     <Compile Include="WinStatView.xaml.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="CreateUserView.xaml">
+    <Page Include="WinCreateUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinEditPoolView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinEditUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

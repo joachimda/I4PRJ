@@ -55,6 +55,7 @@
     <Compile Include="Messages\MessageTypes.cs" />
     <Compile Include="Messages\ServerMessages\GeneralResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\GetPoolDataResponseMsg.cs" />
+    <Compile Include="Messages\ServerMessages\GetPoolInfoResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\LoginResponseMsg.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\AddPoolRequestMsg.cs" />

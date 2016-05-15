@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using Smartpool;
@@ -159,43 +162,77 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void CreateDataEntry_AddingDataEntry_()
+        public void CreateDataEntry_AddingDataEntry_SetHasCorrectValue()
         {
-            _uut.CreateDataEntry(ownerEmail, poolName, 987, 89, 8, 33);
-            
-            //Assert.That(_uut.);
+            double value = 987;
+
+            string start = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+            _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
+            string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+
+            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item2;
+
+            Assert.That(setvalue, Is.EqualTo(value));
         }
 
-        #endregion
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
+        {
+            double value = 987;
 
-        #region RemoveData
+            Thread.Sleep(1000);
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
+            Thread.Sleep(1000);
+            string end = DateTime.UtcNow.ToString("G");
 
-        //[Test]
-        //public void RemoveData_RemovingDataFromNonExistingPoolAndUser_ReturnsFalse() { }
+            string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
 
-        //[Test]
-        //public void RemoveData_RemovingDataFromNonExistingPool_ReturnsFalse() { }
+            Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
+        }
 
-        //[Test]
-        //public void RemoveData_RemovingDataFromNonExistingUser_ReturnsFalse() { }
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampMoreThanBeforeMethodCall()
+        {
+            double value = 987;
 
-        //[Test]
-        //public void RemoveData_RemovingDataFromPoolWithoutData_ReturnsFalse() { }
+            Thread.Sleep(1000);
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
+            Thread.Sleep(1000);
+            string end = DateTime.UtcNow.ToString("G");
 
-        //[Test]
-        //public void RemoveData_RemovingData_ReturnsFalse() { }
+            string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+
+            Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.AtLeast(DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
+        }
 
         #endregion
 
         #region DeleteAllData
 
-        //[Test]
-        //public void DeleteAllData_AddedDataToSomePools_NoDataSetInDatabase() { }
+        [Test]
+        public void DeleteAllData_AddedDataToSomePools_NoDataInDatabase()
+        {
+            _uut.CreateDataEntry(ownerEmail, poolName, 78, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 78, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 78, 89, 8, 33);
 
-        //[Test]
-        //public void DeleteAllData_EmptyDatabase_NoDataSetInDatabase() { }
+            _uut.DeleteAllData();
+
+            int entries = 0;
+
+            using (var db = new DatabaseContext())
+            {
+                var search = from data in db.ChlorineSet
+                             select data;
+
+                entries = search.Count();
+            }
+
+            Assert.That(entries, Is.EqualTo(0));
+        }
 
         #endregion
-
     }
 }

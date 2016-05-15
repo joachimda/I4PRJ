@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -68,6 +71,7 @@ namespace Smartpool.Connection.Server
             {
                 listener.Bind(localEndPoint);
                 listener.Listen(100);
+                Console.WriteLine("Server started");
 
                 while (true)
                 {
@@ -75,7 +79,7 @@ namespace Smartpool.Connection.Server
                     allDone.Reset();
 
                     // Start an asynchronous socket to listen for connections.
-                    Console.WriteLine("Waiting for a connection...");
+                    //Console.WriteLine("Waiting for a connection...");
                     listener.BeginAccept(
                         new AsyncCallback(AcceptCallback),
                         listener);
@@ -136,8 +140,15 @@ namespace Smartpool.Connection.Server
                 {
                     // All the data has been read from the 
                     // client. Display it on the console.
-                    Console.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \n Data received : {1}",
+
+                    using (var file = new StreamWriter(@"debugFile.txt", true))
+                    {
+                        file.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \nData received : {1}",
                         content.Length, content);
+                    }
+                    var contentCommand = content.Substring(37, (content.IndexOf(",") - 37));
+                    Console.WriteLine(DateTime.Now + " - Received command: " + contentCommand);
+                    //Console.WriteLine(DateTime.Now + " - Read {0} bytes from socket. \nData received : {1}", content.Length, content);
 
                     var receivedString = content.Remove(content.Length - 5, 5); //Removes <EOF>
 
@@ -158,7 +169,12 @@ namespace Smartpool.Connection.Server
 
         private static void Send(Socket handler, String data)
         {
-            Console.WriteLine("Sent data back to client: " + data);
+            using (var file = new StreamWriter(@"debugFile.txt", true))
+            {
+                file.WriteLine(DateTime.Now + " - Sent: " + data);
+            }
+            var dataCommand = data.Substring(37, (data.IndexOf(",") - 37));
+            Console.Write(DateTime.Now + " - Replied with: " + dataCommand);
             // Convert the string data to byte data using ASCII encoding.
             byte[] byteData = Encoding.ASCII.GetBytes(data);
 
@@ -176,7 +192,7 @@ namespace Smartpool.Connection.Server
 
                 // Complete sending the data to the remote device.
                 int bytesSent = handler.EndSend(ar);
-                Console.WriteLine(DateTime.Now + " - Sent {0} bytes to client.", bytesSent);
+                Console.Write(" - {0} bytes. Check debugFile for info\n", bytesSent);
 
                 handler.Shutdown(SocketShutdown.Both);
                 handler.Close();

@@ -6,6 +6,8 @@
 // 1.01 EN      Added event for History
 // 1.02 EN      Added event for AddPool and EditPool
 // 1.03 EN      Added more statviewers
+// 1.04 EN      Added comboBox
+// 1.1  EN      Implemented presenter
 //========================================================================
 
 using System;
@@ -77,11 +79,14 @@ namespace Smartpool.Application.Win
         public List<string> AvailablePoolsList { get; set; } = new List<string>();
         public void SetAvailablePools(List<Tuple<string, bool>> pools)
         {
+            PoolComboBox.ItemsSource = null;
             AvailablePoolsList.Clear();
+
             foreach (var pool in pools)
             {
                 AvailablePoolsList.Add(pool.Item1);
             }
+            PoolComboBox.ItemsSource = AvailablePoolsList;
         }
 
         public void DisplayAlert(string title, string content)
