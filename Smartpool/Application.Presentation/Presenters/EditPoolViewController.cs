@@ -5,6 +5,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
 // 1.1  LP      Updated to use pool validator and loader
+// 1.2  LP      Fixed loading of pool info into view
 //========================================================================
 
 using System;
@@ -61,9 +62,9 @@ namespace Smartpool.Application.Presentation
                 LoadPoolInfoIntoView();
 
             }
-            else if (response.TokenStillActive == false)
+            else
             {
-                _view.DisplayAlert("Invalid action", "Your login is no longer active, please login again.");
+                _view.DisplayAlert("Save Error", response.MessageInfo);
             }
         }
 
@@ -84,7 +85,7 @@ namespace Smartpool.Application.Presentation
             }
             else
             {
-                _view.DisplayAlert("Error", "The pool could not be removed");
+                _view.DisplayAlert("Error", response.MessageInfo);
             }
         }
 
