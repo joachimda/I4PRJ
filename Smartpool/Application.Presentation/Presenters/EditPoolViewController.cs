@@ -62,9 +62,9 @@ namespace Smartpool.Application.Presentation
                 LoadPoolInfoIntoView();
 
             }
-            else if (response.TokenStillActive == false)
+            else
             {
-                _view.DisplayAlert("Invalid action", "Your login is no longer active, please login again.");
+                _view.DisplayAlert("Save Error", response.MessageInfo);
             }
         }
 
@@ -85,7 +85,7 @@ namespace Smartpool.Application.Presentation
             }
             else
             {
-                _view.DisplayAlert("Error", "The pool could not be removed");
+                _view.DisplayAlert("Error", response.MessageInfo);
             }
         }
 

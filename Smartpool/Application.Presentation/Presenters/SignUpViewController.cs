@@ -18,7 +18,7 @@ namespace Smartpool.Application.Presentation
     {
         // Properties
 
-        private readonly IClientMessenger _clientMessenger; // temporary, needs a real IClient
+        private readonly IClientMessenger _clientMessenger;
         private readonly ISignUpView _view;
         public UserValidator User = new UserValidator();
 
