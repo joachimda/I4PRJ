@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddPoolViewControllerTest.cs" />
+    <Compile Include="EditUserViewControllerTest.cs" />
     <Compile Include="PoolValidatorTest.cs" />
     <Compile Include="SessionTest.cs" />
     <Compile Include="StatViewControllerTest.cs" />
