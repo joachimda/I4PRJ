@@ -9,11 +9,14 @@
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System;
+using Foundation;
 using UIKit;
+using System.Drawing;
+using FieldService.iOS;
 
 namespace Application.iOS
 {
-	public partial class LoginViewBridge : UIViewController, ILoginView
+	public partial class LoginViewBridge : BaseController, ILoginView
 	{
 		private ILoginViewController _specializedController => Controller as ILoginViewController;
 
@@ -32,12 +35,12 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override void DidReceiveMemoryWarning ()
-		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
+		public override bool HandlesKeyboardNotifications {
+			get {
+				return true;
+			}
 		}
-
+			
 		// Actions
 
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender)
