@@ -88,12 +88,6 @@ namespace Application.iOS
 
 		// Actions
 
-		partial void cancelButtonTouchUpInside (Foundation.NSObject sender)
-		{
-			// return to previous view
-			NavigationController.PopViewController(true);
-		}
-
 		partial void emailEditingChanged (UIKit.UITextField sender)
 		{
 			_specializedController.DidChangeEmailText(sender.Text);
