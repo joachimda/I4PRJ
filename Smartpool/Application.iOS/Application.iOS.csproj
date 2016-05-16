@@ -129,6 +129,7 @@
       <DependentUpon>SignUpViewBridge.cs</DependentUpon>
     </Compile>
     <Compile Include="iOSClientMessenger.cs" />
+    <Compile Include="iOSResponseManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

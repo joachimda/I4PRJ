@@ -20,7 +20,7 @@ namespace Application.iOS
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new LoginViewController(this);
+			Controller = new LoginViewController(this, new iOSClientMessenger());
 		}
 
 		public override void ViewDidLoad ()
