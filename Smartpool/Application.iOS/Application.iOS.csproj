@@ -135,6 +135,10 @@
       <DependentUpon>StatViewBridge.cs</DependentUpon>
     </Compile>
     <Compile Include="BaseController.cs" />
+    <Compile Include="HistoryViewBridge.cs" />
+    <Compile Include="HistoryViewBridge.designer.cs">
+      <DependentUpon>HistoryViewBridge.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
