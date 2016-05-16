@@ -1,4 +1,11 @@
-﻿using System;
+﻿//========================================================================
+// FILENAME :   iOSClientMessenger.cs
+// DESCR.   :   Messenger for iOS socket client
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 0.1  LP      Initial version, using fake response manager
+//========================================================================
+
 using Smartpool.Connection.Model;
 
 namespace Application.iOS
@@ -9,15 +16,8 @@ namespace Application.iOS
 
 		public Message SendMessage(Message message)
 		{
-			return iOSResponseManager.ResponseForMessage (message);
-		}
-	}
-
-	public class iOSResponseManager
-	{
-		public static Message ResponseForMessage(Message message)
-		{
-			return new Message ();
+			var responseManager = new iOSResponseManager ();
+			return responseManager.ResponseForMessage (message);
 		}
 	}
 }
