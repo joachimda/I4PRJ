@@ -36,6 +36,7 @@ namespace Smartpool.Application.Presentation
             else
             {
                 _view.SetAvailablePools(_session.Pools);
+				_view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 LoadSensorData();
             }
         }
