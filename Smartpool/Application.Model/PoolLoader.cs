@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
-// 1.1  LP      Volume can't be negative
+// 1.1  LP      Volume can't be negative, added additional pool info method
 //========================================================================
 
 using System;
@@ -46,6 +46,7 @@ namespace Smartpool.Application.Model
 
         public Tuple<double, string> GetVolumeAndSerialNumberForSelectedPool(IClientMessenger clientMessenger)
         {
+            // Send request to server
             var request = new GetPoolInfoRequestMsg(_session.UserName, _session.TokenString, _session.SelectedPool.Item1);
             var response = (GetPoolInfoResponseMsg) clientMessenger.SendMessage(request);
             return new Tuple<double, string>(response.Volume, response.SerialNumber);

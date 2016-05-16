@@ -47,9 +47,11 @@
   <ItemGroup>
     <Compile Include="Presenters\AddPoolViewController.cs" />
     <Compile Include="Presenters\EditPoolViewController.cs" />
+    <Compile Include="Presenters\EditUserViewController.cs" />
     <Compile Include="Presenters\HistoryViewController.cs" />
     <Compile Include="Presenters\Interfaces\IAddPoolViewController.cs" />
     <Compile Include="Presenters\Interfaces\IEditPoolViewController.cs" />
+    <Compile Include="Presenters\Interfaces\IEditUserViewController.cs" />
     <Compile Include="Presenters\Interfaces\IHistoryViewController.cs" />
     <Compile Include="Presenters\Interfaces\IPoolControlling.cs" />
     <Compile Include="Presenters\Interfaces\ISignUpViewController.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="View Interfaces\IAddPoolView.cs" />
     <Compile Include="View Interfaces\IAlertDisplaying.cs" />
     <Compile Include="View Interfaces\IEditPoolView.cs" />
+    <Compile Include="View Interfaces\IEditUserView.cs" />
     <Compile Include="View Interfaces\IHistoryView.cs" />
     <Compile Include="View Interfaces\ILoginView.cs" />
     <Compile Include="Presenters\Interfaces\ILoginViewController.cs" />

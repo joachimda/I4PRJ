@@ -1,6 +1,6 @@
 ﻿//========================================================================
 // FILENAME :   IEditPoolView.cs
-// DESCR.   :   Interface for the add pool views
+// DESCR.   :   Interface for the edit pool views
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
