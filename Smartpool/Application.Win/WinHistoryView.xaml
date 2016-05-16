@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Smartpool.Application.Win"
         mc:Ignorable="d"
-        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="420" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+        Background="{StaticResource SpBlack}" SizeChanged="WinHistoryView_OnSizeChanged" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="420" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -19,7 +19,9 @@
             <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
                       Height="20" SelectionChanged="PoolComboBox_SelectionChanged">
             </ComboBox>
-
-            <Canvas Grid.Row="1" HorizontalAlignment="Stretch" Background="Aqua" x:Name="TemperatureCanvas"></Canvas>            
+            <Border Grid.Row="1" Margin="4, 4, 4, 0" BorderBrush="{StaticResource SpRed}" BorderThickness="2" CornerRadius="5">
+                <Canvas Margin="4" HorizontalAlignment="Stretch" x:Name="TemperatureCanvas">
+                </Canvas>
+            </Border>
         </Grid>
     </Window>

@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 0.1  EN      Initial version with partial GUI
+// 0.2  EN      Draws points on temp graph
 //========================================================================
 
 using System;
@@ -58,6 +59,9 @@ namespace Smartpool.Application.Win
             PoolComboBox.SelectedIndex = index;
         }
 
+        private const int PointsOnGraphs = 13;
+        List<double> _temperatureValues;
+
         public void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData)
         {
             foreach (var sensor in historicData)
@@ -65,7 +69,15 @@ namespace Smartpool.Application.Win
                 switch (sensor.Item1)
                 {
                     case SensorTypes.Temperature:
-                        DisplayGraph(TemperatureCanvas, sensor.Item2);
+                        if (sensor.Item2.Count < PointsOnGraphs)
+                        {
+                            _temperatureValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
+                        }
+                        else
+                        {
+                            _temperatureValues = sensor.Item2.GetRange(0, PointsOnGraphs);
+                            DisplayGraph(TemperatureCanvas, _temperatureValues);
+                        }
                         break;
                     
                 }
@@ -105,12 +117,11 @@ namespace Smartpool.Application.Win
                 // Remove children from canvas
                 historyCanvas.Children.Clear();
             }));
-
-            // Calculate canvas x/y values and scalars
+            
             var canvasHeight = historyCanvas.ActualHeight;
             var canvasWidth = historyCanvas.ActualWidth;
 
-            int i = 1;
+            var i = 0;
 
             // Draw tracks as ellipses
             foreach (var value in history)
@@ -126,10 +137,31 @@ namespace Smartpool.Application.Win
                     historyCanvas.Children.Add(point);
                     var pointHeight = (1.0 - (100 - value) / 100) * canvasHeight;
                     Canvas.SetBottom(point, pointHeight);
-                    Canvas.SetLeft(point, (canvasWidth/10) * i);
+                    Canvas.SetLeft(point, (canvasWidth/10) * i - 2);
                     i++;
                 }));
             }
+
+            var topText = new TextBlock();
+            topText.Text = "100";
+            topText.FontSize = 8;
+            topText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+            historyCanvas.Children.Add(topText);
+            Canvas.SetBottom(topText, canvasHeight - 6);
+            Canvas.SetLeft(topText, - 4);
+            var bottomText = new TextBlock();
+            bottomText.Text = "0";
+            bottomText.FontSize = 8;
+            bottomText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+            historyCanvas.Children.Add(bottomText);
+            Canvas.SetBottom(bottomText, -4);
+            Canvas.SetLeft(bottomText, -4);
         }
+
+        private void WinHistoryView_OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DisplayGraph(TemperatureCanvas, _temperatureValues);
+        }
+    
     }
 }
