@@ -20,7 +20,7 @@ namespace Application.iOS
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new SignUpViewController(this);
+			Controller = new SignUpViewController(this, new iOSClientMessenger());
 		}
 
 		public override void ViewDidLoad ()
@@ -82,7 +82,8 @@ namespace Application.iOS
 			
 		public void SignUpAccepted()
 		{
-			// Implementation missing
+			// return to previous view
+			NavigationController?.PopViewController(true);
 		}
 
 		// Actions
@@ -90,6 +91,7 @@ namespace Application.iOS
 		partial void cancelButtonTouchUpInside (Foundation.NSObject sender)
 		{
 			// return to previous view
+			NavigationController.PopViewController(true);
 		}
 
 		partial void emailEditingChanged (UIKit.UITextField sender)

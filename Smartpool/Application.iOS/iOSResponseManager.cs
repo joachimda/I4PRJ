@@ -18,14 +18,21 @@ namespace Application.iOS
 			{
 			case MessageTypes.LoginRequest:
 				return ResponseForLoginRequestMessage ((LoginRequestMsg)message);
+			case MessageTypes.AddUserRequest:
+				return ResponseForAddUserRequestMessage ((AddUserRequestMsg)message);
+			default:
+				return new GeneralResponseMsg (true, true);
 			}
-
-			return new Message ();
 		}
 
 		private Message ResponseForLoginRequestMessage(LoginRequestMsg message)
 		{
 			return new LoginResponseMsg ("tokenString", true);
+		}
+
+		private Message ResponseForAddUserRequestMessage(AddUserRequestMsg message)
+		{
+			return new GeneralResponseMsg (true, true);
 		}
 	}
 }
