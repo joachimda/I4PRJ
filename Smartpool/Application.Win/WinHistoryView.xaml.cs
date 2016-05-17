@@ -6,6 +6,7 @@
 // 0.2  EN      Draws points on temp graph
 // 0.3  EN      Draws tendency lines and value text
 // 0.4  EN      Temperature graph is fully working
+// 0.5  EN      Added Humidity
 //========================================================================
 
 using System;
@@ -59,9 +60,12 @@ namespace Smartpool.Application.Win
         {
             PoolComboBox.SelectedIndex = index;
         }
-
-        private const int PointsOnGraphs = 13;
-        List<double> _temperatureValues;
+        
+        private const int PointsOnGraphs = 16;
+        private List<double> _temperatureValues;
+        private List<double> _pHValues;
+        private List<double> _chlorineValues;
+        private List<double> _humidityValues;
 
         public void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData)
         {
@@ -82,6 +86,18 @@ namespace Smartpool.Application.Win
                         }
                         break;
                     
+                    case SensorTypes.Humidity:
+                        //Get last values from historicData
+                        if (sensor.Item2.Count < PointsOnGraphs)
+                        {
+                            _humidityValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
+                        }
+                        else
+                        {
+                            _humidityValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
+                            DisplayGraph(HumidityCanvas, _humidityValues);
+                        }
+                        break;
                 }
             }
         }
@@ -160,7 +176,7 @@ namespace Smartpool.Application.Win
                     var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
                     Canvas.SetLeft(point, pointWidth);
 
-                    //Draw value text above ellipse
+                    //Draw value text above poiny
                     var valueText = new TextBlock();
                     valueText.Text = value.ToString();
                     valueText.FontSize = 8;
@@ -174,7 +190,7 @@ namespace Smartpool.Application.Win
                         var line = new Line();
                         line.StrokeThickness = 1;
                         line.Stroke = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-                        line.X1 = lastPointX + 1;
+                        line.X1 = lastPointX;
                         line.Y1 = lastPointY;
                         line.X2 = pointWidth + 1;
                         line.Y2 = pointHeight + 1;
@@ -185,7 +201,7 @@ namespace Smartpool.Application.Win
                     //Remember info on point for drawing the tendency line
                     lastPointY = pointHeight + 1;
                     lastPointX = pointWidth + 1;
-                    lastPointBottom = Canvas.GetTop(point);
+                    lastPointBottom = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
 
                     i++;
                 }));
@@ -213,6 +229,8 @@ namespace Smartpool.Application.Win
         private void WinHistoryView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             DisplayGraph(TemperatureCanvas, _temperatureValues);
+
+            DisplayGraph(HumidityCanvas, _humidityValues);
         }
     
     }
