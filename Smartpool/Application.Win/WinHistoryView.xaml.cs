@@ -5,6 +5,7 @@
 // 0.1  EN      Initial version with partial GUI
 // 0.2  EN      Draws points on temp graph
 // 0.3  EN      Draws tendency lines and value text
+// 0.4  EN      Temperature graph is fully working
 //========================================================================
 
 using System;
@@ -13,7 +14,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Client;
@@ -70,13 +70,14 @@ namespace Smartpool.Application.Win
                 switch (sensor.Item1)
                 {
                     case SensorTypes.Temperature:
+                        //Get last values from historicData
                         if (sensor.Item2.Count < PointsOnGraphs)
                         {
                             _temperatureValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
                         }
                         else
                         {
-                            _temperatureValues = sensor.Item2.GetRange(0, PointsOnGraphs);
+                            _temperatureValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
                             DisplayGraph(TemperatureCanvas, _temperatureValues);
                         }
                         break;
@@ -122,12 +123,15 @@ namespace Smartpool.Application.Win
             //Sets up graphs upper and lower bounds
             var upperBound = 0d;
             var lowerBound = 200d;
+
             foreach (var value in history)
             {
-                if (value > upperBound) upperBound = value + 5;
-                if (value < lowerBound) lowerBound = value - 5;
+                if (value > upperBound) upperBound = value;
+                if (value < lowerBound) lowerBound = value;
             }
-            //Make bounds even, because I asume constumers like even numbers
+            upperBound += 5;
+            lowerBound -= 5;
+            //Make bounds even, because I asume people like even numbers
             if (!(upperBound % 2 == 0)) upperBound++;
             if (!(lowerBound % 2 == 0)) lowerBound++;
 
@@ -135,10 +139,10 @@ namespace Smartpool.Application.Win
             var canvasWidth = historyCanvas.ActualWidth;
 
             var i = 0;
+            //Remember last point drawn. Is used to draw tendency line
             var lastPointX = 0d;
             var lastPointY = 0d;
             var lastPointBottom = 0d;
-            var lastPointLeft = 0d;
             // Draw ellipses
             foreach (var value in history)
             {
@@ -151,18 +155,19 @@ namespace Smartpool.Application.Win
                     point.Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
 
                     historyCanvas.Children.Add(point);
-                    var pointHeight = (1.0 - ((upperBound - value)) / (upperBound - lowerBound)) * canvasHeight;
-                    Canvas.SetBottom(point, pointHeight);
+                    var pointHeight = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
+                    Canvas.SetTop(point, pointHeight);
                     var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
                     Canvas.SetLeft(point, pointWidth);
 
+                    //Draw value text above ellipse
                     var valueText = new TextBlock();
                     valueText.Text = value.ToString();
-                    valueText.FontSize = 7;
+                    valueText.FontSize = 8;
                     valueText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
                     historyCanvas.Children.Add(valueText);
-                    Canvas.SetBottom(valueText, pointHeight + 5);
-                    Canvas.SetLeft(valueText, pointWidth);
+                    Canvas.SetTop(valueText, pointHeight - 10);
+                    Canvas.SetLeft(valueText, pointWidth - 3);
                     //Draw tendency line
                     if (!(i == 0))
                     {
@@ -170,19 +175,17 @@ namespace Smartpool.Application.Win
                         line.StrokeThickness = 1;
                         line.Stroke = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
                         line.X1 = lastPointX + 1;
-                        line.Y1 = lastPointY + 1;
+                        line.Y1 = lastPointY;
                         line.X2 = pointWidth + 1;
-                        line.Y2 = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight + 1;
+                        line.Y2 = pointHeight + 1;
 
                         historyCanvas.Children.Add(line);
-                        Canvas.SetBottom(line, lastPointBottom);
-                        //Canvas.SetLeft(line, lastPointLeft);
+                        Canvas.SetTop(line, lastPointBottom + (line.Height/2));
                     }
                     //Remember info on point for drawing the tendency line
-                    lastPointY = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
-                    lastPointX = pointWidth;
-                    lastPointBottom = Canvas.GetBottom(point);
-                    lastPointLeft = Canvas.GetLeft(point);
+                    lastPointY = pointHeight + 1;
+                    lastPointX = pointWidth + 1;
+                    lastPointBottom = Canvas.GetTop(point);
 
                     i++;
                 }));
