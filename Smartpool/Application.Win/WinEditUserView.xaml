@@ -21,8 +21,7 @@
         </Grid.RowDefinitions>
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Grid.ColumnSpan="3"/>
 
-        <TextBox Grid.Row="1" Grid.Column="0" x:Name="NameTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
-        <TextBox Grid.Row="2" Grid.Column="0" x:Name="EmailTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="EmailTextBox_OnTextChanged"/>
+        <TextBox Grid.Row="1" Grid.Column="0" x:Name="CurrentPasswordTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" TextChanged="CurrentPasswordTextBox_TextChanged" />
         <TextBox Grid.Row="3" Grid.Column="0" x:Name="PasswordTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000"  TextChanged="PasswordTextBox_OnTextChanged"/>
         <TextBox Grid.Row="4" Grid.Column="0" x:Name="RepeatPasswordTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" Foreground="#00000000" TextChanged="PasswordTextBox_OnTextChanged"/>
         <Ellipse Grid.Row="4" Grid.Column="1" x:Name="ValidEllipse" HorizontalAlignment="Left" Margin="-4, 12, 0, 0" Height="8" Width="8" Fill="#FF00FF00"/>
