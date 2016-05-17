@@ -3,11 +3,12 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 0.1  EN      Initial version with partial GUI
-// 0.2  EN      Draws points on temp graph
+// 0.2  EN      Draws points on temp graph and is working with presenter
 // 0.3  EN      Draws tendency lines and value text
 // 0.4  EN      Temperature graph is fully working
 // 0.5  EN      Added humidity graph
 // 0.6  EN      Removed ellipses from graphs
+// 1.0  EN      All graphs working, GUI finished
 //========================================================================
 
 using System;
@@ -83,10 +84,33 @@ namespace Smartpool.Application.Win
                         else
                         {
                             _temperatureValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                            DisplayGraph(TemperatureCanvas, _temperatureValues);
                         }
+                        DisplayGraph(TemperatureCanvas, _temperatureValues, false);
                         break;
-                    
+                    case SensorTypes.Ph:
+                        //Get last values from historicData
+                        if (sensor.Item2.Count < PointsOnGraphs)
+                        {
+                            _pHValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
+                        }
+                        else
+                        {
+                            _pHValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
+                        }
+                        DisplayGraph(PhCanvas, _pHValues, true);
+                        break;
+                    case SensorTypes.Chlorine:
+                        //Get last values from historicData
+                        if (sensor.Item2.Count < PointsOnGraphs)
+                        {
+                            _chlorineValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
+                        }
+                        else
+                        {
+                            _chlorineValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
+                        }
+                        DisplayGraph(ChlorineCanvas, _chlorineValues, true);
+                        break;
                     case SensorTypes.Humidity:
                         //Get last values from historicData
                         if (sensor.Item2.Count < PointsOnGraphs)
@@ -96,8 +120,8 @@ namespace Smartpool.Application.Win
                         else
                         {
                             _humidityValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                            DisplayGraph(HumidityCanvas, _humidityValues);
                         }
+                        DisplayGraph(HumidityCanvas, _humidityValues, false);
                         break;
                 }
             }
@@ -127,15 +151,15 @@ namespace Smartpool.Application.Win
             }
         }
 
-        private void DisplayGraph(Canvas historyCanvas, List<double> history)
+        private void DisplayGraph(Canvas historyCanvas, List<double> history, bool isPhOrChlorine)
         {
             if (!history.Any()) return;
 
-            Dispatcher.Invoke((Action)(() =>
+            Dispatcher.Invoke(() =>
             {
                 // Remove children from canvas
                 historyCanvas.Children.Clear();
-            }));
+            });
 
             //Sets up graphs upper and lower bounds
             var upperBound = 0d;
@@ -146,12 +170,21 @@ namespace Smartpool.Application.Win
                 if (value > upperBound) upperBound = value;
                 if (value < lowerBound) lowerBound = value;
             }
-            upperBound += 5;
-            lowerBound -= 5;
-            //Make bounds even, because I asume people like even numbers
-            if (!(upperBound % 2 == 0)) upperBound++;
-            if (!(lowerBound % 2 == 0)) lowerBound++;
-
+            //If isPhOrChlorine bounds are +- 0.5 else +-5
+            if (isPhOrChlorine)
+            {
+                upperBound += 0.5;
+                lowerBound -= 0.5;
+            }
+            else
+            {
+                upperBound += 5;
+                lowerBound -= 5;
+                //Make bounds even, because I asume people like even numbers
+                if (!(upperBound % 2 == 0)) upperBound++;
+                if (!(lowerBound % 2 == 0)) lowerBound++;
+            }
+            
             var canvasHeight = historyCanvas.ActualHeight;
             var canvasWidth = historyCanvas.ActualWidth;
 
@@ -163,7 +196,7 @@ namespace Smartpool.Application.Win
             // Draw graph
             foreach (var value in history)
             {
-                Dispatcher.Invoke((Action)(() =>
+                Dispatcher.Invoke(() =>
                 {
                     var pointHeight = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
                     var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
@@ -196,34 +229,34 @@ namespace Smartpool.Application.Win
                     lastPointTop = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
 
                     i++;
-                }));
+                });
             }
             //Write bounds on graph
-            Dispatcher.Invoke((Action) (() =>
+            Dispatcher.Invoke(() =>
             {
-                var topText = new TextBlock();
-                topText.Text = upperBound.ToString();
-                topText.FontSize = 8;
-                topText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-                historyCanvas.Children.Add(topText);
-                Canvas.SetBottom(topText, canvasHeight - 6);
-                Canvas.SetLeft(topText, -4);
-                var bottomText = new TextBlock();
-                bottomText.Text = lowerBound.ToString();
-                bottomText.FontSize = 8;
-                bottomText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-                historyCanvas.Children.Add(bottomText);
-                Canvas.SetBottom(bottomText, -4);
-                Canvas.SetLeft(bottomText, -3);
-            }));
+               var topText = new TextBlock();
+               topText.Text = upperBound.ToString();
+               topText.FontSize = 8;
+               topText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+               historyCanvas.Children.Add(topText);
+               Canvas.SetBottom(topText, canvasHeight - 6);
+               Canvas.SetLeft(topText, -4);
+               var bottomText = new TextBlock();
+               bottomText.Text = lowerBound.ToString();
+               bottomText.FontSize = 8;
+               bottomText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+               historyCanvas.Children.Add(bottomText);
+               Canvas.SetBottom(bottomText, -4);
+               Canvas.SetLeft(bottomText, -3);
+            });
         }
 
         private void WinHistoryView_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            DisplayGraph(TemperatureCanvas, _temperatureValues);
-
-            DisplayGraph(HumidityCanvas, _humidityValues);
+            DisplayGraph(TemperatureCanvas, _temperatureValues, false);
+            DisplayGraph(ChlorineCanvas, _chlorineValues, true);
+            DisplayGraph(PhCanvas, _pHValues, true);
+            DisplayGraph(HumidityCanvas, _humidityValues, false);
         }
-    
     }
 }
