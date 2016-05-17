@@ -20,7 +20,7 @@
                       Height="20" SelectionChanged="PoolComboBox_SelectionChanged">
             </ComboBox>
             <Border Grid.Row="1" Margin="4, 4, 4, 0" BorderBrush="{StaticResource SpRed}" BorderThickness="2" CornerRadius="5">
-                <Canvas Margin="4" HorizontalAlignment="Stretch" x:Name="TemperatureCanvas">
+                <Canvas Margin="4,4,8,4" HorizontalAlignment="Stretch" x:Name="TemperatureCanvas">
                 </Canvas>
             </Border>
         </Grid>

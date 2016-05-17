@@ -4,6 +4,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 0.1  EN      Initial version with partial GUI
 // 0.2  EN      Draws points on temp graph
+// 0.3  EN      Draws tendency lines and value text
 //========================================================================
 
 using System;
@@ -117,13 +118,28 @@ namespace Smartpool.Application.Win
                 // Remove children from canvas
                 historyCanvas.Children.Clear();
             }));
-            
+
+            //Sets up graphs upper and lower bounds
+            var upperBound = 0d;
+            var lowerBound = 200d;
+            foreach (var value in history)
+            {
+                if (value > upperBound) upperBound = value + 5;
+                if (value < lowerBound) lowerBound = value - 5;
+            }
+            //Make bounds even, because I asume constumers like even numbers
+            if (!(upperBound % 2 == 0)) upperBound++;
+            if (!(lowerBound % 2 == 0)) lowerBound++;
+
             var canvasHeight = historyCanvas.ActualHeight;
             var canvasWidth = historyCanvas.ActualWidth;
 
             var i = 0;
-
-            // Draw tracks as ellipses
+            var lastPointX = 0d;
+            var lastPointY = 0d;
+            var lastPointBottom = 0d;
+            var lastPointLeft = 0d;
+            // Draw ellipses
             foreach (var value in history)
             {
                 Dispatcher.Invoke((Action)(() =>
@@ -135,27 +151,60 @@ namespace Smartpool.Application.Win
                     point.Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
 
                     historyCanvas.Children.Add(point);
-                    var pointHeight = (1.0 - (100 - value) / 100) * canvasHeight;
+                    var pointHeight = (1.0 - ((upperBound - value)) / (upperBound - lowerBound)) * canvasHeight;
                     Canvas.SetBottom(point, pointHeight);
-                    Canvas.SetLeft(point, (canvasWidth/10) * i - 2);
+                    var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
+                    Canvas.SetLeft(point, pointWidth);
+
+                    var valueText = new TextBlock();
+                    valueText.Text = value.ToString();
+                    valueText.FontSize = 7;
+                    valueText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+                    historyCanvas.Children.Add(valueText);
+                    Canvas.SetBottom(valueText, pointHeight + 5);
+                    Canvas.SetLeft(valueText, pointWidth);
+                    //Draw tendency line
+                    if (!(i == 0))
+                    {
+                        var line = new Line();
+                        line.StrokeThickness = 1;
+                        line.Stroke = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+                        line.X1 = lastPointX + 1;
+                        line.Y1 = lastPointY + 1;
+                        line.X2 = pointWidth + 1;
+                        line.Y2 = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight + 1;
+
+                        historyCanvas.Children.Add(line);
+                        Canvas.SetBottom(line, lastPointBottom);
+                        //Canvas.SetLeft(line, lastPointLeft);
+                    }
+                    //Remember info on point for drawing the tendency line
+                    lastPointY = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
+                    lastPointX = pointWidth;
+                    lastPointBottom = Canvas.GetBottom(point);
+                    lastPointLeft = Canvas.GetLeft(point);
+
                     i++;
                 }));
             }
-
-            var topText = new TextBlock();
-            topText.Text = "100";
-            topText.FontSize = 8;
-            topText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-            historyCanvas.Children.Add(topText);
-            Canvas.SetBottom(topText, canvasHeight - 6);
-            Canvas.SetLeft(topText, - 4);
-            var bottomText = new TextBlock();
-            bottomText.Text = "0";
-            bottomText.FontSize = 8;
-            bottomText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-            historyCanvas.Children.Add(bottomText);
-            Canvas.SetBottom(bottomText, -4);
-            Canvas.SetLeft(bottomText, -4);
+            //Write bounds on graph
+            Dispatcher.Invoke((Action) (() =>
+            {
+                var topText = new TextBlock();
+                topText.Text = upperBound.ToString();
+                topText.FontSize = 8;
+                topText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+                historyCanvas.Children.Add(topText);
+                Canvas.SetBottom(topText, canvasHeight - 6);
+                Canvas.SetLeft(topText, -4);
+                var bottomText = new TextBlock();
+                bottomText.Text = lowerBound.ToString();
+                bottomText.FontSize = 8;
+                bottomText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+                historyCanvas.Children.Add(bottomText);
+                Canvas.SetBottom(bottomText, -4);
+                Canvas.SetLeft(bottomText, -3);
+            }));
         }
 
         private void WinHistoryView_OnSizeChanged(object sender, SizeChangedEventArgs e)
