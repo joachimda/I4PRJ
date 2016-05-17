@@ -6,7 +6,8 @@
 // 0.2  EN      Draws points on temp graph
 // 0.3  EN      Draws tendency lines and value text
 // 0.4  EN      Temperature graph is fully working
-// 0.5  EN      Added Humidity
+// 0.5  EN      Added humidity graph
+// 0.6  EN      Removed ellipses from graphs
 //========================================================================
 
 using System;
@@ -155,28 +156,19 @@ namespace Smartpool.Application.Win
             var canvasWidth = historyCanvas.ActualWidth;
 
             var i = 0;
-            //Remember last point drawn. Is used to draw tendency line
+            //Holds last point drawn. Is used to draw tendency line
             var lastPointX = 0d;
             var lastPointY = 0d;
-            var lastPointBottom = 0d;
-            // Draw ellipses
+            var lastPointTop = 0d;
+            // Draw graph
             foreach (var value in history)
             {
                 Dispatcher.Invoke((Action)(() =>
                 {
-                    // Draw ellipse
-                    var point = new Ellipse();
-                    point.Height = 4;
-                    point.Width = 4;
-                    point.Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
-
-                    historyCanvas.Children.Add(point);
                     var pointHeight = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
-                    Canvas.SetTop(point, pointHeight);
                     var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
-                    Canvas.SetLeft(point, pointWidth);
 
-                    //Draw value text above poiny
+                    //Draw value text above point
                     var valueText = new TextBlock();
                     valueText.Text = value.ToString();
                     valueText.FontSize = 8;
@@ -196,12 +188,12 @@ namespace Smartpool.Application.Win
                         line.Y2 = pointHeight + 1;
 
                         historyCanvas.Children.Add(line);
-                        Canvas.SetTop(line, lastPointBottom + (line.Height/2));
+                        Canvas.SetTop(line, lastPointTop + (line.Height/2));
                     }
                     //Remember info on point for drawing the tendency line
                     lastPointY = pointHeight + 1;
                     lastPointX = pointWidth + 1;
-                    lastPointBottom = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
+                    lastPointTop = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
 
                     i++;
                 }));
