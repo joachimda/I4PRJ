@@ -52,5 +52,20 @@ namespace Smartpool.Application.Test.Unit
             _uut.ViewDidLoad();
             _view.Received().SetSaveButtonEnabled(false);
         }
+
+        [TestCase("myOldPassword", "12345678", "12345678", false)]
+        [TestCase("myOldPassword", "12345678", "abc", true)]
+        [TestCase("abc", "12345678", "12345678", false)]
+        public void UpdatePassword_PasswordsEnteredFromView_SaveButtonSet(string oldPw, string newPw1, string newPw2, bool shouldReceive)
+        {
+            _uut.DidChangeOldPasswordText(oldPw);
+            _uut.DidChangeNewPasswordText(newPw1, 0);
+            _uut.DidChangeNewPasswordText(newPw2, 1);
+
+            if (shouldReceive)
+                _view.DidNotReceive().SetNewPasswordValid(true);
+            else
+                _view.Received().SetNewPasswordValid(true);
+        }
     }
 }
