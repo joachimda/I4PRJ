@@ -9,7 +9,7 @@ namespace Smartpool.Connection.Server
     public class TokenMsgResponse : ITokenMsgResponse
     {
         /***TEMPORARY***/
-        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,10);
+        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,2);
         private readonly Random _random = new Random();
         /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
