@@ -142,7 +142,6 @@ namespace Smartpool
             }
         }
 
-
         /// <summary>
         /// Queries temperature values within a given time range: dd/MM/yyyy HH:mm:ss
         /// </summary>
