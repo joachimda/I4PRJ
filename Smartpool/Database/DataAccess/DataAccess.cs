@@ -104,7 +104,7 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a chlorine value and the time where it was measured</returns>
+        /// <returns>A list of tuples, where each tuple contains a chlorine value and the sensor that measured it</returns>
         public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
             double days = System.Convert.ToDouble(daysToGoBack);
