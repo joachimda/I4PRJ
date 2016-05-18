@@ -10,9 +10,9 @@ namespace Smartpool
         bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity);
         void DeleteAllData();
     
-        List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end);
+        List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);
     }
 }
