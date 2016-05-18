@@ -17,7 +17,12 @@
         <AssociationConnector Association="Smartpool.DataChlorine" />
         <AssociationConnector Association="Smartpool.DataHumidity" />
         <AssociationConnector Association="Smartpool.DatapH" />
-        <AssociationConnector Association="Smartpool.DataTemperature" />
+        <AssociationConnector Association="Smartpool.DataTemperature" ManuallyRouted="true" >
+          <ConnectorPoint PointX="7.093752" PointY="3.0571907552083335" />
+          <ConnectorPoint PointX="7.093752" PointY="3.325" />
+          <ConnectorPoint PointX="8.25" PointY="3.325" />
+          <ConnectorPoint PointX="8.25" PointY="3.625" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
