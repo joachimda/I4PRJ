@@ -238,47 +238,64 @@ namespace Database.Test.Unit
 
         #region GetData
 
+
+        #region GetPhData
+
         [Test]
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-            
+
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
-            
+
         }
+        #endregion
+
+        #region GetChlorineData
+
+        #endregion
+
+        #region GetTemperatureData
+
+        #endregion
+
+        #region GetHumidityData
+
+
+        #endregion
 
 
         #endregion
