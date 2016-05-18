@@ -11,26 +11,26 @@ namespace Connection.Test
     public class ResponseManagerUnitTest
     {
         private ResponseManager _uut;
-        private ITokenKeeper _tokenKeeper;
-        private ITokenMsgResponse _tokenMsgResponse;
-        private ISmartpoolDB _smartpoolDb;
+        private ITokenKeeper _tokenKeeperSub;
+        private ITokenMsgResponse _tokenMsgResponseSub;
+        private ISmartpoolDB _smartpoolDbSub;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         [SetUp]
         public void SetUp()
         {
-            _tokenKeeper = Substitute.For<ITokenKeeper>();
-            _tokenMsgResponse = Substitute.For<ITokenMsgResponse>();
-            _smartpoolDb = Substitute.For<ISmartpoolDB>();
-            _uut = new ResponseManager(_tokenKeeper, _tokenMsgResponse, _smartpoolDb);
+            _tokenKeeperSub = Substitute.For<ITokenKeeper>();
+            _tokenMsgResponseSub = Substitute.For<ITokenMsgResponse>();
+            _smartpoolDbSub = Substitute.For<ISmartpoolDB>();
+            _uut = new ResponseManager(_tokenKeeperSub, _tokenMsgResponseSub, _smartpoolDbSub);
 
-            _smartpoolDb.UserAccess.ValidatePassword("KnownEmail", "CorrectPassword").Returns(true);
+            _smartpoolDbSub.UserAccess.ValidatePassword("KnownEmail", "CorrectPassword").Returns(true);
 
             //_tokenMsgResponse.HandleTokenMsg(new TokenMsg("KnownEmail", "CorrectTokenString")).Returns(new TokenResponseMsg(true));
 
-            _tokenKeeper.CreateNewToken("KnownEmail").Returns("CorrectTokenString");
-            _tokenKeeper.TokenActive("KnownEmail", "CorrectTokenString").Returns(true);
-            _tokenKeeper.TokenActive("KnownEmail", "IncorrectTokenString").Returns(false);
+            _tokenKeeperSub.CreateNewToken("KnownEmail").Returns("CorrectTokenString");
+            _tokenKeeperSub.TokenActive("KnownEmail", "CorrectTokenString").Returns(true);
+            _tokenKeeperSub.TokenActive("KnownEmail", "IncorrectTokenString").Returns(false);
         }
 
         #region Test of Login case
@@ -47,47 +47,46 @@ namespace Connection.Test
             Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("CorrectTokenString", true))));
         }
 
-        //[Test]
-        //public void Respond_ReceivedKnownUsernameButIncorrectPassword_ReturnsCorrectLoginResponseMsg()
-        //{
-        //    //Message received from client
-        //    var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("KnownEmail", "WrongPassword"));
-        //    //Answer from ResponseManager
-        //    var messageSentBack = _uut.Respond(messageReceived);
-        //    //Answer from ResponseManager in serialized form
-        //    var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+        [Test]
+        public void Respond_ReceivedKnownUsernameButIncorrectPassword_ReturnsCorrectLoginResponseMsg()
+        {
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("KnownEmail", "WrongPassword"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
 
-        //    Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false))));
-        //}
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect" })));
+        }
 
-        //[Test]
-        //public void Respond_ReceivedUnknownUsername_ReturnsCorrectLoginResponseMsg()
-        //{
-        //    //Message received from client
-        //    var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("UnknownEmail", "CorrectPassword"));
-        //    //Answer from ResponseManager
-        //    var messageSentBack = _uut.Respond(messageReceived);
-        //    //Answer from ResponseManager in serialized form
-        //    var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
+        [Test]
+        public void Respond_ReceivedUnknownUsername_ReturnsCorrectLoginResponseMsg()
+        {
+            //Message received from client
+            var messageReceived = JsonConvert.SerializeObject(new LoginRequestMsg("UnknownEmail", "CorrectPassword"));
+            //Answer from ResponseManager
+            var messageSentBack = _uut.Respond(messageReceived);
+            //Answer from ResponseManager in serialized form
+            var serializedMessage = JsonConvert.SerializeObject(messageSentBack);
 
-        //    Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false))));
-        //}
+            Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect"})));
+        }
         #endregion
 
         #region Test of Token case
-        /*
+        
         [Test]
         public void Respond_CorrectToken_ReturnsCorrectMessage()
         {
-            var tokenRequestMessage = new TokenRequestMsg("KnownEmail", "CorrectTokenString");
+            var tokenRequestMessage = new TokenMsg("KnownEmail", "CorrectTokenString");
             //Message received from client
             var messageReceived = JsonConvert.SerializeObject(tokenRequestMessage, _jsonSettings);
 
             _uut.Respond(messageReceived);
 
-            _tokenMsgResponse.Received().HandleTokenMsg(Arg.Any<TokenRequestMsg>());
+            _tokenMsgResponseSub.Received().HandleTokenMsg(Arg.Any<TokenMsg>(),messageReceived, _tokenKeeperSub);
         }
-        
         
         [Test]
         public void Respond_InCorrectToken_ReturnsCorrectMessage()
@@ -105,7 +104,7 @@ namespace Connection.Test
             Assert.That(serializedMessage, Is.EqualTo(JsonConvert.SerializeObject(new GeneralResponseMsg(false, false))));
             
         }
-        */
+        
         #endregion
 
         #region Test of AddUser case

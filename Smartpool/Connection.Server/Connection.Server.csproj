@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AsynchronousSocketListener.cs" />
     <Compile Include="FakePoolDataGeneration\FakePool.cs" />
+    <Compile Include="FakePoolDataGeneration\FakePoolKeeper.cs" />
     <Compile Include="FakePoolDataGeneration\FakeSensor.cs" />
     <Compile Include="FakePoolDataGeneration\SensorValueAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

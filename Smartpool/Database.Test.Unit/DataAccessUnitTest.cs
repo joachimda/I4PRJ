@@ -190,7 +190,7 @@ namespace Database.Test.Unit
         //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
 
         //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
-        //}
+        }
 
         //[Test]
         //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampMoreThanBeforeMethodCall()
