@@ -171,7 +171,7 @@ namespace Database.Test.Unit
         //    _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
         //    string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
 
-            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item2;
+            //double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item2;
 
         //    Assert.That(setvalue, Is.EqualTo(value));
         //}
@@ -187,7 +187,7 @@ namespace Database.Test.Unit
         //    Thread.Sleep(1000);
         //    string end = DateTime.UtcNow.ToString("G");
 
-            string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+            //string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
 
         //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
         //}
