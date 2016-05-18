@@ -244,31 +244,37 @@ namespace Database.Test.Unit
             
         }
 
+        [Test]
         public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
         {
             
         }
 
+        [Test]
         public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
             
         }
 
+        [Test]
         public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
             
         }
 
+        [Test]
         public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
         {
             
         }
 
+        [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
             
         }
 
+        [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
             
