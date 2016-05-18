@@ -236,8 +236,7 @@ namespace Database.Test.Unit
 
         #endregion
 
-        #region GetData
-
+        #region GetData Methods
 
         #region GetPhData
 
@@ -285,7 +284,47 @@ namespace Database.Test.Unit
         #endregion
 
         #region GetChlorineData
+        [Test]
+        public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
 
+        }
+
+        [Test]
+        public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
         #endregion
 
         #region GetTemperatureData
@@ -296,7 +335,6 @@ namespace Database.Test.Unit
 
 
         #endregion
-
 
         #endregion
     }
