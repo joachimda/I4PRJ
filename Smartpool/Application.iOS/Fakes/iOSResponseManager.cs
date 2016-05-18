@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1	LP		Final version, this is a FAKE client response manager
 //========================================================================
 
 using Smartpool.Connection.Model;

@@ -1,4 +1,13 @@
-﻿using Smartpool.Application.Presentation;
+﻿//========================================================================
+// FILENAME :   HistoryViewBridge.cs
+// DESCR.   :   Bridge between history view controller and iOS history view
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version, missing pool switching
+//========================================================================
+
+
+using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System.Collections.Generic;
 using System;
@@ -16,7 +25,7 @@ namespace Application.iOS
 		{
 			// Initialize view controller.
 			_historicData = new List<Tuple<SensorTypes, List<double>>>();
-			Controller = new HistoryViewController(this, new iOSClientMessenger());
+			Controller = new HistoryViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
