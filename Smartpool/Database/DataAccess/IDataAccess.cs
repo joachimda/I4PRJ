@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Smartpool.Connection.Model;
 
 namespace Smartpool
 {
@@ -10,9 +11,9 @@ namespace Smartpool
         bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity);
         void DeleteAllData();
     
-        List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end);
-        List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end);
+        List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);
     }
 }
