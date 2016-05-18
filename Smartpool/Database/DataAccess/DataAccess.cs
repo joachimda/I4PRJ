@@ -199,17 +199,22 @@ namespace Smartpool
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owne</param>
         /// <param name="poolName">The specific pool name</param>
-        /// <param name="start">Specifies the starting time of the query</param>
-        /// <param name="end">Specifies the ending time of the query</param>
+        /// <param name="daysToGoBack"></param>
         /// <returns>A list of tuples, where each tuple contains a pH value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, string start, string end)
+        public List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
+
+            double days = System.Convert.ToDouble(daysToGoBack);
+            string now = DateTime.UtcNow.ToString("G");
+            string start = DateTime.Parse(now).AddDays(-days).ToString("G");
+
             using (var db = new DatabaseContext())
+
             {
                 #region Convert start and end times to DateTime types
 
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime endTime = DateTime.ParseExact(now, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
                 #endregion
 
@@ -247,18 +252,22 @@ namespace Smartpool
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owne</param>
         /// <param name="poolName">The specific pool name</param>
-        /// <param name="start">Specifies the starting time of the query</param>
-        /// <param name="end">Specifies the ending time of the query</param>
+        /// <param name="daysToGoBack"></param>
         /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, string start, string end)
+        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
+
+            double days = System.Convert.ToDouble(daysToGoBack);
+            string now = DateTime.UtcNow.ToString("G");
+            string start = DateTime.Parse(now).AddDays(-days).ToString("G");
+
             using (var db = new DatabaseContext())
             {
                 #region Convert start and end times to DateTime types
 
                 DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss",
                     System.Globalization.CultureInfo.InvariantCulture);
-                DateTime endTime = DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss",
+                DateTime endTime = DateTime.ParseExact(now, "dd/MM/yyyy HH:mm:ss",
                     System.Globalization.CultureInfo.InvariantCulture);
 
                 #endregion
