@@ -138,9 +138,9 @@ namespace Smartpool
                         DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                            chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
-                        }
+                        chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
                     }
+                }
 
                 #endregion
 
@@ -259,7 +259,7 @@ namespace Smartpool
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
         /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        public List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
 
             double days = System.Convert.ToDouble(daysToGoBack);
@@ -280,14 +280,14 @@ namespace Smartpool
                 #region Query for all user-pool specific humidity data
 
                 var humidityDataQuery = from humidity in db.HumiditySet
-                                           where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
-                                           select humidity;
+                                        where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
+                                        select humidity;
 
                 #endregion
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> humidityTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> humidityTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var humidity in humidityDataQuery)
                 {
@@ -296,7 +296,7 @@ namespace Smartpool
                         DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        humidityTuples.Add(new Tuple<string, double>(humidity.Data.Timestamp, humidity.Value));
+                        humidityTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, humidity.Value));
                     }
                 }
 
