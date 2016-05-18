@@ -12,19 +12,19 @@ namespace Database.Test
         // derp
         static void Main(string[] args)
         {
-            SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
-            IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
-            dataAccess.DeleteAllData();
-            SmartPoolDB.ClearEntireDatabase();
+            //SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
+            //IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+            //dataAccess.DeleteAllData();
+            //SmartPoolDB.ClearEntireDatabase();
 
-            SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
-            SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
+            //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
+            //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
-            for (int i = 0; i < 10; i++)
-            {
-                dataAccess.CreateDataEntry("email", "baghave", 5+i, 9+1, 3+i, 10+i);
-                Thread.Sleep(1500);
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    dataAccess.CreateDataEntry("email", "baghave", 5+i, 9+1, 3+i, 10+i);
+            //    Thread.Sleep(1500);
+            //}
 
             var time = DateTime.UtcNow.ToString("G");
 

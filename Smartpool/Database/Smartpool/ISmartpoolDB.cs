@@ -6,6 +6,7 @@ namespace Smartpool
     {
         IPoolAccess PoolAccess { get; }
         IUserAccess UserAccess { get; }
+        IDataAccess DataAccess { get; }
         void ClearEntireDatabase();
     }
 }
