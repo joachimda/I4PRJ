@@ -47,6 +47,7 @@ namespace Application.iOS
 		public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
 		{
 			_sensorData = sensorData;
+			_sensorData.Sort ();
 			TableView.ReloadData ();
 		}
 
@@ -72,21 +73,19 @@ namespace Application.iOS
 			return _sensorData.Count;
 		}
 
-
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
-		{
-			
+		{	
 			var cell = tableView.DequeueReusableCell (_reuseIdentifier) as StatViewCell;
 			var type = string.Format ($"{_sensorData [indexPath.Row].Item1}");
-			cell.DataLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}");
+			cell.DataLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}") + GuiCharacter.SignForType(_sensorData [indexPath.Row].Item1);
 			cell.NameLabel.Text = type;
-			cell.BorderImage.Image = UIImage.FromBundle (type.ToLower ());
+			cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
 			return cell;
 		}
 
 		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			return 132;
+			return 140;
 		}
 	}
 }

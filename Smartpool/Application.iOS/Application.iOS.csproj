@@ -161,6 +161,7 @@
     <Compile Include="HistoryViewCell.designer.cs">
       <DependentUpon>HistoryViewCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuiCharacter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -177,12 +178,14 @@
     <BundleResource Include="Resources\Images.xcassets\Contents.json" />
     <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Chlorine.png" />
     <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Contents.json" />
-    <BundleResource Include="Resources\Images.xcassets\humidity.imageset\Contents.json" />
-    <BundleResource Include="Resources\Images.xcassets\humidity.imageset\Humidity.png" />
     <BundleResource Include="Resources\Images.xcassets\ph.imageset\Contents.json" />
     <BundleResource Include="Resources\Images.xcassets\ph.imageset\pH.png" />
     <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Contents.json" />
     <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Temperature.png" />
+    <BundleResource Include="Resources\temperature.png" />
+    <BundleResource Include="Resources\ph.png" />
+    <BundleResource Include="Resources\humidity.png" />
+    <BundleResource Include="Resources\chlorine.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\Logo.imageset\" />
