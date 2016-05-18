@@ -8,6 +8,7 @@ namespace Database.Test
 {
     class Program
     {
+        // derp
         static void Main(string[] args)
         {
             SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
