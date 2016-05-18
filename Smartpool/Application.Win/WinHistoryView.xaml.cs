@@ -9,6 +9,7 @@
 // 0.5  EN      Added humidity graph
 // 0.6  EN      Removed ellipses from graphs
 // 1.0  EN      All graphs working, GUI finished
+// 1.01 EN      Points on graphs is now equal to the points received
 //========================================================================
 
 using System;
@@ -63,7 +64,7 @@ namespace Smartpool.Application.Win
             PoolComboBox.SelectedIndex = index;
         }
         
-        private const int PointsOnGraphs = 16;
+        private int _pointsOnGraphs;
         private List<double> _temperatureValues;
         private List<double> _pHValues;
         private List<double> _chlorineValues;
@@ -71,56 +72,36 @@ namespace Smartpool.Application.Win
 
         public void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData)
         {
+            //Sets points on graphs to amount of data received
+            //Assumes that all graphs have the same amount of points
+            _pointsOnGraphs = historicData[0].Item2.Count;
+
             foreach (var sensor in historicData)
             {
                 switch (sensor.Item1)
                 {
                     case SensorTypes.Temperature:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _temperatureValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _temperatureValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _temperatureValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+                        
                         DisplayGraph(TemperatureCanvas, _temperatureValues, false);
                         break;
                     case SensorTypes.Ph:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _pHValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _pHValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _pHValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(PhCanvas, _pHValues, true);
                         break;
                     case SensorTypes.Chlorine:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _chlorineValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _chlorineValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _chlorineValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(ChlorineCanvas, _chlorineValues, true);
                         break;
                     case SensorTypes.Humidity:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _humidityValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _humidityValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _humidityValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(HumidityCanvas, _humidityValues, false);
                         break;
                 }
@@ -199,7 +180,7 @@ namespace Smartpool.Application.Win
                 Dispatcher.Invoke(() =>
                 {
                     var pointHeight = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
-                    var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
+                    var pointWidth = (canvasWidth/(_pointsOnGraphs - 1))*i;
 
                     //Draw value text above point
                     var valueText = new TextBlock();
