@@ -103,6 +103,7 @@ namespace Smartpool
         public List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end)
         {
             // List<Tuple<SensorTypes, List<Tuple<string, double>>>>
+            // some comment
 
             using (var db = new DatabaseContext())
             {
