@@ -176,10 +176,10 @@ namespace Database.Test.Unit
         //    Assert.That(setvalue, Is.EqualTo(value));
         //}
 
-        [Test]
-        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithRightSensorType()
-        {
-            double value = 987;
+        //[Test]
+        //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
+        //{
+        //    double value = 987;
 
         //    Thread.Sleep(1000);
         //    string start = DateTime.UtcNow.ToString("G");
@@ -187,7 +187,7 @@ namespace Database.Test.Unit
         //    Thread.Sleep(1000);
         //    string end = DateTime.UtcNow.ToString("G");
 
-            //string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
 
         //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
         //}
