@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
+      <Name>Connection.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Database\Database.csproj">
       <Project>{49C26AE7-7C61-453F-A21A-2BBA513DD71D}</Project>
       <Name>Database</Name>

@@ -21,7 +21,7 @@ namespace Smartpool
         }
 
         /// <summary>
-        /// 
+        /// Creates a data entry with all types of data
         /// </summary>
         /// <param name="ownerEmail"></param>
         /// <param name="poolName"></param>
