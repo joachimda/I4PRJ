@@ -258,7 +258,7 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owne</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
+        /// <returns>A list of tuples, where each tuple contains a humidity value and the sensor that measured it</returns>
         public List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
 
