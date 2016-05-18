@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
 using Smartpool.Connection.Server.FakePoolDataGeneration;
@@ -10,20 +9,16 @@ namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
-        // ReSharper disable once CollectionNeverQueried.Local -> _fakePools never used since they write directly to db
-        private readonly List<FakePool> _fakePools = new List<FakePool>();
+        private readonly FakePoolKeeper _fakePoolKeeper;
         private readonly Random _random = new Random();
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
-            var poolList = _smartpoolDb.PoolAccess.FindAllPoolsOfUser("1");
-            foreach (var pool in poolList)
-            {
-                _fakePools.Add(new FakePool(4, 15, "1", pool.Name, _smartpoolDb));
-                Thread.Sleep(1100);
-            }
+            _fakePoolKeeper = new FakePoolKeeper(_smartpoolDb);
+            _fakePoolKeeper.GeneratePoolsForUser("1");
+            _fakePoolKeeper.GeneratePoolsForUser("2");
         }
 
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
@@ -36,7 +31,8 @@ namespace Smartpool.Connection.Server
                     var apMsg = JsonConvert.DeserializeObject<AddPoolRequestMsg>(messageString);
                     var poolCreatedSuccessfully = _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name,
                         apMsg.Volume);
-                    _fakePools.Add(new FakePool(4, 15, apMsg.Username, apMsg.Name, _smartpoolDb));
+                    if (poolCreatedSuccessfully)
+                        _fakePoolKeeper.AddFakePoolToKeeper(apMsg.Username, apMsg.Name);
                     return new GeneralResponseMsg(true, poolCreatedSuccessfully); 
 
                 case TokenSubMessageTypes.UpdatePoolRequest:
@@ -77,7 +73,7 @@ namespace Smartpool.Connection.Server
                     }
                     else //return data for one pool only
                         //return new GetPoolDataResponseMsg(GetSensorValues(gpdMsg.Username, gpdMsg.PoolName, gpdMsg.GetHistoryDays));
-                        return new GetPoolDataResponseMsg(_fakePools[0].GetSensorValuesList());
+                        return new GetPoolDataResponseMsg(_fakePoolKeeper.GetPools()[0].GetSensorValuesList());
 
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
