@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
+using Smartpool.Connection.Server.FakePoolDataGeneration;
 
 namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
         /***TEMPORARY***/
-        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,2);
+        private readonly List<FakePool> _fakePools = new List<FakePool>();
         private readonly Random _random = new Random();
         /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
@@ -17,7 +19,14 @@ namespace Smartpool.Connection.Server
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
+            var poolList = _smartpoolDb.PoolAccess.FindAllPoolsOfUser("1");
+            foreach (var pool in poolList)
+            {
+                _fakePools.Add(new FakePool(4, 10, "1", pool.Name, _smartpoolDb));
+                Thread.Sleep(2000);
+            }
         }
+
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
         {
             var tokenMsg = JsonConvert.DeserializeObject<TokenMsg>(messageString, _jsonSettings);
@@ -64,7 +73,7 @@ namespace Smartpool.Connection.Server
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        return new GetPoolDataResponseMsg(_fakePool.GetSensorValuesList());
+                        return new GetPoolDataResponseMsg(_fakePools[0].GetSensorValuesList());
 
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
