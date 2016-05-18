@@ -9,6 +9,11 @@ namespace Smartpool
     {
         public IPoolAccess PoolAccess { get; set; }
 
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="poolAccess">Sets the pool access datamember</param>
         public DataAccess(IPoolAccess poolAccess)
         {
             PoolAccess = poolAccess;
