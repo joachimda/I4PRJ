@@ -102,6 +102,8 @@ namespace Smartpool
         /// <returns>A list of tuples, where each tuple contains a chlorine value and the time where it was measured</returns>
         public List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, string start, string end)
         {
+            // List<Tuple<SensorTypes, List<Tuple<string, double>>>>
+
             using (var db = new DatabaseContext())
             {
                 #region Convert start and end times to DateTime types
