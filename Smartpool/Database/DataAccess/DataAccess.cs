@@ -147,8 +147,7 @@ namespace Smartpool
         /// </summary>
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
-        /// <param name="start">Specifies the starting time of the query</param>
-        /// <param name="end">Specifies the ending time of the query</param>
+        /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
         /// <returns>A list of tuples, where each tuple contains a temperature value and the time where it was measured</returns>
         public List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
