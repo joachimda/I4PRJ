@@ -61,6 +61,10 @@ namespace Smartpool.Application.Web
             return View();
         }
 
+        public ActionResult EditUserView()
+        {
+            return View();
+        }
         
 
         public ActionResult About()

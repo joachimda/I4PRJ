@@ -271,6 +271,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\StatView.cshtml" />
     <Content Include="Views\Home\AddPoolView.cshtml" />
+    <Content Include="Views\Home\EditUserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
