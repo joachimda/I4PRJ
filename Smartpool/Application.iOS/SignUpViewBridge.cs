@@ -10,6 +10,7 @@ using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System;
 using UIKit;
+using Foundation;
 
 namespace Application.iOS
 {
@@ -32,10 +33,10 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
 		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
 
 		// IView Interface Implementation

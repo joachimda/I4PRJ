@@ -55,6 +55,28 @@ namespace Application.iOS
 		{
 			// Missing implementation
 		}
+
+		// Actions
+
+		partial void NewPasswordChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeNewPasswordText(sender.Text, 0);
+		}
+
+		partial void NewPasswordRepeatedChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeNewPasswordText(sender.Text, 1);
+		}
+
+		partial void OldPasswordChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeOldPasswordText(sender.Text);
+		}
+
+		partial void SaveButtonTouchUpInside (UIKit.UIButton sender)
+		{
+			_specializedController.SaveButtonPressed();
+		}
 	}
 }
 
