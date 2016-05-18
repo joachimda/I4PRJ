@@ -1,0 +1,22 @@
+﻿@using System.Web.UI.WebControls
+@using Smartpool.Application.Model
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "AddPoolView";
+}
+<section id="AddPoolForm">
+    <div class="input-form">
+        @Html.TextBox("Poolname", "Pool Name")
+    </div>
+
+    <div class="input-form">
+        @Html.RadioButton("volumeSelected", true)
+        @Html.TextBox("volume", "Volume", new TextBox())
+        @Html.RadioButton("dimensionsSelected", true)
+        @Html.TextBox("depth", "Depth", new { @class = "input-form" })
+        @Html.TextBox("lenght", "Lenght", new { @class = "input-form" })
+        @Html.TextBox("width", "Width", new { @class = "input-form" })
+    </div>
+</section>
+
