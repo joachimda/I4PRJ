@@ -8,11 +8,17 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
     public class FakePool
     {
+        public string UserName { get; set; }
+        public string PoolName { get; set; }
+        public ISmartpoolDB SmartpoolDb { get; set; }
         private readonly int _amountOfSensors;
         private readonly List<ISensor> _fakeSensors;
 
-        public FakePool(int amountOfSensors, int secondsBetweenSensorReadings)
+        public FakePool(int amountOfSensors, int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
         {
+            UserName = userName;
+            PoolName = poolName;
+            SmartpoolDb = smartpoolDb;
             _amountOfSensors = amountOfSensors;
             _fakeSensors = new List<ISensor>();
             GenerateSensors();
@@ -42,8 +48,14 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             foreach (var sensor in _fakeSensors)
             {
                 sensor.GetNextSensorValue();
-                sensor.SaveValueToDatabase();
             }
+            SaveValueToDatabase();
+        }
+
+        private void SaveValueToDatabase()
+        {
+            SmartpoolDb.DataAccess.CreateDataEntry(UserName, PoolName, _fakeSensors[2].LastSensorValueEntry, _fakeSensors[0].LastSensorValueEntry,
+                _fakeSensors[1].LastSensorValueEntry, _fakeSensors[3].LastSensorValueEntry);
         }
 
         public List<Tuple<SensorTypes, List<double>>> GetSensorValuesList()

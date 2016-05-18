@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Smartpool.Connection.Model;
 
 namespace Smartpool
 {
@@ -103,8 +104,8 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a chlorine value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        /// <returns>A list of tuples, where each tuple contains a chlorine value and the sensor that measured it</returns>
+        public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
             double days = System.Convert.ToDouble(daysToGoBack);
             string now = DateTime.UtcNow.ToString("G");
@@ -128,7 +129,7 @@ namespace Smartpool
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> chlorineTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var chlorine in chlorineDataQuery)
                 {
@@ -137,9 +138,9 @@ namespace Smartpool
                         DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                            chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
-                        }
+                        chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
                     }
+                }
 
                 #endregion
 
@@ -153,8 +154,8 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owner</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a temperature value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        /// <returns>A list of tuples, where each tuple contains a temperature value and the sensor that measured it</returns>
+        public List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
             double days = System.Convert.ToDouble(daysToGoBack);
             string now = DateTime.UtcNow.ToString("G");
@@ -179,7 +180,7 @@ namespace Smartpool
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> temperatureTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> temperatureTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var temperature in temperatureDataQuery)
                 {
@@ -188,7 +189,7 @@ namespace Smartpool
                         DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        temperatureTuples.Add(new Tuple<string, double>(temperature.Data.Timestamp, temperature.Value));
+                        temperatureTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, temperature.Value));
                     }
                 }
 
@@ -204,8 +205,8 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owne</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a pH value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        /// <returns>A list of tuples, where each tuple contains a pH value and the sensor that measured it</returns>
+        public List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
 
             double days = System.Convert.ToDouble(daysToGoBack);
@@ -232,7 +233,7 @@ namespace Smartpool
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> phTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> phTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var ph in phDataQuery)
                 {
@@ -241,7 +242,7 @@ namespace Smartpool
                         DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        phTuples.Add(new Tuple<string, double>(ph.Data.Timestamp, ph.Value));
+                        phTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, ph.Value));
                     }
                 }
 
@@ -257,8 +258,8 @@ namespace Smartpool
         /// <param name="poolOwnerEmail">The email of the pool owne</param>
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
-        /// <returns>A list of tuples, where each tuple contains a humidity value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        /// <returns>A list of tuples, where each tuple contains a humidity value and the sensor that measured it</returns>
+        public List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
 
             double days = System.Convert.ToDouble(daysToGoBack);
@@ -279,14 +280,14 @@ namespace Smartpool
                 #region Query for all user-pool specific humidity data
 
                 var humidityDataQuery = from humidity in db.HumiditySet
-                                           where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
-                                           select humidity;
+                                        where humidity.Data.Pool.Name == poolName && humidity.Data.Pool.User.Email == poolOwnerEmail
+                                        select humidity;
 
                 #endregion
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> humidityTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> humidityTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var humidity in humidityDataQuery)
                 {
@@ -295,7 +296,7 @@ namespace Smartpool
                         DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                        humidityTuples.Add(new Tuple<string, double>(humidity.Data.Timestamp, humidity.Value));
+                        humidityTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, humidity.Value));
                     }
                 }
 
