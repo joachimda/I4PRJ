@@ -178,7 +178,7 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
+        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithRightSensorType()
         {
             double value = 987;
 
@@ -188,7 +188,7 @@ namespace Database.Test.Unit
             Thread.Sleep(1000);
             string end = DateTime.UtcNow.ToString("G");
 
-            string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+            SensorTypes sensorType = _uut.GetChlorineValues(ownerEmail, poolName, 2 ).First().Item1;
 
             Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
         }
