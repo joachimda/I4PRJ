@@ -41,14 +41,14 @@ namespace Smartpool.Application.Test.Unit
 
         // View/Controller TextChanged Interaction
 
-        [TestCase("100,5", 100.5)]
-        [TestCase("0", 0)]
-        [TestCase("-100,23", 0)]
-        public void ActualVolume_VolumeTextChanged_ActualVolumeCorrectValue(string text, double volume)
-        {
-            _uut.DidChangeText(AddPoolTextField.Volume, text);
-            Assert.That(_uut.Pool.Volume, Is.EqualTo(volume).Within(0.1));
-        }
+        //[TestCase("100,5", 100.5)]
+        //[TestCase("0", 0)]
+        //[TestCase("-100,23", 0)]
+        //public void ActualVolume_VolumeTextChanged_ActualVolumeCorrectValue(string text, double volume)
+        //{
+        //    _uut.DidChangeText(AddPoolTextField.Volume, text);
+        //    Assert.That(_uut.Pool.Volume, Is.EqualTo(volume).Within(0.1));
+        //}
 
         [TestCase("10", "10", "10", 1000)]
         [TestCase("charmander", "10", "10", 0)]
@@ -62,15 +62,15 @@ namespace Smartpool.Application.Test.Unit
             Assert.That(_uut.Pool.Volume, Is.EqualTo(volume).Within(0.1));
         }
 
-        [TestCase("109,23", 109.23)]
-        public void ActualVolume_VolumeTextChangedAfterDimensions_VolumeCorrectValue(string volumeText, double volume)
-        {
-            _uut.DidChangeText(AddPoolTextField.Width, "10");
-            _uut.DidChangeText(AddPoolTextField.Length, "10");
-            _uut.DidChangeText(AddPoolTextField.Depth, "10");
-            _uut.DidChangeText(AddPoolTextField.Volume, volumeText);
-            Assert.That(_uut.Pool.Volume, Is.EqualTo(volume).Within(0.1));
-        }
+        //[TestCase("109,23", 109.23)]
+        //public void ActualVolume_VolumeTextChangedAfterDimensions_VolumeCorrectValue(string volumeText, double volume)
+        //{
+        //    _uut.DidChangeText(AddPoolTextField.Width, "10");
+        //    _uut.DidChangeText(AddPoolTextField.Length, "10");
+        //    _uut.DidChangeText(AddPoolTextField.Depth, "10");
+        //    _uut.DidChangeText(AddPoolTextField.Volume, volumeText);
+        //    Assert.That(_uut.Pool.Volume, Is.EqualTo(volume).Within(0.1));
+        //}
 
         // Required text field filled tests
 
