@@ -12,10 +12,10 @@ namespace Database.Test
         // derp
         static void Main(string[] args)
         {
-            //SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
-            //IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
-            //dataAccess.DeleteAllData();
-            //SmartPoolDB.ClearEntireDatabase();
+            SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
+            IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+            dataAccess.DeleteAllData();
+            SmartPoolDB.ClearEntireDatabase();
 
             //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
             //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
