@@ -4,12 +4,14 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System;
 using UIKit;
+using Foundation;
 
 namespace Application.iOS
 {
@@ -20,7 +22,7 @@ namespace Application.iOS
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new SignUpViewController(this, new iOSClientMessenger());
+			Controller = new SignUpViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
@@ -32,10 +34,10 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
 		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
 
 		// IView Interface Implementation

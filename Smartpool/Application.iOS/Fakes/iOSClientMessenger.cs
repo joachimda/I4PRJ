@@ -3,7 +3,8 @@
 // DESCR.   :   Messenger for iOS socket client
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
-// 0.1  LP      Initial version, using fake response manager
+// 0.1  LP      Initial version
+// 1.0	LP		Final version, this is a FAKE client messenger
 //========================================================================
 
 using Smartpool.Connection.Model;
