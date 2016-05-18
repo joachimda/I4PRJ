@@ -4,6 +4,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  EN      Initial version with GUI
 // 1.1  EN      Redid part of GUI and implemented presenter
+// 1.2  EN      Fixed textchanged bugs
 //========================================================================
 
 using System;
@@ -67,9 +68,7 @@ namespace Smartpool.Application.Win
 
         public void SetNewPasswordValid(bool valid)
         {
-            //EditButton.IsEnabled = valid;
-
-            ValidEllipse.Visibility = valid ? Visibility.Collapsed : Visibility.Visible;
+            ValidEllipse.Visibility = valid ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public void UpdateSuccessful()
@@ -86,14 +85,14 @@ namespace Smartpool.Application.Win
         private void PasswordTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var textField = sender as TextBox;
-            _specializedController.DidChangeOldPasswordText(textField?.Text);
+            _specializedController.DidChangeNewPasswordText(textField?.Text,
+                textField?.Name == "PasswordTextBox" ? 0 : 1);
         }
 
         private void CurrentPasswordTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textField = sender as TextBox;
-            _specializedController.DidChangeNewPasswordText(textField?.Text,
-                textField?.Name == "PasswordTextBox" ? 0 : 1);
+            _specializedController.DidChangeOldPasswordText(textField?.Text);
         }
     }
 }
