@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Smartpool.Connection.Server</RootNamespace>
     <AssemblyName>Connection.Server</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="AsynchronousSocketListener.cs" />
     <Compile Include="FakePoolDataGeneration\FakePool.cs" />
+    <Compile Include="FakePoolDataGeneration\FakePoolKeeper.cs" />
     <Compile Include="FakePoolDataGeneration\FakeSensor.cs" />
     <Compile Include="FakePoolDataGeneration\SensorValueAuthenticator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

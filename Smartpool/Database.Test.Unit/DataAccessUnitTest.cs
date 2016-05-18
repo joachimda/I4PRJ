@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Database.Test.Unit
 {
@@ -161,19 +162,19 @@ namespace Database.Test.Unit
             }
         }
 
-        //[Test]
-        //public void CreateDataEntry_AddingDataEntry_SetHasCorrectValue()
-        //{
-        //    double value = 987;
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_SetHasCorrectValue()
+        {
+            double value = 987;
 
-        //    string start = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
-        //    _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
-        //    string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+            string start = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
+            _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
+            string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
 
-        //    double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item2;
+            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item2;
 
-        //    Assert.That(setvalue, Is.EqualTo(value));
-        //}
+            Assert.That(setvalue, Is.EqualTo(value));
+        }
 
         //[Test]
         //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
@@ -186,7 +187,7 @@ namespace Database.Test.Unit
         //    Thread.Sleep(1000);
         //    string end = DateTime.UtcNow.ToString("G");
 
-        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item1;
 
         //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
         //}
@@ -202,7 +203,7 @@ namespace Database.Test.Unit
         //    Thread.Sleep(1000);
         //    string end = DateTime.UtcNow.ToString("G");
 
-        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item1;
+        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item1;
 
         //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.AtLeast(DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
         //}
@@ -232,6 +233,204 @@ namespace Database.Test.Unit
 
             Assert.That(entries, Is.EqualTo(0));
         }
+
+        #endregion
+
+        #region GetData Methods
+
+        #region GetPhData
+
+        [Test]
+        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightSensorType()
+        {
+            double pH = 8;
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Ph));
+
+        }
+
+        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightValue()
+        {
+            double pH = 8;
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item2, Is.EqualTo(pH));
+
+        }
+
+        [Test]
+        public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+        #endregion
+
+        #region GetChlorineData
+        [Test]
+        public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+        #endregion
+
+        #region GetTemperatureData
+        [Test]
+        public void GetTemperatureData_TemperatureDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_TemperatureDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+        #endregion
+
+        #region GetHumidityData
+
+        [Test]
+        public void GetHumidityData_HumidityDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_HumidityDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        #endregion
 
         #endregion
     }

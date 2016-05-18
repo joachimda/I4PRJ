@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.WebControls
+@using Microsoft.Ajax.Utilities
 @using Smartpool.Application.Model
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
@@ -6,17 +7,59 @@
     ViewBag.Title = "AddPoolView";
 }
 <section id="AddPoolForm">
-    <div class="input-form">
-        @Html.TextBox("Poolname", "Pool Name")
+    <div class="input-form" align="left">
+        <input class="input-form" type="text" placeholder="Pool name"/>
     </div>
 
-    <div class="input-form">
-        @Html.RadioButton("volumeSelected", true)
-        @Html.TextBox("volume", "Volume", new TextBox())
-        @Html.RadioButton("dimensionsSelected", true)
-        @Html.TextBox("depth", "Depth", new { @class = "input-form" })
-        @Html.TextBox("lenght", "Lenght", new { @class = "input-form" })
-        @Html.TextBox("width", "Width", new { @class = "input-form" })
+    <div class="addpoolinput">
+        <table>
+            <tr>
+                <td>
+                    <div align="left" onclick="enableTextBox" padding="10pt">
+                        <input type="checkbox" class="checkbox" onclick="enableTextBox" />
+                    </div>
+                </td>
+                <td>
+                    <div class="input-form" width="100pt">
+                        <input type="text" class="input-form" placeholder="Volume" id="txtBox1"/>
+                    </div>
+                </td>
+                <td>
+                   <input type="checkbox" class="checkbox" onclick="enableTextBox"/>
+                </td>
+                <td>
+                    <div class="input-form">
+                        <input type="text" class="addpoolinput" placeholder="Depth" id="txtBox2" />
+                    </div>
+                </td>
+                <td>
+                    <div class="input-form">
+                        <input type="text" class="addpoolinput" placeholder="Width" id="txtBox3" />
+                    </div>
+                </td>
+                <td>
+                    <div class="input-form">
+                        <input type="text" class="addpoolinput" placeholder="Lenght" id="txtBox4" />
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>
+
+<script type="text/javascript" language="javascript">
+        function enableTextBox() {
+            window.onload = function () {
+                if (document.getElementByClass() == chk1)
+                var check = document.getElementByClass("chkAssociation");
+                check.onheck = function () {
+                    if (this.checked == true)
+                        document.getElementByClass("txtBox2").disabled = false;
+                    else
+                        document.getElementByClass("txtBox2").disabled = true;
+                };
+            };
+        }
+</script>
+
 
