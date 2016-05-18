@@ -16,6 +16,23 @@ header {
     
 }
 
+.addpoolinput input{
+	background-color: #575757;
+	border-radius:5px;
+	border-color: #1F1F1F;
+	color: #ABABAC;
+
+}
+
+.addpoolinput:focus {
+    background-color: #FDA029;
+    outline: none;
+}
+
+.addpoolinput:hover {
+	border-color: #FDA029;
+}
+
 .input-form input{
 
     width: 250pt;

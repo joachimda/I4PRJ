@@ -9,6 +9,8 @@
 // 0.5  EN      Added humidity graph
 // 0.6  EN      Removed ellipses from graphs
 // 1.0  EN      All graphs working, GUI finished
+// 1.01 EN      Points on graphs is now equal to the points received
+// 1.02 EN      Only draws value text at local minimums and maximums
 //========================================================================
 
 using System;
@@ -63,7 +65,7 @@ namespace Smartpool.Application.Win
             PoolComboBox.SelectedIndex = index;
         }
         
-        private const int PointsOnGraphs = 16;
+        private int _pointsOnGraphs;
         private List<double> _temperatureValues;
         private List<double> _pHValues;
         private List<double> _chlorineValues;
@@ -71,56 +73,36 @@ namespace Smartpool.Application.Win
 
         public void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData)
         {
+            //Sets points on graphs to amount of data received
+            //Assumes that all graphs have the same amount of points
+            _pointsOnGraphs = historicData[0].Item2.Count;
+
             foreach (var sensor in historicData)
             {
                 switch (sensor.Item1)
                 {
                     case SensorTypes.Temperature:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _temperatureValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _temperatureValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _temperatureValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+                        
                         DisplayGraph(TemperatureCanvas, _temperatureValues, false);
                         break;
                     case SensorTypes.Ph:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _pHValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _pHValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _pHValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(PhCanvas, _pHValues, true);
                         break;
                     case SensorTypes.Chlorine:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _chlorineValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _chlorineValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _chlorineValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(ChlorineCanvas, _chlorineValues, true);
                         break;
                     case SensorTypes.Humidity:
                         //Get last values from historicData
-                        if (sensor.Item2.Count < PointsOnGraphs)
-                        {
-                            _humidityValues = sensor.Item2.GetRange(0, sensor.Item2.Count);
-                        }
-                        else
-                        {
-                            _humidityValues = sensor.Item2.GetRange(sensor.Item2.Count - PointsOnGraphs, PointsOnGraphs);
-                        }
+                        _humidityValues = sensor.Item2.GetRange(0, _pointsOnGraphs);
+
                         DisplayGraph(HumidityCanvas, _humidityValues, false);
                         break;
                 }
@@ -188,27 +170,42 @@ namespace Smartpool.Application.Win
             var canvasHeight = historyCanvas.ActualHeight;
             var canvasWidth = historyCanvas.ActualWidth;
 
-            var i = 0;
             //Holds last point drawn. Is used to draw tendency line
             var lastPointX = 0d;
             var lastPointY = 0d;
             var lastPointTop = 0d;
             // Draw graph
-            foreach (var value in history)
+            for (var i = 0; i < _pointsOnGraphs; i++)
             {
                 Dispatcher.Invoke(() =>
                 {
-                    var pointHeight = ((upperBound - value)) / (upperBound - lowerBound) * canvasHeight;
-                    var pointWidth = (canvasWidth/(PointsOnGraphs - 1))*i;
+                    var pointHeight = ((upperBound - history[i])) / (upperBound - lowerBound) * canvasHeight;
+                    var pointWidth = (canvasWidth/(_pointsOnGraphs - 1))*i;
 
                     //Draw value text above point
-                    var valueText = new TextBlock();
-                    valueText.Text = value.ToString();
+                    //If point is local min or max
+                    var valueTextIsVisible = false;
+                    var valueTextIsLocalMinimum = false;
+
+                    if (i == 0 || i == (_pointsOnGraphs - 1)) ;   //avoids argumentsOutOfRangeException
+                    else if (history[i] < history[i - 1] && history[i] < history[i + 1])
+                    {
+                        valueTextIsVisible = true;
+                        valueTextIsLocalMinimum = true;
+                    }
+                    else if (history[i] > history[i - 1] && history[i] > history[i + 1]) valueTextIsVisible = true;
+
+                    var valueText = new TextBlock();    
+                    if (valueTextIsVisible) valueText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+                    else valueText.Foreground = new SolidColorBrush(Color.FromArgb(0x00, 0xFF, 0xFF, 0xFF));
+
+                    valueText.Text = history[i].ToString();
                     valueText.FontSize = 8;
-                    valueText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
                     historyCanvas.Children.Add(valueText);
-                    Canvas.SetTop(valueText, pointHeight - 10);
+                    //if valueText belongs to a local minimum it's drawn below the point. Else above
+                    Canvas.SetTop(valueText, valueTextIsLocalMinimum? pointHeight + 1 : pointHeight - 10);
                     Canvas.SetLeft(valueText, pointWidth - 3);
+
                     //Draw tendency line
                     if (!(i == 0))
                     {
@@ -227,8 +224,6 @@ namespace Smartpool.Application.Win
                     lastPointY = pointHeight + 1;
                     lastPointX = pointWidth + 1;
                     lastPointTop = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
-
-                    i++;
                 });
             }
             //Write bounds on graph

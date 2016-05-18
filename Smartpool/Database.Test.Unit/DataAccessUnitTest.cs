@@ -300,7 +300,7 @@ namespace Database.Test.Unit
 
         #region GetChlorineData
         [Test]
-        public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
         {
 
         }
