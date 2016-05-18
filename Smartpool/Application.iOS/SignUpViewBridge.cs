@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
@@ -21,7 +22,7 @@ namespace Application.iOS
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new SignUpViewController(this, new iOSClientMessenger());
+			Controller = new SignUpViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()

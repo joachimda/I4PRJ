@@ -1,4 +1,12 @@
-﻿using Smartpool.Application.Presentation;
+﻿//========================================================================
+// FILENAME :   StatViewBridge.cs
+// DESCR.   :   Bridge between stat view controller and iOS stat view
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version, missing pool switching
+//========================================================================
+
+using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System.Collections.Generic;
 using System;
@@ -16,7 +24,7 @@ namespace Application.iOS
 		{
 			// Initialize view controller.
 			_sensorData = new List<Tuple<SensorTypes, double>>();
-			Controller = new StatViewController(this, new iOSClientMessenger());
+			Controller = new StatViewController (this, iOSClientFactory.DefaultClient ());
 		}
 
 		public override void ViewDidLoad ()

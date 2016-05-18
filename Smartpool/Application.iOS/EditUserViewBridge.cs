@@ -1,6 +1,14 @@
-﻿using System;
-using Smartpool.Application.Presentation;
+﻿//========================================================================
+// FILENAME :   EditUserViewBridge.cs
+// DESCR.   :   Bridge between edit user view controller and iOS view
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version, missing IBOutlets
+//========================================================================
 
+
+using System;
+using Smartpool.Application.Presentation;
 using UIKit;
 
 namespace Application.iOS

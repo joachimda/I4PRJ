@@ -77,6 +77,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Socket">
+      <HintPath>..\packages\Socket.2.0.0\lib\Socket.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
@@ -108,6 +114,7 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -128,8 +135,6 @@
     <Compile Include="SignUpViewBridge.designer.cs">
       <DependentUpon>SignUpViewBridge.cs</DependentUpon>
     </Compile>
-    <Compile Include="iOSClientMessenger.cs" />
-    <Compile Include="iOSResponseManager.cs" />
     <Compile Include="StatViewBridge.cs" />
     <Compile Include="StatViewBridge.designer.cs">
       <DependentUpon>StatViewBridge.cs</DependentUpon>
@@ -142,6 +147,10 @@
     <Compile Include="EditUserViewBridge.designer.cs">
       <DependentUpon>EditUserViewBridge.cs</DependentUpon>
     </Compile>
+    <Compile Include="iOSClient.cs" />
+    <Compile Include="Fakes\iOSClientMessenger.cs" />
+    <Compile Include="Fakes\iOSResponseManager.cs" />
+    <Compile Include="iOSClientFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -160,5 +169,6 @@
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\Logo.imageset\" />
     <Folder Include="Temporary\" />
+    <Folder Include="Fakes\" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing DisplayAlert implementation
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
@@ -22,7 +23,7 @@ namespace Application.iOS
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new LoginViewController(this, new iOSClientMessenger());
+			Controller = new LoginViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
