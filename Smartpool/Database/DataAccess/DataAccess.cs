@@ -10,7 +10,6 @@ namespace Smartpool
     {
         public IPoolAccess PoolAccess { get; set; }
 
-
         /// <summary>
         /// Constructor
         /// </summary>
@@ -193,10 +192,8 @@ namespace Smartpool
 
                 foreach (var temperature in temperatureDataQuery)
                 {
-                    if (DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(temperature.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(temperature.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         temperatureTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, temperature.Value));
                     }
@@ -246,10 +243,8 @@ namespace Smartpool
 
                 foreach (var ph in phDataQuery)
                 {
-                    if (DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(ph.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(ph.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         phTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, ph.Value));
                     }
@@ -300,10 +295,8 @@ namespace Smartpool
 
                 foreach (var humidity in humidityDataQuery)
                 {
-                    if (DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(humidity.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(humidity.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         humidityTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, humidity.Value));
                     }

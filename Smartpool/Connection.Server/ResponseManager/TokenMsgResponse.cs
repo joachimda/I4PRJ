@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Newtonsoft.Json;
 using Smartpool.Connection.Model;
+using Smartpool.Connection.Server.FakePoolDataGeneration;
 
 namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
         /***TEMPORARY***/
-        private readonly FakePoolDataGeneration.FakePool _fakePool = new FakePoolDataGeneration.FakePool(4,10);
+        private readonly List<FakePool> _fakePools = new List<FakePool>();
         private readonly Random _random = new Random();
         /***END OF TEMPORARY***/
         private readonly ISmartpoolDB _smartpoolDb;
@@ -17,7 +19,14 @@ namespace Smartpool.Connection.Server
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
+            var poolList = _smartpoolDb.PoolAccess.FindAllPoolsOfUser("1");
+            foreach (var pool in poolList)
+            {
+                _fakePools.Add(new FakePool(4, 10, "1", pool.Name, _smartpoolDb));
+                Thread.Sleep(2000);
+            }
         }
+
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
         {
             var tokenMsg = JsonConvert.DeserializeObject<TokenMsg>(messageString, _jsonSettings);
@@ -60,11 +69,13 @@ namespace Smartpool.Connection.Server
                     if (gpdMsg.GetAllNamesOnly)
                     {
                         var pools = _smartpoolDb.PoolAccess.FindAllPoolsOfUser(gpdMsg.Username);
-                        var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
+                        var poolNamesListTuple =
+                            pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        return new GetPoolDataResponseMsg(_fakePool.GetSensorValuesList());
+                        return new GetPoolDataResponseMsg(GetSensorValues(gpdMsg.Username, gpdMsg.PoolName, gpdMsg.GetHistoryDays));
+                        //return new GetPoolDataResponseMsg(_fakePools[0].GetSensorValuesList());
 
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
@@ -90,6 +101,26 @@ namespace Smartpool.Connection.Server
                 default:
                     return new GeneralResponseMsg(true, false);
             }
+        }
+
+        private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
+        {
+            var listToReturn = new List<Tuple<SensorTypes, List<double>>>();
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity));
+            return listToReturn;
+        }
+
+        private static Tuple<SensorTypes, List<double>> GetData(List<Tuple<SensorTypes, double>> dataFromDb, SensorTypes sensorType)
+        {
+            var tempList = new List<double>();
+            foreach (var tuple in dataFromDb)
+            {
+                tempList.Add(tuple.Item2);
+            }
+            return new Tuple<SensorTypes, List<double>>(sensorType, tempList);
         }
     }
 }
