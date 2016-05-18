@@ -1,0 +1,43 @@
+\documentclass[a4paper,11pt,oneside]{memoir}
+\input{utils/packages}
+\input{utils/layout}
+\input{utils/listings}
+\input{utils/ordliste}
+
+%% Forside variabler
+\newcommand{\Kursus}{I4PRJ4 F16}
+\newcommand{\Projektnavn}{SmartPool 2.0}
+\newcommand{\Gruppe}{Gruppe 3}
+\newcommand{\Projektdokument}{Projektrapport}
+
+\bibliography{utils/litteratur} %% Litteratur
+
+\begin{document}		
+	\frontmatter
+	\pagestyle{asereport}
+	\input{utils/frontpage}					\clearpage %% Forside
+	\input{docs/frontmatter/abstract}		\clearpage %% Abstract
+	\input{docs/frontmatter/forord}			\clearpage %% Forord
+	\tableofcontents						\clearpage %% ToC
+	
+	\mainmatter
+	\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
+	\input{docs/frontmatter/indledning}		\clearpage %% Indledning
+	\input{docs/projektformulering/main}	\clearpage %% Projektformulering
+	\input{docs/kravspecifikation/main}		\clearpage %% Kravspecifikation
+	\input{docs/systemarkitektur/main}		\clearpage %% Systemarkitektur
+	\input{docs/processbeskrivelse/main}	\clearpage %% Processbeskrivelse, skal ikke være i doc
+	\input{docs/design/main}				\clearpage %% Design
+	\input{docs/implementering/main}		\clearpage %% Implementering
+	\input{docs/integration/main}			\clearpage %% Integration
+	\input{docs/accepttest/main}			\clearpage %% Accepttest
+	%% reflektion
+	\input{docs/appendix/main}				\clearpage %% Appendix
+	
+	\backmatter
+	\setglossarystyle{list}
+	\printnoidxglossary[title=Ordliste]		%% Glossary
+	
+	\clearpage
+	\printbibliography[title={Litteratur}] 	%% Bibliography
+\end{document}
