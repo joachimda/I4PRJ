@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Smartpool.Connection.Model;
 
 namespace Smartpool
 {
@@ -104,7 +105,7 @@ namespace Smartpool
         /// <param name="poolName">The specific pool name</param>
         /// <param name="daysToGoBack">Specifies how many days ago to start looking at data</param>
         /// <returns>A list of tuples, where each tuple contains a chlorine value and the time where it was measured</returns>
-        public List<Tuple<string, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+        public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
         {
             double days = System.Convert.ToDouble(daysToGoBack);
             string now = DateTime.UtcNow.ToString("G");
@@ -128,7 +129,7 @@ namespace Smartpool
 
                 #region Check for timestamp matches and add to tuples
 
-                List<Tuple<string, double>> chlorineTuples = new List<Tuple<string, double>>();
+                List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
 
                 foreach (var chlorine in chlorineDataQuery)
                 {
@@ -137,7 +138,7 @@ namespace Smartpool
                         DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
                             System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
                     {
-                            chlorineTuples.Add(new Tuple<string, double>(chlorine.Data.Timestamp, chlorine.Value));
+                            chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
                         }
                     }
 
