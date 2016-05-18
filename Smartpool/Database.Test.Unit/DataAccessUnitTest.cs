@@ -176,10 +176,10 @@ namespace Database.Test.Unit
         //    Assert.That(setvalue, Is.EqualTo(value));
         //}
 
-        //[Test]
-        //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
-        //{
-        //    double value = 987;
+        [Test]
+        public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithRightSensorType()
+        {
+            double value = 987;
 
         //    Thread.Sleep(1000);
         //    string start = DateTime.UtcNow.ToString("G");
