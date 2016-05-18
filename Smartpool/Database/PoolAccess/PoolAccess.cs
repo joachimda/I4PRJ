@@ -41,7 +41,7 @@ namespace Smartpool
                 db.PoolSet.Add(newPool);
                 db.SaveChanges();
             }
-
++
             return true;
         }
 
