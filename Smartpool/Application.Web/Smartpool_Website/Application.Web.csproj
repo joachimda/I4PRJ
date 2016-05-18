@@ -270,6 +270,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\StatView.cshtml" />
+    <Content Include="Views\Home\AddPoolView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,6 +282,20 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application.Presentation\Application.Presentation.csproj">
+      <Project>{9c001789-1d5f-4545-ad60-50b6fb91dd96}</Project>
+      <Name>Application.Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Connection.Client.NET\Connection.Client.NET.csproj">
+      <Project>{5eabb430-58ae-4139-923a-9efa963a2c5f}</Project>
+      <Name>Connection.Client.NET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Connection.Model\Connection.Model.csproj">
+      <Project>{43c6c261-d3ec-4ab6-972e-a81c85e9258a}</Project>
+      <Name>Connection.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

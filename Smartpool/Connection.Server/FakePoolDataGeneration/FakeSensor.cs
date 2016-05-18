@@ -13,7 +13,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         private readonly SensorValueAuthenticator _sensorValueAuthenticator = new SensorValueAuthenticator();
         private readonly Random _random = new Random();
         private readonly Queue<double> _sensorValueQueue = new Queue<double>();
-        private double _lastSensorValueEntry;
+        public double LastSensorValueEntry { get; set; }
         private readonly int _maxHistory;
 
         public FakeSensor(int sensorType = -1, int maxHistory = 30)
@@ -50,24 +50,20 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         public void GetNextSensorValue()
         {
             if (SensorType == SensorTypes.Temperature || SensorType == SensorTypes.Humidity)
-                AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3));
+                AddNewSensorValue(LastSensorValueEntry + _random.Next(-2, 3));
 
             if (SensorType == SensorTypes.Chlorine || SensorType == SensorTypes.Ph)
-                AddNewSensorValue(_lastSensorValueEntry + _random.Next(-2, 3) * 0.1);
+                AddNewSensorValue(LastSensorValueEntry + _random.Next(-2, 3) * 0.1);
         }
 
         private void AddNewSensorValue(double sensorValue)
         {
             if (!(_sensorValueQueue.Count < _maxHistory))
                 _sensorValueQueue.Dequeue();
-            
-            _sensorValueQueue.Enqueue(Math.Round(_sensorValueAuthenticator.Auth(SensorType, sensorValue), 1));
-            _lastSensorValueEntry = sensorValue;
-        }
 
-        public void SaveValueToDatabase()
-        {
-            //Console.WriteLine(DateTime.Now + " - Sensor of type: " + SensorType + " recorded a value of: " + _lastSensorValueEntry);
+            var controlledValue = Math.Round(_sensorValueAuthenticator.Auth(SensorType, sensorValue), 1);
+            _sensorValueQueue.Enqueue(controlledValue);
+            LastSensorValueEntry = controlledValue;
         }
     }
 }
