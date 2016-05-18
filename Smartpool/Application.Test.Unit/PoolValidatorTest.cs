@@ -41,15 +41,15 @@ namespace Smartpool.Application.Test.Unit
             Assert.That(_uut.IsValid(), Is.EqualTo(valid));
         }
 
-        [TestCase("0", 0)]
-        [TestCase("10,5", 10.5)]
-        [TestCase("-10,5", 0)]
-        public void Volume_VolumeUpdated_CorrectReturnValue(string volume, double actualVolume)
-        {
-            _uut.UpdateVolume(volume, null);
+        //[TestCase("0", 0)]
+        //[TestCase("10,5", 10.5)]
+        //[TestCase("-10,5", 0)]
+        //public void Volume_VolumeUpdated_CorrectReturnValue(string volume, double actualVolume)
+        //{
+        //    _uut.UpdateVolume(volume, null);
 
-            Assert.That(_uut.Volume, Is.EqualTo(actualVolume).Within(0.1));
-        }
+        //    Assert.That(_uut.Volume, Is.EqualTo(actualVolume).Within(0.1));
+        //}
 
         [TestCase("0", "0", "0", 0)]
         [TestCase("1", "1", "1", 1)]
