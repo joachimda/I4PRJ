@@ -34,19 +34,19 @@ namespace Database.Test
                 Console.WriteLine("Chlorine data: " + chlorineTuple.Item1 + " " + chlorineTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetPhValues("email", "baghave", 8);
+            dataTuples = dataAccess.GetPhValues("email", "baghave", 1);
             foreach (var phTuple in dataTuples)
             {
                 Console.WriteLine("pH data: " + phTuple.Item1 + " " + phTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetTemperatureValues("email", "baghave", 8);
+            dataTuples = dataAccess.GetTemperatureValues("email", "baghave", 1);
             foreach (var tempTuple in dataTuples)
             {
                 Console.WriteLine("Temperature data: " + tempTuple.Item1 + " " + tempTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetHumidityValues("email", "baghave", 8);
+            dataTuples = dataAccess.GetHumidityValues("email", "baghave", 1);
             foreach (var humidityTuple in dataTuples)
             {
                 Console.WriteLine("Humidity data: " + humidityTuple.Item1 + " " + humidityTuple.Item2);

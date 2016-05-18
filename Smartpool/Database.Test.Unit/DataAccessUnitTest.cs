@@ -373,6 +373,47 @@ namespace Database.Test.Unit
 
         #region GetHumidityData
 
+        [Test]
+        public void GetHumidityData_HumidityDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_HumidityDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
 
         #endregion
 
