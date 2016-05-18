@@ -172,7 +172,7 @@ namespace Database.Test.Unit
             _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
             string end = DateTime.UtcNow.ToString("G"); Thread.Sleep(1000);
 
-            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, start, end).First().Item2;
+            double setvalue = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item2;
 
             Assert.That(setvalue, Is.EqualTo(value));
         }
