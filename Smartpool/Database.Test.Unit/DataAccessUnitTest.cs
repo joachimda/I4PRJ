@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Smartpool;
 
 namespace Database.Test.Unit
@@ -232,6 +233,37 @@ namespace Database.Test.Unit
 
             Assert.That(entries, Is.EqualTo(0));
         }
+
+        #endregion
+
+        #region GetData
+
+        [Test]
+        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
+            
+        }
+
+        public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
+        {
+            
+        }
+
+        public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+            
+        }
+
+        public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+            
+        }
+
+        public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+            
+        }
+
 
         #endregion
     }
