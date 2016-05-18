@@ -69,11 +69,13 @@ namespace Smartpool.Connection.Server
                     if (gpdMsg.GetAllNamesOnly)
                     {
                         var pools = _smartpoolDb.PoolAccess.FindAllPoolsOfUser(gpdMsg.Username);
-                        var poolNamesListTuple = pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
+                        var poolNamesListTuple =
+                            pools.Select(pool => Tuple.Create(pool.Name, _random.NextDouble() > 0.5)).ToList();
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        return new GetPoolDataResponseMsg(_fakePools[0].GetSensorValuesList());
+                        return new GetPoolDataResponseMsg(GetSensorValues(gpdMsg.Username, gpdMsg.PoolName, gpdMsg.GetHistoryDays));
+                        //return new GetPoolDataResponseMsg(_fakePools[0].GetSensorValuesList());
 
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);
@@ -99,6 +101,26 @@ namespace Smartpool.Connection.Server
                 default:
                     return new GeneralResponseMsg(true, false);
             }
+        }
+
+        private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
+        {
+            var listToReturn = new List<Tuple<SensorTypes, List<double>>>();
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine));
+            listToReturn.Add(GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity));
+            return listToReturn;
+        }
+
+        private static Tuple<SensorTypes, List<double>> GetData(List<Tuple<SensorTypes, double>> dataFromDb, SensorTypes sensorType)
+        {
+            var tempList = new List<double>();
+            foreach (var tuple in dataFromDb)
+            {
+                tempList.Add(tuple.Item2);
+            }
+            return new Tuple<SensorTypes, List<double>>(sensorType, tempList);
         }
     }
 }
