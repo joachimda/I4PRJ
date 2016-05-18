@@ -6,6 +6,7 @@ using System.Threading;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Database.Test.Unit
 {
@@ -241,8 +242,23 @@ namespace Database.Test.Unit
         #region GetPhData
 
         [Test]
-        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightSensorType()
         {
+            double pH = 8;
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName,2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Ph));
+
+        }
+
+        public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightValue()
+        {
+            double pH = 8;
+            string start = DateTime.UtcNow.ToString("G");
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
         }
 
