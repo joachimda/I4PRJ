@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Database.Test
 {
@@ -25,27 +26,27 @@ namespace Database.Test
                 Thread.Sleep(1500);
             }
 
-            var time = DateTime.UtcNow.ToString();
+            var time = DateTime.UtcNow.ToString("G");
 
-            List<Tuple<string, double>> dataTuples = dataAccess.GetChlorineValues("email", "baghave", "11/05/2016 11:47:51", time);
+            List<Tuple<SensorTypes, double>> dataTuples = dataAccess.GetChlorineValues("email", "baghave", 8);
             foreach (var chlorineTuple in dataTuples)
             {
                 Console.WriteLine("Chlorine data: " + chlorineTuple.Item1 + " " + chlorineTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetPhValues("email", "baghave", "11/05/2016 11:47:51", time);
+            dataTuples = dataAccess.GetPhValues("email", "baghave", 8);
             foreach (var phTuple in dataTuples)
             {
                 Console.WriteLine("pH data: " + phTuple.Item1 + " " + phTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetTemperatureValues("email", "baghave", "11/05/2016 11:47:51", time);
+            dataTuples = dataAccess.GetTemperatureValues("email", "baghave", 8);
             foreach (var tempTuple in dataTuples)
             {
                 Console.WriteLine("Temperature data: " + tempTuple.Item1 + " " + tempTuple.Item2);
             }
 
-            dataTuples = dataAccess.GetHumidityValues("email", "baghave", "11/05/2016 11:47:51", time);
+            dataTuples = dataAccess.GetHumidityValues("email", "baghave", 8);
             foreach (var humidityTuple in dataTuples)
             {
                 Console.WriteLine("Humidity data: " + humidityTuple.Item1 + " " + humidityTuple.Item2);
