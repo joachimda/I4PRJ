@@ -110,6 +110,8 @@
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="StatViewCell.xib" />
+    <InterfaceDefinition Include="HistoryViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -151,6 +153,14 @@
     <Compile Include="Fakes\iOSClientMessenger.cs" />
     <Compile Include="Fakes\iOSResponseManager.cs" />
     <Compile Include="iOSClientFactory.cs" />
+    <Compile Include="StatViewCell.cs" />
+    <Compile Include="StatViewCell.designer.cs">
+      <DependentUpon>StatViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryViewCell.cs" />
+    <Compile Include="HistoryViewCell.designer.cs">
+      <DependentUpon>HistoryViewCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -165,6 +175,14 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Images.xcassets\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Chlorine.png" />
+    <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\humidity.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\humidity.imageset\Humidity.png" />
+    <BundleResource Include="Resources\Images.xcassets\ph.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\ph.imageset\pH.png" />
+    <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Temperature.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\Logo.imageset\" />

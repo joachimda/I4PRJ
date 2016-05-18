@@ -18,7 +18,7 @@ namespace Application.iOS
 	{
 		private IStatViewController _specializedController => Controller as IStatViewController;
 		private List<Tuple<SensorTypes, double>> _sensorData;
-
+		private string _reuseIdentifier = "statViewCell";
 
 		public StatViewBridge (IntPtr handle) : base (handle)
 		{
@@ -32,6 +32,8 @@ namespace Application.iOS
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 
+
+			TableView.RegisterNibForCellReuse(StatViewCell.Nib, _reuseIdentifier);
 			TableView.TableFooterView = new UIView ();
 
 			// Let the controller know that the view has finished loading.
@@ -73,13 +75,18 @@ namespace Application.iOS
 
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			var reuseIdentifier = "recentsCell";
-			var cell = tableView.DequeueReusableCell (reuseIdentifier);
-
-			cell.TextLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item1}");
-			cell.DetailTextLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}");
-
+			
+			var cell = tableView.DequeueReusableCell (_reuseIdentifier) as StatViewCell;
+			var type = string.Format ($"{_sensorData [indexPath.Row].Item1}");
+			cell.DataLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}");
+			cell.NameLabel.Text = type;
+			cell.BorderImage.Image = UIImage.FromBundle (type.ToLower ());
 			return cell;
+		}
+
+		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
+		{
+			return 132;
 		}
 	}
 }
