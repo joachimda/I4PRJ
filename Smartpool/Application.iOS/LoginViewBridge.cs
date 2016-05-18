@@ -12,11 +12,10 @@ using System;
 using Foundation;
 using UIKit;
 using System.Drawing;
-using FieldService.iOS;
 
 namespace Application.iOS
 {
-	public partial class LoginViewBridge : BaseController, ILoginView
+	public partial class LoginViewBridge : UIViewController, ILoginView
 	{
 		private ILoginViewController _specializedController => Controller as ILoginViewController;
 
@@ -35,10 +34,10 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override bool HandlesKeyboardNotifications {
-			get {
-				return true;
-			}
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
+		{
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
 			
 		// Actions
@@ -95,7 +94,7 @@ namespace Application.iOS
 		public void SetLoginButtonEnabled(bool enabled)
 		{
 			loginButton.Enabled = enabled;
-			loginButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
+//			loginButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 
 		public void DisplayAlert(string title, string content)
