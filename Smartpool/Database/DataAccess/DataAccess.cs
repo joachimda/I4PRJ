@@ -10,7 +10,6 @@ namespace Smartpool
     {
         public IPoolAccess PoolAccess { get; set; }
 
-
         /// <summary>
         /// Constructor
         /// </summary>
