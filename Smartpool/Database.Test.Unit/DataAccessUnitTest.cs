@@ -328,7 +328,47 @@ namespace Database.Test.Unit
         #endregion
 
         #region GetTemperatureData
+        [Test]
+        public void GetTemperatureData_TemperatureDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
+        {
 
+        }
+
+        [Test]
+        public void GetTemperatureData_TemperatureDataNotPresent_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNonExistingEmail_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNonExistingPoolName_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithNegativeDays_ReturnsEmptyList()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
+
+        [Test]
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        {
+
+        }
         #endregion
 
         #region GetHumidityData
