@@ -130,21 +130,10 @@ namespace Smartpool
 
                 List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
 
-                //foreach (var chlorine in chlorineDataQuery)
-                //{
-                //    if (DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                //        System.Globalization.CultureInfo.InvariantCulture).CompareTo(endTime) < 0 ||
-                //        DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss",
-                //            System.Globalization.CultureInfo.InvariantCulture).CompareTo(startTime) > 0)
-                //    {
-                //        chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
-                //    }
-                //}
-
                 foreach (var chlorine in chlorineDataQuery)
                 {
-                    if (DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(chlorine.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(chlorine.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
                     }
@@ -192,8 +181,8 @@ namespace Smartpool
 
                 foreach (var temperature in temperatureDataQuery)
                 {
-                    if (DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(temperature.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(temperature.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         temperatureTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, temperature.Value));
                     }
@@ -243,8 +232,8 @@ namespace Smartpool
 
                 foreach (var ph in phDataQuery)
                 {
-                    if (DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(ph.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(ph.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         phTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, ph.Value));
                     }
