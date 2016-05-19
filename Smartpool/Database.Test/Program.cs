@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Mail;
 using System.Threading;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Database.Test
 {
