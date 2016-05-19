@@ -65,7 +65,7 @@ namespace Application.iOS
 		public void SetPasswordValid(bool valid)
 		{
 			if (valid) {
-				passwordTextFieldTwo.TextColor = UIColor.White;
+				passwordTextFieldTwo.TextColor = UIColor.Green;
 			} else {
 				passwordTextFieldTwo.TextColor = UIColor.Red;
 			}

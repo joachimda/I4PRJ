@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Mail;
 using System.Threading;
 using Smartpool;
@@ -11,6 +12,8 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine(CultureInfo.CurrentCulture);
             //SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
             //IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
             //dataAccess.DeleteAllData();
