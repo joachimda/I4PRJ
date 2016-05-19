@@ -473,7 +473,10 @@ namespace Database.Test.Unit
         [Test]
         public void GetHumidityData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues("non", poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
