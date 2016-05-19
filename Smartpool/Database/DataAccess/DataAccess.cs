@@ -243,8 +243,8 @@ namespace Smartpool
 
                 foreach (var ph in phDataQuery)
                 {
-                    if (DateTime.Parse(ph.Data.Timestamp).CompareTo(endTime) < 0 ||
-                        DateTime.Parse(ph.Data.Timestamp).CompareTo(startTime) > 0)
+                    if (DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(ph.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
                     {
                         phTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Ph, ph.Value));
                     }
