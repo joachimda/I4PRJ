@@ -5,6 +5,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing pool switching
 // 1.1	LP		Added pool cycling
+// 1.2	LP		Added graph drawing (modified EN's win graph)
 //========================================================================
 
 
