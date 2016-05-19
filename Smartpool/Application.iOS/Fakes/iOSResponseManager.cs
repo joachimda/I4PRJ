@@ -56,6 +56,7 @@ namespace Application.iOS
 				var pools = new List<Tuple<string, bool>> ();
 				pools.Add(new Tuple<string, bool>("Min sjove pool", false));
 				pools.Add(new Tuple<string, bool>("Lasses pool", false));
+				pools.Add(new Tuple<string, bool>("Min slemme pool", false));
 
 				return new GetPoolDataResponseMsg (null, pools);
 			}

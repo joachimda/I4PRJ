@@ -51,15 +51,23 @@ namespace Application.iOS
 			TableView.ReloadData ();
 		}
 
+		// IPoolDisplaying
+
+		private List<Tuple<string, bool>> _pools = new List<Tuple<string, bool>> ();
+		private int _selectedIndex = 0;
+
 		public void SetAvailablePools(List<Tuple<string, bool>> pools)
 		{
-			// Missing implementation
+			_pools = pools;
 		}
-			
+
 		public void SetSelectedPoolIndex(int index)
 		{
-			// Missing implementation
+			_selectedIndex = index;
+			PoolsBarButtonItem.Title = _pools [index].Item1;
 		}
+
+		// IAlartDisplaying
 
 		public void DisplayAlert(string title, string content)
 		{
@@ -86,6 +94,16 @@ namespace Application.iOS
 		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
 			return 140;
+		}
+
+		// Actions
+
+		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender)
+		{
+			// Cycle through available pools
+			var newIndex = (_selectedIndex + 1) % _pools.Count;
+			_specializedController.DidSelectPool(newIndex);
+			SetSelectedPoolIndex(newIndex);
 		}
 	}
 }
