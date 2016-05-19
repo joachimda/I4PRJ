@@ -36,6 +36,11 @@ namespace Application.iOS
 
 			TableView.RegisterNibForCellReuse(StatViewCell.Nib, _reuseIdentifier);
 			TableView.TableFooterView = new UIView ();
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
 
 			// Let the controller know that the view has finished loading.
 			Controller.ViewDidLoad();

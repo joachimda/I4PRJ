@@ -43,6 +43,8 @@ namespace Application.iOS
 			{
 			case TokenSubMessageTypes.GetPoolDataRequest:
 				return ResponseForGetPoolDataRequest ((GetPoolDataRequestMsg)message);
+			case TokenSubMessageTypes.GetPoolInfoRequest:
+				return ResponseForGetPoolInfoRequest ((GetPoolInfoRequestMsg)message);
 			default:
 				return new GeneralResponseMsg (true, true);
 			}
@@ -71,6 +73,15 @@ namespace Application.iOS
 
 				return new GetPoolDataResponseMsg(readings, null);
 			}
+		}
+
+		private Message ResponseForGetPoolInfoRequest(GetPoolInfoRequestMsg message)
+		{
+			var serialNumber = "5XXAS-WWWD2-ASCC1-APW2W-98QSS";
+			var randomizer = new Random ();
+			var volume = randomizer.Next (20, 100);
+
+			return new GetPoolInfoResponseMsg (volume, serialNumber);
 		}
 	}
 }

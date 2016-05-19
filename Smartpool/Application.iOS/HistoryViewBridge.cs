@@ -35,6 +35,11 @@ namespace Application.iOS
 			// Perform any additional setup after loading the view, typically from a nib.
 
 			TableView.TableFooterView = new UIView ();
+		}
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
 
 			// Let the controller know that the view has finished loading.
 			Controller.ViewDidLoad();

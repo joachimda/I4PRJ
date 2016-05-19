@@ -22,11 +22,10 @@ namespace Application.iOS
 		{
 			Controller = new EditPoolViewController(this, iOSClientFactory.DefaultClient());
 		}
-
-		public override void ViewDidLoad ()
+			
+		public override void ViewDidAppear (bool animated)
 		{
-			base.ViewDidLoad ();
-			// Perform any additional setup after loading the view, typically from a nib.
+			base.ViewDidAppear (animated);
 
 			// Let the controller know that the view has finished loading.
 			Controller.ViewDidLoad();
