@@ -132,6 +132,7 @@ namespace Application.iOS
 			layer.LineWidth = 2;
 			layer.FillColor = UIColor.Clear.CGColor;
 
+			view.Layer.Sublayers = null;
 			view.Layer.AddSublayer (layer);
 		}
 

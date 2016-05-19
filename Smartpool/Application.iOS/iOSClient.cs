@@ -5,6 +5,7 @@ using Smartpool.Connection.Model;
 using Newtonsoft.Json;
 using SocketLibrary;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace Application.iOS
 {
@@ -42,6 +43,7 @@ namespace Application.iOS
 					var received = "";
 					do {
 						received += sender.Receive(1024);
+						Thread.Sleep(5);
 					}
 					while (sender.AnythingToReceive);
 
