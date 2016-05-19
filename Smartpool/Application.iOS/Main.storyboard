@@ -310,8 +310,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History" id="5eW-aj-ALD">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="xF5-cx-LGP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="xF5-cx-LGP">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="OoZ-yn-A5o" id="aAR-Mm-SD3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="PoolsBarButtonItem" destination="xF5-cx-LGP" id="dti-CH-85I"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmx-Yw-UXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -379,9 +386,16 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Recents" id="6V2-Ku-VJP">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="0eL-c5-5nU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="0eL-c5-5nU">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="cjM-zg-047" id="Hbn-Cq-obA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="PoolsBarButtonItem" destination="0eL-c5-5nU" id="kma-EK-zCv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TzJ-39-7zC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -799,6 +813,12 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Password" id="NH1-pf-lo8"/>
+                    <connections>
+                        <outlet property="NewPasswordRepeatedTextField" destination="3ep-fS-gq0" id="CJj-GS-dGb"/>
+                        <outlet property="NewPasswordTextField" destination="wHR-Uj-LwE" id="edf-eZ-Wsq"/>
+                        <outlet property="OldPasswordTextField" destination="ERE-dl-NdI" id="8lH-16-Rml"/>
+                        <outlet property="SaveButton" destination="hGI-N5-2ir" id="NtX-jH-nak"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-55-HqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

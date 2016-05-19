@@ -162,6 +162,10 @@
       <DependentUpon>HistoryViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="GuiCharacter.cs" />
+    <Compile Include="EditPoolViewBridge.cs" />
+    <Compile Include="EditPoolViewBridge.designer.cs">
+      <DependentUpon>EditPoolViewBridge.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
