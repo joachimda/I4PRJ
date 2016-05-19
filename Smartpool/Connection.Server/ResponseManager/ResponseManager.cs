@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -77,8 +78,18 @@ namespace Smartpool.Connection.Server
                 Console.Write(e.ToString());
                 if (e.InnerException is SqlException)
                 {
+                    if (receivedString.Contains("GetPoolDataRequest"))
+                        return new GetPoolDataResponseMsg(new List<Tuple<SensorTypes, List<double>>>())
+                        {
+                            MessageInfo = "Please contact helpdesk: CodeDbError40\nFailed to get pool data"
+                        };
                     return new GeneralResponseMsg(false, false) {MessageInfo = "Please contact helpdesk: CodeDbError40"};
                 }
+                if (receivedString.Contains("GetPoolDataRequest"))
+                    return new GetPoolDataResponseMsg(new List<Tuple<SensorTypes, List<double>>>())
+                    {
+                        MessageInfo = "Failed to get pool data"
+                    };
                 return new GeneralResponseMsg(false, false) {MessageInfo = "Please check internet connection and braincells for tissue damage"};
             }
         }
