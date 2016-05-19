@@ -482,13 +482,17 @@ namespace Database.Test.Unit
         [Test]
         public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 20));
+            Assert.That(tuples.First().Item2, Is.EqualTo(hum));
         }
 
         [Test]
         public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 20));
+            Assert.That(tuples, Is.Empty);
         }
 
         #endregion
