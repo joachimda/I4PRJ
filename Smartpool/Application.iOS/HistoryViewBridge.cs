@@ -13,6 +13,8 @@ using Smartpool.Connection.Model;
 using System.Collections.Generic;
 using System;
 using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 
 namespace Application.iOS
 {
@@ -109,7 +111,93 @@ namespace Application.iOS
 
 		private void DrawGraph(UIView view, List<double> values, SensorTypes type)
 		{
-			
+			var bounds = GraphBounds (values, (type == SensorTypes.Chlorine || type == SensorTypes.Ph));
+			var points = GraphPoints (values, bounds, view);
+			var numberOfPoints = points.Count;
+
+			if (numberOfPoints == 0)
+				return;
+
+			var path = new UIBezierPath ();
+			path.MoveTo (points[0]);
+
+			for (var i = 1; i < numberOfPoints; i++) {
+				path.AddLineTo (points[i]);
+			}
+
+			var layer = new CAShapeLayer ();
+			layer.Path = path.CGPath;
+			layer.StrokeColor = UIColor.White.CGColor;
+			layer.LineWidth = 2;
+			layer.FillColor = UIColor.Clear.CGColor;
+
+			view.Layer.AddSublayer (layer);
+		}
+
+		private Tuple<double, double> GraphBounds(List<double> values, bool isPhOrChlorine)
+		{
+			//Sets up graphs upper and lower bounds
+			var upperBound = 0d;
+			var lowerBound = 200d;
+
+			foreach (var value in values)
+			{
+				if (value > upperBound) upperBound = value;
+				if (value < lowerBound) lowerBound = value;
+			}
+			//If isPhOrChlorine bounds are +- 0.5 else +-5
+			if (isPhOrChlorine)
+			{
+				upperBound += 0.5;
+				lowerBound -= 0.5;
+			}
+			else
+			{
+				upperBound += 5;
+				lowerBound -= 5;
+				//Make bounds even, because I asume people like even numbers
+				if (!(upperBound % 2 == 0)) upperBound++;
+				if (!(lowerBound % 2 == 0)) lowerBound++;
+			}
+
+			return new Tuple<double, double> (lowerBound, upperBound);
+		}
+
+		private List<CGPoint> GraphPoints(List<double> values, Tuple<double, double> bounds, UIView view)
+		{
+			var points = new List<CGPoint> ();
+			var numberOfPoints = values.Count;
+
+			// Bounds
+			var lowerBound = bounds.Item1;
+			var upperBound = bounds.Item2;
+
+			// Canvas size
+			var canvasWidth = view.Frame.Width;
+			var canvasHeight = view.Frame.Height;
+
+			// Holds last point drawn. Is used to draw tendency line
+			var lastPointX = 0d;
+			var lastPointY = 0d;
+
+			// Draw graph
+			for (var i = 0; i < numberOfPoints; i++)
+			{
+				var pointHeight = ((upperBound - values[i])) / (upperBound - lowerBound) * canvasHeight;
+				var pointWidth = (canvasWidth/(numberOfPoints - 1))*i;
+
+				var point = new CGPoint ();
+				point.X = (nfloat)pointWidth;
+				point.Y = (nfloat)pointHeight;
+
+				points.Add (point);
+
+				//Remember info on point for drawing the tendency line
+				lastPointY = pointHeight;
+				lastPointX = pointWidth;
+			}
+
+			return points;
 		}
 
 		// Actions

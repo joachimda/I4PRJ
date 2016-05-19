@@ -4,6 +4,7 @@ using System.Text;
 using Smartpool.Connection.Model;
 using Newtonsoft.Json;
 using SocketLibrary;
+using System.Net.Sockets;
 
 namespace Application.iOS
 {
@@ -38,7 +39,14 @@ namespace Application.iOS
 					sender.Send(whatToSend);
 
 					// Receive the response from the remote device.
-					return sender.Receive(10240);
+					var received = "";
+					do {
+						received += sender.Receive(1024);
+					}
+					while (sender.AnythingToReceive);
+
+					Console.WriteLine(received);
+					return received;
 
 				}
 				catch (Exception)
