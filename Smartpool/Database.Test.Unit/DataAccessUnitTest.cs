@@ -456,9 +456,9 @@ namespace Database.Test.Unit
         public void GetHumidityData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
             double hum = 18;
-            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            _uut.CreateDataEntry("nonExistingMail", poolName, 8, 17, 7, hum);
             var tuples = (_uut.GetHumidityValues("non", poolName, 2));
-            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Humidity));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
