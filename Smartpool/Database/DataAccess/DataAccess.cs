@@ -143,8 +143,8 @@ namespace Smartpool
 
                 foreach (var chlorine in chlorineDataQuery)
                 {
-                    if (DateTime.Parse(chlorine.Data.Timestamp).CompareTo(endTime) < 0 ||
-                        DateTime.Parse(chlorine.Data.Timestamp).CompareTo(startTime) > 0)
+                    if (DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(chlorine.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
                     {
                         chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
                     }
