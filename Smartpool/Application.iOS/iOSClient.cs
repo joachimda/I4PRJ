@@ -43,7 +43,7 @@ namespace Application.iOS
 					var received = "";
 					do {
 						received += sender.Receive(1024);
-						Thread.Sleep(5);
+						Thread.Sleep(20);
 					}
 					while (sender.AnythingToReceive);
 

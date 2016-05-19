@@ -98,9 +98,10 @@ namespace Application.iOS
 			var type = string.Format ($"{_historicData [indexPath.Row].Item1}");
 			cell.TypeLabel.Text = type;
 			cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
-			DrawGraph (cell.GraphView, _historicData [indexPath.Row].Item2, _historicData [indexPath.Row].Item1);
+			var bounds = DrawGraph (cell.GraphView, _historicData [indexPath.Row].Item2, _historicData [indexPath.Row].Item1);
+			cell.MinLabel.Text = string.Format($"{bounds.Item1}");
+			cell.MaxLabel.Text = string.Format($"{bounds.Item2}");
 			return cell;
-
 		}
 
 		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
@@ -110,14 +111,14 @@ namespace Application.iOS
 
 		// Graph drawing
 
-		private void DrawGraph(UIView view, List<double> values, SensorTypes type)
+		private Tuple<double, double> DrawGraph(UIView view, List<double> values, SensorTypes type)
 		{
 			var bounds = GraphBounds (values, (type == SensorTypes.Chlorine || type == SensorTypes.Ph));
 			var points = GraphPoints (values, bounds, view);
 			var numberOfPoints = points.Count;
 
 			if (numberOfPoints == 0)
-				return;
+				return bounds;
 
 			var path = new UIBezierPath ();
 			path.MoveTo (points[0]);
@@ -134,6 +135,8 @@ namespace Application.iOS
 
 			view.Layer.Sublayers = null;
 			view.Layer.AddSublayer (layer);
+
+			return bounds;
 		}
 
 		private Tuple<double, double> GraphBounds(List<double> values, bool isPhOrChlorine)

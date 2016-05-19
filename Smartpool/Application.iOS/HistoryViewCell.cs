@@ -33,6 +33,20 @@ namespace Application.iOS
 			}
 		}
 
+		public UILabel MinLabel
+		{
+			get {
+				return minLabel;
+			}
+		}
+
+		public UILabel MaxLabel
+		{
+			get {
+				return maxLabel;
+			}
+		}
+
 		public UIView GraphView
 		{
 			get {

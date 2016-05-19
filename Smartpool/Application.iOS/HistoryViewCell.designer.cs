@@ -19,6 +19,12 @@ namespace Application.iOS
 		UIKit.UIView graphView { get; set; }
 
 		[Outlet]
+		UIKit.UILabel maxLabel { get; set; }
+
+		[Outlet]
+		UIKit.UILabel minLabel { get; set; }
+
+		[Outlet]
 		UIKit.UILabel typeLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -28,14 +34,24 @@ namespace Application.iOS
 				borderImage = null;
 			}
 
+			if (graphView != null) {
+				graphView.Dispose ();
+				graphView = null;
+			}
+
 			if (typeLabel != null) {
 				typeLabel.Dispose ();
 				typeLabel = null;
 			}
 
-			if (graphView != null) {
-				graphView.Dispose ();
-				graphView = null;
+			if (minLabel != null) {
+				minLabel.Dispose ();
+				minLabel = null;
+			}
+
+			if (maxLabel != null) {
+				maxLabel.Dispose ();
+				maxLabel = null;
 			}
 		}
 	}
