@@ -289,7 +289,7 @@ namespace Database.Test.Unit
         public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
         {
             double pH = 8;
-            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 15, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
             Assert.That(tuples, Is.Empty);
         }
@@ -350,19 +350,27 @@ namespace Database.Test.Unit
         [Test]
         public void GetChlorineData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = _uut.GetChlorineValues(ownerEmail, poolName, 200);
+            Assert.That(tuples.First().Item2, Is.EqualTo(chlorine));
         }
 
         [Test]
-        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsEmptyList()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = _uut.GetChlorineValues(ownerEmail, poolName, 200);
         }
         #endregion
 
