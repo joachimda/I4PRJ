@@ -386,8 +386,6 @@ namespace Database.Test.Unit
         [Test]
         public void GetTemperatureData_TemperatureDataNotPresent_ReturnsEmptyList()
         {
-            double temp = 18;
-            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
             var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
             Assert.That(tuples, Is.Empty);
         }
@@ -429,9 +427,10 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
         #endregion
 
