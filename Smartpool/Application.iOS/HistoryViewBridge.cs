@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing pool switching
+// 1.1	LP		Added pool cycling
 //========================================================================
 
 
@@ -49,15 +50,24 @@ namespace Application.iOS
 			TableView.ReloadData ();
 		}
 
+		// IPoolDisplaying
+
+		private List<Tuple<string, bool>> _pools = new List<Tuple<string, bool>> ();
+
+		private int _selectedIndex = 0;
+
 		public void SetAvailablePools(List<Tuple<string, bool>> pools)
 		{
-			// Missing implementation
+			_pools = pools;
 		}
 
 		public void SetSelectedPoolIndex(int index)
 		{
-			// Missing implementation
+			_selectedIndex = index;
+			PoolsBarButtonItem.Title = _pools [index].Item1;
 		}
+
+		// IAlertDisplaying
 
 		public void DisplayAlert(string title, string content)
 		{
@@ -88,6 +98,16 @@ namespace Application.iOS
 			cell.DetailTextLabel.Text = valueString;
 
 			return cell;
+		}
+
+		// Actions
+
+		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender)
+		{
+			// Cycle through available pools
+			var newIndex = (_selectedIndex + 1) % _pools.Count;
+			_specializedController.DidSelectPool(newIndex);
+			SetSelectedPoolIndex(newIndex);
 		}
 	}
 }

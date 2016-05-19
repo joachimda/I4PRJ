@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing pool switching
+// 1.1	LP		Added pool cycling
 //========================================================================
 
 using Smartpool.Application.Presentation;

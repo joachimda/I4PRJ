@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing pool selection
+// 1.1	LP		Added pool cycling
 //========================================================================
 
 using System;
@@ -46,6 +47,8 @@ namespace Application.iOS
 
 		private List<Tuple<string, bool>> _pools = new List<Tuple<string, bool>> ();
 
+		private int _selectedIndex = 0;
+
 		public void SetAvailablePools(List<Tuple<string, bool>> pools)
 		{
 			_pools = pools;
@@ -53,6 +56,7 @@ namespace Application.iOS
 
 		public void SetSelectedPoolIndex(int index)
 		{
+			_selectedIndex = index;
 			PoolsBarButtonItem.Title = _pools [index].Item1;
 		}
 
@@ -110,7 +114,10 @@ namespace Application.iOS
 			
 		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender)
 		{
-			// Missing implementation
+			// Cycle through available pools
+			var newIndex = (_selectedIndex + 1) % _pools.Count;
+			_specializedController.DidSelectPool(newIndex);
+			SetSelectedPoolIndex(newIndex);
 		}
 			
 		partial void SaveButtonTouchUpInside (UIKit.UIButton sender)
