@@ -254,7 +254,6 @@ namespace Database.Test.Unit
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightValue()
         {
             double pH = 8;
-            string start = DateTime.UtcNow.ToString("G");
             _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item2, Is.EqualTo(pH));
@@ -264,37 +263,52 @@ namespace Database.Test.Unit
         [Test]
         public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, "nonExistingPoolName", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty;
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
+            double pH = 2;
+            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            var tuples = _uut.GetPhValues(ownerEmail, poolName, 20);
+            Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            var tuples = _uut.GetPhValues(ownerEmail, poolName, 20);
+            Assert.That(tuples, Is.Empty);
         }
         #endregion
 
@@ -302,7 +316,10 @@ namespace Database.Test.Unit
         [Test]
         public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Chlorine));
         }
 
         [Test]
