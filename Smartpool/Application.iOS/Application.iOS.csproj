@@ -166,6 +166,10 @@
     <Compile Include="EditPoolViewBridge.designer.cs">
       <DependentUpon>EditPoolViewBridge.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddPoolViewBridge.cs" />
+    <Compile Include="AddPoolViewBridge.designer.cs">
+      <DependentUpon>AddPoolViewBridge.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

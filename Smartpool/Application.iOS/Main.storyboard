@@ -540,7 +540,7 @@
         <!--Add Pool-->
         <scene sceneID="PId-Pa-Yar">
             <objects>
-                <viewController id="I1r-2z-mVJ" sceneMemberID="viewController">
+                <viewController id="I1r-2z-mVJ" customClass="AddPoolViewBridge" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xur-6c-eoX"/>
                         <viewControllerLayoutGuide type="bottom" id="q6Y-9b-nIz"/>
@@ -558,6 +558,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="NameChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="n1J-O4-exd"/>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="FRr-2Q-NJE"/>
                                 </connections>
                             </textField>
@@ -571,6 +572,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="CMZ-gK-xCi"/>
+                                    <action selector="VolumeChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="whw-uC-ejx"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Serial number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-x4-zn9">
@@ -583,6 +585,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="ZKh-8f-FaG"/>
+                                    <action selector="SerialNumberChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="YKX-qy-bkr"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53l-OV-Mir">
@@ -596,6 +599,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="SaveButtonTouchUpInside:" destination="I1r-2z-mVJ" eventType="touchUpInside" id="To4-SP-YvD"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="e9Q-ee-XyB"/>
                                 </connections>
                             </button>
@@ -617,6 +621,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Pool" id="Tft-6w-Rvt"/>
+                    <connections>
+                        <outlet property="NameTextField" destination="LHB-Q0-zg3" id="w1E-4I-bgg"/>
+                        <outlet property="SaveButton" destination="53l-OV-Mir" id="0G7-qb-PPN"/>
+                        <outlet property="SerialNumberTextField" destination="xhd-x4-zn9" id="4D3-tD-LUT"/>
+                        <outlet property="VolumeTextField" destination="Q8H-5g-JBb" id="UZ1-YL-PA9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yM8-AK-Wld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -760,7 +770,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Kwn-D3-YYg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="chI-qy-8FF"/>
                                 </connections>
@@ -772,7 +782,7 @@
                                     <constraint firstAttribute="height" constant="50" id="5nZ-2U-4i7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="NewPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="dSY-ve-hOW"/>
                                 </connections>
@@ -784,7 +794,7 @@
                                     <constraint firstAttribute="height" constant="50" id="uo1-Lo-9Mm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="NewPasswordRepeatedChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="nsH-Ox-9Kc"/>
                                 </connections>
