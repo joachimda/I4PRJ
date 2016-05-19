@@ -271,7 +271,7 @@ namespace Database.Test.Unit
         public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
             double pH = 8;
-            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 4, 89, pH, 33);
             var tuples = (_uut.GetPhValues("nonExistingMail", poolName, 2));
             Assert.That(tuples, Is.Empty);
         }
