@@ -192,8 +192,8 @@ namespace Smartpool
 
                 foreach (var temperature in temperatureDataQuery)
                 {
-                    if (DateTime.Parse(temperature.Data.Timestamp).CompareTo(endTime) < 0 ||
-                        DateTime.Parse(temperature.Data.Timestamp).CompareTo(startTime) > 0)
+                    if (DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
+                        DateTime.ParseExact(temperature.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
                     {
                         temperatureTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Temperature, temperature.Value));
                     }
