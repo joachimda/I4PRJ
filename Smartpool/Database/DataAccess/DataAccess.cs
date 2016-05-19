@@ -295,8 +295,8 @@ namespace Smartpool
 
                 foreach (var humidity in humidityDataQuery)
                 {
-                    if (DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(endTime) < 0 ||
-                        DateTime.ParseExact(humidity.Data.Timestamp, "dd/MM/yyyy HH:mm:ss", new CultureInfo("en-GB")).CompareTo(startTime) > 0)
+                    if (DateTime.Parse(humidity.Data.Timestamp).CompareTo(endTime) < 0 ||
+                        DateTime.Parse(humidity.Data.Timestamp).CompareTo(startTime) > 0)
                     {
                         humidityTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Humidity, humidity.Value));
                     }
