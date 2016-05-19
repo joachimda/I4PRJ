@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing DisplayAlert implementation
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
@@ -12,18 +13,17 @@ using System;
 using Foundation;
 using UIKit;
 using System.Drawing;
-using FieldService.iOS;
 
 namespace Application.iOS
 {
-	public partial class LoginViewBridge : BaseController, ILoginView
+	public partial class LoginViewBridge : UIViewController, ILoginView
 	{
 		private ILoginViewController _specializedController => Controller as ILoginViewController;
 
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new LoginViewController(this, new iOSClientMessenger());
+			Controller = new LoginViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
@@ -35,10 +35,10 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override bool HandlesKeyboardNotifications {
-			get {
-				return true;
-			}
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
+		{
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
 			
 		// Actions

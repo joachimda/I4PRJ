@@ -71,7 +71,7 @@ namespace Smartpool.Connection.Server
             {
                 listener.Bind(localEndPoint);
                 listener.Listen(100);
-                Console.WriteLine("Server started");
+                Console.WriteLine("Server started.");
 
                 while (true)
                 {

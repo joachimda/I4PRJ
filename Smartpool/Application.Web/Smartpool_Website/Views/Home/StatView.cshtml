@@ -22,11 +22,28 @@
     }
 
 }
-@{ var parameter = "";}
+@{ 
+    var parameter = "";
+    var temp = "";
+    var pH = "";
+    var chlorine = "";
+    var humidity = "";
+    var tempTarget = "";
+    var phTarget = "";
+    var chlorineTarget = "";
+    var humidityTarget = "";
+    var degree = "°C";
+    var ppm = "ppm";
+    var percentage = "%";
+ }
 <div class="container">
 <br/>
-@{parameter = "Temperature";
- var tableColor = ColorForParameter(parameter);}
+    @{
+        parameter = "Temperature";
+        var tableColor = ColorForParameter(parameter);
+        temp = "23";
+        tempTarget = "30";
+    }
 <div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px" >
     <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
         <tr>
@@ -34,18 +51,23 @@
         </tr>
 
         <tr>
-            <td class="Value">23&#x2103</td>
+            <td class="Value">@temp @degree</td>
         </tr>
 
         <tr>
-            <td class="Target">Target: 30&#x2103 </td>
+            <td class="Target">Target: @tempTarget @degree </td>
         </tr>
     </table>
 </div>
 <br/>
 
-@{parameter = "pH";}
-@{tableColor = ColorForParameter(parameter);}
+@{
+    parameter = "pH";
+    tableColor = ColorForParameter(parameter);
+    pH = "7,6";
+    phTarget = "7";
+}
+
 <div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
     <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
         <tr>
@@ -53,18 +75,23 @@
         </tr>
 
         <tr>
-            <td class="Value">23&#x2103</td>
+            <td class="Value">@pH</td>
         </tr>
 
         <tr>
-            <td class="Target">Target: 30&#x2103 </td>
+            <td class="Target">Target: @phTarget </td>
         </tr>
     </table>
 </div>
 <br />
 
-@{parameter = "Chlorine";}
-@{tableColor = ColorForParameter(parameter);}
+@{
+    parameter = "Chlorine";
+    tableColor = ColorForParameter(parameter);
+    chlorine = "2";
+    chlorineTarget = "1";
+}
+
 <div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
     <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
         <tr>
@@ -72,11 +99,11 @@
         </tr>
 
         <tr>
-            <td class="Value">23&#x2103</td>
+            <td class="Value">@chlorine @ppm</td>
         </tr>
 
         <tr>
-            <td class="Target">Target: 30&#x2103 </td>
+            <td class="Target">Target: @chlorineTarget @ppm </td>
         </tr>
     </table>
 </div>
@@ -84,8 +111,12 @@
 
 
 
-@{parameter = "Humidity";}
-@{tableColor = ColorForParameter(parameter);}
+@{
+    parameter = "Humidity";
+    tableColor = ColorForParameter(parameter);
+    humidity = "40";
+    humidityTarget = "20";
+}
 <div class="SP_button" style="border: 3px solid @tableColor; border-radius: 5px">
     <table class="SP_button" onclick="location.href = 'www.google.dk'" style="color: @tableColor; border: 3px solid @tableColor; border-radius: 5px;">
         <tr>
@@ -93,11 +124,11 @@
         </tr>
 
         <tr>
-            <td class="Value">23&#x2103</td>
+            <td class="Value">@humidity @percentage</td>
         </tr>
 
         <tr>
-            <td class="Target">Target: 30&#x2103 </td>
+            <td class="Target">Target: @humidityTarget @percentage </td>
         </tr>
     </table>
 </div>
