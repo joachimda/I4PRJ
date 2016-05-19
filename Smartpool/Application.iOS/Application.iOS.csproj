@@ -170,6 +170,14 @@
     <Compile Include="AddPoolViewBridge.designer.cs">
       <DependentUpon>AddPoolViewBridge.cs</DependentUpon>
     </Compile>
+    <Compile Include="IPViewController.cs" />
+    <Compile Include="IPViewController.designer.cs">
+      <DependentUpon>IPViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreViewController.cs" />
+    <Compile Include="MoreViewController.designer.cs">
+      <DependentUpon>MoreViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
