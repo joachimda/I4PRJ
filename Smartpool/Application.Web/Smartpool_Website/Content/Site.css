@@ -17,6 +17,9 @@ header {
 }
 
 .addpoolinput input{
+    width: 150pt;
+    height: 20pt;
+    margin: 10pt;
 	background-color: #575757;
 	border-radius:5px;
 	border-color: #1F1F1F;

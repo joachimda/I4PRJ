@@ -8,38 +8,38 @@
 }
 <section id="AddPoolForm">
     <div class="input-form" align="left">
-        <input class="input-form" type="text" placeholder="Pool name"/>
+        <input type="text" placeholder="Pool name"/>
     </div>
 
     <div class="addpoolinput">
         <table>
             <tr>
                 <td>
-                    <div align="left" onclick="enableTextBox" padding="10pt">
-                        <input type="checkbox" class="checkbox" onclick="enableTextBox" />
+                    <div align="left" padding="10pt">
+                        <input type="radio" name="inputType" checked="Checked" id="radio1" onclick="enableTxtBox()" />
                     </div>
                 </td>
                 <td>
                     <div class="input-form" width="100pt">
-                        <input type="text" class="input-form" placeholder="Volume" id="txtBox1"/>
+                        <input type="text" class="input-form" placeholder="Volume" id="volume"/>
                     </div>
                 </td>
                 <td>
-                   <input type="checkbox" class="checkbox" onclick="enableTextBox"/>
+                   <input type="radio" name="inputType" id="radio2" onclick="enableTxtBox();"/>
                 </td>
                 <td>
                     <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Depth" id="txtBox2" />
-                    </div>
-                </td>
-                <td>
-                    <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Width" id="txtBox3" />
+                        <input type="text" class="addpoolinput" placeholder="Depth" id="D" />
                     </div>
                 </td>
                 <td>
                     <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Lenght" id="txtBox4" />
+                        <input type="text" class="addpoolinput" placeholder="Width" id="W"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="input-form">
+                        <input type="text" class="addpoolinput" placeholder="Lenght" id="L" />
                     </div>
                 </td>
             </tr>
@@ -47,19 +47,21 @@
     </div>
 </section>
 
-<script type="text/javascript" language="javascript">
-        function enableTextBox() {
-            window.onload = function () {
-                if (document.getElementByClass() == chk1)
-                var check = document.getElementByClass("chkAssociation");
-                check.onheck = function () {
-                    if (this.checked == true)
-                        document.getElementByClass("txtBox2").disabled = false;
-                    else
-                        document.getElementByClass("txtBox2").disabled = true;
-                };
-            };
-        }
-</script>
 
+
+<script type="text/javascript">
+    function enableTxtBox() {
+        if (document.getElementsById("radio1").checked) {
+            document.getElementsById("volume").disabled = false;
+            document.getElementsById("D").disabled = true;
+            window.alert(1);
+        }
+        else if (document.getElementById("radio2").selected) {
+            document.getElementsById("volume").disabled = true;
+            document.getElementsById("D").disabled = false;
+            window.alert(2);
+        }
+
+    }
+</script>
 
