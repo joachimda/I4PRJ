@@ -625,7 +625,7 @@
         <!--Edit Pool-->
         <scene sceneID="4Mx-Ap-gSc">
             <objects>
-                <viewController id="NZf-Xo-I99" sceneMemberID="viewController">
+                <viewController id="NZf-Xo-I99" customClass="EditPoolViewBridge" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Orr-gl-eX9"/>
                         <viewControllerLayoutGuide type="bottom" id="HVQ-0z-bv2"/>
@@ -643,6 +643,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="NameChanged:" destination="NZf-Xo-I99" eventType="editingChanged" id="3qu-cG-VaY"/>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="crT-H5-fY5"/>
                                 </connections>
                             </textField>
@@ -656,6 +657,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="RCE-Iy-xU7"/>
+                                    <action selector="VolumeChanged:" destination="NZf-Xo-I99" eventType="editingChanged" id="606-YZ-fG1"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A123G-13HAW-9WJL2-2WDAD-WWW2Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fR-1d-Ru3">
@@ -678,6 +680,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="SaveButtonTouchUpInside:" destination="NZf-Xo-I99" eventType="touchUpInside" id="nhO-Q7-ATU"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="zM2-mR-wGG"/>
                                 </connections>
                             </button>
@@ -692,6 +695,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="DeleteButtonTouchUpInside:" destination="NZf-Xo-I99" eventType="touchUpInside" id="mrG-sI-rOG"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="gR3-V0-tcU"/>
                                 </connections>
                             </button>
@@ -717,9 +721,21 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Edit Pool" id="R8s-kp-vG5">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="She-lY-Mf8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="She-lY-Mf8">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="NZf-Xo-I99" id="KGh-TC-ntd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="DeleteButton" destination="fVR-Td-8rc" id="2av-QG-ag5"/>
+                        <outlet property="NameTextField" destination="Psq-D7-hk2" id="82o-oI-vBe"/>
+                        <outlet property="PoolsBarButtonItem" destination="She-lY-Mf8" id="xeq-w5-g88"/>
+                        <outlet property="SaveButton" destination="vIq-SZ-kBy" id="yQh-Qg-vlR"/>
+                        <outlet property="SerialNumberLabel" destination="5fR-1d-Ru3" id="2JA-gX-aXf"/>
+                        <outlet property="VolumeTextField" destination="lvq-Zk-ujJ" id="Fzd-Vo-vgA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Abw-04-sqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

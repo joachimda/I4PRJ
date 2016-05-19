@@ -1,4 +1,13 @@
-﻿using System;
+﻿//========================================================================
+// FILENAME :   EditPoolViewBridge.cs
+// DESCR.   :   Bridge between edit pool view controller and iOS view
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version, missing pool selection
+//========================================================================
+
+using System;
+using System.Collections.Generic;
 using Smartpool.Application.Presentation;
 using UIKit;
 
@@ -10,7 +19,7 @@ namespace Application.iOS
 
 		public EditPoolViewBridge (IntPtr handle) : base (handle)
 		{
-			Controller = new IEditPoolViewController(this, iOSClientFactory.DefaultClient());
+			Controller = new EditPoolViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
@@ -35,78 +44,83 @@ namespace Application.iOS
 
 		// IPoolDisplaying
 
-		/// <summary>
-		/// Sets the list of available pools (tuples with name and notification status)
-		/// </summary>
+		private List<Tuple<string, bool>> _pools = new List<Tuple<string, bool>> ();
+
 		public void SetAvailablePools(List<Tuple<string, bool>> pools)
 		{
-			// Missing implementation
+			_pools = pools;
 		}
 
-		/// <summary>
-		/// Sets the currently selected pool index
-		/// </summary>
 		public void SetSelectedPoolIndex(int index)
 		{
-			// Missing implementation
+			PoolsBarButtonItem.Title = _pools [index].Item1;
 		}
 
 		// IEditPoolView
 
-		/// <summary>
-		/// Sets the text of the name text field
-		/// </summary>
 		public void SetNameText(string text)
 		{
-			// Missing implementation
+			NameTextField.Text = text;
 		}
-
-		/// <summary>
-		/// Sets the text of the volume text field
-		/// </summary>
+			
 		public void SetVolumeText(string text)
 		{
-			// Missing implementation
+			VolumeTextField.Text = text;
 		}
-
-		/// <summary>
-		/// Sets the text of the serial number label
-		/// </summary>
+			
 		public void SetSerialNumberText(string text)
 		{
-			// Missing implementation
+			SerialNumberLabel.Text = text;
 		}
-
-		/// <summary>
-		/// Clears the text of all the dimension text fields
-		/// </summary>
+			
 		public void ClearDimensionText()
 		{
-			// Missing implementation
+			// Not applicable for iOS
 		}
-
-		/// <summary>
-		/// Sets the state of the save button (save updated info)
-		/// </summary>
+			
 		public void SetSaveButtonEnabled(bool enabled)
 		{
-			// Missing implementation
+			SaveButton.Enabled = enabled;
+			SaveButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
-
-		/// <summary>
-		/// Sets the state of the delete button (delete pool)
-		/// </summary>
+			
 		public void SetDeleteButtonEnabled(bool enabled)
 		{
-			// Missing implementation
+			DeleteButton.Enabled = enabled;
+			DeleteButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
-
-		/// <summary>
-		/// Tells the view that a the changes have been saved successfully
-		/// </summary>
+			
 		public void PoolUpdated()
 		{
+			// return to previous view
+			NavigationController?.PopViewController(true);
+		}
+
+		// Actions
+
+		partial void DeleteButtonTouchUpInside (UIKit.UIButton sender)
+		{
+			_specializedController.DeleteButtonPressed();
+		}
+			
+		partial void NameChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeText(EditPoolTextField.PoolName, sender.Text);
+		}
+			
+		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender)
+		{
 			// Missing implementation
+		}
+			
+		partial void SaveButtonTouchUpInside (UIKit.UIButton sender)
+		{
+			_specializedController.SaveButtonPressed();
+		}
+			
+		partial void VolumeChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeText(EditPoolTextField.Volume, sender.Text);
 		}
 	}
 }
