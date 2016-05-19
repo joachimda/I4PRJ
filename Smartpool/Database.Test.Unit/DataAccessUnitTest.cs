@@ -377,37 +377,55 @@ namespace Database.Test.Unit
         [Test]
         public void GetTemperatureData_TemperatureDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Temperature));
         }
 
         [Test]
         public void GetTemperatureData_TemperatureDataNotPresent_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, "nonExistingPoolname", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item2, Is.EqualTo(temp));
         }
 
         [Test]
