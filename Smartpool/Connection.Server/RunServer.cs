@@ -1,4 +1,5 @@
 ﻿using System;
+using Smartpool.Connection.Server.FakePoolDataGeneration;
 
 namespace Smartpool.Connection.Server
 {
@@ -8,7 +9,8 @@ namespace Smartpool.Connection.Server
         {
 
             Console.WriteLine("Server starting. Please wait and ensure you are connected to VPN");
-            var socketListener = new AsynchronousSocketListener(new ResponseManager(new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())))));
+            var db = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
+            var socketListener = new AsynchronousSocketListener(new ResponseManager(db));
             socketListener.StartListening();
             return 0;
         }

@@ -1,4 +1,12 @@
-﻿using Smartpool.Application.Presentation;
+﻿//========================================================================
+// FILENAME :   StatViewBridge.cs
+// DESCR.   :   Bridge between stat view controller and iOS stat view
+//------------------------------------------------------------------------ 
+// REV. AUTHOR  CHANGE DESCRIPTION
+// 1.0  LP      Initial version, missing pool switching
+//========================================================================
+
+using Smartpool.Application.Presentation;
 using Smartpool.Connection.Model;
 using System.Collections.Generic;
 using System;
@@ -10,13 +18,13 @@ namespace Application.iOS
 	{
 		private IStatViewController _specializedController => Controller as IStatViewController;
 		private List<Tuple<SensorTypes, double>> _sensorData;
-
+		private string _reuseIdentifier = "statViewCell";
 
 		public StatViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
 			_sensorData = new List<Tuple<SensorTypes, double>>();
-			Controller = new StatViewController(this, new iOSClientMessenger());
+			Controller = new StatViewController (this, iOSClientFactory.DefaultClient ());
 		}
 
 		public override void ViewDidLoad ()
@@ -24,6 +32,8 @@ namespace Application.iOS
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 
+
+			TableView.RegisterNibForCellReuse(StatViewCell.Nib, _reuseIdentifier);
 			TableView.TableFooterView = new UIView ();
 
 			// Let the controller know that the view has finished loading.
@@ -37,6 +47,7 @@ namespace Application.iOS
 		public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
 		{
 			_sensorData = sensorData;
+			_sensorData.Sort ();
 			TableView.ReloadData ();
 		}
 
@@ -62,16 +73,19 @@ namespace Application.iOS
 			return _sensorData.Count;
 		}
 
-
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
-		{
-			var reuseIdentifier = "recentsCell";
-			var cell = tableView.DequeueReusableCell (reuseIdentifier);
-
-			cell.TextLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item1}");
-			cell.DetailTextLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}");
-
+		{	
+			var cell = tableView.DequeueReusableCell (_reuseIdentifier) as StatViewCell;
+			var type = string.Format ($"{_sensorData [indexPath.Row].Item1}");
+			cell.DataLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}") + GuiCharacter.SignForType(_sensorData [indexPath.Row].Item1);
+			cell.NameLabel.Text = type;
+			cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
 			return cell;
+		}
+
+		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
+		{
+			return 140;
 		}
 	}
 }

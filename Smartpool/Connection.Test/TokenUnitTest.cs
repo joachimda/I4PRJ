@@ -52,7 +52,7 @@ namespace Connection.Test
         }
 
         [Test]
-        public void CreateNewToken_SameTokenCreated_NoDuplicates()
+        public void CreateNewToken_SameTokenCreated_DuplicatesKept()
         {
             _uut_TK.CreateNewToken("Joachim");
             _uut_TK.CreateNewToken("Joachim");
@@ -60,7 +60,7 @@ namespace Connection.Test
             _uut_TK.CreateNewToken("Morten");
             _uut_TK.CreateNewToken("Morten");
             _uut_TK.CreateNewToken("Morten");
-            Assert.That(_uut_TK.GetAmountOfTokens(), Is.EqualTo(2));
+            Assert.That(_uut_TK.GetAmountOfTokens(), Is.EqualTo(6));
         }
 
         [Test]
