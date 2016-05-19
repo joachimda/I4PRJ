@@ -291,14 +291,14 @@ namespace Database.Test.Unit
             double pH = 8;
             _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
-            Assert.That(tuples, Is.Empty;
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
             double pH = 2;
-            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 5, 89, pH, 33);
             var tuples = _uut.GetPhValues(ownerEmail, poolName, 20);
             Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
@@ -317,27 +317,34 @@ namespace Database.Test.Unit
         public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
         {
             double chlorine = 8;
-            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, 8, 33);
-            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Chlorine));
         }
 
         [Test]
         public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetChlorineValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues(ownerEmail, "nonExistingPoolname", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
