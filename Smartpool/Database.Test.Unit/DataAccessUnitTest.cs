@@ -244,7 +244,6 @@ namespace Database.Test.Unit
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightSensorType()
         {
             double pH = 8;
-            string start = DateTime.UtcNow.ToString("G");
             _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Ph));
