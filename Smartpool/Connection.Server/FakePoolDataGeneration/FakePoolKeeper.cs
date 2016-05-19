@@ -8,6 +8,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
     {
         private readonly List<FakePool> _fakePools = new List<FakePool>();
         private readonly ISmartpoolDB _smartpoolDb;
+        private const int PoolUpdateTime = 60;
 
         public FakePoolKeeper(ISmartpoolDB smartpoolDb)
         {
@@ -19,14 +20,14 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             var poolList = _smartpoolDb.PoolAccess.FindAllPoolsOfUser(userName);
             foreach (var pool in poolList)
             {
-                _fakePools.Add(new FakePool(4, 15, userName, pool.Name, _smartpoolDb));
+                _fakePools.Add(new FakePool(4, PoolUpdateTime, userName, pool.Name, _smartpoolDb));
                 Thread.Sleep(1100);
             }
         }
 
         public void AddFakePoolToKeeper(string userName, string poolName)
         {
-            _fakePools.Add(new FakePool(4, 15, userName, poolName, _smartpoolDb));
+            _fakePools.Add(new FakePool(4, PoolUpdateTime, userName, poolName, _smartpoolDb));
         }
 
         public List<FakePool> GetPools()
