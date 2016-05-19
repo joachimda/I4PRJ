@@ -20,7 +20,7 @@ namespace Smartpool.Connection.Server
             _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
             try
             {
-                _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
+                //_smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
             }
             catch (Exception)
             {
