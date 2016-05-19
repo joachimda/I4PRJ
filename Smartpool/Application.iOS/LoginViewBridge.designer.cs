@@ -30,6 +30,9 @@ namespace Application.iOS
 		[Action ("forgotButtonTouchUpInside:")]
 		partial void forgotButtonTouchUpInside (Foundation.NSObject sender);
 
+		[Action ("IpAddressChanged:")]
+		partial void IpAddressChanged (UIKit.UITextField sender);
+
 		[Action ("loginButtonTouchUpInside:")]
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender);
 

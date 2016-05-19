@@ -1,0 +1,41 @@
+%!TEX root = main.tex
+% Listings
+\AtBeginDocument{%
+  \counterwithin*{lstlisting}{section}
+  \counterwithin*{lstlisting}{subsection}
+  \counterwithin*{lstlisting}{subsubsection}
+  \renewcommand{\thelstlisting}{%
+    \ifnum\value{subsection}=0
+      \thesection.\arabic{lstlisting}%
+    \else
+      \ifnum\value{subsubsection}=0
+        \thesubsection.\arabic{lstlisting}%
+      \else
+        \thesubsubsection.\arabic{lstlisting}%
+      \fi
+    \fi
+  }
+}
+
+% Loading languages
+\lstloadlanguages{C, C++}
+
+% Listing setup
+\lstdefinestyle{all}{
+    basicstyle    = \ttfamily\SingleSpacing\scriptsize,
+    numbers       = left, 
+    numberstyle   = \ttfamily\tiny,
+    breaklines    = true,
+    commentstyle=\color{green},
+    %backgroundcolor = \color{red},
+    numbersep     = 20pt,
+    xleftmargin   = \parindent,
+    captionpos    = b,
+    keywordstyle  = [1]\color{Blue}\bfseries,
+    commentstyle  = \itshape\color{Green},
+    tabsize       = 3
+}
+
+\lstset{
+    style = all
+} 

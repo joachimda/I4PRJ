@@ -72,8 +72,8 @@ namespace Smartpool.Connection.Server
                         return new GetPoolDataResponseMsg() {AllPoolNamesListTuple = poolNamesListTuple};
                     }
                     else //return data for one pool only
-                        //return new GetPoolDataResponseMsg(GetSensorValues(gpdMsg.Username, gpdMsg.PoolName, gpdMsg.GetHistoryDays));
-                        return new GetPoolDataResponseMsg(_fakePoolKeeper.GetPools()[0].GetSensorValuesList());
+                        return new GetPoolDataResponseMsg(GetSensorValues(gpdMsg.Username, gpdMsg.PoolName, gpdMsg.GetHistoryDays));
+                        //return new GetPoolDataResponseMsg(_fakePoolKeeper.GetPools()[0].GetSensorValuesList());
 
                 case TokenSubMessageTypes.GetPoolInfoRequest:
                     var gpiMsg = JsonConvert.DeserializeObject<GetPoolInfoRequestMsg>(messageString);

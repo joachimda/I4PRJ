@@ -244,8 +244,7 @@ namespace Database.Test.Unit
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightSensorType()
         {
             double pH = 8;
-            string start = DateTime.UtcNow.ToString("G");
-            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Ph));
 
@@ -254,8 +253,7 @@ namespace Database.Test.Unit
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightValue()
         {
             double pH = 8;
-            string start = DateTime.UtcNow.ToString("G");
-            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 5, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
@@ -264,37 +262,52 @@ namespace Database.Test.Unit
         [Test]
         public void GetPhData_PhDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, 4, 89, pH, 33);
+            var tuples = (_uut.GetPhValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, 9, 89, pH, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, "nonExistingPoolName", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double pH = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, 15, 89, pH, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
+            double pH = 2;
+            _uut.CreateDataEntry(ownerEmail, poolName, 5, 89, pH, 33);
+            var tuples = _uut.GetPhValues(ownerEmail, poolName, 20);
+            Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
         }
 
         [Test]
         public void GetPhData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            var tuples = _uut.GetPhValues(ownerEmail, poolName, 20);
+            Assert.That(tuples, Is.Empty);
         }
         #endregion
 
@@ -302,43 +315,61 @@ namespace Database.Test.Unit
         [Test]
         public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Chlorine));
         }
 
         [Test]
         public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetChlorineValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double chlorine = 8;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetChlorineValues(ownerEmail, "nonExistingPoolname", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = (_uut.GetPhValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = _uut.GetChlorineValues(ownerEmail, poolName, 200);
+            Assert.That(tuples.First().Item2, Is.EqualTo(chlorine));
         }
 
         [Test]
-        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsEmptyList()
         {
-
+            double chlorine = 5;
+            _uut.CreateDataEntry(ownerEmail, poolName, chlorine, 89, 8, 33);
+            var tuples = _uut.GetChlorineValues(ownerEmail, poolName, 200);
         }
         #endregion
 
@@ -346,43 +377,60 @@ namespace Database.Test.Unit
         [Test]
         public void GetTemperatureData_TemperatureDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Temperature));
         }
 
         [Test]
         public void GetTemperatureData_TemperatureDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues("nonExistingMail", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, "nonExistingPoolname", 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double temp = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, temp, 7, 33);
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item2, Is.EqualTo(temp));
         }
 
         [Test]
-        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
+        public void GetTemperatureData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetTemperatureValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
         #endregion
 
@@ -391,43 +439,60 @@ namespace Database.Test.Unit
         [Test]
         public void GetHumidityData_HumidityDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndalues()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 2));
+            Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Humidity));
         }
 
         [Test]
         public void GetHumidityData_HumidityDataNotPresent_ReturnsEmptyList()
         {
-
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetHumidityData_CallWithNonExistingEmail_ReturnsEmptyList()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry("nonExistingMail", poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues("non", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetHumidityData_CallWithNonExistingPoolName_ReturnsEmptyList()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, "nonExistingPoolname", 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues("non", poolName, 2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetHumidityData_CallWithNegativeDays_ReturnsEmptyList()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues("non", poolName, -2));
+            Assert.That(tuples, Is.Empty);
         }
 
         [Test]
         public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            double hum = 18;
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 17, 7, hum);
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 20));
+            Assert.That(tuples.First().Item2, Is.EqualTo(hum));
         }
 
         [Test]
         public void GetHumidityData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_ReturnsListWithOnlyDataPresent()
         {
-
+            var tuples = (_uut.GetHumidityValues(ownerEmail, poolName, 20));
+            Assert.That(tuples, Is.Empty);
         }
 
         #endregion
