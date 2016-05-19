@@ -32,5 +32,12 @@ namespace Application.iOS
 				return typeLabel;
 			}
 		}
+
+		public UIView GraphView
+		{
+			get {
+				return graphView;
+			}
+		}
 	}
 }

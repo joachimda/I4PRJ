@@ -23,12 +23,20 @@
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3aV-BB-lvR">
+                        <rect key="frame" x="5" y="33.5" width="365" height="92.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="MAS-92-fFX" secondAttribute="bottom" constant="8" id="Egs-FV-vxz"/>
+                    <constraint firstItem="3aV-BB-lvR" firstAttribute="top" secondItem="Lu4-sE-5Ej" secondAttribute="bottom" constant="8" id="G18-Xz-SFF"/>
                     <constraint firstItem="Lu4-sE-5Ej" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" constant="6" id="Hg8-Ld-cfD"/>
                     <constraint firstAttribute="trailing" secondItem="Lu4-sE-5Ej" secondAttribute="trailing" constant="8" id="KfG-UT-teI"/>
+                    <constraint firstAttribute="bottom" secondItem="3aV-BB-lvR" secondAttribute="bottom" constant="13.5" id="WSs-V2-gLT"/>
+                    <constraint firstItem="3aV-BB-lvR" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" constant="5" id="aOw-G6-4TE"/>
+                    <constraint firstAttribute="trailing" secondItem="3aV-BB-lvR" secondAttribute="trailing" constant="5" id="dmY-ku-5xy"/>
                     <constraint firstItem="MAS-92-fFX" firstAttribute="top" secondItem="YTl-1W-gDM" secondAttribute="top" id="dtP-YM-mu4"/>
                     <constraint firstAttribute="trailing" secondItem="MAS-92-fFX" secondAttribute="trailing" id="hkC-e5-cSm"/>
                     <constraint firstItem="MAS-92-fFX" firstAttribute="leading" secondItem="YTl-1W-gDM" secondAttribute="leading" id="v1L-Uo-oPT"/>
@@ -37,6 +45,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="borderImage" destination="MAS-92-fFX" id="uAg-zp-9sT"/>
+                <outlet property="graphView" destination="3aV-BB-lvR" id="htM-Ta-M3o"/>
                 <outlet property="typeLabel" destination="Lu4-sE-5Ej" id="7XH-sA-nID"/>
             </connections>
             <point key="canvasLocation" x="592.5" y="460"/>

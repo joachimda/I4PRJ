@@ -16,6 +16,9 @@ namespace Application.iOS
 		UIKit.UIImageView borderImage { get; set; }
 
 		[Outlet]
+		UIKit.UIView graphView { get; set; }
+
+		[Outlet]
 		UIKit.UILabel typeLabel { get; set; }
 		
 		void ReleaseDesignerOutlets ()
@@ -28,6 +31,11 @@ namespace Application.iOS
 			if (typeLabel != null) {
 				typeLabel.Dispose ();
 				typeLabel = null;
+			}
+
+			if (graphView != null) {
+				graphView.Dispose ();
+				graphView = null;
 			}
 		}
 	}

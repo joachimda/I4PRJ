@@ -7,8 +7,8 @@ namespace Application.iOS
 	{
 		public static IClientMessenger DefaultClient()
 		{
-			return new iOSClientMessenger ();
-			//return new ClientMessenger (new iOSClient ("93.166.226.201"));
+			//return new iOSClientMessenger ();
+			return new ClientMessenger (new iOSClient ("93.166.226.201"));
 		}
 	}
 }

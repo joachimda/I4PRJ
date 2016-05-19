@@ -95,6 +95,7 @@ namespace Application.iOS
 			var type = string.Format ($"{_historicData [indexPath.Row].Item1}");
 			cell.TypeLabel.Text = type;
 			cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
+			DrawGraph (cell.GraphView, _historicData [indexPath.Row].Item2, _historicData [indexPath.Row].Item1);
 			return cell;
 
 		}
@@ -102,6 +103,13 @@ namespace Application.iOS
 		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
 			return 140;
+		}
+
+		// Graph drawing
+
+		private void DrawGraph(UIView view, List<double> values, SensorTypes type)
+		{
+			
 		}
 
 		// Actions
