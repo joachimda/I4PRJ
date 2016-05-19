@@ -36,8 +36,6 @@ namespace Smartpool.Application.Win
         {
             InitializeComponent();
 
-            ThemeProperties.SetPlaceholderText(DaysTextBox, "Days");
-
             //Sets up the tabBars event handlers
             SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
             SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
@@ -225,7 +223,7 @@ namespace Smartpool.Application.Win
                     //Remember info on point for drawing the tendency line
                     lastPointY = pointHeight + 1;
                     lastPointX = pointWidth + 1;
-                    lastPointTop = Canvas.GetTop(valueText) ; //+10 because the text is offset by -10
+                    lastPointTop = Canvas.GetTop(valueText) + 10; //+10 because the text is offset by -10
                 });
             }
             //Write bounds on graph
