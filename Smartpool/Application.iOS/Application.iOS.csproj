@@ -106,6 +106,14 @@
     <ImageAsset Include="Resources\Images.xcassets\Logo.imageset\Logo.pdf">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%402x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
@@ -162,6 +170,22 @@
       <DependentUpon>HistoryViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="GuiCharacter.cs" />
+    <Compile Include="EditPoolViewBridge.cs" />
+    <Compile Include="EditPoolViewBridge.designer.cs">
+      <DependentUpon>EditPoolViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPoolViewBridge.cs" />
+    <Compile Include="AddPoolViewBridge.designer.cs">
+      <DependentUpon>AddPoolViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPViewController.cs" />
+    <Compile Include="IPViewController.designer.cs">
+      <DependentUpon>IPViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreViewController.cs" />
+    <Compile Include="MoreViewController.designer.cs">
+      <DependentUpon>MoreViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
