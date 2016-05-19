@@ -245,7 +245,7 @@ namespace Database.Test.Unit
         {
             double pH = 8;
             string start = DateTime.UtcNow.ToString("G");
-            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 8, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item1, Is.EqualTo(SensorTypes.Ph));
 
@@ -254,7 +254,7 @@ namespace Database.Test.Unit
         public void GetPhData_PhDataIsInDatabase_ReturnsListOfTuplesWithRightValue()
         {
             double pH = 8;
-            _uut.CreateDataEntry(ownerEmail, poolName, pH, 89, 8, 33);
+            _uut.CreateDataEntry(ownerEmail, poolName, 5, 89, pH, 33);
             var tuples = (_uut.GetPhValues(ownerEmail, poolName, 2));
             Assert.That(tuples.First().Item2, Is.EqualTo(pH));
 
