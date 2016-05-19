@@ -18,5 +18,19 @@ namespace Application.iOS
 		public HistoryViewCell (IntPtr handle) : base (handle)
 		{
 		}
+
+		public UIImageView BorderImage
+		{
+			get {
+				return borderImage;
+			}
+		}
+
+		public UILabel TypeLabel
+		{
+			get {
+				return typeLabel;
+			}
+		}
 	}
 }

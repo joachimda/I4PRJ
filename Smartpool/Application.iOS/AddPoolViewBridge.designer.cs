@@ -1,11 +1,13 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio Community to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
 using Foundation;
+using System;
 using System.CodeDom.Compiler;
+using UIKit;
 
 namespace Application.iOS
 {
@@ -35,27 +37,24 @@ namespace Application.iOS
 
 		[Action ("VolumeChanged:")]
 		partial void VolumeChanged (UIKit.UITextField sender);
-		
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (NameTextField != null) {
 				NameTextField.Dispose ();
 				NameTextField = null;
 			}
-
-			if (VolumeTextField != null) {
-				VolumeTextField.Dispose ();
-				VolumeTextField = null;
+			if (SaveButton != null) {
+				SaveButton.Dispose ();
+				SaveButton = null;
 			}
-
 			if (SerialNumberTextField != null) {
 				SerialNumberTextField.Dispose ();
 				SerialNumberTextField = null;
 			}
-
-			if (SaveButton != null) {
-				SaveButton.Dispose ();
-				SaveButton = null;
+			if (VolumeTextField != null) {
+				VolumeTextField.Dispose ();
+				VolumeTextField = null;
 			}
 		}
 	}

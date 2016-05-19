@@ -21,6 +21,7 @@ namespace Application.iOS
 		private IHistoryViewController _specializedController => Controller as IHistoryViewController;
 		private List<Tuple<SensorTypes, List<double>>> _historicData;
 
+		private string _reuseIdentifier = "historyViewCell";
 
 		public HistoryViewBridge (IntPtr handle) : base (handle)
 		{
@@ -34,6 +35,7 @@ namespace Application.iOS
 			base.ViewDidLoad ();
 			// Perform any additional setup after loading the view, typically from a nib.
 
+			TableView.RegisterNibForCellReuse(HistoryViewCell.Nib, _reuseIdentifier);
 			TableView.TableFooterView = new UIView ();
 		}
 
@@ -52,6 +54,7 @@ namespace Application.iOS
 		public void DisplayHistoricData(List<Tuple<SensorTypes, List<double>>> historicData)
 		{
 			_historicData = historicData;
+			_historicData.Sort ();
 			TableView.ReloadData ();
 		}
 
@@ -86,23 +89,19 @@ namespace Application.iOS
 			return _historicData.Count;
 		}
 
-
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
-			var reuseIdentifier = "historyCell";
-			var cell = tableView.DequeueReusableCell (reuseIdentifier);
-
-			cell.TextLabel.Text = string.Format ($"{_historicData [indexPath.Row].Item1}");
-
-			string valueString = "";
-			foreach (var value in _historicData [indexPath.Row].Item2)
-				valueString += string.Format($"{value}, ");
-			if (valueString.Length > 2)
-				valueString = valueString.Substring (0, valueString.Length - 2);
-			
-			cell.DetailTextLabel.Text = valueString;
-
+			var cell = tableView.DequeueReusableCell (_reuseIdentifier) as HistoryViewCell;
+			var type = string.Format ($"{_historicData [indexPath.Row].Item1}");
+			cell.TypeLabel.Text = type;
+			cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
 			return cell;
+
+		}
+
+		public override nfloat GetHeightForRow (UITableView tableView, Foundation.NSIndexPath indexPath)
+		{
+			return 140;
 		}
 
 		// Actions
