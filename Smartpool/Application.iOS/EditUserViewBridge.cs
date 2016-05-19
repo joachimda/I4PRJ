@@ -4,6 +4,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing IBOutlets
+// 1.1	LP		Added IBOutlets and missing implementation
 //========================================================================
 
 
@@ -19,7 +20,7 @@ namespace Application.iOS
 
 		public EditUserViewBridge (IntPtr handle) : base (handle)
 		{
-			Controller = new EditUserViewController(this, new iOSClientMessenger());
+			Controller = new EditUserViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
@@ -46,22 +47,30 @@ namespace Application.iOS
 
 		public void ClearAllText()
 		{
-			// Missing implementation
+			OldPasswordTextField.Text = "";
+			NewPasswordTextField.Text = "";
+			NewPasswordRepeatedTextField.Text = "";
 		}
 			
 		public void SetSaveButtonEnabled(bool enabled)
 		{
-			// Missing implementation
+			SaveButton.Enabled = enabled;
+			SaveButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 			
 		public void SetNewPasswordValid(bool valid)
 		{
-			// Missing implementation
+			if (valid) {
+				NewPasswordRepeatedTextField.TextColor = UIColor.Green;
+			} else {
+				NewPasswordRepeatedTextField.TextColor = UIColor.Red;
+			}
 		}
 			
 		public void UpdateSuccessful()
 		{
-			// Missing implementation
+			// return to previous view
+			NavigationController?.PopViewController(true);
 		}
 
 		// Actions

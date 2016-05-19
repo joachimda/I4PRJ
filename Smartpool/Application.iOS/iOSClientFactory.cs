@@ -5,10 +5,14 @@ namespace Application.iOS
 {
 	public class iOSClientFactory
 	{
+		public static string ServerIP = "93.166.226.201";
+		
 		public static IClientMessenger DefaultClient()
 		{
-			return new iOSClientMessenger ();
-			//return new ClientMessenger (new iOSClient ("93.166.226.201"));
+			if (ServerIP == "test")
+				return new iOSClientMessenger ();
+			else
+				return new ClientMessenger (new iOSClient (ServerIP));
 		}
 	}
 }

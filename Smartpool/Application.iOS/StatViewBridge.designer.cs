@@ -14,8 +14,18 @@ namespace Application.iOS
 	[Register ("StatViewBridge")]
 	partial class StatViewBridge
 	{
+		[Outlet]
+		UIKit.UIBarButtonItem PoolsBarButtonItem { get; set; }
+
+		[Action ("PoolsBarButtonItemTouchUpInside:")]
+		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender);
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (PoolsBarButtonItem != null) {
+				PoolsBarButtonItem.Dispose ();
+				PoolsBarButtonItem = null;
+			}
 		}
 	}
 }

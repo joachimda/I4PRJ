@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
@@ -24,6 +25,8 @@ namespace Database.Test.Unit
         [SetUp]
         public void Setup()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB"); // will fix datetime errors while testing
+
             poolName = "baghave";
             ownerEmail = "hansen@gmail.com";
 

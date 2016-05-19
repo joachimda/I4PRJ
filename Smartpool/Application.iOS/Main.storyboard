@@ -119,10 +119,50 @@
             </objects>
             <point key="canvasLocation" x="-416.5" y="-86.5"/>
         </scene>
+        <!--Setup-->
+        <scene sceneID="fhC-Ao-UXM">
+            <objects>
+                <viewController id="owO-fX-DYe" customClass="IPViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PYJ-li-Kte"/>
+                        <viewControllerLayoutGuide type="bottom" id="qop-85-kbC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6o2-7l-60a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IP-address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Udh-gB-Ssm">
+                                <rect key="frame" x="12" y="76" width="351" height="50"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.99215686270000003" green="0.61960784310000006" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Xnv-EO-xZw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="IPChanged:" destination="owO-fX-DYe" eventType="editingChanged" id="3P5-Cr-hgn"/>
+                                    <action selector="emailEditingChanged:" destination="MOS-mj-LMJ" eventType="editingChanged" id="48b-Iz-Na1"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18197569250000001" green="0.1820139885" blue="0.18197321890000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Udh-gB-Ssm" firstAttribute="leading" secondItem="6o2-7l-60a" secondAttribute="leading" constant="12" id="4vu-8A-Obm"/>
+                            <constraint firstAttribute="trailing" secondItem="Udh-gB-Ssm" secondAttribute="trailing" constant="12" id="Vef-DF-AfI"/>
+                            <constraint firstItem="Udh-gB-Ssm" firstAttribute="top" secondItem="PYJ-li-Kte" secondAttribute="bottom" constant="12" id="zpn-Fg-eEf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Setup" id="fyx-00-cwV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ucu-zz-JrV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-848.5" y="-820.5"/>
+        </scene>
         <!--Smartpool-->
         <scene sceneID="AEQ-Ap-0nH">
             <objects>
-                <viewController id="MOS-mj-LMJ" customClass="LoginViewBridge" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginView" id="MOS-mj-LMJ" customClass="LoginViewBridge" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QPg-jw-hhZ"/>
                         <viewControllerLayoutGuide type="bottom" id="C0M-YJ-4Ul"/>
@@ -186,6 +226,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Smartpool" id="yNL-GR-xSw">
+                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="TDA-6T-4X4">
+                            <connections>
+                                <segue destination="owO-fX-DYe" kind="show" id="BMD-Xq-Yyd"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Sign up" id="w0F-DM-d5u">
                             <connections>
                                 <segue destination="PbW-WE-txZ" kind="show" id="40H-5N-UO5"/>
@@ -229,7 +274,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JkD-48-aCT">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B7n-za-fXl" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="rootView" automaticallyAdjustsScrollViewInsets="NO" id="B7n-za-fXl" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Ljd-qC-C7r">
@@ -246,11 +291,11 @@
             </objects>
             <point key="canvasLocation" x="-1282.5" y="-92.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Recents-->
         <scene sceneID="Ujm-WJ-uaV">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XAX-1M-xNb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Recents" image="Image" id="acW-dT-cKf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="bas-3s-jl0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -270,7 +315,7 @@
         <scene sceneID="qbf-fB-25H">
             <objects>
                 <tableViewController id="OoZ-yn-A5o" customClass="HistoryViewBridge" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EOo-Ow-ige">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="EOo-Ow-ige">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -281,18 +326,18 @@
                                 <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X1v-kt-4rl" id="Xu2-Mn-sXu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Ru-rY-mhp">
-                                            <rect key="frame" x="15" y="12" width="31.5" height="19.5"/>
+                                            <rect key="frame" x="15" y="13" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eqa-80-i3G">
-                                            <rect key="frame" x="318.5" y="12" width="41.5" height="19.5"/>
+                                            <rect key="frame" x="318.5" y="13" width="41.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -310,18 +355,25 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History" id="5eW-aj-ALD">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="xF5-cx-LGP"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="xF5-cx-LGP">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="OoZ-yn-A5o" id="aAR-Mm-SD3"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="PoolsBarButtonItem" destination="xF5-cx-LGP" id="dti-CH-85I"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmx-Yw-UXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1046.5" y="752.5"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--History-->
         <scene sceneID="weZ-J6-ikM">
             <objects>
                 <navigationController id="frV-nB-dn4" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="history" id="5fS-uH-jJ5"/>
+                    <tabBarItem key="tabBarItem" title="History" image="Image-1" id="5fS-uH-jJ5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Jru-g6-ui1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -379,9 +431,16 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Recents" id="6V2-Ku-VJP">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="0eL-c5-5nU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="0eL-c5-5nU">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="cjM-zg-047" id="Hbn-Cq-obA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="PoolsBarButtonItem" destination="0eL-c5-5nU" id="kma-EK-zCv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TzJ-39-7zC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -410,7 +469,7 @@
         <!--More-->
         <scene sceneID="Gvp-Sh-DJm">
             <objects>
-                <tableViewController id="unj-GT-Nvx" sceneMemberID="viewController">
+                <tableViewController id="unj-GT-Nvx" customClass="MoreViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="LHS-fK-kNc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -491,21 +550,25 @@
                             </tableViewSection>
                             <tableViewSection id="p2t-Po-JCw">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recentsCell" textLabel="fVl-QQ-zQl" style="IBUITableViewCellStyleDefault" id="ENK-u1-jtj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="recentsCell" id="ENK-u1-jtj">
                                         <rect key="frame" x="0.0" y="331.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ENK-u1-jtj" id="Nat-Ft-rgT">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Log out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fVl-QQ-zQl">
-                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9k-iI-y6m">
+                                                    <rect key="frame" x="161.5" y="7" width="52" height="30"/>
+                                                    <state key="normal" title="Log out"/>
+                                                    <connections>
+                                                        <action selector="LogOutTouchUpInside:" destination="unj-GT-Nvx" eventType="touchUpInside" id="1lm-k4-9ha"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Z9k-iI-y6m" firstAttribute="centerX" secondItem="Nat-Ft-rgT" secondAttribute="centerX" id="2Ha-3J-J4t"/>
+                                                <constraint firstItem="Z9k-iI-y6m" firstAttribute="centerY" secondItem="Nat-Ft-rgT" secondAttribute="centerY" id="5h5-He-nsy"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
@@ -526,7 +589,7 @@
         <!--Add Pool-->
         <scene sceneID="PId-Pa-Yar">
             <objects>
-                <viewController id="I1r-2z-mVJ" sceneMemberID="viewController">
+                <viewController id="I1r-2z-mVJ" customClass="AddPoolViewBridge" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xur-6c-eoX"/>
                         <viewControllerLayoutGuide type="bottom" id="q6Y-9b-nIz"/>
@@ -544,6 +607,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="NameChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="n1J-O4-exd"/>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="FRr-2Q-NJE"/>
                                 </connections>
                             </textField>
@@ -557,6 +621,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="CMZ-gK-xCi"/>
+                                    <action selector="VolumeChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="whw-uC-ejx"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Serial number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xhd-x4-zn9">
@@ -569,6 +634,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="ZKh-8f-FaG"/>
+                                    <action selector="SerialNumberChanged:" destination="I1r-2z-mVJ" eventType="editingChanged" id="YKX-qy-bkr"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53l-OV-Mir">
@@ -582,6 +648,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="SaveButtonTouchUpInside:" destination="I1r-2z-mVJ" eventType="touchUpInside" id="To4-SP-YvD"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="e9Q-ee-XyB"/>
                                 </connections>
                             </button>
@@ -603,6 +670,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Pool" id="Tft-6w-Rvt"/>
+                    <connections>
+                        <outlet property="NameTextField" destination="LHB-Q0-zg3" id="w1E-4I-bgg"/>
+                        <outlet property="SaveButton" destination="53l-OV-Mir" id="0G7-qb-PPN"/>
+                        <outlet property="SerialNumberTextField" destination="xhd-x4-zn9" id="4D3-tD-LUT"/>
+                        <outlet property="VolumeTextField" destination="Q8H-5g-JBb" id="UZ1-YL-PA9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yM8-AK-Wld" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -611,7 +684,7 @@
         <!--Edit Pool-->
         <scene sceneID="4Mx-Ap-gSc">
             <objects>
-                <viewController id="NZf-Xo-I99" sceneMemberID="viewController">
+                <viewController id="NZf-Xo-I99" customClass="EditPoolViewBridge" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Orr-gl-eX9"/>
                         <viewControllerLayoutGuide type="bottom" id="HVQ-0z-bv2"/>
@@ -629,6 +702,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
+                                    <action selector="NameChanged:" destination="NZf-Xo-I99" eventType="editingChanged" id="3qu-cG-VaY"/>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="crT-H5-fY5"/>
                                 </connections>
                             </textField>
@@ -642,6 +716,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="RCE-Iy-xU7"/>
+                                    <action selector="VolumeChanged:" destination="NZf-Xo-I99" eventType="editingChanged" id="606-YZ-fG1"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A123G-13HAW-9WJL2-2WDAD-WWW2Q" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fR-1d-Ru3">
@@ -664,6 +739,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="SaveButtonTouchUpInside:" destination="NZf-Xo-I99" eventType="touchUpInside" id="nhO-Q7-ATU"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="zM2-mR-wGG"/>
                                 </connections>
                             </button>
@@ -678,6 +754,7 @@
                                     <color key="titleColor" red="0.13725490200000001" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="DeleteButtonTouchUpInside:" destination="NZf-Xo-I99" eventType="touchUpInside" id="mrG-sI-rOG"/>
                                     <action selector="SaveButtonTouchUpInside:" destination="kfP-us-9Go" eventType="touchUpInside" id="gR3-V0-tcU"/>
                                 </connections>
                             </button>
@@ -703,9 +780,21 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Edit Pool" id="R8s-kp-vG5">
-                        <barButtonItem key="rightBarButtonItem" title="Pools" id="She-lY-Mf8"/>
+                        <barButtonItem key="rightBarButtonItem" title="Pools" id="She-lY-Mf8">
+                            <connections>
+                                <action selector="PoolsBarButtonItemTouchUpInside:" destination="NZf-Xo-I99" id="KGh-TC-ntd"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="DeleteButton" destination="fVR-Td-8rc" id="2av-QG-ag5"/>
+                        <outlet property="NameTextField" destination="Psq-D7-hk2" id="82o-oI-vBe"/>
+                        <outlet property="PoolsBarButtonItem" destination="She-lY-Mf8" id="xeq-w5-g88"/>
+                        <outlet property="SaveButton" destination="vIq-SZ-kBy" id="yQh-Qg-vlR"/>
+                        <outlet property="SerialNumberLabel" destination="5fR-1d-Ru3" id="2JA-gX-aXf"/>
+                        <outlet property="VolumeTextField" destination="lvq-Zk-ujJ" id="Fzd-Vo-vgA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Abw-04-sqg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -730,7 +819,7 @@
                                     <constraint firstAttribute="height" constant="50" id="Kwn-D3-YYg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="OldPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="chI-qy-8FF"/>
                                 </connections>
@@ -742,7 +831,7 @@
                                     <constraint firstAttribute="height" constant="50" id="5nZ-2U-4i7"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="NewPasswordChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="dSY-ve-hOW"/>
                                 </connections>
@@ -754,7 +843,7 @@
                                     <constraint firstAttribute="height" constant="50" id="uo1-Lo-9Mm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="NewPasswordRepeatedChanged:" destination="kfP-us-9Go" eventType="editingChanged" id="nsH-Ox-9Kc"/>
                                 </connections>
@@ -799,10 +888,20 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Password" id="NH1-pf-lo8"/>
+                    <connections>
+                        <outlet property="NewPasswordRepeatedTextField" destination="3ep-fS-gq0" id="CJj-GS-dGb"/>
+                        <outlet property="NewPasswordTextField" destination="wHR-Uj-LwE" id="edf-eZ-Wsq"/>
+                        <outlet property="OldPasswordTextField" destination="ERE-dl-NdI" id="8lH-16-Rml"/>
+                        <outlet property="SaveButton" destination="hGI-N5-2ir" id="NtX-jH-nak"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T8K-55-HqP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2445.5" y="-871.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image" width="30" height="30"/>
+        <image name="Image-1" width="30" height="30"/>
+    </resources>
 </document>

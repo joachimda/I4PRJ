@@ -23,16 +23,15 @@ namespace Application.iOS
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new LoginViewController(this, iOSClientFactory.DefaultClient());
 		}
 
-		public override void ViewDidLoad ()
+		public override void ViewDidAppear (bool animated)
 		{
-			base.ViewDidLoad ();
-			// Perform any additional setup after loading the view, typically from a nib.
+			base.ViewDidAppear (animated);
 
 			// Let the controller know that the view has finished loading.
-			Controller.ViewDidLoad();
+			Controller = new LoginViewController(this, iOSClientFactory.DefaultClient());
+			Controller.ViewDidLoad ();
 		}
 
 		public override void TouchesBegan (NSSet touches, UIEvent evt)

@@ -14,8 +14,18 @@ namespace Application.iOS
 	[Register ("HistoryViewBridge")]
 	partial class HistoryViewBridge
 	{
+		[Outlet]
+		UIKit.UIBarButtonItem PoolsBarButtonItem { get; set; }
+
+		[Action ("PoolsBarButtonItemTouchUpInside:")]
+		partial void PoolsBarButtonItemTouchUpInside (UIKit.UIBarButtonItem sender);
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (PoolsBarButtonItem != null) {
+				PoolsBarButtonItem.Dispose ();
+				PoolsBarButtonItem = null;
+			}
 		}
 	}
 }
