@@ -1,10 +1,3 @@
-\usepackage{listings}
-\usepackage{xcolor}
-
-\lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
-
-\lstdefinestyle{xaml}{language=, frame=lr, rulecolor=\color{blue!80!black}}
-
 \section{Windows GUI}
 Til at vise nuværende data blev WinStatView lavet.
 \begin{figure}[h]
@@ -15,38 +8,39 @@ Til at vise nuværende data blev WinStatView lavet.
 \end{figure}
 
 En controller oprettes, som kan hente de nuværende data. Når ViewDidLoad bliver kaldt på controlleren kalder den følgende funktion.
-\lstset{style=sharpc}
-\begin{lstlisting}
-        public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
-        {
-        	foreach (var sensor in sensorData)
-        	{
-        		switch (sensor.Item1)
-        		{
-        			case SensorTypes.Temperature:
-        			TemperatureStatViewer.Parameter = string.Format($"{sensor.Item2}");
-        			break;
-        			case SensorTypes.Ph:
-        			PhStatViewer.Parameter = string.Format($"{sensor.Item2}");
-        			break;
-        			case SensorTypes.Chlorine:
-        			ChlorineStatViewer.Parameter = string.Format($"{sensor.Item2}");
-        			break;
-        			case SensorTypes.Humidity:
-        			HumidityStatViewer.Parameter = string.Format($"{sensor.Item2}");
-        			break;
-        		} 
-        	}
-        }
+
+\begin{lstlisting}[caption=Caption til kodebid,label=code:asd]
+public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
+{
+   	foreach (var sensor in sensorData)
+   	{
+   		switch (sensor.Item1)
+   		{
+   			case SensorTypes.Temperature:
+   			TemperatureStatViewer.Parameter = string.Format($"{sensor.Item2}");
+   			break;
+   			case SensorTypes.Ph:
+   			PhStatViewer.Parameter = string.Format($"{sensor.Item2}");
+   			break;
+   			case SensorTypes.Chlorine:
+   			ChlorineStatViewer.Parameter = string.Format($"{sensor.Item2}");
+   			break;
+   			case SensorTypes.Humidity:
+   			HumidityStatViewer.Parameter = string.Format($"{sensor.Item2}");
+   			break;
+   		} 
+   	}
+}
 \end{lstlisting}
+
 Den korrekte StatViewer vælges og dens Parameter sættes til at være det nyeste data.
 
 En StatViewer er en custom wpf control, som er lavet til dette formål. Den har en farve der repræsenterer sensor typen, og tekstfelter til property'en Parameter, hvori nuværende data er, Target værdi og sensor typen. 
 På figur~\ref{fig:winstatview} ses fire StatViewers. En til hver sensor. 
 
 StatViewer klassen er har givet fire ekstra properties. I koden nedenfor ses et eksempel.
-\lstset{style=sharpc}
-\begin{lstlisting}
+
+\begin{lstlisting}[caption=Caption til kodebid, label=asd2]
 public class StatViewer : Button
 {
 	public string Parameter
@@ -63,12 +57,13 @@ public class StatViewer : Button
 	new FrameworkPropertyMetadata("XX"));
 	...
 \end{lstlisting}
+
 På denne måde er properties til BorderColor, Parameter og ParameterTarget. ParameterTarget er der, fordi det var planlagt at den skulle vise den ønskede værdi, men det er ikke implementeret.
 
 Udseendet på StatViewer er defineret i en template der ligger i StatViewerTheme.xaml. Det er et ResourceDictionary, hvilket tillader at adskille Resourcer fra vinduerne i xaml.
 Templaten ses nedenfor.
-\lstset{style=sharpc}
-\begin{lstlisting}
+
+\begin{lstlisting}[caption=bla bla bla, label=code:asd3]
 <!-- StatView template -->
 <Style x:Key="{x:Type local:StatViewer}" TargetType="{x:Type local:StatViewer}">
 <Setter Property="Foreground" Value="{StaticResource SpWhite}"/>
@@ -93,4 +88,5 @@ Templaten ses nedenfor.
 </Grid>
 </ControlTemplate>
 \end{lstlisting}
+
 Bemærk TargetType="local:StatViewer". Templaten er til StatViewer og de steder der står TemplateBinding forbindes de properties der var blevet tilføjet.
