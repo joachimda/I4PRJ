@@ -35,3 +35,21 @@ Med \gls{ef} blev følgende model lavet til at opfylde dette krav.
 \end{figure}
 
 Udfra dette blev et script genereret, som så skulle køres mod en localdb. Nu var databasen oprettet og implementeringen af \textit{UserAccess} kunne starte.
+
+\subsection{Persistering af sensordata}
+%Husk at tage udgangspunkt historisk pool data US
+Da Smartpool systemet kræver lagring af større mængder data er der gjort en del overvejelser på området. 
+Sensor data persisteres i hver sin tabel.
+
+\subsection{Endeligt database design}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/design/databaseERD_final_uml}
+\caption{Endeligt ER diagram, UML notation}
+\label{fig:databaseERD_final_uml}
+\end{figure}
+
+
+
+
