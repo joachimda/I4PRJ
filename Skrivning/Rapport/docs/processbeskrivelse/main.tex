@@ -1,21 +1,30 @@
 \chapter{Process og projektgennemførsel}
 
-I dette afsnit beskrives gennemførslen af projekten, herunder process, ledelse samt anvendte principper og værktøjer. Disse principper og værktæjer har været et vigtigt elemtent i udarbejdelsen af projektet, og har haft til formål at give arbejet struktur samt at hjælpe grupens til at få et overblik og færdigt og ufærdigt arbejde
+I dette afsnit beskrives gennemførslen af projektet, herunder process, ledelse samt anvendte principper og værktøjer. Disse principper og værktøjer har været et vigtigt element i udarbejdelsen af systemet, og har haft til formål at give arbejdet struktur samt at hjælpe gruppens til at få et overblik over færdigt og ufærdigt arbejde
 
-\section{SCRUM og agil udvikling}
-Scrum er et ”Agile development” værktøj. I dette projekt bruges de væsentligste grunprincipper. Som udgangspunkt er der afholdt et ugentligt ”stå-op” møde, hvor gruppen har talt og diskuteret den forrige uges arbejde, samt hvilke problemer eller forhindringer der har været.
+\section{SCRUM og agile udvikling}
+Scrum er et ”Agile development” værktøj. I dette projekt bruges de væsentligste grundprincipper. Som udgangspunkt er der afholdt et ugentligt møde, hvor gruppen har talt og diskuteret den forrige uges arbejde, samt hvilke problemer eller forhindringer der har været eller kommer.
+
+Gruppen har ikke brugt scrum ''fully dressed'' men har derimod taget de principper og grundsten som gav mening på et mindre team.
 
 \subsection{Milestones}
-En af hoved principperne i scrum er at gøre det der giver mening. Gruppen har derfor ikke brugt scrum "fully dressed" men derimod taget de principper og grundsten med som giver mening på et mindre team.
+En af hovedprincipperne i scrum er at gøre det der giver størst værdi. Arbejdet er simpelthen gået efter at lave de vigtigste ting først. Disse blev identificeret ved en \gls{moscow} analyse, se afsnit~\ref{sec:moscow}.
+
+Når et punkt i \gls{moscow} var valgt har hele gruppen så designet og implementeret områder inden for deres specialisering.
 
 \subsection{Retrospekt}
 Løbende har gruppen revideret samarbejdet i forbindelse med gruppemøder. Dette har givet en stærkere team, og forbedret kommunikationen i mellem gruppens medlemmer.
 
+Eksempelvis kom det i starten frem at gruppemedlemmer havde en tendens til at arbejde på en del af systemet, uden at resten af gruppen var klar over hvad de så tilsvarende skulle lave. 
+Dette blev heldigvis, tidligt, bragt op på et møde og en løsning blev fundet.
+
 \subsection{Development spikes}
-Et princip taget fra "Extreme programming". Dette princip har været brugt i enkelte tilfælde hvor gruppen har arbejdet sig hen mod et mål og ikke stoppet før det nåes.
+Et princip taget fra "Extreme programming". Det går ud på at der designes og implementeres de nødvendige dele for at et ''signal'' kan gå fra ende til anden i systemet.
+
+Dette princip har været brugt i starten, før \gls{db}, \gls{windserver} og diverse klienter kunne tale sammen om en opgave.
 
 \section{User Stories}
-På tidligere semestre har use cases været brugt til at vise scenarier hvor systemet kan bruges. I dette projekt bruges user stories, som er en kort beskrivelse af en system-feature[ref: http://searchsoftwarequality.techtarget.com/definition/user-story ]. En user story skal forstås som et ønske fra slutbrugerens side, og er altså derved en beskrivelse af et systemkrav.
+På tidligere semestre har use cases været brugt til at vise scenarier for hvordan systemet kan bruges. I dette projekt bruges user stories \cite{user_story} \cite{websiteAttachedProperties}, som er en kort beskrivelse af en system-feature[ref: http://searchsoftwarequality.techtarget.com/definition/user-story ]. En user story skal forstås som et ønske fra slutbrugerens side, og er altså derved en beskrivelse af et systemkrav.
 
 \subsection{Pivotal Tracker}
 Pivotal tracker er et webbaseret, agilt projektsstyrings værktøj, udviklet af pivotal labs[ref:https://www.pivotaltracker.com/]. Pivotal tracker stiller et interaktivt scrumboard til rådighed, hvorpå der er mulighed for at tilføje user-stories til en backlog, tracke teamets velocity samt se opgaver der er færdige. Se eksempel på \ref{fig:scrumboard}.
