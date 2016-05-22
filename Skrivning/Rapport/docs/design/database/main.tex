@@ -1,4 +1,18 @@
-\section{Database}
+\section{Database og data access layer}
+
+\subsection{Indledende design overvejelser}
+Før design af database og data access layer, er der gjort nogle indledende tekonologiundersøgelser. DDS-lite er brugt i kurset I4DAB, har været brugt til at designe de første udkast til en database. DDS-lite giver mulighed for at autogenerere SQL scripts som kan køres på databasen. Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en ORM\footnote{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det muligt at behandle rå data records som objekter. 
+
+Helt fra begyndelsen af databasen/DAl designfasen har tanken været at skabe et DAL der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Dette illustreres på figur \ref{fig:vs_codeMap}.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/design/vs_codeMap.PNG}
+\caption{Dependancy graph for Smartpool Systemet}
+\label{fig:vs_codeMap}
+\end{figure}
+
 
 Med udgangspunkt i \gls{moscow} analysen i afsnit~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde punktet: 
 
@@ -22,7 +36,7 @@ Der skulle så laves en simple database, med det eneste formål at kunne indehol
 \begin{itemize}
 	\item Navn (for, mellem og -efternavn)
 	\item Email
-	\item Kodeord
+	\item Password
 \end{itemize}
 
 Med \gls{ef} blev følgende model lavet til at opfylde dette krav.
@@ -40,8 +54,44 @@ Udfra dette blev et script genereret, som så skulle køres mod en localdb. Nu v
 %Husk at tage udgangspunkt historisk pool data US
 Da Smartpool systemet kræver lagring af større mængder data er der gjort en del overvejelser på området. En tidlig udgave af database designet kan ses på \ref{fig:databaseERD_final_uml}. Her gemmes alt indsamlet data i én stor tabel. Dette er uhensigtsmæssigt i forbindelse med data queries, og designet er siden blevet optimeret. Ser man på \ref{fig:databaseERD_final_uml}, er entiteten MonitorUnit blevet fjernet helt. Dataen ligger her i hver sin respektive tabel med henblik på type. Der er tilføjet en Data entitet der har et timestamp som attribut. Man kan derved finde tidsspecfik data, blot ved at kende den Data entitet der videre kender til brugerens pool. På denne måde er søgetiden optimeret med en faktor 4. Dog vil søgetider stadig blive længere jo flere pools der tilføjes i systemet.
 
-\subsubsection{Fremtidigt arbejde}
 En videre optimering må være at oprette nye data tabeller hver gang der oprettes en pool i systemet. Dette vil mindske søgetider drastisk. Envidere kan data der er ældre end x antal dage, flyttes til en anden tabel. På denne måde vil der komme et maximum for søgetider i nyere data.
+Mulighederne for dette er undersøgt, dog vil løsningen kræve yderligere teknologi undersøgelser samt tage for lang tid at implementere det nuværende design.
+
+\subsubsection{User Story - Se pooldata}
+
+"\textit{Som bruger vil jeg kunne se mine pooldata \todo{Ændr denne US???}}"
+
+Det endelige design tillader en bruger at hente sin egens pooldata ud af databasen.
+
+Funktionaliteten hertil er implementeret i projektets data-access layer. Udadtil har DAL et interface \textit{ISmartpoolDB} som en klient (connection server) kan kalde sig ind i. Dette er smart da data-access klienten ikke behøves at have referencer til alle DAL klasser.
+
+\begin{lstlisting}[caption=TokenMsgResponse constructor,label=code:tokenMsgRespone_constructor]
+public TokenMsgResponse(ISmartpoolDB smartpoolDb)
+{
+	_smartpoolDb = smartpoolDB;
+	...
+	...
+}
+\end{lstlisting}
+
+Som det kan ses på kodeudsnit \ref{code:tokenMsgRespone_constructor}, initialiseres objektet i klientens constructor.
+For at få data trukket ud af databasen kaldes DAL's DataAccess klasse som implementerer DataAccess interfacet IDataAccess. DataAccess har de nødvendige data getter metoder. Alle getData metoder returnerer en liste af tupler. Tuplerne indeholder enum SensorTypes, som beskriver hvilken sensor der har foretaget målingen, og en double der repræsenterer målingens værdi.
+
+\begin{lstlisting}
+private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
+{
+	return new List<Tuple<SensorTypes, List<double>>>
+		{
+				GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
+				GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
+				GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
+				GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
+		};
+}
+\end{lstlisting}
+
+
+
 
 \begin{figure}
 	\centering
@@ -52,7 +102,7 @@ En videre optimering må være at oprette nye data tabeller hver gang der oprett
 
 Sensor data persisteres i hver sin tabel.
 
-\subsection{Endeligt database design}
+\subsection{Endeligt database og DAL design}
 
 \begin{figure}
 \centering
