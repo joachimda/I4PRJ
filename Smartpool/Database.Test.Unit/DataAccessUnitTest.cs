@@ -179,38 +179,6 @@ namespace Database.Test.Unit
             Assert.That(setvalue, Is.EqualTo(value));
         }
 
-        //[Test]
-        //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampLessThanNow()
-        //{
-        //    double value = 987;
-
-        //    Thread.Sleep(1000);
-        //    string start = DateTime.UtcNow.ToString("G");
-        //    _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
-        //    Thread.Sleep(1000);
-        //    string end = DateTime.UtcNow.ToString("G");
-
-        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item1;
-
-        //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.LessThan(DateTime.ParseExact(end, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
-        //}
-
-        //[Test]
-        //public void CreateDataEntry_AddingDataEntry_ReturnsTupleWithTimestampMoreThanBeforeMethodCall()
-        //{
-        //    double value = 987;
-
-        //    Thread.Sleep(1000);
-        //    string start = DateTime.UtcNow.ToString("G");
-        //    _uut.CreateDataEntry(ownerEmail, poolName, value, 89, 8, 33);
-        //    Thread.Sleep(1000);
-        //    string end = DateTime.UtcNow.ToString("G");
-
-        //    string settime = _uut.GetChlorineValues(ownerEmail, poolName, 2).First().Item1;
-
-        //    Assert.That(DateTime.ParseExact(settime, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture), Is.AtLeast(DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)));
-        //}
-
         #endregion
 
         #region DeleteAllData
