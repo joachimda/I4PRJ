@@ -52,21 +52,30 @@ Når der i fællesskab udarbejdes user stories, bliver teamet samtidig enige om 
 Som det kan ses på figur~\ref{fig:userstory_with_tasks} er der tildelt 2 point til en \gls{us}. Dette er grundet behovet for udvikling af både database, Data Access Layer, samt GUI. Altså er det en feature der berører alle aspekter af projektet.
 
 \section{Test Driven Development}
-TDD er en udviklingsmetode der bla bla bla. Gruppen har brugt TDD i tilfælde hvor bla bla i nogle sprints.
+TDD er en udviklingsmetode, som foreskriver at test skrives før selve produktionskoden \cite{osherove2015art}. Gruppen har ikke brugt TDD 100\% gennemforløbet. 
+Dog har TDD været særligt brugbart i udviklingen af DAL\footnote{Data Access Layer} laget, idet at de enkelte methoder har været enkle nok til der kunne skrives test før selve produktionskoden skulle skrives.
 
 \section{Versionsstyring}
-Versionstyring er en vigtig del af softwareudviklingsprocecssen. Det er et værktøj der giver mulighed for at flere udviklere kan arbejde på samme projekt uden at træde hinanden over tæerne.
+En fuldstændig essentiel del af softwareudvikling er versionstyring. Det er et værktøj der giver mulighed for at flere udviklere kan arbejde, tæt sammen, på et projekt uden at træde hinanden over tæerne.\todo{bedre formulering?}
 
 \subsection{Git}
-Gruppen har igennem hele forløbt benyttet versionsstyringsværktøjet Git. Git er gratis, og har været brugt i kurser som Software Test og Indlejret Software Udvikling. Git bruges is projektet til al source kode, og hver feature udikles på sin egen branch. Når en feature er færdig udstedes et pull request, hvorefter repository administratoren kan merge koden ind på master branch. Som en sikkerhedsforanstaltning er Master branchen låst så der ikke uden videre kan pushes til den.
+Gruppen har igennem hele forløbet benyttet versionsstyrings-værktøjet Git. Git er gratis, og har været brugt i kurser som Software Test og Indlejret Software Udvikling. 
+Git bruges i projektet til al source kode, og hver feature udvikles på sin egen branch for at undgå konflikter. Når en feature er færdig udstedes et pull request, hvorefter repository administratoren kan merge koden ind på master branch.
 
 \subsubsection{GitHub}
-Github er online hosting af Git repositories, og er brugt i projektet til at gemme source kode, samt administrere projektets repository. I forbindelse med projektstyring og adminitration, har git været brugt til eks. at tracke teamets effektivitet og commit-frekvens.
-Projektets repository kan finde på www.github.com/joachimda/I4PRJ.
+Github er online hosting af Git repositories, og er brugt i projektet til at gemme source kode, samt administrere projektets repository. I forbindelse med projektstyring og adminitration, har git været brugt til eksempelvis at tracke teamets effektivitet og commit-frekvens.
+Projektets repository kan finde på \url{www.github.com/joachimda/I4PRJ}.
 
 \subsection{Travis CI og Jenkins}
-Gruppen har undervejs forsøgts sig med at arbejde hhv. med Travis CI og Jenkins. Begge værktøjer er til Continuos Integration. CI er er smart idet en ekstern server står for at bygge al source kode der bliver pushet til projektets repository.  Travis CI er gratis til offentlige repositories på GitHub. Dog er Travis CI kun ”community supported” for C\# kode.
-Da projektet både indeholder en applikation til PC, iOS, en web applikation, har det været en stor udfordring at benytte et continous integration værktøj.
+Gruppen har undervejs forsøgts sig med både med Travis CI og Jenkins. Da gruppen allerede var godt bekendt med Jenkins, virkede Travis CI som en interessant mulighed for at prøve noget anderledes.
+Begge værktøjer er til continuos integration. CI er belejligt idet en ekstern server står for at bygge al source kode der bliver pushet til projektets repository og kører tilsvarende tests.
+
+Dette er især nyttigt til større projekter, hvor lokale test på udviklerens computer ikke er hensigtsmæssige af tidsmæssige årsager. Travis CI er gratis til offentlige repositories på GitHub. Dog er Travis CI kun ''community supported'' for C\# kode \cite{communitysupportedlanguages2016}, hvilket præsenterede en udfordring.
+
+Da projektet både indeholder en applikation til PC, iOS og en web applikation, har det været en stor udfordring at benytte et continous integration værktøj.
+Dette kombineret med at hele testsuiten hurtigt kunne eksekveres lokalt, ledte til at gruppen valgte at prioritere tid brugt på udvikling og lokale test.
+
+Dette har dog ikke forhindret et forsøg. Det lykkedes gruppen at sætte den ellers kun ''community supported'' Travis CI op til at teste et C\# projekt fra github, som skulle konstatere om der skulle bruges mere tid på Travis CI. 
 
 \section{Software test}
 Software testing har været en stor del af dette projekt. Der har været stor fokus på robusthed, og blabla. Der er i alt skrevet XXX automatiserede tests.
