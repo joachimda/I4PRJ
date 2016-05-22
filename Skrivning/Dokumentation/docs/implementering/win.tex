@@ -1,4 +1,75 @@
 \section{Windows GUI}
+Implementeringen af den grafiske bruger grænseflade til windows beskrives her.
+\subsection{WinLoginView}
+Første skærm eller view der vises er WinLoginView.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/implementering/winloginview}
+	\caption{WinLoginView}
+	\label{fig:winloginview}
+\end{figure}
+Det var blevet besluttet at textbox'ene skulle have "placeholder" text, hvilket ikke findes som standard i WPF. Placeholder tekst fortæller hvad det er forventet brugeren skriver i feltet. På figur~\ref{fig:winloginview} ses det i øverste felt at brugeren skal skrive sin e-mail. Placeholder teksten forsvinder, når brugeren skriver i feltet, hvilket ses i felt nummer to til password. Password teksten er hemmelig og derfor ikke synlig. 
+
+Det blev overvejet om det var forsvarligt at have passwordet i en normal textbox, i stedet for en WPF PasswordBox, hvor indholdet ikke ligger ukrypteret i hukommelsen. 
+For at sende passwordet til severen, skal det alligevel være ukrypteret, så det ville ikke ændre meget på sikerheden. Derfor blev diskussionen droppet.
+
+Placeholder teksten er lavetog vist ved hjælp af en property og en template til en normal TextBox.
+Placeholder teksten er lavet som en property, som kan sættes på alle controls med klassen ThemeProperties der ligger i WinLoginView.xaml.cs. Det ses i følgende kode udsnit.
+\begin{lstlisting}[caption=ThemeProperties, label=code:asd3]
+public static class ThemeProperties
+{
+public static string GetPlaceholderText(DependencyObject obj)
+{
+return (string)obj.GetValue(PlaceholderTextProperty);
+}
+
+public static void SetPlaceholderText(DependencyObject obj, string value)
+{
+obj.SetValue(PlaceholderTextProperty, value);
+}
+
+public static readonly DependencyProperty PlaceholderTextProperty =
+DependencyProperty.RegisterAttached(
+"PlaceholderText",
+typeof(string),
+typeof(ThemeProperties),
+new FrameworkPropertyMetadata("Placeholder"));
+}
+\end{lstlisting} 
+Med SetPlaceholderText() kan man så sætte placeholder teksten til en given control.
+Det kunne have været lavet som en PlaceholderTextBox klasse ligesom StatViewer i figur~\ref{code:StatViewer}, men dette blev lavet inden den idé opstod.
+
+Placeholder teksten bliver vist, fordi den er en templateBinding til den i en template til TextBox'ene. Implementeringen af templaten ses her.
+\begin{lstlisting}[caption=TextBoxWPlaceholderTemplate, label=TextBoxWPlaceholderTemplate]
+<!-- TextBox with a placeholder containing attached property PlaceholderText-->
+<ControlTemplate x:Key="TextBoxWPlaceholderTemplate" TargetType="{x:Type TextBox}">
+<Grid>
+<Border Background="{StaticResource SpGrey}" x:Name="Bd" BorderBrush="{StaticResource SpDarkGrey}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="5" Height="30" >
+<ScrollViewer x:Name="PART_ContentHost"/>
+<Border.Effect>
+<DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="2" Opacity="0.3" />
+</Border.Effect>
+</Border>
+
+<TextBlock IsHitTestVisible="False" Text="{Binding Path=(local:ThemeProperties.PlaceholderText), RelativeSource={RelativeSource TemplatedParent}}" 
+VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" Foreground="#FF808080">
+<TextBlock.Style>
+<Style TargetType="{x:Type TextBlock}">
+<Setter Property="Visibility" Value="Collapsed"/>
+<Style.Triggers>
+<DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}" Value="">
+<Setter Property="Visibility" Value="Visible"/>
+</DataTrigger>
+</Style.Triggers>
+</Style>
+</TextBlock.Style>
+</TextBlock>
+</Grid>
+...
+\end{lstlisting}
+På linje 11 er en TextBlock der er båndet til placeholder teksten tilføjet til TextBox'en. 
+På linje 17 er der lavet en DataTrigger. Den er båndet til teksten i TextBox'en. Hvis tekst property'en er tom, vises placeholder teksten.
+\subsection{WinStatView}
 Til at vise nuværende data blev WinStatView lavet.
 \begin{figure}[h]
 	\centering
@@ -9,7 +80,7 @@ Til at vise nuværende data blev WinStatView lavet.
 
 En controller oprettes, som kan hente de nuværende data. Når ViewDidLoad bliver kaldt på controlleren kalder den følgende funktion.
 
-\begin{lstlisting}[caption=Caption til kodebid,label=code:asd]
+\begin{lstlisting}[caption=DisplaySensorData(),label=code:DisplaySensorData]
 public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
 {
    	foreach (var sensor in sensorData)
@@ -38,9 +109,9 @@ Den korrekte StatViewer vælges og dens Parameter sættes til at være det nyest
 En StatViewer er en custom wpf control, som er lavet til dette formål. Den har en farve der repræsenterer sensor typen, og tekstfelter til property'en Parameter, hvori nuværende data er, Target værdi og sensor typen. 
 På figur~\ref{fig:winstatview} ses fire StatViewers. En til hver sensor. 
 
-StatViewer klassen er har givet fire ekstra properties. I koden nedenfor ses et eksempel.
+StatViewer klassen er givet fire ekstra properties. I koden nedenfor ses et eksempel.
 
-\begin{lstlisting}[caption=Caption til kodebid, label=asd2]
+\begin{lstlisting}[caption=StatViewer attatched property, label=code:StatViewer]
 public class StatViewer : Button
 {
 	public string Parameter
@@ -58,12 +129,12 @@ public class StatViewer : Button
 	...
 \end{lstlisting}
 
-På denne måde er properties til BorderColor, Parameter og ParameterTarget. ParameterTarget er der, fordi det var planlagt at den skulle vise den ønskede værdi, men det er ikke implementeret.
+På denne måde er properties til BorderColor, Parameter og ParameterTarget tilføjet til klassen StatViewer. ParameterTarget er der, fordi det var planlagt, at den skulle vise den ønskede værdi, men det er ikke implementeret.
 
 Udseendet på StatViewer er defineret i en template der ligger i StatViewerTheme.xaml. Det er et ResourceDictionary, hvilket tillader at adskille Resourcer fra vinduerne i xaml.
 Templaten ses nedenfor.
 
-\begin{lstlisting}[caption=bla bla bla, label=code:asd3]
+\begin{lstlisting}[caption=StatViewerTheme, label=code:asd3]
 <!-- StatView template -->
 <Style x:Key="{x:Type local:StatViewer}" TargetType="{x:Type local:StatViewer}">
 <Setter Property="Foreground" Value="{StaticResource SpWhite}"/>
