@@ -3,12 +3,37 @@
 \subsection{Indledende design overvejelser}
 Før design af database og data access layer, er der gjort nogle indledende tekonologiundersøgelser. DDS-lite er brugt i kurset I4DAB, har været brugt til at designe de første udkast til en database. DDS-lite giver mulighed for at autogenerere SQL scripts som kan køres på databasen. Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en ORM\footnote{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det muligt at behandle rå data records som objekter. 
 
-Helt fra begyndelsen af databasen/DAl designfasen har tanken været at skabe et DAL der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Dette illustreres på figur \ref{fig:vs_codeMap}.
+Helt fra begyndelsen af databasen/DAL designfasen har tanken været at skabe et DAL der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Dette illustreres på figur \ref{fig:vs_codeMap}.
+
+Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et ER diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på i Entity Frameworket. Undervejs er flere af dem blevet afprøvet, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
+
+Database first blev brugt i forbindelse med DDS-Lite som blev brugt til at designe selve databasen. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede.
+
+Dog blev Model First tilgangen valgt, da der i projektets udviklingsfase ofte blev foretaget markante ændringer i designet. Model first gør det lettere at udføre ER opdateringer, direkte på modellen og derefter køre et tilhørende SQL script direkte på databasen. Det første model first udkast til projektets database var meget omfattende og er siden hen blevet revideret og omkonstrueret. Se figur \ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{figs/design/databaseERD}
+\caption{Første "Model First tilgang" til database design}
+\label{fig:databaseERD_firstattempt_uml}
+\end{figure}
+
+Af markante ændringer kan der nævnes:
+
+\begin{itemize}
+	\item FullName entiteten fjernes, User får 3 naming properties.
+	\item Residence entiteten fjernes, og Pool entitens \textit{Name} property står for indhold af både addresse og navn.
+	\item Value constraints fjernes helt da de ikke er nødvendige at have på databasen
+	\item PoolDimensions entiteten fjernes, og Pool får en \textit{Volume} property.
+	\item MonitorUnit entiteten udgår af fra databasen. Denne har kun været i databasen for at checke på et evt. serienummer.
+\end{itemize}
+
+ 
 
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/design/vs_codeMap.PNG}
+\includegraphics[width=0.5\linewidth]{figs/design/vs_codeMap.PNG}
 \caption{Dependancy graph for Smartpool Systemet}
 \label{fig:vs_codeMap}
 \end{figure}
