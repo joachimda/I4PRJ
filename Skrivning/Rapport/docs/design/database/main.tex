@@ -3,7 +3,16 @@
 \subsection{Indledende design overvejelser}
 Før design af database og data access layer, er der gjort nogle indledende tekonologiundersøgelser. DDS-lite er brugt i kurset I4DAB, har været brugt til at designe de første udkast til en database. DDS-lite giver mulighed for at autogenerere SQL scripts som kan køres på databasen. Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en ORM\footnote{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det muligt at behandle rå data records som objekter. 
 
-I begyndelsen blev der lavet en ER model 
+Helt fra begyndelsen af databasen/DAl designfasen har tanken været at skabe et DAL der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Dette illustreres på figur \ref{fig:vs_codeMap}.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/design/vs_codeMap.PNG}
+\caption{Dependancy graph for Smartpool Systemet}
+\label{fig:vs_codeMap}
+\end{figure}
+
 
 Med udgangspunkt i \gls{moscow} analysen i afsnit~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde punktet: 
 
