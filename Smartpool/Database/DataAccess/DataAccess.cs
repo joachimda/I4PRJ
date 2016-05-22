@@ -43,11 +43,7 @@ namespace Smartpool
                 var poolsearch = from pools in db.PoolSet
                                  where pools.UserId == userId && pools.Name == poolName
                                  select pools;
-
-                // check for errors in poolsearch
-                if (poolsearch.Count() > 1) return false;
-                if (poolsearch.Any() == false) return false;
-
+                
                 // create 'Data' entity to store measurements in
                 string time = DateTime.UtcNow.ToString();
                 var newData = new Data() { PoolId = poolsearch.First().Id, Timestamp = time };
@@ -61,7 +57,6 @@ namespace Smartpool
 
                 // check for errors in datasearch
                 if (datasearch.Count() > 1) return false;
-                if (datasearch.Any() == false) return false;
 
                 // create measurements
                 var newChlorine = new Chlorine() { DataId = datasearch.First().Id, Value = chlorine };
