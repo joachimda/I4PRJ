@@ -7,12 +7,12 @@
 	\label{fig:domainmodel}
 \end{figure}
 
-%\todo{Elementer i figur \ref{fig:domainmodel} skal muligvis rykkes tættere sammen for at gøre det nemmere at læse på tryk.}
+\todo{Fig~\ref{fig:domainmodel} skal beskrives som et ''tidligt design'' eftersom det overhovedet ikke ligner systemet som det er nu. En ny model skal nok laves.}
 
 \subsection{Domænebeskrivelser}
 Med udgangspunkt i modellen på figur~\ref{fig:domainmodel} er der opstillet analyser af de enkelte domæner.
 
-\subsubsection{\gls{user}}
+\subsubsection{\gls{user}}\todo{Afsnit skal måske rettes lidt...}
 \gls{user} er systemet primære bruger. En \gls{user} kan tillade og/eller fjerne \glspl{spectator}. En \gls{user} kan regulere pH/klor/temperatur værdier inden for evt. lovmæssige begrænsninger. Tilføjelse\footnote{Mulighed for tilføjelse af  \gls{mu} giver \gls{user} mulighed for at tilføje flere/større \glspl{pool} og/eller \glspl{mu}.} af \glspl{mu} er \glspl{user} ansvar. En \gls{user} har mulighed for at sende en \gls{specinvite} til en anden \gls{user}. Dette gøres ved at sende et link\footnote{En \gls{user} kan gennem \gls{pcapp} få genereret et link som \gls{user} selv står for at sende.}  til anden partens email-addresse.
 
 \todo{Reference skal muligvis tilføjes.}
@@ -39,7 +39,7 @@ En \gls{iosapp} er en “lightweight” udgave af \gls{pcapp}. Denne applikation
 Til at transmittere data fra \gls{mu} til Database, samt fra Database til \gls{pcapp} og \gls{iosapp} benyttes en netværksforbindelse.  For at systemet skal fungere er det et krav at både \gls{pcapp} og remote applikation, databaseserver samt \gls{mu}\footnote{  \gls{mu} har ikke en direkte forbindelse til internettet, men benytter sig af en endnu ikke defineret mediator.} har forbindelse til internettet.
 
 \subsubsection{\gls{admin}}
-En \gls{admin} er en “official” fra \gls{smartpool}, og har rettigheder til at fjerne brugere fra systemet. Det er \glspl{admin} ansvar at de lovmæssige standarder%\todo{Reference} for pH/klor/varme værdier er defineret i Databasen.
+En \gls{admin} er en medarbejder fra \gls{smartpool}, og har rettigheder til at fjerne brugere fra systemet. Det er \glspl{admin} ansvar at de lovmæssige standarder \todo{Reference} for pH/klor/varme værdier er defineret i Databasen.
 
 \subsubsection{\gls{db}}
 Databasen indeholder brugerdata, såsom brugerens email-adresse, registrerede \gls{mu}, samt måledata. Måledata gemmes i en endnu udefineret tidsperiode, således at \gls{user} har mulighed for at få en grafisk gengivelse\footnote{Evt. Graf, søjlediagram og lign.} af historisk data.
