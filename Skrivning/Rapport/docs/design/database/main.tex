@@ -108,16 +108,13 @@ private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, 
 {
 	return new List<Tuple<SensorTypes, List<double>>>
 		{
-				GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
-				GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
-				GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
-				GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
+			GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
+			GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
+			GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
+			GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
 		};
 }
 \end{lstlisting}
-
-
-
 
 \begin{figure}
 	\centering
@@ -140,6 +137,21 @@ Sensor data persisteres i hver sin tabel.
 Det endelige database design kan ses på figur \ref{fig:databaseERD_final_uml}. I modsætning til designet på figur \ref{fig:databaseERD_firstattempt_uml} er dette design mere simpelt og langt bedre optimeret. Optimeringen ligger til dels i at nogle af entiteterne er samlet til én enkelt, og dels i måden hvorpå data kan hentes ud af databasen. 
 
 \todo{Skriv noget om hvordan man querier på DB her! + noget om hvordan data-pH/chlorine relationen fungerer}
+
+I det nuværende design kan der laves en query på pooldata ved at kalde data getter metoderne i DataAccess klassen. Som det kan ses på figur \ref{fig:getDataClassDiagramPNG} eksponerer DataAccess et interface, IDataAccess der initialiseres i SmartPoolDB klassens constructor.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/design/getDataClassDiagramPNG.PNG}
+\caption{Udtag pooldata fra databasen - DataAccess klassediagram}
+\label{fig:getDataClassDiagramPNG}
+\end{figure}
+
+Dette designvalg er taget for at simplificere brugen GetData metoder, og for at dependancy inverte forholdet mellem SmartPoolDB og DataAccess. 
+
+
+
+\todo{Skriv om DataAcces og IDataAccess}
 
 
 
