@@ -60,11 +60,13 @@ En fuldstændig essentiel del af softwareudvikling er versionstyring. Det er et 
 
 \subsection{Git}
 Gruppen har igennem hele forløbet benyttet versionsstyrings-værktøjet Git. Git er gratis, og har været brugt i kurser som Software Test og Indlejret Software Udvikling. 
+
 Git bruges i projektet til al source kode, og hver feature udvikles på sin egen branch for at undgå konflikter. Når en feature er færdig udstedes et pull request, hvorefter repository administratoren kan merge koden ind på master branch.
+
+For at holde styr på branches og versioner er der brugt Feature Branching \cite{atlassian2016}. Dette indebære der ikke foregår noget produktionsarbejde på master branchen. I stedet skal der oprettes en branch specielt til denne feature. Så når denne feature er testet med seneste udgave af master branchen, kan ændringerne blive ''merget'' ind. På denne måde har gruppen hele tiden haft en fungerende produkt at vise frem, hvis det skulle blive nødvendigt.
 
 \subsubsection{GitHub}
 Github er online hosting af Git repositories, og er brugt i projektet til at gemme source kode, samt administrere projektets repository. I forbindelse med projektstyring og adminitration, har git været brugt til eksempelvis at tracke teamets effektivitet og commit-frekvens.
-Projektets repository kan finde på \url{www.github.com/joachimda/I4PRJ}.
 
 \subsection{Travis CI og Jenkins}
 Gruppen har undervejs forsøgts sig med både med Travis CI og Jenkins. Da gruppen allerede var godt bekendt med Jenkins, virkede Travis CI som en interessant mulighed for at prøve noget anderledes.
