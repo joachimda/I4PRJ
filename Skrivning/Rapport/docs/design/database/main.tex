@@ -49,7 +49,18 @@ Mulighederne for dette er undersøgt, dog vil løsningen kræve yderligere tekno
 
 Det endelige design tillader en bruger at hente sin egens pooldata ud af databasen.
 
-Funktionaliteten hertil er implementeret i projektets data-access layer. Udadtil har DAL et interface \textit{ISmartpoolDB} som en klient (connection server)
+Funktionaliteten hertil er implementeret i projektets data-access layer. Udadtil har DAL et interface \textit{ISmartpoolDB} som en klient (connection server) kan kalde sig ind i. Dette er smart da data-access klienten ikke behøves at have referencer til alle DAL klasser.
+
+\begin{lstlisting}[caption=TokenMsgResponse constructor,label=code:tokenMsgRespone_constructor]
+public TokenMsgResponse(ISmartpoolDB smartpoolDb)
+{
+	_smartpoolDb = smartpoolDB;
+	...
+	...
+}
+\end{lstlisting}
+
+Som det kan ses på \ref{code:tokenMsgRespone_constructor}
 
 
 
