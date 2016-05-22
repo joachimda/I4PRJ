@@ -1,4 +1,9 @@
-\section{Database}
+\section{Database og data access layer}
+
+\subsection{Indledende design overvejelser}
+Før design af database og data access layer, er der gjort nogle indledende tekonologiundersøgelser. DDS-lite er brugt i kurset I4DAB, har været brugt til at designe de første udkast til en database. DDS-lite giver mulighed for at autogenerere SQL scripts som kan køres på databasen. Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en ORM\footnote{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det muligt at behandle rå data records som objekter. 
+
+I begyndelsen blev der lavet en ER model 
 
 Med udgangspunkt i \gls{moscow} analysen i afsnit~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde punktet: 
 
@@ -22,7 +27,7 @@ Der skulle så laves en simple database, med det eneste formål at kunne indehol
 \begin{itemize}
 	\item Navn (for, mellem og -efternavn)
 	\item Email
-	\item Kodeord
+	\item Password
 \end{itemize}
 
 Med \gls{ef} blev følgende model lavet til at opfylde dette krav.
@@ -60,7 +65,22 @@ public TokenMsgResponse(ISmartpoolDB smartpoolDb)
 }
 \end{lstlisting}
 
-Som det kan ses på \ref{code:tokenMsgRespone_constructor}
+Som det kan ses på kodeudsnit \ref{code:tokenMsgRespone_constructor}, initialiseres objektet i klientens constructor.
+For at få data trukket ud af databasen kaldes DAL's DataAccess klasse som implementerer DataAccess interfacet IDataAccess. DataAccess har de nødvendige data getter metoder. Alle getData metoder returnerer en liste af tupler. Tuplerne indeholder enum SensorTypes, som beskriver hvilken sensor der har foretaget målingen, og en double der repræsenterer målingens værdi.
+
+\begin{lstlisting}
+private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
+{
+	return new List<Tuple<SensorTypes, List<double>>>
+		{
+				GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
+				GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
+				GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
+				GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
+		};
+}
+\end{lstlisting}
+
 
 
 
@@ -73,7 +93,7 @@ Som det kan ses på \ref{code:tokenMsgRespone_constructor}
 
 Sensor data persisteres i hver sin tabel.
 
-\subsection{Endeligt database design}
+\subsection{Endeligt database og DAL design}
 
 \begin{figure}
 \centering
