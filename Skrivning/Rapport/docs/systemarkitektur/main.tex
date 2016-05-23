@@ -44,6 +44,8 @@ I dette afsnit beskrives den overordnede arkitektur for Smartpool systemet. Syst
 
 På figur \ref{fig:packageDiagram} ses projektets packagediagram.
 
+Package diagrammet har til formål at vise systemets afhængigheder. Disse er vist med en stiplet pil. En fuldoptrukket linje med + betyder "\textit{nested} og altså at pakken er indeholdt i den anden pakke. Pakken \textit{External DLL's} er eksterne afhængigheder, såsom library filer og DLL'er der bruges.
+
 \begin{landscape}
 	\begin{figure}[H]
 		\centering
@@ -55,7 +57,8 @@ På figur \ref{fig:packageDiagram} ses projektets packagediagram.
 
 \section{Physical view}
 \todo{Skriv kort om development viewet.}
-
+ 
+Deployment diagrammet har til formål at vise systemets hardware (Klienter, servere og databaser), og hvordan de kommunikerer. Da Smartpool systemet er udviklet til flere typer af kienter, herunder iOS, Windows og Internet browsere giver deployment diagrammet god indsigt i hvordan elementerne hænger sammen.
 På figur \ref{fig:deploymentView} ses projektets deployment diagram.
 \begin{figure}
 	\centering
