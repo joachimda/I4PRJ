@@ -106,14 +106,30 @@
     <ImageAsset Include="Resources\Images.xcassets\Logo.imageset\Logo.pdf">
       <InProject>false</InProject>
     </ImageAsset>
-    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\Contents.json" />
-    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%403x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%402x.png" />
-    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%403x.png" />
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />

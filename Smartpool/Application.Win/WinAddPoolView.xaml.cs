@@ -38,7 +38,7 @@ namespace Smartpool.Application.Win
             SpTabControl1.OnShowEditUserButtonClicked += TabBarController.ShowEditUserButtonPressed;
 
             string Ip = System.IO.File.ReadAllText("IpTextFile.txt");
-            //Controller
+            //Controllers
             var clientMessager = new ClientMessenger(new SynchronousSocketClient(Ip));
             Controller = new AddPoolViewController(this, clientMessager);
             Controller.ViewDidLoad();

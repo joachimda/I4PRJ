@@ -37,10 +37,13 @@
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{makecell}
+\usepackage{booktabs}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.2}
 
 
 % References & Quotes
-%\usepackage[danish]{varioref}				% Muliggoer bl.a. krydshenvisninger med sidetal (\vref)
+\usepackage[danish]{varioref}				% Muliggoer bl.a. krydshenvisninger med sidetal (\vref)
 %\usepackage{nat}							% Udvidelse med naturvidenskabelige citationsmodeller
 \usepackage[perpage]{footmisc}	% resets footnote counter on new page
 \usepackage[danish=guillemets]{csquotes}
@@ -56,8 +59,8 @@
 % Etc
 \usepackage{todonotes} % "to-do"-liste vha. \todo{opgave}
 \usepackage[
-	%backend=biber,
-	backend=bibtex,
+	backend=biber,
+	%backend=bibtex,
 	style=ieee,
 	natbib=true,
 	backref=false,
@@ -77,7 +80,7 @@
 %	backgroundcolor=\color{black!5},
 %	basicstyle=\footnotesize,
 %	commentstyle=\color{mygreen},
-%	%frame=single, 						% laver en ramme om koden
+%	frame=single, 						% laver en ramme om koden
 %	keepspaces=true, 					% beholde indrykning
 %	keywordstyle=\color{blue},
 %	numbers=left, 
@@ -89,7 +92,7 @@
 %	otherkeywords={null}, 	% til keywords 
 %	showstringspaces=false
 %}
-%\renewcommand\lstlistingname{Code listing}
+\renewcommand\lstlistingname{Code listing}
 
 \definecolor{bluekeywords}{rgb}{0,0,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
