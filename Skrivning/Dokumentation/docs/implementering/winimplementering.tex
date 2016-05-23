@@ -1,5 +1,6 @@
 \section{Windows GUI}
 Implementeringen af den grafiske bruger grænseflade til Windows PC applications program beskrives her.
+Kildekoden ligger i projektet Application.Win.
 \subsection{WinLoginView}
 Første skærm eller view der vises er WinLoginView.
 \begin{figure}
@@ -267,3 +268,15 @@ I SpTabControl.xaml.cs ligger den tilhørende klasse SpTabControl.
 
 Koden er skåret ned til kun at vise opsætningen af ét event. Der er et tilsvarende for alle tabs. Se kommentarerne i koden for forklaring.
 Der er fundet inspiration på en blog af Alan Beech~\cite{alanbeech2011}.
+
+Når SpTabControl genererer et synligt event kan det fanges af en event handler i codebehind af et vindue. Nedenfor ses det.
+\begin{lstlisting}[caption=EventHandler setup, label=EventHandlerSetup]
+	//Sets up the tabBars event handlers
+	SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+\end{lstlisting}
+Det er placeret i constructoren af alle views med en tabBar.
+Funktionen TabBarController.ShowStatButtonPressed() er placeret i klassen TabBarController for at kunne genbruge funktionen i alle views.
+
+\subsection{Vindue design}
+Vinduernes udseende er ikke standard .NET. Det er lavet i samme stil som resten af det visuelle design ved hjælp af nogle klasser og en template lavet af Jay Chase~\cite{websiteCustomWindow} på msdn.
+Når man fjerner .NETs normale vindue forsvinder den indbyggede funktionalitet også. Det vil sige evnen til at flytte og resize vinduet. I klasserne fra Jay Chase er det lavet, og det er uændret. Klasserne ligger i mappen StyleableWindow. Templaten der beskriver udseendet er stærkt ændret for at få det ønskede udseende.
