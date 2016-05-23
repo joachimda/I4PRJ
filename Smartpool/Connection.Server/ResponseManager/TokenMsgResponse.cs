@@ -29,10 +29,10 @@ namespace Smartpool.Connection.Server
                 //Pool messages
                 case TokenSubMessageTypes.AddPoolRequest:
                     var apMsg = JsonConvert.DeserializeObject<AddPoolRequestMsg>(messageString);
-                    var poolCreatedSuccessfully = _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.Name,
+                    var poolCreatedSuccessfully = _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.PoolName,
                         apMsg.Volume);
                     if (poolCreatedSuccessfully)
-                        _fakePoolKeeper.AddFakePoolToKeeper(apMsg.Username, apMsg.Name);
+                        _fakePoolKeeper.AddFakePoolToKeeper(apMsg.Username, apMsg.PoolName);
                     return new GeneralResponseMsg(true, poolCreatedSuccessfully); 
 
                 case TokenSubMessageTypes.UpdatePoolRequest:
