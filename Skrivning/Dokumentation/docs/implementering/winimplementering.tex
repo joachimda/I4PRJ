@@ -1,5 +1,5 @@
 \section{Windows GUI}
-Implementeringen af den grafiske bruger grænseflade til windows beskrives her.
+Implementeringen af den grafiske bruger grænseflade til Windows PC applications program beskrives her.
 \subsection{WinLoginView}
 Første skærm eller view der vises er WinLoginView.
 \begin{figure}
@@ -15,7 +15,7 @@ For at sende passwordet til severen, skal det alligevel være ukrypteret, så de
 
 Placeholder teksten er lavetog vist ved hjælp af en property og en template til en normal TextBox.
 Placeholder teksten er lavet som en property, som kan sættes på alle controls med klassen ThemeProperties der ligger i WinLoginView.xaml.cs. Det ses i følgende kode udsnit.
-\begin{lstlisting}[caption=ThemeProperties, label=code:asd3]
+\begin{lstlisting}[caption=ThemeProperties, label=code:ThemeProperties]
 public static class ThemeProperties
 {
 public static string GetPlaceholderText(DependencyObject obj)
@@ -40,7 +40,7 @@ Med SetPlaceholderText() kan man så sætte placeholder teksten til en given con
 Det kunne have været lavet som en PlaceholderTextBox klasse ligesom StatViewer i figur~\ref{code:StatViewer}, men dette blev lavet inden den idé opstod.
 
 Placeholder teksten bliver vist, fordi den er en templateBinding til den i en template til TextBox'ene. Implementeringen af templaten ses her.
-\begin{lstlisting}[caption=TextBoxWPlaceholderTemplate, label=TextBoxWPlaceholderTemplate]
+\begin{lstlisting}[caption=TextBoxWPlaceholderTemplate, label=code:TextBoxWPlaceholderTemplate]
 <!-- TextBox with a placeholder containing attached property PlaceholderText-->
 <ControlTemplate x:Key="TextBoxWPlaceholderTemplate" TargetType="{x:Type TextBox}">
 <Grid>
@@ -134,7 +134,7 @@ På denne måde er properties til BorderColor, Parameter og ParameterTarget tilf
 Udseendet på StatViewer er defineret i en template der ligger i StatViewerTheme.xaml. Det er et ResourceDictionary, hvilket tillader at adskille Resourcer fra vinduerne i xaml.
 Templaten ses nedenfor.
 
-\begin{lstlisting}[caption=StatViewerTheme, label=code:asd3]
+\begin{lstlisting}[caption=StatViewerTheme, label=code:StatViewerTheme]
 <!-- StatView template -->
 <Style x:Key="{x:Type local:StatViewer}" TargetType="{x:Type local:StatViewer}">
 <Setter Property="Foreground" Value="{StaticResource SpWhite}"/>
@@ -161,3 +161,13 @@ Templaten ses nedenfor.
 \end{lstlisting}
 
 Bemærk TargetType="local:StatViewer". Templaten er til StatViewer og de steder der står TemplateBinding forbindes de properties der var blevet tilføjet.
+
+\subsection{WinHistoryView}
+Til at præsentere brugeren for måledata grafisk i PC applikationen er WinHistoryView lavet.
+\begin{figure}
+\centering
+\includegraphics[width=0.6\linewidth]{figs/implementering/winhistoryview}
+\caption{WinHistoryView}
+\label{fig:winhistoryview}
+\end{figure}
+Hver graf præsenterer historisk data for 
