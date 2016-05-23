@@ -1,46 +1,36 @@
-\section{Implementering af database og data-access layer}
+\section{Database og Data Access Layer}
 
-\todo{Del evt kode op i mindre dele og forklar alt med henblik på User story vedr. pooldata}
+Der er med udgangspunkt i designovervejelserne i afsnit~\ref{sec:designdatabase} implementeret et fungerende data-access layer med tilhørende database.
 
-Der er med udgangspunkt i designovervejelserne i afsnit \todo{indsæt reference til design her} implementeret et fungerende data-access layer med tilhørende database.
+Databasen er implementeret med en Model First tilgang \cite{microsoftdatadevelopercenter2016}. Det vil sige at der opsættes en model (ER diagram) for databasen i Visual Studio, hvorefter der genereres et SQL script der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
 
-Dette afsnit vil tage udgangspunkt i to af de væsentligste user stories, \todo{reference til de to user stories}. For dokumentation af resterende user stories, se dokumentationen.
-
-Databasen er implementeret med en Model First tilgang \todo{refence til mf}. Det vil sige at der opsættes en model (ER diagram) for databasen i visual studio, hvorefter der hurtigt kan genereres den samme kode som eller skrives med Code First \todo{reference til CF} tilgangen. Samtidig genereres et SQL script der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
-
-
-
-
-
-\begin{lstlisting}[caption= GetChlorineData method, label=code:getChlorineData]
-
-public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
-{
-double days = System.Convert.ToDouble(daysToGoBack);
-string now = DateTime.UtcNow.ToString("G");
-string start = DateTime.Parse(now).AddDays(-days).ToString("G");
-
-using (var db = new DatabaseContext())
-{   
-DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-DateTime endTime = DateTime.ParseExact(now, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-
-var chlorineDataQuery = from chlorine in db.ChlorineSet
-where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
-select chlorine;
-
-List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
-
-foreach (var chlorine in chlorineDataQuery)
-{
-if(DateTime.Parse(chlorine.Data.Timestamp).CompareTo(endTime) < 0 ||
-DateTime.Parse(chlorine.Data.Timestamp).CompareTo(startTime) > 0)
-{
-chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
-}
-}
-
-return chlorineTuples;
-}
-}
-\end{lstlisting}
+%\begin{lstlisting}[caption= GetChlorineData method, label=code:getChlorineData]
+%public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
+%{
+%	double days = System.Convert.ToDouble(daysToGoBack);
+%	string now = DateTime.UtcNow.ToString("G");
+%	string start = DateTime.Parse(now).AddDays(-days).ToString("G");
+%	
+%	using (var db = new DatabaseContext())
+%	{   
+%		DateTime startTime = DateTime.ParseExact(start, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+%		DateTime endTime = DateTime.ParseExact(now, "dd/MM/yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+%		
+%		var chlorineDataQuery = from chlorine in db.ChlorineSet
+%								where chlorine.Data.Pool.Name == poolName && chlorine.Data.Pool.User.Email == poolOwnerEmail
+%								select chlorine;
+%
+%		List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
+%		
+%		foreach (var chlorine in chlorineDataQuery)
+%		{
+%			if(	DateTime.Parse(chlorine.Data.Timestamp).CompareTo(endTime) 	 < 0 || 
+%				DateTime.Parse(chlorine.Data.Timestamp).CompareTo(startTime) > 0)
+%			{
+%				chlorineTuples.Add(new Tuple<SensorTypes, double>(SensorTypes.Chlorine, chlorine.Value));
+%			}
+%		}
+%		return chlorineTuples;
+%	}
+%}
+%\end{lstlisting}

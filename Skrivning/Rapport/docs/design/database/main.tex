@@ -1,4 +1,4 @@
-\section{Database og Data Access Layer}
+\section{Database og Data Access Layer}\label{sec:designdatabase}
 
 %\subsection{Indledende design overvejelser}
 Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser. DDS-lite har været brugt til at designe første udkast til databasen.
@@ -106,9 +106,10 @@ public TokenMsgResponse(ISmartpoolDB smartpoolDb)
 \end{lstlisting}
 
 Som det kan ses på kodeudsnit~\ref{code:tokenMsgRespone_constructor}, initialiseres objektet i klientens constructor.
-For at få data trukket ud af databasen kaldes DAL's DataAccess klasse som implementerer DataAccess interfacet IDataAccess. DataAccess har de nødvendige data getter metoder. Alle getData metoder returnerer en liste af tupler. Tuplerne indeholder enum SensorTypes, som beskriver hvilken sensor der har foretaget målingen, og en double der repræsenterer målingens værdi.
+For at få data trukket ud af databasen kaldes DAL's DataAccess klasse som implementerer DataAccess interfacet IDataAccess. DataAccess har de nødvendige data getter metoder. 
+Alle getData metoder returnerer en liste af tupler. Tuplerne indeholder enum SensorTypes, som beskriver hvilken sensor der har foretaget målingen, og en double der repræsenterer målingens værdi.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=something, label=code:derp]
 private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
 {
 	return new List<Tuple<SensorTypes, List<double>>>
@@ -119,7 +120,7 @@ private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, 
 			GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
 		};
 }
-\end{lstlisting}
+\end{lstlisting}\todo{missing caption!}
 
 \begin{figure}[h]
 	\centering
@@ -133,28 +134,26 @@ Sensor data persisteres i hver sin tabel.
 \subsection{Endeligt database og DAL design}
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=\linewidth]{figs/design/databaseERD_final_uml}
-\caption{Endeligt ER diagram, UML notation}
-\label{fig:databaseERD_final_uml}
+	\centering
+	\includegraphics[width=\linewidth]{figs/design/databaseERD_final_uml}
+	\caption{Endeligt ER diagram, UML notation}
+	\label{fig:databaseERD_final_uml}
 \end{figure}
 
-Det endelige database design kan ses på figur \ref{fig:databaseERD_final_uml}. I modsætning til designet på figur \ref{fig:databaseERD_firstattempt_uml} er dette design mere simpelt og langt bedre optimeret. Optimeringen ligger til dels i at nogle af entiteterne er samlet til én enkelt, og dels i måden hvorpå data kan hentes ud af databasen. 
+Det endelige database design kan ses på figur~\ref{fig:databaseERD_final_uml}. I modsætning til designet på figur~\ref{fig:databaseERD_firstattempt_uml} er dette design mere simpelt og langt bedre optimeret. Optimeringen ligger til dels i at nogle af entiteterne er samlet til én enkelt, og dels i måden hvorpå data kan hentes ud af databasen. 
 
 \todo{Skriv noget om hvordan man querier på DB her! + noget om hvordan data-pH/chlorine relationen fungerer}
 
 I det nuværende design kan der laves en query på pooldata ved at kalde data getter metoderne i DataAccess klassen. Som det kan ses på figur \ref{fig:getDataClassDiagramPNG} eksponerer DataAccess et interface, IDataAccess der initialiseres i SmartPoolDB klassens constructor.
 
 \begin{figure}[h]
-\centering
-\includegraphics[width=0.7\linewidth]{figs/design/getDataClassDiagramPNG.PNG}
-\caption{Udtag pooldata fra databasen - DataAccess klassediagram}
-\label{fig:getDataClassDiagramPNG}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/design/getDataClassDiagramPNG.PNG}
+	\caption{Udtag pooldata fra databasen - DataAccess klassediagram}
+	\label{fig:getDataClassDiagramPNG}
 \end{figure}
 
 Dette designvalg er taget for at simplificere brugen GetData metoder, og for at dependancy inverte forholdet mellem SmartPoolDB og DataAccess. 
-
-
 
 \todo{Skriv om DataAcces og IDataAccess}
 
