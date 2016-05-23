@@ -11,18 +11,20 @@
     <div class="col-md-4">
         <h2>Get Smartpool</h2>
         <p>
-            Check out our product on the website, simply pressing this button.
+            Check out our products on the website, and become a Smartpool owner.
+            <br/>
+            Simply press this button!
         </p>
-        <p><a class="btn btn-info" href=products>Product &raquo;</a></p>
+        <p><a class="btn btn-info" @Html.ActionLink("Products", "Products", "Home") &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Monitor your pool</h2>
         <p>If you're already a customer you can watch the status of your pool or change setting by logging in. Click on the button below.</p>
-        <p><a class="btn btn-info" href=login>Login &raquo;</a></p>
+        <p><a class="btn btn-info" @Html.ActionLink("Login","Login","Account") &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Question</h2>
+        <h2>Questions</h2>
         <p>If you have any question, press the buttton below. It will guide you to the contact page where you can find the way that fits you the most</p>
-        <p><a class="btn btn-info" ref=Contact>Contact us &raquo;</a></p>
+        <p><a class="btn btn-info" @Html.ActionLink("Contact us", "Contact", "Home") &raquo;</a></p>
     </div>
 </div>

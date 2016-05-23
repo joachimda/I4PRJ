@@ -14,36 +14,9 @@ namespace Smartpool.Application.Web
 
     public class HomeController : Controller
     {
-        //static string Ip = "Ip-address" ;
 
         public ActionResult Index()
         {
-            return View();
-        }
-
-
-       //public class ASPLoginView : ILoginView
-       // {
-        
-       //     public IViewController Controller { get; set; }
-            
-       //     ASPLoginView()
-       //     {
-       //            var clientMessager = new ClientMessager(new SynchronousSocketClient(Ip));
-       //             Controller = new LoginViewController(this,clientMessager);
-       //     }
-
-
-        //    public void LoginAccepted()
-        //    {
-                
-        //    }
-        //}
-
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Login Page";
-
             return View();
         }
 
@@ -51,6 +24,11 @@ namespace Smartpool.Application.Web
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult Products()
+        {
             return View();
         }
 

@@ -6,62 +6,67 @@
 @{
     ViewBag.Title = "AddPoolView";
 }
-<section id="AddPoolForm">
-    <div class="input-form" align="left">
-        <input type="text" placeholder="Pool name"/>
-    </div>
 
-    <div class="addpoolinput">
-        <table>
-            <tr>
-                <td>
-                    <div align="left" padding="10pt">
-                        <input type="radio" name="inputType" checked="Checked" id="radio1" onclick="enableTxtBox()" />
-                    </div>
-                </td>
-                <td>
-                    <div class="input-form" width="100pt">
-                        <input type="text" class="input-form" placeholder="Volume" id="volume"/>
-                    </div>
-                </td>
-                <td>
-                   <input type="radio" name="inputType" id="radio2" onclick="enableTxtBox();"/>
-                </td>
-                <td>
-                    <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Depth" id="D" />
-                    </div>
-                </td>
-                <td>
-                    <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Width" id="W"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="input-form">
-                        <input type="text" class="addpoolinput" placeholder="Lenght" id="L" />
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
-</section>
+<body>
+<div class="addpoolinput">
 
+    <form class="addpoolblock">
+        <input type="text" id="PoolName" class="poolname" placeholder="Pool Name"><br/>
+        <input type="radio" name="r" id="radio1" checked="checked" onclick="enableTxtBox1(); clearText();">
+        <input type="text" id="text1" placeholder="Volume m^3" onkeypress="return isNumber(event)" class="volume"><br/>
+        <input type="radio" name="r" id="radio2" onclick="enableTxtBox1(); clearText();">
+        <input type="text" id="text2" disabled="disabled" placeholder="Lenght" onkeypress="return isNumber(event)" class="dimensions">
+        <input type="text" id="text3" disabled="disabled" placeholder="Width" onkeypress="return isNumber(event)" class="dimensions">
+        <input type="text" id="text4" disabled="disabled" placeholder="Depth" onkeypress="return isNumber(event)" class="dimensions"><br/>
+        <input type="text" id="SerialNo" placeholder="Serial Number"><br/>
+        <input type="button" value="Add Pool">
+    </form>
+            
+</div>
+</body>
 
-
-<script type="text/javascript">
-    function enableTxtBox() {
-        if (document.getElementsById("radio1").checked) {
-            document.getElementsById("volume").disabled = false;
-            document.getElementsById("D").disabled = true;
-            window.alert(1);
-        }
-        else if (document.getElementById("radio2").selected) {
-            document.getElementsById("volume").disabled = true;
-            document.getElementsById("D").disabled = false;
-            window.alert(2);
-        }
-
+<script>
+	function enableTxtBox1()
+	{
+         	document.getElementById("text1").disabled = !document.getElementById("radio1").checked;
+         	document.getElementById("text2").disabled = document.getElementById("radio1").checked;
+         	document.getElementById("text3").disabled = document.getElementById("radio1").checked;
+         	document.getElementById("text4").disabled = document.getElementById("radio1").checked;
     }
+</script>
+
+<script>
+	function clearText()
+	{
+		if(!document.getElementById("radio1").checked) text1.value="";
+		if(document.getElementById("radio1").checked) {
+         	text2.value="";
+         	text3.value="";
+         	text4.value="";
+         }
+    }
+</script>
+
+<script>
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+</script>
+
+<script>
+document.getElementById("nav01").innerHTML =
+"<ul class='topnav'>" +
+"<li><a href='index.html'>Home</a></li>" +
+"<li><a href='Products.html'>Products</a></li>" +
+"<li><a href='Status.html'>Status</a><li>" +
+"<li><a href='addPoolview.html'>Add Pool</a></li>" +
+"<li><a href='editUserView.html'>Edit User</a></li>" +
+"<li><a href='about.html'>Contact</a></li>" +
+"</ul>";
 </script>
 
