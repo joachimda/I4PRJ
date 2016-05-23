@@ -1,3 +1,7 @@
+% Default compiler: lualatex
+% Default bibliography tool: biber
+% Bibliography->Type= BibTex
+
 \documentclass[a4paper,11pt,oneside]{memoir}
 \input{utils/packages}
 \input{utils/layout}
@@ -10,8 +14,7 @@
 \newcommand{\Gruppe}{Gruppe 3}
 \newcommand{\Projektdokument}{Projektrapport}
 
-%%\bibliography{utils/litteratur} %% Litteratur
-\addbibresource{litteratur.bib}
+\bibliography{utils/litteratur.bib} %% Litteratur
 
 \begin{document}		
 	\frontmatter
@@ -22,7 +25,7 @@
 	\tableofcontents						\clearpage %% ToC
 	
 	\mainmatter
-	\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
+	%\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
 	\input{docs/frontmatter/indledning}		\clearpage %% Indledning
 	\input{docs/projektformulering/main}	\clearpage %% Projektformulering
 	\input{docs/kravspecifikation/main}		\clearpage %% Kravspecifikation
