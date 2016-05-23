@@ -2,7 +2,7 @@
 
 % Beskrivelse af den overordnede systemarkitektur. Her skal SysML blok diagrammer benyttes. Der gives et overblik over systemets arkitektur med udgangspunkt og reference til jeres systemarkitektur dokument.
 
-I dette afsnit beskrives den overordnede arkitektur for Smartpool systemet. Systemets arkitektur har dannet ramme for design og senere implementering. Til at beskrive systemets arkitektur bruges 4+1 modellen som kan ses på figur \ref{fig:41model}. Modellen er udviklet af Philippe Kruchten \cite{fcgss2007}. Modellen indeholder 4 views samt et user-story eller use-cases view.
+I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arkitektur har dannet ramme for design og senere implementering. Til at beskrive systemets arkitektur bruges 4+1 modellen som kan ses på figur~\ref{fig:41model}. Modellen er udviklet af Philippe Kruchten~\cite{fcgss2007}. Modellen indeholder fire views samt et user-story eller use-cases view.
 
 \begin{itemize}
 	\item Logical view - End-user funktionalitet
@@ -26,15 +26,15 @@ I dette afsnit beskrives den overordnede arkitektur for Smartpool systemet. Syst
 	\end{itemize}
 \end{itemize}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\linewidth]{figs/arkitektur/41model}
-\caption{4+1 Arkitektur modellen \cite{flylib}}
-\label{fig:41model}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/arkitektur/41model}
+	\caption{$4+1$ Arkitektur modellen \cite{flylib}}
+	\label{fig:41model}
 \end{figure}
 
 \section{Logical view}
-\todo{Skriv kort om development viewet.}
+
 
 \section{Process view}
 \todo{Skriv kort om development viewet.}
@@ -60,6 +60,7 @@ Package diagrammet har til formål at vise systemets afhængigheder. Disse er vi
  
 Deployment diagrammet har til formål at vise systemets hardware (Klienter, servere og databaser), og hvordan de kommunikerer. Da Smartpool systemet er udviklet til flere typer af kienter, herunder iOS, Windows og Internet browsere giver deployment diagrammet god indsigt i hvordan elementerne hænger sammen.
 På figur \ref{fig:deploymentView} ses projektets deployment diagram.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{figs/arkitektur/deploymentView.PNG}
