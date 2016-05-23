@@ -1,0 +1,35 @@
+\section{Connection}
+
+\subsection{Overordnet connection struktur}
+\textbf{Klient} delen består af et model projekt som er generelt for alle platforme, samt et klient projekt som er specifikt for hver platform. Dette er gjort for at gøre så meget som muligt anvendeligt på alle platforme. I model projektet er desuden defineret en række besked objekter, som anvendes ved kommunikation mellem klient og server.
+\textbf{Server} delen består af en række systemer som tilsammen udgør en samlet server udviklet til at køre på en windows pc. Al kommunikation til databasen foregår fra server delen.
+
+\subsection{Klient}
+Klienten modtager besked objekter fra applikations laget, og omdanner disse til en streng vha. Json serializering. Strengen bliver sendt til server delen gennem en socket klient der passer til den pågældende platform.
+Klienten modtager derefter et svar fra serveren, i form af et serializeret besked objekt, som bliver deserializeret til basis besked klassen. Denne indeholder en besked type, og klienten kan derefter deserializere den modtagne streng til det korrekte besked objekt. Derefter bliver objektet sendt videre, tilbage til applikations laget. 
+
+\subsection{Server}
+Vedligeholder følgende funktioner i systemet
+\begin{itemize}
+	\item Modtage, behandle og svare på requests fra klient delen
+	\item Varetage user sessions
+	\item Kommunikere med databasen via metoder i database delen
+	\item Simulere pool data
+\end{itemize}
+
+\subsubsection{Modtage, behandle og svare på requests fra klient delen}
+Serveren modtager via en Asyncronous Socket Client (ASC) en streng fra klient delen. Denne bliver, som i klienten, lavet til et basis besked objekt. Denne bliver derefter behandlet vha. en switchcase, hvor der reageres på hvilken message type der er blevet sendt. Dette foregår i en ResponseManager klasse, og denne vil, i nogle situationer, være i stand til selv at udføre den kaldte request. Det gør den ved f.eks. at lave et kald til databasen og returnere svaret derfra. 
+I andre situationer, bliver kaldet sendt videre til en sub handler, som f.eks. TokenMsgResponse, der tager sig af alle requests, som kræver at brugeren er logget ind. Dette er lavet således at ResponseManager checker, via databasen, om brugeren er logget ind, og hvis dette er tilfældet, bliver beskeden sendt videre til TokenMsgResponse. TokenMsgResponse behøver dermed ikke selv at kontrollere om brugeren er logget ind.
+Hvis beskedtypen ikke genkendes, sendes svar tilbage til klienten om dette.
+
+\subsubsection{User sessions}
+For at holde styr på hvilke brugere som er logget ind, er der udviklet et Token system. Dette system giver en øget sikkerhed, ved at brugeren kun sender password en enkelt gang, og det behøver derfor heller ikke at blive gemt i klienten. Desuden bliver der færre kald til databasen, da efterfølgende requests ikke behøver at kontrollere brugerens password via databasen.
+Token systemet virker ved at en bruger, ved login, får tilknyttet en streng af tilfældige karakterer. Brugernavnet bliver, sammen med strengen af karakterer og et timestamp, gemt i en klasse der hedder Token. Alle disse tokens bliver så vedligeholdt i en TokenKeeper. Når en bruger efterfølgende laver en request til serveren, sender klienten både username og token strengen med i sin request. Serveren kontrollerer derefter om dette stemmer overens med de data som ligger i TokenKeeperen, samt om det gemte timestamp er ældre end systemets valgte sessions tid.
+En bruger kan godt være logget ind på flere enheder på samme tid. I det tilfælde vil hver enhed få tildelt en token streng, og dermed har de ikke indflydelse på hinandens session.
+
+\subsubsection{Kommunikere med databasen via metoder i database delen}
+Serveren kommunikerer via tilgængelige metoder i systemet dataaccess layer ??
+
+\subsubsection{Simulerering af pool data}
+Da Smartpool systemet ikke anvender reele data, er der udviklet en FakePool klasse til at simulere dette. Denne opretter en af hver type sensor. Hver sensor bliver initieret med en værdi, der ligger indenfor et realistisk område, for den pågældende sensor type. 
+Denne værdi opdateres med et angivet internal, hvorefter værdierne gemmes i databasen. Værdi opdateringen foregår med små tilfældigt genererede ændringer. Disse er yderligere begrænset af en minimum og maximum grænse, specificeret i en SensorValueAuthenticator klasse.  
