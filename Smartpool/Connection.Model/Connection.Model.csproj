@@ -45,10 +45,8 @@
     <Compile Include="Messages\ClientMessages\LoginRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\ResetPasswordRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\AddPoolPictureRequestMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\AddMonitorUnitMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\RemoveMonitorUnitRequestMsg.cs" />
-    <Compile Include="Messages\ClientMessages\TokenMessages\MonitorUnitMessages\UpdateMonitorUnitRequest.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\GetPoolDataRequestMsg.cs" />
+    <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\GetPoolInfoRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\UserMessages\ChangePasswordRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\UserMessages\LogoutRequestMsg.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\RemovePoolRequestMsg.cs" />
@@ -57,6 +55,7 @@
     <Compile Include="Messages\MessageTypes.cs" />
     <Compile Include="Messages\ServerMessages\GeneralResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\GetPoolDataResponseMsg.cs" />
+    <Compile Include="Messages\ServerMessages\GetPoolInfoResponseMsg.cs" />
     <Compile Include="Messages\ServerMessages\LoginResponseMsg.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\ClientMessages\TokenMessages\PoolMessages\AddPoolRequestMsg.cs" />
@@ -67,10 +66,6 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

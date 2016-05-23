@@ -1,6 +1,6 @@
 ﻿//========================================================================
 // FILENAME :   IEditPoolView.cs
-// DESCR.   :   Interface for the add pool views
+// DESCR.   :   Interface for the edit pool views
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
@@ -21,6 +21,11 @@ namespace Smartpool.Application.Presentation
         /// Sets the text of the volume text field
         /// </summary>
         void SetVolumeText(string text);
+
+        /// <summary>
+        /// Sets the text of the serial number label
+        /// </summary>
+        void SetSerialNumberText(string text);
 
         /// <summary>
         /// Clears the text of all the dimension text fields

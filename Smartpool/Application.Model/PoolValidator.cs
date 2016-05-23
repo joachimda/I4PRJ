@@ -59,7 +59,8 @@ namespace Smartpool.Application.Model
                 // Try parsing the input string, otherwise set to 0
                 try
                 {
-                    return double.Parse(_volume);
+                    var volume = double.Parse(_volume);
+                    return volume > 0 ? volume : 0;
                 }
                 catch (Exception)
                 {

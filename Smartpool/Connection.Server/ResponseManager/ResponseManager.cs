@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -18,7 +19,15 @@ namespace Smartpool.Connection.Server
             _tokenKeeper = new TokenKeeper(new TokenStringGenerator(), 10);
             _smartpoolDb = smartpoolDb;
             _tokenMsgResponse = new TokenMsgResponse(_smartpoolDb);
-            _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
+            try
+            {
+                _smartpoolDb.UserAccess.IsEmailInUse("qa"); //error with first call to db taking an excess amount of time
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Could not connect to database. Make sure VPN is active");
+            }
+            
         }
 
         public ResponseManager(ITokenKeeper tokenKeeper, ITokenMsgResponse tokenMsgResponse, ISmartpoolDB smartpoolDb)
@@ -69,8 +78,18 @@ namespace Smartpool.Connection.Server
                 Console.Write(e.ToString());
                 if (e.InnerException is SqlException)
                 {
+                    if (receivedString.Contains("GetPoolDataRequest"))
+                        return new GetPoolDataResponseMsg(new List<Tuple<SensorTypes, List<double>>>())
+                        {
+                            MessageInfo = "Please contact helpdesk: CodeDbError40\nFailed to get pool data"
+                        };
                     return new GeneralResponseMsg(false, false) {MessageInfo = "Please contact helpdesk: CodeDbError40"};
                 }
+                if (receivedString.Contains("GetPoolDataRequest"))
+                    return new GetPoolDataResponseMsg(new List<Tuple<SensorTypes, List<double>>>())
+                    {
+                        MessageInfo = "Failed to get pool data"
+                    };
                 return new GeneralResponseMsg(false, false) {MessageInfo = "Please check internet connection and braincells for tissue damage"};
             }
         }

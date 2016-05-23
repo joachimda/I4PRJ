@@ -1,0 +1,123 @@
+%!TEX root = main.tex
+% Encoding
+%\usepackage[utf8]{inputenc} % pdfLatex
+\usepackage[T1]{fontenc}
+\usepackage[danish]{babel}
+\renewcommand{\danishhyphenmins}{22}
+\usepackage[utf8]{inputenc} % æ ø å
+
+% Date
+\usepackage[ddmmyyyy]{datetime}
+\renewcommand{\dateseparator}{.}
+
+% Fonts
+\usepackage{fourier}
+\usepackage[scaled=0.8]{beramono}
+
+% Math
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% Graphics
+\usepackage[usenames,dvipsnames,table,xcdraw]{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+%\usepackage[section]{placeins}
+\usepackage{tikz}
+\usepackage[pages=some]{background}
+\usepackage{wrapfig}
+
+% Listings & Tables
+\usepackage{listings}
+%\usepackage{pythontex}
+\usepackage{enumitem}
+\usepackage{tabu}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\setlength{\tabcolsep}{10pt}
+\renewcommand{\arraystretch}{1.2}
+
+% References & Quotes
+\usepackage[danish]{varioref}				% Muliggoer bl.a. krydshenvisninger med sidetal (\vref)
+%\usepackage{nat}							% Udvidelse med naturvidenskabelige citationsmodeller
+\usepackage[perpage]{footmisc}	% resets footnote counter on new page
+\usepackage[danish=guillemets]{csquotes}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    pdfstartview={FitH},
+    pdftitle={Smart Pool 2.0},
+    pdfsubject={Projektrapport},
+    pdfauthor={I4PRJ4GRP3}
+}
+\usepackage[all]{hypcap}
+
+% Etc
+\usepackage{todonotes} % "to-do"-liste vha. \todo{opgave}
+\usepackage[
+	backend=biber,
+	%backend=bibtex,
+	style=ieee,
+	natbib=true,
+	backref=false,
+	backrefstyle=all+,
+	hyperref=true
+]{biblatex}
+\usepackage{pdflscape}
+\usepackage[nomain,toc,xindy,acronym,nonumberlist,noredefwarn]{glossaries}
+\usepackage[xindy]{imakeidx}
+\usepackage{float}
+\makeindex
+
+%=== Indstillinger til kodestykker ==========================%
+%\usepackage{listings} % kode
+%\lstset{
+%	language = C++, 
+%	backgroundcolor=\color{black!5},
+%	basicstyle=\footnotesize,
+%	commentstyle=\color{mygreen},
+%	frame=single, 						% laver en ramme om koden
+%	keepspaces=true, 					% beholde indrykning
+%	keywordstyle=\color{blue},
+%	numbers=left, 
+%	numbersep=2pt, 						% afstand fra nummer til kode
+%	numberstyle=\color{mygray}, 		% linjenummer farve
+%	stringstyle=\color{green!70!black}, 		% string farve
+%	tabsize=5,
+%	captionpos=b, % sets the caption-position to bottom
+%	otherkeywords={null}, 	% til keywords 
+%	showstringspaces=false
+%}
+\renewcommand\lstlistingname{Code listing}
+
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\usepackage{listings}
+\lstset{language=[Sharp]C,
+	captionpos=b,
+	numbers=left, %Nummerierung
+	numberstyle=\tiny, % kleine Zeilennummern
+	frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{greencomments},
+	morekeywords={partial, var, value, get, set},
+	keywordstyle=\color{bluekeywords},
+	stringstyle=\color{redstrings},
+	%basicstyle=\ttfamily\small,
+}
+
+% Dummy
+\usepackage{lipsum}

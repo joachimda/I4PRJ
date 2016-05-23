@@ -36,6 +36,7 @@ header {
 
 .addpoolinput [type=button]{
 	height: 20pt;
+
 	background-color: #575757;
 	border-radius:5px;
 	border-color: #1F1F1F;

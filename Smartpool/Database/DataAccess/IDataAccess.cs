@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using Smartpool.Connection.Model;
 
-namespace Smartpool.DataAccess
+namespace Smartpool
 {
-    public interface IWriteDataAccess
+    public interface IDataAccess
     {
-        bool AddData(string ownerEmail, string poolName);
-        bool RemoveData(string ownerEmail, string poolName);
-        bool DeleteAllData();
-        bool CreateChlorineEntry(string poolOwnerEmail, string poolName, int chlorineValue);
-        bool CreateTemperatureEntry(string poolOwnerEmail, string poolName, int temperatureValue);
-    }
-
-    public interface IReadDataAccess
-    {
-        Dictionary<DateTime, Temperature> GetRecentChlorineValues(string poolOwnerEmail, string poolName, int howManyToReturns);
-        Dictionary<DateTime, Temperature> GetRecentTemperatureValues(string poolOwnerEmail, string poolName, int howManyToReturns);
+        IPoolAccess PoolAccess { get; set; }
+        bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity);
+        void DeleteAllData();
+    
+        List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack);
+        List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);
     }
 }

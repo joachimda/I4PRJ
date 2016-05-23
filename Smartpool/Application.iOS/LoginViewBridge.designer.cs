@@ -21,14 +21,23 @@ namespace Application.iOS
 		[Outlet]
 		UIKit.UITextField passwordTextField { get; set; }
 
+		[Action ("emailEditingChanged:")]
+		partial void emailEditingChanged (UIKit.UITextField sender);
+
 		[Action ("emailValueChanged:")]
 		partial void emailValueChanged (Foundation.NSObject sender);
 
 		[Action ("forgotButtonTouchUpInside:")]
 		partial void forgotButtonTouchUpInside (Foundation.NSObject sender);
 
+		[Action ("IpAddressChanged:")]
+		partial void IpAddressChanged (UIKit.UITextField sender);
+
 		[Action ("loginButtonTouchUpInside:")]
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender);
+
+		[Action ("passwordEditingChanged:")]
+		partial void passwordEditingChanged (UIKit.UITextField sender);
 
 		[Action ("passwordValueChanged:")]
 		partial void passwordValueChanged (Foundation.NSObject sender);

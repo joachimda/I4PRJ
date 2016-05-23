@@ -4,69 +4,67 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version, missing DisplayAlert implementation
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
+using Foundation;
 using UIKit;
+using System.Drawing;
 
 namespace Application.iOS
 {
 	public partial class LoginViewBridge : UIViewController, ILoginView
 	{
+		private ILoginViewController _specializedController => Controller as ILoginViewController;
+
 		public LoginViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new LoginViewController(this);
 		}
 
-		public override void ViewDidLoad ()
+		public override void ViewDidAppear (bool animated)
 		{
-			base.ViewDidLoad ();
-			// Perform any additional setup after loading the view, typically from a nib.
+			base.ViewDidAppear (animated);
 
 			// Let the controller know that the view has finished loading.
-			Controller.ViewDidLoad();
+			Controller = new LoginViewController(this, iOSClientFactory.DefaultClient());
+			Controller.ViewDidLoad ();
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
 		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
-
+			
 		// Actions
 
 		partial void loginButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.LoginButton);
+			_specializedController.ButtonPressed(LoginViewButton.LoginButton);
 		}
 
 		partial void signupButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.SignUpButton);
+			_specializedController.ButtonPressed(LoginViewButton.SignUpButton);
 		}
 
 		partial void forgotButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ILoginViewController;
-			controller?.ButtonPressed(LoginViewButton.ForgotButton);
+			_specializedController.ButtonPressed(LoginViewButton.ForgotButton);
+		}
+			
+		partial void emailEditingChanged (UIKit.UITextField sender)
+		{
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 
-		partial void emailValueChanged (Foundation.NSObject sender)
+		partial void passwordEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
-		}
-
-		partial void passwordValueChanged (Foundation.NSObject sender)
-		{
-			var textField = sender as UITextField;
-			var controller = Controller as ILoginViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text);
+			_specializedController.DidChangePasswordText(sender.Text);
 		}
 
 		// IView Interface Implementation
@@ -96,6 +94,7 @@ namespace Application.iOS
 		public void SetLoginButtonEnabled(bool enabled)
 		{
 			loginButton.Enabled = enabled;
+			loginButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 
 		public void DisplayAlert(string title, string content)

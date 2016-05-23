@@ -77,6 +77,12 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Socket">
+      <HintPath>..\packages\Socket.2.0.0\lib\Socket.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
@@ -100,14 +106,41 @@
     <ImageAsset Include="Resources\Images.xcassets\Logo.imageset\Logo.pdf">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image.imageset\Current%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Images.xcassets\Image-1.imageset\History%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <InterfaceDefinition Include="Main.storyboard" />
+    <InterfaceDefinition Include="StatViewCell.xib" />
+    <InterfaceDefinition Include="HistoryViewCell.xib" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -128,6 +161,47 @@
     <Compile Include="SignUpViewBridge.designer.cs">
       <DependentUpon>SignUpViewBridge.cs</DependentUpon>
     </Compile>
+    <Compile Include="StatViewBridge.cs" />
+    <Compile Include="StatViewBridge.designer.cs">
+      <DependentUpon>StatViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryViewBridge.cs" />
+    <Compile Include="HistoryViewBridge.designer.cs">
+      <DependentUpon>HistoryViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditUserViewBridge.cs" />
+    <Compile Include="EditUserViewBridge.designer.cs">
+      <DependentUpon>EditUserViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="iOSClient.cs" />
+    <Compile Include="Fakes\iOSClientMessenger.cs" />
+    <Compile Include="Fakes\iOSResponseManager.cs" />
+    <Compile Include="iOSClientFactory.cs" />
+    <Compile Include="StatViewCell.cs" />
+    <Compile Include="StatViewCell.designer.cs">
+      <DependentUpon>StatViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryViewCell.cs" />
+    <Compile Include="HistoryViewCell.designer.cs">
+      <DependentUpon>HistoryViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GuiCharacter.cs" />
+    <Compile Include="EditPoolViewBridge.cs" />
+    <Compile Include="EditPoolViewBridge.designer.cs">
+      <DependentUpon>EditPoolViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddPoolViewBridge.cs" />
+    <Compile Include="AddPoolViewBridge.designer.cs">
+      <DependentUpon>AddPoolViewBridge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IPViewController.cs" />
+    <Compile Include="IPViewController.designer.cs">
+      <DependentUpon>IPViewController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MoreViewController.cs" />
+    <Compile Include="MoreViewController.designer.cs">
+      <DependentUpon>MoreViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -135,16 +209,27 @@
       <Project>{9C001789-1D5F-4545-AD60-50B6FB91DD96}</Project>
       <Name>Application.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Application.Model\Application.Model.csproj">
-      <Project>{AF0D91D7-2379-4B72-B739-6CB92DFCB2E4}</Project>
-      <Name>Application.Model</Name>
+    <ProjectReference Include="..\Connection.Model\Connection.Model.csproj">
+      <Project>{43C6C261-D3EC-4AB6-972E-A81C85E9258A}</Project>
+      <Name>Connection.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Images.xcassets\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Chlorine.png" />
+    <BundleResource Include="Resources\Images.xcassets\chlorine.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\ph.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\ph.imageset\pH.png" />
+    <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Contents.json" />
+    <BundleResource Include="Resources\Images.xcassets\temperature.imageset\Temperature.png" />
+    <BundleResource Include="Resources\temperature.png" />
+    <BundleResource Include="Resources\ph.png" />
+    <BundleResource Include="Resources\humidity.png" />
+    <BundleResource Include="Resources\chlorine.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Images.xcassets\Logo.imageset\" />
     <Folder Include="Temporary\" />
+    <Folder Include="Fakes\" />
   </ItemGroup>
 </Project>

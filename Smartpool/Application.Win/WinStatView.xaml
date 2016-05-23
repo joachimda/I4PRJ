@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Smartpool.Application.Win"
         x:Class="Smartpool.Application.Win.WinStatView"
         mc:Ignorable="d"
-        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="300" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
+        Background="{StaticResource SpBlack}" Foreground="{StaticResource SpWhite}" MinHeight="370" Height="370" Width="420" Style="{StaticResource ResourceKey=SpWindowStyle}" Icon="Icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,7 +19,7 @@
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" />
 
         <ComboBox x:Name="PoolComboBox" Grid.Row="0" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
-                      Height="20" >
+                      Height="20" SelectionChanged="PoolComboBox_SelectionChanged">
         </ComboBox>
 
         <local:StatViewer Grid.Row="1" x:Name="TemperatureStatViewer" Content="Temperature" Template="{StaticResource StatViewer}" />

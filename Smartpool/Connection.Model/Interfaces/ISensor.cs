@@ -7,6 +7,6 @@ namespace Smartpool.Connection.Model
         SensorTypes SensorType { get; }
         List<double> SensorValueList { get; }
         void GetNextSensorValue();
-        void SaveValueToDatabase();
+        double LastSensorValueEntry { get; }
     }
 }

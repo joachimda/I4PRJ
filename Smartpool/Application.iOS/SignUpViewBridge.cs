@@ -4,20 +4,25 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1	LP		Redesigned view and now uses proper client
 //========================================================================
 
 using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
 using System;
 using UIKit;
+using Foundation;
 
 namespace Application.iOS
 {
 	public partial class SignUpViewBridge : UIViewController, ISignUpView
 	{
+		private ISignUpViewController _specializedController => Controller as ISignUpViewController;
+
 		public SignUpViewBridge (IntPtr handle) : base (handle)
 		{
 			// Initialize view controller.
-			Controller = new SignUpViewController(this);
+			Controller = new SignUpViewController(this, iOSClientFactory.DefaultClient());
 		}
 
 		public override void ViewDidLoad ()
@@ -29,10 +34,10 @@ namespace Application.iOS
 			Controller.ViewDidLoad();
 		}
 
-		public override void DidReceiveMemoryWarning ()
+		public override void TouchesBegan (NSSet touches, UIEvent evt)
 		{
-			base.DidReceiveMemoryWarning ();
-			// Release any cached data, images, etc that aren't in use.
+			base.TouchesBegan (touches, evt);
+			View.EndEditing (true);
 		}
 
 		// IView Interface Implementation
@@ -60,7 +65,7 @@ namespace Application.iOS
 		public void SetPasswordValid(bool valid)
 		{
 			if (valid) {
-				passwordTextFieldTwo.TextColor = UIColor.White;
+				passwordTextFieldTwo.TextColor = UIColor.Green;
 			} else {
 				passwordTextFieldTwo.TextColor = UIColor.Red;
 			}
@@ -69,58 +74,45 @@ namespace Application.iOS
 		public void SetButtonEnabled(bool enabled)
 		{
 			signUpButton.Enabled = enabled;
+			signUpButton.Alpha = enabled ? (nfloat) 1.0 : (nfloat) 0.2;
 		}
 			
 		public void DisplayAlert(string title, string content)
 		{
 			// Implementation missing
-			Console.WriteLine(content);
 		}
 			
 		public void SignUpAccepted()
 		{
-			// Implementation missing
+			// return to previous view
+			NavigationController?.PopViewController(true);
 		}
 
 		// Actions
 
-		partial void cancelButtonTouchUpInside (Foundation.NSObject sender)
+		partial void emailEditingChanged (UIKit.UITextField sender)
 		{
-			// return to previous view
-		}
-
-		partial void emailTextFieldValueChanged (Foundation.NSObject sender)
-		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeEmailText(textField.Text);
+			_specializedController.DidChangeEmailText(sender.Text);
 		}
 			
-		partial void nameTextFieldValueChanged (Foundation.NSObject sender)
+		partial void nameEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangeNameText(textField.Text);
+			_specializedController.DidChangeNameText(sender.Text);
 		}
 			
-		partial void passwordTextFieldOneValueChanged (Foundation.NSObject sender)
+		partial void passwordOneEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 0);
 		}
 			
-		partial void passwordTextFieldTwoValueChanged (Foundation.NSObject sender)
+		partial void passwordTwoEditingChanged (UIKit.UITextField sender)
 		{
-			var textField = sender as UITextField;
-			var controller = Controller as ISignUpViewController;
-			if (textField.Text != null) controller?.DidChangePasswordText(textField.Text, 0);
+			_specializedController.DidChangePasswordText(sender.Text, 1);
 		}
 			
 		partial void signUpButtonTouchUpInside (Foundation.NSObject sender)
 		{
-			var controller = Controller as ISignUpViewController;
-			controller?.ButtonPressed();
+			_specializedController.ButtonPressed();
 		}
 	}
 }

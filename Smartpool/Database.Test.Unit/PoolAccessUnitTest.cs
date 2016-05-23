@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using NUnit.Framework;
 using Smartpool;
 
@@ -64,9 +63,9 @@ namespace Database.Test.Unit
         }
 
         [Test]
-        public void AddPool_AddingPoolWithZeroVolume_ReturnsFalse()
+        public void AddPool_AddingPoolWithZeroVolume_ReturnsTrue()
         {
-            Assert.That(_uut.AddPool(_testUser1.Email, "name", 0), Is.False);
+            Assert.That(_uut.AddPool(_testUser1.Email, "name", 0), Is.True);
         }
 
         [Test]

@@ -4,6 +4,7 @@
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  EN      Initial version with functions
 // 1.01 EN      Resizes windows before showing
+// 1.1  EN      Has all view functions
 //========================================================================
 
 using System.Linq;
@@ -31,14 +32,13 @@ namespace Smartpool.Application.Win
         internal static void ShowHistoryButtonPressed(object sender, RoutedEventArgs e)
         {
             Window activeWindow = GetActiveWindow();
-            /*Window view = new WinAddPoolView();
+            Window view = new WinHistoryView();
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
             view.Width = activeWindow.Width;
             view.Height = activeWindow.Height;
-            view.Show();*/
-            MessageBox.Show("Show Historyl\nFix this in TabBarController.cs");
+            view.Show();
             activeWindow.Close();
         }
 
@@ -71,14 +71,13 @@ namespace Smartpool.Application.Win
         internal static void ShowEditUserButtonPressed(object sender, RoutedEventArgs e)
         {
             Window activeWindow = GetActiveWindow();
-            /*Window view = new WinAddPoolView();
+            Window view = new WinEditUserView();
 
             view.Left = activeWindow.Left;
             view.Top = activeWindow.Top;
             view.Width = activeWindow.Width;
             view.Height = activeWindow.Height;
-            view.Show();*/
-            MessageBox.Show("Show Edit User\nFix this in TabBarController.cs");
+            view.Show();
             activeWindow.Close();
         }
 

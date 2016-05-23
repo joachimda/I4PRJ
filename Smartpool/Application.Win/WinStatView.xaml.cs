@@ -6,11 +6,14 @@
 // 1.01 EN      Added event for History
 // 1.02 EN      Added event for AddPool and EditPool
 // 1.03 EN      Added more statviewers
+// 1.04 EN      Added comboBox
+// 1.1  EN      Implemented presenter
 //========================================================================
 
 using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Smartpool.Application.Presentation;
 using Smartpool.Connection.Client;
@@ -35,7 +38,7 @@ namespace Smartpool.Application.Win
             HumidityStatViewer.BorderColor = new SolidColorBrush(Color.FromRgb(0x03, 0x54, 0xA5));
 
             //Sets up the tabBars event handlers
-            //SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
+            SpTabControl1.OnShowStatButtonClicked += TabBarController.ShowStatButtonPressed;
             SpTabControl1.OnShowHistoryButtonClicked += TabBarController.ShowHistoryButtonPressed;
             SpTabControl1.OnShowAddPoolButtonClicked += TabBarController.ShowAddPoolButtonPressed;
             SpTabControl1.OnShowEditPoolButtonClicked += TabBarController.ShowEditPoolButtonPressed;
@@ -76,16 +79,36 @@ namespace Smartpool.Application.Win
         public List<string> AvailablePoolsList { get; set; } = new List<string>();
         public void SetAvailablePools(List<Tuple<string, bool>> pools)
         {
+            PoolComboBox.ItemsSource = null;
             AvailablePoolsList.Clear();
+
             foreach (var pool in pools)
             {
                 AvailablePoolsList.Add(pool.Item1);
             }
+            PoolComboBox.ItemsSource = AvailablePoolsList;
         }
 
         public void DisplayAlert(string title, string content)
         {
             MessageBox.Show(content, title);
+        }
+        
+        public void PoolComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var controller = Controller as IStatViewController;
+            
+            var selected = PoolComboBox.SelectedIndex;
+
+            if (selected != -1)
+            {
+                controller?.DidSelectPool(selected);
+            }
+        }
+
+        public void SetSelectedPoolIndex(int index)
+        {
+            PoolComboBox.SelectedIndex = index;
         }
     }
 }

@@ -5,6 +5,7 @@
 //------------------------------------------------------------------------ 
 // REV. AUTHOR  CHANGE DESCRIPTION
 // 1.0  LP      Initial version
+// 1.1  LP      Volume can't be negative, added additional pool info method
 //========================================================================
 
 using System;
@@ -29,12 +30,26 @@ namespace Smartpool.Application.Model
             _session.Pools = response.AllPoolNamesListTuple;
         }
 
+        public void ResetPools(IClientMessenger clientMessenger)
+        {
+            ReloadPools(clientMessenger);
+            _session.SelectedPoolIndex = 0;
+        }
+
         public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
         {
             // Send request to server
             var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1);
             var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
             return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.Item1, sensor.Item2.LastOrDefault())).ToList();
+        }
+
+        public Tuple<double, string> GetVolumeAndSerialNumberForSelectedPool(IClientMessenger clientMessenger)
+        {
+            // Send request to server
+            var request = new GetPoolInfoRequestMsg(_session.UserName, _session.TokenString, _session.SelectedPool.Item1);
+            var response = (GetPoolInfoResponseMsg) clientMessenger.SendMessage(request);
+            return new Tuple<double, string>(response.Volume, response.SerialNumber);
         }
 
         public List<Tuple<SensorTypes, List<double>>> GetHistoricDataFromPool(IClientMessenger clientMessenger, int numberOfDays)

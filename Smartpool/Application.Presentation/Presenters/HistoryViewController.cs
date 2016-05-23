@@ -36,6 +36,7 @@ namespace Smartpool.Application.Presentation
             else
             {
                 _view.SetAvailablePools(_session.Pools);
+				_view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
                 LoadSensorData();
             }
         }
@@ -48,10 +49,10 @@ namespace Smartpool.Application.Presentation
         }
 
         // Interface
-        public void DidSelectPool(string name)
+        public void DidSelectPool(int index)
         {
             // Parse the name in the pool loader 
-            _session.SelectedPoolIndex = _loader.IndexForPoolName(name);
+            _session.SelectedPoolIndex = index;
             LoadSensorData();
         }
 

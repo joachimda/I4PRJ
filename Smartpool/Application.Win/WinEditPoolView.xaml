@@ -17,20 +17,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <local:SpTabControl x:Name="SpTabControl1" Template="{StaticResource SpTabControl}" Grid.ColumnSpan="3"/>
 
-        <ComboBox x:Name="PoolComboBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
-                      Height="20" >
-            <ComboBoxItem Content="Sommerhus pool" />
-            <ComboBoxItem Content="Den sjove pool" />
-            <ComboBoxItem Content="Coffee" />
-            <ComboBoxItem Content="Tea" />
-            <ComboBoxItem Content="Orange Juice" />
-            <ComboBoxItem Content="Milk" Foreground="{StaticResource SpRed}"/>
-            <ComboBoxItem Content="Iced Tea" />
-            <ComboBoxItem Content="Mango Shake" />
+        <ComboBox x:Name="PoolComboBox" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Right" Width="100" VerticalContentAlignment="Center"
+                      Height="20" SelectionChanged="PoolComboBox_SelectionChanged">
         </ComboBox>
         
         <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"  x:Name="NameTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
@@ -40,8 +33,10 @@
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="LengthTextBox" Width="44" HorizontalAlignment="Left" Margin="21,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="WidthTextBox" Width="44" HorizontalAlignment="Left" Margin="72,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="DepthTextBox" Width="44" HorizontalAlignment="Left" Margin="124,12,0,0" IsEnabled="False" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
-        <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="SerialTextBox" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" Template="{StaticResource TextBoxWPlaceholderTemplate}" TextChanged="TextBox_TextChanged" />
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="Moniter unit serial number: " x:Name="SerialTextBlock" Foreground="{StaticResource SpBlack}" HorizontalAlignment="Stretch" Margin="4, 12, 4, 0" />
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="EditButton" Content="Edit pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Template="{StaticResource ButtonSp}" Click="EditButton_OnClickButton_Click" />
+        <Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="DeleteButton" Content="Delete pool" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="4,12,4,0" Background="{StaticResource
+            SpRed}" Template="{StaticResource ButtonSp}" Click="DeleteButton_OnClickButton_OnClickButton_Click" />
 
     </Grid>
 </Window>

@@ -1,5 +1,10 @@
-﻿using System.Net.Mail;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Mail;
+using System.Threading;
 using Smartpool;
+using Smartpool.Connection.Model;
 
 namespace Database.Test
 {
@@ -7,24 +12,47 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-            SmartpoolDB SmartPoolDB = new SmartpoolDB(new PoolAccess(new UserAccess()));
-            SmartPoolDB.ClearEntireDatabase();
 
-            //SmartPoolDB.UserAccess.AddUser("Sir Derp Hansen", "email@hensen.dk", "pass124");
-            //SmartPoolDB.UserAccess.EditUserPassword("email@hensen.dk", "såfedt");
+            Console.WriteLine(CultureInfo.CurrentCulture);
+            //SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
+            //IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));
+            //dataAccess.DeleteAllData();
+            //SmartPoolDB.ClearEntireDatabase();
 
-            ////SmartPoolDB.UserAccess.EditUserEmail("email@hensen.dk", "contact@hensen.dk");
-            //SmartPoolDB.UserAccess.AddUser("Miss Herine sen", "sen@her.com", "pass");
-            //SmartPoolDB.UserAccess.EditUserPassword("sen@her.com", "loart2");
-            ////SmartPoolDB.UserAccess.AddUser("Duke Dennis Fucktarrt", "duck@import.dk", "asljh");
+            //SmartPoolDB.UserAccess.AddUser("Sir john derp", "email", "pass");
+            //SmartPoolDB.PoolAccess.AddPool("email", "baghave", 9);
 
-            //SmartPoolDB.PoolAccess.AddPool("email@hensen.dk", "Sir Derp's Pool", 20);
-            //SmartPoolDB.PoolAccess.EditPoolName("email@hensen.dk", "Sir Derp's Pool", "namechange");
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    dataAccess.CreateDataEntry("email", "baghave", 5+i, 9+1, 3+i, 10+i);
+            //    Thread.Sleep(1500);
+            //}
 
-            //SmartPoolDB.UserAccess.EditUserEmail("sen@her.com", "noobiboob@mail.com");
-            //SmartPoolDB.UserAccess.EditUserName("email@hensen.dk", "Sir Derpdddd");
-            //SmartPoolDB.PoolAccess.AddPool("sen@her.com", "Miss's Pool", 11);
-            //SmartPoolDB.PoolAccess.AddPool("duck@import.dk", "Duke's Pool", 5);
+            //var time = DateTime.UtcNow.ToString();
+
+            //List<Tuple<string, double>> dataTuples = dataAccess.GetChlorineValues("email", "baghave", "11/05/2016 11:47:51", time);
+            //foreach (var chlorineTuple in dataTuples)
+            //{
+            //    Console.WriteLine("Chlorine data: " + chlorineTuple.Item1 + " " + chlorineTuple.Item2);
+            //}
+
+            //dataTuples = dataAccess.GetPhValues("email", "baghave", "11/05/2016 11:47:51", time);
+            //foreach (var phTuple in dataTuples)
+            //{
+            //    Console.WriteLine("pH data: " + phTuple.Item1 + " " + phTuple.Item2);
+            //}
+
+            //dataTuples = dataAccess.GetTemperatureValues("email", "baghave", "11/05/2016 11:47:51", time);
+            //foreach (var tempTuple in dataTuples)
+            //{
+            //    Console.WriteLine("Temperature data: " + tempTuple.Item1 + " " + tempTuple.Item2);
+            //}
+
+            //dataTuples = dataAccess.GetHumidityValues("email", "baghave", "11/05/2016 11:47:51", time);
+            //foreach (var humidityTuple in dataTuples)
+            //{
+            //    Console.WriteLine("Humidity data: " + humidityTuple.Item1 + " " + humidityTuple.Item2);
+            //}
         }
     }
     /*****************************Don't touch diz!*******************************/
