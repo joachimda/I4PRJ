@@ -25,17 +25,17 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Products", "Products", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         <li>@Html.ActionLink("StatView", "StatView", "Home")</li>
                         <li>@Html.ActionLink("Add Pool", "AddPoolView", "Home")</li>
                         <li>@Html.ActionLink("EditUserView", "EditUserView", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>
-    <header class="Logo" height="200px" padding="150px" ><img src="../../Icon.png" style="height: 200px; padding-top: 60px; padding-bottom: 10px;" /></header>
+    <header class="Logo" height="200px" padding="150px" align="middle"><img src="../../Icon.png" style="height: 200px; padding-top: 60px; padding-bottom: 10px;" /></header>
 
 <div class="container body-content">
     @RenderBody()
