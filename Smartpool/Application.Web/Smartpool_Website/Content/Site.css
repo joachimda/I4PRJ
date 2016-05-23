@@ -1,38 +1,67 @@
 ﻿
 body{
-	
+    text-align: center;
 	background-color:#2e2e2e;
 	font-family: Arial, Helvetica, sans-serif;
-	text-align:center;
     color: black;
 }
 
 header {
     height: 200pt;
     background-color: black;
+    text-align: center;
 }
 .Logo {
     height: 200px;
-    
+    align-items: center;
 }
 
-.addpoolinput input{
-    width: 150pt;
-    height: 20pt;
-    margin: 10pt;
+.addpoolblock {
+    text-align: left;
+}
+
+.addpoolinput [type=text]{
+	height: 20pt;
+	margin: 6pt;
 	background-color: #575757;
 	border-radius:5px;
 	border-color: #1F1F1F;
 	color: #ABABAC;
-
 }
 
-.addpoolinput:focus {
+.oneline {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.addpoolinput [type=button]{
+	height: 20pt;
+	background-color: #575757;
+	border-radius:5px;
+	border-color: #1F1F1F;
+	color: #ABABAC;
+}
+
+.addpoolinput [type=radio] {
+    
+}
+
+
+.addpoolinput [type=text]:focus {
     background-color: #FDA029;
     outline: none;
 }
 
-.addpoolinput:hover {
+.addpoolinput [type=text]:hover {
+	border-color: #FDA029;
+}
+
+.addpoolinput [type=button]:focus {
+    background-color: #FDA029;
+    outline: none;
+}
+
+.addpoolinput [type=button]:hover {
 	border-color: #FDA029;
 }
 
