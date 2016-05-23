@@ -1,0 +1,10 @@
+\section{Connection}\label{sec:designconnection}
+
+%\subsection{Indledende design overvejelser}
+For at give systemet en øget sikkerhed, og bedre scalability, blev det besluttet at al business logic skulle varetages af en form for server. På denne måde indkaples essentielle dele af systemet, så brugere ikke har direkte adgang til systemkritiske elementer. Desuden kan der laves fremtidige ændringer i systemet, uden alle klienter nødvendigvis skal opdateres.
+user sessions ??
+
+Det blev yderligere besluttet at denne server skulle modtage data fra pools koblet til systemet. Da reele data rækker ud over dette projekts afgrænsning, blev det besluttet at lave en simulering af data, som foregår på serveren.
+Udvalgte User Stories
+
+På baggrund af de valgte user stories ?? og design valg, blev der undersøgt hvilke teknologier, som kunne anvendes til at opnå det ønskede. Da der i et sideløbende netværksfag (IKN) ?? blev arbejdet meget med TCP sockets, virkede det som en oplagt mulighed, da dette netop blev anvendt til, at etablere en server og en klient.
