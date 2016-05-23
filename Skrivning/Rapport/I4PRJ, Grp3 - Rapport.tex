@@ -1,5 +1,6 @@
-% Brug Lualatex
-% Bibtype: BibTex
+% Default compiler: lualatex
+% Default bibliography tool: biber
+% Bibliography->Type= BibTex
 
 \documentclass[a4paper,11pt,oneside]{memoir}
 \input{utils/packages}
@@ -24,7 +25,7 @@
 	\tableofcontents						\clearpage %% ToC
 	
 	\mainmatter
-	\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
+	%\listoftodos[Liste over gøremål]%% Todo oversigt - SKAL UDKOMMENTERES FØR AFLEVERING
 	\input{docs/frontmatter/indledning}		\clearpage %% Indledning
 	\input{docs/projektformulering/main}	\clearpage %% Projektformulering
 	\input{docs/kravspecifikation/main}		\clearpage %% Kravspecifikation

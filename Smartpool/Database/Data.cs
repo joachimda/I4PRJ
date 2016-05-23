@@ -1,4 +1,3 @@
-
 namespace Smartpool
 {
     using System;
@@ -6,7 +5,6 @@ namespace Smartpool
     
     public partial class Data
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Data()
         {
             this.Chlorine = new HashSet<Chlorine>();
@@ -20,13 +18,9 @@ namespace Smartpool
         public int PoolId { get; set; }
     
         public virtual Pool Pool { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chlorine> Chlorine { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Humidity> Humidity { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<pH> pH { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Temperature> Temperature { get; set; }
     }
 }
