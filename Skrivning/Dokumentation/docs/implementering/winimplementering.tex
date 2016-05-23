@@ -170,4 +170,100 @@ Til at præsentere brugeren for måledata grafisk i PC applikationen er WinHisto
 \caption{WinHistoryView}
 \label{fig:winhistoryview}
 \end{figure}
-Hver graf præsenterer historisk data for 
+Hver graf præsenterer historisk data for en sensor.
+Graferne var svære at implementere. De er ikke lavet med specielle controls eller templates, fordi det basale udseende blot er en border med et canvas i. I stedet genererer funktionen DisplayGraph() useendet ud fra modtaget data i runtime. Specielle udsnit af funktionen vises nedenfor.
+
+\begin{lstlisting}[caption=DisplayGraph, label=DisplayGraph]
+	private void DisplayGraph(Canvas historyCanvas, List<double> history, bool isPhOrChlorine)
+	{
+	...
+	// Draw graph
+	for (var i = 0; i < _pointsOnGraphs; i++)
+	{
+	Dispatcher.Invoke(() =>
+	{
+	var pointHeight = ((upperBound - history[i])) / (upperBound - lowerBound) * canvasHeight;
+	var pointWidth = (canvasWidth/(_pointsOnGraphs - 1))*i;
+	
+	...
+	
+	valueText.Text = history[i].ToString();
+	valueText.FontSize = 8;
+	historyCanvas.Children.Add(valueText);
+	//if valueText belongs to a local minimum it's drawn below the point. Else above
+	Canvas.SetTop(valueText, valueTextIsLocalMinimum? pointHeight + 1 : pointHeight - 10);
+	Canvas.SetLeft(valueText, pointWidth - 3);
+	
+	//Draw tendency line
+	if (!(i == 0))
+	{
+	var line = new Line();
+	line.StrokeThickness = 1;
+	line.Stroke = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF));
+	line.X1 = lastPointX;
+	line.Y1 = lastPointY;
+	line.X2 = pointWidth + 1;
+	line.Y2 = pointHeight + 1;
+	
+	historyCanvas.Children.Add(line);
+	Canvas.SetTop(line, lastPointTop + (line.Height/2));
+	}
+	...
+\end{lstlisting}
+Funktionen er en hjælpe funktion, der modtager historisk data og tegner en graf på et modtaget canvas.
+På linje 9 og 10 udregnes punktets position relativt i forhold til canvas'ets størrelse. 
+\_pointsOnGraphs er en variabel der blot er sat til antallet af punkter i det historiske data der er modtaget. Så uanset hvor meget data funktionen modtager, så tegner den det. Der kunne have været implementeret et input felt, hvor brugeren kunne specificere hvor mange dages data han ville se, men det blev ned prioriteret. 
+Linje 14 til 19 indsættes punktet i grafen.
+
+\subsection{TabBar}
+TabBaren, som ses på alle views efter brugeren har logget ind, er ikke en standard WPF control. WPF har en TabBarControl, men den indeholder pages, som kan indeholde yderligere controls. I views'ne skulle der bruges buttons, som åbnede nye views, når man klikkede. Visuelt giver de indtrykket af at det er en standard tabBar, men funktionaliteten og udseendet er special lavet.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/implementering/tabbar}
+\caption{Win tabBar}
+\label{fig:tabbar}
+\end{figure}
+Den er i xaml lavet på samme måde som f.eks. figur~\ref{code:TextBoxWPlaceholderTemplate}, i et ResourceDictionary med en template. 
+Templaten indeholder buttons, hvilket voldte problemer. De buttons' click events kunne ikke ses udenfor den overliggende control. Der blev lavet events, som SpTabControl genererer, når buttons'ne bliver clicked.
+I SpTabControl.xaml.cs ligger den tilhørende klasse SpTabControl.
+\begin{lstlisting}[caption=SpTabControl, label=SpTabControl]
+	public class SpTabControl : Button
+	{
+	// button objects
+	private Button _showStatViewbutton;
+	
+	// events exposed to container
+	public static readonly RoutedEvent OnShowStatButtonClickedEvent =
+	EventManager.RegisterRoutedEvent("OnShowStatButtonClicked", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(SpTabControl));
+		
+	static SpTabControl()
+	{
+	DefaultStyleKeyProperty.OverrideMetadata(typeof(SpTabControl), new FrameworkPropertyMetadata(typeof(SpTabControl)));
+	}
+	
+	// Get the button objects as the template is applied and add click event handlers
+	public override void OnApplyTemplate()
+	{
+	base.OnApplyTemplate();
+	
+	_showStatViewbutton = GetTemplateChild("PART_StatViewButton") as Button;
+		
+	if (_showStatViewbutton != null) _showStatViewbutton.Click += ShowStatButtonClicked;
+	}
+	
+	// Expose and raise 'OnShowStatButtonClicked' event
+	public event RoutedEventHandler OnShowStatButtonClicked
+	{
+	add { AddHandler(OnShowStatButtonClickedEvent, value); }
+	remove { RemoveHandler(OnShowStatButtonClickedEvent, value); }
+	}
+	
+	private void ShowStatButtonClicked(object sender, RoutedEventArgs e)
+	{
+	RaiseEvent(new RoutedEventArgs(OnShowStatButtonClickedEvent));
+	}
+	}
+\end{lstlisting}
+
+Koden er skåret ned til kun at vise opsætningen af ét event. Der er et tilsvarende for alle tabs. Se kommentarerne i koden for forklaring.
+Der er fundet inspiration på en blog af Alan Beech~\cite{alanbeech2011}.
