@@ -144,7 +144,9 @@ using (var db = new DatabaseContext())
 \subparagraph{EditUserPassword}\
 
 \textit{bool EditUserPassword(string email, string newPassword)}
-\todo{do dis}
+
+Gør det muligt for en bruger at ændre sit password. Metoden står derudover for at sikre at det nye password ikke er en tom streng. User entitetens password property ændres gennem databasekonteksobjektet, hvorefter ændringen gemmes på databasen.
+
 \subparagraph{EditUserEmail}\
 
 \textit{bool EditUserEmail(string email, string newEmail)}
