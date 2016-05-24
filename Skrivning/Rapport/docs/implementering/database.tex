@@ -96,9 +96,9 @@ public bool AddUser(string fullname, string email, string password)
 	}
 \end{lstlisting}
 
-Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokalt, hvorefter user objektets navne properties sættes. En User's navn opdeles i Firstname, Middlename og Lastname strings. 
+Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokalt, hvorefter user objektets navne, password og email properties sættes. En User's navn opdeles i Firstname, Middlename og Lastname strings. 
 
-\begin{lstlisting}[caption=User objektet tilføjes i database konteksten hvorefter der gemmes på selve databasen,label=adduser2]
+\begin{lstlisting}[caption=User objektet tilføjes i database konteksten hvorefter der gemmes på selve databasen,label=code:adduser2]
 	using (var db = new DatabaseContext())
 	{
 		db.UserSet.Add(user);
