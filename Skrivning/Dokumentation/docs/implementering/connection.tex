@@ -9,7 +9,7 @@ Indeholder en enum af typen MessageTypes, hvori alle typer beskeder fremgår. De
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{figs/connection/loginError.png}
+	\includegraphics[width=0.3\linewidth]{figs/connection/loginError.png}
 	\caption{Login error}
 	\label{fig:loginError}
 \end{figure}
@@ -18,7 +18,7 @@ Nedarving fra message klassen er vist på figur~\ref{fig:MessageUML}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{figs/connection/MessageUML.png}
+	\includegraphics[width=0.6\linewidth]{figs/connection/MessageUML.png}
 	\caption{Message nedarving}
 	\label{fig:MessageUML}
 \end{figure}
@@ -28,13 +28,8 @@ Indeholder ikke yderligere informationer, men definerer en adskillelse mellem se
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
-	\includegraphics[width=\linewidth]{figs/connection/ClientMsgUML.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/ClientMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ClientMsgUML.png}
 	\caption{ClientMsg nedarving}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:ClientMsgUML}
 \end{figure}
 
@@ -110,7 +105,7 @@ public class TokenMsg : ClientMsg
 Nedarving fra TokenMsg er vist på figur~\ref{fig:TokenMsgUML}. AddPoolPictureRequestMsg er ikke blevet implementeret, men var en del af de user stories som blev udvalgt i starten af projektet, og er derfor taget med på figuren.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/TokenMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/TokenMsgUML.png}
 	\caption{TokenMsg nedarving}
 	\label{fig:TokenMsgUML}
 \end{figure}
@@ -236,7 +231,7 @@ public class LogoutRequestMsg : TokenMsg
 Denne klasse indeholder ikke yderligere informationer, men definerer en række beskeder som serveren kan svare med. Det er forsøgt at holde antallet af beskeder så lavt som muligt, ved f.eks. at lave en GeneralResponseMsg som anvendes på alle requests, hvor applikationen ikke modtager data, men blot ønsker at vide om den pågældende request blev udført. Nedarving fra ServerMsg er vist på figur~\ref{fig:ServerMsgUML}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/ServerMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ServerMsgUML.png}
 	\caption{ServerMsg nedarving}
 	\label{fig:ServerMsgUML}
 \end{figure}
@@ -378,13 +373,8 @@ Der er ændret i klassens konsol output, så essentielle data vises. Dette kan s
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
 	\includegraphics[width=0.9\linewidth]{figs/connection/asynchronousSocketListener.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/asynchronousSocketListener.png}
 	\caption{Asynchronous Socket Listener}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:asynchronousSocketListener}
 \end{figure}
 
@@ -394,13 +384,8 @@ Der er desuden valgt at lade exceptions blive vist i server vinduet, som f.eks. 
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
 	\includegraphics[width=0.9\linewidth]{figs/connection/asynchronousSocketListenerException.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/asynchronousSocketListenerException.png}
 	\caption{Asynchronous Socket Listener Exception}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:asynchronousSocketListenerException}
 \end{figure}
 
@@ -458,7 +443,7 @@ else
 \subsubsection{FakePool DataGeneration}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/ConnectionPool.png}
+	\includegraphics[width=0.8\linewidth]{figs/connection/ConnectionPool.png}
 	\caption{Connection.Pool diagram}
 	\label{fig:ConnectionPool}
 \end{figure}
