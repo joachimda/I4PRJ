@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Smartpool.Application.Presentation;
-using Smartpool.Connection.Client;
-using Smartpool.Connection.Model;
 
 //ReSharper disable once CheckNamespace 
 namespace Smartpool.Application.Web
 {
     
-
     public class HomeController : Controller
     {
 
