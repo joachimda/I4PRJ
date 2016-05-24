@@ -10,7 +10,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         public SensorTypes SensorType { get; set; }
         public List<double> SensorValueList => _sensorValueQueue.ToList();
 
-        private readonly SensorValueAuthenticator _sensorValueAuthenticator = new SensorValueAuthenticator();
+        private readonly ISensorValueAuthenticator _sensorValueAuthenticator = new SensorValueAuthenticator();
         private readonly Random _random = new Random();
         private readonly Queue<double> _sensorValueQueue = new Queue<double>();
         public double LastSensorValueEntry { get; set; }
