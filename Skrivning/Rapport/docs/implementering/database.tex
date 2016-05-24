@@ -47,7 +47,7 @@ using (var db = new DatabaseContext())
 
 Som det kan ses på kodeudsnit \ref{code:convertToDateTime} konverteres timestamp strengene til DateTime objekter, hvorefter der bruges LINQ til at lave en forespørgsel på klor-data. Bemærk at der kun hentes klor-data for én specifik bruger og en enkelt af brugerens pools.
 
-\begin{lstlisting}[caption=Iteration over indhentet pool data,label=dataIteration]
+\begin{lstlisting}[caption=Iteration over indhentet pool data,label=code:dataIteration]
 List<Tuple<SensorTypes, double>> chlorineTuples = new List<Tuple<SensorTypes, double>>();
 
 foreach (var chlorine in chlorineDataQuery)
@@ -62,7 +62,7 @@ foreach (var chlorine in chlorineDataQuery)
 return chlorineTuples;
 \end{lstlisting}
 
-
+Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en måling. Som det kan ses på kodeudsnit \ref{code:dataIteration} sammenlignes den data som blev hentet i kodeudsnit \ref{code:convertToDateTime} med de to DateTime objekter, \textit{endTime} og \textit{startTime}. På denne måde gemmes de relevante klor data som tupler i listen.
 
 \subsubsection{Tilføj user}
 
