@@ -434,16 +434,45 @@ else
 \end{lstlisting}
 
 \subsubsection{Token System}
+For at lave et user session koncept, er der implementeret et token system, som består af en TokenKeeper, Token og TokenStringGenerator klasse. UML diagram over disse ses på figur~\ref{fig:ConnectionServerToken}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figs/connection/ConnectionServerToken.png}
 	\caption{Connection.Server.Token}
 	\label{fig:ConnectionServerToken}
 \end{figure}
-\subsubsection{FakePool DataGeneration}
+Som det fremgår af figur~\ref{fig:ConnectionServerToken}, er der øverst en TokenKeeper som indeholder en TokenStringGenerator og en liste af Tokens. Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
+For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på figur ??
+\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken, label=code:Server.TokenKeeper.CreateNewToken]
+public string CreateNewToken(string username)
+{
+	var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
+	_tokens.Add(newToken);
+	
+	if (_removeUnusedCountdown == 0)
+	{
+		RemoveAllUnusedTokens();
+		_removeUnusedCountdown = _tokensCreatedBeforeRemovingUnused;
+	}
+	_removeUnusedCountdown--;
+	
+	return newToken.GetTokenString();
+}
+\end{lstlisting}
+
+\subsubsection{Pool DataGeneration}
+For at simulere data fra pools i systemet, er der implementeret en række pool/sensor klasser. Disse ses på figur~\ref{fig:ConnectionPool}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.8\linewidth]{figs/connection/ConnectionPool.png}
 	\caption{Connection.Pool diagram}
 	\label{fig:ConnectionPool}
 \end{figure}
+
+\paragraph{PoolKeeper} er implementeret som en fake klasse, der indeholder en liste over pools i systemet. Ved opstart chekkes på få udvalgte brugernavne i databasen, som der derefter genereres tilsvarende pools for. Desuden bliver der, mens systemet kører, oprettet pools i systemet for nye pools der tilføjes til databasen. Så længe serveren kører, vil alle nye pools altså generere data.
+
+\paragraph{Pool} er implementeret som en fake klasse. Klassen indeholder ikke nogen public metoder, da den er selvkørende og ved et angivet interval selv opretter sensor data i databasen. Dette er tiltænkt at være tilsvarende et reelt system, hvor en reel pool klasse, ved et givet interval, sender en request til en fysisk enhed om måledata, som derefter gemmes i databasen.
+
+\paragraph{Sensor} er implementeret som en fake klasse. Der er lagt stor vægt på at klassen genererer værdier som kunne være reele, da dette er med til at give et helhedsindtryk af det endelige system. 
+
+\paragraph{SensorValueAuthenticator} som et led i at give sensoren realistiske værdier, er denne klasse oprettet for at angive en minimum og maximum værdi, en given sensor type kan have.
