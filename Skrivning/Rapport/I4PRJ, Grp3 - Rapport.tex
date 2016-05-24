@@ -3,10 +3,10 @@
 % Bibliography->Type= BibTex
 
 \documentclass[a4paper,11pt,oneside]{memoir}
-\input{utils/packages}
-\input{utils/layout}
-\input{utils/listings}
-\input{utils/ordliste}
+\input{../utils/packages}
+\input{../utils/layout}
+\input{../utils/listings}
+\input{../utils/ordliste}
 
 %% Forside variabler
 \newcommand{\Kursus}{I4PRJ4 F16}
@@ -14,7 +14,7 @@
 \newcommand{\Gruppe}{Gruppe 3}
 \newcommand{\Projektdokument}{Projektrapport}
 
-\bibliography{utils/litteratur.bib} %% Litteratur
+\bibliography{../utils/litteratur.bib} %% Litteratur
 
 \begin{document}		
 	\frontmatter
@@ -33,8 +33,6 @@
 	\input{docs/systemarkitektur/main}		\clearpage %% Arkitektur
 	\input{docs/design/main}				\clearpage %% Design
 	\input{docs/implementering/main}		\clearpage %% Implementering
-	\input{docs/integration/main}			\clearpage %% Integration
-	\input{docs/accepttest/main}			\clearpage %% Accepttest
 	\input{docs/resultater/main}			\clearpage %% Resultater
 	\input{docs/udviklingsvarktojer/main}	\clearpage %% udviklingsværktøjer
 	\input{docs/fremtidigtarbejde/main}		\clearpage %% Fremtidigt arbejde
