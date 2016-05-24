@@ -1,9 +1,205 @@
+% !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
 \section{Applikationslaget}
-Implementeringen af applikationslaget er god. Nedenfor ses resultatet.
+Dette afsnit beskriver implementeringen af applikationslaget. Implementeringen af applikationslaget består i, at implementere lagets modelklasser, presenterklasser og platform-specifikke user interface programmer. 
+
+\subsection{Implementering af modelklasser}
+Udvalgte dele af implementeringen af modelklasserne i applikationslaget beskrives i dette afsnit. Modelklasserne er implementeret i sproget C Sharp, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Model projektet.
+
+\subsubsection{Session.cs}
+Session-klassen indeholder hovedsageligt properties, som kan oversættes direkte fra klassens design til kode. Da Session klassen er designet som en Singleton, beskrives implementeringen af dens constructor og statiske Session medlem i dette afsnit.
+
+Listing~\ref{code:application_model_ss} viser implementeringen af klassens statiske medlem. Når SharedSession bliver brugt første gang, laves en ny Session. I efterfølgende brug returneres den statiske session fra backing variablen sharedSession.
+
+\begin{lstlisting}[caption={SharedSession},label={code:application_model_ss}]
+public static Session SharedSession => _sharedSession ?? (_sharedSession = new Session());
+\end{lstlisting}
+
+Listing~\ref{code:application_model_sessionconstructor} viser implementeringen af Session-klassens constructor. Constructor'en er gjordt privat, således at SharedSession beskrevet i listing~\ref{code:application_model_ss}, er den eneste måde man kan oprette en Session.
+
+\begin{lstlisting}[caption={Session constructor},label={code:application_model_sessionconstructor}]
+private Session()
+{
+	SelectedPoolIndex = 0;
+	Pools = new List<Tuple<string, bool>>();
+}
+\end{lstlisting}
+
+\subsubsection{PoolLoader.cs}
+PoolLoader-klassen indeholder en række metoder til at hente data fra connection-serveren. Generelt opretter metoder en passende besked fra Smartpool.Connection.Model, sender den med en IClientMessenger, og parser evt. svaret der modtages fra serveren.
+
+Listing~\ref{code:application_model_gcdfp} viser implementeringen af en af disse metoder. I metoden oprettes en GetPoolDataRequestMsg som instantieres med sessionsinformation fra Session-klassen. Når svaret modtages, trækkes den relevante data ud af svarbeskeden, og laves om til en passende type.
+
+\begin{lstlisting}[caption={GetCurrentDataFromPool(...)},label={code:application_model_gcdfp}]
+public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
+{
+	var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1);
+	var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
+	return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.Item1, sensor.Item2.LastOrDefault())).ToList();
+}
+\end{lstlisting}
+
+Klassen indeholder også metoder der indlæser data i den statiske Session-instans. Metoden i listing~\ref{code:application_model_reloadpools} er et eksempel på dette. Metoden efterspørger pool-information fra serveren og gemmer den data der modtages i Session-instansen.
+
+\begin{lstlisting}[caption={ReloadPools(...)},label={code:application_model_reloadpools}]
+public void ReloadPools(IClientMessenger clientMessenger)
+{
+	var poolRequest = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, true);
+	var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(poolRequest);
+	_session.Pools = response.AllPoolNamesListTuple;
+}
+\end{lstlisting}
+
+\subsubsection{PoolValidator.cs}
+PoolValidator-klassen indeholder de properties der blev defineret i klassens design, samt implementeringen af de tilhørende funktioner. PoolValidator-klassens ansvar består i at tilbyde en måde, at validere pool-oplysninger. Metoden i listing~\ref{code:application_model_pvisvalid} definere hvornår en pool anses som værende godkendt i systemet. Som det fremgår af kodestykket, foretages en sammenligning af indholdet af klassens Name og SerialNumber properties.
+
+\begin{lstlisting}[caption={IsValid()},label={code:application_model_pvisvalid}]
+public bool IsValid()
+{
+	if (Name.Length == 0) return false;
+	if (SerialNumber.Length == 0) return false;
+	return true;
+}
+\end{lstlisting}
+
+Klassen indeholder også funktionalitet, der tillader parsing af poolstørrelse og volumen, fra string til double-repræsentation. Listing~\ref{code:application_model_parsedvolume} implementerer denne funktionalitet. Metoden prøver først at parse klassens volume property hvis den indeholder en string, hvis ikke, prøver forsøger klassen at parse dimensions arrayet.
+
+\begin{lstlisting}[caption={ParsedVolume()},label={code:application_model_parsedvolume}]
+private double ParsedVolume()
+{
+if (_volume != "")
+	{
+	_dimensions[0] = ""; _dimensions[1] = ""; _dimensions[2] = "";
+	try
+	{
+		var volume = double.Parse(_volume);
+		return volume > 0 ? volume : 0;
+	}
+	catch (Exception)
+		return 0;
+}
+else
+ {
+	 _volume = "";
+	try
+		return double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
+	catch (Exception)
+		return 0;
+	}
+ }
+\end{lstlisting}
+
+\subsubsection{UserValidator.cs}
+UserValidator-klassen indeholder de properties der blev defineret i klassens design, samt implementeringen af de tilhørende funktioner. Klassen kan validere brugeroplysninger, ved hjælp af de metoder der ses implementeret i listing~\ref{code:application_model_uservalidator}.
+
+\begin{lstlisting}[caption={UserValidator valideringsmetoder},label={code:application_model_uservalidator}]
+public bool PasswordIsValid => Passwords[0].Length >= MinimumCharacters && Passwords[0] == Passwords[1];
+public bool IsValidForSignup => PasswordIsValid && Name.Length > 0 && Email.Length > 0;
+public bool IsValidForLogin => Email.Length > 0 && Passwords[0].Length > 0;
+\end{lstlisting}
+
+Metoderne beskriver forskellige valideringsscenarier, og benytter klassens properties til at vurdere hvorvidt de indtastede oplysninger er tilstrækkelige.
+
+\subsection{Implementering af presenter-klasser}
+Udvalgte dele af implementeringen afpresenter-klasserne i applikationslaget beskrives i dette afsnit. Presenter-klasserne er udviklet i sproget C Sharp, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Presentation projektet. Presenter-klasserne implementerer de interfaces der er defineret i designet, samt metoder og parametre i de konkrete klassers design.
+
+Fælles for alle presenter-klasserne er, at de implementerer en ViewDidLoad metode, da denne metode er defineret i IViewController interfacet. Et eksempel på en ViewDidLoad implementering ses i listing~\ref{code:application_impl_viewdidload}.
+
+\begin{lstlisting}[caption={ViewDidLoad() i SignUpViewController.cs},label={code:application_impl_viewdidload}]
+public void ViewDidLoad()
+{
+	_view.SetNameText("");
+	_view.SetEmailText("");
+	_view.SetPasswordText("");
+	_view.SetPasswordValid(false);
+	_view.SetButtonEnabled(false);
+}
+\end{lstlisting}
+
+ViewDidLoad metoderne initiere view'ets state, ved at kalde view'ets interface-metoder. I eksemplet på listing~\ref{code:application_impl_viewdidload} ses det, at presenteren sætter tilstanden i view'ets tekstfelter og knapper. Dette er det generelle princip for alle ViewDidLoad metoderne, og derfor beskrives kun denne ene ViewDidLoad metode, indledningsvist.
+
+Implementeringen af presenter-klassernes constructer-metoder er også ens i struktur. På listing~\ref{code:application_impl_presentercons} ses et eksempel på en af presenter-klassernes constructor. I constructor-metoden gemmes input parametrene i klassens private felter.
+
+\begin{lstlisting}[caption={Constructor i SignUpViewController.cs},label={code:application_impl_presentercons}]
+public SignUpViewController(ISignUpView view, IClientMessenger clientMessenger = null)
+{
+	_view = view;
+	_clientMessenger = clientMessenger;
+}
+\end{lstlisting}
+
+\subsubsection{SignUpViewController.cs}
+Implementeringen af SignUpViewController-klassen bestod hovedsageligt i at sammenbinde ISignUpViewController-interfacets metoder, med handlinger der skulle foretages i SignUpViewController-klassens ISignUpView. Listing~\ref{code:application_impl_signupviewc1} viser et eksempel på en sådan sammenbinding, hvor en tekstændring modtages fra view'et, gemmes i en af klassens properties, og view'et opdateres.
+
+\begin{lstlisting}[caption={DidChangeNameText(...)},label={code:application_impl_signupviewc1}]
+public void DidChangeNameText(string text)
+{
+	User.Name = text;
+	UpdateSignUpButton();
+}
+\end{lstlisting}
+
+Klassens SignUp metode er implementeret således, at den kontakter connection-serveren, med de oplysninger som presenteren har kendskab til, om den bruger der ønskes oprettet. Metoden kan ses i listing~\ref{code:application_impl_signupmethod}. Når et svar modtages fra serveren, tjekker presenteren hvorvidt anmodningen var succesfuld. Herefter kaldes en metode i view'et, alt efter om anmodningen gik igennem eller ej. Hvis anmodningen blev afvist kaldes DisplayAlert i view'et.
+
+\begin{lstlisting}[caption={SignUp()},label={code:application_impl_signupmethod}]
+public void SignUp()
+{
+	var signUpRequest = new AddUserRequestMsg(User.Name, User.Email, User.Passwords[0]);
+	var response = _clientMessenger.SendMessage(signUpRequest);
+	var generalResponse = (GeneralResponseMsg) response;
+
+	if (generalResponse.RequestExecutedSuccesfully)
+		_view.SignUpAccepted();
+	else
+		_view.DisplayAlert("Invalid Sign Up", "The e-mail is already used");
+}
+\end{lstlisting}
+
+\subsubsection{LoginViewController.cs}
+En del af LoginViewController-klassens metode implementering består i at sammenbinde kald fra view'et og tilhørende opdateringer af view'et, som i vist listing~\ref{code:application_impl_lvcdcet}.
+
+\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
+public void DidChangeEmailText(string text)
+{
+	User.Email = text;
+	UpdateLoginButton();
+}
+\end{lstlisting}
+
+Udover denne type metode, implementerer LoginViewController-klassen en Login metode, se listing~\ref{code:application_impl_lvclogin}, som igangsætter kommunikation med connection-serveren, og giver svaret tilbage til view'et. 
+
+\begin{lstlisting}[caption={Login()},label={code:application_impl_lvclogin}]
+ public void Login()
+{
+	var request = new LoginRequestMsg(User.Email, User.Passwords[0]);
+	var response = _clientMessenger.SendMessage(request);
+	var loginResponse = (LoginResponseMsg) response;
+
+	if (loginResponse.LoginSuccessful)
+	{
+		// Save token
+		var session = Session.SharedSession;
+		session.TokenString = loginResponse.TokenString;
+		session.UserName = User.Email;
+
+		// Notify view
+		_view.LoginAccepted (); 
+	}
+	else {
+		// Reset password and display message
+		_view.SetPasswordText("");
+		_view.DisplayAlert("Login Error", loginResponse.MessageInfo);
+	}
+}
+\end{lstlisting}
+
+Login metoden konstruere en LoginRequestMsg, som den sender til serveren via. presenterens IClientMessenger. Når et svar modtages, tjekkes det hvorvidt anmodningen blev godkendt eller ej, og view'et opdateres.
+
+\subsection{Implementering af view-klasser}
+Applikationslagets view-interfaces er blevet implementeret af klasser på forskellige platforme, og beskrives derfor i deres egne afsnit. På figur~\ref{fig:view_family} illustreres de færdigimplementerede brugergrænseflader. 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=1.0\linewidth]{figs/implementering/view_family}
-	\caption{Familieportræt}
+	\caption{Brugergrænsefladeimplementering på hhv. iOS, Windows og Web}
 	\label{fig:view_family}
 \end{figure}
