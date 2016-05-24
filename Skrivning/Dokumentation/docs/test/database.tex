@@ -8,10 +8,10 @@ I det følgende vil test og integration af databasen blive beskrevet. Alle kompo
 
 \subsubsection{Testdetaljer}
 % beskrivelse af coverage procent og antallet af test, samt begrundelse for begge.
-\textit{UserAccess.Unit.Test} har en coverage procent på 100\% og er dækket af 33 test. Med disse test er både normale brugs- og fejlscenarier dækket.
+\textit{UserAccess.Unit.Test} har en coverage procent på 100\% (figur~\ref{fig:useraccesscoverage}) og er dækket af 33 test (figur~\ref{fig:useraccessunittest}). Med disse test er både normale brugs- og fejlscenarier dækket.
 
 % BILLEDE AF KØRTE UNITTEST
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.9\linewidth]{figs/test/useraccessunittest}
 \caption{Unittest for UserAccess.}
@@ -19,7 +19,7 @@ I det følgende vil test og integration af databasen blive beskrevet. Alle kompo
 \end{figure}
 
 % BILLEDE AF COVERAGE KØRT
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/test/useraccesscoverage}
 \caption{Coverage for UserAccess.}
@@ -34,13 +34,27 @@ For hver metode er det normale brugsscenarie identificeret og testet for forskel
 
 \subsection{PoolAccess}
 % klassens opgave... 
+\textit{PoolAccess} har til ansvar at håndtere operationer som tager \textit{Pool}'s ind og up af databasen, samt forbinde en indsæt pool til en Bruger. 
 
 \subsubsection{Testdetaljer}
 % beskrivelse af coverage procent og antallet af test, samt begrundelse for begge.
+\textit{PoolAccess.Unit.Test} har en coverage procent på 100\% (figur~\ref{fig:poolaccesscoverage}) og er dækket af 33 test (figur~\ref{fig:poolaccessunittest}). Med disse test er både normale brugs- og fejlscenarier dækket.
 
 % BILLEDE AF KØRTE UNITTEST
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/test/poolaccessunittest}
+	\caption{Unittest for PoolAccess.}
+	\label{fig:poolaccessunittest}
+\end{figure}
 
 % BILLEDE AF COVERAGE KØRT
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/test/poolaccessunittest}
+	\caption{Coverage for PoolAccess.}
+	\label{fig:poolaccessunittest}
+\end{figure}
 
 \subsection{Testbeskrivelse}
 % hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test. 
@@ -48,13 +62,27 @@ For hver metode er det normale brugsscenarie identificeret og testet for forskel
 
 \subsection{DataAccess}
 % klassens opgave... 
+\textit{DataAccess} har til ansvar at oprette et dataset for en pool og i den forbindelse registrere tidspunktet for en måling. Yderligere gør klassen det muligt at finde tilbage til den pool som målingerne høre til.
 
 \subsubsection{Testdetaljer}
 % beskrivelse af coverage procent og antallet af test, samt begrundelse for begge.
+\textit{DataAccess.Unit.Test} har en coverage procent på 100\% (figur~\ref{fig:dataaccesscoverage}) og er dækket af 33 test (figur~\ref{fig:dataaccessunittest}). Med disse test er både normale brugs- og fejlscenarier dækket.
 
 % BILLEDE AF KØRTE UNITTEST
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figs/test/dataaccessunittest}
+	\caption{Unittest for DataAccess.}
+	\label{fig:dataaccessunittest}
+\end{figure}
 
 % BILLEDE AF COVERAGE KØRT
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/test/dataaccessunittest}
+	\caption{Coverage for DataAccess.}
+	\label{fig:dataaccessunittest}
+\end{figure}
 
 \subsection{Testbeskrivelse}
 % hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test. 
