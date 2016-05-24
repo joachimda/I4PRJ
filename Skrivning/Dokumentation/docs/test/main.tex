@@ -1,16 +1,30 @@
 \chapter{Software Test og Integration}
 
- indledning til kapitel
+% indledning til kapitel
+Som en del af gruppens måde at bruge scrum på er der løbende integreret. Omkring hver anden uge har der været en målsætning om at have en fase af systemet færdig. 
 
- værktøjer til test... Nunit, Nsub, github, travis?
+System er udviklet i tre faser: 
 
- Siden første design spike er hver eneste testede ændring blevet først ind i kodebasen som alle har brugt... på denne måde er systemet gennem hele udviklingsforløbet holdt opdateret og klar til release...
+\begin{enumerate}
+	\item \textbf{Brugerfunktionalitet}\\
+	En Bruger skal kunne oprettes, fjernes og findes. Herunder ligger også funktionalitet til validering af email og password. 
+	\item \textbf{Poolfunktionalitet}\\
+	Ligeledes skal en pool kunne sættes ind i systemet. En Bruger skulle i denne faser kunne være tilknyttet flere pools.
+	\item \textbf{Datafunktionalitet}\\
+	Sensormålinger skal kunne opbevares og vises. 
+\end{enumerate}
 
- find et dependency diagram og sæt ind her, og henvis til i dette afsnit
+Efter hver af disse faser hvor henholdsvis databasen, \gls{windserver} og GUI applikationerne.
 
- generelt er systemet integrationstestet 'bottom-up' idet at det var nemmest at sikre at databasen virkede pga mange nemme enhedstest, dernæst kunne connection serveren kobles på, hvorefter applicationen kunne sættes sammen med serveren.
+% værktøjer til test... Nunit, Nsub, github, travis?
 
- hvordan integrationen er designet for hhv. db, connection og gui... afhængigheder, problemer... hvordan det er gået med at teste det løbende
+% Siden første design spike er hver eneste testede ændring blevet først ind i kodebasen som alle har brugt... på denne måde er systemet gennem hele udviklingsforløbet holdt opdateret og klar til release...
+
+% find et dependency diagram og sæt ind her, og henvis til i dette afsnit
+
+% generelt er systemet integrationstestet 'bottom-up' idet at det var nemmest at sikre at databasen virkede pga mange nemme enhedstest, dernæst kunne connection serveren kobles på, hvorefter applicationen kunne sættes sammen med serveren.
+
+% hvordan integrationen er designet for hhv. db, connection og gui... afhængigheder, problemer... hvordan det er gået med at teste det løbende
 
 %\input{docs/test/database}
 %\input{docs/test/connection}

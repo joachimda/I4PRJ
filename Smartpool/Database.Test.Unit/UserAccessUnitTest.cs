@@ -262,6 +262,13 @@ namespace Database.Test.Unit
         }
 
         [Test]
+        public void EditUser_ChangeNameOfUserTo3Names_ReturnsTrue()
+        {
+            _uut.AddUser("Hans Jørgensen", "mail@net.com", "pass");
+            Assert.That(_uut.EditUserName("mail@net.com", "Hans Peking John"), Is.True);
+        }
+
+        [Test]
         public void EditUser_ChangeNameOfExistingUser_FindUserByEmailReturnsNewUserName()
         {
             _uut.AddUser("Hans Jørgensen", "mail@net.com", "pass");
