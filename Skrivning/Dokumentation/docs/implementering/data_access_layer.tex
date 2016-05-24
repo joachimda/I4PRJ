@@ -146,11 +146,32 @@ using (var db = new DatabaseContext())
 \textit{bool EditUserPassword(string email, string newPassword)}
 
 Gør det muligt for en bruger at ændre sit password. Metoden står derudover for at sikre at det nye password ikke er en tom streng. User entitetens password property ændres gennem databasekonteksobjektet, hvorefter ændringen gemmes på databasen.
+Metoden returnerer true med mindre der findes en uoverensstemmelse med enten password eller email.
 
 \subparagraph{EditUserEmail}\
 
 \textit{bool EditUserEmail(string email, string newEmail)}
-\todo{do dis}
+
+Gør det muligt or en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et system login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter den pågældende User returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
+
+\begin{lstlisting}[caption=EditUserEmail - brug af primær nøgler i Entity Framework,label=code:idef]
+public bool EditUserEmail(string email, string newEmail)
+{
+	...
+	using (var db = new DatabaseContext())
+		{
+			var original = db.UserSet.Find(FindUserByEmail(email).Id);
+			if (original != null)
+				{
+					original.Email = newEmail;
+					db.SaveChanges();
+				}
+		}
+	return true;
+}
+
+\end{lstlisting}
+
 \subparagraph{EditUserName}\
 
 \textit{bool EditUserName(string email, string newName)}
