@@ -19,24 +19,20 @@ Placeholder teksten er lavet som en property, som kan sættes på alle controls 
 \begin{lstlisting}[caption=ThemeProperties, label=code:ThemeProperties]
 public static class ThemeProperties
 {
-public static string GetPlaceholderText(DependencyObject obj)
-{
-return (string)obj.GetValue(PlaceholderTextProperty);
-}
-
-public static void SetPlaceholderText(DependencyObject obj, string value)
-{
-obj.SetValue(PlaceholderTextProperty, value);
-}
-
-public static readonly DependencyProperty PlaceholderTextProperty =
-DependencyProperty.RegisterAttached(
-"PlaceholderText",
-typeof(string),
-typeof(ThemeProperties),
-new FrameworkPropertyMetadata("Placeholder"));
+	public static string GetPlaceholderText(DependencyObject obj)
+	{
+		return (string)obj.GetValue(PlaceholderTextProperty);
+	}
+	
+	public static void SetPlaceholderText(DependencyObject obj, string value)
+	{
+		obj.SetValue(PlaceholderTextProperty, value);
+	}
+	
+	public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.RegisterAttached("PlaceholderText", typeof(string),	typeof(ThemeProperties), new FrameworkPropertyMetadata("Placeholder"));
 }
 \end{lstlisting} 
+
 Med SetPlaceholderText() kan man så sætte placeholder teksten til en given control.
 Det kunne have været lavet som en PlaceholderTextBox klasse ligesom StatViewer i figur~\ref{code:StatViewer}, men dette blev lavet inden den idé opstod.
 
@@ -228,42 +224,44 @@ Den er i xaml lavet på samme måde som f.eks. figur~\ref{code:TextBoxWPlacehold
 Templaten indeholder buttons, hvilket voldte problemer. De buttons' click events kunne ikke ses udenfor den overliggende control. Der blev lavet events, som SpTabControl genererer, når buttons'ne bliver clicked.
 I SpTabControl.xaml.cs ligger den tilhørende klasse SpTabControl.
 \begin{lstlisting}[caption=SpTabControl, label=SpTabControl]
-	public class SpTabControl : Button
-	{
+public class SpTabControl : Button
+{
 	// button objects
 	private Button _showStatViewbutton;
 	
 	// events exposed to container
 	public static readonly RoutedEvent OnShowStatButtonClickedEvent =
 	EventManager.RegisterRoutedEvent("OnShowStatButtonClicked", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(SpTabControl));
-		
+	
 	static SpTabControl()
 	{
-	DefaultStyleKeyProperty.OverrideMetadata(typeof(SpTabControl), new FrameworkPropertyMetadata(typeof(SpTabControl)));
+		DefaultStyleKeyProperty.OverrideMetadata(typeof(SpTabControl), new FrameworkPropertyMetadata(typeof(SpTabControl)));
 	}
 	
 	// Get the button objects as the template is applied and add click event handlers
 	public override void OnApplyTemplate()
 	{
-	base.OnApplyTemplate();
-	
-	_showStatViewbutton = GetTemplateChild("PART_StatViewButton") as Button;
+		base.OnApplyTemplate();
 		
-	if (_showStatViewbutton != null) _showStatViewbutton.Click += ShowStatButtonClicked;
+		_showStatViewbutton = GetTemplateChild("PART_StatViewButton") as Button;
+		
+		if (_showStatViewbutton != null)
+			_showStatViewbutton.Click += ShowStatButtonClicked;
 	}
 	
 	// Expose and raise 'OnShowStatButtonClicked' event
 	public event RoutedEventHandler OnShowStatButtonClicked
 	{
-	add { AddHandler(OnShowStatButtonClickedEvent, value); }
-	remove { RemoveHandler(OnShowStatButtonClickedEvent, value); }
+		add { AddHandler(OnShowStatButtonClickedEvent, value); }
+	
+		remove { RemoveHandler(OnShowStatButtonClickedEvent, value); }
 	}
 	
 	private void ShowStatButtonClicked(object sender, RoutedEventArgs e)
 	{
-	RaiseEvent(new RoutedEventArgs(OnShowStatButtonClickedEvent));
+		RaiseEvent(new RoutedEventArgs(OnShowStatButtonClickedEvent));
 	}
-	}
+}
 \end{lstlisting}
 
 Koden er skåret ned til kun at vise opsætningen af ét event. Der er et tilsvarende for alle tabs. Se kommentarerne i koden for forklaring.

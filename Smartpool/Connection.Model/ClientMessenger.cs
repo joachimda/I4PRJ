@@ -6,7 +6,7 @@ namespace Smartpool.Connection.Model
     {
         private readonly IClient _client;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-        private readonly ClientResponseManager _clientResponseManager = new ClientResponseManager();
+        private readonly IClientResponseManager _clientResponseManager = new ClientResponseManager();
         
 
         public ClientMessenger(IClient client)
