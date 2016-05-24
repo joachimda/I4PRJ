@@ -17,6 +17,8 @@ Data entiteten som ses på figur~\ref{fig:databaseERD_final_uml} da bruges som e
 
 \subsubsection{Træk pooldata ud}
 
+Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Ændringer/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontektsobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne i konteksten
+
 \begin{lstlisting}[caption= GetChlorineData method, label=code:getChlorineData]
 
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
