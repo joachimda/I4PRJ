@@ -10,7 +10,7 @@ Der findes forskellige basis controller-klasser i UIKit, som kan benyttes. I kla
 	\label{fig:ios_full}
 \end{figure}
 
-Af klassediagrammet fremgår det, at alle iOS klasserne har en "specializedController" property. Dette er en property, der bør typecaste deres nedarvede IViewController property, til den type presenter der passer specifikt til view'et.
+Af klassediagrammet fremgår det, at alle iOS klasserne har en "\_specializedController" property. Dette er en property, der bør typecaste deres nedarvede IViewController property, til den type presenter der passer specifikt til view'et.
 
 \subsection{Klassedesign}
 I dette afsnit beskrives designet af de enkelte view-implementerende klasser i Smartpool.Application.iOS. Hver klasse der beskrives i dette afsnit, er en UIKit controller klasse, der implementerer et view-interface defineret i Smartpools præsentationslag.
@@ -26,7 +26,7 @@ SignUpViewBridge-klassen implementerer ISignUpView interfacet. Klassen indeholde
 \end{figure}
 
 \subsubsection{LoginViewBridge}
-LoginViewBridge-klassen implementerer ILoginView interfacet. Da dette view håndtere login, er klassen designet til at indeholde en to tekstfelter, og en knap til at godkende login. Denne klasse er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
+LoginViewBridge-klassen implementerer ILoginView interfacet. Da dette view håndterer login, er klassen designet til at indeholde to tekstfelter, og en knap til at godkende login. Denne klasse er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
 
 \begin{figure}
 	\centering
@@ -46,7 +46,7 @@ AddPoolViewBridge-klassen implementerer IAddPoolView interfacet. Klassen indehol
 \end{figure}
 
 \subsubsection{EditUserViewBridge}
-Klassen implementerer IEditUserView interfacet. Klassen indeholder en række UIKit user interface elementer, som tekstfelter og en knap, der passer sammen med metoderne i interfacet. Klassen er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
+EditUserViewBridge-klassen implementerer IEditUserView interfacet. Klassen indeholder en række UIKit user interface elementer, som tekstfelter og en knap, der passer sammen med metoderne i interfacet. Klassen er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
 
 \begin{figure}
 	\centering
@@ -56,7 +56,7 @@ Klassen implementerer IEditUserView interfacet. Klassen indeholder en række UIK
 \end{figure}
 
 \subsubsection{EditPoolViewBridge}
-EditPoolViewBridge-klassen implementerer IEditPoolView interfacet. Da dette view håndtere redigering af pools, indeholder klassen tekstfelter, og knap til at foretage ændringer eller slette en pool. Klassen indeholder også en UIBarButtonItem, som type knap, der er tænkt at skulle bruges til skift imellem pools i systemet. Denne knap er tilføjet klassen, da IEditPoolView interfacet implementerer IPoolDisplaying interfacet. Denne klasse er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
+EditPoolViewBridge-klassen implementerer IEditPoolView interfacet. Da dette view håndterer redigering af pools, indeholder klassen tekstfelter, og knap til at foretage ændringer eller slette en pool. Klassen indeholder også en UIBarButtonItem, som type knap, der er tænkt at skulle bruges til skift imellem pools i systemet. Denne knap er tilføjet klassen, da IEditPoolView interfacet implementerer IPoolDisplaying interfacet. Denne klasse er designet til at nedarve fra UIKit klassen UIViewController, da de user interface elementer der indgår i designet, forventes at være statiske.
 
 \begin{figure}
 	\centering
@@ -66,7 +66,7 @@ EditPoolViewBridge-klassen implementerer IEditPoolView interfacet. Da dette view
 \end{figure}
 
 \subsubsection{StatViewBridge}
-StatViewBridge-klassen implementerer IStatView interfacet. Dette view bør kunne håndtere dynamisk indlæsning og visning af måledata, i følge de user stories der er tilknyttet interfacet. Af denne grund nedarver StatViewBridge fra UITableViewController, der kan opsættes til at præsentere en dynamisk liste. StatViewBridge indeholder en UIBarButtonItem, der kan bruges til at skifte imellem pools i systemet.
+StatViewBridge-klassen implementerer IStatView interfacet. Dette view bør kunne håndtere dynamisk indlæsning og visning af måledata i følge de user stories, der er tilknyttet interfacet. Af denne grund nedarver StatViewBridge fra UITableViewController, der kan opsættes til at præsentere en dynamisk liste. StatViewBridge indeholder en UIBarButtonItem, der kan bruges til at skifte imellem pools i systemet.
 
 \begin{figure}
 	\centering
