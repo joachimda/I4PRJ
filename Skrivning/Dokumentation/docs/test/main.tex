@@ -22,13 +22,23 @@ Enhedstest er skrevet i Visual Studio, samtidigt med produktionskoden. Til at la
 \gls{dotcover} er anvendt til at bestemme coverage af koden - på denne måde har gruppen i løbet af udviklingen været opmærksom på hvilke dele af koden, som ikke har været dækket af automatiske test.
 For alle tre store komponenter: GUI-applikationer, \gls{windserver} og DAL, har det været tydligt for gruppen at DAL har været lettest at dække med enhedstest, se figur~\ref{fig:coverage}.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{figs/test/coverage}
-\caption{}
-\label{fig:coverage}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/test/coverage}
+	\caption{Test coverage af enhedstest.}
+	\label{fig:coverage}
 \end{figure}
 
+I gruppen git repository, har branchen \textit{master} været klar til release siden første design spike. Hver dag efter endt arbejde er fungerende funktionalitet merget ind på denne branch. Ligeledes er \textit{master} branchen hver morgen merget ind i de personlige branches og derved integreret. På denne måde er \textit{integrationshelvedet} undgået og medlemmerne har hele tiden haft de seneste fungerende opdateringer fra resten af gruppen.
+
+Github hoster gruppens repository og har indbygget værktøj til at teste om et pull-request gnidningsløst kan integreres på master, se figur~\ref{fig:gitmerge}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figs/test/gitmerge.png}
+\caption{Github, tjekker om en branch kan merges ind på master}
+\label{fig:gitmerge}
+\end{figure}
 
 % Siden første design spike er hver eneste testede ændring blevet først ind i kodebasen som alle har brugt... på denne måde er systemet gennem hele udviklingsforløbet holdt opdateret og klar til release...
 
