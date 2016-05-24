@@ -2,13 +2,13 @@
 % introduktion
 I det følgende vil test og integration af databasen blive beskrevet. Alle komponenter er udviklet iterativt og integreret løbende.
 
-\subsubsection{UserAccess}
+\subsection{UserAccess}
 % klassens opgave... 
 \textit{UserAccess} har til ansvar at håndtere operationer som tager \textit{User}'s ind og up af databasen. Klassen er implementeret som det første i DAL og har dannet grundlag for videre udvikling.
 
 \subsubsection{Testdetaljer}
 % beskrivelse af coverage procent og antallet af test, samt begrundelse for begge.
-\textit{UserAccess.Unit.Test} 
+\textit{UserAccess.Unit.Test} har en coverage procent på 100\% og er dækket af 33 test. Med disse test er både normale brugs- og fejlscenarier dækket.
 
 % BILLEDE AF KØRTE UNITTEST
 \begin{figure}[H]
@@ -20,17 +20,19 @@ I det følgende vil test og integration af databasen blive beskrevet. Alle kompo
 
 % BILLEDE AF COVERAGE KØRT
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{figs/test/useraccesscoverage}
-	\caption{Coverage for UserAccess.}
-	\label{fig:useraccesscoverage}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/test/useraccesscoverage}
+\caption{Coverage for UserAccess.}
+\label{fig:useraccesscoverage}
 \end{figure}
 
 \subsection{Testbeskrivelse}
-% hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test. 
+% hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test.
+For hver metode er det normale brugsscenarie identificeret og testet for forskellige kombinationer. Herefter problemerne forsøgt identificeret og taget højde for.
+ 
 % hvad var let/svært at teste etc.
 
-\subsubsection{PoolAccess}
+\subsection{PoolAccess}
 % klassens opgave... 
 
 \subsubsection{Testdetaljer}
@@ -44,7 +46,7 @@ I det følgende vil test og integration af databasen blive beskrevet. Alle kompo
 % hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test. 
 % hvad var let/svært at teste etc.
 
-\subsubsection{DataAccess}
+\subsection{DataAccess}
 % klassens opgave... 
 
 \subsubsection{Testdetaljer}
