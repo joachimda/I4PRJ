@@ -1,6 +1,5 @@
 ﻿@using System.Web.UI.WebControls
 @using Microsoft.Ajax.Utilities
-@using Smartpool.Application.Model
 <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 
 @{
@@ -19,7 +18,7 @@
         <input type="text" id="text3" disabled="disabled" placeholder="Width" onkeypress="return isNumber(event)" class="dimensions">
         <input type="text" id="text4" disabled="disabled" placeholder="Depth" onkeypress="return isNumber(event)" class="dimensions"><br/>
         <input type="text" id="SerialNo" placeholder="Serial Number"><br/>
-        <input type="button" value="Add Pool">
+        <input type="submit" class="btn-login" value="Add Pool">
     </form>
             
 </div>
