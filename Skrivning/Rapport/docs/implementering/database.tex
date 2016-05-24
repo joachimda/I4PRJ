@@ -6,7 +6,16 @@ Der er med udgangspunkt i designovervejelserne i afsnit~\ref{sec:designdatabase}
 
 Databasen er implementeret med en Model First tilgang \cite{microsoftdatadevelopercenter2016}. Det vil sige at der opsættes en model (ER diagram) for databasen i Visual Studio, hvorefter der genereres et SQL script der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
 
-Data entiteten som ses på figur~\ref{fig:databaseERD_final_uml} da bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som virtual. Dette er for at gøre lazy loading muligt.\todo{Skriv om konkret impl af data og datatype}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.25\linewidth]{figs/implementering/dataentity.png}
+	\caption{Data Entity fra ER diagrammet i Visual Studio}
+	\label{fig:dataentity}
+\end{figure}
+
+Data entiteten som ses på figur~\ref{fig:dataentity} da bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som virtual. Dette er for at gøre lazy loading\todo{skriv noget om lazy loading} muligt.
+
+\todo{Skriv om konkret impl af data og datatype}
 
 \begin{figure}
 \centering
