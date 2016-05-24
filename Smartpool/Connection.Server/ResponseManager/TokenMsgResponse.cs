@@ -9,16 +9,16 @@ namespace Smartpool.Connection.Server
 {
     public class TokenMsgResponse : ITokenMsgResponse
     {
-        private readonly FakePoolKeeper _fakePoolKeeper;
+        private readonly IPoolKeeper _poolKeeper;
         private readonly Random _random = new Random();
         private readonly ISmartpoolDB _smartpoolDb;
         private readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
-            _fakePoolKeeper = new FakePoolKeeper(_smartpoolDb);
-            _fakePoolKeeper.GeneratePoolsForUser("1");
-            _fakePoolKeeper.GeneratePoolsForUser("2");
+            _poolKeeper = new PoolKeeper(_smartpoolDb);
+            _poolKeeper.GeneratePoolsForUser("1");
+            _poolKeeper.GeneratePoolsForUser("2");
         }
 
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
@@ -32,7 +32,7 @@ namespace Smartpool.Connection.Server
                     var poolCreatedSuccessfully = _smartpoolDb.PoolAccess.AddPool(apMsg.Username, apMsg.PoolName,
                         apMsg.Volume);
                     if (poolCreatedSuccessfully)
-                        _fakePoolKeeper.AddFakePoolToKeeper(apMsg.Username, apMsg.PoolName);
+                        _poolKeeper.AddPoolToKeeper(apMsg.Username, apMsg.PoolName);
                     return new GeneralResponseMsg(true, poolCreatedSuccessfully); 
 
                 case TokenSubMessageTypes.UpdatePoolRequest:

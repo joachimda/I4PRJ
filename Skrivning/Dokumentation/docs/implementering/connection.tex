@@ -34,7 +34,7 @@ Indeholder ikke yderligere informationer, men definerer en adskillelse mellem se
 \end{figure}
 
 \paragraph{ResetPasswordRequestMsg}
-Denne beskedtype er ikke blevet implementeret i hverken applikation eller database. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
+Denne beskedtype er ikke blevet færdigt implementeret. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
 \begin{lstlisting}[caption=ResetPasswordRequestMsg, label=code:ResetPasswordRequestMsg]
 public class ResetPasswordRequestMsg : ClientMsg
 {
@@ -304,13 +304,13 @@ public class LoginResponseMsg : ServerMsg
 \end{lstlisting}
 
 \subsection{Client}
-I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. Klient struktur ses i UML diagram på figur~\ref{fig:Connection.Client}
+I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. Klient struktur ses i UML diagram på figur~\ref{fig:ConnectionClient}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/Connection.Client.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionClient.png}
 	\caption{Klient diagram}
-	\label{fig:Connection.Client}
+	\label{fig:ConnectionClient}
 \end{figure}
 
 \subsubsection{Synchronous Socket Client}
@@ -358,13 +358,13 @@ public Message HandleMessage(string messageString)
 \end{lstlisting}
 
 \subsection{Server}
-I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Server struktur ses i UML diagram på figur~\ref{fig:Connection.Server}
+I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Server struktur ses i UML diagram på figur~\ref{fig:ConnectionServer}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/Connection.Server.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionServer.png}
 	\caption{Server diagram}
-	\label{fig:Connection.Server}
+	\label{fig:ConnectionServer}
 \end{figure}
 
 \subsubsection{Asynchronous Socket Listener}
@@ -392,8 +392,53 @@ Der er desuden valgt at lade exceptions blive vist i server vinduet, som f.eks. 
 Som det også fremgår i server vinduet figur~\ref{fig:asynchronousSocketListenerException} bliver en exception håndteret af serveren, og der sendes en besked af den korrekte type tilbage til klient applikationen, så hverken server eller klient crasher.
 
 \subsubsection{Response Manager}
+Denne klasse er primært baseret på en switch case, hvor der baseret på den modtagne beskeds type, returneres et passende svar som set på figur ??
+\begin{lstlisting}[caption=Server.ResponseManager, label=code:Server.ResponseManager]
+var receivedMessage = JsonConvert.DeserializeObject<Message>(receivedString, _jsonSettings);
+
+switch (receivedMessage.MsgType)
+{
+	case MessageTypes.LoginRequest:
+	var loginMessage = JsonConvert.DeserializeObject<LoginRequestMsg>(receivedString);
+	return HandleLoginRequest(loginMessage);
+	
+	case MessageTypes.TokenMsg:
+	var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
+	if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
+		return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString, _tokenKeeper);
+	else return new GeneralResponseMsg(false, false);
+	
+	case MessageTypes.AddUserRequest:
+	var addUserMessage = JsonConvert.DeserializeObject<AddUserRequestMsg>(receivedString);
+	return new GeneralResponseMsg(false, _smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
+	
+	case MessageTypes.ResetPasswordRequest:
+	var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
+	return new GeneralResponseMsg(false, false); //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+	
+	default:
+	return new GeneralResponseMsg(false, false)	{MessageInfo = "The server did not recognize your request"};
+}
+\end{lstlisting}
+
+Klassens switch-case er indkapslet i en try block, hvori der sørges for at eventuelle exceptions bliver håndteret, og der sendes et passende svar tilbage til klienten. Der er yderligere lavet en metode til håndtering af login requests, da denne som den eneste krævede en længere håndtering. Denne anvender en task til at kalde i databasen, da dette ved test af og til tog længere tid end forventet. Metoden ses på figur ??
+
+\begin{lstlisting}[caption=Server.ResponseManager.HandleLoginRequest, label=code:Server.ResponseManager.HandleLoginRequest]
+var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMsg.Username, loginMsg.Password));
+if (task.Wait(TimeSpan.FromSeconds(15))) //if task is completed within time limit
+{
+	return task.Result ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMsg.Username), true) : new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect"};
+}
+else
+	return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
+\end{lstlisting}
 
 \subsubsection{Token System}
-
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/connection/ConnectionServerToken.png}
+	\caption{Connection.Server.Token}
+	\label{fig:ConnectionServerToken}
+\end{figure}
 \subsubsection{FakePool DataGeneration}
 

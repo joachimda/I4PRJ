@@ -3,7 +3,7 @@ using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
-    internal class SensorValueAuthenticator
+    internal class SensorValueAuthenticator : ISensorValueAuthenticator
     {
         private const double MinTemp = 20;
         private const double MaxTemp = 40;
