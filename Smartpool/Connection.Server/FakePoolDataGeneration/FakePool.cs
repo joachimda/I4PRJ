@@ -6,20 +6,20 @@ using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
-    public class FakePool
+    public class Pool : IPool
     {
-        public string UserName { get; set; }
-        public string PoolName { get; set; }
-        public ISmartpoolDB SmartpoolDb { get; set; }
-        private readonly int _amountOfSensors;
+        private string UserName { get; }
+        private string PoolName { get; }
+        private ISmartpoolDB SmartpoolDb { get; set; }
+        //private readonly int _amountOfSensors;
         private readonly List<ISensor> _fakeSensors;
 
-        public FakePool(int amountOfSensors, int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
+        public Pool(int amountOfSensors, int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
         {
             UserName = userName;
             PoolName = poolName;
             SmartpoolDb = smartpoolDb;
-            _amountOfSensors = amountOfSensors;
+            //_amountOfSensors = amountOfSensors;
             _fakeSensors = new List<ISensor>();
             GenerateSensors();
             var timer = new Timer { Interval = 1000 * secondsBetweenSensorReadings };
@@ -58,9 +58,9 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
                 _fakeSensors[1].LastSensorValueEntry, _fakeSensors[3].LastSensorValueEntry);
         }
 
-        public List<Tuple<SensorTypes, List<double>>> GetSensorValuesList()
-        {
-            return _fakeSensors.Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
-        }
+        //public List<Tuple<SensorTypes, List<double>>> GetSensorValuesList()
+        //{
+        //    return _fakeSensors.Select(sensor => new Tuple<SensorTypes, List<double>>(sensor.SensorType, sensor.SensorValueList)).ToList();
+        //}
     }
 }
