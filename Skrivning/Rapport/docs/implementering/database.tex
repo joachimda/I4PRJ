@@ -80,15 +80,18 @@ Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en 
 
 \subsubsection{Tilføj user}
 
-\begin{lstlisting}[]
+\textit{Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet}
+
+I de følgende kodeudsnit vises der med tilhørende forklaringer hvordan en bruger bliver oprettet og gemt i databasen. Der tages udgangspunkt i metoden \textit{AddUser}, som er en del af UserAccess\footnote{Se dokumentationen XXXX} klassen. AddUser metoden kaldes af ConnectionServer klassen \todo{indsæt kodeudsnit af kald her!} som set på figur XXXX.
+ 
+\begin{lstlisting}[caption=User laves lokalt hvorefter User's navne properties sættes, label=code:adduser1]
 public bool AddUser(string fullname, string email, string password)
 {
-
-	if (IsEmailInUse(email)) return false;
-
+	...
+	//Checks for existing user and valid name
+	...
+	
 	User user;
-
-	if (!ValidateName(fullname)) return false;
 
 	string[] names = fullname.Split(' ');
 
@@ -100,7 +103,11 @@ public bool AddUser(string fullname, string email, string password)
 	{
 		user = new User() { Firstname = names[0], Middelname = names[1], Lastname = names[2], Email = email, Password = password };
 	}
+\end{lstlisting}
 
+Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokalt, hvorefter user objektets navne, password og email properties sættes. En User's navn opdeles i Firstname, Middlename og Lastname strings. 
+
+\begin{lstlisting}[caption=User objektet tilføjes i database konteksten hvorefter der gemmes på selve databasen,label=code:adduser2]
 	using (var db = new DatabaseContext())
 	{
 		db.UserSet.Add(user);
@@ -110,3 +117,6 @@ public bool AddUser(string fullname, string email, string password)
 	return true;
 }
 \end{lstlisting}
+
+Når der skal foretages ændringer på databasen, oprettes et database kontekst objekt hvor ændringerne gemmes på. Derefter kaldes \textit{db.SaveChanges()} metoden, som gemmer ændringerne på selve databasen. Se kodeudsnit \ref{code:adduser2} for eksempel på brugen af database konteksten med \textit{using} direktivet.
+
