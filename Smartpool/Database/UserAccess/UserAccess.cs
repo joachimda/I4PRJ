@@ -140,8 +140,7 @@ namespace Smartpool
                 Console.WriteLine("Herro pree, u can haz exception: " + e);
                 return false;
             }
-
-            if (user == null) return false;
+            
             if (user.Password == password) return true;
 
             return false;
