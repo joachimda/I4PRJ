@@ -187,7 +187,8 @@ namespace Smartpool.Application.Win
                     var valueTextIsVisible = false;
                     var valueTextIsLocalMinimum = false;
 
-                    if (i == 0 || i == (_pointsOnGraphs - 1)) ;   //avoids argumentsOutOfRangeException
+                    if (i == 0 || i == (_pointsOnGraphs - 1)) //avoids argumentsOutOfRangeException
+                    { }  
                     else if (history[i] < history[i - 1] && history[i] < history[i + 1])
                     {
                         valueTextIsVisible = true;
