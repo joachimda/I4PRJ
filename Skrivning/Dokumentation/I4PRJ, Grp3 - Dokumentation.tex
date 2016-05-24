@@ -1,8 +1,8 @@
 \documentclass[a4paper,11pt,oneside]{memoir}
-\input{utils/packages}
-\input{utils/layout}
-\input{utils/listings}
-\input{utils/ordliste}
+\input{../utils/packages}
+\input{../utils/layout}
+\input{../utils/listings}
+\input{../utils/ordliste}
 
 %% Forside variabler
 \newcommand{\Kursus}{I4PRJ4 F16}
@@ -10,14 +10,14 @@
 \newcommand{\Gruppe}{Gruppe 3}
 \newcommand{\Projektdokument}{Dokumentation}
 
-\bibliography{utils/litteratur} %% Litteratur
+\bibliography{../utils/litteratur} %% Litteratur
 
 \begin{document}		
 	\frontmatter
 	\pagestyle{asereport}
 	\input{utils/frontpage}					\clearpage %% Forside
-	\input{docs/frontmatter/abstract}		\clearpage %% Abstract
-	\input{docs/frontmatter/forord}			\clearpage %% Forord
+	%\input{docs/frontmatter/abstract}		\clearpage %% Abstract
+	%\input{docs/frontmatter/forord}		\clearpage %% Forord
 	\tableofcontents						\clearpage %% ToC
 	
 	\mainmatter
@@ -27,7 +27,8 @@
 	\input{docs/systemarkitektur/main}		\clearpage %% Systemarkitektur
 	\input{docs/design/main}				\clearpage %% Design
 	\input{docs/implementering/main}		\clearpage %% Implementering
-	\input{docs/integration/main}			\clearpage %% Integration
+	\input{docs/test/main}					\clearpage %% Test
+	%\input{docs/integration/main}			\clearpage %% Integration % i test nu
 	\input{docs/accepttest/main}			\clearpage %% Accepttest
 	\input{docs/appendix/main}				\clearpage %% Appendix
 	
