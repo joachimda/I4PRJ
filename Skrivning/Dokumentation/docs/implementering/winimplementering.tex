@@ -19,24 +19,20 @@ Placeholder teksten er lavet som en property, som kan sættes på alle controls 
 \begin{lstlisting}[caption=ThemeProperties, label=code:ThemeProperties]
 public static class ThemeProperties
 {
-public static string GetPlaceholderText(DependencyObject obj)
-{
-return (string)obj.GetValue(PlaceholderTextProperty);
-}
-
-public static void SetPlaceholderText(DependencyObject obj, string value)
-{
-obj.SetValue(PlaceholderTextProperty, value);
-}
-
-public static readonly DependencyProperty PlaceholderTextProperty =
-DependencyProperty.RegisterAttached(
-"PlaceholderText",
-typeof(string),
-typeof(ThemeProperties),
-new FrameworkPropertyMetadata("Placeholder"));
+	public static string GetPlaceholderText(DependencyObject obj)
+	{
+		return (string)obj.GetValue(PlaceholderTextProperty);
+	}
+	
+	public static void SetPlaceholderText(DependencyObject obj, string value)
+	{
+		obj.SetValue(PlaceholderTextProperty, value);
+	}
+	
+	public static readonly DependencyProperty PlaceholderTextProperty = DependencyProperty.RegisterAttached("PlaceholderText", typeof(string),	typeof(ThemeProperties), new FrameworkPropertyMetadata("Placeholder"));
 }
 \end{lstlisting} 
+
 Med SetPlaceholderText() kan man så sætte placeholder teksten til en given control.
 Det kunne have været lavet som en PlaceholderTextBox klasse ligesom StatViewer i figur~\ref{code:StatViewer}, men dette blev lavet inden den idé opstod.
 
