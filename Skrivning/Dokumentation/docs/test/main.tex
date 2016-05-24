@@ -14,9 +14,21 @@ System er udviklet i tre faser:
 	Sensormålinger skal kunne opbevares og vises. 
 \end{enumerate}
 
-Efter hver af disse faser hvor henholdsvis databasen, \gls{windserver} og GUI applikationerne.
+Efter hver af disse faser, er der afsat en dag til at integrere systemet. Dette er for de nærliggende grænseflader også gjort i løbet af processen. Derfor har det ikke været noget problem at forbinde komponenterne. 
 
 % værktøjer til test... Nunit, Nsub, github, travis?
+\section{Værktøjer}
+Enhedstest er skrevet i Visual Studio, samtidigt med produktionskoden. Til at lave enhedstest er \gls{nunit} brugt sammen med \gls{nsub}. 
+\gls{dotcover} er anvendt til at bestemme coverage af koden - på denne måde har gruppen i løbet af udviklingen været opmærksom på hvilke dele af koden, som ikke har været dækket af automatiske test.
+For alle tre store komponenter: GUI-applikationer, \gls{windserver} og DAL, har det været tydligt for gruppen at DAL har været lettest at dække med enhedstest, se figur~\ref{fig:coverage}.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/test/coverage}
+\caption{}
+\label{fig:coverage}
+\end{figure}
+
 
 % Siden første design spike er hver eneste testede ændring blevet først ind i kodebasen som alle har brugt... på denne måde er systemet gennem hele udviklingsforløbet holdt opdateret og klar til release...
 
