@@ -15,11 +15,15 @@ Data entiteten som ses på figur~\ref{fig:databaseERD_final_uml} da bruges som e
 
 \subsection{Implementering af data-access layer}
 
-\subsubsection{Træk pooldata ud}
-
 Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Ændringer/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontektsobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne i konteksten. Resultatet en af query kan da behandles i en foreach løkke.
 
 For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som tager udgangspunkt i to af projektets user stories, herunder tilføjelse af bruger samt at visning af pooldata.
+
+\subsubsection{Træk pooldata ud}
+
+\textit{Som bruger vil jeg kunne se min pools data}\
+
+I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring af alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
 
 \begin{lstlisting}[caption= GetChlorineData method - konvertering af DateTime objekter, label=code:getChlorineData]
 
@@ -28,7 +32,6 @@ public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail,
 double days = System.Convert.ToDouble(daysToGoBack);
 string now = DateTime.UtcNow.ToString("G");
 string start = DateTime.Parse(now).AddDays(-days).ToString("G");
-
 \end{lstlisting}
 
 På kodeudsnit \ref{code:getChlorineDataIterator} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslet og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til data queryen. Strengen G der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}
