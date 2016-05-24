@@ -57,8 +57,6 @@
     <Compile Include="Presenters\Interfaces\ISignUpViewController.cs" />
     <Compile Include="Presenters\SignUpViewController.cs" />
     <Compile Include="Presenters\StatViewController.cs" />
-    <Compile Include="Redundant\Tab Bar Controller\ITabBarController.cs" />
-    <Compile Include="Redundant\Tab Bar Controller\TabBarController.cs" />
     <Compile Include="View Interfaces\IAddPoolView.cs" />
     <Compile Include="View Interfaces\IAlertDisplaying.cs" />
     <Compile Include="View Interfaces\IEditPoolView.cs" />
@@ -71,8 +69,6 @@
     <Compile Include="View Interfaces\IPoolDisplaying.cs" />
     <Compile Include="View Interfaces\IView.cs" />
     <Compile Include="Presenters\Interfaces\IViewController.cs" />
-    <Compile Include="Redundant\ITabbedViewController.cs" />
-    <Compile Include="Redundant\ITabbedView.cs" />
     <Compile Include="Presenters\Interfaces\IStatViewController.cs" />
     <Compile Include="View Interfaces\IStatView.cs" />
     <Compile Include="View Interfaces\ISignUpView.cs" />
