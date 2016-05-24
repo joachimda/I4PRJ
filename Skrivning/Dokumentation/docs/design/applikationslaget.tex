@@ -112,7 +112,7 @@ IViewController interfacet er det mest generelle presenter-interface, som implem
 \end{figure}
 
 \subsubsection{IPoolControlling}
-IPoolControlling er et interface der er segregeret fra de interfaces som håndterer visning og styring af pool oplysninger. Interfacet indeholder �n motode, DidSelectPool(int), som bør kaldes af det tilhørende view, efter en pool er valgt i view?et, fra en liste eller lignende. Integer parameteren repræsenterer indekset på den valgte pool, i listen af pools (se Session).  
+IPoolControlling er et interface der er segregeret fra de interfaces som håndterer visning og styring af pool oplysninger. Interfacet indeholder en motode, DidSelectPool(int), som bør kaldes af det tilhørende view, efter en pool er valgt i view?et, fra en liste eller lignende. Integer parameteren repræsenterer indekset på den valgte pool, i listen af pools (se Session).  
 \begin{figure}
 	\centering
 	\includegraphics[width=0.3\linewidth]{figs/design/application_ipoolcontrolling}
@@ -161,7 +161,7 @@ I dette afsnit beskrives designet af applikationens view-interfaces. Disse inter
 I de efterfølgende afsnit beskrives designet af applikationslagets view-interfaces.
 
 \subsubsection{IView}
-Dette interface er det mest generelle view-interface, som implementeres af alle de andre views. Interfacet indeholder �n property, Controller, som er en IViewController beskrevet i foregående afsnit. Alle views har derfor en controller, som de kan kalde ViewDidLoad på, eller typecaste til en mere specifik controller, som passer til det konkrete view.
+Dette interface er det mest generelle view-interface, som implementeres af alle de andre views. Interfacet indeholder en property, Controller, som er en IViewController beskrevet i foregående afsnit. Alle views har derfor en controller, som de kan kalde ViewDidLoad på, eller typecaste til en mere specifik controller, som passer til det konkrete view.
 
 \begin{figure}
 	\centering
@@ -216,7 +216,7 @@ Dette interface er modparten til IEditPoolViewController, og omhandler dermed re
 [Tabel mangler]
 
 \subsubsection{IStatView}
-IStatView er modparten til IStatViewController. Dette interface indeholder �n metode, der skal kunne indlæse sensor data i view?et. Sensor data bliver sendt som en liste af tupler, med sensor type og måleværdi.
+IStatView er modparten til IStatViewController. Dette interface indeholder en metode, der skal kunne indlæse sensor data i view?et. Sensor data bliver sendt som en liste af tupler, med sensor type og måleværdi.
 
 \begin{figure}
 	\centering
@@ -226,7 +226,7 @@ IStatView er modparten til IStatViewController. Dette interface indeholder �n me
 \end{figure}
 
 \subsubsection{IHistoryView}
-Dette interface er modparten til IHistoryViewController. Interface indeholder �n metode, der skal kunne indlæse historisk sensor data i view?et. Sensor data bliver sendt som en liste af tupler, med sensor type og en liste af måleværdier.
+Dette interface er modparten til IHistoryViewController. Interface indeholder en metode, der skal kunne indlæse historisk sensor data i view?et. Sensor data bliver sendt som en liste af tupler, med sensor type og en liste af måleværdier.
 
 \begin{figure}
 	\centering
