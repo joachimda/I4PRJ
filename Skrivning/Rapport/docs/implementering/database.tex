@@ -6,22 +6,37 @@ Der er med udgangspunkt i designovervejelserne i afsnit~\ref{sec:designdatabase}
 
 Databasen er implementeret med en Model First tilgang \cite{microsoftdatadevelopercenter2016}. Det vil sige at der opsættes en model (ER diagram) for databasen i Visual Studio, hvorefter der genereres et SQL script der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
 
+Data entiteten som ses på figur~\ref{fig:datasetentity} da bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som virtual. Dette er for at gøre lazy loading muligt, hvilket betyder at de først bliver loadet fra databasen når de tilgås gennem deres navigation property \cite{microsoftdevelopernetwork2016} (linje 7 i listing~\ref{code:chlorinecode}).
+
+Som det kan ses på figur~\ref{fig:datasetentity}, har diverse datatyper (Chlorine, Ph...) en \textit{DataId} property. Denne bruger til at identificere hvilket \textit{DataSet} den enkelte måling høre til. På denne måde behøver de enkelte datatyper ikke selv at have et \textit{Timestamp} medlem. 
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.25\linewidth]{figs/implementering/dataentity.png}
+	\includegraphics[width=0.8\linewidth]{figs/implementering/datasetentity.png}
 	\caption{Data Entity fra ER diagrammet i Visual Studio}
-	\label{fig:dataentity}
+	\label{fig:datasetentity}
 \end{figure}
 
-Data entiteten som ses på figur~\ref{fig:dataentity} da bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som virtual. Dette er for at gøre lazy loading\todo{skriv noget om lazy loading} muligt.
+Når \gls{ef} oversætter ER diagrammet til C\# kode og laver scriptet, bliver eksempelvis Chlorine Entity'en til C\# koden vist i listing~\ref{code:chlorinecode}. I dette kodesnit kan man se hvordan \gls{ef} har givet \textit{Chlorine} klassen en \textit{virtual Data}, som et eksempel på lazy loading anvendt.
 
-\todo{Skriv om konkret impl af data og datatype}
+\begin{minipage}[h]{\linewidth}
+\begin{lstlisting}[caption=C\# kode repræsentationen af Chlorine entity.,label=code:chlorinecode]
+public partial class Chlorine
+{
+	public int Id { get; set; }
+	public double Value { get; set; }
+	public int DataId { get; set; }
+	
+	public virtual Data Data { get; set; }
+}
+\end{lstlisting}
+\end{minipage}
 
 \begin{figure}
-\centering
-\includegraphics[width=0.5\linewidth]{figs/implementering/efGeneratedData.PNG}
-\caption{Data klassen - Genereret fra Entity Model}
-\label{fig:efGeneratedData}
+	\centering
+	\includegraphics[width=0.5\linewidth]{figs/implementering/efGeneratedData.PNG}
+	\caption{Data klassen - Genereret fra Entity Model}
+	\label{fig:efGeneratedData}
 \end{figure}
 
 \subsection{Implementering af data-access layer}
@@ -37,7 +52,6 @@ For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som 
 I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring af alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
 
 \begin{lstlisting}[caption= GetChlorineData method - konvertering af DateTime objekter, label=code:getChlorineData]
-
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
 {
 double days = System.Convert.ToDouble(daysToGoBack);
