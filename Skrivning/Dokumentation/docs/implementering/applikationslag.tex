@@ -1,9 +1,113 @@
+% !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
 \section{Applikationslaget}
-Implementeringen af applikationslaget er god. Nedenfor ses resultatet.
+Dette afsnit beskriver implementeringen af applikationslaget. Implementeringen af applikationslaget består i, at implementere lagets modelklasser, presenterklasser og platform-specifikke user interface programmer. 
+
+\subsection{Implementering af modelklasser}
+Implementeringen af modelklasserne i applikationslaget beskrives i dette afsnit. Modelklasserne er implementeret i sproget C#, i Microsoft Visual Studio.
+
+\subsubsection{Session.cs}
+Session-klassen indeholder hovedsageligt properties, som kan oversættes direkte fra klassens design til kode. Da Session klassen er designet som en Singleton, beskrives implementeringen af dens constructor og statiske Session medlem i dette afsnit.
+
+Listing~\ref{code:application_model_sharedsession} viser implementeringen af klassens statiske medlem. Når SharedSession bliver brugt første gang, laves en ny Session. I efterfølgende brug returneres den statiske session fra backing variablen sharedSession.
+
+\begin{lstlisting}[caption={SharedSession}\label={code:application_model_sharedsession}]
+public static Session SharedSession => _sharedSession ?? (_sharedSession = new Session());
+\end{lstlisting}
+
+Listing~\ref{code:application_model_sessionconstructor} viser implementeringen af Session-klassens constructor. Constructor'en er gjordt privat, således at SharedSession beskrevet i listing~\ref{code:application_model_sharedsession}, er den eneste måde man kan oprette en Session.
+
+\begin{lstlisting}[caption={Session constructor}\label={code:application_model_sessionconstructor}]
+private Session()
+{
+	SelectedPoolIndex = 0;
+	Pools = new List<Tuple<string, bool>>();
+}
+\end{lstlisting}
+
+\subsubsection{PoolLoader.cs}
+PoolLoader-klassen indeholder en række metoder til at hente data fra connection-serveren. Generelt opretter metoder en passende besked fra Smartpool.Connection.Model, sender den med en IClientMessenger, og parser evt. svaret der modtages fra serveren.
+
+Listing~\ref{code:application_model_gcdfp} viser implementeringen af en af disse metoder. I metoden oprettes en GetPoolDataRequestMsg som instantieres med sessionsinformation fra Session-klassen. Når svaret modtages, trækkes den relevante data ud af svarbeskeden, og laves om til en passende type.
+
+\begin{lstlisting}[caption={GetCurrentDataFromPool(...)}\label={code:application_model_gcdfp}]
+public List<Tuple<SensorTypes, double>> GetCurrentDataFromPool(IClientMessenger clientMessenger)
+{
+	var request = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, false, _session.SelectedPool.Item1);
+	var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(request);
+	return response.SensorList.Select(sensor => new Tuple<SensorTypes, double>(sensor.Item1, sensor.Item2.LastOrDefault())).ToList();
+}
+\end{lstlisting}
+
+Klassen indeholder også metoder der indlæser data i den statiske Session-instans. Metoden i listing~\ref{code:application_model_reloadpools} er et eksempel på dette. Metoden efterspørger pool-information fra serveren og gemmer den data der modtages i Session-instansen.
+
+\begin{lstlisting}[caption={ReloadPools(...)}\label={code:application_model_reloadpools}]
+public void ReloadPools(IClientMessenger clientMessenger)
+{
+	var poolRequest = new GetPoolDataRequestMsg(_session.UserName, _session.TokenString, true);
+	var response = (GetPoolDataResponseMsg) clientMessenger.SendMessage(poolRequest);
+	_session.Pools = response.AllPoolNamesListTuple;
+}
+\end{lstlisting}
+
+\subsubsection{PoolValidator.cs}
+PoolValidator-klassen indeholder de properties der blev defineret i klassens design, samt implementeringen af de tilhørende funktioner. PoolValidator-klassens ansvar består i at tilbyde en måde, at validere pool-oplysninger. Metoden i listing~\ref{code:application_model_pvisvalid} definere hvornår en pool anses som værende godkendt i systemet. Som det fremgår af kodestykket, foretages en sammenligning af indholdet af klassens Name og SerialNumber properties.
+
+\begin{lstlisting}[caption={IsValid()}\label={code:application_model_pvisvalid}]
+public bool IsValid()
+{
+	if (Name.Length == 0) return false;
+	if (SerialNumber.Length == 0) return false;
+	return true;
+}
+\end{lstlisting}
+
+Klassen indeholder også funktionalitet, der tillader parsing af poolstørrelse og volumen, fra string til double-repræsentation. Listing~\ref{code:application_model_parsedvolume} implementerer denne funktionalitet. Metoden prøver først at parse klassens volume property hvis den indeholder en string, hvis ikke, prøver forsøger klassen at parse dimensions arrayet.
+
+\begin{lstlisting}[caption={ParsedVolume()}\label={code:application_model_parsedvolume}]
+private double ParsedVolume()
+{
+if (_volume != "")
+	{
+	_dimensions[0] = ""; _dimensions[1] = ""; _dimensions[2] = "";
+	try
+	{
+		var volume = double.Parse(_volume);
+		return volume > 0 ? volume : 0;
+	}
+	catch (Exception)
+		return 0;
+}
+else
+ {
+	 _volume = "";
+	try
+		return double.Parse(_dimensions[0]) * double.Parse(_dimensions[1]) * double.Parse(_dimensions[2]);
+	catch (Exception)
+		return 0;
+	}
+ }
+\end{lstlisting}
+
+\subsubsection{UserValidator.cs}
+UserValidator-klassen indeholder de properties der blev defineret i klassens design, samt implementeringen af de tilhørende funktioner. Klassen kan validere brugeroplysninger, ved hjælp af de metoder der ses implementeret i listing~\ref{code:application_model_uservalidator}.
+
+\begin{lstlisting}[caption={UserValidator valideringsmetoder}\label={code:application_model_uservalidator}]
+public bool PasswordIsValid => Passwords[0].Length >= MinimumCharacters && Passwords[0] == Passwords[1];
+public bool IsValidForSignup => PasswordIsValid && Name.Length > 0 && Email.Length > 0;
+public bool IsValidForLogin => Email.Length > 0 && Passwords[0].Length > 0;
+\end{lstlisting}
+
+Metoderne beskriver forskellige valideringsscenarier, og benytter klassens properties til at vurdere hvorvidt de indtastede oplysninger er tilstrækkelige.
+
+\subsection{Implementering af presenter-klasser}
+Dette afsnit beskriver implementeringen af applikationslaget. Implementeringen af applikationslaget består i, at implementere lagets modelklasser, presenterklasser og platform-specifikke user interface programmer. 
+
+\subsection{Implementering af view-klasser}}
+Applikationslagets view-interfaces er blevet implementeret af klasser på forskellige platforme, og beskrives derfor i deres egne afsnit. På figur~\ref{fig:view_family} illustreres de færdigimplementerede brugergrænseflader. 
 
 \begin{figure}
 	\centering
 	\includegraphics[width=1.0\linewidth]{figs/implementering/view_family}
-	\caption{FamilieportrÃ¦t}
+	\caption{Brugergrænsefladeimplementering på hhv. iOS, Windows og Web}
 	\label{fig:view_family}
 \end{figure}
