@@ -5,28 +5,85 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.UI.HtmlControls;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Smartpool_Website.Models;
+using Smartpool.Application.Presentation;
+using Smartpool.Connection.Model;
+using Smartpool.Connection.Client;
+using Newtonsoft.Json;
 
 namespace Smartpool_Website.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : Controller, ILoginView
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
         public AccountController()
         {
+            InitiateController();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
+            InitiateController();
         }
+
+        private void InitiateController()
+        {
+            Controller = new LoginViewController(this, new ClientMessenger(new SynchronousSocketClient("a")));
+            Controller.ViewDidLoad();
+        }
+
+        // ILoginView Implementation
+
+        public IViewController Controller { get; set; }
+
+        private string _returnUrl = "";
+
+        public void DisplayAlert(string title, string content) { }
+
+        public void SetEmailText(string text)
+        {
+            ViewBag.Message = text;
+            ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
+        }
+
+        public void SetPasswordText(string text)
+        {
+            ViewBag.Message = text;
+            ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
+        }
+
+        public void SetLoginButtonEnabled(bool enabled) { }
+
+        public void LoginAccepted()
+        {
+            ActionInvoker.InvokeAction(ControllerContext, "RedirectLogin");
+        }
+
+        [AllowAnonymous]
+        public ActionResult RedirectLogin()
+        {
+            return RedirectToLocal(_returnUrl);
+        }
+
+        [AllowAnonymous]
+        public ActionResult SetTextFieldText ()
+        {
+            return View(_returnUrl);
+        }
+
+        // Controller implementation
 
         public ApplicationSignInManager SignInManager
         {
@@ -68,28 +125,39 @@ namespace Smartpool_Website.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+            var loginController = Controller as ILoginViewController;
+            loginController.DidChangeEmailText(model.Email);
+            loginController.DidChangePasswordText(model.Password);
+            loginController.ButtonPressed(LoginViewButton.LoginButton);
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            _returnUrl = returnUrl;
+
+            return View(model);
         }
+
+        /*
+if (!ModelState.IsValid)
+{
+
+}
+
+// This doesn't count login failures towards account lockout
+// To enable password failures to trigger account lockout, change to shouldLockout: true
+var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+switch (result)
+{
+    case SignInStatus.Success:
+        return RedirectToLocal(returnUrl);
+    case SignInStatus.LockedOut:
+        return View("Lockout");
+    case SignInStatus.RequiresVerification:
+        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+    case SignInStatus.Failure:
+    default:
+        ModelState.AddModelError("", "Invalid login attempt.");
+        return View(model);
+}
+*/
 
         //
         // GET: /Account/VerifyCode
