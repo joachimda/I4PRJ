@@ -129,7 +129,8 @@ Klassen hjælper med at isolere brugervalideringslogik, fra klasser i præsentat
 		+ MinimumCharacters  				& En integer der angiver det mindst mulige antal af karaktere der kan indgå i brugerens password. MinimumCharacters er const og kan derfor kun læses udefra. MinimumCharacters bruges af PasswordIsValid metoden til at vurdere hvorvidt et password er gyldigt. \\\hline
 		+ Passwords  			& En array af tekststrenge der bruges til at gemme de passwords som indtastes af brugeren. Et array af passwords er nødvendigt da to passwords skal sammenlignes for at sikre at brugeren har indtastet passwordet rigtigt gentagende gange.\\\hline
 		+ IsValidForLogin() 				& En metode der returnere en boolean værdi, som angiver hvorvidt UserValidator-klassens state tillader login. I denne metode tjekkes medlemsvariablerne Name og Passwords. \\\hline
-		+ IsValidForSignup() 			& En metode der returnere en boolean værdi, som angiver hvorvidt UserValidator-klassens state tillader brugeroprettelse. I denne metode tjekkes alle medlemsvariablerne. \\\hline
+		+ IsValidForSignup() 			& En metode der returnere en boolean værdi, som angiver hvorvidt UserValidator-klassens state tillader brugeroprettelse. I denne metode tjekkes alle medlemsvariablerne.
+ \\\hline
 		+ PasswordIsValid()				& En metode der sammenligner de passwords som er gemt i medlemsvariablen Passwords, og returnere en boolean der angiver hvorvidt de er ens. \\
 		\bottomrule
 		\end{tabular}
@@ -150,7 +151,7 @@ Presenter-interfacene definerer en simpel protokol mellem view og presenter. De 
 	\includegraphics[width=1.0\linewidth]{figs/design/application_presentation_interfaces}
 	\caption{Presenter interfaces}
 	\label{fig:application_presentation_interfaces}
-\end{figure}
+\end{figure}\todo{skal muligvis på en pdf for sig, så man har en change for at læse det.}
 
 I de efterfølgende afsnit beskrives designet af de forskellige presenter-interfaces.
 
@@ -338,7 +339,8 @@ ILoginView er modparten til ILoginViewController interfacet. Dette interface ind
 		\toprule
 		\textbf{Klassemedlem}	& \textbf{Beskrivelse} \\
 		\midrule
-		+ LoginAccepted()				& En metode der notificerer view?et, når et login er gennemført.	\\\hline
+		+ LoginAccepted()				& En metode der notificerer view?et, når et login er gennemført.
+	\\\hline
 		+ SetEmailText(...)				& Metoder der sætter teksten i view?ets tekstfelter. \\
 		+ SetPasswordText(...)				& \\\hline
 		+ SetLoginButtonEnabled(...) 					& En metode der ændre på hvorvidt brugeren har mulighed for at gennemføre logge ind. \\
@@ -400,7 +402,8 @@ Dette interface er modparten til IEditPoolViewController, og omhandler dermed re
 		+ PoolUpdated()					& En metode der kaldes når en pool er blevet opdateret i systemet. \\\hline
 		+ SetDeleteButtonEnabled(...)				& Metoder der kaldes, for at ændre på tilstanden af knapperne i view?et. \\
 		+ SetSaveButtonEnabled(...)				& \\\hline
-		+ SetNameText(...)						& Metoder der kaldes, for at sætte teksten i view?ets tekstfelter. \\
+		+ SetNameText(...)						& Metoder der kaldes, for at sætte teksten i view?ets tekstfelter.
+ \\
 		+ SetSerialNumberText(...)				& \\
 		+ SetVolumeText(...)						& \\
 		\bottomrule
@@ -439,7 +442,7 @@ Presenter-klasserne er designet til at være platform-uafhængige, ved ikke at b
 	\includegraphics[width=0.9\linewidth]{figs/design/application_presentation_full}
 	\caption{Klasser og interfaces i præsentationslaget}
 	\label{fig:application_presentation_full}
-\end{figure}
+\end{figure}\todo{skal muligvis i en pdf for sig, readability you know...}
 
 I de efterfølgende afsnit beskrives kort, de metoder og properties, der er tilføjet designet af de konkrete presenters, og som ikke er beskrevet ved deres interface.
 
