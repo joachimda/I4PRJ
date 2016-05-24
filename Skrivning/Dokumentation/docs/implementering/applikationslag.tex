@@ -3,7 +3,7 @@
 Dette afsnit beskriver implementeringen af applikationslaget. Implementeringen af applikationslaget består i, at implementere lagets modelklasser, presenterklasser og platform-specifikke user interface programmer. 
 
 \subsection{Implementering af modelklasser}
-Udvalgte dele af implementeringen af modelklasserne i applikationslaget beskrives i dette afsnit. Modelklasserne er implementeret i sproget C Sharp, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Model projektet.
+Udvalgte dele af implementeringen af modelklasserne i applikationslaget beskrives i dette afsnit. Modelklasserne er implementeret i sproget C \#, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Model projektet.
 
 \subsubsection{Session.cs}
 Session-klassen indeholder hovedsageligt properties, som kan oversættes direkte fra klassens design til kode. Da Session klassen er designet som en Singleton, beskrives implementeringen af dens constructor og statiske Session medlem i dette afsnit.
@@ -100,7 +100,7 @@ public bool IsValidForLogin => Email.Length > 0 && Passwords[0].Length > 0;
 Metoderne beskriver forskellige valideringsscenarier, og benytter klassens properties til at vurdere hvorvidt de indtastede oplysninger er tilstrækkelige.
 
 \subsection{Implementering af presenter-klasser}
-Udvalgte dele af implementeringen afpresenter-klasserne i applikationslaget beskrives i dette afsnit. Presenter-klasserne er udviklet i sproget C Sharp, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Presentation projektet. Presenter-klasserne implementerer de interfaces der er defineret i designet, samt metoder og parametre i de konkrete klassers design.
+Udvalgte dele af implementeringen afpresenter-klasserne i applikationslaget beskrives i dette afsnit. Presenter-klasserne er udviklet i sproget C \#, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Presentation projektet. Presenter-klasserne implementerer de interfaces der er defineret i designet, samt metoder og parametre i de konkrete klassers design.
 
 Fælles for alle presenter-klasserne er, at de implementerer en ViewDidLoad metode, da denne metode er defineret i IViewController interfacet. Et eksempel på en ViewDidLoad implementering ses i listing~\ref{code:application_impl_viewdidload}.
 
@@ -193,6 +193,183 @@ Udover denne type metode, implementerer LoginViewController-klassen en Login met
 \end{lstlisting}
 
 Login metoden konstruere en LoginRequestMsg, som den sender til serveren via. presenterens IClientMessenger. Når et svar modtages, tjekkes det hvorvidt anmodningen blev godkendt eller ej, og view'et opdateres.
+
+\subsubsection{AddPoolViewController.cs}
+AddPoolViewController-klassen skal kunne håndtere tekst
+
+\begin{lstlisting}[caption={DidChangeText(...)},label={code:application_impl_apvcdct}]
+public void DidChangeText(AddPoolTextField textField, string text)
+{
+	// Switch based on text field type and set the proper variable
+	switch (textField)
+	{
+	case AddPoolTextField.PoolName:
+		Pool.Name = text;
+		break;
+	case AddPoolTextField.SerialNumber:
+		Pool.SerialNumber = text;
+		break;
+	case AddPoolTextField.Volume:
+		Pool.UpdateVolume(text, null);
+		_dimensions[0] = ""; _dimensions[1] = ""; _dimensions[2] = "";
+		break;
+	case AddPoolTextField.Width:
+		_dimensions[0] = text;
+		Pool.UpdateVolume(null, _dimensions);
+		break;
+	case AddPoolTextField.Length:
+		_dimensions[1] = text;
+		Pool.UpdateVolume(null, _dimensions);
+		break;
+	case AddPoolTextField.Depth:
+		_dimensions[2] = text;
+		Pool.UpdateVolume(null, _dimensions);
+		break;
+	}
+
+	// Update the pool button state since input could have changed the expected state
+	UpdateAddPoolButton();
+}
+\end{lstlisting}
+
+Den skal også kunne sende beskeder til serveren.
+
+\begin{lstlisting}[caption={DidChangeText(...)},label={code:application_impl_lvcdcet}]
+public void AddPoolButtonPressed()
+{
+	if (!Pool.IsValid()) return;
+
+	var userName = Session.SharedSession.UserName;
+	var tokenString = Session.SharedSession.TokenString;
+
+	// Send add pool request to server
+	var addPoolMessage = new AddPoolRequestMsg(userName, tokenString, Pool.Name, Pool.Volume, Pool.SerialNumber);
+	var response = _clientMessenger.SendMessage(addPoolMessage);
+	var addPoolResponse = (GeneralResponseMsg) response;
+
+	// Act on response
+	if (addPoolResponse.RequestExecutedSuccesfully)
+	{
+		var loader = new PoolLoader();
+		loader.ReloadPools(_clientMessenger);
+		_view.PoolAdded();
+	} else if (addPoolResponse.TokenStillActive == false)
+		_view.DisplayAlert("Invalid action","Your login is no longer active, please login again.");
+}
+\end{lstlisting}
+
+\subsubsection{EditUserViewController.cs}
+EditUserViewController-klassen skal kunne håndtere tekst
+
+\begin{lstlisting}[caption={DidChangeNewPasswordText(...)},label={code:application_impl_euvcdcnpw}]
+public void DidChangeNewPasswordText(string text, int fieldNumber)
+{
+	if (fieldNumber > 1) throw new ArgumentException();
+	User.Passwords[fieldNumber] = text;
+	UpdatePassword();
+	UpdateSaveButton();
+}
+\end{lstlisting}
+
+Indeholder også en anden interessant metode.
+
+\begin{lstlisting}[caption={Save()},label={code:application_impl_euvcsave}]
+public void Save()
+{
+	// Send message to client
+	var updatePasswordRequest = new ChangePasswordRequestMsg(_session.UserName, _session.TokenString, _oldPassword, User.Passwords.First());
+	var response = (GeneralResponseMsg) _clientMessenger.SendMessage(updatePasswordRequest);
+
+	if (response.RequestExecutedSuccesfully)
+		_view.UpdateSuccessful();
+	else
+		_view.DisplayAlert("Save Error", response.MessageInfo);
+}
+\end{lstlisting}
+
+\subsubsection{EditPoolViewController.cs}
+EditPoolViewController-klassen skal kunne håndtere tekst
+
+\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
+public void DidChangeEmailText(string text)
+{
+	User.Email = text;
+	UpdateLoginButton();
+}
+\end{lstlisting}
+
+\paragraph{IPoolControlling}
+EditPoolViewController, StatViewController og HistoryViewController implementerer alle IPoolControlling. De tre presenter-klasser implementerer IPoolControlling interfacet på samme måde. Implementeringen af IPoolControlling eksemplificeres derfor udelukkende i dette afsnit, ved visning af EditPoolViewController-klassens implementering af interfacet.
+
+\begin{lstlisting}[caption={DidSelectPool(...)},label={code:application_impl_pcdsp}]
+public void DidSelectPool(int index)
+{
+	// Parse the name in the pool loader 
+	_session.SelectedPoolIndex = index;
+	if (!_loader.PoolsAreAvailable()) return;
+
+	_view.SetNameText(_session.SelectedPool.Item1);
+	_view.SetDeleteButtonEnabled(true);
+}
+\end{lstlisting}
+
+EditPoolViewController indeholder også en privat hjælpemetode, der kalder IPoolDisplaying interfacet i view'et.
+
+\begin{lstlisting}[caption={LoadPoolInfoIntoView(...)},label={code:application_impl_pcdlpiiv}]
+private void LoadPoolInfoIntoView()
+{
+	// Load active pool info into text fields
+	_view.SetAvailablePools(_session.Pools);
+
+	var volumeAndSerialNumber = _loader.GetVolumeAndSerialNumberForSelectedPool(_clientMessenger);
+
+	if (_loader.PoolsAreAvailable())
+	{
+		// Update pool loader
+		_pool.Name = _session.SelectedPool.Item1;
+		_pool.UpdateVolume(string.Format($"{volumeAndSerialNumber.Item1}"), null);
+		_pool.SerialNumber = volumeAndSerialNumber.Item2;
+
+		// Update view
+		_view.SetNameText(_session.SelectedPool.Item1);
+		_view.SetSerialNumberText(_pool.SerialNumber);
+		_view.SetVolumeText(string.Format($"{_pool.Volume}"));
+		_view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
+		_view.SetSaveButtonEnabled(true);
+		_view.SetDeleteButtonEnabled(true);
+	}
+	else
+	{
+		_view.DisplayAlert("No pools", "You have no pools to edit");
+		_view.SetSaveButtonEnabled(false);
+		_view.SetDeleteButtonEnabled(false);
+	}
+}
+\end{lstlisting}
+
+HER ER DU NÅET TIL MHT INDSÆTNING AF METODER
+
+\subsubsection{StatViewController.cs}
+StatViewController-klassen skal kunne håndtere tekst
+
+\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
+public void DidChangeEmailText(string text)
+{
+	User.Email = text;
+	UpdateLoginButton();
+}
+\end{lstlisting}
+
+\subsubsection{HistoryViewController.cs}
+HistoryViewController-klassen skal kunne håndtere tekst
+
+\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
+public void DidChangeEmailText(string text)
+{
+	User.Email = text;
+	UpdateLoginButton();
+}
+\end{lstlisting}
 
 \subsection{Implementering af view-klasser}
 Applikationslagets view-interfaces er blevet implementeret af klasser på forskellige platforme, og beskrives derfor i deres egne afsnit. På figur~\ref{fig:view_family} illustreres de færdigimplementerede brugergrænseflader. 
