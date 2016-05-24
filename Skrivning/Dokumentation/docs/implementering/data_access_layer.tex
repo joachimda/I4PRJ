@@ -23,7 +23,7 @@ DbContext er en del af Entity Frameworket. Som det kan ses på figur~\ref{fig:db
 
 \begin{figure}
 \centering
-\includegraphics[width=0.3\linewidth]{figs/implementering/dbContextClass.PNG}
+\includegraphics[width=0.5\linewidth]{figs/implementering/dbContextClass.PNG}
 \caption{}
 \label{fig:dbContextClass}
 \end{figure}
@@ -33,9 +33,14 @@ DatabaseContext objektet skal oprettes når der laves en query på databasen ell
 På en DbSet property kan der kaldes Add(), som tilføjer en entity i den kontekst der kaldes i. Herefter skal DbContext’s SaveChanges() metode kaldes for at ændringerne skrives i databasen.
 
 \subsubsection{SmartpoolDB}
-SmartpoolDB implementerer ISmartPoolDB og står for at initialisere DataAccess, UserAccess og PoolAccess gennem deres interfaces. SmartpoolDB kan da bruge af klienter når data access funktionalitet skal bruges. I SmartpoolDB klassen findes også administratormetode der står for at slette hele databasen.
+SmartpoolDB implementerer ISmartPoolDB og står for at initialisere DataAccess, UserAccess og PoolAccess gennem deres interfaces. SmartpoolDB kan da bruge af klienter når data access funktionalitet skal bruges. I SmartpoolDB klassen findes også administratormetode der står for at slette hele databasen.Klassen \textit{SmartpoolDB} kan ses på figur \ref{fig:smartpoolDBClass}
 
-\todo{Indsæt klassediagram?}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/implementering/smartpoolDBClass.PNG}
+\caption{Klassen SmartpoolDB}
+\label{fig:smartpoolDBClass}
+\end{figure}
 
 \paragraph{Metodebeskrivelser}
 
@@ -63,9 +68,16 @@ Metoden kalder DeleteAll metoderne på dens egen properties, og derved fjernes a
 Klassen UserAccess implementerer IUserAccess og står for at skrive og læse user records til/fra databasen.
 UserAccess indeholer administrator funktionalitet til at slette alle users på databasen. Herudover står UserAccess for data editing af users samt validering af userdata før det gemmes. 
 
-\todo{Indsæt klassediagram?}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/implementering/UserAccessClass.PNG}
+\caption{Klassen UserAccess}
+\label{fig:UserAccessClass}
+\end{figure}
+
 
 \paragraph{Metodebeskrivelser}
+I dette afsnit findes metodebeskrivelser for klassen \textit{UserAccess}.
 
 \subparagraph{AddUser}\
 
@@ -144,11 +156,34 @@ using (var db = new DatabaseContext())
 \subparagraph{EditUserPassword}\
 
 \textit{bool EditUserPassword(string email, string newPassword)}
-\todo{do dis}
+
+Gør det muligt for en bruger at ændre sit password. Metoden står derudover for at sikre at det nye password ikke er en tom streng. User entitetens password property ændres gennem databasekonteksobjektet, hvorefter ændringen gemmes på databasen.
+Metoden returnerer true med mindre der findes en uoverensstemmelse med enten password eller email.
+
 \subparagraph{EditUserEmail}\
 
 \textit{bool EditUserEmail(string email, string newEmail)}
-\todo{do dis}
+
+Gør det muligt or en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et system login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter den pågældende User returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
+
+\begin{lstlisting}[caption=EditUserEmail - brug af primær nøgler i Entity Framework,label=code:idef]
+public bool EditUserEmail(string email, string newEmail)
+{
+	...
+	using (var db = new DatabaseContext())
+		{
+			var original = db.UserSet.Find(FindUserByEmail(email).Id);
+			if (original != null)
+				{
+					original.Email = newEmail;
+					db.SaveChanges();
+				}
+		}
+	return true;
+}
+
+\end{lstlisting}
+
 \subparagraph{EditUserName}\
 
 \textit{bool EditUserName(string email, string newName)}
@@ -161,7 +196,12 @@ using (var db = new DatabaseContext())
 \subsubsection{PoolAccess}
 PoolAccess implementerer IPoolAccess og står for at skrive og læse pool records til/fra databasen. PoolAccess indeholder administrator funktionalitet til at slette alle pools på databasen. Herudover står PoolAcces for data editing af pools samt validering af pooldata før det gemmes.
 
-\todo{Indsæt klassediagram?}
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/implementering/poolAccessClass.PNG}
+\caption{Klassen PoolAccess}
+\label{fig:poolAccessClass}
+\end{figure}
 
 \paragraph{Metodebeskrivelser}
 
@@ -220,10 +260,15 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 \subsubsection{DataAccess}
 DataAccess implementerer IDataAccess og står for at skrive og læse data records til/fra databasen.
-IDataAccess refereres af klassen SmartPoolDB
+IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på figur \ref{fig:dataAccessClassNoInherit}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\linewidth]{figs/implementering/dataAccessClassNoInherit}
+\caption{Klassen DataAccess}
+\label{fig:dataAccessClassNoInherit}
+\end{figure}
 
-\todo{Indsæt klassediagram?}
 
 \paragraph{Metodebeskrivelser}
 
