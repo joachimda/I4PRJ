@@ -7,11 +7,11 @@ I afsnittet beskrives gennemførslen af projektet, herunder: udviklingmetode, pr
 Udviklingsmetoden for projektet er Scrum. Scrum er en agil udviklingsmetode \cite[kap. 1]{robertmartin2006}. Scrum er ikke indlemmet i processen i sin kanoniske form. I næste afsnit beskrives, hvordan projektprocessen afviger fra teorien.
 
 \section{Scrum}
-Scrum sprints er har været forlænget, da Scrum typisk bruges i fuldtids-udviklingteams, kunne det ikke lade sig gøre at have nok at samle op på efter en uges arbejde. Daglige scrum meetings er blevet til ugentlige, spørgsmålene Hvad har jeg lavet? Hvad mangler jeg at lave? Hvad skal der til for at jeg kommer videre? er blevet besvaret af hvert gruppe medlem. Den forlængede tid mellem møder har medført sprints har strukket sig over 2-3 uger ad gangen. I scrum forsøger man at være refleksiv over processen. Hvor spørgsmålene stilles; Hvad skal vi blive ved med at gøre? Hvad skal vi holde op med at gøre Hvad skal vi begynde at gøre? På samme måde har gruppen reflekteret over processen og har eksempelvis løst følgende misforståelse og gjort gruppen opmærksom på øget kommunikation:
+Scrum sprints er har været forlænget, da Scrum typisk bruges i fuldtids-udviklingteams, kunne det ikke lade sig gøre at have nok at samle op på efter en uges arbejde. Daglige scrum meetings er blevet til ugentlige, spørgsmålene: Hvad har jeg lavet? Hvad mangler jeg at lave? Hvad skal der til for at jeg kommer videre? er blevet besvaret af hvert gruppe medlem. Den forlængede tid mellem møder har medført sprints har strukket sig over 2-3 uger af gangen. I scrum har gruppen forsøgt at være refleksiv over processen. Hvor spørgsmålene stilles; Hvad skal vi blive ved med at gøre? Hvad skal vi holde op med at gøre? Hvad skal vi begynde at gøre? På samme måde har gruppen reflekteret over processen og har eksempelvis løst følgende misforståelse og gjort gruppen opmærksom på øget kommunikation:
 
 Der var gruppemedlemmer, som havde tendens til at arbejde på en del af systemet, uden at der var åbenhed omkring det. Det kunne have ført til evt. dobbelt arbejde, som ville have været spildt. Problemet blev bragt op tidligt i processen, hvormed gruppen har indgået konsensus om åbenhed af arbejdsopgaver, hvilket har gjort det nemmere at koordinere arbejde på tværs af undergrupper.
 
-Gruppen har ikke anvendt den traditionelle rollefordeling i et Scrumteam. Alle gruppen medlemmer har været ligestillet som udviklere og rollerne som scrum master og product owner har været en diskussion på møder, hvor demokratiske beslutninger er foretaget som erstatning. Til alle møder er der taget referat, og referent rollen er blevet udtrukket ved et hertil udviklet værktøj. Mere information om værktøjet kan findes i afsnittet...??? Til alle møder er der blevet valgt en mødeleder, hvis ikke den vante mødeleder kunne være til mødet. Mødelederen rolle var ordstyrer og ansvar for overholdelse af dagsorden. 
+Gruppen har ikke anvendt den traditionelle rollefordeling i et Scrumteam. Alle gruppen medlemmer har været ligestillet som udviklere og rollerne som scrum master og product owner har været en diskussion på møder, hvor demokratiske beslutninger er foretaget som erstatning. Til alle møder er der taget referat, og referent rollen er blevet udtrukket ved et hertil udviklet værktøj. Mere information om værktøjet kan findes i afsnittet...???\todo{missing} Til alle møder er der blevet valgt en mødeleder, hvis ikke den valgte mødeleder kunne være til mødet. Mødelederen rolle var ordstyrer og ansvar for overholdelse af dagsorden. 
 
 For at holde styr på status i processen og i de enkelte sprints opererer Scrum med backlogs. Det er product backlog og sprint backlog, som i projektet er oprettet ved hjælp af værktøjet "Pivotal Tracker". 
 
@@ -38,44 +38,48 @@ Pivotal Tracker er et processtyringsværktøj, til projekter som bruger Scrum so
 
 Som det ses på figur~\ref{fig:userstory_with_tasks} giver Pivotal Tracker mulighed for at tjekke tasks af efterhånden som de udføres. Når alle tasks i den pågældende user story trykkes Deliver, herefter kan en story påbegyndes. 
 
-Start af nye user stories eller tasks sker ved et sprint planlæggende møde. For at sikre at arbejdsbyrden er passende for sprinten, vurderes hver user story af alle medlemmer. Hvert medlem vurderer på en skala fra 1-3. Et gennemsnit afgører suverænt gruppens estimering af arbejdsbyrden. Efter hver sprint opgøres det hvor mange point gruppen har lavet i løbet af sprinten. Antallet er point er lig med gruppens hastighed. Ved planlægning af et nyt sprint vurderes det, om gruppen kan arbejde med samme hastighed, eller højere eller lavere, hvorefter arbejdsbyrden planlægges herefter. User stories som giver meget værdi for kunden udvælges først. Værdivurderingen er en MoSCoW analyse, hvor det kvalitativ vurdereres, hvor stor værdi de respektive user stories har, ved at stemple dem med Must, Should, Could og Won't, sorteres fra høj til lav værdi.  
+Start af nye user stories eller tasks sker ved et sprint planlæggende møde. For at sikre at arbejdsbyrden er passende for sprinten, vurderes hver user story af alle medlemmer. Hvert medlem vurderer på en skala fra 1-3. Et gennemsnit afgører suverænt gruppens estimering af arbejdsbyrden. Efter hver sprint opgøres det hvor mange point gruppen har lavet i løbet af sprinten. Antallet er point er lig med gruppens hastighed. Ved planlægning af et nyt sprint vurderes det, om gruppen kan arbejde med samme hastighed, eller højere eller lavere, hvorefter arbejdsbyrden planlægges herefter. User stories som giver meget værdi for kunden udvælges først. Værdivurderingen er en MoSCoW analyse, hvor det kvalitativ vurdereres, hvor stor værdi de respektive user stories har, ved at stemple dem med Must, Should, Could og Won't, sorteres fra høj til lav værdi. Gruppen vurderede, at bruger skal kunne logge ind i systemet, som værende en af de vigtigste user stories, og den fik dermed et 'Must'. Den user story blev den første "Spike" i den agile udvikling af Smartpool.  
 
-\subsection{Development spikes}
-Et princip der også tager udgangspunkt i den agile tankegang. Et development spike \cite{scaledagile} går ud på at der designes og implementeres de nødvendige dele for at et ''signal'' kan gå fra ende til anden i systemet.
+\section{Test}
+Sidste led i udviklingen af en del-feature er test. Det gælder for alle lag af projektet, dog adskiller måden at teste sig i de forskellige lag. GUI blev testet ved en kvalitativ visuel user experience test\todo{Er det at tage munden lidt for fuld?}. Til Business logikken er klassernes metoder unit testet. Til det anvendes et automatiseret test framework Nunit, som fungerer som dokumentation af koden dvs. ændres noget i koden og testen stadig går godt, antages ændringen at være korrekt. Hvad med database??
 
-Dette princip har været brugt i starten, før \gls{db}, \gls{windserver} og diverse klienter kunne tale sammen om en opgave. På denne måde kom et grundlæggende system på benene. På dette tidspunkt handlede det \textit{kun} at der skulle tilføjes mere funktionalitet.
-
-\section{User Stories}
-På tidligere semestre har use cases været brugt til at vise scenarier for hvordan systemet kan bruges. I dette projekt bruges user stories \cite{margaretrouse2015}, som er en kort beskrivelse af en system-feature. En \gls{us} skal forstås som et ønske fra slutbrugerens side, og er altså derved en beskrivelse af et systemkrav.
-
-
-\section{Test Driven Development}
+\subsection{Test Driven Development}
 TDD er en udviklingsmetode, som foreskriver at test skrives før selve produktionskoden \cite{osherove2015art}. Gruppen har ikke brugt TDD 100\% gennemforløbet. 
 Dog har TDD været særligt brugbart i udviklingen af DAL\footnote{Data Access Layer} laget, idet at de enkelte methoder har været enkle nok til der kunne skrives test før selve produktionskoden skulle skrives.
 
+Integrationstest af klasser
+
+\subsection{Spikes} %integration af lag?
+Spikes blev i projektet brugt til at teste login funktionaliteten fra ende til anden af systemet. Brugeren logge ind gennem et GUI, hvorefter systemet forespørger database om brugeren eksisterer, og slutteligt bekræftes det at brugeren er logget ind. Designet af systemet testes hermed fra ende til anden. Integration af systemet fra ende til anden foretages kontinuerligt langt frem med udviklingsprocessen. Det er gjort for hele tiden at teste, om arbejdet er på vej i den rigtige retning. Fejlene der opstår i første spike tages i mente, når næste Spike skal udarbejdes. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\linewidth]{figs/processProjektGennemforsel/Spike.PNG}
+	\caption{Design Spike}
+	\label{fig:design_spike}
+\end{figure}
+
 \section{Versionsstyring}
-En fuldstændig essentiel del af softwareudvikling er versionstyring. Det er et værktøj der giver mulighed for at flere udviklere kan arbejde, tæt sammen, på et projekt uden at træde hinanden over tæerne.\todo{bedre formulering?}
+Softwareudviklingen er versionsstyret, for at flere udviklere kan arbejde parallelt på et projekt uden at skabe konflikter når ændringer gemmes. Til formålet har gruppen benyttet versionsstyringsværktøjet Git.
 
-\subsection{Git}
-Gruppen har igennem hele forløbet benyttet versionsstyrings-værktøjet Git. Git er gratis, og har været brugt i kurser som Software Test og Indlejret Software Udvikling. 
-
+\subsection{Git} \todo{Meget indforstået}
 Git bruges i projektet til al source kode, og hver feature udvikles på sin egen branch for at undgå konflikter. Når en feature er færdig udstedes et pull request, hvorefter repository administratoren kan merge koden ind på master branch.
 
-For at holde styr på branches og versioner er der brugt Feature Branching \cite{atlassian2016}. Dette indebære der ikke foregår noget produktionsarbejde på master branchen. I stedet skal der oprettes en branch specielt til denne feature. Så når denne feature er testet med seneste udgave af master branchen, kan ændringerne blive ''merget'' ind. På denne måde har gruppen hele tiden haft en fungerende produkt at vise frem, hvis det skulle blive nødvendigt.
+For at holde styr på branches og versioner er der brugt Feature Branching \cite{atlassian2016}. Dette indebære der ikke foregår noget produktionsarbejde på master branchen. I stedet skal der oprettes en branch specielt til denne feature. Så når denne feature er testet med seneste udgave af master branchen, kan ændringerne blive ''merget''\todo{Det danske ord er flette} ind. På denne måde har gruppen hele tiden haft en fungerende produkt at vise frem, hvis det skulle blive nødvendigt.
 
 \subsubsection{GitHub}
 Github er online hosting af Git repositories, og er brugt i projektet til at gemme source kode, samt administrere projektets repository. I forbindelse med projektstyring og adminitration, har git været brugt til eksempelvis at tracke teamets effektivitet og commit-frekvens.
 
-\subsection{Travis CI og Jenkins}
-Gruppen har undervejs forsøgts sig med både med Travis CI og Jenkins. Da gruppen allerede var godt bekendt med Jenkins, virkede Travis CI som en interessant mulighed for at prøve noget anderledes.
+\subsection{Travis CI og Jenkins} \todo{Hele afsnittet er meget rodet, og det er usikkert hvad der prøves at fortælle. Resultatet skal udpensles og refleksioner herpå. Brugte vi det? Til hvad brugte vi det? Hvorfor brugte vi det ikke mere? Vi skal ikke forklare, hvordan CI fungerer men om vi har brugt det og hvad vi har fået ud af det.}
+Gruppen har undervejs forsøgts sig med både med Travis CI og Jenkins. Da gruppen allerede var godt bekendt med Jenkins, virkede Travis CI som en interessant mulighed for at prøve noget anderledes. \todo{Arg, det må være en bedre årsag}
 Begge værktøjer er til continuos integration. CI er belejligt idet en ekstern server står for at bygge al source kode der bliver pushet til projektets repository og kører tilsvarende tests.
 
-Dette er især nyttigt til større projekter, hvor lokale test på udviklerens computer ikke er hensigtsmæssige af tidsmæssige årsager. Travis CI er gratis til offentlige repositories på GitHub. Dog er Travis CI kun ''community supported'' for C\# kode \cite{communitysupportedlanguages2016}, hvilket præsenterede en udfordring.
+Dette er især nyttigt til større projekter, hvor lokale test på udviklerens computer ikke er hensigtsmæssige af tidsmæssige årsager. Travis CI er gratis til offentlige repositories på GitHub. Dog er Travis CI kun ''community supported'' for C\# kode \cite{communitysupportedlanguages2016}, hvilket introducerede en udfordring.
 
 Da projektet både indeholder en applikation til PC, iOS og en web applikation, har det været en udfordring at benytte et continous integration værktøj.
-Dette kombineret med at hele testsuiten hurtigt kunne eksekveres lokalt, ledte til at gruppen valgte at prioritere tid brugt på udvikling og lokale test.
+Det kombineret med at hele testsuiten hurtigt kunne eksekveres lokalt, ledte til at gruppen valgte at prioritere tid brugt på udvikling og lokale test.
 
-Dette har dog ikke forhindret et forsøg. Det lykkedes gruppen at sætte den ellers kun ''community supported'' Travis CI op til at teste et C\# projekt fra github, som skulle konstatere om der skulle bruges mere tid på Travis CI. 
+Det har dog ikke forhindret et forsøg. Det lykkedes gruppen at sætte den ellers kun ''community supported'' Travis CI op til at teste et C\# projekt fra github, som skulle konstatere om der skulle bruges mere tid på Travis CI. \todo{Og hvad så... Hvad var konklusionen?}
 
 Til et github projekt skal der tilføjes en \textit{.travis.yml}-fil. Denne bestemmer hvilke pakker mm. der skal installeres og hvilke test der skal køres. 
 Herefter lykkedes det at sætte github repositoriet op til kun at tillade et merge hvis koden kan bygge og består alle tests som vist på figur~\ref{fig:travispullrequest}.
@@ -108,11 +112,3 @@ Software testing har været en stor del af dette projekt. Der har været stor fo
 
 \subsection{NUnit- og testframeworks}\todo{Afsnittet skal muligvis flyttes til Udviklingsværktøjer...}
 Et oplagt værktøj til softwaretest har været Nunit idet det bruges i vid udstrækning i forbindelse med kurset Software Test.
-
-\section{UML}
-UML er brugt i vid udstrækning gennem alle projektets faser. UML danner grundstenen i projektets dokumentation, men har også hjulpet udviklingen undervejs, idet visualiseringen har givet en bedre forståelse og gør det lettere at gennemskue nye og smartere designmuligheder.
-
-\section{Gruppeledelse og -struktur}
-Ledelsesstrukturen har hovedsageligt været flad. Gruppemedlemmer har i fællesskab afgjort hvilke elementer af projekt der har været vigtigst, og derefter selv fundet de bedste måder at implementere disse på.
-
-I forbindelse med gruppemøder har der imidlertid ofte været én som agerede ordstyre. Dette var for at begrænse tiden mødet skulle tage, sådan at både vejleder og medlemmer hurtigt kunne kommer videre til andre opgaver.
