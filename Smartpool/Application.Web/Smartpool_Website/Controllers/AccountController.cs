@@ -55,13 +55,13 @@ namespace Smartpool_Website.Controllers
         public void SetEmailText(string text)
         {
             ViewBag.Message = text;
-            ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
+            //ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
         }
 
         public void SetPasswordText(string text)
         {
             ViewBag.Message = text;
-            ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
+            //ActionInvoker.InvokeAction(ControllerContext, "SetTextFieldText");
         }
 
         public void SetLoginButtonEnabled(bool enabled) { }
