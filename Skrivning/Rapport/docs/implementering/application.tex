@@ -2,18 +2,9 @@
 \section{Applikationslaget}
 Applikationslagets model- og presenterklasser er udviklet i C\#, i Microsoft Visual Studio. Klasserne er implementeret under følgende namespaces: Smartpool.Application.Model, Smartpool.Connection.Model og Smartpool.Application.Presentation. I dette afsnit beskrives de presenter-klasser, der blev introduceret i rapportens designafsnit. Herefter beskrives view-implementeringen i de platform-specifikke applikationer. For yderligere dokumentation af Smartpool.Application.Model og Smartpool.Application.Presentation henvises til dokumentationen.
 
+\subsection{Implementering af presenter-klasser}
 \subsubsection{SignUpViewController.cs}
-Implementeringen af SignUpViewController-klassen bestod hovedsageligt i at sammenbinde ISignUpViewController-interfacets metoder, med handlinger der skulle foretages i SignUpViewController-klassens ISignUpView. Listing~\ref{code:application_impl_signupviewc1} viser et eksempel på en sådan sammenbinding, hvor en tekstændring modtages fra view'et, gemmes i en af klassens properties, og view'et opdateres.
-
-\begin{lstlisting}[caption={DidChangeNameText(...)},label={code:application_impl_signupviewc1}]
-public void DidChangeNameText(string text)
-{
-	User.Name = text;
-	UpdateSignUpButton();
-}
-\end{lstlisting}
-
-Klassens SignUp metode er implementeret således, at den kontakter connection-serveren, med de oplysninger som presenteren har kendskab til, om den bruger der ønskes oprettet. Metoden kan ses i listing~\ref{code:application_impl_signupmethod}. Når et svar modtages fra serveren, tjekker presenteren hvorvidt anmodningen var succesfuld. Herefter kaldes en metode i view'et, alt efter om anmodningen gik igennem eller ej. Hvis anmodningen blev afvist kaldes DisplayAlert i view'et.
+Implementeringen af SignUpViewController-klassen bestod hovedsageligt i, at sammenbinde ISignUpViewController-interfacets metoder, med handlinger der skulle foretages i SignUpViewController-klassens ISignUpView. En af disse handlinger er oprettelsen af en bruger. Metoden SignUp, der kaldes når presenter-klassen modtager et ButtonPressed kald fra view'et, kan ses i listing~\ref{code:application_impl_signupmethod}. I metoden oprettes en besked, der sendes til serveren gennem den presenterens IClientMessenger. Når et svar modtages fra serveren, tjekker presenteren hvorvidt anmodningen var succesfuld. Herefter kaldes en metode i view'et, alt efter om anmodningen gik igennem eller ej. Hvis anmodningen blev afvist kaldes DisplayAlert i view'et.
 
 \begin{lstlisting}[caption={SignUp()},label={code:application_impl_signupmethod}]
 public void SignUp()

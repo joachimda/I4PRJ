@@ -16,9 +16,11 @@ namespace Smartpool.Connection.Server
         public TokenMsgResponse(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
-            _poolKeeper = new PoolKeeper(_smartpoolDb);
-            _poolKeeper.GeneratePoolsForUser("1");
-            _poolKeeper.GeneratePoolsForUser("2");
+            _poolKeeper = new FakePoolKeeper(_smartpoolDb);
+            if(_smartpoolDb.UserAccess.IsEmailInUse("1"))
+                _poolKeeper.GeneratePoolsForUser("1");
+            if (_smartpoolDb.UserAccess.IsEmailInUse("2"))
+                _poolKeeper.GeneratePoolsForUser("2");
         }
 
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)
