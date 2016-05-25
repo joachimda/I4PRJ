@@ -10,7 +10,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 \paragraph{AddPool}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool AddPool(string email, string name, double volume)}
 \end{itemize}
@@ -39,7 +39,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool IsPoolNameAvailable(string email, string name)}
 \end{itemize}
@@ -74,7 +74,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{Pool FindSpecificPool(string email, string name)}
 \end{itemize}
@@ -104,7 +104,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 \paragraph{RemovePool}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool RemovePool(string email, string name)}
 \end{itemize}
@@ -130,7 +130,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{void DeleteAllPools()}
 \end{itemize}
@@ -161,7 +161,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool EditPoolName(string ownerEmail, string currentName, string newName)}
 \end{itemize}
@@ -195,7 +195,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool EditPoolVolume(string ownerEmail, string name, double newVolume)}
 \end{itemize}
@@ -229,7 +229,7 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 
 
-\subparagraph{Prototype}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)}
 \end{itemize}
@@ -258,8 +258,37 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 \paragraph{FindAllPoolsOfUser}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textit{List<Pool> FindAllPoolsOfUser(string ownerEmail}
-\todo{do dis}
+
+
+
+
+
+
+
+\subparagraph{Signatur}
+\begin{itemize}
+	\item \textit{List<Pool> FindAllPoolsOfUser(string ownerEmail}
+\end{itemize}
+
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{List<Pool>}, som indeholder alle pool tilknyttet en bruger.
+\end{itemize}
+
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger, som pools skal findes for.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Først tester metoden om brugeren findes i databasen, hvis denne ikke kan findes smides en \textit{UserNotFoundException()}. Dernæst findes alle pools med tilknytning til brugeren og disse returneres.
+\end{itemize}
+
+
+
+
+
 
 \paragraph{UserAccess}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
