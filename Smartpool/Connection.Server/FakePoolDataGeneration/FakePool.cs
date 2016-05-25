@@ -6,7 +6,7 @@ using Smartpool.Connection.Model;
 
 namespace Smartpool.Connection.Server.FakePoolDataGeneration
 {
-    public class Pool : IPool
+    public class FakePool : IPool
     {
         private string UserName { get; }
         private string PoolName { get; }
@@ -14,7 +14,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         //private readonly int _amountOfSensors;
         private readonly List<ISensor> _fakeSensors;
 
-        public Pool(int amountOfSensors, int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
+        public FakePool(int amountOfSensors, int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
         {
             UserName = userName;
             PoolName = poolName;
@@ -22,6 +22,7 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
             //_amountOfSensors = amountOfSensors;
             _fakeSensors = new List<ISensor>();
             GenerateSensors();
+            SaveSensorValue(null, null);
             var timer = new Timer { Interval = 1000 * secondsBetweenSensorReadings };
             timer.Elapsed += SaveSensorValue;
             timer.Start();
