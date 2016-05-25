@@ -40,7 +40,7 @@ namespace Smartpool_Website.Controllers
 
         private void InitiateController()
         {
-            Controller = new LoginViewController(this, new ClientMessenger(new SynchronousSocketClient("a")));
+            Controller = new LoginViewController(this, new ClientMessenger(new SynchronousSocketClient("93.166.226.201")));
             Controller.ViewDidLoad();
         }
 
