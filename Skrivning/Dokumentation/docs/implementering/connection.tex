@@ -14,24 +14,8 @@ Indeholder en enum af typen MessageTypes, hvori alle typer beskeder fremgår. De
 	\label{fig:loginError}
 \end{figure}
 
-Nedarving fra message klassen er vist på figur~\ref{fig:MessageUML}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.6\linewidth]{figs/connection/MessageUML.png}
-	\caption{Message nedarving}
-	\label{fig:MessageUML}
-\end{figure}
-
 \subsubsection{ClientMsg}
-Indeholder ikke yderligere informationer, men definerer en adskillelse mellem server beskeder og klient beskeder. Desuden giver det mulighed for at alle klient beskeder i fremtiden kan indeholder informationer, som server beskeder ikke indeholder. Nedarving fra ClientMsg klassen er vist på figur~\ref{fig:ClientMsgUML}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/ClientMsgUML.png}
-	\caption{ClientMsg nedarving}
-	\label{fig:ClientMsgUML}
-\end{figure}
+Indeholder ikke yderligere informationer, men definerer en adskillelse mellem server beskeder og klient beskeder. Desuden giver det mulighed for at alle klient beskeder i fremtiden kan indeholder informationer, som server beskeder ikke indeholder. 
 
 \paragraph{ResetPasswordRequestMsg}
 Denne beskedtype er ikke blevet færdigt implementeret. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
@@ -101,14 +85,6 @@ public class TokenMsg : ClientMsg
 	}
 }
 \end{lstlisting}
-
-Nedarving fra TokenMsg er vist på figur~\ref{fig:TokenMsgUML}. AddPoolPictureRequestMsg er ikke blevet implementeret, men var en del af de user stories som blev udvalgt i starten af projektet, og er derfor taget med på figuren.
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/TokenMsgUML.png}
-	\caption{TokenMsg nedarving}
-	\label{fig:TokenMsgUML}
-\end{figure}
 
 \paragraph{AddPoolRequest}
 Indeholder informationer til at beskrive brugerens pool i systemet.
@@ -228,13 +204,7 @@ public class LogoutRequestMsg : TokenMsg
 \end{lstlisting}
 
 \subsubsection{ServerMsg}
-Denne klasse indeholder ikke yderligere informationer, men definerer en række beskeder som serveren kan svare med. Det er forsøgt at holde antallet af beskeder så lavt som muligt, ved f.eks. at lave en GeneralResponseMsg som anvendes på alle requests, hvor applikationen ikke modtager data, men blot ønsker at vide om den pågældende request blev udført. Nedarving fra ServerMsg er vist på figur~\ref{fig:ServerMsgUML}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/ServerMsgUML.png}
-	\caption{ServerMsg nedarving}
-	\label{fig:ServerMsgUML}
-\end{figure}
+Denne klasse indeholder ikke yderligere informationer, men definerer en række beskeder som serveren kan svare med. Det er forsøgt at holde antallet af beskeder så lavt som muligt, ved f.eks. at lave en GeneralResponseMsg som anvendes på alle requests, hvor applikationen ikke modtager data, men blot ønsker at vide om den pågældende request blev udført. 
 
 \paragraph{GeneralResponseMsg}
 Indeholder informationer om hvor vidt en request blev udført. Der gives yderligere information om det skyldes at brugerens session ikke længere er aktiv, eller at det var selve requesten der fejlede.
@@ -304,14 +274,7 @@ public class LoginResponseMsg : ServerMsg
 \end{lstlisting}
 
 \subsection{Client}
-I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. Klient struktur ses i UML diagram på figur~\ref{fig:ConnectionClient}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionClient.png}
-	\caption{Klient diagram}
-	\label{fig:ConnectionClient}
-\end{figure}
+I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. 
 
 \subsubsection{Synchronous Socket Client}
 Er den konkrete implementering af socket client, som anvendes med en windows desktop applikation. Klassen er implementeret udfra eksemplet fundet på https://msdn.microsoft.com/en-us/library/kb5kfec7(v=vs.110).aspx ?? . Der er tilføjet exception handling, i tilfælde af at serveren ikke svarer. Andre konkrete klienter er baseret på samme princip.
@@ -358,14 +321,7 @@ public Message HandleMessage(string messageString)
 \end{lstlisting}
 
 \subsection{Server}
-I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Server struktur ses i UML diagram på figur~\ref{fig:ConnectionServer}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionServer.png}
-	\caption{Server diagram}
-	\label{fig:ConnectionServer}
-\end{figure}
+I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. 
 
 \subsubsection{Asynchronous Socket Listener}
 Den primære funktionalitet af denne klasse er hentet fra https://msdn.microsoft.com/en-us/library/fx6588te(v=vs.110).aspx ?? . Denne fungerer ved at køre asynchront, hvilket vil sige at applikationen ikke idler når der afventes en connection. Dette vil med andre ord sige, at der kan oprettes flere forbindelser til serveren på samme tid, da de ikke blokkerer hinanden.
@@ -414,7 +370,7 @@ switch (receivedMessage.MsgType)
 	
 	case MessageTypes.ResetPasswordRequest:
 	var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
-	return new GeneralResponseMsg(false, false); //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+	return new GeneralResponseMsg(false, false);
 	
 	default:
 	return new GeneralResponseMsg(false, false)	{MessageInfo = "The server did not recognize your request"};
@@ -434,16 +390,9 @@ else
 \end{lstlisting}
 
 \subsubsection{Token System}
-For at lave et user session koncept, er der implementeret et token system, som består af en TokenKeeper, Token og TokenStringGenerator klasse. UML diagram over disse ses på figur~\ref{fig:ConnectionServerToken}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/ConnectionServerToken.png}
-	\caption{Connection.Server.Token}
-	\label{fig:ConnectionServerToken}
-\end{figure}
-Som det fremgår af figur~\ref{fig:ConnectionServerToken}, er der øverst en TokenKeeper som indeholder en TokenStringGenerator og en liste af Tokens. Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
-For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på figur ??
-\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken, label=code:Server.TokenKeeper.CreateNewToken]
+Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
+For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på~\ref{code:ServerTokenKeeperCreateNewToken}
+\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken, label=code:ServerTokenKeeperCreateNewToken]
 public string CreateNewToken(string username)
 {
 	var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
@@ -461,17 +410,24 @@ public string CreateNewToken(string username)
 \end{lstlisting}
 
 \subsubsection{Pool DataGeneration}
-For at simulere data fra pools i systemet, er der implementeret en række pool/sensor klasser. Disse ses på figur~\ref{fig:ConnectionPool}
-\begin{figure}
-	\centering
-	\includegraphics[width=0.8\linewidth]{figs/connection/ConnectionPool.png}
-	\caption{Connection.Pool diagram}
-	\label{fig:ConnectionPool}
-\end{figure}
-
 \paragraph{PoolKeeper} er implementeret som en fake klasse, der indeholder en liste over pools i systemet. Ved opstart chekkes på få udvalgte brugernavne i databasen, som der derefter genereres tilsvarende pools for. Desuden bliver der, mens systemet kører, oprettet pools i systemet for nye pools der tilføjes til databasen. Så længe serveren kører, vil alle nye pools altså generere data.
 
 \paragraph{Pool} er implementeret som en fake klasse. Klassen indeholder ikke nogen public metoder, da den er selvkørende og ved et angivet interval selv opretter sensor data i databasen. Dette er tiltænkt at være tilsvarende et reelt system, hvor en reel pool klasse, ved et givet interval, sender en request til en fysisk enhed om måledata, som derefter gemmes i databasen.
+
+Oprettelse af en pool via klassens constructor ses på ??
+\begin{lstlisting}[caption=Server.FakePool.Constructor, label=code:ServerFakePoolConstructor]
+public Pool(int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
+{
+	UserName = userName;
+	PoolName = poolName;
+	SmartpoolDb = smartpoolDb;
+	_fakeSensors = new List<ISensor>();
+	GenerateSensors();
+	var timer = new Timer { Interval = 1000 * secondsBetweenSensorReadings };
+	timer.Elapsed += SaveSensorValue;
+	timer.Start();
+}
+\end{lstlisting}
 
 \paragraph{Sensor} er implementeret som en fake klasse. Der er lagt stor vægt på at klassen genererer værdier som kunne være reele, da dette er med til at give et helhedsindtryk af det endelige system. 
 
