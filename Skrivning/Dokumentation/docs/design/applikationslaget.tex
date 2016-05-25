@@ -437,12 +437,14 @@ Efter at have designet par af view- og presenter-interfaces, blev konkrete prese
 
 Presenter-klasserne er designet til at være platform-uafhængige, ved ikke at benytte klasser, som ikke understøttes i portable projekter. Da klasserne er designet sammen med interfaces, giver det stadigvæk mulighed for, at lave specifikke presenters for en given platform, hvis det bliver nødvendigt. Alle presenters har en constructor, der tager imod en IClientMessenger (defineret i connection-modellen), og et view af den tilhørende type. Presenter-klasserne har brug for at modtage en IClientMessenger fra view?et der instantiere presenteren, for at platform specifikke klienter ikke skal forhindre præsentationslaget i at være portabelt. 
 
+\begin{landscape}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.9\linewidth]{figs/design/application_presentation_full}
+	\includegraphics[width=1\linewidth]{figs/design/application_presentation_full}
 	\caption{Klasser og interfaces i præsentationslaget}
 	\label{fig:application_presentation_full}
-\end{figure}\todo{skal muligvis i en pdf for sig, readability you know...}
+\end{figure}
+\end{landscape}
 
 I de efterfølgende afsnit beskrives kort, de metoder og properties, der er tilføjet designet af de konkrete presenters, og som ikke er beskrevet ved deres interface.
 

@@ -2,8 +2,16 @@
 
 For at give systemet en øget sikkerhed, og bedre scalability, blev det besluttet at al business logic skulle varetages af en form for server. På denne måde indkaples essentielle dele af systemet, så brugere ikke har direkte adgang til systemkritiske elementer. Desuden kan der laves fremtidige ændringer i systemet, uden alle klienter nødvendigvis skal opdateres.
 
-user sessions ??
-
 Det blev yderligere besluttet at denne server skulle modtage data fra pools koblet til systemet. Da reele data rækker ud over dette projekts afgrænsning, blev det besluttet at lave en simulering af data, som foregår på serveren.
 
 På baggrund af de valgte user stories ?? og design valg, blev der undersøgt hvilke teknologier, som kunne anvendes til at opnå det ønskede. Da der i et sideløbende netværksfag (IKN) ?? blev arbejdet meget med TCP sockets, virkede det som en oplagt mulighed, da dette netop blev anvendt til, at etablere en server og en klient.
+
+Efter disse relativt få design overvejelser, blev implementering påbegyndt. Dette var et led i hurtigt at få testet, om det valgte design var anvendeligt. 
+
+Da klient delen anvendes på flere platforme, blev projektet udviklet som et portable C\# projekt. Dette gav dog et stort problem, da et portable projekt ikke kan anvende .Net TCP/IP sockets. Løsningen på dette blev at placere interfacet til socket klienten i det portable projekt. Den konkrete implementering af socket klienten blev oprettet i et separat ikke portable projekt. Presenter laget i applikationen, kender dermed kun til interfacet, mens GUI laget kender til den konkrete klient der anvendes på den pågældende platform.
+
+Derefter lykkedes det at skabe et design spike, hvor der blev testet at en enkelt kommando kunne oprettes i applikationen, sendes til serveren og udføres vha. databasen. 
+
+Efter dette opstod en problemstilling angående brugerens password. Hver gang en bruger laver en request, skal systemet være sikker på at brugeren har adgang til de ønskede data. Dette kunne løses ved at sende brugerens password med i hver request. Dette er dog ikke hensigtsmæssigt, da brugeren så enten skal indtaste sit password flere gange, eller at password skal det gemmes i applikation. Desuden giver dette ekstra kald til databasen. 
+
+Løsningen på denne problemstilling blev at oprette et system til at håndtere user sessions. Princippet i dette system er at der oprettes en tilfældigt genereret streng af bogstaver, som knyttes til den pågældende bruger i et vist tidsrum. På den måde kan efterfølgende kald sende denne streng med til at identificere at brugeren har adgang. 
