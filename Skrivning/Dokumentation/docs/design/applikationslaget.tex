@@ -13,7 +13,7 @@ Af diagrammet fremgår det, at applikationslaget er opdelt i flere lag som følg
 
 Som følge af multi-lag arkitekturen kunne applikationslaget samt de platform-specifikke view-implementeringer designes, uafhængigt af hinanden, så længe interfaces blev specificeret undervejs i processen. Sammenkobling og protokolspecificering mellem de forskellige lag i applikationen er et resultat af interface specificeringen. Et eksempel på dette er rækken af view/presenter interfaces beskrevet i underafsnittet om design af applikationens præsentationslag.
 
-Den overordnede ide omkring designet af model-view-presenter er adskillelse af laggene. View kalder presenter, som kan hente data fra model. Opstarts- og et interaktionsscenarie eksemplificeres på sekvensdiagrammet på figur~\ref{fig:application_sd}.
+Den overordnede ide omkring designet af model-view-presenter er adskillelse af lagene. View kalder presenter, som kan hente data fra model. Opstarts- og et interaktionsscenarie eksemplificeres på sekvensdiagrammet på figur~\ref{fig:application_sd}.
 
 \begin{figure}
 	\centering
@@ -156,7 +156,7 @@ Presenter-interfacene definerer en simpel protokol mellem view og presenter. De 
 I de efterfølgende afsnit beskrives designet af de forskellige presenter-interfaces.
 
 \subsubsection{IViewController}
-IViewController interfacet er det mest generelle presenter-interface, som implementeres af alle de andre presenter-interfaces. Interfacet indeholder en metode, ViewDidLoad, som kaldes af det tilhørende view, efter view?et er loaded i hukommelsen og vises for brugeren.
+IViewController interfacet er det mest generelle presenter-interface, som implementeres af alle de andre presenter-interfaces. Interfacet indeholder en metode, ViewDidLoad, som kaldes af det tilhørende view, efter view´et er loaded i hukommelsen og vises for brugeren.
 
 \begin{figure}
 	\centering
@@ -166,7 +166,7 @@ IViewController interfacet er det mest generelle presenter-interface, som implem
 \end{figure}
 
 \subsubsection{IPoolControlling}
-IPoolControlling er et interface der er segregeret fra de interfaces som håndterer visning og styring af pool oplysninger. Interfacet indeholder en motode, DidSelectPool(int), som bør kaldes af det tilhørende view, efter en pool er valgt i view?et, fra en liste eller lignende. Integer parameteren repræsenterer indekset på den valgte pool, i listen af pools (se Session).  
+IPoolControlling er et interface der er segregeret fra de interfaces som håndterer visning og styring af pool oplysninger. Interfacet indeholder en metode, DidSelectPool(int), som bør kaldes af det tilhørende view, efter en pool er valgt i view´et, fra en liste eller lignende. Integer parameteren repræsenterer indekset på den valgte pool, i listen af pools (se Session).  
 \begin{figure}
 	\centering
 	\includegraphics[width=0.3\linewidth]{figs/design/application_ipoolcontrolling}
@@ -175,7 +175,7 @@ IPoolControlling er et interface der er segregeret fra de interfaces som håndte
 \end{figure}
 
 \subsubsection{ISignUpViewController}
-Dette interface er designet i forbindelse med user stories, der omhandler, at brugeren skal kunne oprette sig i systemet. Interfacet indeholder metoder, som det tilhørende view kan kalde, når events som tekst-input sker. Dermed kan presenteren der implementerer dette interface få opdateringer fra view?et, når brugeren indtaster sine oplysninger.
+Interfacet er designet i forbindelse med user stories, der omhandler, at brugeren skal kunne oprette sig i systemet. Interfacet indeholder metoder, som det tilhørende view kan kalde, når events som tekst-input sker. Dermed kan presenteren, der implementerer interfacet få opdateringer fra viewet, når brugeren indtaster sine oplysninger.
 
 \begin{table}
 	\centering
@@ -183,10 +183,10 @@ Dette interface er designet i forbindelse med user stories, der omhandler, at br
 		\toprule
 		\textbf{Klassemedlem}	& \textbf{Beskrivelse} \\
 		\midrule
-		+ ButtonPressed()				& En metode der kaldes af presenterens view, når brugeren fra view?et vælger at færdiggøre brugeroprettelsen.	\\\hline
+		+ ButtonPressed()				& En metode der kaldes af presenterens view, når brugeren fra view'et vælger at færdiggøre brugeroprettelsen.	\\\hline
 		+ DidChangeEmailText(...) 			& Metoder der skal kaldes af view?et, når brugeren har indtastet tekst i de pågældende tekstfelter. \\
 		+ DidChangeNameText(...)  			& \\\hline
-		+ DidChangePasswordText(...) 				& En metode der kaldes af presenterens view, når brugeren indtaster sit ønskede password fra view?et. Passwordet skal indtastes to gange i view?et for at sikre, at det er korrekt indtastet. Metoden indeholder derfor en integer parameter som sættes til enten 0 eller 1, efter hvilken gang passwordet er indtastet. \\
+		+ DidChangePasswordText(...) 				& En metode der kaldes af presenterens view, når brugeren indtaster sit ønskede password fra view'et. Passwordet skal indtastes to gange i view?et for at sikre, at det er korrekt indtastet. Metoden indeholder derfor en integer parameter som sættes til enten 0 eller 1, efter hvilken gang passwordet er indtastet. \\
 		\bottomrule
 		\end{tabular}
 	\caption{Beskrivelse af ISignUpViewController-klassens medlemmer}
@@ -408,8 +408,8 @@ Dette interface er modparten til IEditPoolViewController, og omhandler dermed re
 		+ SetVolumeText(...)						& \\
 		\bottomrule
 		\end{tabular}
-	\caption{Beskrivelse af IEditUserView-klassens medlemmer}
-	\label{tab:table_design_iedituserview}	
+	\caption{Beskrivelse af IEditPoolView-klassens medlemmer}
+	\label{tab:table_design_ieditPoolview}	
 \end{table}
 
 \subsubsection{IStatView}
