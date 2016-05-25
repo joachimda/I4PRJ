@@ -9,7 +9,7 @@ Indeholder en enum af typen MessageTypes, hvori alle typer beskeder fremgår. De
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{figs/connection/loginError.png}
+	\includegraphics[width=0.3\linewidth]{figs/connection/loginError.png}
 	\caption{Login error}
 	\label{fig:loginError}
 \end{figure}
@@ -18,7 +18,7 @@ Nedarving fra message klassen er vist på figur~\ref{fig:MessageUML}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.8\linewidth]{figs/connection/MessageUML.png}
+	\includegraphics[width=0.6\linewidth]{figs/connection/MessageUML.png}
 	\caption{Message nedarving}
 	\label{fig:MessageUML}
 \end{figure}
@@ -28,18 +28,13 @@ Indeholder ikke yderligere informationer, men definerer en adskillelse mellem se
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
-	\includegraphics[width=\linewidth]{figs/connection/ClientMsgUML.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/ClientMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ClientMsgUML.png}
 	\caption{ClientMsg nedarving}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:ClientMsgUML}
 \end{figure}
 
 \paragraph{ResetPasswordRequestMsg}
-Denne beskedtype er ikke blevet implementeret i hverken applikation eller database. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
+Denne beskedtype er ikke blevet færdigt implementeret. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
 \begin{lstlisting}[caption=ResetPasswordRequestMsg, label=code:ResetPasswordRequestMsg]
 public class ResetPasswordRequestMsg : ClientMsg
 {
@@ -110,7 +105,7 @@ public class TokenMsg : ClientMsg
 Nedarving fra TokenMsg er vist på figur~\ref{fig:TokenMsgUML}. AddPoolPictureRequestMsg er ikke blevet implementeret, men var en del af de user stories som blev udvalgt i starten af projektet, og er derfor taget med på figuren.
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/TokenMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/TokenMsgUML.png}
 	\caption{TokenMsg nedarving}
 	\label{fig:TokenMsgUML}
 \end{figure}
@@ -236,7 +231,7 @@ public class LogoutRequestMsg : TokenMsg
 Denne klasse indeholder ikke yderligere informationer, men definerer en række beskeder som serveren kan svare med. Det er forsøgt at holde antallet af beskeder så lavt som muligt, ved f.eks. at lave en GeneralResponseMsg som anvendes på alle requests, hvor applikationen ikke modtager data, men blot ønsker at vide om den pågældende request blev udført. Nedarving fra ServerMsg er vist på figur~\ref{fig:ServerMsgUML}
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/connection/ServerMsgUML.png}
+	\includegraphics[width=0.9\linewidth]{figs/connection/ServerMsgUML.png}
 	\caption{ServerMsg nedarving}
 	\label{fig:ServerMsgUML}
 \end{figure}
@@ -309,13 +304,13 @@ public class LoginResponseMsg : ServerMsg
 \end{lstlisting}
 
 \subsection{Client}
-I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. Klient struktur ses i UML diagram på figur~\ref{fig:Connection.Client}
+I denne sektion er beskrevet hvorledes klienten er opbygget. Klienten står for at modtage besked objekter fra applikations laget, og omsætte disse til strings der kan sendes til serveren. Desuden står klienten for at modtage svar fra serveren, og omdanne disse til den korrekte beskedtype. Klient struktur ses i UML diagram på figur~\ref{fig:ConnectionClient}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionClient.png}
 	\caption{Klient diagram}
-	\label{fig:Connection.Client}
+	\label{fig:ConnectionClient}
 \end{figure}
 
 \subsubsection{Synchronous Socket Client}
@@ -363,13 +358,13 @@ public Message HandleMessage(string messageString)
 \end{lstlisting}
 
 \subsection{Server}
-I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Server struktur ses i UML diagram på figur~\ref{fig:Connection.Server}
+I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Server struktur ses i UML diagram på figur~\ref{fig:ConnectionServer}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figs/connection/ConnectionServer.png}
 	\caption{Server diagram}
-	\label{fig:Connection.Server}
+	\label{fig:ConnectionServer}
 \end{figure}
 
 \subsubsection{Asynchronous Socket Listener}
@@ -378,13 +373,8 @@ Der er ændret i klassens konsol output, så essentielle data vises. Dette kan s
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
 	\includegraphics[width=0.9\linewidth]{figs/connection/asynchronousSocketListener.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/asynchronousSocketListener.png}
 	\caption{Asynchronous Socket Listener}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:asynchronousSocketListener}
 \end{figure}
 
@@ -394,21 +384,95 @@ Der er desuden valgt at lade exceptions blive vist i server vinduet, som f.eks. 
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
 	\includegraphics[width=0.9\linewidth]{figs/connection/asynchronousSocketListenerException.png}
-	\caption{WinLoginView}
-=======
-	\includegraphics[width=0.7\linewidth]{figs/connection/asynchronousSocketListenerException.png}
 	\caption{Asynchronous Socket Listener Exception}
->>>>>>> ddddfb4d868f40684108c424cbe6cd45692d701e
 	\label{fig:asynchronousSocketListenerException}
 \end{figure}
 
 Som det også fremgår i server vinduet figur~\ref{fig:asynchronousSocketListenerException} bliver en exception håndteret af serveren, og der sendes en besked af den korrekte type tilbage til klient applikationen, så hverken server eller klient crasher.
 
 \subsubsection{Response Manager}
+Denne klasse er primært baseret på en switch case, hvor der baseret på den modtagne beskeds type, returneres et passende svar som set på figur ??
+\begin{lstlisting}[caption=Server.ResponseManager, label=code:Server.ResponseManager]
+var receivedMessage = JsonConvert.DeserializeObject<Message>(receivedString, _jsonSettings);
+
+switch (receivedMessage.MsgType)
+{
+	case MessageTypes.LoginRequest:
+	var loginMessage = JsonConvert.DeserializeObject<LoginRequestMsg>(receivedString);
+	return HandleLoginRequest(loginMessage);
+	
+	case MessageTypes.TokenMsg:
+	var tokenMessage = JsonConvert.DeserializeObject<TokenMsg>(receivedString);
+	if (_tokenKeeper.TokenActive(tokenMessage.Username, tokenMessage.TokenString))
+		return _tokenMsgResponse.HandleTokenMsg(receivedMessage, receivedString, _tokenKeeper);
+	else return new GeneralResponseMsg(false, false);
+	
+	case MessageTypes.AddUserRequest:
+	var addUserMessage = JsonConvert.DeserializeObject<AddUserRequestMsg>(receivedString);
+	return new GeneralResponseMsg(false, _smartpoolDb.UserAccess.AddUser(addUserMessage.Fullname, addUserMessage.Username, addUserMessage.Password));
+	
+	case MessageTypes.ResetPasswordRequest:
+	var resetPasswordMessage = JsonConvert.DeserializeObject<ResetPasswordRequestMsg>(receivedString);
+	return new GeneralResponseMsg(false, false); //_smartpoolDb.UserAccess.ResetPassword(resetPasswordMessage)
+	
+	default:
+	return new GeneralResponseMsg(false, false)	{MessageInfo = "The server did not recognize your request"};
+}
+\end{lstlisting}
+
+Klassens switch-case er indkapslet i en try block, hvori der sørges for at eventuelle exceptions bliver håndteret, og der sendes et passende svar tilbage til klienten. Der er yderligere lavet en metode til håndtering af login requests, da denne som den eneste krævede en længere håndtering. Denne anvender en task til at kalde i databasen, da dette ved test af og til tog længere tid end forventet. Metoden ses på figur ??
+
+\begin{lstlisting}[caption=Server.ResponseManager.HandleLoginRequest, label=code:Server.ResponseManager.HandleLoginRequest]
+var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMsg.Username, loginMsg.Password));
+if (task.Wait(TimeSpan.FromSeconds(15))) //if task is completed within time limit
+{
+	return task.Result ? new LoginResponseMsg(_tokenKeeper.CreateNewToken(loginMsg.Username), true) : new LoginResponseMsg("", false) {MessageInfo = "Username or password was incorrect"};
+}
+else
+	return new LoginResponseMsg("", false) {MessageInfo = "Login timed out. Please try again later"};
+\end{lstlisting}
 
 \subsubsection{Token System}
+For at lave et user session koncept, er der implementeret et token system, som består af en TokenKeeper, Token og TokenStringGenerator klasse. UML diagram over disse ses på figur~\ref{fig:ConnectionServerToken}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/connection/ConnectionServerToken.png}
+	\caption{Connection.Server.Token}
+	\label{fig:ConnectionServerToken}
+\end{figure}
+Som det fremgår af figur~\ref{fig:ConnectionServerToken}, er der øverst en TokenKeeper som indeholder en TokenStringGenerator og en liste af Tokens. Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
+For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på figur ??
+\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken, label=code:Server.TokenKeeper.CreateNewToken]
+public string CreateNewToken(string username)
+{
+	var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
+	_tokens.Add(newToken);
+	
+	if (_removeUnusedCountdown == 0)
+	{
+		RemoveAllUnusedTokens();
+		_removeUnusedCountdown = _tokensCreatedBeforeRemovingUnused;
+	}
+	_removeUnusedCountdown--;
+	
+	return newToken.GetTokenString();
+}
+\end{lstlisting}
 
-\subsubsection{FakePool DataGeneration}
+\subsubsection{Pool DataGeneration}
+For at simulere data fra pools i systemet, er der implementeret en række pool/sensor klasser. Disse ses på figur~\ref{fig:ConnectionPool}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/connection/ConnectionPool.png}
+	\caption{Connection.Pool diagram}
+	\label{fig:ConnectionPool}
+\end{figure}
 
+\paragraph{PoolKeeper} er implementeret som en fake klasse, der indeholder en liste over pools i systemet. Ved opstart chekkes på få udvalgte brugernavne i databasen, som der derefter genereres tilsvarende pools for. Desuden bliver der, mens systemet kører, oprettet pools i systemet for nye pools der tilføjes til databasen. Så længe serveren kører, vil alle nye pools altså generere data.
+
+\paragraph{Pool} er implementeret som en fake klasse. Klassen indeholder ikke nogen public metoder, da den er selvkørende og ved et angivet interval selv opretter sensor data i databasen. Dette er tiltænkt at være tilsvarende et reelt system, hvor en reel pool klasse, ved et givet interval, sender en request til en fysisk enhed om måledata, som derefter gemmes i databasen.
+
+\paragraph{Sensor} er implementeret som en fake klasse. Der er lagt stor vægt på at klassen genererer værdier som kunne være reele, da dette er med til at give et helhedsindtryk af det endelige system. 
+
+\paragraph{SensorValueAuthenticator} som et led i at give sensoren realistiske værdier, er denne klasse oprettet for at angive en minimum og maximum værdi, en given sensor type kan have.
