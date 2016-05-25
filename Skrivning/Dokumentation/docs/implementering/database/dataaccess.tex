@@ -96,22 +96,19 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Returnere:}
 \begin{itemize}
-	\item \textit{Boolean}, true hvis data kunne sættes ind i databasen uden problemer, ellers false.
+	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (klor for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
 \end{itemize}
 
 \subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
-	\item \textit{double} klor værdien som skal indsættes.
-	\item \textit{double} temperatur værdien som skal indsættes.
-	\item \textit{double} pH værdien som skal indsættes.
-	\item \textit{double} luftfugtigheds værdien som skal indsættes.
+	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
 \end{enumerate}
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{Data} object (som vist i figur~\ref{fig:datasetentity}), som gemmes i databasen. Herefter oprettes målingerne og tildeles den fælles \textit{Data} som tidligere blev oprettet.
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle klor-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
 
 
@@ -124,14 +121,116 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \subparagraph{GetTemperatureValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
-\todo{do dis}
+
+
+
+
+
+\subparagraph{Signatur}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
+\end{itemize}
+
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (temperatur for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
+\end{itemize}
+
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
+	\item \textit{string} navnet på poolen.
+	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle temperatur-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+\end{itemize}
+
+
+
+
+
+
 
 \subparagraph{GetPhValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
-\todo{do dis}
+
+
+
+
+
+
+
+
+
+
+\subparagraph{Signatur}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
+\end{itemize}
+
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (pH for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
+\end{itemize}
+
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
+	\item \textit{string} navnet på poolen.
+	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle pH-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+\end{itemize}
+
+
+
+
+
+
+
+
 
 \subparagraph{GetHumidityValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);}
-\todo{do dis}
+
+
+
+
+
+
+
+\subparagraph{Signatur}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);}
+\end{itemize}
+
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (luftfugtighed for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
+\end{itemize}
+
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
+	\item \textit{string} navnet på poolen.
+	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+\end{itemize}
+
+
+
+
+
+
