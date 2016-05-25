@@ -4,8 +4,14 @@ Designet af Windows GUI er lavet således, at codebehind filerne implementerer h
 Codebehing agerer dermed som en bro, i mellem Smartpools præsentationslag, og WPF view-lag.
 
 I klasse diagrammet nedenfor, ses Windows designet, med de klasser der implementerer view-interfaces.
-
-\todo{Indsæt win klassediagram}
+\begin{landscape}
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{figs/design/win_uml_full}
+\caption{Fuldt klassediagram for Windows applikation}
+\label{fig:win_uml_full}
+\end{figure}
+\end{landscape}
 
 Af klassediagrammet fremgår det, at alle WPF klasserne har en "\_specializedController" property. Dette er en property, der bør typecaste deres nedarvede IViewController property, til den type presenter der passer specifikt til view'et.
 
