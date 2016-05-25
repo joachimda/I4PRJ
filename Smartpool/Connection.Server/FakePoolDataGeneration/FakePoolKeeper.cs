@@ -13,6 +13,10 @@ namespace Smartpool.Connection.Server.FakePoolDataGeneration
         public FakePoolKeeper(ISmartpoolDB smartpoolDb)
         {
             _smartpoolDb = smartpoolDb;
+            if (_smartpoolDb.UserAccess.IsEmailInUse("1"))
+                GeneratePoolsForUser("1");
+            if (_smartpoolDb.UserAccess.IsEmailInUse("IHA"))
+                GeneratePoolsForUser("IHA");
         }
 
         public void GeneratePoolsForUser(string userName)
