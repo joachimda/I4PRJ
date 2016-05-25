@@ -1,4 +1,4 @@
-\subsubsection{UserAccess}
+\subsection{UserAccess}
 Klassen UserAccess implementerer IUserAccess og står for at skrive og læse user records til/fra databasen.
 UserAccess indeholer administrator funktionalitet til at slette alle users på databasen. Herudover står UserAccess for data editing af users samt validering af userdata før det gemmes.
 
@@ -10,16 +10,16 @@ UserAccess indeholer administrator funktionalitet til at slette alle users på d
 \end{figure}
 
 
-\paragraph{Metodebeskrivelser}
+\subsubsection{Metodebeskrivelser}
 I dette afsnit findes metodebeskrivelser for klassen \textit{UserAccess}.
 
-\subparagraph{AddUser}\
+\paragraph{AddUser}\
 
 \textit{bool AddUser(string fullname, string email, string password)}
 
 Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt ValidateName før der oprettes et database kontekst objekt af typen DataBaseContext. På Kontekstobjektets DbSet<User> property kaldes Add metoden med den nye User som parameter. Herefter gemmes den nye User i databasen ved at kalde SaveChanges metoden på kontekstobjektet. Adduser returnerer false hvis der er fejl i enten check på email eller fullname. Hvis det lykkes at tilføje brugeren til databasen returneres true.
 
-\subparagraph{FindUserByEmail}\
+\paragraph{FindUserByEmail}\
 
 \textit{User FindUserByEmail(string email)}
 
@@ -46,18 +46,18 @@ using (var db = new DatabaseContext())
 	\item \textit{UserNotFoundException()} - Kastes hvis der ikke findes en bruger med den angivne email addresse i databasen.
 \end{itemize}
 
-\subparagraph{IsEmailInUse}\
+\paragraph{IsEmailInUse}\
 
 \textit{bool IsEmailInUse(string email)}
 
 Laver en LINQ query på databasekontekst objektet og checker om der findes en mail adresse i databasen der matcher den som er givet som parameter. Metoden returnerer false hvis mail addressen ikke er i brug og true hvis den er.
 
-\subparagraph{ValidatePassword}\
+\paragraph{ValidatePassword}\
 
 \textit{bool ValidatePassword(string email, string password);}
 Da et Fullname skal indeholde mere end et navn, checkes der her for et minimum af to navne. Hvis navnet kan godkendes returneres true, eller false.
 
-\subparagraph{RemoveUser}\
+\paragraph{RemoveUser}\
 
 \textit{void RemoveUser(string email)}
 
@@ -67,7 +67,7 @@ Brugeren fjernes ved at kalde remove på kontekstobjektets UserSet property.
 
 \textit{db.UserSet.Remove(user)}
 
-\subparagraph{DeleteAllUsers}\
+\paragraph{DeleteAllUsers}\
 
 \textit{void DeleteAllUsers()}
 
@@ -83,14 +83,14 @@ using (var db = new DatabaseContext())
 ...	
 \end{lstlisting}
 
-\subparagraph{EditUserPassword}\
+\paragraph{EditUserPassword}\
 
 \textit{bool EditUserPassword(string email, string newPassword)}
 
 Gør det muligt for en bruger at ændre sit password. Metoden står derudover for at sikre at det nye password ikke er en tom streng. User entitetens password property ændres gennem databasekonteksobjektet, hvorefter ændringen gemmes på databasen.
 Metoden returnerer true med mindre der findes en uoverensstemmelse med enten password eller email.
 
-\subparagraph{EditUserEmail}\
+\paragraph{EditUserEmail}\
 
 \textit{bool EditUserEmail(string email, string newEmail)}
 
@@ -114,9 +114,7 @@ public bool EditUserEmail(string email, string newEmail)
 
 \end{lstlisting}
 
-\subparagraph{EditUserName}\
+\paragraph{EditUserName}\
 
 \textit{bool EditUserName(string email, string newName)}
 \todo{do dis}
-
-\paragraph{Properties}\
