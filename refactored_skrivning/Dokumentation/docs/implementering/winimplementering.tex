@@ -1,7 +1,8 @@
-\section{Windows GUI}
+\subsubsection{Implementering}
 Implementeringen af den grafiske bruger grænseflade til Windows PC applications program beskrives her.
 Kildekoden ligger i projektet Application.Win.
-\subsection{WinLoginView}
+
+\paragraph{WinLoginView}
 Første skærm eller view der vises er WinLoginView.
 \begin{figure}
 	\centering
@@ -66,7 +67,7 @@ VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3,0,0,0" Foregroun
 \end{lstlisting}
 På linje 11 er en TextBlock der er båndet til placeholder teksten tilføjet til TextBox'en. 
 På linje 17 er der lavet en DataTrigger. Den er båndet til teksten i TextBox'en. Hvis tekst property'en er tom, vises placeholder teksten.
-\subsection{WinStatView}
+\paragraph{WinStatView}
 Til at vise nuværende data blev WinStatView lavet.
 \begin{figure}[h]
 	\centering
@@ -159,7 +160,7 @@ Templaten ses nedenfor.
 
 Bemærk TargetType="local:StatViewer". Templaten er til StatViewer og de steder der står TemplateBinding forbindes de properties der var blevet tilføjet.
 
-\subsection{WinHistoryView}
+\paragraph{WinHistoryView}
 Til at præsentere brugeren for måledata grafisk i PC applikationen er WinHistoryView lavet.
 \begin{figure}
 \centering
@@ -212,7 +213,7 @@ På linje 9 og 10 udregnes punktets position relativt i forhold til canvas'ets s
 \_pointsOnGraphs er en variabel der blot er sat til antallet af punkter i det historiske data der er modtaget. Så uanset hvor meget data funktionen modtager, så tegner den det. Der kunne have været implementeret et input felt, hvor brugeren kunne specificere hvor mange dages data han ville se, men det blev ned prioriteret. 
 Linje 14 til 19 indsættes punktet i grafen.
 
-\subsection{TabBar}
+\paragraph{TabBar}
 TabBaren, som ses på alle views efter brugeren har logget ind, er ikke en standard WPF control. WPF har en TabBarControl, men den indeholder pages, som kan indeholde yderligere controls. I views'ne skulle der bruges buttons, som åbnede nye views, når man klikkede. Visuelt giver de indtrykket af at det er en standard tabBar, men funktionaliteten og udseendet er special lavet.
 \begin{figure}
 \centering
@@ -275,6 +276,6 @@ Når SpTabControl genererer et synligt event kan det fanges af en event handler 
 Det er placeret i constructoren af alle views med en tabBar.
 Funktionen TabBarController.ShowStatButtonPressed() er placeret i klassen TabBarController for at kunne genbruge funktionen i alle views.
 
-\subsection{Vindue design}
+\paragraph{Vindue design}
 Vinduernes udseende er ikke standard .NET. Det er lavet i samme stil som resten af det visuelle design ved hjælp af nogle klasser og en template lavet af Jay Chase~\cite{websiteCustomWindow} på msdn.
 Når man fjerner .NETs normale vindue forsvinder den indbyggede funktionalitet også. Det vil sige evnen til at flytte og resize vinduet. I klasserne fra Jay Chase er det lavet, og det er uændret. Klasserne ligger i mappen StyleableWindow. Templaten der beskriver udseendet er stærkt ændret for at få det ønskede udseende.

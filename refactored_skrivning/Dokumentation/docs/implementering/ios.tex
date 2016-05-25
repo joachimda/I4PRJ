@@ -1,15 +1,15 @@
 % !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
-\section{iOS}
+\subsubsection{Implementering}
 Dette afsnit beskriver udvalgte elementer af implementeringen, af den grafiske brugergrænseflade til iOS styresystemet. iOS-projektet kan findes i Smartpool.Application.iOS.
 
 Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget.
 
 Implementeringen af view-klasserne foretages i udviklingsværktøjet Xamarin, i sproget C\#. Den visuelle implementering foretages med storyboards i Interface Builder, som er en del af Xcode-udviklingsværktøjet.
 
-\subsection{Implementering i Interface Builder}
+\paragraph{Interface Builder}
 Storyboards er en visuel måde at designe brugergrænseflader til iOS, som kan sammenkobles med controller-klasser som "code-behind" filer. I udviklingen af iOS-applikationen blev view's i storyboardet implementeret, sammen med bro-dannende controller-klasser, som implementerer view-interfaces fra præsentationslaget.
 
-\subsubsection{Storyboard}
+\paragraph{Storyboard}
 På figur~\ref{fig:iosstoryboard} ses det overordnede storyboard layout. I layoutet repræsenterer kasserne UIViewController-subklasser, hvori det view de er tilknyttet vises. Layoutet definerer også de statiske overgange (vist med pile) mellem forskellige view's. Desuden indlejres en række view's i en UITabBarController, således at en Tab Bar implementering, modsat Windows brugergrænsefladen, ikke er nødvendig i iOS-implementeringen.
 
 \begin{figure}
@@ -19,7 +19,7 @@ På figur~\ref{fig:iosstoryboard} ses det overordnede storyboard layout. I layou
 	\label{fig:iosstoryboard}
 \end{figure}
 
-\subsubsection{Layout constraints}
+\paragraph{Layout constraints}
 Layout constraints i Interface Builder muliggør skalering af brugergrænsefladen til forskellige skærmstørrelser. Hvert element i de visuelle view's er implementeret med UILayoutConstraints. På figur~\ref{fig:ios_imp_constraints} ses EditPoolViewBridge-klassens constraint-implementering (listen til venstre i billedet).
 
 \begin{figure}
@@ -31,7 +31,7 @@ Layout constraints i Interface Builder muliggør skalering af brugergrænseflade
 
 Til højre på figuren ses den markerede tekstboks' constraint-implementering. Her ses det, at der er implementeret constraints for elementets højde, og afstand til andre elementer.
 
-\subsubsection{Outlets og actions}
+\paragraph{Outlets og actions}
 Links mellem Interface Builder og den bagvedliggende kode, implementeres fra Interface Builder i form af IBOutlets og IBActions. IBOutlets er referencer til user interface elementerne, hvorimod IBActions er target-actions links til metode kald, eller events, i koden.
 
 På figur~\ref{fig:ios_imp_actionsoutlets} ses outlet/action opsætningen for EditPoolViewBridge I Interface Builder. Listen af IBOutlets og Actions kan ses til højre i billedet.
@@ -43,7 +43,7 @@ På figur~\ref{fig:ios_imp_actionsoutlets} ses outlet/action opsætningen for Ed
 	\label{fig:ios_imp_actionsoutlets}
 \end{figure}
 
-\subsubsection{Tabel-celler}
+\paragraph{Tabel-celler}
 Til StatViewController og HistoryViewController implementeres specielle tabelceller (subklasser af UITableViewCell), som kan bruges til visning af måledata. Cellerne er implementeret i en .xib-fil, med en bagvedliggende C\#-fil, på samme måde som storyboardet. På figur~\ref{fig:ios_imp_historycell} ses den visuelle implementering af HistoryViewCell.
 
 \begin{figure}
@@ -53,10 +53,10 @@ Til StatViewController og HistoryViewController implementeres specielle tabelcel
 	\label{fig:ios_imp_historycell}
 \end{figure}
 
-\subsection{Implementering af view-klasser}
+\paragraph{View-klasser}
 I dette afsnit beskrives implementeringen af de brodannende controller-klasser i iOS-applikationen, som implementerer view-interfacet fra præsentationslaget.
 
-\subsubsection{Constructor-metoder og ViewDidLoad}
+\subparagraph{Constructor-metoder og ViewDidLoad}
 Implementeringen af de forskeligge klassers constructor-metoder er meget sammenlignelig. Derfor eksemplificeres SignUpViewBridge-klassens constructor, i dette afsnit, og constructor-metoderne kommenteres herefter ikke yderligere. På listing~\ref{code:ios_impl_constructor} ses constructor-metoden.
 
 \begin{lstlisting}[caption={SignUpViewBridge(...)},label={code:ios_impl_constructor}]
@@ -81,7 +81,7 @@ public override void ViewDidLoad ()
 }
 \end{lstlisting}
 
-\subsubsection{IBOutlets og IBActions}
+\subparagraph{IBOutlets og IBActions}
 Alle de implementerede view-klasser indeholder partielle implementeringer, givet ved de IBOutlets og IBActions der blev defineret i Interface Builder (se listing~\ref{fig:ios_imp_actionsoutlets}, side~\pageref{fig:ios_imp_actionsoutlets}). Under udarbejdelsen af klassernes kodeimplementering, færdigimplementeres IBOutlets og IBActions. I eksemplet givet ved listing~\ref{code:ios_impl_kodeaction}, ses hvorledes kodeimplementeringen af en IBAction ser ud.
 
 \begin{lstlisting}[caption={Kodeimplementering af en IBAction},label={code:ios_impl_kodeaction}]
@@ -104,10 +104,10 @@ public void SetEmailText(string text)
 
 Da alle view-klasserne indeholder en række af disse IBOutlet og IBAction implementeringer, som alle har formen vist i listing~\ref{code:ios_impl_kodeaction}~og~\ref{code:ios_impl_kodeoutlet}, kommenteres de ikke yderligere.
 
-\subsubsection{Statiske views}
+\subparagraph{Statiske views}
 SignUpViewBridge, LoginViewBridge, EditPoolViewBridge, EditUserViewBridge og AddPoolViewBridge er alle statiske, i den forstand, at opsætningen af deres layout, ikke ændre sig i runtime. Det resulterer i, at der kræves meget lidt, af disse klassers implementering. De statiske views nedarver alle fra UIViewController, og implementerer det view-interface der passer til dem (SignUpViewBridge implementerer eksempelvis ISignUpView-interfacet). Implementeringen af disse klasser består hovedsageligt i, at bygge bro mellem view'et og presenter klassen, ved at implementere IBOutlet- og IBAction-kode, som vist i forrige afsnit. 
 
-\subsubsection{StatViewBridge.cs}
+\subparagraph{StatViewBridge.cs}
 StatViewBridge implementerer IStatView-interfacet. StatViewBridge nedarver, i modsætning til de statiske views, fra UIViewController sub-klassen UITableViewController. Denne UIKit controller-klasse kan bruges til at vise lister der ændre sig i runtime, som er nyttigt for StatViewBridge-klassen, da den skal kunne opdateres med måledata. I listing~\ref{code:ios_impl_statdisplay} ses implementeringen af interface-metoden DisplaySensorData. I denne metode gemmes den modtagne sensor data, så den kan bruges som data source til UITableViewController-listen.
 
 \begin{lstlisting}[caption={DisplaySensorData(...)},label={code:ios_impl_statdisplay}]
@@ -147,7 +147,7 @@ På figur~\ref{fig:ios_imp_statview} ses det visuelle resultat, af StatViewBridg
 	\label{fig:ios_imp_statview}
 \end{figure}
 
-\subsubsection{HistoryViewBridge.cs}
+\subparagraph{HistoryViewBridge.cs}
 HistoryViewBridge implementerer IHistoryView-interfacet. HistoryViewBridge nedarver, ligesom StatViewBridge, fra UITableViewController. I listing~\ref{code:ios_impl_historydisplay} ses implementeringen af interface-metoden DisplayHistoricData. I denne metode gemmes den modtagne sensor data, så den kan bruges som data source til UITableViewController-listen.
 
 \begin{lstlisting}[caption={DisplayHistoricData(...)},label={code:ios_impl_historydisplay}]
@@ -261,7 +261,7 @@ På figur~\ref{fig:ios_imp_historyview} ses det visuelle resultat, af HistoryVie
 	\label{fig:ios_imp_historyview}
 \end{figure}
 
-\subsection{Implementering af iOS socket-klienten}
+\paragraph{iOS socket-klienten}
 Da iOS-applikationen ikke kan drage nytte af det fulde .Net-framework, skulle en platform-specifik socket-klient implementeres. I stedet bruges biblioteket SocketLibrary, som er fundet med NuGet-package manager. Socket-klienten er en modificeret udgave af .Net-socket clienten, som beskrives i Connection afsnittet.
 
 Socket-klienten implementerer IClient-interfacet, der er defineret i Smartpool.Connection.Model. iOS tillader en maksimal socket buffer-størrelse, på 1kb. Derfor implementeres StartClient-metoden (se listing~\ref{code:ios_impl_client}) i IClient-interfaet således, at den modtager data fra serveren af flere omgange. For at bufferen kan nå at modtage data mellem hver transmission, indsættes et mindre delay.
@@ -301,7 +301,7 @@ public string StartClient(string whatToSend)
 	}
 	catch (Exception)
 	{
-		return JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby"}, _jsonSettings);
+		return JsonConvert.SerializeObject(new LoginResponseMsg("", false) {MessageInfo = "Error - Server did not respond\nMake sure server is started and Emil isn't nearby"},5 _jsonSettings);
 	}
 }
 \end{lstlisting}
