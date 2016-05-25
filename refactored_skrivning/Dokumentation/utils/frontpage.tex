@@ -1,0 +1,54 @@
+%!TEX root = main.tex
+\pagestyle{titlingpage}
+\backgroundsetup{
+	scale=1,
+	angle=0,
+	opacity=1,
+	contents={
+		\begin{tikzpicture}[remember picture,overlay]
+		\path [fill=pantone] (-0.5\paperwidth,0.36\paperheight) rectangle (0.5\paperwidth,0.47\paperheight);  
+		\path [fill=pantone] (-0.5\paperwidth,-0.47\paperheight) rectangle (0.5\paperwidth,-0.43\paperheight);  
+		\end{tikzpicture}}}
+\BgThispage
+\vspace*{-25mm}
+\begin{minipage}[l]{\textwidth}
+	\includegraphics[width=0.75\textwidth]{figs/frontpage/aseaulogohvid.pdf}
+\end{minipage}
+
+\vspace{35pt}
+\begin{minipage}[l]{\textwidth}
+\tabulinesep=10pt
+\begin{tabu} to \textwidth{X[l]}
+	{\small\MakeUppercase\Kursus}\\
+	{\HUGE\bfseries\MakeUppercase\Projektnavn}\\
+	{\Large\Gruppe}\\
+	{\itshape\Projektdokument}
+\end{tabu}
+\end{minipage}
+
+\vspace{5pt}
+\begin{minipage}[l]{\textwidth}
+    \centering
+	\vspace*{0cm}\hspace*{8cm}\includegraphics[width=0.4\textwidth]{figs/frontpage/smartpool.png}
+\end{minipage}
+
+\vspace{\fill}
+\begin{minipage}[l]{\textwidth}
+\begin{tabu} to \textwidth{lX[l]}
+\textbf{Dato}           &\today\\
+\textbf{Vejleder}		&Lars Mortensen\\
+\end{tabu}
+\end{minipage}
+
+\vspace{10pt}
+\begin{minipage}[l]{\textwidth}
+\tabulinesep=25pt
+\begin{tabu} to \textwidth{X[l]X[l]X[l]}
+\makebox[\linewidth]{\hrulefill}\newline Joachim Dam Andersen     \newline 201370031/IKT  
+&\makebox[\linewidth]{\hrulefill}\newline Lasse Priebe             \newline 201407375/IKT 
+&\makebox[\linewidth]{\hrulefill}\newline Emil Nyborg              \newline 201404877/IKT\\
+\makebox[\linewidth]{\hrulefill}\newline Bjørn Nørgaard Sørensen  \newline 201370248/IKT  
+&\makebox[\linewidth]{\hrulefill}\newline Alex Justesen Karlsen    \newline 201404623/IKT 
+&\makebox[\linewidth]{\hrulefill}\newline Joachim Händel Noer Wind \newline 201370340/IKT
+\end{tabu}
+\end{minipage}
