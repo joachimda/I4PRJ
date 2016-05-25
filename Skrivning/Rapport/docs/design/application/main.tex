@@ -1,11 +1,20 @@
+% !TEX root = ../../../I4PRJ, Grp3 - Rapport.tex
 \section{Applikationslaget}
-Applikationslaget er det lag af software i det samlede distribuerede system, som installeres eller afvikles hos brugeren. Applikationslaget er designet til at være platformuafhængigt, jf. systemets arkitektur. Derved er lagets model- og præsentationslag designet til at være portabelt, hvorimod view-laget er platformspecifikt. 
+Applikationslaget er det lag af software i det samlede distribuerede system, som installeres eller afvikles hos brugeren. Applikationslaget er designet til at være platformuafhængigt, jf. systemets arkitektur. Lagets model- og præsentationslag er designet til at være portabelt, hvorimod view-laget er platformspecifikt og designes seperat for hver platform. 
 
-Som følge af multi-lag arkitekturen kunne applikationslaget samt de platform-specifikke view-implementeringer
-designes, uafhængigt af hinanden, så længe interfaces blev specificeret undervejs i processen. 
+Det overordnede design i applikationslaget illustreres ved sekvensdiagrammet i figur~\ref{fig:application_sd}. Her fremgår kommunikationsmønsteret mellem model-, view- og presenter-klasserne i applikationslagets design.
 
-Presenter interfacet specificerer hvilke metoder og hvilken funktionalitet et view skal have.
-Her ses klassediagrammet for ISignUpView.
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figs/design/application_sd}
+	\caption{Kommunikation i applikationslaget}
+	\label{fig:application_sd}
+\end{figure}
+
+Som følge systemets multi-lag arkitektur kunne applikationslaget samt de platform-specifikke view-implementeringer
+designes, uafhængigt af hinanden, så længe protokolbestemmende interfaces blev specificeret undervejs i processen. Interfaces for både presenters og views, er defineret ud fra de user stories, der har krævet deres design.
+
+Præsentationslaget består af interfaces til presenters og views, samt konkrete presenters-klasser. View interfaces specificeres af de tilhørende presenter-klasser, og definerer presenter-klassens interaktion med view'et. På figur~\ref{fig:application_isignupview} ses klassediagrammet for ISignUpView-interfacet.
 
 \begin{figure}
 \centering
@@ -13,21 +22,18 @@ Her ses klassediagrammet for ISignUpView.
 \caption{ISignUpView}
 \label{fig:application_isignupview}
 \end{figure}
-View'et i hver applikation implementerer interfacet og opretter en controller, hvis interface ses nedenfor.
-Interfacet indeholder de funktioner user stories'ne leder op til.
+
+Det konkrete signup view i hver platformspecifikke applikation implementerer view-interfacet og instantiere den tilhørende controller, hvis interface- og klassedesign ses på figur~\ref{fig:application_isignupviewcontroller}.
+
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{figs/design/application_signupviewcontrollerandinterface}
 \caption{ISignUpViewController og SignUpViewController}
 \label{fig:application_isignupviewcontroller}
 \end{figure}
-Figur~\ref{fig:application_isignupviewcontroller} viser også SignUpViewController's konkrete klasse, der indeholder flere metoder og attributter, som måden MVP er lavet i applikationslaget viste sig at kræve.
-Det er attributter som \_clientMessenger, som er klienten, der kommunikerer med serveren. 
-\_user af typen UserValidater er en klasse i præsentationslaget der er platformsuafhængig til at validere om bruger informationen er gyldig. 
+Figur~\ref{fig:application_isignupviewcontroller} viser også, at den konkrete klasse indeholder flere metoder og attributter, som binder den konkrete klasse sammen med modellen. Modellen i applikationslaget består delvist af valideringslogik og klasser til kommunikation med resten af systemet. Det er attributter som \_clientMessenger, som er klienten, der kommunikerer med serveren og \_user af typen UserValidater, der validere om brugerinformationen er gyldig.
 
-Controlleren kender ISignUpView, så den kalder funktionerne i view'et og på den måde er logik og view adskilt.
-
-Designet af funktionaliteten bag user story'en, der viser nyeste målinger har ført til følgende konkrete controller klasse.
+Den user story der omhandler visning af målinger, har ført til designet af følgende presenter-klasse.
 
 \begin{figure}
 \centering

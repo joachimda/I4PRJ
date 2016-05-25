@@ -1,6 +1,6 @@
 % !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
 \section{iOS}
-Dette afsnit beskriver udvalgte elementer af implementeringen, af den grafiske bruger grænseflade til iOS styresystemet. iOS-projektet kan findes i Smartpool.Application.iOS.
+Dette afsnit beskriver udvalgte elementer af implementeringen, af den grafiske brugergrænseflade til iOS styresystemet. iOS-projektet kan findes i Smartpool.Application.iOS.
 
 Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget.
 
@@ -105,7 +105,7 @@ public void SetEmailText(string text)
 Da alle view-klasserne indeholder en række af disse IBOutlet og IBAction implementeringer, som alle har formen vist i listing~\ref{code:ios_impl_kodeaction}~og~\ref{code:ios_impl_kodeoutlet}, kommenteres de ikke yderligere.
 
 \subsubsection{Statiske views}
-SignUpViewBridge, LoginViewBridge, EditPoolViewBridge, EditUserViewBridge og AddPoolViewBridge er alle statiske, i den forstand, at opsætningen af deres layout, ikke ændre sig i runtime. Det resulterer i, at der kræves meget lidt, af disse klassers implementering. De statiske views nedarver alle fra UIViewController, og implementere det view-interface der passer til dem (SignUpViewBridge implementerer eksempelvis ISignUpView-interfacet). Implementeringen af disse klasser består hovedsageligt i, at bygge bro mellem view'et og presenter klassen, ved at implementere IBOutlet- og IBAction-kode, som vist i forrige afsnit. 
+SignUpViewBridge, LoginViewBridge, EditPoolViewBridge, EditUserViewBridge og AddPoolViewBridge er alle statiske, i den forstand, at opsætningen af deres layout, ikke ændre sig i runtime. Det resulterer i, at der kræves meget lidt, af disse klassers implementering. De statiske views nedarver alle fra UIViewController, og implementerer det view-interface der passer til dem (SignUpViewBridge implementerer eksempelvis ISignUpView-interfacet). Implementeringen af disse klasser består hovedsageligt i, at bygge bro mellem view'et og presenter klassen, ved at implementere IBOutlet- og IBAction-kode, som vist i forrige afsnit. 
 
 \subsubsection{StatViewBridge.cs}
 StatViewBridge implementerer IStatView-interfacet. StatViewBridge nedarver, i modsætning til de statiske views, fra UIViewController sub-klassen UITableViewController. Denne UIKit controller-klasse kan bruges til at vise lister der ændre sig i runtime, som er nyttigt for StatViewBridge-klassen, da den skal kunne opdateres med måledata. I listing~\ref{code:ios_impl_statdisplay} ses implementeringen af interface-metoden DisplaySensorData. I denne metode gemmes den modtagne sensor data, så den kan bruges som data source til UITableViewController-listen.
@@ -180,7 +180,7 @@ public override UITableViewCell GetCell (UITableView tableView, Foundation.NSInd
 }
 \end{lstlisting}
 
-Under opsætningen cellen kaldes den private hjælpefunktion DrawGraph, som har til formål at tegne en graf i cellen. I listing~\ref{code:ios_impl_historydrawgraph} viser implementeringen af DrawGraph-metoden. I metoden bruges en UIBezierPath til at tegne den serie af streger, som grafen består af.
+Under opsætningen af cellen kaldes den private hjælpefunktion DrawGraph, som har til formål at tegne en graf i cellen. I listing~\ref{code:ios_impl_historydrawgraph} viser implementeringen af DrawGraph-metoden. I metoden bruges en UIBezierPath til at tegne den serie af streger, som grafen består af.
 
 \begin{lstlisting}[caption={DrawGraph(...)},label={code:ios_impl_historydrawgraph}]
 private Tuple<double, double> DrawGraph(UIView view, List<double> values, SensorTypes type)
