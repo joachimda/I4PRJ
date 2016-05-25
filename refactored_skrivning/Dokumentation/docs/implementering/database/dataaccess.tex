@@ -1,4 +1,4 @@
-\subsection{DataAccess}
+\subsubsection{DataAccess}
 DataAccess implementerer IDataAccess og står for at skrive og læse data records til/fra databasen.
 IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på figur \ref{fig:dataAccessClassNoInherit}
 
@@ -9,19 +9,19 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \label{fig:dataAccessClassNoInherit}
 \end{figure}
 
-\subsubsection{CreateDataEntry}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{CreateDataEntry}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Signatur}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{Boolean}, true hvis data kunne sættes ind i databasen uden problemer, ellers false.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
@@ -31,7 +31,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 	\item \textit{double} luftfugtigheds værdien som skal indsættes.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{Data} object (som vist i figur~\ref{fig:datasetentity}), som gemmes i databasen. Herefter oprettes målingerne og tildeles den fælles \textit{Data} som tidligere blev oprettet.
 \end{itemize}
@@ -43,19 +43,12 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \label{fig:datasetentity}
 \end{figure}
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/createDataEntry}
-\caption{Sekvensdiagram for metoden CreateDataEntry}
-\label{fig:createDataEntry}
-\end{figure}
 
 
 
 
 
-
-\subsubsection{DeleteAllData}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{DeleteAllData}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -63,22 +56,22 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\paragraph{Signatur}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{void DeleteAllData()}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{void}.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item Tager ikke nogle argumenter.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Lavet til brug under test og udvikling. Rydder tabellerne for Data og målinger (Chlorine, Ph...).
 \end{itemize}
@@ -89,31 +82,31 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\subsubsection{GetChlorineValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{GetChlorineValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
 
 
 
-\paragraph{Signatur}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (klor for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
 	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle klor-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
@@ -125,27 +118,32 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\subsubsection{GetTemperatureValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subparagraph{GetTemperatureValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textit{List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 
 
-\paragraph{Signatur}
+
+
+
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (temperatur for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
 	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle temperatur-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
@@ -156,7 +154,9 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\subsubsection{GetPhValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subparagraph{GetPhValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textit{List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 
 
 
@@ -166,24 +166,25 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\paragraph{Signatur}
+
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (pH for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
 	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle pH-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
@@ -196,7 +197,9 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\subsubsection{GetHumidityValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subparagraph{GetHumidityValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textit{List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);}
 
 
 
@@ -204,37 +207,30 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 
 
-\paragraph{Signatur}
+\subparagraph{Signatur}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);}
 \end{itemize}
 
-\paragraph{Returnere:}
+\subparagraph{Returnere:}
 \begin{itemize}
 	\item \textit{List<Tuple<SensorTypes, double>>} - \textit{SensorTypes} er et enum for typen af måler/sensor (luftfugtighed for denne metode), \textit{double} er den målte værdi. Disse bliver returneret i en \textit{Tuple} og alle målinger lavet i det valgte tidsrum bliver lagt ind i listen.
 \end{itemize}
 
-\paragraph{Argumenter:}
+\subparagraph{Argumenter:}
 \begin{enumerate}
 	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
 	\item \textit{string} navnet på poolen.
 	\item \textit{int} hvor langt tilbage der skal findes målinger for. Eksempelvis vil $daysToGoBack == 2$ finde alle målinger foretaget indenfor de sidste 48 timer.
 \end{enumerate}
 
-\paragraph{Virkemåde}
+\subparagraph{Virkemåde}
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
 
 
-På figur~\ ses sekvensdiagrammet for GetChlorine data. Måden hvorpå dette udføres er den samme for alle fire typer af data.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/getChlorineData}
-\caption{Sekvensdiagram for metoden GetChlorineData}
-\label{fig:getChlorineData}
-\end{figure}
 
 
 

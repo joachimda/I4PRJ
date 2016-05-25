@@ -1,8 +1,8 @@
 % !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
-\section{Web GUI}
+\subsubsection{Implementering}
 Implementeringen af den grafiske brugergrænseflade til Web-applikationen beskrives i dette afsnit. Kildekoden ligger i Application.Web løsningen, hvori projektet af samme navn forefindes. Fælles for alle web views er, at de implementeret med HTML\todo{ordliste}. HTML er et markup language til hjemmesider. Hjemmesidens grafiske layout laves vha. CSS som beskriver, hvordan man vil have HTML vist på sin hjemmeside. Ydermere er der brugt javascript til fra client-side at kommunikerer med brugeren.Slutteligt er der brugt razor som er et server-side markup language. 
 
-\subsection{LoginView}
+\paragraph{LoginView}
 LoginView ses på figuren nedenfor:
 
 \begin{figure}
@@ -78,7 +78,7 @@ Ved forsøg på login, ses følgende på serveren:
 
 Testen bekræfter, at den generelle arkitektur for systemet virker sammen med ASP.NET MVC arkitekturen. 
  
-\subsection{SignUpView}\label{sec: signupview}
+\paragraph{SignUpView}\label{sec: signupview}
 SignUpView ses på figuren nedenfor:
 
 \begin{figure}
@@ -90,7 +90,7 @@ SignUpView ses på figuren nedenfor:
 
 View grafikken er implementeret jævnfør det grafiske design. AccountController implementerer endnu ikke ISignUpView. Den ene sprint foretaget på Web, havde primært til formål at teste arkitekturen. Grunden tidspres og er implementering af det resterende website blevet nedprioriteret. Det gælder ligeledes for de resterende views.
 
-\subsection{AddPoolView}
+\paragraph{AddPoolView}
 AddPoolView ses på figuren nedenfor:
 
 \begin{figure}
@@ -102,7 +102,7 @@ AddPoolView ses på figuren nedenfor:
 
 View grafikken er implementeret jævnfør det grafiske design. AccountController implementerer endnu ikke IAddPoolView. Se \ref{sec: signupview} for yderligere forklaring.
 
-\subsection{EditUserView}
+\paragraph{EditUserView}
 AddPoolView ses på figuren nedenfor:
 
 \begin{figure}
@@ -114,10 +114,10 @@ AddPoolView ses på figuren nedenfor:
 
 View grafikken er implementeret jævnfør det grafiske design. AccountController implementerer endnu ikke IEditUserView. Se \ref{sec: signupview} for yderligere forklaring.
 
-\subsection{EditPoolView}
+\paragraph{EditPoolView}
 Dette view er endnu ikke implementeret. Se \ref{sec: signupview} for yderligere forklaring.
 
-\subsection{StatView}
+\paragraph{StatView}
 StatView ses på figuren nedenfor:
 
 \begin{figure}
@@ -129,9 +129,6 @@ StatView ses på figuren nedenfor:
 
 View grafikken er implementeret jævnfør det grafiske design. AccountController implementerer endnu ikke IStatView. Se \ref{sec: signupview} for yderligere forklaring.
 
-\subsection{HistoryView}
+\paragraph{HistoryView}
 
 Dette view er endnu ikke implementeret. Se \ref{sec: signupview} for yderligere forklaring.
-
-
-

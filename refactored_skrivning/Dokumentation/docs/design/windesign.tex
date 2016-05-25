@@ -1,4 +1,7 @@
-\section{Windows GUI}
+\subsection{Windows GUI}
+I dette afsnit beskrives design og implementering af Windows applikationen.
+
+\subsubsection{Design}
 I dette afsnit beskrives designet af Windows applikationen. I Windows applikationen designes view-klasser, der implementerer view-interfacet defineret i præsentationslaget. De dominante user interface frameworks på Windows kaldes .NET og WPF, hvor der her bruges WPF, som er en overbygning på .NET. 
 Designet af Windows GUI er lavet således, at codebehind filerne implementerer hver sit view-interfacet fra præsentationslaget.
 Codebehind agerer dermed bro i mellem Smartpools præsentationslag og WPF view-lag.
@@ -15,29 +18,28 @@ I klasse diagrammet nedenfor, ses Windows designet, med de klasser der implement
 
 Af klassediagrammet fremgår det, at alle WPF klasserne har en "\_specializedController" property. Denne property, der bør typecaste sin nedarvede IViewController property, til den type presenter, der passer specifikt til view'et.
 
-\subsection{Klassedesign}
-I dette afsnit beskrives designet af de enkelte view-implementerende klasser i Smartpool.Application.Win. Hver klasse, der beskrives i dette afsnit er en WPF codebehind klasse, der implementerer et view-interface defineret i Smartpools præsentationslag.
+I de følgende afsnit beskrives designet af de enkelte view-implementerende klasser i Smartpool.Application.Win. Hver klasse, der beskrives i dette afsnit er en WPF codebehind klasse, der implementerer et view-interface defineret i Smartpools præsentationslag.
 
-\subsubsection{WinCreateUserView}
+\paragraph {WinCreateUserView}
 WinCreateUserView-klassen implementerer ISignUpView interfacet. Klassen indeholder en række WPF/.NET user interface elementer, som passer sammen med klasse interfacet. Da dette view omhandler brugeroprettelse, er klassen designet til at indeholde en række tekstfelter, og en knap til at fuldende brugeroprettelsen. 
 
-\subsubsection{WinLoginView}
+\paragraph {WinLoginView}
 WinLoginView-klassen implementerer ILoginView interfacet. Da dette view håndterer login, er klassen designet til at indeholde to tekstfelter, og en knap til at godkende login.
 
-\subsubsection{WinAddPoolView}
+\paragraph {WinAddPoolView}
 WinAddPoolView-klassen implementerer IAddPoolView interfacet. Klassen indeholder en række WPF/.NET user interface elementer, som tekstfelter og en knap, der passer sammen med metoderne i interfacet. 
 
-\subsubsection{WinEditUserView}
+\paragraph {WinEditUserView}
 WinEditUserView-klassen implementerer IEditUserView interfacet. Klassen indeholder en række WPF/.NET user interface elementer, som tekstfelter og en knap, der passer sammen med metoderne i interfacet.
 
-\subsubsection{WinEditPoolView}
+\paragraph {WinEditPoolView}
 WinEditPoolView-klassen implementerer IEditPoolView interfacet. Da dette view håndterer redigering af pools, indeholder klassen tekstfelter, og knap til at foretage ændringer eller slette en pool. 
 Klassen indeholder også en PoolComboBox, som type knap med en liste, der er tænkt at skulle bruges til skift imellem pools i systemet. Denne knap er tilføjet klassen, da IEditPoolView interfacet implementerer IPoolDisplaying interfacet.
 
-\subsubsection{WinStatView}
+\paragraph {WinStatView}
 WinStatView-klassen implementerer IStatView interfacet. Dette view håndterer dynamisk visning af nyeste måledata.
 Klassen indeholder også en PoolComboBox, som type knap med en liste, der er tænkt at skulle bruges til skift imellem pools i systemet. Denne knap er tilføjet klassen, da IEditPoolView interfacet implementerer IPoolDisplaying interfacet.
 
-\subsubsection{WinHistoryView}
+\paragraph {WinHistoryView}
 WinHistoryView-klassen implementerer IHistoryView interfacet. Dette view håndterer dynamisk visning af historisk måledata.
 Klassen indeholder også en PoolComboBox, som type knap med en liste, der er tænkt at skulle bruges til skift imellem pools i systemet. Denne knap er tilføjet klassen, da IEditPoolView interfacet implementerer IPoolDisplaying interfacet. 
