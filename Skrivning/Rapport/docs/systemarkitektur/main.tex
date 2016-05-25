@@ -33,9 +33,8 @@ I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arki
 \section{Logical view}
 \todo{Skriv kort om viewet.}
 I 4+1 arkitekturen kan det logiske view repræsenteres med et pakkediagram.
-
 På figur~\ref{fig:packageDiagram} ses projektets pakkediagram. På dette diagram vises de forskellige pakker i systemet, dog uden de klasser som de indeholder. Se dokumentationen for fuldt pakkediagram\todo{indsæt reference til dokumentation}.
-Package diagrammet har til formål at vise systemets afhængigheder. Disse er vist med en stiplet pil. En fuldoptrukket linje med + betyder "\textit{nested} og altså at pakken er indeholdt i den anden pakke. Pakken \textit{External DLL's} er eksterne afhængigheder, såsom library filer og DLL'er der bruges.
+Pakkediagrammet har til formål at vise systemets afhængigheder. Disse er vist med en stiplet pil. En fuldoptrukket linje med + betyder "\textit{nested} og altså at pakken er indeholdt i den anden pakke. Pakken \textit{External DLL's} er eksterne afhængigheder, såsom library filer og DLL'er der bruges.
 
 \begin{landscape}
 	\begin{figure}[H]
@@ -48,6 +47,14 @@ Package diagrammet har til formål at vise systemets afhængigheder. Disse er vi
 
 \section{Process view}
 \todo{Skriv kort om viewet.}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/arkitektur/addUserActivity.PNG}
+\caption{Activity diagram for user story - Oprettelse af bruger i systemet}
+\label{fig:addUserActivity}
+\end{figure}
+
 
 \section{Implementation/Development view}
 \todo{Skriv kort om development viewet.}
@@ -73,4 +80,7 @@ På figur \ref{fig:deploymentView} ses projektets deployment diagram.
 	\caption{Deployment diagram - Physical view}
 	\label{fig:deploymentView}
 \end{figure}
+
+\section{Use case/User story view}
+Til dette prokjekt er der brugt user stories til at beskrive systemets brugsscenarier. Disse User Stories kan ses på \todo{reference til US} hvor de er opstillet i en tabel.
 
