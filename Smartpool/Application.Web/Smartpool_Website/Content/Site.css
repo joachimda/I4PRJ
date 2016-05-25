@@ -99,6 +99,8 @@ header {
 .btn-login {
 	width: 255pt;
 	height: 25pt;
+    border: 0 none;
+    border-radius: 5px;
 	background-color:#ABABAC;
 	color: #000000; 
 }

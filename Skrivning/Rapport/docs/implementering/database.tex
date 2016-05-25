@@ -51,13 +51,17 @@ For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som 
 
 I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring af alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ead435153a2f8ba0e8b66926208049c0ba0f7dfb
 \begin{lstlisting}[caption=GetChlorineData method - konvertering af DateTime objekter, label=code:getChlorineData]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
 {
-double days = System.Convert.ToDouble(daysToGoBack);
-string now = DateTime.UtcNow.ToString("G");
-string start = DateTime.Parse(now).AddDays(-days).ToString("G");
+	double days = System.Convert.ToDouble(daysToGoBack);
+	string now = DateTime.UtcNow.ToString("G");
+	string start = DateTime.Parse(now).AddDays(-days).ToString("G");
+	...
 \end{lstlisting}
 
 På kodeudsnit \ref{code:getChlorineData} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslet og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til data queryen. Strengen G der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}
