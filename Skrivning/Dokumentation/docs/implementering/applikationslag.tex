@@ -150,7 +150,7 @@ public void SignUp()
 	if (generalResponse.RequestExecutedSuccesfully)
 		_view.SignUpAccepted();
 	else
-		_view.DisplayAlert("Invalid Sign Up", "The e-mail is already used");
+		_view.DisplayAlert("Invalid Sign Up", response.MessageInfo);
 }
 \end{lstlisting}
 
@@ -195,7 +195,7 @@ Udover denne type metode, implementerer LoginViewController-klassen en Login met
 Login metoden konstruere en LoginRequestMsg, som den sender til serveren via. presenterens IClientMessenger. Når et svar modtages, tjekkes det hvorvidt anmodningen blev godkendt eller ej, og view'et opdateres.
 
 \subsubsection{AddPoolViewController.cs}
-AddPoolViewController-klassen skal kunne håndtere tekst
+AddPoolViewController-klassen skal i følge interfacet kunne håndtere tekstinput fra en række forskellige tekstfelter. Klassen implementerer derfor interface-metoden DidChangeText(...) med en switch-case, som set i listing~\ref{code:application_impl_apvcdct}. I kodestykket ses det, at presenter-klassen bruger en PoolValidator (kaldet pool), fra modellaget, til midlertidigt at gemme og validere den information der kommer ind, fra view'et.
 
 \begin{lstlisting}[caption={DidChangeText(...)},label={code:application_impl_apvcdct}]
 public void DidChangeText(AddPoolTextField textField, string text)
@@ -232,9 +232,9 @@ public void DidChangeText(AddPoolTextField textField, string text)
 }
 \end{lstlisting}
 
-Den skal også kunne sende beskeder til serveren.
+Interfacet indeholder også en metode der bliver kaldt af view'et, når en bruger ønskes oprettet. I listing~\ref{code:application_impl_apvcadbp} ses implementeringen af denne interface metode, i AddPoolViewController-klassen. I metoden oprettes en AddPoolRequestMessage og sendes til serveren. Godkendes svaret bruges en PoolLoader fra modellaget, til at indhente de opdaterede pool-oplysninger.
 
-\begin{lstlisting}[caption={DidChangeText(...)},label={code:application_impl_lvcdcet}]
+\begin{lstlisting}[caption={AddPoolButtonPressed()},label={code:application_impl_apvcadbp}]
 public void AddPoolButtonPressed()
 {
 	if (!Pool.IsValid()) return;
@@ -254,12 +254,12 @@ public void AddPoolButtonPressed()
 		loader.ReloadPools(_clientMessenger);
 		_view.PoolAdded();
 	} else if (addPoolResponse.TokenStillActive == false)
-		_view.DisplayAlert("Invalid action","Your login is no longer active, please login again.");
+		_view.DisplayAlert("Invalid action", response.MessageInfo);
 }
 \end{lstlisting}
 
 \subsubsection{EditUserViewController.cs}
-EditUserViewController-klassen skal kunne håndtere tekst
+EditUserViewController-klassen skal i følge interfacet håndtere ændring af brugerens password. Klassen implementerer metoder der tager imod tekstinput view'et, same validerer de nye oplysninger med en UserValidator fra modellaget. I listing~\ref{code:application_impl_euvcdcnpw} ses implementeringen af den metode, der tager imod oplysninger om det nye password. Oplysningerne gemmes i password-array'et i UserValidator-objektet User. Herefter kaldes private hjælpemetoder, der opdatere view'ets tilstand, for at give feedback på, om de indtastede oplysninger kan godkendes eller ej.
 
 \begin{lstlisting}[caption={DidChangeNewPasswordText(...)},label={code:application_impl_euvcdcnpw}]
 public void DidChangeNewPasswordText(string text, int fieldNumber)
@@ -271,7 +271,7 @@ public void DidChangeNewPasswordText(string text, int fieldNumber)
 }
 \end{lstlisting}
 
-Indeholder også en anden interessant metode.
+Klassen implementerer også en SaveButtonPressed metode, som kaldes nå brugeren er tilfreds med de ændringer, vedkommende har foretaget. SaveButtonPressed metoden kalder hjælpemetoden Save, som ses i listing~\ref{code:application_impl_euvcsave}. Save metoden laver en ChangePasswordRequestMsg fra connection-model laget, og sender den til serveren. Svaret undersøges og view'et opdateres.
 
 \begin{lstlisting}[caption={Save()},label={code:application_impl_euvcsave}]
 public void Save()
@@ -288,34 +288,34 @@ public void Save()
 \end{lstlisting}
 
 \subsubsection{EditPoolViewController.cs}
-EditPoolViewController-klassen skal kunne håndtere tekst
+EditPoolViewController-klassen skal i følge interfacet håndtere ændring af de pools, der er tilknyttet en brugers konto. Klassen implementerer en DidChangeText-metode fra interfacet, på samme måde som AddPoolViewController (se listing~\ref{code:application_impl_apvcdct}, side~\pageref{code:application_impl_apvcdct}).
 
-\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
-public void DidChangeEmailText(string text)
+Klassen implementerer også metoder til at gemme eller slette pool-oplysninger. I listing~\ref{code:application_impl_epvcsd} ses implementeringen af SaveButtonPressed-metoden. I denne metode oprettes en UpdatePoolRequestMsg fra connection-model laget, som sendes til serveren. Svaret undersøges og view'et opdateres.
+
+\begin{lstlisting}[caption={SaveButtonPressed()},label={code:application_impl_epvcsd}]
+public void SaveButtonPressed()
 {
-	User.Email = text;
-	UpdateLoginButton();
+	if (!_pool.IsValid()) return;
+
+	var session = Session.SharedSession;
+	var updatePoolMessage = new UpdatePoolRequestMsg(session.UserName, session.TokenString, session.SelectedPool.Item1, _pool.Name, _pool.Volume);
+	var response = (GeneralResponseMsg) _clientMessenger.SendMessage(updatePoolMessage);
+
+	// Act on the response from the server
+	if (response.RequestExecutedSuccesfully)
+	{
+		_loader.ReloadPools(_clientMessenger);
+		_view.PoolUpdated();
+		LoadPoolInfoIntoView();
+	}
+	else
+		_view.DisplayAlert("Save Error", response.MessageInfo);
 }
 \end{lstlisting}
 
-\paragraph{IPoolControlling}
-EditPoolViewController, StatViewController og HistoryViewController implementerer alle IPoolControlling. De tre presenter-klasser implementerer IPoolControlling interfacet på samme måde. Implementeringen af IPoolControlling eksemplificeres derfor udelukkende i dette afsnit, ved visning af EditPoolViewController-klassens implementering af interfacet.
+EditPoolViewController indeholder også en privat hjælpemetode, der kalder IPoolDisplaying interface-metoderne i view'et, når view'et ønskes opdateret med pool-information. I listing~\ref{code:application_impl_pcdlpiiv} ses implementeringen af LoadPoolInfoIntoView-metoden, som bruger klassens PoolLoader fra modellaget, til at indlæse pool-oplysninger og derefter opdatere view'et.
 
-\begin{lstlisting}[caption={DidSelectPool(...)},label={code:application_impl_pcdsp}]
-public void DidSelectPool(int index)
-{
-	// Parse the name in the pool loader 
-	_session.SelectedPoolIndex = index;
-	if (!_loader.PoolsAreAvailable()) return;
-
-	_view.SetNameText(_session.SelectedPool.Item1);
-	_view.SetDeleteButtonEnabled(true);
-}
-\end{lstlisting}
-
-EditPoolViewController indeholder også en privat hjælpemetode, der kalder IPoolDisplaying interfacet i view'et.
-
-\begin{lstlisting}[caption={LoadPoolInfoIntoView(...)},label={code:application_impl_pcdlpiiv}]
+\begin{lstlisting}[caption={LoadPoolInfoIntoView()},label={code:application_impl_pcdlpiiv}]
 private void LoadPoolInfoIntoView()
 {
 	// Load active pool info into text fields
@@ -347,27 +347,80 @@ private void LoadPoolInfoIntoView()
 }
 \end{lstlisting}
 
-HER ER DU NÅET TIL MHT INDSÆTNING AF METODER
+\paragraph{IPoolControlling}
+EditPoolViewController, StatViewController og HistoryViewController implementerer alle IPoolControlling. De tre presenter-klasser implementerer IPoolControlling interfacet på samme måde. Implementeringen af IPoolControlling eksemplificeres derfor udelukkende i dette afsnit, ved visning af EditPoolViewController-klassens implementering af interface-metoden DidSelectPool, i listing~\ref{code:application_impl_pcdsp}.
+
+\begin{lstlisting}[caption={DidSelectPool(...)},label={code:application_impl_pcdsp}]
+public void DidSelectPool(int index)
+{
+	// Parse the name in the pool loader 
+	_session.SelectedPoolIndex = index;
+	if (!_loader.PoolsAreAvailable()) return;
+
+	_view.SetNameText(_session.SelectedPool.Item1);
+	_view.SetDeleteButtonEnabled(true);
+}
+\end{lstlisting}
 
 \subsubsection{StatViewController.cs}
-StatViewController-klassen skal kunne håndtere tekst
+StatViewController-klassen håndterer indlæsning af pool-data til det tilknyttede view. I StatViewController-klassens ViewDidLoad, set i listing~\ref{code:application_impl_vdlstat}, bruges klassens PoolLoader til at indlæse pool-oplysninger i view'et.
 
-\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
-public void DidChangeEmailText(string text)
+\begin{lstlisting}[caption={ViewDidLoad() in StatViewController},label={code:application_impl_vdlstat}]
+public void ViewDidLoad()
 {
-	User.Email = text;
-	UpdateLoginButton();
+	// Load pools from server
+	_loader.ReloadPools(_clientMessenger);
+
+	// Load active pool info into text fields
+	if (!_loader.PoolsAreAvailable())
+		_view.DisplayAlert("No pools available", "You have not added any pools yet. Please go to 'Add Pool' to add a pool.");
+	else
+	{
+		_view.SetAvailablePools(_session.Pools);
+		_view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
+		LoadSensorData();
+	}
+}
+\end{lstlisting}
+
+ViewDidLoad-metoden benytter sig af en private hjælpemetode, LoadSensorData. Metoden, som ses i listing~\ref{code:application_impl_statlsd}, kalder view interface-metoden DisplaySensorData og bruger klassens PoolLoader, til at indlæse måleværdier i view'et.
+
+\begin{lstlisting}[caption={LoadSensorData() in StatViewController},label={code:application_impl_statlsd}]
+private void LoadSensorData()
+{
+	// Loads current sensor data into the view
+	_view.DisplaySensorData(_loader.GetCurrentDataFromPool(_clientMessenger));
 }
 \end{lstlisting}
 
 \subsubsection{HistoryViewController.cs}
-HistoryViewController-klassen skal kunne håndtere tekst
+HistoryViewController-klassen håndterer indlæsning af pool-data i det tilknyttede view. I HistoryViewController-klassen minder i implementering om StatViewController. ViewDidLoad, set i listing~\ref{code:application_impl_vdlhistory}, bruges klassens PoolLoader til at indlæse pool-oplysninger i view'et.
 
-\begin{lstlisting}[caption={DidChangeEmailText(...)},label={code:application_impl_lvcdcet}]
-public void DidChangeEmailText(string text)
+\begin{lstlisting}[caption={ViewDidLoad() in HistoryViewController},label={code:application_impl_vdlhistory}]
+public void ViewDidLoad()
 {
-	User.Email = text;
-	UpdateLoginButton();
+	// Load pools from server
+	_loader.ReloadPools(_clientMessenger);
+
+	// Load active pool info into text fields
+	if (!_loader.PoolsAreAvailable())
+		_view.DisplayAlert("No pools available", "You have not added any pools yet. Please go to 'Add Pool' to add a pool.");
+	else
+	{
+		_view.SetAvailablePools(_session.Pools);
+		_view.SetSelectedPoolIndex(_session.SelectedPoolIndex);
+		LoadSensorData();
+	}
+}
+\end{lstlisting}
+
+ViewDidLoad-metoden benytter sig på samme måde som StatViewController, af en private hjælpemetode. Metoden, som ses i listing~\ref{code:application_impl_historylsd}, kalder view interface-metoden DisplayHistoricData og bruger klassens PoolLoader, til at indlæse historiske måleværdier i view'et.
+
+\begin{lstlisting}[caption={LoadSensorData() in HistoryViewController},label={code:application_impl_historylsd}]
+private void LoadSensorData()
+{
+	// Loads historic sensor data into the view
+	_view.DisplayHistoricData(_loader.GetHistoricDataFromPool(_clientMessenger, 7));
 }
 \end{lstlisting}
 

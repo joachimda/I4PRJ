@@ -223,8 +223,38 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 
 \subparagraph{EditPoolUser}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textit{bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)}
-\todo{do dis}
+
+
+
+
+
+
+\subparagraph{Prototype}
+\begin{itemize}
+	\item \textit{bool EditPoolUser(string currectOwnerEmail, string name, string newUserEmail)}
+\end{itemize}
+
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{Boolean}, true hvis poolen kunne fjernes fra tidligere bruger til tilføjes den nye, ellers false.
+\end{itemize}
+
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger som har poolen.
+	\item \textit{string} navnet som brugeren har valgt til at identificere poolen med.
+	\item \textit{string} email addressen til den nye bruger som skal have poolen.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Metoden tjekker først om den valgte kombination af email og navn findes i databasen. Hvis kombinationen findes, testes det om den nye bruger eksistere. Hvis den nye bruger ikke allerede har en pool med samme navn, bliver poolen fjernet fra den gamle bruger og tilføjet den nye.
+\end{itemize}
+
+
+
+
+
 
 \paragraph{FindAllPoolsOfUser}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
