@@ -17,8 +17,10 @@ namespace Smartpool.Connection.Server
         {
             _smartpoolDb = smartpoolDb;
             _poolKeeper = new FakePoolKeeper(_smartpoolDb);
-            _poolKeeper.GeneratePoolsForUser("1");
-            _poolKeeper.GeneratePoolsForUser("2");
+            if(_smartpoolDb.UserAccess.IsEmailInUse("1"))
+                _poolKeeper.GeneratePoolsForUser("1");
+            if (_smartpoolDb.UserAccess.IsEmailInUse("2"))
+                _poolKeeper.GeneratePoolsForUser("2");
         }
 
         public Message HandleTokenMsg(Message message, string messageString, ITokenKeeper tokenKeeper)

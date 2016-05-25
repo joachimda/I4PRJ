@@ -34,16 +34,6 @@ namespace Connection.Test
             var baseMsg = JsonConvert.DeserializeObject<Message>(addPoolMessageString);
             Assert.That(JsonConvert.SerializeObject(_uut.HandleTokenMsg(baseMsg, addPoolMessageString, _subForTokenKeeper)), Is.EqualTo(JsonConvert.SerializeObject(new GeneralResponseMsg(true, true))));
         }
-
-        [Test]
-        public void HandleTokenMsg_AddPoolRequest_PoolAddedToPoolKeeper()
-        {
-            _subForSmartpoolDb.PoolAccess.AddPool("username", "poolName", 10).Returns(true);
-            var apm = new AddPoolRequestMsg("username", "tokenString", "poolName", 10, "serialNumber");
-            var addPoolMessageString =
-                JsonConvert.SerializeObject(apm, _jsonSettings);
-            var baseMsg = JsonConvert.DeserializeObject<Message>(addPoolMessageString);
-            _uut.HandleTokenMsg(baseMsg, addPoolMessageString, _subForTokenKeeper);
-        }
+        
     }
 }
