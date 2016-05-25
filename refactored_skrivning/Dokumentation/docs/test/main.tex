@@ -1,0 +1,59 @@
+\chapter{Software Test og Integration}
+
+% indledning til kapitel
+I Følgende afsnit vil test- og integrationsdelen af projektet blive beskrevet. Først beskrives de generelle detaljer omkring udvikling og integrering af systemet. 
+Dernæst i afsnit~\ref{sec:testdatabase}, \ref{sec:testconnection} og \ref{sec:testapplikation} vil de konkrete detaljer omkring test og integration af hovedkomponenter blive beskrevet.
+
+Som en del af gruppens måde at bruge scrum på er der løbende integreret. Omkring hver anden uge har der været en målsætning om at have en fase af systemet færdig. 
+
+System er udviklet i tre faser: 
+
+\begin{enumerate}
+	\item \textbf{Brugerfunktionalitet}\\
+	En Bruger skal kunne oprettes, fjernes og findes. Herunder ligger også funktionalitet til validering af email og password. 
+	\item \textbf{Poolfunktionalitet}\\
+	Ligeledes skal en pool kunne sættes ind i systemet. En Bruger skulle i denne faser kunne være tilknyttet flere pools.
+	\item \textbf{Datafunktionalitet}\\
+	Sensormålinger skal kunne opbevares og vises. 
+\end{enumerate}
+
+Efter hver af disse faser, er der afsat en dag til at integrere systemet. Dette er for de nærliggende grænseflader også gjort i løbet af processen. Derfor har det ikke været noget problem at forbinde komponenterne. 
+
+% værktøjer til test... Nunit, Nsub, github, travis?
+\section{Værktøjer}
+Enhedstest er skrevet i Visual Studio, samtidigt med produktionskoden. Til at lave enhedstest er \gls{nunit} brugt sammen med \gls{nsub}. 
+\gls{dotcover} er anvendt til at bestemme coverage af koden - på denne måde har gruppen i løbet af udviklingen været opmærksom på hvilke dele af koden, som ikke har været dækket af automatiske test.
+For alle tre store komponenter: GUI-applikationer, \gls{windserver} og DAL, har det været tydligt for gruppen at DAL har været lettest at dække med enhedstest, se figur~\ref{fig:coverage}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/test/coverage}
+	\caption{Test coverage af enhedstest.}
+	\label{fig:coverage}
+\end{figure}
+
+I gruppen git repository, har branchen \textit{master} været klar til release siden første design spike. Hver dag efter endt arbejde er fungerende funktionalitet merget ind på denne branch. Ligeledes er \textit{master} branchen hver morgen merget ind i de personlige branches og derved integreret. På denne måde er \textit{integrationshelvedet} undgået og medlemmerne har hele tiden haft de seneste fungerende opdateringer fra resten af gruppen.
+
+Github hoster gruppens repository og har indbygget værktøj til at teste om et pull-request gnidningsløst kan integreres på master, se figur~\ref{fig:gitmerge}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figs/test/gitmerge.png}
+\caption{Github, tjekker om en branch kan merges ind på master}
+\label{fig:gitmerge}
+\end{figure}
+
+På denne måde er master holdt opdateret og klar til release.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{figs/test/vsUnittest}
+	\caption{Unittest af solution.}
+	\label{fig:coverage}
+\end{figure}
+
+\input{docs/test/database}
+\input{docs/test/connection}
+\input{docs/test/application}
+
+
