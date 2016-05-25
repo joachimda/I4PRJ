@@ -49,7 +49,13 @@ For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som 
 
 \textit{"Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand"}\
 
-I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring af alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
+Som beskrevet i designafsnittet bruges et interface, ISmartpoolDB til at kalde ind i DataAccess, se figur~\ref{dataAccessClassNoImpl}. Under implementering i dokumentationen uddybes disse klassers implementering.\todo{reference til dokumentation}
+
+I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring, herunder sekvens og klassediagrammer for alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
+
+
+
+
 
 \begin{lstlisting}[caption=GetChlorineData method - konvertering af DateTime objekter, label=code:getChlorineData]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
@@ -134,4 +140,6 @@ Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokal
 \end{lstlisting}
 
 Når der skal foretages ændringer på databasen, oprettes et database kontekst objekt hvor ændringerne gemmes på. Derefter kaldes \textit{db.SaveChanges()} metoden, som gemmer ændringerne på selve databasen. Se kodeudsnit \ref{code:adduser2} for eksempel på brugen af database konteksten med \textit{using} direktivet.
+
+I dokumentationen \todo{reference here!} findes dybdegående forklaring af implementeringen, herunder klassediagrammer og sekvensdiagrammer til alle metoder. 
 

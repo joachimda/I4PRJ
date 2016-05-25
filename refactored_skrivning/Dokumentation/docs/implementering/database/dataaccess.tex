@@ -43,6 +43,14 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \label{fig:datasetentity}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/createDataEntry}
+\caption{Sekvensdiagram for metoden CreateDataEntry}
+\label{fig:createDataEntry}
+\end{figure}
+
+
 
 
 
@@ -218,6 +226,16 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
 \end{itemize}
+
+
+På figur~\ ses sekvensdiagrammet for GetChlorine data. Måden hvorpå dette udføres er den samme for alle fire typer af data.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/getChlorineData}
+\caption{Sekvensdiagram for metoden GetChlorineData}
+\label{fig:getChlorineData}
+\end{figure}
 
 
 

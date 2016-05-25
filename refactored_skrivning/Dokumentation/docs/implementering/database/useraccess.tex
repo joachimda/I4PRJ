@@ -19,6 +19,14 @@ I dette afsnit findes metodebeskrivelser for klassen \textit{UserAccess}.
 
 Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt ValidateName før der oprettes et database kontekst objekt af typen DataBaseContext. På Kontekstobjektets DbSet<User> property kaldes Add metoden med den nye User som parameter. Herefter gemmes den nye User i databasen ved at kalde SaveChanges metoden på kontekstobjektet. Adduser returnerer false hvis der er fejl i enten check på email eller fullname. Hvis det lykkes at tilføje brugeren til databasen returneres true.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/adduser.PNG}
+\caption{Sekvensdiagram for metoden AddUser}
+\label{fig:adduser}
+\end{figure}
+
+
 \paragraph{FindUserByEmail}\
 
 \textit{User FindUserByEmail(string email)}
@@ -46,16 +54,40 @@ using (var db = new DatabaseContext())
 	\item \textit{UserNotFoundException()} - Kastes hvis der ikke findes en bruger med den angivne email addresse i databasen.
 \end{itemize}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/findUserByEmail.PNG}
+\caption{Sekvensdiagram for metoden FindUserByEmail}
+\label{fig:findUserByEmail}
+\end{figure}
+
+
 \paragraph{IsEmailInUse}\
 
 \textit{bool IsEmailInUse(string email)}
 
 Laver en LINQ query på databasekontekst objektet og checker om der findes en mail adresse i databasen der matcher den som er givet som parameter. Metoden returnerer false hvis mail addressen ikke er i brug og true hvis den er.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/isEmailInUse.PNG}
+\caption{Sekvensdiagram for metoden IsEmailInUse}
+\label{fig:isEmailInUse}
+\end{figure}
+
+
 \paragraph{ValidatePassword}\
 
 \textit{bool ValidatePassword(string email, string password);}
 Da et Fullname skal indeholde mere end et navn, checkes der her for et minimum af to navne. Hvis navnet kan godkendes returneres true, eller false.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/validatePassword.PNG}
+\caption{Sekvensdiagram for metoden ValidatePassword}
+\label{fig:validatePassword}
+\end{figure}
+
 
 \paragraph{RemoveUser}\
 
@@ -66,6 +98,14 @@ Laver en LINQ query på databasekontekst objektet. Og finder den pågældende br
 Brugeren fjernes ved at kalde remove på kontekstobjektets UserSet property.
 
 \textit{db.UserSet.Remove(user)}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/removeUser}
+\caption{Sekvensdiagram for metoden RemoveUser}
+\label{fig:removeUser}
+\end{figure}
+
 
 \paragraph{DeleteAllUsers}\
 
@@ -82,6 +122,7 @@ using (var db = new DatabaseContext())
 }
 ...	
 \end{lstlisting}
+
 
 \paragraph{EditUserPassword}\
 
