@@ -9,42 +9,60 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \label{fig:dataAccessClassNoInherit}
 \end{figure}
 
+\paragraph{CreateDataEntry}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\paragraph{Metodebeskrivelser}
+\subparagraph{Signatur}
+\begin{itemize}
+	\item \textit{bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)}
+\end{itemize}
 
-\subparagraph{CreateDataEntry}\
+\subparagraph{Returnere:}
+\begin{itemize}
+	\item \textit{Boolean}, true hvis data kunne sættes ind i databasen uden problemer, ellers false.
+\end{itemize}
 
-\textit{bool CreateDataEntry(string ownerEmail, string poolName, double chlorine, double temp, double pH, double humidity)}
-\todo{do dis}
+\subparagraph{Argumenter:}
+\begin{enumerate}
+	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
+	\item \textit{string} navnet på poolen.
+	\item \textit{double} klor værdien som skal indsættes.
+	\item \textit{double} temperatur værdien som skal indsættes.
+	\item \textit{double} pH værdien som skal indsættes.
+	\item \textit{double} luftfugtigheds værdien som skal indsættes.
+\end{enumerate}
+
+\subparagraph{Virkemåde}
+\begin{itemize}
+	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{DataSet} (som vist i figur~\ref{fig:datasetentity})
+\end{itemize}
 
 
-\subparagraph{DeleteAllData}\
+
+
+
+
+
+\subparagraph{DeleteAllData}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{void DeleteAllData()}
 \todo{do dis}
 
-\subparagraph{GetChlorineValues}\
+\subparagraph{GetChlorineValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \todo{do dis}
 
-\subparagraph{GetTemperatureValues}\
+\subparagraph{GetTemperatureValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetTemperatureValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \todo{do dis}
 
-\subparagraph{GetPhValues}\
+\subparagraph{GetPhValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetPhValues(string poolOwnerEmail, string poolName, int daysToGoBack)}
 \todo{do dis}
 
-\subparagraph{GetHumidityValues}\
+\subparagraph{GetHumidityValues}\ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textit{List<Tuple<SensorTypes, double>> GetHumidityValues(string poolOwnerEmail, string poolName, int daysToGoBack);}
 \todo{do dis}
-
-\paragraph{Properties}
-
-\subparagraph{PoolAccess}\
-
-\textit{IPoolAccess PoolAccess { get; set; }}
