@@ -65,7 +65,11 @@
     <Compile Include="ClientMessengerUnitTest.cs" />
     <Compile Include="ClientResponseManagerUnitTest.cs" />
     <Compile Include="ConnectionIntegrationTest.cs" />
+    <Compile Include="FakePoolKeeperUnitTest.cs" />
+    <Compile Include="FakePoolUnitTest.cs" />
     <Compile Include="ResponseManagerUnitTest.cs" />
+    <Compile Include="FakeSensorUnitTest.cs" />
+    <Compile Include="SensorValueAuthenticatorUnitTest.cs" />
     <Compile Include="TokenMsgResponseUnitTest.cs" />
     <Compile Include="TokenUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
