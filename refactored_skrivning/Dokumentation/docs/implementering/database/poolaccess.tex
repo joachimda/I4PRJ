@@ -32,6 +32,17 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 	\item Metoden tjekker først om brugeren allerede har oprettet en pool med det sammen navn, hvis dette er tilfældet vil metoden returnere \textit{false}. Metoden sikre også at poolens navn ikke er tomt. Hvis brugeren ikke har en pool med samme navn, vil poolen bliver oprettet i databasen.
 \end{itemize}
 
+<<<<<<< HEAD
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/addPool}
+\caption{Sekvensdiagram for metoden AddPool}
+\label{fig:addPool}
+\end{figure}
+
+
+
+
 \subsubsection{IsPoolNameAvailable}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -60,8 +71,12 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 	\item Metoden finder alle pools i databasen som har dette navn. Derefter tjekker den om en af disse pool tilhører brugeren, ved hjælp af email addressen.
 \end{itemize}
 
-
-
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/isPoolNameAvailable}
+\caption{Sekvensdiagram for metoden IsPoolNameAvailable}
+\label{fig:isPoolNameAvailable}
+\end{figure}
 
 
 
@@ -95,9 +110,12 @@ PoolAccess implementerer IPoolAccess og står for at skrive og læse pool record
 	\item Metoden tjekker først om den valgte kombination af email og navn findes i databasen. Hvis kombinationen findes, henter den poolen og returnere denne.
 \end{itemize}
 
-
-
-
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/findSpecificPool}
+\caption{Sekvensdiagram for FindSpecificPool}
+\label{fig:findSpecificPool}
+\end{figure}
 
 
 

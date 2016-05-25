@@ -1,6 +1,8 @@
-\section{Database og Data Access Layer}\label{sec:designdatabase}
+
+\section{Indledende designovervejelser}\label{sec:designdatabase}
 
 %\subsection{Indledende design overvejelser}
+>>>>>>> a8d06b5dd3f9b6f0f8f81d222a7e2a471e56f7b7
 Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser. DDS-lite har været brugt til at designe første udkast til databasen.
 
 Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en \textit{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter. 
@@ -56,6 +58,8 @@ Med \gls{ef} blev følgende model lavet til at opfylde dette krav.
 \end{figure}
 
 Udfra dette blev et script genereret, som så skulle køres mod en localdb. Nu var databasen oprettet og implementeringen af \textit{UserAccess} klassen kunne starte.
+%
+%Først blev følgende test skrevet til \textit{AddUser} metoden: 
 
 \subsection{Persistering af sensordata}
 %Husk at tage udgangspunkt historisk pool data US
@@ -105,6 +109,17 @@ private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, 
 Sensor data persisteres i hver sin tabel.
 
 \subsection{Endeligt database og DAL design}
+
+Af markante ændringer siden starten kan der nævnes:
+
+\begin{itemize}
+	\item FullName entiteten fjernes, User får 3 naming properties.
+	\item Residence entiteten fjernes, og Pool entitens \textit{Name} property står for indhold af både addresse og navn.
+	\item Value constraints fjernes helt da de ikke er nødvendige at have på databasen
+	\item PoolDimensions entiteten fjernes, og Pool får en \textit{Volume} property.
+	\item MonitorUnit entiteten udgår af fra databasen. Denne har kun været i databasen for at checke på et evt. serienummer.
+	\item Persistering af data er blevet smartere, se figur \ref{fig:databaseERD_final_uml}.
+\end{itemize}
 
 \begin{figure}[h]
 	\centering
