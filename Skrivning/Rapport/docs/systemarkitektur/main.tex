@@ -32,6 +32,19 @@ I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arki
 
 \section{Logical view}
 \todo{Skriv kort om viewet.}
+I 4+1 arkitekturen kan det logiske view repræsenteres med et pakkediagram.
+
+På figur~\ref{fig:packageDiagram} ses projektets pakkediagram. På dette diagram vises de forskellige pakker i systemet, dog uden de klasser som de indeholder. Se dokumentationen for fuldt pakkediagram\todo{indsæt reference til dokumentation}.
+Package diagrammet har til formål at vise systemets afhængigheder. Disse er vist med en stiplet pil. En fuldoptrukket linje med + betyder "\textit{nested} og altså at pakken er indeholdt i den anden pakke. Pakken \textit{External DLL's} er eksterne afhængigheder, såsom library filer og DLL'er der bruges.
+
+\begin{landscape}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{figs/arkitektur/packageDiagramNoImpl.PNG}
+		\caption{Package model - Implementation/Development view}
+		\label{fig:packageDiagram}
+	\end{figure}
+\end{landscape}
 
 \section{Process view}
 \todo{Skriv kort om viewet.}
@@ -39,18 +52,14 @@ I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arki
 \section{Implementation/Development view}
 \todo{Skriv kort om development viewet.}
 
-På figur \ref{fig:packageDiagram} ses projektets packagediagram.
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/arkitektur/componentModel}
+\caption{Component model for Smartpool systemet}
+\label{fig:componentModel}
+\end{figure}
 
-Package diagrammet har til formål at vise systemets afhængigheder. Disse er vist med en stiplet pil. En fuldoptrukket linje med + betyder "\textit{nested} og altså at pakken er indeholdt i den anden pakke. Pakken \textit{External DLL's} er eksterne afhængigheder, såsom library filer og DLL'er der bruges.
-
-\begin{landscape}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=\linewidth]{figs/arkitektur/packageDiagram.PNG}
-		\caption{Package model - Implementation/Development view}
-		\label{fig:packageDiagram}
-	\end{figure}
-\end{landscape}
+Med component diagrammet på figur~\ref{fig:componentModel} er det forsøgt at vise de forskellige software komponenter, og de porte eksponeres. Windows og iOS GUI'erne bruger begge database forbindelsen, som bruger Data Access lagets interface ISmartpoolDB. Data access laget kommunikerer med den egentlige database vha. Entity Frameworket.
 
 \section{Physical view}
 \todo{Skriv kort om development viewet.}
