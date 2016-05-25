@@ -6,6 +6,9 @@ Den endelige database er udviklet med entity frameworket, med en model first til
 
 Databasen og DAL har gennemgået 3 udviklingsfaser, første iteration med User, derefter Pool og til sodst Data.
 
+
+Der er følgene ting i data access laget \todo{vis noget klasse halløj med interfaces}
+
 \begin{itemize}
 	\item \textit{"Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet"}
 	\item \textit{"Som bruger vil jeg kune se de seneste sensorværdier for at kunne få et overblik over poolens tilstand"}
@@ -43,4 +46,14 @@ En klient kan kalde sig ind i alt dal's funktionalitet gennem ISmartpoolDB inter
 
 Eftersom funktionalitet til oprettelse af bruger og Pools blev laveet, var  det tid til at gå i gang med sensordata ting.
 
-Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres
+Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres for at det samme timestamp ikke skal ligge på flere data - undgå redundant data.  Samtidig hvis man gerne vil have ex luftfugtighed i samme tidsrum som klor level, er det vigtgt at målingernes timestamp er den samme.
+
+Der er lavet en dataAccess klasse til at lave data wueries og skrivninger til databasen. Se klassediagra \todo{indsæt her}
+
+Igen brugtes test driven development til dette, hvor koden blev skrevet til testene.  \todo{indæt mere test bragging}.
+
+Der er til dataaccess lavet it interface som initialiseret af SmartpoolDB.
+
+Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ ueries. \todo{skriv lidt om LINQ qureis og hvordan man bruger dem}. Brugen heraf er skrevet i detaljer idokumenttionen.
+
+Her på XXXX vises hvordan DALS getter metoder bruges af en klient.\ todo{indsæt kodeudsnit fra windserver}
