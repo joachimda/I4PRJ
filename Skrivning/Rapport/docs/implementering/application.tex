@@ -1,10 +1,6 @@
 % !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \section{Applikationslaget}
-Applikationslagets model- og presenterklasser er udviklet i C\#, i Microsoft Visual Studio. Klasserne er implementeret under følgende namespaces: Smartpool.Application.Model, Smartpool.Connection.Model og Smartpool.Application.Presentation. I dette afsnit beskrives de presenter-klasser, der blev introduceret i rapportens designafsnit. Herefter beskrives view-implementeringen i de platform-specifikke applikationer.
-
-Implementeringen af applikationslaget består i, at udvikle de konkrete presenter-klasser, model-klasser og platform-specifikke applikationer med view-klasser. De to presenter-klasser, SignUpViewController og StatViewController, der blev beskrevet i designafsnittet, 
-
-Udvalgte dele af implementeringen af presenter-klasserne i applikationslaget beskrives i dette afsnit. Presenter-klasserne er udviklet i sproget C \#, i Microsoft Visual Studio. Den fulde implementering kan findes i Smartpool.Application.Presentation projektet. Presenter-klasserne implementerer de interfaces der er defineret i designet, samt metoder og parametre i de konkrete klassers design.
+Applikationslagets model- og presenterklasser er udviklet i C\#, i Microsoft Visual Studio. Klasserne er implementeret under følgende namespaces: Smartpool.Application.Model, Smartpool.Connection.Model og Smartpool.Application.Presentation. I dette afsnit beskrives de presenter-klasser, der blev introduceret i rapportens designafsnit. Herefter beskrives view-implementeringen i de platform-specifikke applikationer. For yderligere dokumentation af Smartpool.Application.Model og Smartpool.Application.Presentation henvises til dokumentationen.
 
 \subsubsection{SignUpViewController.cs}
 Implementeringen af SignUpViewController-klassen bestod hovedsageligt i at sammenbinde ISignUpViewController-interfacets metoder, med handlinger der skulle foretages i SignUpViewController-klassens ISignUpView. Listing~\ref{code:application_impl_signupviewc1} viser et eksempel på en sådan sammenbinding, hvor en tekstændring modtages fra view'et, gemmes i en af klassens properties, og view'et opdateres.
