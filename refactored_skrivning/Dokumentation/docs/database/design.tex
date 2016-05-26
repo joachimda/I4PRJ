@@ -23,7 +23,7 @@ Helt fra begyndelsen af databasen og data-access lagets designfase, har tanken v
 
 Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et \textit{entity relationship} diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på med Entity Frameworket og Visual Studio, hvor flere af dem blevet afprøvet undervejs, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
 
-\textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen og SQL scriptet til at lave tabellerne. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede, netop fordi at der ikke autogenereres klasser til entiteterne.
+\textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen og SQL scriptet til at lave tabellerne. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede, netop fordi at der ikke autogenereres klasser til entiteterne. Se figur~\ref{fig:generatedFiles} hvor entitetsklasser vises.
 
 Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfase ofte blev foretaget markante ændringer i designet. \textit{Model first} gør det lettere at udføre ER opdateringer, direkte på modellen og derefter køre et tilhørende SQL script direkte på databasen. 
 
@@ -44,9 +44,9 @@ På figur~\ref{fig:modelDesigner} vises brugen af designeren i projektet.
 \label{fig:generatedFiles}
 \end{figure}
 
-Nar der udvikles en database med Model First tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når modellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
+Når der udvikles en database med \textit{Model First} tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når databasemodellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
 
-Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denn emodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
+Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denne databasemodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
 
 \begin{figure}[h]
 	\centering
@@ -82,7 +82,7 @@ Herunder vil databasen og data access lagets funktionalitet blive beskrevet ud f
 	\item Som administrator vil jeg kunne slette en bruger for at undgå spild af plads i databasen.
 	\item Som bruger vil jeg kunne logge ind i systemet for at se mine data.
 	\item Som bruger vil jeg kunne nulstille mit kodeord hvis jeg skulle glemme det.
-	\item Som bruger vil jeg skulle ændre mit password for at sikre min konto.
+	\item Som bruger vil jeg kunne ændre mit password for at sikre min konto.
 	\item Som bruger vil jeg kunne tilføje en pool til min konto.
 	\item Som bruger vil jeg kunne fjerne en pool fra min konto.
 	\item Som bruger vil jeg kunne ændre informationer om en eksisterende pool på min konto.
@@ -139,7 +139,7 @@ public void AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse()
 
 Disse blev udfærdiget og implementeret. Undervej blev der selvfølgelig fundet fejl i både test og kode, men tiden brugt på at rette fejlene på dette tidspunkt blev vurderet til at være væsentligt kortere end hvis de først blev fundet senere i processen. 
 
-Endeligt kom \textit{AddUser} metoden til at se ud som vist på listing~\ref{code:adduser} og på grund af TDD er det med en test-coverage på 100\%.
+Endeligt kom \textit{AddUser} metoden til at se ud som vist på listing~\ref{code:adduser} og på grundet brugen af \textit{Test Driven Development} er det med en test-coverage på 100\%.
 
 \begin{lstlisting}[caption=\textit{AddUser} klassen,label=code:adduser]
 public bool AddUser(string fullname, string email, string password)
