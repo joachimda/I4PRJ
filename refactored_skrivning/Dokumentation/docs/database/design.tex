@@ -300,7 +300,73 @@ public void AddPool_AddingPoolToExistingUser_DoesNotThrowException()
 public void AddPool_AddingPoolToExistingUser_UserOnlyAppearOnceInDb()
 \end{lstlisting}
 
-Samtidigt med at disse test med identificeret, blev selve implementering 
+Samtidigt med at disse test med identificeret, blev selve implementering lavet. Implementeringen kan ses herunder: 
+
+\begin{lstlisting}
+public bool AddPool(string email, string name, double volume)
+{
+	if (name == "")	return false;
+	if (IsPoolNameAvailable(email, name) == false)	return false;
+	if (volume < 0)	return false;
+	
+	Pool newPool = new Pool { Name = name, Volume = volume, UserId = UserAccess.FindUserByEmail(email).Id };
+	
+	using (var db = new DatabaseContext())
+	{
+		db.PoolSet.Add(newPool);
+		db.SaveChanges();
+	}
+	
+	return true;
+}
+\end{lstlisting}
+
+Til fjernelsen af en pool fra en bruger blev følgende testcases fundet:
+
+\begin{lstlisting}
+public void RemovePool_RemoveExistingPool_IsPoolNameAvailableReturnsTrue()
+public void RemovePool_PoolNotInDatabase_RemovePoolReturnsFalse()
+\end{lstlisting}
+
+Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
+
+\begin{lstlisting}
+public bool RemovePool(string email, string name)
+{
+	if (IsPoolNameAvailable(email, name))return false;
+	
+	using (var db = new DatabaseContext())
+	{
+		var searchForPool = from pool in db.PoolSet
+		where pool.Name == name
+		select pool;
+		
+		foreach (Pool pool in searchForPool)
+		{
+			if (pool.UserId == UserAccess.FindUserByEmail(email).Id)
+			{
+				db.PoolSet.Remove(pool);
+			}
+		}
+	
+		db.SaveChanges();
+	}
+	
+	return true;
+}
+\end{lstlisting}
+
+\paragraph{Ændring af poolinformationer}
+
+En pools attributter, kan alle ændre. I dette underafsnit vil ændringen af navnet for en pool blive gennemgået. For at lave funktionalitet til at ændre på poolinformationer blev følgende testcases først identificeret:
+
+\begin{lstlisting}
+public void EditPoolName_ChangeNameOfNotExistingPool_ReturnsFalse()
+public void EditPoolName_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
+public void EditPoolName_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
+public void EditPoolName_ChangeNameOfExistingPool_ReturnsTrue()
+public void EditPoolName_ChangeNameOfExistingPoolTo_IsPoolNameAvailableReturnsTrue()                        
+\end{lstlisting}
 
 
 
@@ -308,7 +374,14 @@ Samtidigt med at disse test med identificeret, blev selve implementering
 
 
 
-	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand.
+
+
+
+
+
+
+
+	%\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand.
 
 
 
