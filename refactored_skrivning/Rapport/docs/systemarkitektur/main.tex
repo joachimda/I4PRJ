@@ -1,8 +1,17 @@
+% !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \chapter{Arkitektur}
+I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arkitektur har dannet ramme for design og senere implementering. Domæneanalyse giver anledning til en 3-tier arkitektur, da systemet har tre domæner, som er application, server og database.
 
-% Beskrivelse af den overordnede systemarkitektur. Her skal SysML blok diagrammer benyttes. Der gives et overblik over systemets arkitektur med udgangspunkt og reference til jeres systemarkitektur dokument.
+\section{3 tier modellen}
 
-I dette afsnit beskrives den overordnede arkitektur for systemet. Systemets arkitektur har dannet ramme for design og senere implementering. Til at beskrive systemets arkitektur bruges 4+1 modellen som kan ses på figur~\ref{fig:41model}. Modellen er udviklet af Philippe Kruchten~\cite{fcgss2007}. Modellen indeholder fire views samt et user-story eller use-cases view.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figs/arkitektur/41model}
+	\caption{$4+1$ Arkitektur modellen \cite{flylib}}
+	\label{fig:41model}
+\end{figure}
+
+Til at beskrive systemets arkitektur bruges 4+1 modellen som kan ses på figur~\ref{fig:41model}. Modellen er udviklet af Philippe Kruchten~\cite{fcgss2007}. Modellen indeholder fire views samt et user-story eller use-cases view.
 
 \begin{itemize}
 	\item \textbf{Logical view} - End-user funktionalitet
