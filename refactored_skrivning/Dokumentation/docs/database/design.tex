@@ -68,7 +68,7 @@ I takt med at man tilegnede sig mere viden omkring database design blev der fore
 \end{figure}
 
 \subsection{User Stories}
-Arbejdet med databasen og data access laget, tager udgangspunkt i projektets user stories, herunder:
+Herunder vil databasen og data access lagets funktionalitet blive beskrevet ud fra de undervejs opstillede \textit{user stories}, herunder:
 
 \begin{itemize}
 	\item Som bruger vil jeg kunne nulstille mit kodeord hvis jeg skulle glemme det.
@@ -83,6 +83,12 @@ Arbejdet med databasen og data access laget, tager udgangspunkt i projektets use
 	\item Som administrator vil jeg kunne slette en bruger for at undgå spild af plads i databasen.
 \end{itemize}
 
+\subsubsection{Nulstilling/ændring af password}
+Herunder beskrives dokumentation for følgende \textit{user stories}:
+
+\textit{"Som bruger vil jeg kunne nulstille mit kodeord hvis jeg skulle glemme det"}
+
+\textit{"Som bruger vil jeg skulle ændre mit password for at sikre min konto"} 
 
 For at lave dette på en måde som gjorde udvidelse let, kom første udkast til at se ud som vist på figur~\ref{fig:database_class_1}. Adgangen til databasen skulle være simpel. Dette var på grund af grænsefladen til resten af system, som skulle udvikles samtidigt. På denne måde skulle de øvrige grupper ikke ændre deres brug af \textit{ISmartpool} interfacet.  Derfor skulle der laves én klasse som ville have associationer til specialiserede klasser. Figur~\ref{fig:database_class_1} viser hvordan kaldet fra \textit{context} går gennem klassen \textit{ISmartpool}.
 
