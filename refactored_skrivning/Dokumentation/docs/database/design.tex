@@ -39,7 +39,7 @@ På figur~\ref{fig:modelDesigner} vises brugen af designeren i projektet.
 
 \begin{figure}
 \centering
-\includegraphics[width=0.3\linewidth]{figs/generatedFiles}
+\includegraphics[width=0.35\linewidth]{figs/generatedFiles}
 \caption{Eksempel på entity klasserne i projektet}
 \label{fig:generatedFiles}
 \end{figure}
@@ -48,7 +48,7 @@ Nar der udvikles en database med Model First tilgangen, autogenereres de simple 
 
 Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denn emodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figs/design/databaseERD}
 	\caption{Første "Model First tilgang" til database design}
@@ -100,6 +100,14 @@ Herunder beskrives dokumentation for følgende \textit{user stories}:
 \textit{"Som bruger vil jeg kunne logge ind i systemet for at se mine data"}
 
 Ud fra disse user stories, blev det besluttet af en bruger skulle have attributterne som vist på figur~\ref{fig:database_model_1}. Da entiteten er oprettet i databasen som en tabel, skulle data access laget nu designes så \gls{windserver} har adgang til brugerfunktionalitet.
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.25\linewidth]{figs/design/database_model_1}
+	\caption{Model for første design for database-adgang.}
+	\label{fig:database_model_1}
+\end{figure}
 
 Dette blev udviklet med TDD, hvor der først blev skrevet enhedstest som testede følgende scenarier: 
 
@@ -171,9 +179,34 @@ public void FindUserByEmail_TwoUsersWithSameEmailInDB_ThrowsMultipleEmailsFoundE
 public void FindUserByEmail_InsertsUserWithEmailInAllCaps_FindUserSearchingWithLowerCaps()
 \end{lstlisting}
 
-Dette er lavet efter samme fremgangsmåde som beskrevet med \textit{AddUser} metoden. Sådan er funktionaliteten til at finde en bruger udviklet og på grund af dette igen med fuldstændigt testcoverage.
+Dette er lavet efter samme fremgangsmåde som beskrevet med \textit{AddUser} metoden. Sådan er funktionaliteten til at finde en bruger udviklet og på grund af dette igen med fuldstændigt testcoverage. Metoden er vist herunder: 
 
-Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlod data access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
+\begin{lstlisting}
+public User FindUserByEmail(string email)
+{
+	User foundUser;
+	
+	using (var db = new DatabaseContext())
+	{
+		var searchByEmail = from search in db.UserSet
+		where search.Email.Equals(email)
+		select search;
+	
+		if (searchByEmail.Count() > 1) 
+			throw new MultipleOccourencesOfEmailWasFoundException();
+		if (searchByEmail.Count() == 0) 
+			throw new UserNotFoundException();
+	
+		foundUser = searchByEmail.First();
+	}
+	
+	return foundUser;
+}
+\end{lstlisting}
+
+Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis det ikke går godt.
+
+Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
 
 \begin{lstlisting}[caption=Testcases til \textit{ValidatePassword} metoden.,label=code:validatepasswordtestcases]
 public void ValidatePassword_ValidPassword_ReturnsTrue()
@@ -203,8 +236,6 @@ public bool ValidatePassword(string email, string password)
 }
 \end{lstlisting}
 
-Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis det ikke går godt. Dette er der, som vist ovenfør, taget højde for.
-
 \subsubsection{Nulstilling/ændring af password}
 Herunder beskrives dokumentation for følgende \textit{user stories}:
 
@@ -212,7 +243,21 @@ Herunder beskrives dokumentation for følgende \textit{user stories}:
 
 \textit{"Som bruger vil jeg skulle ændre mit password for at sikre min konto"}
 
-For at en bruger kan ændre sit password, skal der på User entiteten være en proper
+For at en bruger kan ændre sit password, skal der på User entiteten være en property til et kodeord, er allerede indsat på figur~\ref{fig:database_model_1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 For at lave dette på en måde som gjorde udvidelse let, kom første udkast til at se ud som vist på figur~\ref{fig:database_class_1}. Adgangen til databasen skulle være simpel. Dette var på grund af grænsefladen til resten af system, som skulle udvikles samtidigt. På denne måde skulle de øvrige grupper ikke ændre deres brug af \textit{ISmartpool} interfacet.  Derfor skulle der laves én klasse som ville have associationer til specialiserede klasser. Figur~\ref{fig:database_class_1} viser hvordan kaldet fra \textit{context} går gennem klassen \textit{ISmartpool}.
 
@@ -234,13 +279,6 @@ Der skulle så laves en simple database, med det eneste formål at kunne indehol
 \end{itemize}
 
 Med \gls{ef} blev følgende model lavet til at opfylde dette krav.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.25\linewidth]{figs/design/database_model_1}
-	\caption{Model for første design for database-adgang.}
-	\label{fig:database_model_1}
-\end{figure}
 
 Udfra dette blev et script genereret, som så skulle køres mod en localdb. Nu var databasen oprettet og implementeringen af \textit{UserAccess} klassen kunne starte.
 
