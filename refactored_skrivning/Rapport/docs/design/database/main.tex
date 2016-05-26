@@ -9,7 +9,22 @@ Databasen og data-access laget er udviklet sideløbende, og har gennemgået 3 pr
 Da databasen er udviklet med \textit{Object Relational Mapperen}, Entity Framework er det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
 
 Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og let at bruge for klienter.
-Der er følgene elementer i data-access laget. \todo{vis noget klasse halløj med interfaces}
+De primære klasser og interfaces i data-access laget er følgende:
+
+\begin{itemize}
+	\item \textbf{SmartpoolDB som implementerer ISmartpoolDB.}\\
+	Eksponerer et interface for klienten, \gls{windserver}.
+	\item \textbf{UserAccess som implementerer IUserAccess.}\\
+	Står for al database adgang og database forespørgsler i forhold til systemets brugere samt brugerinformation.
+	\item \textbf{PoolAccess som implementerer IPoolAccess.}\\
+	Som det ovenstående står denne klasse for al database adgang og database forespørgsler i forhold til systemets pools.
+	\item DataAccess som implementerer IDataAccess.\\
+	Klassen data-access er på samme måde bindeleddet til al sensor data der foretages på pools.
+\end{itemize}
+
+De fulde klassediagram for data-access laget findes i projektdokumentationens Appendix\todo{reference til dokumentation}.
+
+De data entiteter der ses på figur~\ref{fig:databaseERD_final_uml}, findes også som C\# klasser. Det er dem der udgør database-objekterne. Som det ses på figuren, har entiteten \textit{Data} en Timestamp property, samt associationer til alle sensor-data typerne. Sensor-data typerne holder selve måleværdierne. Når der laves en forespørgsel i databasen på måledata, bruges de enkelte sensor entiteters fremmednøgle, \textit{DataId} til at finde frem til deres egentlige Timestamp.
 
 \subsection{Udvalgte User Stories}
 Med udgangspunkt i de to følgende User Stories, beskrives database designet og data-acces laget. 
