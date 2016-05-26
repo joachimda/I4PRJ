@@ -1,15 +1,15 @@
-\section{Connection}
+\subsection{Implementering}
+I følgende afsnit vil den overordnede implementering af de enkelte dele blive beskrevet.
+\subsubsection{Overordnet connection struktur}
+\textit{Klient} delen består af et model projekt som er generelt for alle platforme, samt et klient projekt som er specifikt for hver platform. Dette er gjort for at gøre så meget som muligt anvendeligt på alle platforme. I model projektet er desuden defineret en række besked objekter, som anvendes ved kommunikation mellem klient og server.
 
-\subsection{Overordnet connection struktur}
-\textbf{Klient} delen består af et model projekt som er generelt for alle platforme, samt et klient projekt som er specifikt for hver platform. Dette er gjort for at gøre så meget som muligt anvendeligt på alle platforme. I model projektet er desuden defineret en række besked objekter, som anvendes ved kommunikation mellem klient og server.
+\textit{Server} delen består af en række systemer som tilsammen udgør en samlet server udviklet til at køre på en windows pc. Al kommunikation til databasen foregår fra server delen.
 
-\textbf{Server} delen består af en række systemer som tilsammen udgør en samlet server udviklet til at køre på en windows pc. Al kommunikation til databasen foregår fra server delen.
-
-\subsection{Klient}
+\subsubsection{Klient}
 Klienten modtager besked objekter fra applikations laget, og omdanner disse til en streng vha. Json serializering. Strengen bliver sendt til server delen gennem en socket klient der passer til den pågældende platform.
 Klienten modtager derefter et svar fra serveren, i form af et serializeret besked objekt, som bliver deserializeret til basis besked klassen. Denne indeholder en besked type, og klienten kan derefter deserializere den modtagne streng til det korrekte besked objekt. Derefter bliver objektet sendt videre, tilbage til applikations laget. 
 
-\subsection{Server}
+\subsubsection{Server}
 Vedligeholder følgende funktioner i systemet
 \begin{itemize}
 	\item Modtage, behandle og svare på requests fra klient delen
