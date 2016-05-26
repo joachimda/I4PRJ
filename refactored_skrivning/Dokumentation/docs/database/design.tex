@@ -30,6 +30,15 @@ Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfas
 Når der skal oprettes en database model, tilføjes der en \textit{ADO.NET Entity Data Model}. Model designeren bruges da til at tilføje, fjerne og ændre i entities.
 På figur~\ref{fig:modelDesigner} vises brugen af designeren i projektet.
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{figs/modelDesigner}
+\caption{Visual Studio's Entity Model Designer}
+\label{fig:modelDesigner}
+\end{figure}
+
+Nar der udvikles en database med Model First tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når modellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
+
 
 
 Det første \textit{Model first} udkast til projektets database var meget omfattende og er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
