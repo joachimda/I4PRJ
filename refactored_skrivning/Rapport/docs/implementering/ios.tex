@@ -1,8 +1,8 @@
 \subsubsection{Implementering}
-Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget. Implementeringen af view-klasserne foretages i udviklingsværktøjet Xamarin, i sproget C\#. Den visuelle implementering foretages med storyboards i Interface Builder, som er en del af Xcode-udviklingsværktøjet.
+Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget. Implementeringen af view-klasserne foretages i udviklingsværktøjet Xamarin, i sproget C\#. 
 
 \paragraph{StatViewBridge.cs}
-StatViewBridge implementerer IStatView-interfacet. StatViewBridge nedarver, i modsætning til de statiske views, fra UIViewController sub-klassen UITableViewController. Denne UIKit controller-klasse kan bruges til at vise lister der ændrer sig i runtime, som er nyttigt for StatViewBridge-klassen, da den skal kunne opdateres med måledata. I listing~\ref{code:ios_impl_statdisplay} ses implementeringen af interface-metoden DisplaySensorData. I denne metode gemmes den modtagne sensor data, så den kan bruges som data source til UITableViewController-listen.
+StatViewBridge implementerer IStatView-interfacet. Klassen skal vise nyeste måledata. I listing~\ref{code:ios_impl_statdisplay} ses implementeringen af interface-metoden DisplaySensorData. I denne metode gemmes den modtagne sensor data, så den kan bruges senere.
 
 \begin{lstlisting}[caption={DisplaySensorData(...)},label={code:ios_impl_statdisplay}]
 public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
@@ -13,7 +13,7 @@ TableView.ReloadData ();
 }
 \end{lstlisting}
 
-Klassen overrider en række af UITableViewController-klassens metoder, der indlæser data i view'et. De overrides der bestemmer indholdet af listens elementer, fremgår af listing~\ref{code:ios_impl_stattableor}. I GetCell-metoden opsættes en StatViewCell (StatViewCell.xib), til at vise den data der er modtaget fra presenter-klassen.
+Klassen overrider en række af Controller-klassens metoder, der indlæser data i view'et. De overrides der bestemmer indholdet af listens elementer, fremgår af listing~\ref{code:ios_impl_stattableor}. I GetCell-metoden opsættes en StatViewCell (StatViewCell.xib), til at vise den data der er modtaget fra presenter-klassen.
 
 \begin{lstlisting}[caption={Overrides af UITableViewController-metoder i StatViewBridge},label={code:ios_impl_stattableor}]
 public override nint RowsInSection (UITableView tableView, nint section)
@@ -31,3 +31,5 @@ cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
 return cell;
 }
 \end{lstlisting}
+
+For yderligere forklaring se dokumentation afsnit Design under iOS.
