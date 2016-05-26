@@ -84,7 +84,7 @@ I sekvensdiagrammet på figur~\ref{fig:isEmailInUse}, kan det se hvordan en emai
 
 \textit{bool ValidatePassword(string email, string password)}
 
-Når der er brug for at validere en brugers password, kaldes denne funktion. Den bruges eksempelvis når en bruger ønsker at logge ind på systemet. Se metodens sekvens diagram på figur~\ref{fig:validatePassword}
+Når der er brug for at validere en brugers password, kaldes denne funktion. Den bruges eksempelvis når en bruger ønsker at logge ind på systemet. Se metodens sekvens diagram på figur~\ref{fig:validatePassword}.
 	
 \begin{figure}[h]
 \centering
@@ -98,13 +98,13 @@ Når der er brug for at validere en brugers password, kaldes denne funktion. Den
 
 \textit{void RemoveUser(string email)}
 
-Checker først om en bruger med email findes.
-Laver en LINQ query på databasekontekst objektet. Og finder den pågældende bruger.
+Checker først om en bruger med den bestemte email findes.
+Laver en LINQ query på databasekontekst objektet, og finder den pågældende bruger.
 Brugeren fjernes ved at kalde \textit{db.UserSet.Remove(user)} på kontekstobjektets UserSet property.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/removeUser.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/removeUser.PNG}
 \caption{Sekvensdiagram for metoden RemoveUser}
 \label{fig:removeUser}
 \end{figure}
