@@ -1,5 +1,4 @@
 \subsection{Design}
-
 Klient og server kommunikerer med hinanden vha. en række besked objekter. Strukturen af disse er udarbejdet efter følgende diagrammer.
 
 Nedarving fra message klassen er vist på figur~\ref{fig:MessageUML}
@@ -52,7 +51,7 @@ Indeholder ikke yderligere informationer, men definerer en adskillelse mellem se
 
 \paragraph{ResetPasswordRequestMsg}
 Denne beskedtype er ikke blevet færdigt implementeret. Beskeden var tiltænkt at skulle sende en mail til brugeren med et nyt password, men blev nedprioriteret pga. tidsmangel.
-\begin{lstlisting}[caption=ResetPasswordRequestMsg, label=code:ResetPasswordRequestMsg]
+\begin{lstlisting}[caption=ResetPasswordRequestMsg,label=code:ResetPasswordRequestMsg]
 public class ResetPasswordRequestMsg : ClientMsg
 {
 	public string Username { get; set; }
