@@ -100,10 +100,13 @@ Der er som beskrevet tidligere lavet en DataAccess klasse til at lave data queri
 \end{figure}
 
 
-Igen brugtes test driven development til dette, hvor koden blev skrevet til testene.  \todo{indæt mere test bragging}.
+Igen blev \textit{Test Driven Development} brugt til dette, hvor koden blev skrevet til testene. Se dokumentation under afsnittet \textit{Test og Integration} for beskrivelse af tests.
 
-Der er til dataaccess lavet it interface som initialiseret af SmartpoolDB.
+Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ queries. Brugen heraf er skrevet i detaljer i dokumentationen, under \textit{Database og Data-access layer}.
 
-Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ ueries. \todo{skriv lidt om LINQ qureis og hvordan man bruger dem}. Brugen heraf er skrevet i detaljer idokumenttionen.
-
-Her på XXXX vises hvordan DALS getter metoder bruges af en klient.\ todo{indsæt kodeudsnit fra windserver}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/implementering/datasetentity.png}
+	\caption{Data Entity fra ER diagrammet i Visual Studio}
+	\label{fig:datasetentity}
+\end{figure}
