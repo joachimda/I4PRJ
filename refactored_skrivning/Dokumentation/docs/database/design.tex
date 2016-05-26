@@ -1,17 +1,17 @@
 \section{Database og Data Access Layer}\label{sec:designdatabase}
 
 %\subsection{Indledende design overvejelser}
-Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser.
+Før design af database og data access layer, er der foretaget nogle indledende teknologiundersøgelser.
 
 \subsection{Indledende overvejelser}
-Fra starten har det været klart at systemet skulle udvikles i flere faser. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
+Lige fra starten har det været klart at systemet skulle udvikles i flere faser, jf. den agile tankegang. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
 
-Projektets mange iterationer kan deles op i 3 faser, hvor det i første fase var målet at kunne oprette en bruger/User, og også lave forespørgsler på databasen.
-DDS-Lite blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
+Projektets mange iterationer kan deles op i tre faser, hvor det i første fase var målet at kunne oprette en bruger/User, og samtidig lave forespørgsler på databasen.
+DDS-Lite\todo{Lav en reference til udviklingsværktøjer} blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende skulle opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at arbejde med rå datarecords i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
 
-I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data access laget.
+I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data-access laget.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{figs/dbExtra/EFarch}
 \caption{Entity Framework \cite{efArch}, hvor ''Application'' på diagrammet er DAL i systemet.}
@@ -19,11 +19,11 @@ I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fi
 \end{figure}
 
 
-Helt fra begyndelsen af databasen og data access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
+Helt fra begyndelsen af databasen og data-access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
 
-Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et ER diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på i Entity Frameworket. Undervejs er flere af dem blevet afprøvet, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
+Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et \textit{entity relationship} diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på med Entity Frameworket og Visual Studio, hvor flere af dem blevet afprøvet undervejs, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
 
-\textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede.
+\textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen og SQL scriptet til at lave tabellerne. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede, netop fordi at der ikke autogenereres klasser til entiteterne. Se figur~\ref{fig:generatedFiles} hvor entitetsklasser vises.
 
 Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfase ofte blev foretaget markante ændringer i designet. \textit{Model first} gør det lettere at udføre ER opdateringer, direkte på modellen og derefter køre et tilhørende SQL script direkte på databasen. 
 
@@ -44,9 +44,9 @@ På figur~\ref{fig:modelDesigner} vises brugen af designeren i projektet.
 \label{fig:generatedFiles}
 \end{figure}
 
-Nar der udvikles en database med Model First tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når modellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
+Når der udvikles en database med \textit{Model First} tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når databasemodellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
 
-Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denn emodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
+Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denne databasemodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
 
 \begin{figure}[h]
 	\centering
@@ -55,7 +55,7 @@ Det første \textit{Model first} udkast til projektets database var meget omfatt
 	\label{fig:databaseERD_firstattempt_uml}
 \end{figure}
 
-I løbet af udviklingsprocessen er der foretaget mange ændringer af modellen der ses på figur~\ref{fig:databaseERD_firstattempt_uml}. 
+I løbet af udviklingsprocessen, dvs. fra projektets begyndelse til slutningen, er der foretaget mange ændringer af modellen der ses på figur~\ref{fig:databaseERD_firstattempt_uml}. 
 I takt med at man tilegnede sig mere viden omkring database design blev der foretaget flere justeringer. Af markante ændringer kan der nævnes:
 
 \begin{itemize}
@@ -74,15 +74,23 @@ I takt med at man tilegnede sig mere viden omkring database design blev der fore
 	\label{fig:vs_codeMap}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/databaseERD_final_uml}
+\caption{Entity Relationship Diagram for det endelige database design}
+\label{fig:databaseERD_final_uml}
+\end{figure}
+
+
 \subsection{User Stories}
-Herunder vil databasen og data access lagets funktionalitet blive beskrevet ud fra de undervejs opstillede \textit{user stories}, herunder:
+Herunder vil databasen og data-access lagets funktionalitet blive beskrevet ud fra de undervejs opstillede \textit{user stories}, herunder:
 
 \begin{itemize}
 	\item Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet.
 	\item Som administrator vil jeg kunne slette en bruger for at undgå spild af plads i databasen.
 	\item Som bruger vil jeg kunne logge ind i systemet for at se mine data.
 	\item Som bruger vil jeg kunne nulstille mit kodeord hvis jeg skulle glemme det.
-	\item Som bruger vil jeg skulle ændre mit password for at sikre min konto.
+	\item Som bruger vil jeg kunne ændre mit password for at sikre min konto.
 	\item Som bruger vil jeg kunne tilføje en pool til min konto.
 	\item Som bruger vil jeg kunne fjerne en pool fra min konto.
 	\item Som bruger vil jeg kunne ændre informationer om en eksisterende pool på min konto.
@@ -109,7 +117,7 @@ Ud fra disse user stories, blev det besluttet af en bruger skulle have attributt
 	\label{fig:database_model_1}
 \end{figure}
 
-Dette blev udviklet med TDD, hvor der først blev skrevet enhedstest som testede følgende scenarier: 
+Dette blev udviklet med \textit{Test Driven Development}, hvor der først blev skrevet enhedstest som testede følgende scenarier: 
 
 \begin{lstlisting}[caption=Testcases til \textit{AddUser} metoden.,label=code:addusertestcases]
 public void AddUser_InsertsUserWith3Names_UserHasCorrectFirstname()
@@ -123,9 +131,9 @@ public void AddUser_InsertUserWithAlreadyUsedEmail_SecondUserIsNotInDatabase()
 public void AddUser_Add2UsersWithSameEmailWithDiffCaPiTaL_ReturnsFalse()
 \end{lstlisting}
 
-Et eksempel på implementeringen af en testcases, som sikre at der ikke kan sættes en bruger ind med et ''taget'' password, finders herunder. Øvrige testcases med implementering kan se i vedlagt source kode i \textit{Smartpool} solutionen, \textit{Database.Test.Unit} projektet, i \textit{UserAccessUnitTest.cs} filen.
+Et eksempel på implementeringen af en testcases, som sikre at der ikke kan sættes en bruger ind med et ''taget'' password, finders herunder. Øvrige testcases med implementering kan ses i vedlagt sourcekode i \textit{Smartpool} solutionen, \textit{Database.Test.Unit} projektet, i \textit{UserAccessUnitTest.cs} filen.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Test for metoden] AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse]
 ...
 [Test]
 public void AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse()
@@ -139,9 +147,9 @@ public void AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse()
 
 Disse blev udfærdiget og implementeret. Undervej blev der selvfølgelig fundet fejl i både test og kode, men tiden brugt på at rette fejlene på dette tidspunkt blev vurderet til at være væsentligt kortere end hvis de først blev fundet senere i processen. 
 
-Endeligt kom \textit{AddUser} metoden til at se ud som vist på listing~\ref{code:adduser} og på grund af TDD er det med en test-coverage på 100\%.
+Endeligt kom \textit{AddUser} metoden til at se ud som vist på listing~\ref{code:adduser} og på grundet brugen af \textit{Test Driven Development} er det med en test-coverage på 100\%.
 
-\begin{lstlisting}[caption=\textit{AddUser} klassen,label=code:adduser]
+\begin{lstlisting}[caption=\textit{AddUser} metoden,label=code:adduser]
 public bool AddUser(string fullname, string email, string password)
 {
 	if (IsEmailInUse(email)) return false;
@@ -170,7 +178,7 @@ public bool AddUser(string fullname, string email, string password)
 }
 \end{lstlisting}
 
-Da metoden til at sætte en bruger ind i databasen med DAL var skrevet og testet, skulle der implementeres funktionalitet til at hente denne bruger ud af databasen. Til dette blev følgende testcases designet:
+Da metoden til at sætte en bruger ind i databasen var skrevet i data-access laget og samtidigt testet, skulle der implementeres funktionalitet til at hente denne bruger ud af databasen. Til dette blev følgende testcases designet:
 
 \begin{lstlisting}[caption=Testcases til \textit{FindUserByEmail} metoden.,label=code:finduserbyemailtestcases]
 public void FindUserByEmail_UserIsNotAdded_ReturnsNullUser()
@@ -181,7 +189,7 @@ public void FindUserByEmail_InsertsUserWithEmailInAllCaps_FindUserSearchingWithL
 
 Dette er lavet efter samme fremgangsmåde som beskrevet med \textit{AddUser} metoden. Sådan er funktionaliteten til at finde en bruger udviklet og på grund af dette igen med fuldstændigt testcoverage. Metoden er vist herunder: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=FindUserByEmail metode]
 public User FindUserByEmail(string email)
 {
 	User foundUser;
@@ -189,8 +197,8 @@ public User FindUserByEmail(string email)
 	using (var db = new DatabaseContext())
 	{
 		var searchByEmail = from search in db.UserSet
-		where search.Email.Equals(email)
-		select search;
+				where search.Email.Equals(email)
+				select search;
 	
 		if (searchByEmail.Count() > 1) 
 			throw new MultipleOccourencesOfEmailWasFoundException();
@@ -204,9 +212,9 @@ public User FindUserByEmail(string email)
 }
 \end{lstlisting}
 
-Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis det ikke går godt.
+Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis kaldet mislykkedes.
 
-Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
+Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data-access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
 
 \begin{lstlisting}[caption=Testcases til \textit{ValidatePassword} metoden.,label=code:validatepasswordtestcases]
 public void ValidatePassword_ValidPassword_ReturnsTrue()
@@ -216,7 +224,7 @@ public void ValidatePassword_UserIsNotInDB_ReturnsFalse()
 
 Disse blev skrevet og løbende blev \textit{ValidatePassword} implementeret, som vist herunder:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=ValidatePassword metoden]
 public bool ValidatePassword(string email, string password)
 {
 	User user;
@@ -245,7 +253,7 @@ Herunder beskrives dokumentation for følgende \textit{user stories}:
 
 For at en bruger kan ændre sit password, skal der på User entiteten være en property til et kodeord, er allerede indsat på figur~\ref{fig:database_model_1}. Herefter er følgende testcases fundet: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til EditUserPassword metoden]
 public void EditUserPassword_ChangePasswordOfNotExistingUser_ReturnsFalse()
 public void EditUserPassword_ChangeToInvalid_ReturnsFalse()
 public void EditUserPassword_ChangePassword_ReturnsTrue()
@@ -253,7 +261,7 @@ public void EditUserPassword_ChangePassword_ReturnsTrue()
 
 Prioriteten ved denne metode var at det ikke skulle være muligt at fjerne sit kodeord, eller sætte det til en tom string. Implementering ses herunder.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=EditUserPassword metoden]
 public bool EditUserPassword(string email, string newPassword)
 {
 	if (!IsEmailInUse(email) || newPassword.Length == 0)
@@ -287,7 +295,7 @@ public bool EditUserPassword(string email, string newPassword)
 
 Omkring tilføjelse af pools var det vigtigt at en bruger ikke kan tildeles flere pools med det samme navn. Følgende test blev opstillet:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til AddPool metoden]
 public void AddPool_AddingPoolWithInvalidName_ReturnsFalse()
 public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
 public void AddPool_AddingPoolWithValidUser_ReturnsNull()
@@ -302,7 +310,7 @@ public void AddPool_AddingPoolToExistingUser_UserOnlyAppearOnceInDb()
 
 Samtidigt med at disse test med identificeret, blev selve implementering lavet. Implementeringen kan ses herunder: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=AddPool metoden]
 public bool AddPool(string email, string name, double volume)
 {
 	if (name == "")	return false;
@@ -323,14 +331,14 @@ public bool AddPool(string email, string name, double volume)
 
 Til fjernelsen af en pool fra en bruger blev følgende testcases fundet:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til RemovePool metoden]
 public void RemovePool_RemoveExistingPool_IsPoolNameAvailableReturnsTrue()
 public void RemovePool_PoolNotInDatabase_RemovePoolReturnsFalse()
 \end{lstlisting}
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=RemovePool metoden]
 public bool RemovePool(string email, string name)
 {
 	if (IsPoolNameAvailable(email, name))return false;
@@ -338,8 +346,8 @@ public bool RemovePool(string email, string name)
 	using (var db = new DatabaseContext())
 	{
 		var searchForPool = from pool in db.PoolSet
-		where pool.Name == name
-		select pool;
+				where pool.Name == name
+				select pool;
 		
 		foreach (Pool pool in searchForPool)
 		{
@@ -360,7 +368,7 @@ public bool RemovePool(string email, string name)
 
 En pools attributter, kan alle ændre. I dette underafsnit vil ændringen af navnet for en pool blive gennemgået. For at lave funktionalitet til at ændre på poolinformationer blev følgende testcases først identificeret:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til EditPoolName metoden]
 public void EditPoolName_ChangeNameOfNotExistingPool_ReturnsFalse()
 public void EditPoolName_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
 public void EditPoolName_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
@@ -370,7 +378,7 @@ public void EditPoolName_ChangeNameOfExistingPoolTo_IsPoolNameAvailableReturnsTr
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden EditPoolName]
 public bool EditPoolName(string ownerEmail, string currentName, string newName)
 {
 	if (newName == "") return false;
@@ -379,8 +387,8 @@ public bool EditPoolName(string ownerEmail, string currentName, string newName)
 	using (var db = new DatabaseContext())
 	{
 		var searchForPool = from pool in db.PoolSet
-		where pool.User.Email == ownerEmail && pool.Name == currentName
-		select pool;
+				where pool.User.Email == ownerEmail && pool.Name == currentName
+				select pool;
 		
 		if (searchForPool.Any() == false) return false;
 		
@@ -397,7 +405,7 @@ public bool EditPoolName(string ownerEmail, string currentName, string newName)
 
 Når applikationslaget vil vise alle en brugers pools, skulle en metoden udvikles til dette formål i DAL. Følgende testcases blev fundet.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til FindAllPoolsOfUser metoden]
 public void FindAllPoolsOfUser_NullUser_ThrowsUserNotFoundException()
 public void FindAllPoolsOfUser_UserWith0Pools_ReturnEmptyList()
 public void FindAllPoolsOfUser_UserWith1Pool_ReturnsListWithCorrectPool()
@@ -408,7 +416,7 @@ public void FindAllPoolsOfUser_UserWith10Pools_ReturnsListWithCorrectPools()
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden FindAllPoolsOfUser]
 public List<Pool> FindAllPoolsOfUser(string ownerEmail)
 {
 	if (UserAccess.IsEmailInUse(ownerEmail) == false) throw new UserNotFoundException();
@@ -434,7 +442,9 @@ public List<Pool> FindAllPoolsOfUser(string ownerEmail)
 
 \subsubsection{Visning af sensormålinger}
 
-\begin{lstlisting}
+For at trække sensormålinger ud af databasen, er følgende testcases blevet identificeret.
+
+\begin{lstlisting}[caption=Testcases til GetChlorineData metoden]
 public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
 public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
 public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
@@ -447,7 +457,7 @@ public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden GetChlorineValues]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
 {
 	double days = System.Convert.ToDouble(daysToGoBack);
