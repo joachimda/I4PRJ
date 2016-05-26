@@ -6,12 +6,14 @@ I dette afsnit beskrives designet af iOS applikationen. I iOS applikationen desi
 
 Der findes forskellige basis controller-klasser i UIKit, som kan benyttes. I klassediagrammet nedenfor, ses iOS designet, med de klasser der implementerer view-interfaces, samt hvilken UIKit controller-klasse de nedarver fra. De views der skal vise en dynamisk liste af data, designes med UITableViewController som superklasse, hvorimod de views der er mere statiske designes med UIViewController som superklasse. 
 
+\begin{landscape}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.9\linewidth]{figs/design/ios_full}
 	\caption{iOS applikationens design}
 	\label{fig:ios_full}
-\end{figure}\todo{skal muligvis i en pdf for sig}
+\end{figure}
+\end{landscape}
 
 Af klassediagrammet fremgår det, at alle iOS klasserne har en "\_specializedController" property. Dette er en property, der bør typecaste deres nedarvede IViewController property, til den type presenter der passer specifikt til view'et.
 
