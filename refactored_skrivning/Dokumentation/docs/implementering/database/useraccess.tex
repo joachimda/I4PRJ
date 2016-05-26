@@ -102,7 +102,7 @@ Checker først om en bruger med den bestemte email findes.
 Laver en LINQ query på databasekontekst objektet, og finder den pågældende bruger.
 Brugeren fjernes ved at kalde \textit{db.UserSet.Remove(user)} på kontekstobjektets UserSet property.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figs/dbSeq/removeUser.PNG}
 \caption{Sekvensdiagram for metoden RemoveUser}
@@ -161,9 +161,9 @@ public bool EditUserEmail(string email, string newEmail)
 
 \textit{bool EditUserName(string email, string newName)}
 
-Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en Bruger/User's navn, er der skrevet ekstra funktionalitet dertil. Dette er gjort for at fremtidssikre data-access laget.
+Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en Bruger/User's navn, er der skrevet funktionalitet dertil. Dette er gjort for at fremtidssikre data-access laget.
 
-Se sekvensdiagrammet på figur~\ref{fig:editUserName}
+Se sekvensdiagrammet på figur~\ref{fig:editUserName}.
 
 \begin{figure}[h]
 \centering
