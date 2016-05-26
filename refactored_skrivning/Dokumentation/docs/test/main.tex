@@ -6,13 +6,13 @@ Dernæst i afsnit~\ref{sec:testdatabase}, \ref{sec:testconnection} og \ref{sec:t
 
 Som en del af gruppens måde at bruge scrum på er der løbende integreret. Omkring hver anden uge har der været en målsætning om at have en fase af systemet færdig. 
 
-System er udviklet i tre faser: 
+System er hovedsageligt udviklet i tre faser: 
 
 \begin{enumerate}
 	\item \textbf{Brugerfunktionalitet}\\
 	En Bruger skal kunne oprettes, fjernes og findes. Herunder ligger også funktionalitet til validering af email og password. 
 	\item \textbf{Poolfunktionalitet}\\
-	Ligeledes skal en pool kunne sættes ind i systemet. En Bruger skulle i denne faser kunne være tilknyttet flere pools.
+	Ligeledes skal en pool kunne sættes ind i systemet. En bruger skulle i denne fase kunne være tilknyttet flere pools.
 	\item \textbf{Datafunktionalitet}\\
 	Sensormålinger skal kunne opbevares og vises. 
 \end{enumerate}
@@ -23,7 +23,7 @@ Efter hver af disse faser, er der afsat en dag til at integrere systemet. Dette 
 \section{Værktøjer}
 Enhedstest er skrevet i Visual Studio, samtidigt med produktionskoden. Til at lave enhedstest er \gls{nunit} brugt sammen med \gls{nsub}. 
 \gls{dotcover} er anvendt til at bestemme coverage af koden - på denne måde har gruppen i løbet af udviklingen været opmærksom på hvilke dele af koden, som ikke har været dækket af automatiske test.
-For alle tre store komponenter: GUI-applikationer, \gls{windserver} og DAL, har det været tydligt for gruppen at DAL har været lettest at dække med enhedstest, se figur~\ref{fig:coverage}.
+For alle tre store komponenter: GUI-applikationer, \gls{windserver} og DAL, har det været tydeligt for gruppen at DAL har været lettest at dække med enhedstest, se figur~\ref{fig:coverage}.
 
 \begin{figure}[h]
 	\centering
@@ -52,8 +52,6 @@ På denne måde er master holdt opdateret og klar til release.
 	\label{fig:coverage}
 \end{figure}
 
-\input{docs/test/database}
-\input{docs/test/connection}
 \input{docs/test/application}
-
-
+\input{docs/test/connection}
+\input{docs/test/database}
