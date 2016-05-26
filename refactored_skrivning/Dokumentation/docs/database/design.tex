@@ -11,10 +11,10 @@ DDS-Lite blev brugt i første forsøg med at oprette en funktionel database til 
 
 I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data access laget.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{figs/dbExtra/EFarch}
-\caption{Entity Framework \cite{efArch}, hvor ''Application'' på diagrammet er DAL i systemet.}
+\caption{Entity }
 \label{fig:EFarch}
 \end{figure}
 
@@ -48,7 +48,7 @@ Nar der udvikles en database med Model First tilgangen, autogenereres de simple 
 
 Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denn emodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figs/design/databaseERD}
 	\caption{Første "Model First tilgang" til database design}
@@ -67,7 +67,7 @@ I takt med at man tilegnede sig mere viden omkring database design blev der fore
 	\item Persistering af data er blevet smartere, se figur \ref{fig:databaseERD_final_uml}.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{figs/design/vs_codeMap.PNG}
 	\caption{Dependancy graf for Smartpool Systemet}
