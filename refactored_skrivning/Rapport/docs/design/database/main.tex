@@ -24,7 +24,7 @@ De primære klasser og interfaces i data-access laget er følgende:
 
 De fulde klassediagram for data-access laget findes i projektdokumentationens Appendix\todo{reference til dokumentation}.
 
-De data entiteter der ses på figur~\ref{fig:databaseERD_final_uml}, findes også som C\# klasser. Det er dem der udgør database-objekterne. Som det ses på figuren, har entiteten \textit{Data} en Timestamp property, samt associationer til alle sensor-data typerne. Sensor-data typerne holder selve måleværdierne. Når der laves en forespørgsel i databasen på måledata, bruges de enkelte sensor entiteters fremmednøgle, \textit{DataId} til at finde frem til deres egentlige Timestamp.
+De data entiteter der ses på figur~\ref{fig:databaseERD_final_uml}, findes også som C\# klasser. Det er dem der udgør database-objekterne. Som det ses på figuren, har entiteten \textit{Data} en Timestamp property, samt associationer til alle sensor-data typerne. Sensor-data typerne holder selve måleværdierne. Når der laves en forespørgsel i databasen på måledata, bruges de enkelte sensor entiteters fremmednøgle, \textit{DataId} til at finde frem til deres egentlige Timestamp. Grunden til dette gøres er for at undgå redundant data (Timestamp) på hver af sensordata entiteterne.
 
 \subsection{Udvalgte User Stories}
 Med udgangspunkt i de to følgende User Stories, beskrives database designet og data-acces laget. 
@@ -84,15 +84,21 @@ På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye A
 	\label{fig:databaseERD_final_uml}
 \end{figure}
 
-En klient kan kalde sig ind i alt data-access lagets funktionalitet gennem ISmartpoolDB interfacet. I projektets dokumentation \todo{indsæt reference her} beskrives det hvorledes data-access laget bruges på \gls{windserver}.
+En klient kan kalde sig ind i alt data-access lagets funktionalitet gennem ISmartpoolDB interfacet. I projektets dokumentation under \textit{Database og Data-access layer} beskrives det hvorledes data-access laget bruges på \gls{windserver}.
 
 \subsection{User story - Se sensor værdier}
 
-Eftersom funktionalitet til oprettelse af Brugere/Users og Pools blev lavet, var  det tid til at gå i gang med sensordata ting.
+I projektrapporten blev funktionalitet til forespørgsler og persistering af sensordataen udviklet i 3. fase, hvor der her allerede var en fuldt fungerende User- og Pool entitet og klasse. Se figur~\ref{fig:datasetentity}.
 
-Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres for at det samme timestamp ikke skal ligge på flere data - undgå redundant data.  Samtidig hvis man gerne vil have ex luftfugtighed i samme tidsrum som klor level, er det vigtigt at målingernes timestamp er den samme.
+Der er som beskrevet tidligere lavet en DataAccess klasse til at lave data queries og persistering på databasen. Se klassediagrammet for DataAccess på figur~\ref{fig:dataAccess}.
+	
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/database/dataAccess}
+\caption{Klassen DataAccess}
+\label{fig:dataAccess}
+\end{figure}
 
-Der er lavet en dataAccess klasse til at lave data wueries og skrivninger til databasen. Se klassediagra \todo{indsæt her}
 
 Igen brugtes test driven development til dette, hvor koden blev skrevet til testene.  \todo{indæt mere test bragging}.
 
