@@ -21,19 +21,28 @@ Med udgangspunkt i de to følgende User Stories, beskrives database designet og 
 
 \subsection{User story - Oprettelse af en bruger i systemet}
 
-Ved at tage udgangspunkt i projektets domæneanalyse, blev det gjort klart hvilke attributter, en Bruger/User af systemet skulle have.
+Ved at tage udgangspunkt i projektets domæneanalyse, blev det gjort klart hvilke attributter, en Bruger/User af systemet skulle have. Disse attributter er vist på figur~\ref{fig:database_model_1}.
 
-Disse attributter er vist på figur XXXX
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.2\linewidth]{figs/database/database_model_1.png}
+\caption{User entiteten}
+\label{fig:database_model_1}
+\end{figure}
 
-\todo{indsæt ERD for User}
 
-Ud fra dette design genereres et SQL script som kan køres mod databasen. \todo{indsæt tabel}. tabellen som vises på XXXX er da oprettet i databasen gennem EF.
+Ud fra denne entitet laves et SQL script som kan køres mod databasen. Tabellen som vises på figur~\ref{fig:usertable} er da oprettet i databasen gennem Entity Frameworket.
 
-Med en funktionel database er det nu oplagt at begynde på designet af database access laget.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figs/database/usertable}
+\caption{User entitens tabel i databasen}
+\label{fig:usertable}
+\end{figure}
 
-Der ænskes funktionalitet til at tage brugere u af databasen. der udvikles data access lag til dette.
 
-I forbindelse med udarbejdelsen af disse backend funktonaliter, brugtes Test driven development hvor vi identificere en masse tetcases og scenarioer.
+Med en funktionel database er det nu oplagt at begynde på designet af data-access laget. Der ønskes herudover funktionalitet til at tage brugere ud af databasen. I forbindelse med udarbejdelsen af disse backend funktonaliter blev \textit{Test Driven Development} brugt, hvor der blev identificeret testcases og testscenarier.
+
 
 \todo{indsæt test shiz m covereage osv}.
 
