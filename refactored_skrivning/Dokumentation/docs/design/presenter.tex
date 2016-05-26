@@ -1,5 +1,5 @@
 % !TEX root = ../../I4PRJ, Grp3 - Dokumentation.tex
-I dette afsnit beskrives designet af softwarepakken Smartpool.Application.Presentation. Denne pakke indeholder præsentationslogikken, som indgår i applikationslager, i det distribuerede system.
+I dette afsnit beskrives designet af softwarepakken Smartpool.Application.Presentation. Denne pakke indeholder præsentationslogikken, som indgår i applikationslager i det distribuerede system.
 
 I præsentationslaget designes en række presenter-interfaces. Disse presenters har til formål at binde model- og view-lag sammen, samt at definere den tilhørende præsentationslogik. Konkrete presenter-klasser er også designet i dette lag. De konkrete klasser implementerer de førnævnte interfaces, samt benytter sig af modellen beskrevet i forrige afsnit. Der defineres også en række view-interfaces. Disse interfaces benyttes og implementeres af view klasser i de platform-specifikke udgaver af Smartpool applikationen. Interfaces er designet undervejs i projektudviklingsforløbet, i takt med at user stories er blevet åbnet og løst.
 
@@ -11,7 +11,7 @@ Presenter-interfacene definerer en simpel protokol mellem view og presenter. De 
 	\includegraphics[width=1.0\linewidth]{figs/design/application_presentation_interfaces}
 	\caption{Presenter interfaces}
 	\label{fig:application_presentation_interfaces}
-\end{figure}\todo{skal muligvis på en pdf for sig, så man har en change for at læse det.}
+\end{figure}
 
 I de efterfølgende afsnit beskrives designet af de forskellige presenter-interfaces.
 
