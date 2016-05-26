@@ -38,7 +38,15 @@ designes, uafhængigt af hinanden, så længe protokolbestemmende interfaces ble
 \input{docs/design/connection/main}
 \input{docs/implementering/connection}
 
-\section{Data}
-\todo{Skriv indledning til Data}
+\section{Database og data-access lag}\label{sec:designdatabase}
+I nedenstående afsnit beskrives designet og implementeringen af database og data access laget.
+
+I følgende liste opridses de fire primære elementer i databasen.
+
+\begin{itemize}
+	\item User - En User er en entitet i databasen, som indeholder information om en af systemets \textit{brugere}.
+	\item Pool - En Pool er også en entitet i databasen. Alle Pool-entieter er \textit{ejet} af en User.
+	\item Data-entiteten og de specifikke datatype-entiteter - Typer af sensordata, herunder klor, pH, temperatur og luftfugtighed.
+\end{itemize}
 \input{docs/design/database/main}
 \input{docs/implementering/database}
