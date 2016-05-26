@@ -18,11 +18,6 @@ I følgende kode er der udsnit fra view'et der præsenterer historisk data for b
 private void DisplayGraph(Canvas historyCanvas, List<double> history, bool isPhOrChlorine)
 {
 ...
-// Draw graph
-for (var i = 0; i < _pointsOnGraphs; i++)
-{
-Dispatcher.Invoke(() =>
-{
 var pointHeight = ((upperBound - history[i])) / (upperBound - lowerBound) * canvasHeight;
 var pointWidth = (canvasWidth/(_pointsOnGraphs - 1))*i;
 ...
