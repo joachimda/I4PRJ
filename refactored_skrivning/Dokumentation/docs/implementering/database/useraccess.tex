@@ -52,13 +52,13 @@ using (var db = new DatabaseContext())
 
 
 \begin{itemize}
-	\item \textit{MultipleOccourencesOfEmailWasFoundException()} - Sikkerhedsforanstaltning ved flere af samme emails.
+	\item \textit{MultipleOccourencesOfEmailWasFoundException()} - Sikkerhedsforanstaltning ved forekomst af flere ens emails.
 	\item \textit{UserNotFoundException()} - Kastes hvis der ikke findes en bruger med den angivne email addresse i databasen.
 \end{itemize}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/findUserByEmail.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/findUserByEmail.PNG}
 \caption{Sekvensdiagram for metoden FindUserByEmail}
 \label{fig:findUserByEmail}
 \end{figure}
