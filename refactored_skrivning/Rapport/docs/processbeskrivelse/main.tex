@@ -61,9 +61,8 @@ Spikes blev i projektet brugt til at teste login funktionaliteten fra ende til a
 \section{Versionsstyring}
 Softwareudviklingen er versionsstyret, for at flere udviklere kan arbejde parallelt på et projekt uden at skabe konflikter når ændringer gemmes. Til formålet har gruppen benyttet versionsstyringsværktøjet Git.
 
-\subsection{Git} \todo{Meget indforstået}
-Git bruges i projektet til al source kode, og hver feature udvikles på sin egen "branch" for at undgå konflikter. Når en feature er færdig udstedes et pull request, hvorefter repository administratoren kan merge koden ind på master branch.
-
+\subsection{Git}
+Git bruges i projektet til deling og versionsstyring af al source kode.
 For at holde styr på branches og versioner er der brugt Feature Branching \cite{atlassian2016}. Dette indebære der ikke foregår noget produktionsarbejde på master branchen. I stedet skal der oprettes en branch specielt til denne feature. Så når denne feature er testet med seneste udgave af master branchen, kan ændringerne blive "merged" eller flettet ind. På denne måde har gruppen hele tiden haft en fungerende produkt at vise frem, hvis det skulle blive nødvendigt.
 
 \subsubsection{GitHub}
@@ -99,6 +98,3 @@ Software testing har været en stor del af dette projekt. Der har været stor fo
 	\caption{Unitest session i Visual Studio}
 	\label{fig:vsUnittest}
 \end{figure}
-
-\subsection{NUnit- og testframeworks}\todo{Afsnittet skal muligvis flyttes til Udviklingsværktøjer...}
-Et oplagt værktøj til softwaretest har været Nunit idet det bruges i vid udstrækning i forbindelse med kurset Software Test.
