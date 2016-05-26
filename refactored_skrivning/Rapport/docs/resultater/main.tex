@@ -3,14 +3,24 @@
 Resultaterne for projektet defineres ved en accepttest. Accepttesten specificerer, hvornår en given story kan accepteres. Accepttesten er specificeret af gruppen selv ud fra user stories. Accepttesten forefindes i dokumentationen. Resultaterne vil blive diskuteret i følgende afsnit.
 
 \section{Diskussion}
-Det er muligt for brugeren at tilgå systemet fra Windows PC, iOS app og Web app. Det opfylder ligeledes kvalitetskravet om, at det skal være muligt at tilgå systemet fra flere platforme. Tilgangen til systemet er dog begrænset, i hvor stor grad websitet tilgår systemet, da det kun er muligt at logge ind. Det vurderes dog som tilfredstillende, da meningen med websitet mest af alt var et proof of concept tiltag. 
+Det er muligt for brugeren at tilgå systemet fra Windows PC, iOS app og Web. Det opfylder ligeledes kvalitetskravet om, at det skal være muligt at tilgå systemet fra flere platforme. Tilgangen til systemet fra web er dog begrænset, da det kun er muligt at logge ind. Det vurderes dog som tilfredstillende, da meningen med websitet mest af alt var et \textit{proof of concept} tiltag. 
 
-Systemdesignet bekræftes hermed at kunne udvides til flere platforme endnu, hvilket understøtter kvalitetskravet om et fleksibelt system. Det er med andre ord ikke skuffende, at web f.eks. ikke kan oprette brugere i system, på trods af at det er et 'must'. Web skal blot implementere view interfaces, hvilket ikke er blevet gjort pga. mangel på tid og ressourcer. Det samme gør sig gældende for andre 'must' krav, såsom tilføje/fjerne en pool fra konto samt at få seneste sensor værdier. Alle views er implementeret undtagen history og editPool. Alle implementerede view skal implementere tilhørende view interfaces, for at kunne accepteres. 
+Systemdesignet bekræftes hermed at kunne udvides til flere platforme, hvilket understøtter kvalitetskravet om et fleksibelt system. Det er med andre ord ikke skuffende, at web f.eks. ikke kan oprette brugere i system, på trods af at det er et 'must'. Web mangler at implementere view interfaces, hvilket ikke er blevet gjort pga. mangel på tid og ressourcer. Alle views er implementeret undtagen history og editPool. Alle implementerede views skal implementere tilhørende view interfaces, for at kunne accepteres. 
 
 Resten af systemets 'must' krav kan accepteres.
 
-Systemet har en række 'should' krav, hvoraf at vise en liste over pools er implementeret i både Windows og iOS, men nulstilling af kodeord ikke er blevet implementeret. Funktionaliteten er blevet nedprioriteret i forhold til 'must' krav. Det vil kræve at login view, blev udvidet med funktionaliteten nulstil kodeord. For at det kan implementeres skal en e-mail server skal oprettes med script til at automatisk at sende en nulstillingsmail til brugeren, som ønsker at nulstille sit kodeord. E-mailen skulle indholde en autogeneret midlertidig kode, som brugeren kan bruge til få adgang til systemet
+Systemet har en række 'should' krav, hvoraf at vise en liste over pools er implementeret i både Windows og iOS, men nulstilling af kodeord ikke er blevet implementeret. Funktionaliteten er blevet nedprioriteret i forhold til 'must' krav. For at implementere dette vil det kræve, at login view blev udvidet med funktionaliteten nulstil kodeord. Der skal yderligere implementeres en e-mail server, og funktionalitet til automatisk at sende en nulstillingsmail til brugeren.
 
-Det er blevet nedprioriteret, at udvikle funktionaliteter til at logge ud og låses ude, ved forkert indtastning af login oplysninger. Ligesom administratorrettigheder for brugere er ikke implementeret, hvilket betyder fastsatte target værdier for pH og klor ikke bestemmes af en administrator. Det vil kræve at en anden story omhandlende brugers mulighed for at sætte target-værdier for sensorer, skulle implementeres først. 
+Det er blevet nedprioriteret, at udvikle funktionaliteter til at logge ud, samt at låse for login ved forkert indtastning af login oplysninger. 
 
-Manglen på administratorrettigheder betyder, at brugere ikke kan slettes i systemet. Denne user story er blevet nedprioriteret, og det er ikke blevet undersøgt, hvad der skal til, for at implementere det i systemet.
+Det er ikke implementeret, at systemet skal understøtte target værdier for sensor målinger. Desuden er der ikke implementeret administratorrettigheder for brugere, hvilket har medført at brugere ikke kan slettes i systemet andet end direkte via databasen.
+
+At relativt mange funktioner ikke er blevet implementeret, vurderes at være grundet store ambitioner fra start. Udfra MoSCoW analyse beskrevet i starten af rapporten, er der lagt vægt på de højst prioriterede funktioner, hvoraf langt de fleste er lykkedes at implementere.
+
+Af disse bør særligt nævnes:
+\begin{itemize}
+	\item Support for flere platforme via samme presenter
+	\item Visning af history over pool data
+	\item Lav kobling gennem hele systemet
+	\item Beskyttet adgang til databasen
+\end{itemize}
