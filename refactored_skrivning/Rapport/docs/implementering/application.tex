@@ -1,9 +1,8 @@
 % !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
-\section{Applikationslaget}
+\subsubsection{Implementering}
 Applikationslagets model- og presenterklasser er udviklet i C\#, i Microsoft Visual Studio. Klasserne er implementeret under følgende namespaces: Smartpool.Application.Model, Smartpool.Connection.Model og Smartpool.Application.Presentation. I dette afsnit beskrives de presenter-klasser, der blev introduceret i rapportens designafsnit. Herefter beskrives view-implementeringen i de platform-specifikke applikationer. For yderligere dokumentation af Smartpool.Application.Model og Smartpool.Application.Presentation henvises til dokumentationen.
 
-\subsection{Implementering af presenter-klasser}
-\subsubsection{SignUpViewController.cs}
+\paragraph{SignUpViewController.cs}
 Implementeringen af SignUpViewController-klassen bestod hovedsageligt i, at sammenbinde ISignUpViewController-interfacets metoder, med handlinger der skulle foretages i SignUpViewController-klassens ISignUpView. En af disse handlinger er oprettelsen af en bruger. Metoden SignUp, der kaldes når presenter-klassen modtager et ButtonPressed kald fra view'et, kan ses i listing~\ref{code:application_impl_signupmethod}. I metoden oprettes en besked, der sendes til serveren gennem den presenterens IClientMessenger. Når et svar modtages fra serveren, tjekker presenteren hvorvidt anmodningen var succesfuld. Herefter kaldes en metode i view'et, alt efter om anmodningen gik igennem eller ej. Hvis anmodningen blev afvist kaldes DisplayAlert i view'et.
 
 \begin{lstlisting}[caption={SignUp()},label={code:application_impl_signupmethod}]
@@ -20,7 +19,7 @@ public void SignUp()
 }
 \end{lstlisting}
 
-\subsubsection{StatViewController.cs}
+\paragraph{StatViewController.cs}
 StatViewController-klassen håndterer indlæsning af pool-data til det tilknyttede view. I StatViewController-klassens ViewDidLoad, set i listing~\ref{code:application_impl_vdlstat}, bruges klassens PoolLoader til at indlæse pool-oplysninger i view'et.
 
 \begin{lstlisting}[caption={ViewDidLoad() in StatViewController},label={code:application_impl_vdlstat}]
@@ -48,43 +47,5 @@ private void LoadSensorData()
 {
 	// Loads current sensor data into the view
 	_view.DisplaySensorData(_loader.GetCurrentDataFromPool(_clientMessenger));
-}
-\end{lstlisting}
-
-\subsection{Windows}
-I Windows applikationen designes view-klasser, der implementerer view-interfacet defineret i præsentationslaget.
-Designet af Windows GUI er lavet således, at codebehind filerne implementerer hver sit view-interfacet fra præsentationslaget. Codebehind agerer dermed som en bro, i mellem Smartpools præsentationslag, og WPF view-lag.
-
-\subsection{iOS}
-Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget. Implementeringen af view-klasserne foretages i udviklingsværktøjet Xamarin, i sproget C\#. Den visuelle implementering foretages med storyboards i Interface Builder, som er en del af Xcode-udviklingsværktøjet.
-
-\subsubsection{StatViewBridge.cs}
-StatViewBridge implementerer IStatView-interfacet. StatViewBridge nedarver, i modsætning til de statiske views, fra UIViewController sub-klassen UITableViewController. Denne UIKit controller-klasse kan bruges til at vise lister der ændre sig i runtime, som er nyttigt for StatViewBridge-klassen, da den skal kunne opdateres med måledata. I listing~\ref{code:ios_impl_statdisplay} ses implementeringen af interface-metoden DisplaySensorData. I denne metode gemmes den modtagne sensor data, så den kan bruges som data source til UITableViewController-listen.
-
-\begin{lstlisting}[caption={DisplaySensorData(...)},label={code:ios_impl_statdisplay}]
-public void DisplaySensorData(List<Tuple<SensorTypes, double>> sensorData)
-{
-	_sensorData = sensorData;
-	_sensorData.Sort ();
-	TableView.ReloadData ();
-}
-\end{lstlisting}
-
-Klassen overrider en række af UITableViewController-klassens metoder, der indlæser data i view'et. De overrides der bestemmer indholdet af listens elementer, fremgår af listing~\ref{code:ios_impl_stattableor}. I GetCell-metoden opsættes en StatViewCell (StatViewCell.xib), til at vise den data der er modtaget fra presenter-klassen.
-
-\begin{lstlisting}[caption={Overrides af UITableViewController-metoder i StatViewBridge},label={code:ios_impl_stattableor}]
-public override nint RowsInSection (UITableView tableView, nint section)
-{
-	return _sensorData.Count;
-}
-
-public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
-{	
-	var cell = tableView.DequeueReusableCell (_reuseIdentifier) as StatViewCell;
-	var type = string.Format ($"{_sensorData [indexPath.Row].Item1}");
-	ell.DataLabel.Text = string.Format ($"{_sensorData [indexPath.Row].Item2}") + GuiCharacter.SignForType(_sensorData [indexPath.Row].Item1);
-	cell.NameLabel.Text = type;
-	cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
-	return cell;
 }
 \end{lstlisting}
