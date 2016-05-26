@@ -214,7 +214,7 @@ public User FindUserByEmail(string email)
 
 Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis kaldet mislykkedes.
 
-Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
+Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data-access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
 
 \begin{lstlisting}[caption=Testcases til \textit{ValidatePassword} metoden.,label=code:validatepasswordtestcases]
 public void ValidatePassword_ValidPassword_ReturnsTrue()
@@ -224,7 +224,7 @@ public void ValidatePassword_UserIsNotInDB_ReturnsFalse()
 
 Disse blev skrevet og løbende blev \textit{ValidatePassword} implementeret, som vist herunder:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=ValidatePassword metoden]
 public bool ValidatePassword(string email, string password)
 {
 	User user;
@@ -253,7 +253,7 @@ Herunder beskrives dokumentation for følgende \textit{user stories}:
 
 For at en bruger kan ændre sit password, skal der på User entiteten være en property til et kodeord, er allerede indsat på figur~\ref{fig:database_model_1}. Herefter er følgende testcases fundet: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til EditUserPassword metoden]
 public void EditUserPassword_ChangePasswordOfNotExistingUser_ReturnsFalse()
 public void EditUserPassword_ChangeToInvalid_ReturnsFalse()
 public void EditUserPassword_ChangePassword_ReturnsTrue()
@@ -261,7 +261,7 @@ public void EditUserPassword_ChangePassword_ReturnsTrue()
 
 Prioriteten ved denne metode var at det ikke skulle være muligt at fjerne sit kodeord, eller sætte det til en tom string. Implementering ses herunder.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=EditUserPassword metoden]
 public bool EditUserPassword(string email, string newPassword)
 {
 	if (!IsEmailInUse(email) || newPassword.Length == 0)
@@ -295,7 +295,7 @@ public bool EditUserPassword(string email, string newPassword)
 
 Omkring tilføjelse af pools var det vigtigt at en bruger ikke kan tildeles flere pools med det samme navn. Følgende test blev opstillet:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til AddPool metoden]
 public void AddPool_AddingPoolWithInvalidName_ReturnsFalse()
 public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
 public void AddPool_AddingPoolWithValidUser_ReturnsNull()
@@ -310,7 +310,7 @@ public void AddPool_AddingPoolToExistingUser_UserOnlyAppearOnceInDb()
 
 Samtidigt med at disse test med identificeret, blev selve implementering lavet. Implementeringen kan ses herunder: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=AddPool metoden]
 public bool AddPool(string email, string name, double volume)
 {
 	if (name == "")	return false;
@@ -331,14 +331,14 @@ public bool AddPool(string email, string name, double volume)
 
 Til fjernelsen af en pool fra en bruger blev følgende testcases fundet:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til RemovePool metoden]
 public void RemovePool_RemoveExistingPool_IsPoolNameAvailableReturnsTrue()
 public void RemovePool_PoolNotInDatabase_RemovePoolReturnsFalse()
 \end{lstlisting}
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=RemovePool metoden]
 public bool RemovePool(string email, string name)
 {
 	if (IsPoolNameAvailable(email, name))return false;
@@ -346,8 +346,8 @@ public bool RemovePool(string email, string name)
 	using (var db = new DatabaseContext())
 	{
 		var searchForPool = from pool in db.PoolSet
-		where pool.Name == name
-		select pool;
+				where pool.Name == name
+				select pool;
 		
 		foreach (Pool pool in searchForPool)
 		{
@@ -368,7 +368,7 @@ public bool RemovePool(string email, string name)
 
 En pools attributter, kan alle ændre. I dette underafsnit vil ændringen af navnet for en pool blive gennemgået. For at lave funktionalitet til at ændre på poolinformationer blev følgende testcases først identificeret:
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til EditPoolName metoden]
 public void EditPoolName_ChangeNameOfNotExistingPool_ReturnsFalse()
 public void EditPoolName_ChangeNameOfExistingPoolToInvalid_ReturnsFalse()
 public void EditPoolName_ChangeNameOfExistingPoolToTakenName_ReturnsFalse()
@@ -378,7 +378,7 @@ public void EditPoolName_ChangeNameOfExistingPoolTo_IsPoolNameAvailableReturnsTr
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden EditPoolName]
 public bool EditPoolName(string ownerEmail, string currentName, string newName)
 {
 	if (newName == "") return false;
@@ -387,8 +387,8 @@ public bool EditPoolName(string ownerEmail, string currentName, string newName)
 	using (var db = new DatabaseContext())
 	{
 		var searchForPool = from pool in db.PoolSet
-		where pool.User.Email == ownerEmail && pool.Name == currentName
-		select pool;
+				where pool.User.Email == ownerEmail && pool.Name == currentName
+				select pool;
 		
 		if (searchForPool.Any() == false) return false;
 		
@@ -405,7 +405,7 @@ public bool EditPoolName(string ownerEmail, string currentName, string newName)
 
 Når applikationslaget vil vise alle en brugers pools, skulle en metoden udvikles til dette formål i DAL. Følgende testcases blev fundet.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til FindAllPoolsOfUser metoden]
 public void FindAllPoolsOfUser_NullUser_ThrowsUserNotFoundException()
 public void FindAllPoolsOfUser_UserWith0Pools_ReturnEmptyList()
 public void FindAllPoolsOfUser_UserWith1Pool_ReturnsListWithCorrectPool()
@@ -416,7 +416,7 @@ public void FindAllPoolsOfUser_UserWith10Pools_ReturnsListWithCorrectPools()
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden FindAllPoolsOfUser]
 public List<Pool> FindAllPoolsOfUser(string ownerEmail)
 {
 	if (UserAccess.IsEmailInUse(ownerEmail) == false) throw new UserNotFoundException();
@@ -442,7 +442,7 @@ public List<Pool> FindAllPoolsOfUser(string ownerEmail)
 
 \subsubsection{Visning af sensormålinger}
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Testcases til GetChlorineData metoden]
 public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
 public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
 public void GetChlorineData_CallWithNonExistingEmail_ReturnsEmptyList()
@@ -455,7 +455,7 @@ public void GetChlorineData_CallWithHigherDaysThanPersistedWhenDataIsNotPresent_
 
 Samtidigt med at test blev fundet og skrevet blev selve implementering lavet og herunder ses det færdige resultat.
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=Metoden GetChlorineValues]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
 {
 	double days = System.Convert.ToDouble(daysToGoBack);
