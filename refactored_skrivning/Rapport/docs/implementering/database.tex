@@ -1,6 +1,4 @@
-\section{Database og Data Access Layer}
-
-Der er med udgangspunkt i designovervejelserne i afsnit~\ref{sec:designdatabase} implementeret et fungerende data-access layer med tilhørende database.
+\section{Implementering af Database og Data Access laget}
 
 \subsection{Implementering af database}
 
@@ -41,23 +39,23 @@ public partial class Chlorine
 
 \subsection{Implementering af data-access layer}
 
-Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Ændringer/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontektsobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne, T i konteksten. Resultatet en af query kan da behandles i en foreach løkke.
+Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Querying/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontektsobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne, T i konteksten. Resultatet en af query kan da behandles i en foreach løkke.
 
 For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som tager udgangspunkt i to af projektets user stories, herunder tilføjelse af bruger samt at visning af pooldata.
 
-\subsubsection{Træk pooldata ud}
+\subsubsection{Se sensorværdier}
 
 \textit{"Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand"}\
 
-Som beskrevet i designafsnittet bruges et interface, ISmartpoolDB til at kalde ind i DataAccess, se figur~\ref{dataAccessClassNoImpl}. Under implementering i dokumentationen uddybes disse klassers implementering.\todo{reference til dokumentation}
+Som beskrevet i designafsnittet bruges et interface, ISmartpoolDB til at kalde ind i DataAccess. Under \textit{Database og Data-Access layer} i dokumentationen uddybes disse klassers implementering.
 
-I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}, en dybdegående forklaring, herunder sekvens og klassediagrammer for alle \textit{Get..Data} metoder kan findes i dokumentationen \todo{reference til dokumentation}.
-
-
+I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}. En dybdegående forklaring, herunder sekvens og klassediagrammer for alle \textit{Get..Data} metoder kan også findes i dokumentationen.
 
 
 
-\begin{lstlisting}[caption=GetChlorineData method - konvertering af DateTime objekter, label=code:getChlorineData]
+
+
+\begin{lstlisting}[caption=GetChlorineData metoden - konvertering af DateTime objekter, label=code:getChlorineData]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
 {
 	double days = System.Convert.ToDouble(daysToGoBack);
@@ -66,7 +64,7 @@ public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail,
 	...
 \end{lstlisting}
 
-På kodeudsnit \ref{code:getChlorineData} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslet og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til data queryen. Strengen G der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}
+På kodeudsnit \ref{code:getChlorineData} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslæt og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til data queryen. Strengen "G" der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}
 
 \begin{lstlisting}[caption=Konvertering tilbage til DateTime objekter,label=code:convertToDateTime]
 using (var db = new DatabaseContext())
@@ -103,7 +101,7 @@ Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en 
 
 \textit{"Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet"}
 
-I de følgende kodeudsnit vises der med tilhørende forklaringer hvordan en bruger bliver oprettet og gemt i databasen. Der tages udgangspunkt i metoden \textit{AddUser}, som er en del af UserAccess\footnote{Se dokumentationen XXXX} klassen. AddUser metoden kaldes af ConnectionServer klassen \todo{indsæt kodeudsnit af kald her!} som set på figur XXXX.
+I de følgende kodeudsnit vises der med tilhørende forklaringer hvordan en bruger bliver oprettet og gemt i databasen. Der tages udgangspunkt i metoden \textit{AddUser}, som er en del af UserAccess klassen. AddUser metoden kaldes af ConnectionServer klassen.
  
 \begin{lstlisting}[caption=User laves lokalt hvorefter User's navne properties sættes, label=code:adduser1]
 public bool AddUser(string fullname, string email, string password)
@@ -141,5 +139,5 @@ Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokal
 
 Når der skal foretages ændringer på databasen, oprettes et database kontekst objekt hvor ændringerne gemmes på. Derefter kaldes \textit{db.SaveChanges()} metoden, som gemmer ændringerne på selve databasen. Se kodeudsnit \ref{code:adduser2} for eksempel på brugen af database konteksten med \textit{using} direktivet.
 
-I dokumentationen \todo{reference here!} findes dybdegående forklaring af implementeringen, herunder klassediagrammer og sekvensdiagrammer til alle metoder. 
+I dokumentationen findes dybdegående forklaring af implementeringen, herunder klassediagrammer og sekvensdiagrammer til alle typer af metoder. 
 

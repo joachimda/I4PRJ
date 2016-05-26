@@ -2,17 +2,32 @@
 
 Til projektet er der udviklet en database som står for at gemme alle brugerdata, herunder brugere, brugernes pools samt alle sensordata der foretages på disse pools.
 
-Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang \todo{se dokumentation}. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i detaljer i projekt dokumentationen \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data access lag. Beskrivelserne tager udgangspunkt i de to primære user stories, som også bruges i resten af denne rapport. Data access laget er som helhed omfattende af skulle beskrive. Derfor findes der beskrivelser af det resterende funktionalitet og design i projektets dokumentation \todo{reference til doku}.
+Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i detaljer i projekt dokumentationen i afnsittet om \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data-access lag. Beskrivelserne tager udgangspunkt i de to primære user stories, som der også refereres til i resten af denne rapport. Data-access laget er som helhed omfattende af skulle beskrive. Derfor findes der yderligere information om det resterende funktionalitet og design i projektets dokumentation \todo{reference til doku}.
 
-Databasen og dataaccess laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser. Første fase med User, derefter Pool og til sidst Data. Dette afspejles i at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration. De mange iterationer kan da groft opdeles i disse 3 faser.
+Databasen og data-access laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser. Første fase med User, derefter Pool og til sidst Data. Dette afspejles ved at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration. De mange iterationer kan da groft opdeles i disse 3 faser.
 
-Den endelige database er som sagt udviklet med Entity Frameworket, som gør det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
+Da databasen er udviklet med \textit{Object Relational Mapperen}, Entity Framework er det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
 
-Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og og let at bruge for klienter.
-Der er følgene ting i data access laget \todo{vis noget klasse halløj med interfaces}
-\subsection{Udvalgte User Story}
+Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og let at bruge for klienter.
+De primære klasser og interfaces i data-access laget er følgende:
 
-Med udgangspunkt i \gls{moscow} analysen på side~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde de to user stories: 
+\begin{itemize}
+	\item \textbf{SmartpoolDB som implementerer ISmartpoolDB.}\\
+	Eksponerer et interface for klienten, \gls{windserver}.
+	\item \textbf{UserAccess som implementerer IUserAccess.}\\
+	Står for al database adgang og database forespørgsler i forhold til systemets brugere samt brugerinformation.
+	\item \textbf{PoolAccess som implementerer IPoolAccess.}\\
+	Som det ovenstående står denne klasse for al database adgang og database forespørgsler i forhold til systemets pools.
+	\item DataAccess som implementerer IDataAccess.\\
+	Klassen data-access er på samme måde bindeleddet til al sensor data der foretages på pools.
+\end{itemize}
+
+De fulde klassediagram for data-access laget findes i projektdokumentationens Appendix\todo{reference til dokumentation}.
+
+De data entiteter der ses på figur~\ref{fig:databaseERD_final_uml}, findes også som C\# klasser. Det er dem der udgør database-objekterne. Som det ses på figuren, har entiteten \textit{Data} en Timestamp property, samt associationer til alle sensor-data typerne. Sensor-data typerne holder selve måleværdierne. Når der laves en forespørgsel i databasen på måledata, bruges de enkelte sensor entiteters fremmednøgle, \textit{DataId} til at finde frem til deres egentlige Timestamp. Grunden til dette gøres er for at undgå redundant data (Timestamp) på hver af sensordata entiteterne.
+
+\subsection{Udvalgte User Stories}
+Med udgangspunkt i de to følgende User Stories, beskrives database designet og data-acces laget. 
 
 \begin{itemize}
 	\item \textit{"Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet"}
@@ -21,26 +36,46 @@ Med udgangspunkt i \gls{moscow} analysen på side~\pageref{sec:moscow} blev det 
 
 \subsection{User story - Oprettelse af en bruger i systemet}
 
-Ved at tage udgangspunkt i projektets domæneanalyse, blev det gjort klart hvilke attributter, en bruger/User af systemet skulle have.
+Ved at tage udgangspunkt i projektets domæneanalyse, blev det gjort klart hvilke attributter, en Bruger/User af systemet skulle have. Disse attributter er vist på figur~\ref{fig:database_model_1}.
 
-Disse attributter er vist på figur XXXX
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.2\linewidth]{figs/database/database_model_1.png}
+\caption{User entiteten}
+\label{fig:database_model_1}
+\end{figure}
 
-\todo{indsæt ERD for User}
 
-Ud fra dette design genereres et SQL script som kan køres mod databasen. \todo{indsæt tabel}. tabellen som vises på XXXX er da oprettet i databasen gennem EF.
+Ud fra denne entitet laves et SQL script som kan køres mod databasen. Tabellen som vises på figur~\ref{fig:usertable} er da oprettet i databasen gennem Entity Frameworket.
 
-Med en funktionel database er det nu oplagt at begynde på designet af database access laget.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figs/database/usertable}
+\caption{User entitens tabel i databasen}
+\label{fig:usertable}
+\end{figure}
 
-Der ænskes funktionalitet til at tage brugere u af databasen. der udvikles data access lag til dette.
 
-I forbindelse med udarbejdelsen af disse backend funktonaliter, brugtes Test driven development hvor vi identificere en masse tetcases og scenarioer.
+Med en funktionel database er det nu oplagt at begynde på designet af data-access laget. Der ønskes herudover funktionalitet til at tage brugere ud af databasen. I forbindelse med udarbejdelsen af disse backend funktonaliter blev \textit{Test Driven Development} brugt, hvor der blev identificeret testcases og testscenarier. Denne måde at arbejde på har også sat sit præg på data-access lagets test coverage procent, som set på figur~\ref{fig:coverage}.
 
-\todo{indsæt test shiz m covereage osv}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\linewidth]{figs/database/coverage.png}
+\caption{Test coverage for Smartpool systemet}
+\label{fig:coverage}
+\end{figure}
 
-Som de blev slrevet blev tilsvarende business logic og funktionalitet designet og implementeret.
-Det har hele tiden været vores tanke at dal skulle være nemt at bruge hos klienten. Vi har derfor designet vores løsning med et simppelt interface, ISmartpoolDB \todo{indst klassediagram for dette interface}.
+Som testene blev skrevet, blev tilsvarende business-logic og funktionalitet implementeret.
+Det har hele tiden været tanken at data-access laget skulle være nemt at bruge hos klienten, \gls{windserver}. Derfor er løsningen designet med et interface, ISmartpoolDB, som kan ses på figur~\ref{fig:classISmartpoolDB}.
 
-På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access kklasser. På samme måde er deisgnet depandancy inverted.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{figs/database/classISmartpoolDB}
+\caption{Interfacet ISmartpoolDB}
+\label{fig:classISmartpoolDB}
+\end{figure}
+
+På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access klasser. På samme måde er designet depandancy inverted.
 
 \begin{figure}[h]
 	\centering
@@ -49,23 +84,29 @@ På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye A
 	\label{fig:databaseERD_final_uml}
 \end{figure}
 
-En klient kan kalde sig ind i alt dal's funktionalitet gennem ISmartpoolDB interfcet.
-
-\todo{indsæt noget om den konkrete implmentering - Find de fedeste kodebidder og sæt in med kommentarer}
-
+En klient kan kalde sig ind i alt data-access lagets funktionalitet gennem ISmartpoolDB interfacet. I projektets dokumentation under \textit{Database og Data-access layer} beskrives det hvorledes data-access laget bruges på \gls{windserver}.
 
 \subsection{User story - Se sensor værdier}
 
-Eftersom funktionalitet til oprettelse af bruger og Pools blev laveet, var  det tid til at gå i gang med sensordata ting.
+I projektrapporten blev funktionalitet til forespørgsler og persistering af sensordataen udviklet i 3. fase, hvor der her allerede var en fuldt fungerende User- og Pool entitet og klasse. Se figur~\ref{fig:datasetentity}.
 
-Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres for at det samme timestamp ikke skal ligge på flere data - undgå redundant data.  Samtidig hvis man gerne vil have ex luftfugtighed i samme tidsrum som klor level, er det vigtgt at målingernes timestamp er den samme.
+Der er som beskrevet tidligere lavet en DataAccess klasse til at lave data queries og persistering på databasen. Se klassediagrammet for DataAccess på figur~\ref{fig:dataAccess}.
+	
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\linewidth]{figs/database/dataAccess}
+\caption{Klassen DataAccess}
+\label{fig:dataAccess}
+\end{figure}
 
-Der er lavet en dataAccess klasse til at lave data wueries og skrivninger til databasen. Se klassediagra \todo{indsæt her}
 
-Igen brugtes test driven development til dette, hvor koden blev skrevet til testene.  \todo{indæt mere test bragging}.
+Igen blev \textit{Test Driven Development} brugt til dette, hvor koden blev skrevet til testene. Se dokumentation under afsnittet \textit{Test og Integration} for beskrivelse af tests.
 
-Der er til dataaccess lavet it interface som initialiseret af SmartpoolDB.
+Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ queries. Brugen heraf er skrevet i detaljer i dokumentationen, under \textit{Database og Data-access layer}.
 
-Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ ueries. \todo{skriv lidt om LINQ qureis og hvordan man bruger dem}. Brugen heraf er skrevet i detaljer idokumenttionen.
-
-Her på XXXX vises hvordan DALS getter metoder bruges af en klient.\ todo{indsæt kodeudsnit fra windserver}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figs/implementering/datasetentity.png}
+	\caption{Data Entity fra ER diagrammet i Visual Studio}
+	\label{fig:datasetentity}
+\end{figure}
