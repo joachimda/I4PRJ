@@ -1,20 +1,28 @@
 \section{Database og Data Access Layer}\label{sec:designdatabase}
 
+I nedenstående afsnit beskrives designet og implementeringen af database og data access laget.
+
+I følgende liste opridses de fire primære elementer i databasen.
+
+\begin{itemize}
+	\item User - En User er en entitet i databasen, som indeholder information om en af systemets \textit{brugere}.
+	\item Pool - En Pool er også en entitet i databasen. Alle Pool-entieter er \textit{ejet} af en User.
+	\item Data-entiteten og de specifikke datatype-entiteter - Typer af sensordata, herunder klor, pH, temperatur og luftfugtighed.
+\end{itemize}
+
 \section{Indledende designovervejelser}\label{sec:designdatabase}
 
 Til projektet er der udviklet en database som står for at gemme alle brugerdata, herunder brugere, brugernes pools samt alle sensordata der foretages på disse pools.
 
 Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang \todo{se dokumentation}. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i detaljer i projekt dokumentationen \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data access lag. Beskrivelserne tager udgangspunkt i de to primære user stories, som også bruges i resten af denne rapport. Data access laget er som helhed omfattende af skulle beskrive. Derfor findes der beskrivelser af det resterende funktionalitet og design i projektets dokumentation \todo{reference til doku}.
 
-Databasen og dataaccess laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser, første fase med User, derefter Pool og til sidst Data. Dette afspejles i at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration. De mange iterationer kan da groft opdeles i disse 3 faser.
+Databasen og dataaccess laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser. Første fase med User, derefter Pool og til sidst Data. Dette afspejles i at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration. De mange iterationer kan da groft opdeles i disse 3 faser.
 
 Den endelige database er som sagt udviklet med Entity Frameworket, som gør det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
 
 Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og og let at bruge for klienter.
 Der er følgene ting i data access laget \todo{vis noget klasse halløj med interfaces}
 \subsection{Udvalgte User Story}
-
-Med udgangspunkt i \gls{moscow} analysen blev det første udkast til databasen lavet. Meningen var da at opfylde punkterne: 
 
 Med udgangspunkt i \gls{moscow} analysen på side~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde de to user stories: 
 
