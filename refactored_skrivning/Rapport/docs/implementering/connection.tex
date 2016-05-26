@@ -1,5 +1,13 @@
 \subsection{Implementering}
-I følgende afsnit vil den overordnede implementering af de enkelte dele blive beskrevet.
+I følgende afsnit vil den overordnede implementering af de enkelte dele blive beskrevet. Et overblik er givet i form af Figur~\ref{fig:klientserver} hvor de primære komponenter er vist
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figs/design/klientserver.PNG}
+	\caption{Overblik over klient server struktur}
+	\label{fig:klientserver}
+\end{figure}
+
 \subsubsection{Overordnet connection struktur}
 \textit{Klient} delen består af et model projekt som er generelt for alle platforme, samt et klient projekt som er specifikt for hver platform. Dette er gjort for at gøre så meget som muligt anvendeligt på alle platforme. I model projektet er desuden defineret en række besked objekter, som anvendes ved kommunikation mellem klient og server.
 

@@ -10,7 +10,7 @@ Designet og efterfølgende implementeringen beskrives med de to samme krav:
 \end{itemize}
 
 \section{Applikation}
-Applikationerne i systemet er jævnfør arkitekturen lavet med MVP, og de respektive dele bliver beskrevet i rækkefølgen Model, Presenter og View. Lagets model- og præsentationslag er designet til at være portabelt, hvorimod view-laget er platformspecifikt og designes seperat for hver platform. 
+Applikationerne i systemet er jævnfør arkitekturen lavet med MVP, og de respektive dele bliver beskrevet i rækkefølgen Model, Presenter og View. Lagets model- og præsentationslag er designet til at være portabelt, så forskellige platforme kunne dele denne kodebase. View-laget designes derimod seperat for hver platform. 
 
 Det overordnede design i applikationslaget illustreres ved sekvensdiagrammet i figur~\ref{fig:application_sd}. Her fremgår kommunikationsmønsteret mellem model-, view- og presenter-klasserne i applikationslagets design.
 
@@ -33,9 +33,6 @@ designes, uafhængigt af hinanden, så længe protokolbestemmende interfaces ble
 \input{docs/implementering/ios}
 \input{docs/design/application/web}
 \input{docs/implementering/web}
-
-\input{docs/design/application/grafiskdesign}
-\input{docs/design/application/farvepalet}
 
 \section{Forbindelse}
 \input{docs/design/connection/main}
