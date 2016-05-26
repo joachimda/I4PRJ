@@ -4,14 +4,14 @@
 Før design af database og data access layer, er der foretaget nogle indledende teknologiundersøgelser.
 
 \subsection{Indledende overvejelser}
-Fra starten har det været klart at systemet skulle udvikles i flere faser. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
+Lige fra starten har det været klart at systemet skulle udvikles i flere faser, jf. den agile tankegang. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
 
-Projektets mange iterationer kan deles op i 3 faser, hvor det i første fase var målet at kunne oprette en bruger/User, og også lave forespørgsler på databasen.
-DDS-Lite blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
+Projektets mange iterationer kan deles op i tre faser, hvor det i første fase var målet at kunne oprette en bruger/User, og samtidig lave forespørgsler på databasen.
+DDS-Lite\todo{Lav en reference til udviklingsværktøjer} blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende skulle opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at arbejde med rå datarecords i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
 
-I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data access laget.
+I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data-access laget.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{figs/dbExtra/EFarch}
 \caption{Entity Framework \cite{efArch}, hvor ''Application'' på diagrammet er DAL i systemet.}
@@ -19,7 +19,7 @@ I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fi
 \end{figure}
 
 
-Helt fra begyndelsen af databasen og data access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
+Helt fra begyndelsen af databasen og data-access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
 
 Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et ER diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på i Entity Frameworket. Undervejs er flere af dem blevet afprøvet, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
 
