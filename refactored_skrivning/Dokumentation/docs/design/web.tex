@@ -5,7 +5,8 @@ I dette afsnit beskrives designet og implementeringen af Web-applikationen.
 \subsubsection{Design}
 I dette afsnit beskrives designet af Web-applikationen. Designet benytter ASP.NET MVC framework. Controllerklasserne er lavet således, at de implementerer hvert view-interface i præsentationslaget. Broen mellem ASP.NET MVC og den overordnede MVP arkitektur sker altså ved implementering af førnævnte interfaces.
 
-Designet af Application.Web
+Designet af Application.Web ses på følgende figur.
+
 \begin{landscape}
 \begin{figure}
 	\centering
@@ -14,5 +15,5 @@ Designet af Application.Web
 	\label{fig:web_class}
 \end{figure}
 \end{landscape}
-På figur~\ref{fig:web_class} ses hvilke controllers som implementerer, hvilke interfaces. AccountController implementerer alt som har med brugeren at gøre, såsom login og signup. Homecontroller implementerer alt som har med pools og status på poolen at gøre. Designet er et indledende design og beslutningen om hvorvidt særligt Homecontroller skal have så meget ansvar er en antagelse. Det skyldes Web-applikationen begrænsede udvikling, som en iterativproces. Den iterative design- implementering- og testproces, har kun haft et fuldt gennemløb, for LoginView. Det vil blive beskrevet i \todo{ref til implementering af web}
+På figur~\ref{fig:web_class} ses hvilke controllers som implementerer hvilke interfaces. AccountController implementerer alt, som har med brugeren at gøre såsom login og signup. Homecontroller implementerer alt, som har med pools og status på poolen at gøre. Designet er et indledende design og beslutningen om hvorvidt særligt Homecontroller skal have så meget ansvar er en antagelse. Det skyldes Web-applikationen begrænsede udvikling som en iterativproces. Den iterative design- implementering- og testproces, har kun haft et fuldt gennemløb, for LoginView. 
 

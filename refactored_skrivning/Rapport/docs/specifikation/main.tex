@@ -1,10 +1,10 @@
 % !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \chapter{Specifikation og Analyse}\label{SpecOgAnalyse}
-Afsnittet beskriver specifikations- og analysearbejdet. Specifikationsarbejdet begyndte med analyse af projektformulering. Analysen bestod af at løse de problemstillinger, som projektformuleringen rejser vha. user stories. User stories, som er resultatet af analyse arbejdet, ses i det tidligere afsnit~\ref{FunkKrav}. Gruppen bestemte at have fokus på at lave de dele, som har mest værdig for slutbrugeren af systemet. User stories blev prioriteret ved en MoSCoW analyse, som også fremgår i tabel~\ref{table:functional}. Til at danne overblik over systemets domæner, foretog gruppen en domæneanalyse\todo{ref til metoden domæneanalyse, som ikke findes} af user stories. Resultatet af analysen ses på figur~\ref{fig:domainmodelboundary}.
+Afsnittet beskriver specifikations- og analysearbejdet. Specifikationsarbejdet begyndte med analyse af projektformulering. Analysen bestod af at løse de problemstillinger, som projektformuleringen rejser vha. user stories. User stories, som er resultatet af analyse arbejdet, ses i det tidligere afsnit~\ref{FunkKrav}. Gruppen bestemte at have fokus på at lave de dele, som har mest værdig for slutbrugeren af systemet. User stories blev prioriteret ved en MoSCoW analyse, som også fremgår i tabel~\ref{table:functional}. Til at danne overblik over systemets domæner, foretog gruppen en domæneanalyse af user stories. Resultatet af analysen ses på figur~\ref{fig:domainmodelboundary}.
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.7\linewidth]{figs/ProjectBoundary}
+	\includegraphics[width=0.65\linewidth]{figs/ProjectBoundary}
 	\caption{Domænemodel for systemet}
 	\label{fig:domainmodelboundary}
 \end{figure}
@@ -13,4 +13,10 @@ Smartpool projektet afgrænses til at være foruden dataopsamlingsdelen, hvilket
 
 For en domænebeskrivelse se dokumentationen afsnit Domænebeskrivelser under Kravspecifikation.
 
-Specifikations- og analysearbejde er ligesom alt andet i projektet en iterativproces. Det betyder, at de user stories som er defineret i denne rapport, ikke nødvendigvis er de samme, som da udviklingsprocessen startede. Undervejs i denne proces kan såvel domæneanalysen og -modellen have ændret sig. I samme proces er kvalitetskravene for systemet blevet bestemt, ved løbende at analysere givne problemstillingerne vha. FURPS. Resultatet af denne proces ses i \todo{ref kravafsnittet} 
+Specifikations- og analysearbejde er ligesom alt andet i projektet en iterativproces. Det betyder, at de user stories som er defineret i denne rapport, ikke nødvendigvis er de samme, som da udviklingsprocessen startede. Undervejs i denne proces kan såvel domæneanalysen og -modellen have ændret sig. I samme proces er kvalitetskravene for systemet blevet bestemt, ved løbende at analysere givne problemstillingerne vha. FURPS. Resultatet af denne proces ses i \todo{FunkKrav} 
+
+Et eksempel på udfærdigelse af et kvalitetskrav er, udarbejdelse af et ensartet visuelt design. Alle GUI's skal fremstå ens uanset platform, det betyder både i funktionalitet men også i fremtoning. Kvalitetskravet blev opfyldt ved at lave et konceptuelt design, som blev udviklet til et grafisk design. Til at sikre farvekorrekthed udarbejdedes en farvepalet, som udviklerne kunne bruge til ensartning.
+
+\input{docs/kravspecifikation/grafiskdesign}
+\input{docs/kravspecifikation/farvepalet}
+
