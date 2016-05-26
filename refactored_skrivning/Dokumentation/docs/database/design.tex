@@ -133,7 +133,7 @@ public void AddUser_Add2UsersWithSameEmailWithDiffCaPiTaL_ReturnsFalse()
 
 Et eksempel på implementeringen af en testcases, som sikre at der ikke kan sættes en bruger ind med et ''taget'' password, finders herunder. Øvrige testcases med implementering kan ses i vedlagt sourcekode i \textit{Smartpool} solutionen, \textit{Database.Test.Unit} projektet, i \textit{UserAccessUnitTest.cs} filen.
 
-\begin{lstlisting}[caption=Test for metoden AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse]
+\begin{lstlisting}[caption=Test for metoden] AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse]
 ...
 [Test]
 public void AddUser_InsertUserWithAlreadyUsedEmail_ReturnsFalse()
@@ -212,7 +212,7 @@ public User FindUserByEmail(string email)
 }
 \end{lstlisting}
 
-Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis det ikke går godt.
+Da \textit{FindUserByEmail} skal returnere en instans af \textit{User} klassen, var der begrænset mulighed for at gøre ''kalder'' klar over at en fejl var forekommet. Så \textit{FindUserByEmail} kaster en exception hvis kaldet mislykkedes.
 
 Endeligt var der behov for at kunne verificere en brugers password. I forbindelse med dette var det vigtigt at selve kodeordet aldrig forlader data access laget. Måden det blev implementeret på var at brugeren af metoden måtte sende email og kodeord med som argument, hvorefter \textit{ValidatePassword} skulle svare om disse matchede. Igen blev der fundet en række testcases:
 
