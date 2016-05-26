@@ -55,7 +55,7 @@ Det første \textit{Model first} udkast til projektets database var meget omfatt
 	\label{fig:databaseERD_firstattempt_uml}
 \end{figure}
 
-I løbet af udviklingsprocessen er der foretaget mange ændringer af modellen der ses på figur~\ref{fig:databaseERD_firstattempt_uml}. 
+I løbet af udviklingsprocessen, dvs. fra projektets begyndelse til slutningen, er der foretaget mange ændringer af modellen der ses på figur~\ref{fig:databaseERD_firstattempt_uml}. 
 I takt med at man tilegnede sig mere viden omkring database design blev der foretaget flere justeringer. Af markante ændringer kan der nævnes:
 
 \begin{itemize}
@@ -170,7 +170,7 @@ public bool AddUser(string fullname, string email, string password)
 }
 \end{lstlisting}
 
-Da metoden til at sætte en bruger ind i databasen med DAL var skrevet og testet, skulle der implementeres funktionalitet til at hente denne bruger ud af databasen. Til dette blev følgende testcases designet:
+Da metoden til at sætte en bruger ind i databasen var skrevet i data-access laget og samtidigt testet, skulle der implementeres funktionalitet til at hente denne bruger ud af databasen. Til dette blev følgende testcases designet:
 
 \begin{lstlisting}[caption=Testcases til \textit{FindUserByEmail} metoden.,label=code:finduserbyemailtestcases]
 public void FindUserByEmail_UserIsNotAdded_ReturnsNullUser()
