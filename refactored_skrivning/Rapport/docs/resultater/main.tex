@@ -1,2 +1,16 @@
+% !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \chapter{Resultater og diskussion}
+Resultaterne for projektet defineres ved en accepttest. Accepttesten er specificerer, hvornår en given story kan accepteres. Accepttesten er specificeret af gruppen selv ud fra user stories, som er specificeret ved MoSCoW. Accepttesten forefindes i dokumentationen. Resultaterne vil blive diskuteret i følgende afsnit.
 
+\section{Diskussion}
+Det er muligt for brugeren at tilgå systemet fra Windows PC, iOS app og Web app. Det opfylder ligeledes kvalitetskravet om at det skal være muligt at tilgå systemet fra flere platforme. Tilgangen til systemet er dog begrænset, i hvor stor grad websitet tilgår systemet, da det kun er muligt at logge ind. Det vurderes dog som tilfredstillende, da meningen med websitet mest af alt var et proof of concept tiltag. 
+
+Systemdesignet bekræftes hermed at kunne udvides til flere platforme endnu, hvilket understøtter kvalitetskravet om et fleksibelt system. Det er med andre ord ikke skuffende, at web fx ikke kan oprette bruger i system, på trods af at det er et 'must'. Web skal blot implementerer view interfaces, det er ikke blevet gjort pga. mangel på tid og ressourcer. Det samme gør sig gældende for andre 'must' krav, såsom tilføje/fjerne en pool fra konto samt at få seneste sensor værdier. Alle views er implementeret undtagen history og editPool. Alle implementerede view skal implementerer tilhørende view interface, for at kunne accepteres. 
+
+Resten af systemets 'must' krav kan accepteres.
+
+Systemet har en række 'should' krav, hvoraf at vise en liste over pools er implementeret i både Windows og iOS, men nulstilling af kodeord ikke er blevet implementeret. Funktionaliteten er blevet nedprioriteret i forhold til 'must' krav. Det vil kræve at login view, blev udvidet med funktionaliteten nulstil kodeord. For at det kan implementeres skal en E-mail server skal oprettes med script til at automatisk at sende en nulstillingsmail til brugeren, som ønsker at nulstille sit kodeord. E-mailen skulle indholde en autogeneret kode, som kan bruges til at logge ind i systemet og med efterfølgende option på at ændre koden vha. ændre password funktionaliteten, som er implementeret i systemet.
+
+Det er blevet nedprioriteret, at udvikle funktionaliteter til at logge ud og låses ude, ved forkert indtastning af login oplysninger. Ligesom administratorrettigheder for brugere er ikke implementeret, hvilket betyder fastsatte target værdier for pH og klor ikke bestemmes af en administrator. Det vil kræve at en anden story omhandlende brugers mulighed for at sætte target-værdier for sensorer, skulle implementeres først. 
+
+Manglen på administratorrettigheder betyder, at brugere ikke kan slettes i systemet. Denne user story er blevet nedprioriteret, og det er ikke blevet undersøgt, hvad der skal til, fat implementerer det i systemet.

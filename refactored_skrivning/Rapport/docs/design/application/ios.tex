@@ -1,6 +1,7 @@
 % !TEX root = ../../../I4PRJ, Grp3 - Rapport.tex
 \subsection{iOS GUI}
-Til iOS er der udviklet et view-lag med UIKit og C\#. Det findes under namespace "Smartpool.Application.iOS."
+Til iOS er der udviklet et view-lag med UIKit og C\#. Det findes i projektet Smartpool.Application.iOS.
+Den visuelle implementering foretages med storyboards i Interface Builder, som er en del af Xcode-udviklingsværktøjet.
 
 \subsubsection{Design}
 I iOS applikationen designes view-klasser, der implementerer view-interfacet defineret i præsentationslaget. Brugergrænseflader på iOS platformen designes med frameworket UIKit, hvor hvert view en tilhørende controller-klasse. iOS designet tager højde for dette, ved at bruge UIKits controller-klasse som en bro, i mellem Smartpools præsentationslag, og UIKits view-lag. Designet er derfor lavet således, at controller-klasserne på iOS implementerer view-interfacet fra præsentationslaget.
