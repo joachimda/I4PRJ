@@ -1,17 +1,45 @@
 \section{Database og Data Access Layer}\label{sec:designdatabase}
 
 %\subsection{Indledende design overvejelser}
-Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser. DDS-lite har været brugt til at designe første udkast til databasen.
+Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser.
 
-Ved videre undersøgelse af mulighederne for udvikling af database og tilhørende DAL blev Entity Framework 6.0 taget i brug. Dette er valgt da brugen af en ORM\footnote{Object Relational Mapper}, gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter. 
+\subsection{Indledende overvejelser}
+Fra starten har det været klart at systemet skulle udvikles i flere faser. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
 
-Helt fra begyndelsen af databasen/DAL designfasen har tanken været at skabe et DAL der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Dette illustreres ved figur~\ref{fig:vs_codeMap}.
+Projektets mange iterationer kan deles op i 3 faser, hvor det i første fase var målet at kunne oprette en bruger/User, og også lave forespørgsler på databasen.
+DDS-Lite blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
+
+I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fig:EFarch}, det skal nævnes at ''Application'' på figuren symbolisere data access laget.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\linewidth]{figs/dbExtra/EFarch}
+\caption{Entity Framework \cite{efArch}}
+\label{fig:EFarch}
+\end{figure}
+
+
+Helt fra begyndelsen af databasen og data access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
 
 Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et ER diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på i Entity Frameworket. Undervejs er flere af dem blevet afprøvet, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
 
-\textit{Database first} blev brugt i forbindelse med DDS-Lite som blev brugt til at designe selve databasen. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede.
+\textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede.
 
-Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfase ofte blev foretaget markante ændringer i designet. \textit{Model first} gør det lettere at udføre ER opdateringer, direkte på modellen og derefter køre et tilhørende SQL script direkte på databasen. Det første \textit{Model first} udkast til projektets database var meget omfattende og er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
+Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfase ofte blev foretaget markante ændringer i designet. \textit{Model first} gør det lettere at udføre ER opdateringer, direkte på modellen og derefter køre et tilhørende SQL script direkte på databasen. 
+
+Når der skal oprettes en database model, tilføjes der en \textit{ADO.NET Entity Data Model}. Model designeren bruges da til at tilføje, fjerne og ændre i entities.
+På figur~\ref{fig:modelDesigner} vises brugen af designeren i projektet.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\linewidth]{figs/generatedFiles}
+\caption{Eksempel på entity klasserne i projektet}
+\label{fig:generatedFiles}
+\end{figure}
+
+Nar der udvikles en database med Model First tilgangen, autogenereres de simple entity klasser (User, Pool Data osv.). Dette er klart at foretrække når systemet er under udvikling idet model designeren selv kan opdatere klasserne når modellen opdateres eller udvides. På denne måde undgås det at man selv skal ind og ændre alle entity klasserne manuelt. På figur~\ref{fig:generatedFiles} ses et eksempel på nogen af de autogenerede klasser.
+
+Det første \textit{Model first} udkast til projektets database var meget omfattende og blev lavet før de første rigtige iterationer begyndte. Grunden til at denn emodel blev lavet var at tankegangen med at definere hele systemet fra starten af ikke var "sluppet" helt. Modellen er sidenhen blevet revideret og omkonstrueret. Se figur~\ref{fig:databaseERD_firstattempt_uml} for dette tidlige design.
 
 \begin{figure}[H]
 	\centering
@@ -20,7 +48,8 @@ Dog blev \textit{Model First} tilgangen valgt, da der i projektets udviklingsfas
 	\label{fig:databaseERD_firstattempt_uml}
 \end{figure}
 
-Af markante ændringer kan der nævnes:
+I løbet af udviklingsprocessen er der foretaget mange ændringer af modellen der ses på figur~\ref{fig:databaseERD_firstattempt_uml}. 
+I takt med at man tilegnede sig mere viden omkring database design blev der foretaget flere justeringer. Af markante ændringer kan der nævnes:
 
 \begin{itemize}
 	\item FullName entiteten fjernes, User får 3 naming properties.
@@ -38,7 +67,7 @@ Af markante ændringer kan der nævnes:
 	\label{fig:vs_codeMap}
 \end{figure}
 
-\subsection{Udvalgte User Story}
+\subsection{User Stories}
 
 Med udgangspunkt i \gls{moscow} analysen på side~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde punkterne: 
 
