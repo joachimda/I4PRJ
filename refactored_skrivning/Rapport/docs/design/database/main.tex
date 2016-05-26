@@ -1,16 +1,19 @@
 
 \section{Indledende designovervejelser}\label{sec:designdatabase}
 
-Til projektet er der udviklet en database som står for at gemme alle brugerdata, herunder en brugers pools samt alle sensordata der foretages derpå.
+Til projektet er der udviklet en database som står for at gemme alle brugerdata, herunder brugere, brugernes pools samt alle sensordata der foretages på disse pools.
 
-Den endelige database er udviklet med entity frameworket, med en model first tilgang. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i detaljer i projekt dokumentationen. \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementering af både databasen og data access laget. Måden dette er beskrevet på, vil tage udgangspunkt i to primlre user stories. Den omfattende resterende funktionalitet er beskrevet i projektets dokumentation \todo{reference til doku}
+Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang \todo{se dokumentation}. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i detaljer i projekt dokumentationen \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data access lag. Beskrivelserne tager udgangspunkt i de to primære user stories, som også bruges i resten af denne rapport. Data access laget er som helhed omfattende af skulle beskrive. Derfor findes der beskrivelser af det resterende funktionalitet og design i projektets dokumentation \todo{reference til doku}.
 
-Databasen og DAL har gennemgået 3 udviklingsfaser, første iteration med User, derefter Pool og til sodst Data.
+Databasen og dataaccess laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser, første fase med User, derefter Pool og til sidst Data. Dette afspejles i at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration. De mange iterationer kan da groft opdeles i disse 3 faser.
 
+Den endelige database er som sagt udviklet med Entity Frameworket, som gør det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
+
+Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og og let at bruge for klienter.
 Der er følgene ting i data access laget \todo{vis noget klasse halløj med interfaces}
 \subsection{Udvalgte User Story}
 
-Med udgangspunkt i \gls{moscow} analysen blev det første udkast til databasen lavet. Meningen var at opfylde punkterne: 
+Med udgangspunkt i \gls{moscow} analysen blev det første udkast til databasen lavet. Meningen var da at opfylde punkterne: 
 
 \begin{itemize}
 	\item \textit{"Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet"}
