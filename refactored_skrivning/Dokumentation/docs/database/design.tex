@@ -82,12 +82,7 @@ Arbejdet med databasen og data access laget, tager udgangspunkt i projektets use
 	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand.
 	\item Som administrator vil jeg kunne slette en bruger for at undgå spild af plads i databasen.
 \end{itemize}
-Med udgangspunkt i \gls{moscow} analysen på side~\pageref{sec:moscow} blev det første udkast til databasen lavet. Meningen var at opfylde punkterne: 
 
-\begin{itemize}
-	\item Der skal kunne oprettes en bruger til systemet.
-	\item Brugeren skal kunne se sine pooldata.
-\end{itemize}
 
 For at lave dette på en måde som gjorde udvidelse let, kom første udkast til at se ud som vist på figur~\ref{fig:database_class_1}. Adgangen til databasen skulle være simpel. Dette var på grund af grænsefladen til resten af system, som skulle udvikles samtidigt. På denne måde skulle de øvrige grupper ikke ændre deres brug af \textit{ISmartpool} interfacet.  Derfor skulle der laves én klasse som ville have associationer til specialiserede klasser. Figur~\ref{fig:database_class_1} viser hvordan kaldet fra \textit{context} går gennem klassen \textit{ISmartpool}.
 
