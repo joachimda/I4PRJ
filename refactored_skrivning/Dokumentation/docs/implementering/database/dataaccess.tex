@@ -23,7 +23,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Argumenter:}
 \begin{enumerate}
-	\item \textit{string} email addressen til den bruger, som poolen tilhøre.
+	\item \textit{string} email addressen til den bruger, som poolen tilhører.
 	\item \textit{string} navnet på poolen.
 	\item \textit{double} klor værdien som skal indsættes.
 	\item \textit{double} temperatur værdien som skal indsættes.
@@ -33,10 +33,18 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{Data} object (som vist i figur~\ref{fig:datasetentity}), som gemmes i databasen. Herefter oprettes målingerne og tildeles den fælles \textit{Data} som tidligere blev oprettet.
+	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{Data} object (som vist i figur~\ref{fig:datasetentity}), som gemmes i databasen. Herefter oprettes målingerne og tildeles den fælles \textit{Data} som tidligere blev oprettet. Se metodens sekvensdiagram på figur~\ref{fig:EFarch}
 \end{itemize}
 
 \begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/createDataEntry.PNG}
+\caption{Sekvensdiagram for metoden CreateDataEntry}
+\label{fig:createDataEntry}
+\end{figure}
+
+
+\begin{figure}\todo{skal dette være her?}
 \centering
 \includegraphics[width=0.8\linewidth]{figs/implementering/datasetentity.png}
 \caption{En del af ER diagrammet som databasen er lavet udfra.}
@@ -108,12 +116,17 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle klor-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle klor-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se metodens sekvensdiagram på figur~\ref{fig:getChlorineData}
 \end{itemize}
 
 
 
-
+\begin{figure}
+\centering
+\includegraphics[width=0.7\linewidth]{figs/dbSeq/getChlorineData.PNG}
+\caption{Sekvensdiagram for metoden GetChlorineData}
+\label{fig:getChlorineData}
+\end{figure}
 
 
 
@@ -145,7 +158,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle temperatur-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle temperatur-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se evt. sekvensdiagrammet for \textit{GetChlorineData} på figur~\ref{fig:getChlorineData}, da funktionaliteten er den samme.
 \end{itemize}
 
 
@@ -186,7 +199,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle pH-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle pH-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se evt. sekvensdiagrammet for \textit{GetChlorineData} på figur~\ref{fig:getChlorineData}, da funktionaliteten er den samme.
 \end{itemize}
 
 
@@ -226,7 +239,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 
 \subparagraph{Virkemåde}
 \begin{itemize}
-	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum.
+	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se evt. sekvensdiagrammet for \textit{GetChlorineData} på figur~\ref{fig:getChlorineData}, da funktionaliteten er den samme.
 \end{itemize}
 
 
