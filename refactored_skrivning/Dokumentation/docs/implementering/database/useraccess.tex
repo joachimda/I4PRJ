@@ -19,7 +19,7 @@ I dette afsnit findes metodebeskrivelser for klassen \textit{UserAccess}.
 
 Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt ValidateName før der oprettes et database kontekst objekt af typen DataBaseContext. På Kontekstobjektets DbSet<User> property kaldes Add metoden med den nye User som parameter. Herefter gemmes den nye User i databasen ved at kalde SaveChanges metoden på kontekstobjektet. AddUser returnerer false hvis der er fejl i enten check på email eller fullname. Hvis det lykkes at tilføje brugeren til databasen returneres true. Se metodens sekvensdiagram på figur~\ref{fig:adduser}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figs/dbSeq/adduser.PNG}
 \caption{Sekvensdiagram for Metoden AddUser}
@@ -56,7 +56,7 @@ using (var db = new DatabaseContext())
 	\item \textit{UserNotFoundException()} - Kastes hvis der ikke findes en bruger med den angivne email addresse i databasen.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figs/dbSeq/findUserByEmail.PNG}
 \caption{Sekvensdiagram for metoden FindUserByEmail}
@@ -72,7 +72,7 @@ Laver en LINQ query på databasekontekst objektet og checker om der findes en ma
 
 I sekvensdiagrammet på figur~\ref{fig:isEmailInUse}, kan det se hvordan en email checkes.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figs/dbSeq/isEmailInUse.PNG}
 \caption{Sekvensdiagram for metoden IsEmailInUse}
@@ -86,7 +86,7 @@ I sekvensdiagrammet på figur~\ref{fig:isEmailInUse}, kan det se hvordan en emai
 
 Når der er brug for at validere en brugers password, kaldes denne funktion. Den bruges eksempelvis når en bruger ønsker at logge ind på systemet. Se metodens sekvens diagram på figur~\ref{fig:validatePassword}.
 	
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/dbSeq/validatePassword.PNG}
 \caption{Sekvensdiagram for metoden ValidatePassword}
@@ -165,7 +165,7 @@ Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en
 
 Se sekvensdiagrammet på figur~\ref{fig:editUserName}.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/dbSeq/editUserName.PNG}
 \caption{Sekvensdiagram for metoden EditUserName}
