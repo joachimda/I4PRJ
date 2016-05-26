@@ -189,7 +189,7 @@ public void FindUserByEmail_InsertsUserWithEmailInAllCaps_FindUserSearchingWithL
 
 Dette er lavet efter samme fremgangsmåde som beskrevet med \textit{AddUser} metoden. Sådan er funktionaliteten til at finde en bruger udviklet og på grund af dette igen med fuldstændigt testcoverage. Metoden er vist herunder: 
 
-\begin{lstlisting}
+\begin{lstlisting}[caption=FindUserByEmail metode]
 public User FindUserByEmail(string email)
 {
 	User foundUser;
@@ -197,8 +197,8 @@ public User FindUserByEmail(string email)
 	using (var db = new DatabaseContext())
 	{
 		var searchByEmail = from search in db.UserSet
-		where search.Email.Equals(email)
-		select search;
+				where search.Email.Equals(email)
+				select search;
 	
 		if (searchByEmail.Count() > 1) 
 			throw new MultipleOccourencesOfEmailWasFoundException();
