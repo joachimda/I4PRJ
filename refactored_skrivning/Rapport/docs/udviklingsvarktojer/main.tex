@@ -1,3 +1,4 @@
+% !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \chapter{Udviklingsværktøjer}
 
 I gennem dette semesterprojekt er der blevet brugt en lang række udviklingsværktøjer. Mange af værktøjerne er både blevet brugt i designfaserne og senere til implementering af systemet. Brugen af de forskellige værktøjer har været baseret på, hvilket emne gruppen har arbejdet med.
@@ -5,35 +6,38 @@ I gennem dette semesterprojekt er der blevet brugt en lang række udviklingsvær
 \section*{DDS-lite}
 DDS-lite er brugt i kurset I4DAB\footnote{Databasefag.}, har været brugt til at designe de første udkast til en database. DDS-lite giver mulighed for at autogenerere SQL scripts som kan køres på databasen, hvorved tabeller med mere oprettes.
 
-\section*{Microsoft Visual Studio 2015}
-Er anvendt til udvikling af source code, database og enkelte diagrammer
-% nuget pakker
-% andre versioner?
-\section{.NET}
+\section*{Microsoft Visual Studio}
+Er anvendt til udvikling af source code, database og UML-diagrammer.
 
-\subsection{WPF}
+\section*{ReSharper} % skal den med?
+Er anvendt som en del af Visual Studio. ReSharper medvirker til at give et forbedret udviklingsmiljø, og en mere ensartet kode 
 
-\subsection{ASP.NET MVC}
+\section*{NUnit}
+Er et test framework som er anvendt til at skrive automatiske tests
 
-\subsection{ADO.NET}
+\section*{NSubstitute}
+Er et mocking bibliotek der anvendes til at generere fakes til tests i NUnit
 
-\section{Xamarin Studio}
+\section*{.NET}
+Microsoft's .NET-framework er blevet brugt i udviklingen af de meste af sourcekoden i projektet.
 
-\section{Xcode}
+\section*{WPF}
+WPF-framework'et er blevet brugt til udviklingen af systemets Windows brugergrænseflade.
 
-\section{UIKit}
+\section*{ASP.NET MVC}
+ASP.NET MVC er et framework, der er blevet brugt, til udviklingen af Web-applikationen.
 
-\subsection*{ReSharper} % skal den med?
-\todo{missing}
+\section*{ADO.NET Entity}
+ADO.NET Entity-framework'et er brugt til implementeringen af data-access laget. Framework'et er brugt for at muliggøre objektorienteret interaktion med systemets database.
 
-\subsection*{NUnit}
-\todo{missing}
+\section*{Xamarin Studio}
+Xamarin Studio er en MonoDevelop IDE, der er brugt til kodeimplementeringen af iOS applikationen.
 
-\subsection*{NSubstitute}
-\todo{missing}
+\section*{UIKit}
+UIKit er et GUI-framework, udbudt af Apple, der er blevet brugt til udviklingen af brugergrænsefladen i iOS applikationen. UIKit udbydes i Objective-C og Swift. I projektet er MonoDevelop's C\# bridge af UIKit blevet brugt.
 
-\subsection*{Entity Framework}
-\todo{missing}
+\section*{Xcode}
+Xcode er det naturlige udviklingsmiljø for iOS-udvikling. Xcode IDE'en er brugt sammen med Xamarin, til udvikling af iOS applikationen. Værktøjet Interface Builder i Xcode, er brugt til implementeringen af iOS' brugergrænseflade.
 
 \section*{TeXstudio}
 Er anvendt til skrivning af rapport og dokumentation. Dette blev valgt fremfor lignende programmer så som Word, da TeXstudio giver en mere ensartet struktur, da designvalg, så som teksttype, størrelse osv, foretages i en separat fil
@@ -53,18 +57,6 @@ Enterprise Architect er et program, som bruges til at lave diagrammer, det er is
 
 \section*{Dropbox}
 Er anvendt til deling af dokumenter i rapporten
-
-\section*{ReSharper} % skal den med?
-Er anvendt som en del af Visual Studio. ReSharper medvirker til at give et forbedret udviklingsmiljø, og en mere ensartet kode 
-
-\section*{NUnit}
-Er et test framework som er anvendt til at skrive automatiske tests
-
-\section*{NSubstitute}
-Er et mocking bibliotek der anvendes til at generere fakes til tests i NUnit
-
-\section*{Entity Framework}
-Er et framework der giver mulighed for at arbejde med objekt orienteret programmering, indenfor udvikling af relationelle databaser. 
 
 \section*{Pivotal Tracker}
 Er anvendt som en form for scrum board, hvor user stories er oprettet og har haft en status som f.eks. ongoing. 
