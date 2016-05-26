@@ -68,7 +68,7 @@ For at holde styr på branches og versioner er der brugt Feature Branching \cite
 Github er online hosting af Git repositories, og er brugt i projektet til at gemme source kode, samt administrere projektets repository. I forbindelse med projektstyring og adminitration, har git været brugt til eksempelvis at tracke teamets effektivitet og commit-frekvens dvs. hvor ofte kode merges ind på master branchen.
 
 \subsection{Travis CI og Jenkins} 
-Gruppen har undervejs forsøgts sig med både med Travis CI og Jenkins. Travis er væsentlig bedre til at integrere med Github, så det bruges i projektet.
+Gruppen har undervejs forsøgt sig med både Travis CI og Jenkins. Travis er væsentlig bedre til at integrere med Github, så det bruges i projektet.
 Begge værktøjer er til continuos integration. CI er belejligt idet en ekstern server står for at bygge al source kode, der bliver pushet til projektets repository og kører tilsvarende tests.
 
 Det er især nyttigt til større projekter, hvor lokale test på udviklerens computer ikke er hensigtsmæssige af tidsmæssige årsager. Travis CI er gratis til offentlige repositories på GitHub. Dog er Travis CI kun "community supported" for C\# kode \cite{communitysupportedlanguages2016}, hvilket introducerede en udfordring.
@@ -80,4 +80,11 @@ Et forsøg med Travis skulle konstatere, om der skulle bruges mere tid på Travi
 Det lykkedes at sætte github repositoriet op til kun at tillade et merge, hvis koden kan bygge og består alle tests. Det besværliggjorde delingen af fremskridt mellem gruppens medlemmer, og blev fjernet igen. Travis har kørt tests efter opsætningen, men det er fravalgt.
 
 \section{Software test}
-Software testing har været en stor del af dette projekt. Der har været stor fokus på robusthed. Der er i alt skrevet cirka 200 automatiserede tests, se figur~\ref{fig:vsUnittest}. Af disse er lidt over halvdelen skrevet til DAL, som er den mest oplagte del at enhedsteste, da eksempelvis GUI laget hovedsageligt er testet visuelt.
+Software testing har været en stor del af dette projekt. Der har været stor fokus på robusthed. Der er i alt skrevet lidt over 200 automatiserede tests, se figur~\ref{fig:vsUnittest}. Af disse er lidt over halvdelen skrevet til DAL, som er den mest oplagte del at enhedsteste, da eksempelvis GUI laget hovedsageligt er testet visuelt.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\linewidth]{figs/processProjektGennemforsel/vsUnittest.PNG}
+\caption{Samlet unittests i projektet}
+\label{fig:vsUnittest}
+\end{figure}
