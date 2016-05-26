@@ -30,11 +30,21 @@ I forbindelse med unit-test kører vi code coverage målinger, for at få en id�
 \subsection{Testbeskrivelse}
 % hvordan div. test er valgt og hvad I specielt var opmærksom på under udviklign af test. 
 % hvad var let/svært at teste etc.
-Modelklasserne i applikationslaget har få afhængigheder, og kan derfor testes uden brug af fakes. Modelklasserne testes individuelt, og den ene klasse (PoolLoader) der benytter sig af en IClientMessenger, opsættes med en fake IClientMessenger. Presenter-klasserne testes også individuelt, og deres dependency til et IView og en IClientMessenger fakes med NSubstitute. I Presenter-klasserne testes forskellige metodekald, samt interaktionen med fake view’s (mocks). Model-klasserne i Smartpool.Application.Model implementerer ikke interfaces. Dette var en ulempe, der gjorde test af presenter-klasser, sværere end de burde have været. Dette er også grundet til, at code-coverage procenten i præsentationslaget er lav. Grundet tidsbegrænsning nåede denne problemstilling ikke at blive rettet i projektforløbet, men opmærsomhed har været rettet på det.
+Modelklasserne i applikationslaget har få afhængigheder, og kan derfor testes uden brug af fakes. Modelklasserne testes individuelt, og den ene klasse (PoolLoader) der benytter sig af en IClientMessenger, opsættes med en fake IClientMessenger. Presenter-klasserne testes også individuelt, og deres dependency til et IView og en IClientMessenger fakes med NSubstitute. I Presenter-klasserne testes forskellige metodekald, samt interaktionen med fake view’s (mocks). Model-klasserne i Smartpool.Application.Model implementerer ikke interfaces. Dette var en ulempe, der gjorde test af presenter-klasser, sværere end de burde have været, fordi de ikke kan mock'es. Dette er også grunden til, at code-coverage procenten i præsentationslaget er lav. Grundet nedprioritering nåede denne problemstilling ikke at blive rettet i projektforløbet, men opmærksomhed har været rettet på det.
 
 Da både presenter-klasser og model er testet med førnævnte test-suite, elimineres en stor del af de logiske fejl som kan opstå i GUI-projekterne. View-implementeringen indeholder udelukkende logik, vedrørende view’ets udseende og hvordan data præsenteres.
 
-\subsection{web}
+\subsubsection{GUI test}
+Her beskrives de kvalitative test, der er foretaget for at verificere, at GUI delen af applikationerne virkede.
+Der tages udgangspunkt i Windows applikationen.
+
+GUI funktionalitet i Windows applikationen kan testes alene. Det kan være funktionalitet, som om et tekst felt bliver orange når man skriver i det eller ej. Det testes kvalitativt af en udvikler.
+
+Funktionaliteten mellem delsystemer eller integrationen af delsystemer og GUI skete også kvalitativt.
+F.eks. integreres lagene Application.Win og Application.Presentation ved at teste om et views controller har den forventede adfærd og f.eks. åbner et besked vindue, når brugeren giver applikationen input.
+
+Delsystemer testes ved at sende information fra bruger ned gennem systemet. GUI kobles først sammen med presenter, så client, så server og så database.
+\paragraph{Web}
 Ved forsøg på login, ses følgende på serveren:
 
 \begin{figure}
