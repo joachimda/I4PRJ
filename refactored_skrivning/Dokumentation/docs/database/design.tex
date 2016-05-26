@@ -4,7 +4,7 @@
 Før design af database og data access layer, er der foretaget nogle indledende tekonologiundersøgelser.
 
 \subsection{Indledende overvejelser}
-Fra starten har det været klart at systemet skulle udvikles i flere faser. Databasen og data access laget er derfor udviklet sideløbende med resten af systemets funktionalitet.
+Fra starten har det været klart at systemet skulle udvikles i flere faser. I løbet af disse er Databasen og data access laget derfor udviklet sideløbende med resten af systemets funktionalitet.
 
 Projektets mange iterationer kan deles op i 3 faser, hvor det i første fase var målet at kunne oprette en bruger/User, og også lave forespørgsler på databasen.
 DDS-Lite blev brugt i første forsøg med at oprette en funktionel database til at gemme brugere og brugerinformation. Dette viste sig og at være en uholdbar løsning da systemet løbende opdateres. I forbindelse med kurset I4DAB, blev der lavet en opgave hvor Entity Frameworket blev brugt. Dette framework gør det let at udvide systemet, hvilket passer godt til den iterative tilgang der er brugt i projektet. Entity Frameworket er en \textit{Object Relational Mapper}, der gør det lettere at integrere rå data records i et objekt orienteret system. Entity Frameworket gør det med andre ord muligt at behandle rå data records som objekter.
