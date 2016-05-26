@@ -1,0 +1,48 @@
+\chapter{Design og implementering}\label{cha:design}
+%% indledning til kapitel skal være her...
+I dette afsnit beskrives designet og implementering af software til \gls{smartpool} systemet. De forskellige ansvarsområder som applikation, forbindelse og data beskrives med indledende overvejelser. 
+Designet og efterfølgende implementeringen beskrives med de to samme krav: 
+
+\begin{itemize}
+	\item Som bruger vil jeg kunne oprette mig i systemet, for at få adgang til systemet.
+	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over 
+	poolens tilstand.
+\end{itemize}
+
+\section{Applikation}
+Applikationerne i systemet er jævnfør arkitekturen lavet med MVP, og de respektive dele bliver beskrevet i rækkefølgen Model, Presenter og View. Lagets model- og præsentationslag er designet til at være portabelt, hvorimod view-laget er platformspecifikt og designes seperat for hver platform. 
+
+Det overordnede design i applikationslaget illustreres ved sekvensdiagrammet i figur~\ref{fig:application_sd}. Her fremgår kommunikationsmønsteret mellem model-, view- og presenter-klasserne i applikationslagets design.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figs/design/application_sd}
+	\caption{Kommunikation i applikationslaget}
+	\label{fig:application_sd}
+\end{figure}
+
+Som følge systemets multi-lag arkitektur kunne applikationslaget samt de platform-specifikke view-implementeringer
+designes, uafhængigt af hinanden, så længe protokolbestemmende interfaces blev specificeret undervejs i processen. Interfaces for både presenters og views, er defineret ud fra de user stories, der har krævet deres design.
+
+\input{docs/design/application/main}
+\input{docs/implementering/application}
+\section{View}
+\input{docs/design/WinGUI}
+\input{docs/implementering/WinGUI}
+\input{docs/design/application/ios}
+\input{docs/implementering/ios}
+\input{docs/design/application/web}
+\input{docs/implementering/web}
+
+\input{docs/design/application/grafiskdesign}
+\input{docs/design/application/farvepalet}
+
+\section{Forbindelse}
+\todo{Skriv indledning til Forbindelse}
+\input{docs/design/database/main}
+\input{docs/implementering/database}
+
+\section{Data}
+\todo{Skriv indledning til Data}
+\input{docs/design/connection/main}
+\input{docs/implementering/connection}

@@ -1,5 +1,5 @@
 \subsection{Design}
-Server struktur ses i UML diagram på figur~\ref{fig:ConnectionServer}
+I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. Serverens struktur er vist i UML diagram på figur~\ref{fig:ConnectionServer}
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{figs/connection/ConnectionServer.png}
@@ -7,7 +7,7 @@ Server struktur ses i UML diagram på figur~\ref{fig:ConnectionServer}
 \label{fig:ConnectionServer}
 \end{figure}
 
-Et typisk forløb i serveren er vist på figur~\ref{fig:ServerSequenceResponse}
+Et eksempel på et typisk forløb i serveren er vist på figur~\ref{fig:ServerSequenceResponse}
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{figs/connection/ServerSequenceResponse.png}
@@ -32,7 +32,7 @@ For at simulere data fra pools i systemet, er der implementeret en række pool/s
 \end{figure}
 
 \subsection{Implementering}
-I denne sektion er beskrevet hvorledes serveren er opbygget. Serveren står for at modtage strings, omdanne dem til besked objekter og lave tilsvarende kald til databasen efter behov. Desuden simuleres pool data i serveren, og der holdes styr på user sessions vha. en TokenKeeper. 
+I denne sektion er beskrevet hvordan de enkelte komponenter, der tilsammen udgør serveren, er realiseret.
 
 \subsubsection{Asynchronous Socket Listener}
 Den primære funktionalitet af denne klasse er hentet fra https://msdn.microsoft.com/en-us/library/fx6588te(v=vs.110).aspx ?? . Denne fungerer ved at køre asynchront, hvilket vil sige at applikationen ikke idler når der afventes en connection. Dette vil med andre ord sige, at der kan oprettes flere forbindelser til serveren på samme tid, da de ikke blokkerer hinanden.
@@ -59,8 +59,8 @@ Der er desuden valgt at lade exceptions blive vist i server vinduet, som f.eks. 
 Som det også fremgår i server vinduet figur~\ref{fig:asynchronousSocketListenerException} bliver en exception håndteret af serveren, og der sendes en besked af den korrekte type tilbage til klient applikationen, så hverken server eller klient crasher.
 
 \subsubsection{Response Manager}
-Denne klasse er primært baseret på en switch case, hvor der baseret på den modtagne beskeds type, returneres et passende svar som set på figur ??
-\begin{lstlisting}[caption=Server.ResponseManager, label=code:Server.ResponseManager]
+Denne klasse er primært baseret på en switch case, hvor der baseret på den modtagne beskeds type, returneres et passende svar som set på listing~\ref{code:ServerResponseManager}
+\begin{lstlisting}[caption=Server.ResponseManager,label=code:ServerResponseManager]
 var receivedMessage = JsonConvert.DeserializeObject<Message>(receivedString, _jsonSettings);
 
 switch (receivedMessage.MsgType)
@@ -88,9 +88,9 @@ switch (receivedMessage.MsgType)
 }
 \end{lstlisting}
 
-Klassens switch-case er indkapslet i en try block, hvori der sørges for at eventuelle exceptions bliver håndteret, og der sendes et passende svar tilbage til klienten. Der er yderligere lavet en metode til håndtering af login requests, da denne som den eneste krævede en længere håndtering. Denne anvender en task til at kalde i databasen, da dette ved test af og til tog længere tid end forventet. Metoden ses på figur ??
+Klassens switch-case er indkapslet i en try block, hvori der sørges for at eventuelle exceptions bliver håndteret, og der sendes et passende svar tilbage til klienten. Der er yderligere lavet en metode til håndtering af login requests, da denne som den eneste krævede en længere håndtering. Denne anvender en task til at kalde i databasen, da dette ved test af og til tog længere tid end forventet. Metoden ses på listing~\ref{code:ServerResponseManagerHandleLoginRequest}
 
-\begin{lstlisting}[caption=Server.ResponseManager.HandleLoginRequest, label=code:Server.ResponseManager.HandleLoginRequest]
+\begin{lstlisting}[caption=Server.ResponseManager.HandleLoginRequest,label=code:ServerResponseManagerHandleLoginRequest]
 var task = Task.Run(() => _smartpoolDb.UserAccess.ValidatePassword(loginMsg.Username, loginMsg.Password));
 if (task.Wait(TimeSpan.FromSeconds(15))) //if task is completed within time limit
 {
@@ -102,8 +102,8 @@ else
 
 \subsubsection{Token System}
 Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
-For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på~\ref{code:ServerTokenKeeperCreateNewToken}
-\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken, label=code:ServerTokenKeeperCreateNewToken]
+For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på listing~\ref{code:ServerTokenKeeperCreateNewToken}
+\begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken,label=code:ServerTokenKeeperCreateNewToken]
 public string CreateNewToken(string username)
 {
 	var newToken = new Token(username, _tokenStringGenerator, _tokenLifeTime);
@@ -125,8 +125,8 @@ public string CreateNewToken(string username)
 
 \paragraph{Pool} er implementeret som en fake klasse. Klassen indeholder ikke nogen public metoder, da den er selvkørende og ved et angivet interval selv opretter sensor data i databasen. Dette er tiltænkt at være tilsvarende et reelt system, hvor en reel pool klasse, ved et givet interval, sender en request til en fysisk enhed om måledata, som derefter gemmes i databasen.
 
-Oprettelse af en pool via klassens constructor ses på ??
-\begin{lstlisting}[caption=Server.FakePool.Constructor, label=code:ServerFakePoolConstructor]
+Oprettelse af en pool via klassens constructor ses på listing~\ref{code:ServerFakePoolConstructor}
+\begin{lstlisting}[caption=Server.FakePool.Constructor,label=code:ServerFakePoolConstructor]
 public Pool(int secondsBetweenSensorReadings, string userName, string poolName, ISmartpoolDB smartpoolDb)
 {
 	UserName = userName;

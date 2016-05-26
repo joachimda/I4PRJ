@@ -33,3 +33,15 @@ I forbindelse med unit-test kører vi code coverage målinger, for at få en id�
 Modelklasserne i applikationslaget har få afhængigheder, og kan derfor testes uden brug af fakes. Modelklasserne testes individuelt, og den ene klasse (PoolLoader) der benytter sig af en IClientMessenger, opsættes med en fake IClientMessenger. Presenter-klasserne testes også individuelt, og deres dependency til et IView og en IClientMessenger fakes med NSubstitute. I Presenter-klasserne testes forskellige metodekald, samt interaktionen med fake view’s (mocks). Model-klasserne i Smartpool.Application.Model implementerer ikke interfaces. Dette var en ulempe, der gjorde test af presenter-klasser, sværere end de burde have været. Dette er også grundet til, at code-coverage procenten i præsentationslaget er lav. Grundet tidsbegrænsning nåede denne problemstilling ikke at blive rettet i projektforløbet, men opmærsomhed har været rettet på det.
 
 Da både presenter-klasser og model er testet med førnævnte test-suite, elimineres en stor del af de logiske fejl som kan opstå i GUI-projekterne. View-implementeringen indeholder udelukkende logik, vedrørende view’ets udseende og hvordan data præsenteres.
+
+\subsection{web}
+Ved forsøg på login, ses følgende på serveren:
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figs/implementering/webtest}
+	\caption{Web login forsøg}
+	\label{fig:weblogintry}
+\end{figure}
+
+Testen bekræfter, at den generelle arkitektur for systemet virker sammen med ASP.NET MVC arkitekturen. 
