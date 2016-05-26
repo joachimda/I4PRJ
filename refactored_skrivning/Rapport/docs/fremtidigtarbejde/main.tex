@@ -6,6 +6,8 @@ I dette afsnit beskrives hvad der skal gøres for, at produktet var klar til at 
 I applikationerne og på serveren skal der laves funktionalitet til, lave et nyt password, hvis brugeren trykker, at det gamle er glemt.
 I applikationerne skal history view ændres, så brugeren har mulighed for at vælge hvor langt tilbage i tiden, han vil se data fra. På de andre tiers er det implementeret.
 
+I Windows applikationen kunne alle kald til serveren laves asynkront, så UI ikke fryser i tilfælde af mangel på svar fra server eller database. Presenter laget burde også være klar til at modtage en fejlbesked i stedet for den forventede beskedtype.
+
 De resterende user stories skal implementeres. F.eks. en brugers evne til at invitere en anden bruger til at blive "spectator" af hans pool, dvs. at se hans pool data uden evnen til at ændre det.
 
 Websitets skal implementere de to resterende view; 'EditPoolView' og 'HistoryView'. Controllers skal implementere alle IView Interfaces, for derved at opnå den samme funktionaltet som de andre platformer.  
