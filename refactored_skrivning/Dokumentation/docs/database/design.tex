@@ -243,7 +243,64 @@ Herunder beskrives dokumentation for følgende \textit{user stories}:
 
 \textit{"Som bruger vil jeg skulle ændre mit password for at sikre min konto"}
 
-For at en bruger kan ændre sit password, skal der på User entiteten være en property til et kodeord, er allerede indsat på figur~\ref{fig:database_model_1}
+For at en bruger kan ændre sit password, skal der på User entiteten være en property til et kodeord, er allerede indsat på figur~\ref{fig:database_model_1}. Herefter er følgende testcases fundet: 
+
+\begin{lstlisting}
+public void EditUserPassword_ChangePasswordOfNotExistingUser_ReturnsFalse()
+public void EditUserPassword_ChangeToInvalid_ReturnsFalse()
+public void EditUserPassword_ChangePassword_ReturnsTrue()
+\end{lstlisting}
+
+Prioriteten ved denne metode var at det ikke skulle være muligt at fjerne sit kodeord, eller sætte det til en tom string. Implementering ses herunder.
+
+\begin{lstlisting}
+public bool EditUserPassword(string email, string newPassword)
+{
+	if (!IsEmailInUse(email) || newPassword.Length == 0)
+	{
+		return false;
+	}
+	
+	using (var db = new DatabaseContext())
+	{
+		var original = db.UserSet.Find(FindUserByEmail(email).Id);
+		if (original != null)
+		{
+			original.Password = newPassword;
+			db.SaveChanges();
+		}
+	}
+	
+	return true;
+}
+\end{lstlisting}
+
+\subsubsection{Tilføjeselse/ændring af pools til bruger}
+
+\textit{''Som bruger vil jeg kunne tilføje en pool til min konto''}
+
+\textit{''Som bruger vil jeg kunne fjerne en pool fra min konto.''}
+
+\textit{''Som bruger vil jeg kunne ændre informationer om en eksisterende pool på min konto.''}
+
+\textit{''Som bruger vil jeg kunne se en liste over alle mine pools.''}
+
+Omkring tilføjelse af pools var det vigtigt at en bruger ikke kan tildeles flere pools med det samme navn. Følgende test blev opstillet:
+
+\begin{lstlisting}
+public void AddPool_AddingPoolWithInvalidName_ReturnsFalse()
+public void AddPool_AddingPoolWithExistingUser_IsPoolNameAvailableReturnsFalse()
+public void AddPool_AddingPoolWithValidUser_ReturnsNull()
+public void AddPool_AddingPoolWithZeroVolume_ReturnsTrue()
+public void AddPool_AddingPoolWithNeg5Volume_ReturnsFalse()
+public void AddPool_AddingIdenticalPool_ReturnsFalse()
+public void AddPool_AddingSecondPoolWithValidName_IsPoolNameAvailableReturnsTrue()
+public void AddPool_AddingPoolToOtherUserWithSameName_ReturnTrue()
+public void AddPool_AddingPoolToExistingUser_DoesNotThrowException()
+public void AddPool_AddingPoolToExistingUser_UserOnlyAppearOnceInDb()
+\end{lstlisting}
+
+Samtidigt med at disse test med identificeret, blev selve implementering 
 
 
 
@@ -251,8 +308,7 @@ For at en bruger kan ændre sit password, skal der på User entiteten være en p
 
 
 
-
-
+	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand.
 
 
 
