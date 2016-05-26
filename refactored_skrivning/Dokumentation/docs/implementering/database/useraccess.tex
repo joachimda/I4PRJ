@@ -137,7 +137,7 @@ Metoden returnerer true med mindre der findes en uoverensstemmelse med enten pas
 
 \textit{bool EditUserEmail(string email, string newEmail)}
 
-Gør det muligt for en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et system login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter det pågældende User objekt returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
+Gør det muligt for en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter det pågældende User objekt returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
 
 \begin{lstlisting}[caption=EditUserEmail - brug af primær nøgler i Entity Framework,label=code:idef]
 public bool EditUserEmail(string email, string newEmail)
@@ -160,7 +160,8 @@ public bool EditUserEmail(string email, string newEmail)
 \subparagraph{EditUserName}\
 
 \textit{bool EditUserName(string email, string newName)}
-Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en bruger/User's navn, er der skrevet ekstra funktionalitet dertil. Dette er gjort for at fremtidssikre data access laget.
+
+Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en Bruger/User's navn, er der skrevet ekstra funktionalitet dertil. Dette er gjort for at fremtidssikre data-access laget.
 
 Se sekvensdiagrammet på figur~\ref{fig:editUserName}
 
