@@ -442,6 +442,8 @@ public List<Pool> FindAllPoolsOfUser(string ownerEmail)
 
 \subsubsection{Visning af sensormålinger}
 
+For at trække sensormålinger ud af databasen, er følgende testcases blevet identificeret.
+
 \begin{lstlisting}[caption=Testcases til GetChlorineData metoden]
 public void GetChlorineData_ChlorineDataIsInDatabase_ReturnsListOfTuplesWithSensorTypeAndValues()
 public void GetChlorineData_ChlorineDataNotPresent_ReturnsEmptyList()
