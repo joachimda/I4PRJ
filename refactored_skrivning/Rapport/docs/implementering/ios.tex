@@ -1,3 +1,4 @@
+% !TEX root = ../../I4PRJ, Grp3 - Rapport.tex
 \subsubsection{Implementering}
 Implementeringen af iOS-applikationen består delvist i den visuelle implementering af brugergrænsefladen, og den kode-mæssige implementering af de bagomliggende view-klasser. Som vist i designafsnittet, implementeres view-klasserne som controller-broer, der implementerer view-interfaces angivet i præsentationslaget. Implementeringen af view-klasserne foretages i udviklingsværktøjet Xamarin, i sproget C\#. 
 
@@ -31,5 +32,14 @@ cell.BorderImage.Image = UIImage.FromFile (type.ToLower () + ".png");
 return cell;
 }
 \end{lstlisting}
+
+Ligesom på Windows-platformen, implementeres et view til visning af historisk data også på iOS. HistoryViewBridge er implementeret på samme måde som StatViewBridge, men har også metoder til beregning af graf-punkter. Resultatet af denne implementering ses på figur~\ref{fig:ios_imp_historyview}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.4\linewidth]{figs/implementering/ios_imp_historyview}
+\caption{Graf vist med HistoryViewBridge på iOS}
+\label{fig:ios_imp_historyview}
+\end{figure}
 
 For yderligere forklaring se dokumentation afsnit Design under iOS.
