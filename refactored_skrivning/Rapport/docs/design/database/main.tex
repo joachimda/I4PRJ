@@ -66,7 +66,7 @@ Med en funktionel database er det nu oplagt at begynde på designet af data-acce
 \end{figure}
 
 Som testene blev skrevet, blev tilsvarende business-logic og funktionalitet implementeret.
-Det har hele tiden været tanken at data-access laget skulle være nemt at bruge hos klienten, \gls{windserver}. Derfor er løsningen designet med et interface, ISmartpoolDB, som kan ses på figur~\ref{fig:classISmartpoolDB}
+Det har hele tiden været tanken at data-access laget skulle være nemt at bruge hos klienten, \gls{windserver}. Derfor er løsningen designet med et interface, ISmartpoolDB, som kan ses på figur~\ref{fig:classISmartpoolDB}.
 
 \begin{figure}[h]
 \centering
@@ -75,7 +75,7 @@ Det har hele tiden været tanken at data-access laget skulle være nemt at bruge
 \label{fig:classISmartpoolDB}
 \end{figure}
 
-På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access klasser. På samme måde er deisgnet depandancy inverted.
+På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access klasser. På samme måde er designet depandancy inverted.
 
 \begin{figure}[h]
 	\centering
@@ -84,16 +84,13 @@ På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye A
 	\label{fig:databaseERD_final_uml}
 \end{figure}
 
-En klient kan kalde sig ind i alt dal's funktionalitet gennem ISmartpoolDB interfcet.
-
-\todo{indsæt noget om den konkrete implmentering - Find de fedeste kodebidder og sæt in med kommentarer}
-
+En klient kan kalde sig ind i alt data-access lagets funktionalitet gennem ISmartpoolDB interfacet. I projektets dokumentation \todo{indsæt reference her} beskrives det hvorledes data-access laget bruges på \gls{windserver}.
 
 \subsection{User story - Se sensor værdier}
 
-Eftersom funktionalitet til oprettelse af bruger og Pools blev laveet, var  det tid til at gå i gang med sensordata ting.
+Eftersom funktionalitet til oprettelse af Brugere/Users og Pools blev lavet, var  det tid til at gå i gang med sensordata ting.
 
-Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres for at det samme timestamp ikke skal ligge på flere data - undgå redundant data.  Samtidig hvis man gerne vil have ex luftfugtighed i samme tidsrum som klor level, er det vigtgt at målingernes timestamp er den samme.
+Dette var 3 fase, og vi havde derfor en fuldt fungerende User og Pool. Måden sensordata persisteres på i databasen skiller sig en smule ud fra måden hvor fx en USer eller en pool gøres. \todo{indsæt ER diagram for data og dtatyper}. Som det kan ses på figur XXXX indeholder databasen 4 typer af sensor målinger, samt en Data entitet. Is tedet for at hver enkel sensortype entitet indeholder et timestamp, har vi valgt at ligge timestampet på Dataentiteten. Dett gøres for at det samme timestamp ikke skal ligge på flere data - undgå redundant data.  Samtidig hvis man gerne vil have ex luftfugtighed i samme tidsrum som klor level, er det vigtigt at målingernes timestamp er den samme.
 
 Der er lavet en dataAccess klasse til at lave data wueries og skrivninger til databasen. Se klassediagra \todo{indsæt her}
 
