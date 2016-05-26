@@ -1,7 +1,10 @@
 \chapter{Forbindelse}
-
-\section{Client-side (Er til diskussion)(skal væk)}
-
-\section{Server-side (Er til diskussion)(skal væk)}
-\input{docs/connection/connection_design}
-\input{docs/connection/connection_impl}
+I dette afsnit beskrives design og implementering af systemets klient og server, der sammen udgør den del af systemet som kaldes connection. Forbindelsen mellem de 2 dele, bygger på TCP/IP sockets. Der er valgt ikke selv at designe forbindelsen fra bunden, da der findes eksempler på https://msdn.microsoft.com/en-us/library/w89fhyex(v=vs.110).aspx ??. Af disse er udvalgt et eksempel på en Synchronous Socket Client og en Asynchronous Socket Server. Forskellen i disse er hvor vidt de blokkerer udførslen af programmet når der oprettes en socket. På server siden ønskes at der kan oprettes flere forbindelser på samme tid, hvorimod der på klienten kun oprettes en enkelt forbindelse. Derfor er klienten synchronous, mens serveren er asynchronous.
+\section{Client-side}
+\input{docs/connection/client}
+\section{Server-side}
+\input{docs/connection/server}
+\section{Message system}
+\input{docs/connection/message_system}
+%\input{docs/connection/connection_design}
+%\input{docs/connection/connection_impl}
