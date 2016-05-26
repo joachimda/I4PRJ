@@ -41,15 +41,26 @@ Ud fra denne entitet laves et SQL script som kan køres mod databasen. Tabellen 
 \end{figure}
 
 
-Med en funktionel database er det nu oplagt at begynde på designet af data-access laget. Der ønskes herudover funktionalitet til at tage brugere ud af databasen. I forbindelse med udarbejdelsen af disse backend funktonaliter blev \textit{Test Driven Development} brugt, hvor der blev identificeret testcases og testscenarier.
+Med en funktionel database er det nu oplagt at begynde på designet af data-access laget. Der ønskes herudover funktionalitet til at tage brugere ud af databasen. I forbindelse med udarbejdelsen af disse backend funktonaliter blev \textit{Test Driven Development} brugt, hvor der blev identificeret testcases og testscenarier. Denne måde at arbejde på har også sat sit præg på data-access lagets test coverage procent, som set på figur~\ref{fig:coverage}.
 
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.75\linewidth]{figs/database/coverage.png}
+\caption{Test coverage for Smartpool systemet}
+\label{fig:coverage}
+\end{figure}
 
-\todo{indsæt test shiz m covereage osv}.
+Som testene blev skrevet, blev tilsvarende business-logic og funktionalitet implementeret.
+Det har hele tiden været tanken at data-access laget skulle være nemt at bruge hos klienten, \gls{windserver}. Derfor er løsningen designet med et interface, ISmartpoolDB, som kan ses på figur~\ref{fig:classISmartpoolDB}
 
-Som de blev slrevet blev tilsvarende business logic og funktionalitet designet og implementeret.
-Det har hele tiden været vores tanke at dal skulle være nemt at bruge hos klienten. Vi har derfor designet vores løsning med et simppelt interface, ISmartpoolDB \todo{indst klassediagram for dette interface}.
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.3\linewidth]{figs/database/classISmartpoolDB}
+\caption{Interfacet ISmartpoolDB}
+\label{fig:classISmartpoolDB}
+\end{figure}
 
-På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access kklasser. På samme måde er deisgnet depandancy inverted.
+På denne måde er systemet åbent for udvidelse, da der let kan tilføjes nye Access klasser. På samme måde er deisgnet depandancy inverted.
 
 \begin{figure}[h]
 	\centering
