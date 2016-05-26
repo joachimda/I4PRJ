@@ -45,7 +45,7 @@ Der er ændret i klassens konsol output, så essentielle data vises. Dette kan s
 \label{fig:asynchronousSocketListener}
 \end{figure}
 	
-Udfra de viste informationer kan man hurtigt se hvilken type besked der er modtaget, samt hvilken type besked der er svaret med, samt hvor meget denne besked fylder. Det fulde output bliver desuden gemt i en log fil, så det efterfølgende er muligt at se præcis hvilke informationer der er sendt. Dette er valgt for at gøre server vinduet overskueligt, uden at miste essentielle informationer.
+Udfra de viste informationer kan man hurtigt se hvilken type besked der er modtaget, hvilken type besked der er svaret med, samt hvor meget denne besked fylder. Det fulde output bliver desuden gemt i en log fil, så det efterfølgende er muligt at se præcis hvilke informationer der er sendt. Dette er valgt for at gøre server vinduet overskueligt, uden at miste essentielle informationer.
 
 Der er desuden valgt at lade exceptions blive vist i server vinduet, som f.eks. ses på figur~\ref{fig:asynchronousSocketListenerException} hvor databasen har genereret en exception, da der er forsøgt at lave et login med et ukendt brugernavn.
 
@@ -102,7 +102,7 @@ else
 
 \subsubsection{Token System}
 Oprettelse af nye tokens sker ved at kalde metoden CreateNewToken med et username som parameter. Dette username bliver gemt i et token objekt, som også indeholder en token string genereret af TokenStringGenerator, samt en DateTime variabel. DateTime variablen indeholder oplysninger om hvornår denne token sidst blev anvendt/oprettet.
-For at undgå at inactive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på listing~\ref{code:ServerTokenKeeperCreateNewToken}
+For at undgå at inaktive tokens bliver liggende i systemet, sørger TokenKeeper for at tælle en variabel ned, som definerer hvornår den skal rydde op i sin liste af aktive tokens. Til sidst returnerer TokenKeeper den genererede TokenString, som bliver sendt tilbage til klient applikationen. Det hele ses på listing~\ref{code:ServerTokenKeeperCreateNewToken}
 \begin{lstlisting}[caption=Server.TokenKeeper.CreateNewToken,label=code:ServerTokenKeeperCreateNewToken]
 public string CreateNewToken(string username)
 {

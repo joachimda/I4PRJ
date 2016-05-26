@@ -1,8 +1,8 @@
-\subsubsection{Klassen UserAccess}
+Det kan konkluderes, at det er lykkedes at lave en Smartpool prototype. Prototypen kan ikke interface til fysiske sensorer. Sensorerne er testet og virker for sig selv, men da HW interfacet til softwaren ikke er blevet færdig, er denne feature ikke implementeret i prototypen. Prototypen kan vha. simulerede hardware signaler, foretage de handlinger, prototypen skal kunne. Prototypen kan ikke tilgå de fysiske aktuatorer i pool-rummet, pga. manglende hardware interface. I stedet kan prototypen, ved hjælp af aktuatoren, tilgå en ekstern LED. I forhold til projektet, er det ikke lykkedes at få hele prototypen til at virke. Prototypen for projektet er udviklet med førnævnte mangler i forhold til den afgrænsede prototype.\subsubsection{Klassen UserAccess}
 Klassen UserAccess implementerer IUserAccess og står for at skrive og læse user records til/fra databasen.
 UserAccess indeholer administrator funktionalitet til at slette alle users på databasen. Herudover står UserAccess for data editing af users samt validering af userdata før det gemmes.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{figs/implementering/UserAccessClass.PNG}
 \caption{Klassen UserAccess}
@@ -17,11 +17,11 @@ I dette afsnit findes metodebeskrivelser for klassen \textit{UserAccess}.
 
 \textit{bool AddUser(string fullname, string email, string password)}
 
-Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt ValidateName før der oprettes et database kontekst objekt af typen DataBaseContext. På Kontekstobjektets DbSet<User> property kaldes Add metoden med den nye User som parameter. Herefter gemmes den nye User i databasen ved at kalde SaveChanges metoden på kontekstobjektet. Adduser returnerer false hvis der er fejl i enten check på email eller fullname. Hvis det lykkes at tilføje brugeren til databasen returneres true. Se metodens sekvensdiagram på figur~\ref{fig:adduser}
+Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt ValidateName før der oprettes et database kontekst objekt af typen DataBaseContext. På Kontekstobjektets DbSet<User> property kaldes Add metoden med den nye User som parameter. Herefter gemmes den nye User i databasen ved at kalde SaveChanges metoden på kontekstobjektet. AddUser returnerer false hvis der er fejl i enten check på email eller fullname. Hvis det lykkes at tilføje brugeren til databasen returneres true. Se metodens sekvensdiagram på figur~\ref{fig:adduser}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/adduser.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/adduser.PNG}
 \caption{Sekvensdiagram for Metoden AddUser}
 \label{fig:adduser}
 \end{figure}
@@ -31,8 +31,8 @@ Står for at indsætte en user i databasen. Metoden kalder IsEmailInUse samt Val
 
 \textit{User FindUserByEmail(string email)}
 
-Søger i databasen efter en User med den email der angives som parameter. Det må ikke eksistere flere brugere med samme email i databasen. Søgningen udføres med et LINQ statement på databasekonteksten. Se kodeudsnit~\ref{code:finduser} .Metoden returnerer den fundne User med mindre der kastes en exception.
-Se metodens sekvensdiagram på figur~\ref{fig:findUserByEmail}
+Søger i databasen efter en User med den email der angives som parameter. Der må ikke eksistere flere brugere med samme email i databasen. Søgningen udføres med et LINQ statement på databasekonteksten. Se kodeudsnit~\ref{code:finduser}. Metoden returnerer den fundne User, med mindre der kastes en exception.
+Se metodens sekvensdiagram på figur~\ref{fig:findUserByEmail}.
 
 \begin{lstlisting}[caption=Kodeudsnit fra metoden FindUserByEmail, label=code:finduser]
 ...
@@ -52,13 +52,13 @@ using (var db = new DatabaseContext())
 
 
 \begin{itemize}
-	\item \textit{MultipleOccourencesOfEmailWasFoundException()} - Sikkerhedsforanstaltning ved flere af samme emails.
+	\item \textit{MultipleOccourencesOfEmailWasFoundException()} - Sikkerhedsforanstaltning ved forekomst af flere ens emails.
 	\item \textit{UserNotFoundException()} - Kastes hvis der ikke findes en bruger med den angivne email addresse i databasen.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/findUserByEmail.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/findUserByEmail.PNG}
 \caption{Sekvensdiagram for metoden FindUserByEmail}
 \label{fig:findUserByEmail}
 \end{figure}
@@ -68,13 +68,13 @@ using (var db = new DatabaseContext())
 
 \textit{bool IsEmailInUse(string email)}
 
-Laver en LINQ query på databasekontekst objektet og checker om der findes en mail adresse i databasen der matcher den som er givet som parameter. Metoden returnerer false hvis mail addressen ikke er i brug og true hvis den er.
+Laver en LINQ query på databasekontekst objektet og checker om der findes en mailadresse i databasen der matcher, den som er givet med som parameter. Metoden returnerer false hvis mailaddressen ikke er i brug, og true hvis den er.
 
 I sekvensdiagrammet på figur~\ref{fig:isEmailInUse}, kan det se hvordan en email checkes.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/isEmailInUse.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/isEmailInUse.PNG}
 \caption{Sekvensdiagram for metoden IsEmailInUse}
 \label{fig:isEmailInUse}
 \end{figure}
@@ -82,10 +82,11 @@ I sekvensdiagrammet på figur~\ref{fig:isEmailInUse}, kan det se hvordan en emai
 
 \subparagraph{ValidatePassword}\
 
-\textit{bool ValidatePassword(string email, string password);}
-Når der er brug for at validere en brugers password kaldes denne funktion. Den bruges eksempelvis når en bruger ønsker at logge ind på systemet. Se metodens sekvens diagram på figur~\ref{fig:validatePassword}
+\textit{bool ValidatePassword(string email, string password)}
+
+Når der er brug for at validere en brugers password, kaldes denne funktion. Den bruges eksempelvis når en bruger ønsker at logge ind på systemet. Se metodens sekvens diagram på figur~\ref{fig:validatePassword}.
 	
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/dbSeq/validatePassword.PNG}
 \caption{Sekvensdiagram for metoden ValidatePassword}
@@ -97,13 +98,13 @@ Når der er brug for at validere en brugers password kaldes denne funktion. Den 
 
 \textit{void RemoveUser(string email)}
 
-Checker først om en bruger med email findes.
-Laver en LINQ query på databasekontekst objektet. Og finder den pågældende bruger.
+Checker først om en bruger med den bestemte email findes.
+Laver en LINQ query på databasekontekst objektet, og finder den pågældende bruger.
 Brugeren fjernes ved at kalde \textit{db.UserSet.Remove(user)} på kontekstobjektets UserSet property.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{figs/dbSeq/removeUser.PNG}
+\includegraphics[width=\linewidth]{figs/dbSeq/removeUser.PNG}
 \caption{Sekvensdiagram for metoden RemoveUser}
 \label{fig:removeUser}
 \end{figure}
@@ -113,7 +114,7 @@ Brugeren fjernes ved at kalde \textit{db.UserSet.Remove(user)} på kontekstobjek
 
 \textit{void DeleteAllUsers()}
 
-Bruges kun til systemtest og under udvikling.
+Bruges kun under systemtest og udvikling.
 Sletter alle brugere i databasen. Dette gøres ved at eksekvere en SQL kommando direkte på databasen. 
 
 \begin{lstlisting}[caption=SQL injection på databasen ved sletning af brugere, label=sqlDeleteUsers]
@@ -136,7 +137,7 @@ Metoden returnerer true med mindre der findes en uoverensstemmelse med enten pas
 
 \textit{bool EditUserEmail(string email, string newEmail)}
 
-Gør det muligt or en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et system login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter den pågældende User returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
+Gør det muligt for en bruger at ændre sin email. Dette gøres gennem databasekontekst objektet. Når emailen er ændret skal brugeren benytte sig af den nye email ved et login. \textit{Find()} metoden kaldes på kontekstobjektets UserSet property, med den ønskede brugers primærnøgle, \textit{Id}, hvorefter det pågældende User objekt returneres. Se kodeudsnit \ref{code:idef} for eksempel på brugen af primær nøgler i entity frameworket.
 
 \begin{lstlisting}[caption=EditUserEmail - brug af primær nøgler i Entity Framework,label=code:idef]
 public bool EditUserEmail(string email, string newEmail)
@@ -159,11 +160,12 @@ public bool EditUserEmail(string email, string newEmail)
 \subparagraph{EditUserName}\
 
 \textit{bool EditUserName(string email, string newName)}
-Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en bruger/User's navn, er der skrevet ekstra funktionalitet dertil. Dette er gjort for at fremtidssikre data access laget.
 
-Se sekvensdiagrammet på figur~\ref{fig:editUserName}
+Selvom der ikke findes en user story der ønsker funktionalitet til at ændre en Bruger/User's navn, er der skrevet funktionalitet dertil. Dette er gjort for at fremtidssikre data-access laget.
 
-\begin{figure}
+Se sekvensdiagrammet på figur~\ref{fig:editUserName}.
+
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/dbSeq/editUserName.PNG}
 \caption{Sekvensdiagram for metoden EditUserName}

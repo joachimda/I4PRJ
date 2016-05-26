@@ -138,7 +138,7 @@ public class AddPoolRequestMsg : TokenMsg
 \end{lstlisting}
 
 \paragraph{GetPoolDataRequest}
-Indeholder informationer om hvilke data der ønskes modtaget i klienten. Beskeden kan oprettes med propperty GetAllNamesOnly sat til true, hvis klienten kun ønsker at modtage en liste med navne over alle pools brugeren har tilknyttet. Denne liste vil yderligere indeholde en bool for hver pool, som er true hvis en eller flere måleværdier er udenfor deres target værdi. En anden mulighed at angive et pool navn, hvilket resulterer i et svar med informationer om konkrete målinger, indenfor en tidsperiode der svarer til det angivne antal dage.
+Indeholder informationer om hvilke data der ønskes modtaget i klienten. Beskeden kan oprettes med property GetAllNamesOnly sat til true, hvis klienten kun ønsker at modtage en liste med navne over alle pools brugeren har tilknyttet. Denne liste vil yderligere indeholde en bool for hver pool, som er true hvis en eller flere måleværdier er udenfor deres target værdi. En anden mulighed at angive et pool navn, hvilket resulterer i et svar med informationer om konkrete målinger, indenfor en tidsperiode der svarer til det angivne antal dage.
 \begin{lstlisting}[caption=GetPoolDataRequest, label=code:GetPoolDataRequest]
 public class GetPoolDataRequestMsg : TokenMsg
 {
