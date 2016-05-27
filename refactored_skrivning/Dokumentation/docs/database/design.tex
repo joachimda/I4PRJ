@@ -98,6 +98,19 @@ Herunder vil databasen og data-access lagets funktionalitet blive beskrevet ud f
 	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand.
 \end{itemize}
 
+\subsubsection{Database uvikling og deployment}
+
+For at resten af gruppen har adgang til en funktionel database i udviklingsforløbet, er der i takt med iterationer, blevet kørt schema compares på den eksterne database. En release database deployes på den projektets I4DAB server.
+Under udvikling bruges der udelukkende en MS SQL localdb server. Når et design er klar til release, udføres der en schema compare mod den eksterne server. Dette giver mulighed for at alle andre software komponenter kan bruge den opdaterede database hvis det er nødvendigt. Hvis data fra localdb skal med udføres en data comparison operation. Både schema og data comparisons, foregår gennem Visual Studio. På figur~\ref{schemaCompare} ses et eksempel på et schema compare.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{figs/dbExtra/schemaCompare.PNG}
+\caption{Eksempel på et schema compare mod ekstern database}
+\label{fig:schemaCompare}
+\end{figure}
+
+
 \subsubsection{Oprettelse/ændring af brugere}
 Herunder beskrives dokumentation for følgende \textit{user stories}:
 
@@ -244,6 +257,7 @@ public bool ValidatePassword(string email, string password)
 }
 \end{lstlisting}
 
+
 \subsubsection{Nulstilling/ændring af password}
 Herunder beskrives dokumentation for følgende \textit{user stories}:
 
@@ -282,6 +296,8 @@ public bool EditUserPassword(string email, string newPassword)
 	return true;
 }
 \end{lstlisting}
+
+
 
 \subsubsection{Tilføjeselse/ændring af pools til bruger}
 
