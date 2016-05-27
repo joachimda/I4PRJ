@@ -43,7 +43,7 @@ Entity Frameworket er et \textit{object-relational mapping} framework. Det giver
 
 For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som tager udgangspunkt i to af projektets user stories, herunder tilføjelse af bruger samt visning af pooldata.
 
-\subsubsection{Se sensorværdier}
+\subsubsection{User Story - Se sensorværdier}
 
 \textit{"Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand"}\
 
@@ -95,7 +95,7 @@ return chlorineTuples;
 
 Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en måling. Som det kan ses på kodeudsnit~\ref{code:dataIteration} sammenlignes den data, som blev hentet i kodeudsnit~\ref{code:convertToDateTime} med de to DateTime objekter, \textit{endTime} og \textit{startTime}. På denne måde gemmes de relevante klor data som tupler i listen.
 
-\subsubsection{Tilføj user}
+\subsubsection{User Story - Oprettelse af en bruger i systemet}
 
 \textit{"Som bruger vil jeg kunne oprette mig i, for at få adgang til systemet"}
 
@@ -137,5 +137,28 @@ Som det kan ses på kodeudsnit \ref{code:adduser1} Oprettes en user først lokal
 
 Når der skal foretages ændringer på databasen, oprettes et database kontekst objekt hvor ændringerne gemmes på. Derefter kaldes \textit{db.SaveChanges()} metoden, som gemmer ændringerne på selve databasen. Se kodeudsnit \ref{code:adduser2} for eksempel på brugen af database konteksten med \textit{using} direktivet.
 
-I dokumentationen findes dybdegående forklaring af implementeringen, herunder klassediagrammer og sekvensdiagrammer til alle typer af metoder. 
+I dokumentationen findes dybdegående forklaring af implementeringen, herunder klassediagrammer og sekvensdiagrammer til alle typer af metoder.
+
+\subsubsection{Sideløbende forsøg og arbejde}
+
+\paragraph{Forsøg med database-deployment på MySQL server}
+Efter database og data-access lag var blevet implmementeret, var det et ønske at deploye databasen på en privat mysql server. Dette var til dels for at undgå at skulle være logget på ASE's VPN og for at kunne have administratoradgang til selve serveren.
+Forsøget med MySQL blev foretaget på en Virtuel Private Server (VPS), med domænet joachim.io. Herpå blev mysql installeret, og der blev lavet en IPTABLES\footnote{IPtables er et netværksadministrationsprogram til Linux} rule der tillod adgang til databasen gennem port 3306. For at der kan forbindes til MySQL server skal der til dels oprettes en MySQL user på databasen, der har rettigheder til at connecte. Disse users blev oprettet manuelt ved at udføre SQL statements på mysql’s User database. En \textit{User} skal da have rettigheder så den kan forbinde udefra og ikke kun fra localhost. Heruderover skal det specificeres i MySQL serverens config fil, hvilke IP addresser der har lov til at oprette forbindelse. Dette gjordes ved at sætte MySQL til at lytte på både localhost og IP-addresse 0.0.0.0 (alle).
+
+Problemer med Visual Studio og MySQL
+Der var problemer med at få forbindelse til databasen gennem Visual Studio. Dette skyldes en mangel på MySQL drivere, idet Visual Studio ikke pr. standard har funktionalitet hertil. MySQL for Visual Studio blev derfor downloadet\cite{oracle}. Efter en mindre kamp med drivers, kunne der oprettes forbindelse til databasen gennem visual studio. Se figur~\ref{fig:MySQLforsog}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\linewidth]{figs/database/MySQLforsog.PNG}
+\caption{Visual Studio forbundet til MySQL server på joachim.io}
+\label{fig:MySQLforsog}
+\end{figure}
+
+Der nåede desværre ikke at blive skrevet SQL scripts til at deploye den nuværende database på MySQL databaseserveren, da porteringen fra MS SQL til MySQL ville være for tidskrævene at sætte sig ind i. 
+
+
+
+
+
 
