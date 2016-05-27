@@ -26,11 +26,10 @@ Det ønskes at afkoble view fra præsentationslogikken og modellen. Til det form
 Da det ønskes at adskille systemets business logic fra brugerens applikation, er der oprettet en server som står for dette. Da systemets primære opgave er at gemme og vise data, består dette primært i at lave kald til databasen. Ved at have disse kald i en separat server applikation, sikrer vi at brugerens adgang til databasen, kun går gennem serveren, som dermed kan beskytte de kritiske data.
 
 \subsection{Database Tier}
+Data-access laget er sammen med \gls{windserver} afkoblet fra Applikations tier'et. Dette betyder at forbindelsen til databasen, sker fra Applikations tier'et gennem \gls{windserver}. Data-access laget som er designet med Entity Frameworket, kommunikerer da med selve databasen.
 
 \section{4+1 Arkitektur Model}
-Systemets arkitektur beskrives ved 4+1 modellen. \todo{fodnote eller ref til 4+1}
-
-\todo{Selve modellen skal ikke beskrives her lav en reference til info om 4+1}
+Systemets arkitektur beskrives ved 4+1 modellen.
 
 
 \begin{itemize}
@@ -58,10 +57,11 @@ Systemets arkitektur beskrives ved 4+1 modellen. \todo{fodnote eller ref til 4+1
 	\caption{$4+1$ Arkitektur modellen \cite{flylib}}
 	\label{fig:41model}
 \end{figure}
-\todo{Beskriv i metode eller whatever}
+
 
 \subsection{Logical view}
 Logical view beskriver funktionaliteten for systemets end-user. Logical view repræsenteres ved et Activity diagram. Figur \ref{fig:ActivityDiagram} illustrerer et typisk brugsscenarie for en end-user. 
+
 \begin{figure}
 \centering
 \includegraphics[width=0.55\linewidth]{figs/arkitektur/ActivityDiagram.PNG}
@@ -81,7 +81,7 @@ Dette view beskriver systemets concurrency. Systemet håndterer at flere typer p
 \subsection{Development view}
 Dette view illustrerer systemet fra udviklers perspektiv og omhandler software håndtering. Viewet beskrives vha. et komponentdiagram. Viewet er lavet ved at analyserer lag modellen \ref{fig:Smartpool_tiersnlayers} og det Logical view. Alle GUI's bruger Connection komponentens interface. Connection bruger Data Access lagets interface ISmartpoolDB. Data Access laget kommunikerer med databasen vha. Entity Frameworket.
 
-\todo{skal laves om... der mangler web. Omdøb data connection til Connection}
+
 \begin{figure}
 \centering
 \includegraphics[width=0.7\linewidth]{figs/arkitektur/componentModel}
@@ -89,19 +89,17 @@ Dette view illustrerer systemet fra udviklers perspektiv og omhandler software h
 \label{fig:componentModel}
 \end{figure}
 
-\section{Physical view}
+\subsection{Physical view}
 Dette view beskriver software komponenternes fysiske placering og den fysiske forbindelse imellem de fysiske placeringer. Det vises ved et Deployment diagram, som udvilkes ved at identificerer, hvor de forskellige komponenter i figur\ref{fig:componentModel}. Diagrammet viser, hvordan de tre fysiske klienter tilgår connection server med TCP/IP. Connection serveren tilgår databsen 
 På figur \ref{fig:deploymentView} ses projektets deployment diagram.
 
-\todo{connection skal ud på alle clienter web, iOs, Win // Web server indeholder ASP.NET MVC // SQL skal laves om til TCP/IP}
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{figs/arkitektur/deploymentView.PNG}
 	\caption{Deployment diagram - Physical view}
 	\label{fig:deploymentView}
->>>>>>> 4f0387033f0b8e0f2cdcfb0f323be6486c07155f
 \end{figure}
 
-\section{Use case view}
-I projektet bruges user stories til at beskrive systemets brugsscenarier. Disse User Stories kan ses i afsnittet \todo{reference til US}.
+\subsection{Use case view}
+I projektet bruges user stories til at beskrive systemets brugsscenarier. Disse User Stories kan ses i kravspecifikationen.
 
