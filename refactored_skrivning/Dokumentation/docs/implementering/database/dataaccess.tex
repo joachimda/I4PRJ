@@ -45,14 +45,14 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 	\item Først tester metoden om brugeren har en pool med det givne navn. Metoden gemmer så tidspunktet og opretter et \textit{Data} object (som vist i figur~\ref{fig:datasetentity}), som gemmes i databasen. Herefter oprettes målingerne og tildeles den fælles \textit{Data} som tidligere blev oprettet. Se metodens sekvensdiagram på figur~\ref{fig:EFarch}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figs/dbSeq/createDataEntry.PNG}
 \caption{Sekvensdiagram for metoden CreateDataEntry}
 \label{fig:createDataEntry}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.85\linewidth]{figs/implementering/datasetentity.png}
 \caption{En del af ER diagrammet som databasen er lavet udfra.}
@@ -107,7 +107,7 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle klor-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se metodens sekvensdiagram på figur~\ref{fig:getChlorineData}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.7\linewidth]{figs/dbSeq/getChlorineData.PNG}
 \caption{Sekvensdiagram for metoden GetChlorineData}
