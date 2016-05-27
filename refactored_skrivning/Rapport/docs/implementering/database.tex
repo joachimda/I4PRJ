@@ -2,11 +2,11 @@
 
 \subsection{Implementering af database}
 
-Databasen er implementeret med en Model First tilgang \cite{microsoftdatadevelopercenter2016}. Det vil sige at der opsættes en model (ER diagram) for databasen i Visual Studio, hvorefter der genereres et SQL script der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
+Databasen er implementeret med en Model First tilgang \cite{microsoftdatadevelopercenter2016}. Det vil sige, at der opsættes en model i form af et ER diagram for databasen i Visual Studio, hvorefter der genereres et SQL script, der kan køres mod den specifikke database. Scriptet køres mod en tom database, hvor de opstillede entities genereres som tabeller.
 
-Data entiteten som ses på figur~\ref{fig:datasetentity} da bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som virtual. Dette er for at gøre lazy loading muligt, hvilket betyder at de først bliver loadet fra databasen når de tilgås gennem deres navigation property \cite{microsoftdevelopernetwork2016} (linje 7 i listing~\ref{code:chlorinecode}).
+Data entiteten som ses på figur~\ref{fig:datasetentity} bruges som en klasse, se klassedigram på figur~\ref{fig:efGeneratedData}. De forskellige datatyper, pH, chlorine, temperature og humidity figurerer som lister (ICollections) i Data klassen. Disse lister er i koden angivet som \textit{virtual}. Dette er for at gøre lazy loading muligt, hvilket betyder, at de først bliver loadet fra databasen, når de tilgås gennem deres navigation property \cite{microsoftdevelopernetwork2016} (linje 7 i listing~\ref{code:chlorinecode}).
 
-Som det kan ses på figur~\ref{fig:datasetentity}, har diverse datatyper (Chlorine, Ph...) en \textit{DataId} property. Denne bruger til at identificere hvilket \textit{DataSet} den enkelte måling høre til. På denne måde behøver de enkelte datatyper ikke selv at have et \textit{Timestamp} medlem. 
+Som det kan ses på figur~\ref{fig:datasetentity}, har diverse datatyper (Chlorine, Ph...) en \textit{DataId} property. Denne bruges til at identificere hvilket \textit{DataSet} den enkelte måling hører til. På denne måde behøver de enkelte datatyper ikke selv at have et \textit{Timestamp} medlem. 
 
 \begin{figure}[h]
 	\centering
@@ -15,7 +15,7 @@ Som det kan ses på figur~\ref{fig:datasetentity}, har diverse datatyper (Chlori
 	\label{fig:datasetentity}
 \end{figure}
 
-Når \gls{ef} oversætter ER diagrammet til C\# kode og laver scriptet, bliver eksempelvis Chlorine Entity'en til C\# koden vist i listing~\ref{code:chlorinecode}. I dette kodesnit kan man se hvordan \gls{ef} har givet \textit{Chlorine} klassen en \textit{virtual Data}, som et eksempel på lazy loading anvendt.
+Når \gls{ef} oversætter ER diagrammet til C\# kode og laver scriptet, bliver eksempelvis Chlorine Entity'en til C\# kode, som er vist i listing~\ref{code:chlorinecode}. I dette kodesnit kan man se hvordan \gls{ef} har givet \textit{Chlorine} klassen en \textit{virtual Data} property.
 
 \begin{minipage}[h]{\linewidth}
 \begin{lstlisting}[caption=C\# kode repræsentationen af Chlorine entity.,label=code:chlorinecode]
@@ -39,21 +39,19 @@ public partial class Chlorine
 
 \subsection{Implementering af data-access layer}
 
-Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Querying/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontektsobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne, T i konteksten. Resultatet en af query kan da behandles i en foreach løkke.
+Entity Frameworket er et \textit{object-relational mapping} framework. Det giver mulighed for at oprette et database-kontekst objekt. Querying/indsætning af data sker gennem dette objekt. Når der ønskes en query på databasen, gøres det i projektet ved hjælp af en LINQ\footnote{Language Integrated Query} query på en af kontekstobjektets properties. Disse properties er af typen \textit{DbSet<T>} som er en samling af alle entiterne, T i konteksten. Resultatet en af query kan da behandles i en \textit{for-each} løkke.
 
-For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som tager udgangspunkt i to af projektets user stories, herunder tilføjelse af bruger samt at visning af pooldata.
+For at give et indblik i implementeringen, kan der nedenfor ses kodeudsnit, som tager udgangspunkt i to af projektets user stories, herunder tilføjelse af bruger samt visning af pooldata.
 
 \subsubsection{Se sensorværdier}
 
 \textit{"Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over poolens tilstand"}\
 
-Som beskrevet i designafsnittet bruges et interface, ISmartpoolDB til at kalde ind i DataAccess. Under \textit{Database og Data-Access layer} i dokumentationen uddybes disse klassers implementering.
+Som beskrevet i designafsnittet bruges et interface, ISmartpoolDB til at kalde ind i DataAccess. 
+
+Under \textit{Database og Data-Access layer} i dokumentationen uddybes disse klassers implementering.
 
 I de følgende kodeudsnit vises der med tilhørende forklaring hvordan data kan udtages fra databasen. I dette eksempel bruges metoden \textit{GetChlorineData()}. En dybdegående forklaring, herunder sekvens og klassediagrammer for alle \textit{Get..Data} metoder kan også findes i dokumentationen.
-
-
-
-
 
 \begin{lstlisting}[caption=GetChlorineData metoden - konvertering af DateTime objekter, label=code:getChlorineData]
 public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail, string poolName, int daysToGoBack)
@@ -64,7 +62,7 @@ public List<Tuple<SensorTypes, double>> GetChlorineValues(string poolOwnerEmail,
 	...
 \end{lstlisting}
 
-På kodeudsnit \ref{code:getChlorineData} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslæt og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til data queryen. Strengen "G" der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}
+På kodeudsnit \ref{code:getChlorineData} vises måden hvorpå et UTC timestamp oprettes. Der benyttes UTC tid da al data gemmes på én server. Det er derfor ligegyldigt, hvor i verden en måling bliver foretaget, da dens timestamp vil følge UTC. Det nuværende tidspunkt skal bruges da meningen med funktionen er at returnere alt klor-data, der er målt i tidsperioden angivet som \textit{daysToGoBack} parameteren. DateTime \cite{dotnetdatetime} klassen er en del af .NET og indeholder informationer om klokkeslæt og dato. Antallet af dage der skal samles informationer om fratrækkes den nuværende DateTime. Derved fås startdatoen til dataqueryen. Strengen "G" der medgives som parameter til \textit{ToString}, bevirker at formateringen af tid og dato bliver \textit{dd/MM/yyyy HH:mm:ss}.
 
 \begin{lstlisting}[caption=Konvertering tilbage til DateTime objekter,label=code:convertToDateTime]
 using (var db = new DatabaseContext())
@@ -95,13 +93,13 @@ foreach (var chlorine in chlorineDataQuery)
 return chlorineTuples;
 \end{lstlisting}
 
-Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en måling. Som det kan ses på kodeudsnit \ref{code:dataIteration} sammenlignes den data som blev hentet i kodeudsnit \ref{code:convertToDateTime} med de to DateTime objekter, \textit{endTime} og \textit{startTime}. På denne måde gemmes de relevante klor data som tupler i listen.
+Returtypen på metoden er en liste af tupler, hvor hver tuple repræsenterer en måling. Som det kan ses på kodeudsnit~\ref{code:dataIteration} sammenlignes den data, som blev hentet i kodeudsnit~\ref{code:convertToDateTime} med de to DateTime objekter, \textit{endTime} og \textit{startTime}. På denne måde gemmes de relevante klor data som tupler i listen.
 
 \subsubsection{Tilføj user}
 
-\textit{"Som bruger vil jeg kunne oprette mig i systemet for at få adgang til systemet"}
+\textit{"Som bruger vil jeg kunne oprette mig i, for at få adgang til systemet"}
 
-I de følgende kodeudsnit vises der med tilhørende forklaringer hvordan en bruger bliver oprettet og gemt i databasen. Der tages udgangspunkt i metoden \textit{AddUser}, som er en del af UserAccess klassen. AddUser metoden kaldes af ConnectionServer klassen.
+I de følgende kodeudsnit vises der med tilhørende forklaringer, hvordan en bruger bliver oprettet og gemt i databasen. Der tages udgangspunkt i metoden \textit{AddUser}, som er en del af UserAccess klassen. AddUser metoden kaldes af ConnectionServer klassen.
  
 \begin{lstlisting}[caption=User laves lokalt hvorefter User's navne properties sættes, label=code:adduser1]
 public bool AddUser(string fullname, string email, string password)
