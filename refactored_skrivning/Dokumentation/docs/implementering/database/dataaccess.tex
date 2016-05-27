@@ -189,3 +189,32 @@ IDataAccess refereres af klassen SmartPoolDB. Klassen DataAccess kan ses på fig
 \begin{itemize}
 	\item Metoden laver først \textit{daysToGoBack} om til \textit{DateTime}-format. Så beregnes \textit{DateTime} for tidspunktet som der skal gås tilbage til. Så findes alle luftfugtigheds-målinger og endeligt fravælges alle som ikke ligge i det rigtige tidsrum. Se evt. sekvensdiagrammet for \textit{GetChlorineData} på figur~\ref{fig:getChlorineData}, da funktionaliteten er den samme.
 \end{itemize}
+
+Måden hvorpå Get..Data metoderne bruges på Connection Serveren kan ses i kodeudsnittende på~\ref{code:cons} og på~\ref{code:cons2}
+
+\begin{lstlisting}[caption=Initialisering af SmartpoolDB objekterne i Connection serverens constructor, label=code:cons]
+public TokenMsgResponse(ISmartpoolDB smartpoolDb)
+{
+_smartpoolDb = smartpoolDb;
+_poolKeeper = new FakePoolKeeper(_smartpoolDb);
+if(_smartpoolDb.UserAccess.IsEmailInUse("1"))
+_poolKeeper.GeneratePoolsForUser("1");
+if (_smartpoolDb.UserAccess.IsEmailInUse("2"))
+_poolKeeper.GeneratePoolsForUser("2");
+}
+\end{lstlisting}
+
+Smartpool objektet initialiseres og bruges ved kald af Get..Data metoderne.
+
+\begin{lstlisting}[caption=Kald ind gennem SmartpoolDB's interface,label=code:cons2]
+private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
+{
+return new List<Tuple<SensorTypes, List<double>>>
+{
+GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
+GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
+GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
+GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
+};
+}
+\end{lstlisting}
