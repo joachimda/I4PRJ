@@ -20,8 +20,7 @@ Det ønskes at afkoble view fra præsentationslogikken og modellen. Til det form
 Da det ønskes at adskille systemets business logic fra brugerens applikation, er der oprettet en server som står for dette. Da systemets primære opgave er at gemme og vise data, består dette primært i at lave kald til databasen. Ved at have disse kald i en separat server applikation, sikrer vi at brugerens adgang til databasen, kun går gennem serveren, som dermed kan beskytte de kritiske data.
 
 \subsection{Data Tier}
-\todo{sæt database tier ind her!}
-
+Data-access laget er sammen med \gls{windserver} afkoblet fra Applikations tier'et. Dette betyder at forbindelsen til databasen, sker fra Applikations tier'et gennem \gls{windserver}. Data-access laget som er designet med Entity Frameworket, kommunikerer da med selve databasen.
 \section{4+1 Arkitektur Model}
 Systemets arkitektur er beskrevet ved 4+1 modellen. 4+1 modellen består af en række views, som hver især henvender sig til forskellige interessenter.
 
