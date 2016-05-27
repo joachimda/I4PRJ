@@ -4,13 +4,12 @@ I dette afsnit beskrives designet og implementering af software til \gls{smartpo
 Designet og efterfølgende implementeringen beskrives med de to samme krav: 
 
 \begin{itemize}
-	\item Som bruger vil jeg kunne oprette mig i systemet, for at få adgang til systemet.
-	\item Som bruger vil jeg kunne se de seneste sensor værdier for at kunne få et overblik over 
-	poolens tilstand.
+	\item Som bruger vil jeg kunne oprette mig, for at få adgang til systemet.
+	\item Som bruger vil jeg kunne se de seneste sensor værdier for, at kunne få et overblik over poolens tilstand.
 \end{itemize}
 
 \section{Applikation}
-Applikationerne i systemet er jævnfør arkitekturen lavet med MVP, og de respektive dele bliver beskrevet i rækkefølgen Model, Presenter og View. Lagets model- og præsentationslag er designet til at være portabelt, så forskellige platforme kunne dele denne kodebase. View-laget designes derimod seperat for hver platform. 
+Applikationerne i systemet er jævnfør arkitekturen lavet med MVP, og de respektive lag bliver beskrevet i rækkefølgen Model, Presenter og View. Lagets model- og præsentationslag er designet til at være portabelt, så forskellige platforme kan dele denne kodebase. View-laget designes derimod seperat for hver platform. 
 
 Det overordnede design i applikationslaget illustreres ved sekvensdiagrammet i figur~\ref{fig:application_sd}. Her fremgår kommunikationsmønsteret mellem model-, view- og presenter-klasserne i applikationslagets design.
 
@@ -21,8 +20,8 @@ Det overordnede design i applikationslaget illustreres ved sekvensdiagrammet i f
 	\label{fig:application_sd}
 \end{figure}
 
-Som følge systemets multi-lag arkitektur kunne applikationslaget samt de platform-specifikke view-implementeringer
-designes, uafhængigt af hinanden, så længe protokolbestemmende interfaces blev specificeret undervejs i processen. Interfaces for både presenters og views, er defineret ud fra de user stories, der har krævet deres design.
+Som følge af systemets arkitektur kunne applikationslaget samt de platform-specifikke view-implementeringer
+designes uafhængigt af hinanden. Protokolbestemmende interfaces blev specificeret undervejs i processen. Interfaces for både presenters og views, er defineret ud fra de user stories, der har krævet deres design.
 
 \input{docs/design/application/main}
 \input{docs/implementering/application}
