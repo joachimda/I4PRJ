@@ -25,9 +25,17 @@ designes uafhængigt af hinanden. Protokolbestemmende interfaces blev specificer
 
 \input{docs/design/application/main}
 \input{docs/implementering/application}
-\section{View}
 
-\todo{insæt family view}
+\section{View}
+Applikationslagets view-interfaces er blevet designet og implementeret af klasser på forskellige platforme, og beskrives derfor i deres egne afsnit. På figur~\ref{fig:view_family} illustreres de færdigimplementerede brugergrænseflader. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1.0\linewidth]{figs/implementering/view_family}
+	\caption{Brugergrænsefladeimplementering på hhv. iOS, Windows og Web}
+	\label{fig:view_family}
+\end{figure}
+
 \input{docs/design/WinGUI}
 \input{docs/implementering/WinGUI}
 \input{docs/design/application/ios}
