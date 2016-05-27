@@ -2,11 +2,11 @@
 
 Til projektet er der udviklet en database som står for at gemme alle brugerdata, herunder brugere, brugernes pools samt alle sensormålinger der foretages på disse pools.
 
-Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i projekt dokumentationen i afnsittet om \todo{reference til dokumentationen}. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data-access lag. Beskrivelserne tager udgangspunkt i de to primære user stories. Data-access laget er som helhed omfattende at skulle beskrive. Derfor findes der yderligere information om den resterende funktionalitet og design i projektets dokumentation.
+Den endelige database er udviklet med Entity Frameworket, med en \textit{Model First} tilgang. Dette er valgt efter mange overvejelser og flere forsøg med forskellige udviklingsmetoder. Dette er beskrevet i projekt dokumentationen i afnsittet om Database og dataacces layer. I de nedenstående afsnit beskrives designet og implementeringen af både databasen og projektets data-access lag. Beskrivelserne tager udgangspunkt i de to primære user stories. Data-access laget er som helhed omfattende at skulle beskrive. Derfor findes der yderligere information om den resterende funktionalitet og design i projektets dokumentation.
 
 Databasen og data-access laget er udviklet sideløbende, og har gennemgået 3 primære udviklingsfaser. Første fase med User, derefter Pool og til sidst Data. Dette afspejles ved, at der i projektet er arbejdet i iterationer, hvor der blev udviklet et funktionelt produkt for hver iteration.
 
-Da databasen er udviklet med \textit{Object Relational Mapperen}, Entity Framework, som gør det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter\todo{reference}.
+Da databasen er udviklet med \textit{Object Relational Mapperen}, Entity Framework, som gør det lettere at arbejde med rå data, ved at give mulighed for at behandle dem som data objekter.
 
 Data access laget er udviklet specifikt til Smartpool databasen, og er designet med henblik på usability og robustness. Denne software komponent er testet grundigt, og let at bruge for klienter. De primære klasser og interfaces i data-access laget er følgende:
 
