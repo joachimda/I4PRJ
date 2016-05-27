@@ -5,19 +5,20 @@ Resultaterne for projektet defineres ved en accepttest. Accepttesten specificere
 \section{Diskussion}
 Det er muligt for brugeren at tilgå systemet fra Windows PC, iOS app og Web. Det opfylder ligeledes kvalitetskravet om, at det skal være muligt at tilgå systemet fra flere platforme. Tilgangen til systemet fra web er dog begrænset, da det kun er muligt at logge ind. Det vurderes dog som tilfredstillende, da meningen med websitet mest af alt var et \textit{proof of concept} tiltag. 
 
-Systemdesignet bekræftes hermed at kunne udvides til flere platforme, hvilket understøtter kvalitetskravet om et fleksibelt system. Det er med andre ord ikke skuffende, at web f.eks. ikke kan oprette brugere i system, på trods af at det er et 'must'. Web mangler at implementere view interfaces, hvilket ikke er blevet gjort pga. mangel på tid og ressourcer. Alle views er implementeret undtagen history og editPool. Alle implementerede views skal implementere tilhørende view interfaces, for at kunne accepteres. 
+Systemdesignet bekræftes hermed, at kunne udvides til flere platforme, hvilket understøtter kvalitetskravet om et fleksibelt system. Det er med andre ord ikke skuffende, at web f.eks. ikke kan oprette brugere i system, på trods af at det er et 'must'. Web mangler at implementere view interfaces, hvilket ikke er blevet gjort pga. mangel på tid og ressourcer. Alle views er implementeret undtagen history og editPool. Alle implementerede views skal implementere tilhørende view interfaces, for at kunne accepteres. 
 
 Resten af systemets 'must' krav kan accepteres.
 
-Systemet har en række 'should' krav, hvoraf at vise en liste over pools er implementeret i både Windows og iOS, men nulstilling af kodeord ikke er blevet implementeret. Funktionaliteten er blevet nedprioriteret i forhold til 'must' krav. For at implementere dette vil det kræve, at login view blev udvidet med funktionaliteten nulstil kodeord. Der skal yderligere implementeres en e-mail server, og funktionalitet til automatisk at sende en nulstillingsmail til brugeren.
+Systemet har en række 'should' krav, hvoraf at vise en liste over pools er implementeret i både Windows og iOS, men nulstilling af kodeord ikke er blevet implementeret. Funktionaliteten er blevet nedprioriteret i forhold til 'must' krav. For at implementere dette vil det kræve, at login view blev udvidet med funktionaliteten nulstil kodeord. Der skal yderligere implementeres en e-mail server, og funktionalitet til automatisk at sende en nulstillingsemail til brugeren.
 
 Det er blevet nedprioriteret, at udvikle funktionaliteter til at logge ud, samt at låse for login ved forkert indtastning af login oplysninger. 
 
-Det er ikke implementeret, at systemet skal understøtte target værdier for sensor målinger. Desuden er der ikke implementeret administratorrettigheder for brugere, hvilket har medført at brugere ikke kan slettes i systemet andet end direkte via databasen.
+Det er ikke implementeret, at systemet skal understøtte target-værdier for sensor målinger. Desuden er der ikke implementeret administratorrettigheder for brugere, hvilket har medført at brugere ikke kan slettes i systemet andet end direkte via databasen.
 
-At relativt mange funktioner ikke er blevet implementeret, vurderes at være grundet store ambitioner fra start. Udfra MoSCoW analyse beskrevet i starten af rapporten, er der lagt vægt på de højst prioriterede funktioner, hvoraf langt de fleste er lykkedes at implementere.
+At relativt mange funktioner ikke er blevet implementeret, vurderes at være grundet store ambitioner fra start. Udfra MoSCoW analyse beskrevet i starten af rapporten, er der lagt vægt på de højst prioriterede funktioner, hvoraf langt de fleste er lykkedes at implementere. Alle ''Must'' er implementeret.
 
-Af særligt gode elementer kan fremhæves:
+Af særligt gode resultater kan fremhæves:
+
 \begin{itemize}
 	\item Support for flere platforme via samme presenter
 	\item Visning af history over pool data
