@@ -21,31 +21,6 @@ I grove træk vises Entity Frameworkets overordnede virkemåde på figur~\ref{fi
 
 Helt fra begyndelsen af databasen og data-access lagets designfase, har tanken været at skabe en software komponent, der blot eksponerer et interface, der skal gøre det nemt for klienter at bruge det. Der er lavet et dependancy diagram som kan ses på figur~\ref{fig:vs_codeMap}.
 
-\begin{lstlisting}
-public TokenMsgResponse(ISmartpoolDB smartpoolDb)
-{
-	_smartpoolDb = smartpoolDb;
-	_poolKeeper = new FakePoolKeeper(_smartpoolDb);
-	if(_smartpoolDb.UserAccess.IsEmailInUse("1"))
-		_poolKeeper.GeneratePoolsForUser("1");
-	if (_smartpoolDb.UserAccess.IsEmailInUse("2"))
-		_poolKeeper.GeneratePoolsForUser("2");
-}
-\end{lstlisting}
-
-\begin{lstlisting}
-private List<Tuple<SensorTypes, List<double>>> GetSensorValues(string userName, string poolName, int days)
-{
-	return new List<Tuple<SensorTypes, List<double>>>
-	{
-		GetData(_smartpoolDb.DataAccess.GetTemperatureValues(userName, poolName, days), SensorTypes.Temperature),
-		GetData(_smartpoolDb.DataAccess.GetPhValues(userName, poolName, days), SensorTypes.Ph),
-		GetData(_smartpoolDb.DataAccess.GetChlorineValues(userName, poolName, days), SensorTypes.Chlorine),
-		GetData(_smartpoolDb.DataAccess.GetHumidityValues(userName, poolName, days), SensorTypes.Humidity)
-	};
-}
-\end{lstlisting}
-
 Efter Entity Framkeworket blev vedtaget til brug, blev der udarbejdet et \textit{entity relationship} diagram ved hjælp af Visual Studio's modelling project. Der er flere måder at designe databaser på med Entity Frameworket og Visual Studio, hvor flere af dem blevet afprøvet undervejs, herunder \textit{Code First}, \textit{Model First} samt \textit{Database First}.
 
 \textit{Database first} blev brugt i forlængelse med DDS-Lite, som blev brugt til at designe selve databasen og SQL scriptet til at lave tabellerne. Code First tilgangen gav en bred forståelse for hvordan Entity Frameworket fungerede, netop fordi at der ikke autogenereres klasser til entiteterne. Se figur~\ref{fig:generatedFiles} hvor entitetsklasser vises.
