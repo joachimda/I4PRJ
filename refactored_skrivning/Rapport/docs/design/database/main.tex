@@ -88,7 +88,7 @@ En klient kan kalde sig ind i alt data-access lagets funktionalitet gennem ISmar
 
 \subsection{User story - Se sensor værdier}
 
-I projektrapporten blev funktionalitet til forespørgsler og persistering af sensordataen udviklet i 3. fase, hvor der her allerede var en fuldt fungerende User- og Pool entitet og klasse. Se figur~\ref{fig:datasetentity}.
+I projektrapporten blev funktionalitet til forespørgsler og persistering af sensordataen udviklet i 3. fase, hvor der her allerede var en fuldt fungerende User- og Pool entitet og klasse. Se figur~\ref{fig:datasetentity} og figur~\ref{fig:databaseERD_final_uml}.
 
 Der er som beskrevet tidligere lavet en DataAccess klasse til at lave data queries og persistering på databasen. Se klassediagrammet for DataAccess på figur~\ref{fig:dataAccess}.
 	
@@ -103,10 +103,3 @@ Der er som beskrevet tidligere lavet en DataAccess klasse til at lave data queri
 Igen blev \textit{Test Driven Development} brugt til dette, hvor koden blev skrevet til testene. Se dokumentation under afsnittet \textit{Test og Integration} for beskrivelse af tests.
 
 Måden hvorpå der trækkes data ud af databasen er ved hjælp af LINQ queries. Brugen heraf er skrevet i detaljer i dokumentationen, under \textit{Database og Data-access layer}.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figs/implementering/datasetentity.png}
-	\caption{Data Entity fra ER diagrammet i Visual Studio}
-	\label{fig:datasetentity}
-\end{figure}
