@@ -12,6 +12,7 @@ namespace Smartpool
         {
             UserAccess = userAccess;
         }
+
         /// <summary>
         /// Adds pool to a users poolSet.
         /// </summary

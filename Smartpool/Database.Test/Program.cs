@@ -12,7 +12,6 @@ namespace Database.Test
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine(CultureInfo.CurrentCulture);
             //SmartpoolDB SmartPoolDB = new SmartpoolDB(new DataAccess(new PoolAccess(new UserAccess())));
             //IDataAccess dataAccess = new DataAccess(new PoolAccess(new UserAccess()));

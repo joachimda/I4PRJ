@@ -12,6 +12,7 @@ namespace Database.Test.Unit
 
         private IPoolAccess _uut;
         private IUserAccess _userAccess;
+        private IDataAccess _dataAccess;
         private User _testUser1, _testUser2;
 
         [SetUp]
@@ -19,6 +20,7 @@ namespace Database.Test.Unit
         {
             _userAccess = new UserAccess();
             _uut = new PoolAccess(_userAccess);
+            _dataAccess = new DataAccess(_uut);
 
             _testUser1 = new User() { Firstname = "John", Middelname = "Derp", Lastname = "Andersen", Email = "somemail@derp.com", Password = "password123" };
             _testUser2 = new User() { Firstname = "Sire", Middelname = "Herp", Lastname = "Jensenei", Email = "post@jensenei.dk", Password = "mydogsname" };
@@ -213,6 +215,19 @@ namespace Database.Test.Unit
         {
             const string mail = "somemail@derp.com";
             Assert.That(_uut.RemovePool(mail, "ThisPoolIsNotHere"), Is.False);
+        }
+
+        [Test]
+        public void RemovePool_RemovingPoolWithExistingData_ReturnsTrue()
+        {
+            _uut.AddPool(_testUser1.Email, "name", 4);
+
+            for (int i = 0; i<10; i++)
+            {
+                _dataAccess.CreateDataEntry(_testUser1.Email, "name", 87, 3, 5, 3);
+            }
+
+            Assert.That(_uut.RemovePool(_testUser1.Email, "name"), Is.True);
         }
 
         #endregion
