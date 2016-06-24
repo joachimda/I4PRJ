@@ -10,17 +10,20 @@ namespace Database.Test.Unit
 
         IUserAccess _uut;
         IPoolAccess _poolAccess;
+        IDataAccess _dataAccess;
 
         [SetUp]
         public void Setup()
         {
             _uut = new UserAccess();
             _poolAccess = new PoolAccess(_uut);
+            _dataAccess = new DataAccess(_poolAccess);
         }
 
         [TearDown]
         public void Teardown()
         {
+            _dataAccess.DeleteAllData();
             _poolAccess.DeleteAllPools();
             _uut.DeleteAllUsers();
         }
