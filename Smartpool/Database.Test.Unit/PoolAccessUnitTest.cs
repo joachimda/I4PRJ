@@ -217,19 +217,6 @@ namespace Database.Test.Unit
             Assert.That(_uut.RemovePool(mail, "ThisPoolIsNotHere"), Is.False);
         }
 
-        [Test]
-        public void RemovePool_RemovingPoolWithExistingData_ReturnsTrue()
-        {
-            _uut.AddPool(_testUser1.Email, "name", 4);
-
-            for (int i = 0; i<10; i++)
-            {
-                _dataAccess.CreateDataEntry(_testUser1.Email, "name", 87, 3, 5, 3);
-            }
-
-            Assert.That(_uut.RemovePool(_testUser1.Email, "name"), Is.True);
-        }
-
         #endregion
 
         #region Change Name
